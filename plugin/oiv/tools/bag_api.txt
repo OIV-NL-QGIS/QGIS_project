@@ -1,0 +1,12 @@
+import json, requests
+        
+url = "https://bag.basisregistraties.overheid.nl/api/v1/panden/0"+str(bagid)
+#querystring = {"identificatie":"0432100000005844"}
+headers = {
+        'X-Api-Key': "3cdcb3b8-ea40-4e53-bb08-094fafaba7f5",
+        'Accept': "application/hal+json"
+           }
+response = requests.request("GET", url, headers=headers)
+print(response.text)
+        
+        

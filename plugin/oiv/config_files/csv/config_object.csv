@@ -1,0 +1,14 @@
+child_layer,bestand,parent_layer,identifier,input_label,foreign_key,question,label_required,rotatie,type_layer_name
+Labels ruimtelijk,/config_files/csv/labels.csv,Objecten,soort,omschrijving,object_id,Geef een label op (dit is een verplicht veld.),1,rotatie,
+Opslag stoffen ruimtelijk,/config_files/csv/opslag_stoffen.csv,Objecten,,locatie,object_id,Geef een locatie op (dit is een verplicht veld.),1,rotatie,
+Opstelplaats,/config_files/csv/opstelplaats.csv,Objecten,soort,,object_id,,2,rotatie,
+Ruimtelijke veiligheidsvoorzieningen,/config_files/csv/ruimtelijke_veiligheidsv.csv,Objecten,veiligh_ruimtelijk_type_id,label,object_id,,2,rotatie,veiligh_ruimtelijk_type
+Ingang ruimtelijk,/config_files/csv/ingang_object.csv,Objecten,ingang_type_id,label,object_id,,2,rotatie,ingang_type
+Sleutelkluis ruimtelijk,/config_files/csv/sleutelkluis_object.csv,Ingang ruimtelijk,sleutelkluis_type_id,label,ingang_id,,2,rotatie,sleutelkluis_type
+Bereikbaarheid,/config_files/csv/bereikbaarheid.csv,Objecten,soort,,object_id,,2,,
+Isolijnen,/config_files/csv/isolijnen.csv,Objecten,hoogte,,object_id,,2,,
+Objecten,,BAG panden,basisreg_identifier,formelenaam,basisreg_identifier,Geef een formelenaam op (dit is een verplicht veld).,1,,
+Objecten BGT,,BGT,basisreg_identifier,formelenaam,basisreg_identifier,Geef een formelenaam op (dit is een verplicht veld).,1,,
+Sectoren,/config_files/csv/sectoren.csv,Objecten,soort,,object_id,,2,,
+Dreiging ruimtelijk,/config_files/csv/dreiging.csv,Objecten,dreiging_type_id,,object_id,2,rotatie,dreiging_type
+Alternatief bluswater,/config_files/csv/bluswater.csv,,type_id,,,,2,,alternatieve_type

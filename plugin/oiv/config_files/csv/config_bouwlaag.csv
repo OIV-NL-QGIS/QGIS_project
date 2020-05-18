@@ -1,0 +1,11 @@
+child_layer,bestand,parent_layer,identifier,input_label,foreign_key,question,label_required,rotatie,type_layer_name
+Labels bouwlaag,/config_files/csv/labels.csv,Bouwlagen,soort,omschrijving,bouwlaag_id,Geef een label op (dit is een verplicht veld.),1,rotatie,
+Opslag stoffen bouwlaag,/config_files/csv/opslag_stoffen.csv,Bouwlagen,,locatie,bouwlaag_id,Geef een locatie op (dit is een verplicht veld.),1,rotatie,
+Bouwkundige veiligheidsvoorzieningen,/config_files/csv/bouwkundige_veiligheidsv.csv,Bouwlagen,soort,,bouwlaag_id,,2,,
+Ruimten,/config_files/csv/ruimten.csv,Bouwlagen,ruimten_type_id,,bouwlaag_id,,2,,ruimten_type
+Dreiging bouwlaag,/config_files/csv/dreiging.csv,Bouwlagen,dreiging_type_id,,bouwlaag_id,,2,rotatie,dreiging_type
+Bouwlagen,,BAG panden,,bouwdeel,pand_id,Geef een bouwdeel op (dit is geen verplicht veld).,2,,
+Installatietechnische veiligheidsvoorzieningen,/config_files/csv/install_veilighv.csv,Bouwlagen,veiligh_install_type_id,label,bouwlaag_id,,2,rotatie,veiligh_install_type
+Ingang bouwlaag,/config_files/csv/ingang_bouwlaag.csv,Bouwlagen,ingang_type_id,label,bouwlaag_id,,2,rotatie,ingang_type
+Sleutelkluis bouwlaag,/config_files/csv/sleutelkluis_bouwlaag.csv,Ingang bouwlaag,sleutelkluis_type_id,label,ingang_id,,2,rotatie,sleutelkluis_type
+Afwijkende binnendekking,/config_files/csv/afw_binnendekking.csv,Bouwlagen,soort,label,bouwlaag_id,,2,rotatie,
