@@ -149,10 +149,8 @@ class CaptureTool(QgsMapTool):
         tolerance = layerPt2.x() - layerPt1.x()
         return tolerance
 
-    #indien de gebruiker op backspace of delete klikt verwijder het laatst geregistreerde punt
-    #indien de gebruiker op enter drukt betekent hetzelfde als de rechtermuisknop
     def keyPressEvent(self, event):
-        """handel keypress events"""
+        """handle keypress events"""
         if event.key() == Qt.Key_Backspace or \
            event.key() == Qt.Key_Delete:
             self.removeLastVertex()
@@ -202,10 +200,11 @@ class CaptureTool(QgsMapTool):
 
     def enable_roundrubberband(self):
         """hide/show the help circle"""
-        if self.parent.straal_button.isChecked():
-            self.roundRubberBand.show()
-        else:
-            self.roundRubberBand.hide()
+        if self.roundRubberBand:
+            if self.parent.straal_button.isChecked():
+                self.roundRubberBand.show()
+            else:
+                self.roundRubberBand.hide()
 
     def stopCapturing(self):
         """remove rubberbands als er gestopt wordt met tekenen"""
@@ -303,7 +302,7 @@ class CaptureTool(QgsMapTool):
 
     def draw_help_circle(self):
         """change diameter of circular rubberband"""
-        if self.parent.straal_button.isChecked():
+        if self.parent.straal_button.isChecked() and self.capturing:
             straal = self.parent.straal.value()
             startPt = self.capturedPoints[-1]
             circle = QgsCircle(QgsPoint(startPt), straal)

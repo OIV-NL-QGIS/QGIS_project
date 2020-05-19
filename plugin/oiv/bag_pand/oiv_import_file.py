@@ -8,10 +8,10 @@ from qgis.core import QgsVectorLayer, QgsFeature, QgsGeometry, QgsProject, QgsFe
 from qgis.utils import iface
 
 #from ..tools.identifyTool import IdentifyGeometryTool
-from ..tools.utils_core import getlayer_byname, get_draw_layer_attr, write_layer
+from ..tools.utils_core import getlayer_byname, get_draw_layer_attr, write_layer, read_settings
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_import_filewidget.ui'))
+    os.path.dirname(__file__), 'oiv_import_file_widget.ui'))
 
 class oivImportFileWidget(QDockWidget, FORM_CLASS):
     """the actions class for the import"""
@@ -80,15 +80,14 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         layerName = 'Bouwlagen'
         layer = getlayer_byname(layerName)
         #get necessary attributes from config file
-        attrs = {"foreign_key" : ''}
-        attrs = get_draw_layer_attr(attrs, layer.name(), self.configFileBouwlaag)
-        self.iface.setActiveLayer(layer)
+        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
+        foreignKey = read_settings(query, False)[0]
         #construct QgsFeature to save
         childFeature.setGeometry(bouwlaagFeature.geometry())
         fields = layer.fields()
         childFeature.initAttributes(fields.count())
         childFeature.setFields(fields)
-        childFeature[attrs["foreign_key"]] = str(self.object_id.text())
+        childFeature[foreignKey] = str(self.object_id.text())
         childFeature["bouwlaag"] = int(self.bouwlaag.text())
         newFeatureId = write_layer(layer, childFeature)
         self.bouwlaag_id.setText(str(newFeatureId))
@@ -166,8 +165,8 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         targetLayer = getlayer_byname(targetLayerName)
         targetFields = targetLayer.fields()
         targetFeature.initAttributes(targetFields.count())
-        attrs = {"identifier" : ''}
-        attrs = get_draw_layer_attr(attrs, targetLayerName, self.configFileObject)
+        query = "SELECT identifier FROM config_bouwlaag WHERE child_layer = '{}'".format(targetLayerName)
+        identifier = read_settings(query, False)[0]        
         targetFeature.setFields(targetFields)
         self.iface.setActiveLayer(self.importLayer)
         dummy, progressBar = self.progressdialog(0)
@@ -190,9 +189,9 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                 if targetLayerName == "Ruimten":
                     request = QgsFeatureRequest().setFilterExpression('"naam" = ' + "'" + self.mappingDict[feature[self.type.currentText()]] + "'")
                     tempFeature = next(typeLayer.getFeatures(request))
-                    targetFeature[attrs["identifier"]] = tempFeature["id"]
+                    targetFeature[identifier] = tempFeature["id"]
                 else:
-                    targetFeature[attrs["identifier"]] = self.mappingDict[feature[self.type.currentText()]]
+                    targetFeature[identifier] = self.mappingDict[feature[self.type.currentText()]]
                 write_layer(targetLayer, targetFeature)
             progress = (float(count)/float(cntFeat)) * 100
             progressBar.setValue(progress)

@@ -29,8 +29,8 @@ from qgis.PyQt.QtWidgets import QDockWidget, QCheckBox, QMessageBox
 from qgis.utils import iface
 from qgis.core import QgsFeature, QgsGeometry, QgsFeatureRequest
 
-from ..tools.utils_core import getlayer_byname, get_draw_layer_attr, write_layer, set_layer_substring, get_possible_snapFeatures_bouwlaag
-from ..tools.utils_gui import set_lengte_oppervlakte_visibility, read_config_file
+from ..tools.utils_core import getlayer_byname, write_layer, get_possible_snapFeatures_bouwlaag, read_settings
+from ..tools.utils_gui import set_lengte_oppervlakte_visibility, set_layer_substring
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_bouwlaag_widget.ui'))
@@ -53,13 +53,11 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
         super(oivBouwlaagWidget, self).__init__(parent)
         self.setupUi(self)
         self.iface = iface
-        self.configFileBouwlaag = read_config_file("/config_files/csv/config_bouwlaag.csv", None)
         self.bouwlaag_bag.clicked.connect(self.run_bag_overnemen)
         self.bouwlaag_tekenen.clicked.connect(self.run_bouwlaag_tekenen)
         self.bouwlaag_overnemen.clicked.connect(self.run_bouwlaag_overnemen)
         self.terug.clicked.connect(self.close_bouwlaag)
         self.copy.clicked.connect(self.run_select_bouwlaag)
-
         self.label1.setVisible(False)
         self.label2.setVisible(False)
         self.label3.setVisible(False)
@@ -67,7 +65,6 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
         self.bouwlaag_max.setVisible(False)
         self.bouwlaag.setVisible(False)
         self.copy.setVisible(False)
-
         for var in vars(self):
             typeVar = type(vars(self)[var])
             if typeVar == QCheckBox:
@@ -78,7 +75,7 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
         set_lengte_oppervlakte_visibility(self, False, False, False, False)
         layerName = "BAG panden"
         ilayer = getlayer_byname(layerName)
-        request = QgsFeatureRequest().setFilterExpression('"identificatie" = ' + str(self.objectId))
+        request = QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(self.objectId))
         ifeature = next(ilayer.getFeatures(request))
         self.copy_bag_bouwlaag(ilayer, ifeature)
 
@@ -122,7 +119,7 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
         comboboxText = str(self.bouwlaag.currentText())
         if comboboxText != "":
             sub_string = "bouwlaag = " + str(self.bouwlaag.currentText())
-            set_layer_substring(self.configFileBouwlaag, sub_string)            
+            set_layer_substring(sub_string)
 
     def copy_layers(self, parentID, newID, layer, bouwlaag):
         """select the features"""
@@ -130,23 +127,22 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
         newFeature = QgsFeature()
         newFeature.initAttributes(fields.count())
         newFeature.setFields(fields)
-        attrs = {"foreign_key" : '', "identifier" : '', "input_label" : '', "rotatie" : ''}
-        attrs = get_draw_layer_attr(attrs, layer.name(), self.configFileBouwlaag)
+        query = "SELECT foreign_key, identifier, input_label, rotatie FROM config_bouwlaag WHERE child_layer = '{}'".format(layer.name())
+        attrs = read_settings(query, False)
         #get features by bouwlaag ID
-        request = attrs["foreign_key"] + '=' + str(parentID)
-        it = layer.getFeatures(QgsFeatureRequest().setFilterExpression(request))
+        it = layer.getFeatures(QgsFeatureRequest().setFilterExpression(attrs[0] + '=' + str(parentID)))
         for feat in it:
             newFeature.setGeometry(feat.geometry())
-            if attrs["identifier"] != '':
-                if str(feat[attrs["identifier"]]).isdigit():
-                    newFeature[attrs["identifier"]] = int(feat[attrs["identifier"]])
+            if attrs[1] != '':
+                if str(feat[attrs[1]]).isdigit():
+                    newFeature[attrs[1]] = int(feat[attrs[1]])
                 else:
-                    newFeature[attrs["identifier"]] = feat[attrs["identifier"]]
-            if attrs["input_label"] != '':
-                newFeature[attrs["input_label"]] = feat[attrs["input_label"]]
-            if attrs["rotatie"] != '':
-                newFeature[attrs["rotatie"]] = feat[attrs["rotatie"]]
-            newFeature[attrs["foreign_key"]] = int(newID)
+                    newFeature[attrs[1]] = feat[attrs[1]]
+            if attrs[2] != '':
+                newFeature[attrs[2]] = feat[attrs[2]]
+            if attrs[3] != '':
+                newFeature[attrs[3]] = feat[attrs[3]]
+            newFeature[attrs[0]] = int(newID)
             newFeature["bouwlaag"] = bouwlaag
             write_layer(layer, newFeature)
 
@@ -167,9 +163,8 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
         childFeature = QgsFeature()
         layerName = 'Bouwlagen'
         layer = getlayer_byname(layerName)
-        attrs = {"foreign_key" : ''}
-        attrs = get_draw_layer_attr(attrs, layerName, self.configFileBouwlaag)
-        self.iface.setActiveLayer(layer)
+        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
+        foreignKey = read_settings(query, False)[0]
         #construct QgsFeature to save
         for i in range(minBouwlaag, maxBouwlaag + 1):
             if i != 0:
@@ -177,9 +172,9 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
                 fields = layer.fields()
                 childFeature.initAttributes(fields.count())
                 childFeature.setFields(fields)
-                childFeature[attrs["foreign_key"]] = self.objectId
+                childFeature[foreignKey] = self.objectId
                 childFeature["bouwlaag"] = i
-                dummy = write_layer(layer, childFeature)
+                write_layer(layer, childFeature)
                 #block the signals of changing the comboBox to add the new floor
                 self.bouwlaag.blockSignals(True)
                 self.bouwlaag.clear()
@@ -191,7 +186,7 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
         self.iface.actionPan().trigger()
         #set all layers substring to the right floor
         sub_string = "bouwlaag = " + str(minBouwlaag)
-        set_layer_substring(self.configFileBouwlaag, sub_string)
+        set_layer_substring(sub_string)
         if maxBouwlaag != minBouwlaag:
             QMessageBox.information(None, "Gereed!", "Alle bouwlagen zijn succesvol aangemaakt!")
 
@@ -205,9 +200,8 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
             maxBouwlaag = int(self.bouwlaag_max.text())
             layer = getlayer_byname(layerName)
             #get necessary attributes from config file
-            attrs = {"foreign_key" : ''}
-            attrs = get_draw_layer_attr(attrs, layerName, self.configFileBouwlaag)
-            self.iface.setActiveLayer(layer)
+            query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
+            foreignKey = read_settings(query, False)[0]
             #construct QgsFeature to save
             for i in range(minBouwlaag, maxBouwlaag + 1):
                 if i != 0:
@@ -215,7 +209,7 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
                     fields = layer.fields()
                     childFeature.initAttributes(fields.count())
                     childFeature.setFields(fields)
-                    childFeature[attrs["foreign_key"]] = self.objectId
+                    childFeature[foreignKey] = self.objectId
                     childFeature["bouwlaag"] = i
                     newFeatureId = write_layer(layer, childFeature)
                     #copy also the selected layers
@@ -227,12 +221,12 @@ class oivBouwlaagWidget(QDockWidget, FORM_CLASS):
                     if i not in self.bouwlaagList:
                         self.bouwlaagList.append(i)
             self.bouwlaagList.sort()
-            self.bouwlagen_to_combobox()           
+            self.bouwlagen_to_combobox()
             self.bouwlaag.blockSignals(False)
             self.iface.actionPan().trigger()
             #set all layers substring to the right floor
             sub_string = "bouwlaag = " + str(minBouwlaag)
-            set_layer_substring(self.configFileBouwlaag, sub_string)
+            set_layer_substring(sub_string)
             try:
                 self.selectTool.geomSelected.disconnect()
             except:  # pylint: disable=bare-except

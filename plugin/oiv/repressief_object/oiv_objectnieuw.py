@@ -29,7 +29,7 @@ from qgis.PyQt.QtWidgets import QDockWidget
 from qgis.core import QgsFeatureRequest, QgsFeature, QgsGeometry
 from qgis.utils import iface
 
-from ..tools.utils_core import get_draw_layer_attr, user_input_label, getlayer_byname, write_layer
+from ..tools.utils_core import user_input_label, getlayer_byname, write_layer, read_settings
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_objectnieuw_widget.ui'))
@@ -37,9 +37,8 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
 
     canvas = None
-    configFileObject = None
     newObject = None
-    draw_layer = None
+    drawLayer = None
     basewidget = None
     objectwidget = None
     mapTool = None
@@ -87,35 +86,37 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
             request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(self.newObject))
             tempFeature = next(self.drawLayer.getFeatures(request))
             #with new created feature run existing object widget
-            self.run_objectgegevens(tempFeature)
+            self.run_objectgegevens(tempFeature, newFeatureId)
         else:
             self.iface.actionPan().trigger()
 
     #get the right attributes from user
     def get_attributes(self, foreignKey, childFeature):
-        attrs = {"foreign_key" : '', "identifier" : '', "input_label" : '', "question" : '', "label_required" : ''}
-        attrs = get_draw_layer_attr(attrs, self.drawLayer.name(), self.configFileObject)
-        labelTekst = user_input_label(attrs["label_req"], attrs["question"])
+        query = "SELECT foreign_key, input_label, question, label_required\
+             FROM config_object WHERE child_layer = '{}'".format(self.drawLayer.name())
+        attrs = read_settings(query, False)[0]
+        labelTekst = user_input_label(attrs[3], attrs[2])
         if labelTekst != 'Cancel':
             fields = self.drawLayer.fields()
             childFeature.initAttributes(fields.count())
             childFeature.setFields(fields)
-            if attrs["input_label"] != '':
-                childFeature[attrs["input_label"]] = labelTekst
-            if attrs["foreign_key"] != '':
-                childFeature[attrs["foreign_key"]] = foreignKey
+            if attrs[1] != '':
+                childFeature[attrs[1]] = labelTekst
+            if attrs[0] != '':
+                childFeature[attrs[0]] = foreignKey
             childFeature["bron"] = self.bron.text()
             childFeature["bron_tabel"] = self.bron_table.text()
             return childFeature
         else:
             return 'Cancel'
 
-    def run_objectgegevens(self, tempFeature):
+    def run_objectgegevens(self, tempFeature, objectId):
         """continue to existing object woth the newly created feature and already searched address"""
-        self.drawLayer = getlayer_byname('Objecten')
-        self.objectwidget.draw_layer = self.drawLayer
-        self.objectwidget.existing_object(tempFeature, self.newObject)
+        self.objectwidget.drawLayer = getlayer_byname('Objecten')
+        self.objectwidget.object_id.setText(str(objectId))
+        self.objectwidget.formelenaam.setText(tempFeature["formelenaam"])
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.objectwidget)
+        self.objectwidget.initActions()
         self.objectwidget.show()
         self.iface.actionPan().trigger()
         self.close()

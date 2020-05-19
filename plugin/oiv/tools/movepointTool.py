@@ -6,6 +6,7 @@ from qgis.PyQt.QtCore import Qt
 from qgis.core import QgsWkbTypes, QgsGeometry
 from qgis.gui import QgsRubberBand, QgsMapToolIdentify, QgsVertexMarker
 
+from .rubberbands import init_rubberband
 from .utils_core import check_layer_type
 
 class MovePointTool(QgsMapToolIdentify):
@@ -24,7 +25,7 @@ class MovePointTool(QgsMapToolIdentify):
         self.idlayer = None
         self.startRotate = False
         self.tempRubberBand = None
-        self.vertexMarker = QgsVertexMarker(self.canvas)
+        self.vertexMarker = None
 
     def canvasPressEvent(self, event):
         """op welke feature wordt er geklikt"""
@@ -39,6 +40,7 @@ class MovePointTool(QgsMapToolIdentify):
             if found_features is not None and type_check == "Point":
                 self.dragging = True
                 #init drag point
+                self.vertexMarker = QgsVertexMarker(self.canvas)
                 self.vertexMarker.setColor(QColor(0, 0, 255))
                 self.vertexMarker.setIconSize(5)
                 self.vertexMarker.setIconType(QgsVertexMarker.ICON_X)
@@ -59,32 +61,23 @@ class MovePointTool(QgsMapToolIdentify):
 
     def start_to_rotate(self, event):
         """init tempRubberband indicating rotation"""
-        mapPt, dummy = self.transformCoordinates(event.pos())
-        color = QColor("black")
-        color.setAlphaF(0.78)
-        self.tempRubberBand = QgsRubberBand(self.canvas, QgsWkbTypes.LineGeometry)
-        self.tempRubberBand.setWidth(4)
-        self.tempRubberBand.setColor(color)
-        self.tempRubberBand.setLineStyle(Qt.DotLine)
+        layerPt = self.toMapCoordinates(event.pos())
+        self.tempRubberBand = init_rubberband(QColor("black"), Qt.DashLine, 25, 1, QgsWkbTypes.LineGeometry, self.canvas)
         self.tempRubberBand.show()
-        self.tempRubberBand.addPoint(mapPt)
+        self.tempRubberBand.addPoint(layerPt)
         self.startRotate = True
 
     def canvasMoveEvent(self, event):
         """als verslepen -> verplaats de indicatieve marker"""
+        layerPt = self.toMapCoordinates(event.pos())
+        if self.tempRubberBand is None:
+            self.tempRubberBand = init_rubberband(QColor("black"), Qt.DashLine, 25, 1, QgsWkbTypes.LineGeometry, self.canvas)     
         if self.dragging:
-            mapPt, layerPt = self.transformCoordinates(event.pos())
             self.point = layerPt
-            self.vertexMarker.setCenter(mapPt)
+            self.vertexMarker.setCenter(layerPt)
         #als roteren -> teken de tempRubberband als lijn
         if self.startRotate:
-            mapPt, layerPt = self.transformCoordinates(event.pos())
-            self.tempRubberBand.movePoint(mapPt)
-
-    def transformCoordinates(self, canvasPt):
-        """transformeer muis lokatie naar canvas punt en laag punt"""
-        return (self.toMapCoordinates(canvasPt),
-                self.toLayerCoordinates(self.layer, canvasPt))
+            self.tempRubberBand.movePoint(layerPt)
 
     def canvasReleaseEvent(self, event):
         """als verslepen -> pas de geometry van de betreffende feature aan"""
@@ -98,7 +91,7 @@ class MovePointTool(QgsMapToolIdentify):
         #als roteren -> pas de rotatie van de betreffende feature aan op basis van de loodrechte lijn tussen muisklik en bestaand punt
         if self.startRotate:
             self.tempRubberBand.hide()
-            dummy, clickedPt = self.transformCoordinates(event.pos())
+            clickedPt = self.toMapCoordinates(event.pos())
             tempGeometry = self.tempRubberBand.asGeometry().asPolyline()
             drawPoint = self.toLayerCoordinates(self.layer, tempGeometry[0])
             field = self.idlayer.fields().indexOf("rotatie")
