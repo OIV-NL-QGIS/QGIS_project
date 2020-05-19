@@ -88,12 +88,12 @@ def execute_update(geoserverURL, geoserverBron, cursor, allTables):
                 print("The {} table is corrupt!".format(layerName), e)
     return 'ok'
 
-def run_update_dimension_tables():
+def run_update_dimension_tables(confFile, dbFile):
     """execute all the real work"""
-    print ('Start : ', time.ctime())
+    print('Start : ', time.ctime())
     result = None
-    geoserverURL, geoserverBron = get_geoserver_conf('..\\config_files\\geoserver.conf')
-    conn, cursor, allTables = setup_db_connection('..\\config_files\\dimension_tables.db')
+    geoserverURL, geoserverBron = get_geoserver_conf(confFile)
+    conn, cursor, allTables = setup_db_connection(dbFile)
     if geoserverURL and geoserverBron and allTables:
         result = execute_update(geoserverURL, geoserverBron, cursor, allTables)
     if result == 'ok':

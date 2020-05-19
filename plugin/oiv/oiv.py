@@ -96,7 +96,10 @@ class oiv:
         self.projCombo.currentIndexChanged.connect(self.set_layer_subset_toolbar)
         #init projectVariable to communicate from plugin to original drawing possibilities
         QgsExpressionContextUtils.setProjectVariable(QgsProject.instance(), 'actieve_bouwlaag', 1)
-        run_update_dimension_tables()
+        self.action2 = QAction(QIcon(":/plugins/oiv/config_files/png/oiv_update.png"), "Update dimension tables", self.iface.mainWindow())
+        self.action2.triggered.connect(self.update_dimension_tables)
+        self.iface.addPluginToMenu('&OIV Objecten', self.action2)
+        self.update_dimension_tables()
 
     def close_basewidget(self):
         """close plugin and re-activate toolbar combobox"""
@@ -120,11 +123,25 @@ class oiv:
         except: # pylint: disable=bare-except
             pass
         self.iface.removePluginMenu("&OIV Objecten", self.action)
+        self.iface.removePluginMenu("&OIV Objecten", self.action2)
         self.projCombo.currentIndexChanged.disconnect()
         self.action.triggered.disconnect()
+        self.action2.triggered.disconnect()
         del self.toolbar
         self.checkVisibility = None
         self.iface.removeToolBarIcon(self.action)
+
+    def update_dimension_tables(self):
+        project = QgsProject.instance()
+        projectTest = str(QgsExpressionContextUtils.projectScope(project).variable('project_title'))
+        connection = str(QgsExpressionContextUtils.projectScope(project).variable('connection'))
+        if 'Objecten' not in projectTest:
+            QMessageBox.warning(None, "Let op:", "De dimension tabellen van het project zijn niet geupdate.\n"
+                                "Het project moet hiervoor geopend zijn!")
+        elif connection == 'WFS':
+            run_update_dimension_tables('..\\config_files\\geoserver.conf', '..\\config_files\\dimension_tables.db')
+            dbPath = QgsProject.instance().readPath("./") + '/db/dimension_tables.db'
+            run_update_dimension_tables('..\\config_files\\geoserver.conf', dbPath)
 
     def run_identify_pand(self):
         """get the identification of a building from the user"""
@@ -261,6 +278,7 @@ class oiv:
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
+            self.action2.setEnabled(False)
         elif dbVersion < self.compatibleVersion[0] or dbVersion > self.compatibleVersion[1]:
             QMessageBox.critical(None, "Database versie klopt niet",
                                  "De plugin of het project komt niet overeen met database versie!\
@@ -268,6 +286,7 @@ class oiv:
                                  Excuses voor het ongemak.")
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
+            self.action2.setEnabled(False)
         else:
             #always start from floor 1
             subString = "bouwlaag = 1"
