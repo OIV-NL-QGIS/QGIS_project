@@ -1,5 +1,6 @@
 /**
  * Copyright (c) 2020 SafetyCT - https://www.safetyct.com
+ * Copyright (c) 2016-2017 Baas geo-information - www.baasgeo.com
 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -348,7 +349,9 @@ Section "WFS" SectionWFS
   AccessControl::GrantOnFile "$INSTDIR\db" "(S-1-5-32-545)" "GenericRead + GenericWrite"
 
   ;Convert standard PostGres project to geoserver WFS project
+  SetRegView 64
   ReadRegStr $R0 HKLM "SOFTWARE\QGIS 3.10" "InstallPath"
+  ;ExecWait "python.exe $INSTDIR\convert_to_wfs.py"
   ExecWait "$R0\apps\Python37\python.exe $INSTDIR\convert_to_wfs.py"
 
 SectionEnd
