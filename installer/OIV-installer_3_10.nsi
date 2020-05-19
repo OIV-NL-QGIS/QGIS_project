@@ -193,13 +193,31 @@ Section "${APPNAME} (required)" SectionMain
 	File /a nircmd.exe
 	File /a dos2unix.exe
 	File /r ..\oiv_project\qgis_project\ini
+  File /a ..\oiv_project\qgis_project\pg_service.conf
 	
-	; Create service file
-	File /a ..\oiv_project\qgis_project\pg_service.conf
-  ${ConfigWrite} "$INSTDIR\pg_service.conf" "host=" "$Host" $R0
-  ${ConfigWrite} "$INSTDIR\pg_service.conf" "dbname=" "$Dbname" $R1
+  ;Create db-connection service file
+  ${IfNot} $Dbname == ""
+  FileOpen $4 "$INSTDIR\pg_service.conf" a
+  FileSeek $4 0 END
+  FileWrite $4 "$\r$\n"
+  FileWrite $4 "[oiv]"
+  FileWrite $4 "$\r$\n"
+  FileWrite $4 "host=$Host"
+  FileWrite $4 "$\r$\n"
+  FileWrite $4 "port=5432"
+  FileWrite $4 "$\r$\n"
+  FileWrite $4 "dbname=$Dbname"
+  FileWrite $4 "$\r$\n"  
+  FileWrite $4 "user=$User"
+  FileWrite $4 "$\r$\n"
+  FileWrite $4 "password=$Password"
+  FileWrite $4 "$\r$\n"
+  FileWrite $4 "application_name=oiv"
+  FileClose $4
+  ${EndIf}
 
   ;geoserver wfs config file
+  ${IfNot} $GeoserverUrl == ""
   FileOpen $4 "$INSTDIR\geoserver.conf" w
   FileWrite $4 "$GeoserverUrl"
   FileWrite $4 "$\r$\n"
@@ -209,6 +227,7 @@ Section "${APPNAME} (required)" SectionMain
   FileWrite $4 "$\r$\n"
   FileWrite $4 "$Password"        
   FileClose $4
+  ${EndIf}
 		
 	; set variable
 	DetailPrint "Set windows variable PGSERVICEFILE to $INSTDIR\pg_service.conf"
@@ -229,8 +248,6 @@ Section "${APPNAME} (required)" SectionMain
 	WriteRegStr HKLM "${REG_APPSETTINGS}" "Dbname" "$Dbname"
   WriteRegStr HKLM "${REG_APPSETTINGS}" "GeoserverUrl" "$GeoserverUrl"
   WriteRegStr HKLM "${REG_APPSETTINGS}" "GeoserverBron" "$GeoserverBron"
-  WriteRegStr HKLM "${REG_APPSETTINGS}" "User" "$User"
-  WriteRegStr HKLM "${REG_APPSETTINGS}" "Password" "$Password"
 
 	; User settings
 	WriteRegStr HKCU "Software\QGIS\QGIS3\Qgis" "askToSaveProjectChanges" "false"
@@ -251,25 +268,6 @@ Section "Objecten" SectionObjecten
 	;ReadRegStr $R0 HKLM "Software\QGIS" "InstallPath"
 	ReadRegStr $R0 HKCR "QGIS Project\Shell\open\command" ""
 	${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten.qgs"
-
-    ;geoserver wfs config file
-  FileOpen $4 "$INSTDIR\ini\pg_service.conf" a
-  FileSeek $4 0 END
-  FileWrite $4 "$\r$\n"
-  FileWrite $4 "[oiv]"
-  FileWrite $4 "$\r$\n"
-  FileWrite $4 "host=$Host"
-  FileWrite $4 "$\r$\n"
-  FileWrite $4 "port=5432"
-  FileWrite $4 "$\r$\n"
-  FileWrite $4 "dbname=$Dbname"
-  FileWrite $4 "$\r$\n"  
-  FileWrite $4 "user=$User"
-  FileWrite $4 "$\r$\n"
-  FileWrite $4 "password=$Password"
-  FileWrite $4 "$\r$\n"
-  FileWrite $4 "application_name=oiv"
-  FileClose $4
 
 	SetShellVarContext all
 
