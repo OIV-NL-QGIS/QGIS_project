@@ -23,8 +23,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.1.7
-!define PLUGINVERSION 3.1.7
+!define VERSION 3.1.8
+!define PLUGINVERSION 3.1.8
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION}"
 !define WEBSITE "https://www.safetyct.com"
@@ -338,6 +338,7 @@ Section "WFS" SectionWFS
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
   File /a ..\oiv_project\qgis_project\objecten\convert_to_wfs.py
+  File /a ..\oiv_project\qgis_project\objecten\update_dimension_tables.py
   File /r ..\oiv_project\qgis_project\objecten\db
  
 	; Create desktop shortcuts
