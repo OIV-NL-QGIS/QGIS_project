@@ -557,6 +557,7 @@ Section Uninstall
 
   ; Delete files/folders
   RMDir /r "$INSTDIR\ui"
+  RMDir /r "$INSTDIR\db"  
   RMDir /r "$INSTDIR\ini"
   RMDir /r "$INSTDIR\svg"
   Delete "$INSTDIR\*.*"
