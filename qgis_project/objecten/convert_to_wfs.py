@@ -68,5 +68,15 @@ for layer in root.iter('maplayer'):
         layer.find('datasource').text = sqliteLayers[layer.find('layername').text]
         layer.find('provider').text = 'spatialite'
 
+for elem in root.iter('Variables'):
+    for var in elem.findall('variableNames'):
+        count = 0
+        for val in var.findall('value'):
+            if val.text == 'connection':
+                index = count
+            count += 1
+    for var in elem.findall('variableValues'):
+        var[index].text = 'WFS'
+
 tree.write('./OIV_Objecten.qgs')
 os.remove('./geoserver.conf')
