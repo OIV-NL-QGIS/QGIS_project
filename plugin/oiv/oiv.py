@@ -97,8 +97,9 @@ class oiv:
         #init projectVariable to communicate from plugin to original drawing possibilities
         QgsExpressionContextUtils.setProjectVariable(QgsProject.instance(), 'actieve_bouwlaag', 1)
         self.action2 = QAction(QIcon(":/plugins/oiv/config_files/png/oiv_update.png"), "Update dimension tables", self.iface.mainWindow())
-        self.action2.triggered.connect(self.update_dimension_tables)
+        self.action2.triggered.connect(self.update_dimension_tables_project)
         self.iface.addPluginToMenu('&OIV Objecten', self.action2)
+        self.action2.setEnabled(False)
         self.update_dimension_tables()
 
     def close_basewidget(self):
@@ -106,6 +107,7 @@ class oiv:
         self.basewidget.close()
         self.toolbar.setEnabled(True)
         self.projCombo.setEnabled(True)
+        self.action2.setEnabled(False)
         self.checkVisibility = False
 
     def unload(self):
@@ -132,16 +134,15 @@ class oiv:
         self.iface.removeToolBarIcon(self.action)
 
     def update_dimension_tables(self):
+        run_update_dimension_tables('..\\config_files\\geoserver.conf', '..\\config_files\\dimension_tables.db', False)
+
+    def update_dimension_tables_project(self):
         project = QgsProject.instance()
-        projectTest = str(QgsExpressionContextUtils.projectScope(project).variable('project_title'))
-        connection = str(QgsExpressionContextUtils.projectScope(project).variable('connection'))
-        if 'Objecten' not in projectTest:
-            QMessageBox.warning(None, "Let op:", "De dimension tabellen van het project zijn niet geupdate.\n"
-                                "Het project moet hiervoor geopend zijn!")
-        elif connection == 'WFS':
-            run_update_dimension_tables('..\\config_files\\geoserver.conf', '..\\config_files\\dimension_tables.db')
-            dbPath = QgsProject.instance().readPath("./") + '/db/dimension_tables.db'
-            run_update_dimension_tables('..\\config_files\\geoserver.conf', dbPath)
+        projectConn = str(QgsExpressionContextUtils.projectScope(project).variable('connection'))
+        if projectConn == 'WFS':
+            projPath = QgsProject.instance().readPath("./")
+            dbPath = projPath + '/db/dimension_tables.db'
+            run_update_dimension_tables('..\\config_files\\geoserver.conf', dbPath, True)
 
     def run_identify_pand(self):
         """get the identification of a building from the user"""
@@ -298,6 +299,7 @@ class oiv:
             self.basewidget.identify_pand.clicked.connect(self.run_identify_pand)
             self.basewidget.identify_gebouw.clicked.connect(self.run_identify_terrein)
             self.basewidget.closewidget.clicked.connect(self.close_basewidget)
+            self.action2.setEnabled(True)
             self.basewidget.show()
             self.toolbar.setEnabled(False)
             self.projCombo.setEnabled(False)

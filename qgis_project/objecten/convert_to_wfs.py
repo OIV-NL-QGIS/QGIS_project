@@ -80,4 +80,3 @@ for elem in root.iter('Variables'):
 
 tree.write('./OIV_Objecten.qgs')
 os.remove('./geoserver.conf')
-

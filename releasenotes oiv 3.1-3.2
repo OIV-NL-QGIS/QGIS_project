@@ -136,3 +136,12 @@ De volgende instellingen zijn van belang:
 - Handmatige verversing is tevens ingebouwd in de plugin onder het menu "Plugin", "OIV Objecten", "Ververs types".
 
 WFS en database projecten zijn lokaal niet door elkaar te gebruiken. Het is het één of het ander. Per organsatie kan dit wel prima door elkaar heen worden gebruikt.
+
+--release notes OIV versie 3.1.8
+------------------------------------------------------------------
+De plugin moet synchroon zijn met de database. Afhankelijk van de connectie (db/wfs) wordt bij het laden van de plugin en dus qgis de dimensie tabel geupdatet.
+Als het project connectie maakt via de wfs koppeling dan wordt bij het opstarten van het project ook de dimesnie tabellen van het project geupdatet.
+
+Indien de plugin bij opstarten niet heeft kunnen updaten of men wil tijdens het werken een aanpassing doorvoeren (bijvoorbeeld de stijl) kan via het plugin menu (OIV Objecten) handmatige synchronisatie worden gestart. Dit geldt dan alleen voor het QGIS oiv project en wordt alleen uitgevoerd indien gebruik wordt gemaakt van de WFS koppeling. Het is niet noodzakelijk voor de plugin en wordt voor de plugin dan ook niet uitgevoerd.
+
+Daarnaast is de installer aangepast zodat bij elke installatie, zowel bij db- als wfs koppeling de gebruikersnaam en wachtwoord moeten worden opgegeven. In het gehele project wordt nu nergens meer de connectie parameters opgeslagen. Deze worden pas opgeslagen in de pg_service.cong of de geoserver.conf na installatie.
