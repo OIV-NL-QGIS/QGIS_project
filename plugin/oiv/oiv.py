@@ -42,6 +42,7 @@ from .tools.mapTool import CaptureTool
 from .tools.movepointTool import MovePointTool
 from .tools.snappointTool import SnapPointTool
 from .tools.update_dimension_tables import run_update_dimension_tables
+from .tools.filter_object import init_filter_section, set_object_filter
 from .oiv_base_widget import oivBaseWidget
 from .bag_pand.oiv_pandgegevens import oivPandWidget
 from .repressief_object.oiv_repressief_object import oivRepressiefObjectWidget
@@ -50,8 +51,8 @@ from .repressief_object.oiv_objectnieuw import oivObjectNieuwWidget
 class oiv:
     """initialize class attributes"""
 
-    compatibleVersion = [315, 317]
-    pluginVersion = '3.1.7'
+    compatibleVersion = [315, 318]
+    pluginVersion = '3.1.8'
     minBouwlaag = -10
     maxBouwlaag = 30
     checkVisibility = False
@@ -96,13 +97,18 @@ class oiv:
         self.projCombo.currentIndexChanged.connect(self.set_layer_subset_toolbar)
         #init projectVariable to communicate from plugin to original drawing possibilities
         QgsExpressionContextUtils.setProjectVariable(QgsProject.instance(), 'actieve_bouwlaag', 1)
-        run_update_dimension_tables()
+        self.action2 = QAction(QIcon(":/plugins/oiv/config_files/png/oiv_update.png"), "Update dimension tables", self.iface.mainWindow())
+        self.action2.triggered.connect(self.update_dimension_tables_project)
+        self.iface.addPluginToMenu('&OIV Objecten', self.action2)
+        self.action2.setEnabled(False)
+        self.update_dimension_tables()
 
     def close_basewidget(self):
         """close plugin and re-activate toolbar combobox"""
         self.basewidget.close()
         self.toolbar.setEnabled(True)
         self.projCombo.setEnabled(True)
+        self.action2.setEnabled(False)
         self.checkVisibility = False
 
     def unload(self):
@@ -120,11 +126,24 @@ class oiv:
         except: # pylint: disable=bare-except
             pass
         self.iface.removePluginMenu("&OIV Objecten", self.action)
+        self.iface.removePluginMenu("&OIV Objecten", self.action2)
         self.projCombo.currentIndexChanged.disconnect()
         self.action.triggered.disconnect()
+        self.action2.triggered.disconnect()
         del self.toolbar
         self.checkVisibility = None
         self.iface.removeToolBarIcon(self.action)
+
+    def update_dimension_tables(self):
+        run_update_dimension_tables('..\\config_files\\geoserver.conf', '..\\config_files\\dimension_tables.db', False)
+
+    def update_dimension_tables_project(self):
+        project = QgsProject.instance()
+        projectConn = str(QgsExpressionContextUtils.projectScope(project).variable('connection'))
+        if projectConn == 'WFS':
+            projPath = QgsProject.instance().readPath("./")
+            dbPath = projPath + '/db/dimension_tables.db'
+            run_update_dimension_tables('..\\config_files\\geoserver.conf', dbPath, True)
 
     def run_identify_pand(self):
         """get the identification of a building from the user"""
@@ -261,6 +280,7 @@ class oiv:
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
+            self.action2.setEnabled(False)
         elif dbVersion < self.compatibleVersion[0] or dbVersion > self.compatibleVersion[1]:
             QMessageBox.critical(None, "Database versie klopt niet",
                                  "De plugin of het project komt niet overeen met database versie!\
@@ -268,17 +288,22 @@ class oiv:
                                  Excuses voor het ongemak.")
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
+            self.action2.setEnabled(False)
         else:
             #always start from floor 1
             subString = "bouwlaag = 1"
             set_layer_substring(subString)
+            self.basewidget.filterframe.setVisible(False)
             index = self.projCombo.findText('1', Qt.MatchFixedString)
             if index >= 0:
                 self.projCombo.setCurrentIndex(index)
             self.iface.addDockWidget(Qt.RightDockWidgetArea, self.basewidget)
             self.basewidget.identify_pand.clicked.connect(self.run_identify_pand)
             self.basewidget.identify_gebouw.clicked.connect(self.run_identify_terrein)
+            self.basewidget.filter_objecten.clicked.connect(lambda: init_filter_section(self.basewidget))
+            self.basewidget.filterBtn.clicked.connect(lambda: set_object_filter(self.basewidget))
             self.basewidget.closewidget.clicked.connect(self.close_basewidget)
+            self.action2.setEnabled(True)
             self.basewidget.show()
             self.toolbar.setEnabled(False)
             self.projCombo.setEnabled(False)
