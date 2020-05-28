@@ -31,7 +31,6 @@ def setup_sqlitedb_connection(dbrelPath, isProject):
             db_path = dbrelPath
         else:
             db_path = os.path.join(os.path.dirname(__file__), dbrelPath)
-        print(db_path)
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
         query = "SELECT name FROM sqlite_master WHERE type='table'"

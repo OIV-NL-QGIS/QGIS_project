@@ -42,6 +42,7 @@ from .tools.mapTool import CaptureTool
 from .tools.movepointTool import MovePointTool
 from .tools.snappointTool import SnapPointTool
 from .tools.update_dimension_tables import run_update_dimension_tables
+from .tools.filter_object import init_filter_section, set_object_filter
 from .oiv_base_widget import oivBaseWidget
 from .bag_pand.oiv_pandgegevens import oivPandWidget
 from .repressief_object.oiv_repressief_object import oivRepressiefObjectWidget
@@ -50,8 +51,8 @@ from .repressief_object.oiv_objectnieuw import oivObjectNieuwWidget
 class oiv:
     """initialize class attributes"""
 
-    compatibleVersion = [315, 317]
-    pluginVersion = '3.1.7'
+    compatibleVersion = [315, 318]
+    pluginVersion = '3.1.8'
     minBouwlaag = -10
     maxBouwlaag = 30
     checkVisibility = False
@@ -292,12 +293,15 @@ class oiv:
             #always start from floor 1
             subString = "bouwlaag = 1"
             set_layer_substring(subString)
+            self.basewidget.filterframe.setVisible(False)
             index = self.projCombo.findText('1', Qt.MatchFixedString)
             if index >= 0:
                 self.projCombo.setCurrentIndex(index)
             self.iface.addDockWidget(Qt.RightDockWidgetArea, self.basewidget)
             self.basewidget.identify_pand.clicked.connect(self.run_identify_pand)
             self.basewidget.identify_gebouw.clicked.connect(self.run_identify_terrein)
+            self.basewidget.filter_objecten.clicked.connect(lambda: init_filter_section(self.basewidget))
+            self.basewidget.filterBtn.clicked.connect(lambda: set_object_filter(self.basewidget))
             self.basewidget.closewidget.clicked.connect(self.close_basewidget)
             self.action2.setEnabled(True)
             self.basewidget.show()
