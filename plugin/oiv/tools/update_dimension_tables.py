@@ -36,7 +36,6 @@ def setup_sqlitedb_connection(dbrelPath, isProject):
         query = "SELECT name FROM sqlite_master WHERE type='table'"
         cursor.execute(query)
         allTables = cursor.fetchall()
-        print(allTables)
     except sqlite3.Error as error:
         print("Failed to connect to the dimension database", error)
     return conn, cursor, allTables

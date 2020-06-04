@@ -94,7 +94,7 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
     def get_attributes(self, foreignKey, childFeature):
         query = "SELECT foreign_key, input_label, question, label_required\
              FROM config_object WHERE child_layer = '{}'".format(self.drawLayer.name())
-        attrs = read_settings(query, False)[0]
+        attrs = read_settings(query, False)
         labelTekst = user_input_label(attrs[3], attrs[2])
         if labelTekst != 'Cancel':
             fields = self.drawLayer.fields()

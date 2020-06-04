@@ -20,10 +20,12 @@ def set_object_filter(wdgt):
         filters.append("(datum_geldig_tot < '{}' OR datum_geldig_tot IS NULL)".format(wdgt.datum_tot.date().toPyDate()))
     if wdgt.checkSoort.isChecked():
         filters.append("typeobject = '{}'".format(wdgt.objecttype.currentText()))
+    layerNames = read_settings("SELECT child_layer FROM config_object;", True)
     if filters:
         subString = ' AND '.join(filters)
-        layerNames = read_settings("SELECT child_layer FROM config_object;", True)
-        for layerName in layerNames:
-            if layerName[0] != 'Alternatief bluswater':
-                layer = getlayer_byname(layerName[0])
-                layer.setSubsetString(subString)
+    else:
+        subString = ''
+    for layerName in layerNames:
+        if layerName[0] != 'Alternatief bluswater':
+            layer = getlayer_byname(layerName[0])
+            layer.setSubsetString(subString)
