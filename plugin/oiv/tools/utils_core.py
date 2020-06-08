@@ -130,22 +130,13 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
 
 def get_possible_snapFeatures_object(layerNamesList, objectId):
     possibleSnapFeatures = []
-    objectIds = []
     for name in layerNamesList:
         lyr = getlayer_byname(name)
-        if name == 'Object terrein':
-            request = QgsFeatureRequest().setFilterExpression('"id" = ' + objectId)
-            featureIt = lyr.getFeatures(request)
-            for feat in featureIt:
-                if feat.hasGeometry():
-                    possibleSnapFeatures.append(feat.geometry())
-                objectIds.append(feat["id"])
-        elif objectIds:
-            for bid in objectIds:
-                request = QgsFeatureRequest().setFilterExpression('"object_id" = ' + str(bid))
-                featureIt = lyr.getFeatures(request)
-                for feat in featureIt:
-                    possibleSnapFeatures.append(feat.geometry())
+        request = QgsFeatureRequest().setFilterExpression('"object_id" = ' + str(objectId))
+        featureIt = lyr.getFeatures(request)
+        for feat in featureIt:
+            if feat.hasGeometry():
+                possibleSnapFeatures.append(feat.geometry())
     return possibleSnapFeatures
 
 def construct_feature(layerType, parentLayerName, points, objectId, iface):
