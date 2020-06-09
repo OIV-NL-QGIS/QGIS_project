@@ -194,10 +194,10 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         set_layer_substring(subString)
         self.tekenwidget.bouwlaag.setText(str(self.comboBox.currentText()))
         self.tekenwidget.pand_id.setText(self.pand_id.text())
+        self.tekenwidget.initUI()
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.tekenwidget)
         self.close()
         self.tekenwidget.show()
-        #self.tekenwidget.connect_buttons(self.read_config)
 
     def openBagviewer(self):
         """open url based on BAG pand_id, i.v.m. terugmelden"""

@@ -15,22 +15,6 @@
         <file>config_files/png/oiv_plugin.png</file>
         <file>config_files/png/oiv_update.png</file>
         <file>config_files/png/filter.png</file>
-        <file>config_files/csv/install_veilighv.csv</file>
-        <file>config_files/csv/sleutelkluis_object.csv</file>
-        <file>config_files/csv/sleutelkluis_bouwlaag.csv</file>
-        <file>config_files/csv/ruimten.csv</file>
-        <file>config_files/csv/ruimtelijke_veiligheidsv.csv</file>
-        <file>config_files/csv/opstelplaats.csv</file>
-        <file>config_files/csv/opslag_stoffen.csv</file>
-        <file>config_files/csv/labels.csv</file>
-        <file>config_files/csv/isolijnen.csv</file>
-        <file>config_files/csv/ingang_object.csv</file>
-        <file>config_files/csv/ingang_bouwlaag.csv</file>
-        <file>config_files/csv/bouwkundige_veiligheidsv.csv</file>
-        <file>config_files/csv/bereikbaarheid.csv</file>
-        <file>config_files/csv/afw_binnendekking.csv</file>
-        <file>config_files/csv/sectoren.csv</file>
-        <file>config_files/csv/bluswater.csv</file>
         <file>config_files/png/aanrijdroute.png</file>
         <file>config_files/png/brandweerlift.png</file>
 		<file>config_files/png/brandmeldpaneel.png</file>

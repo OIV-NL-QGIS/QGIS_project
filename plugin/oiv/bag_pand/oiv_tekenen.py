@@ -64,7 +64,6 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
         self.setupUi(self)
         self.iface = iface
         self.stackwidget = oivStackWidget()
-        self.initUI()
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
@@ -218,15 +217,12 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
 
     def close_teken_show_object(self):
         """destroy and close self"""
-        try:
-            self.move.clicked.disconnect()
-            self.identify.clicked.disconnect()
-            self.select.clicked.disconnect()
-            self.delete_f.clicked.disconnect()
-            self.pan.clicked.disconnect()
-            self.terug.clicked.disconnect()
-        except: # pylint: disable=bare-except
-            pass
+        self.move.clicked.disconnect()
+        self.identify.clicked.disconnect()
+        self.select.clicked.disconnect()
+        self.delete_f.clicked.disconnect()
+        self.pan.clicked.disconnect()
+        self.terug.clicked.disconnect()
         try:
             del self.stackwidget
         except: # pylint: disable=bare-except

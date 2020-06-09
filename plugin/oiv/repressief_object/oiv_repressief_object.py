@@ -230,6 +230,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         self.tekensymbolenwidget.repressiefobjectwidget = self
         self.tekensymbolenwidget.formelenaam.setText(self.formelenaam.text())
         self.tekensymbolenwidget.object_id.setText(self.object_id.text())
+        self.tekensymbolenwidget.initUI()
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.tekensymbolenwidget)
         self.tekensymbolenwidget.show()
         self.close()
@@ -240,7 +241,6 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         self.importwidget.parentWidget = self
         self.importwidget.object_id.setText(self.object_id.text())
         self.importwidget.object.setText(self.formelenaam.text())
-        #self.importwidget.selectTool = self.selectTool
         self.importwidget.canvas = self.canvas
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.importwidget)
         self.close()

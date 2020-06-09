@@ -61,7 +61,6 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.setupUi(self)
         self.iface = iface
         self.stackwidget = oivStackWidget()
-        self.initUI()
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
