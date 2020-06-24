@@ -11,7 +11,7 @@ with open('geoserver.conf', 'r') as f:
 geoserverURL = "'{}'".format(x[0])
 geoserverURL = geoserverURL.replace('http://', 'http://{}:{}@'.format(x[2], x[3]))
 geoserverBron = x[1]
-dimensionDbPath = '/db/dimension_tables.db'
+dimensionDbPath = '.db/dimension_tables.db'
 
 dropKeyList = ['service', 'sslmode', 'key', 'type', 'checkPrimaryKeyUnicity', '(geom)']
 wfsSettingsDict = {'pagingEnabled': "'false'", 'restrictToRequestBBOX' : '', 'srsname' : '', 'typename' : '', 'url' : '',\
