@@ -61,10 +61,10 @@ class SelectTool(QgsMapToolIdentify, QgsMapTool):
         """if more features are identified ask user which one to choose"""
         targetFeature = None
         query = "SELECT identifier, type_layer_name FROM {} WHERE child_layer = '{}'".format(self.whichConfig, idLayer.name())
-        attrs = read_settings(query, False)[0]
+        attrs = read_settings(query, False)
         sortList = []
         for feat in allFeatures:
-            if attrs[1] != '':
+            if attrs[1]:
                 request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(feat[attrs[0]]))
                 type_layer = getlayer_byname(attrs[1])
                 tempFeature = next(type_layer.getFeatures(request))
@@ -95,7 +95,7 @@ class AskFeatureDialog(QDialog):
         self.qComboA.setFixedWidth(100)
         self.qComboA.setMaxVisibleItems(30)
         for item in self.askList:
-            self.qComboA.addItem(str(item[1]), str(self.item[0]))
+            self.qComboA.addItem(str(item[1]), str(item[0]))
         qlayout.addWidget(self.qlineA)
         qlayout.addWidget(self.qlineB)
         qlayout.addWidget(self.qComboA)
