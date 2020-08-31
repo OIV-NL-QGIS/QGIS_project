@@ -64,7 +64,8 @@ def write_layer(layer, childFeature):
     layer.startEditing()
     dummy, newFeatures = layer.dataProvider().addFeatures([childFeature])
     layer.commitChanges()
-    layer.triggerRepaint()
+    layer.reload()
+    layer.triggerRepaint()    
     return newFeatures[0].id()
 
 def nearest_neighbor(iface, layer, point):
