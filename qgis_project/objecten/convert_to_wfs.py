@@ -9,12 +9,12 @@ with open('geoserver.conf', 'r') as f:
     x = f.read().splitlines()
 
 geoserverURL = "'{}'".format(x[0])
-geoserverURL = geoserverURL.replace('http://', 'http://{}:{}@'.format(x[2], x[3]))
+#geoserverURL = geoserverURL.replace('http://', 'http://{}:{}@'.format(x[2], x[3]))
 geoserverBron = x[1]
-dimensionDbPath = '.db/dimension_tables.db'
+dimensionDbPath = './db/dimension_tables.db'
 
 dropKeyList = ['service', 'sslmode', 'key', 'type', 'checkPrimaryKeyUnicity', '(geom)']
-wfsSettingsDict = {'pagingEnabled': "'false'", 'restrictToRequestBBOX' : '', 'srsname' : '', 'typename' : '', 'url' : '',\
+wfsSettingsDict = {'user': x[2], 'password': x[3], 'pagingEnabled': "'false'", 'restrictToRequestBBOX' : '', 'srsname' : '', 'typename' : '', 'url' : '',\
                    'version': "'1.0.0'", 'table': '""', 'sql': ''}
 wfsNoGeoLayers = ['aanwezig', 'bedrijfshulpverlening', 'beheersmaatregelen', 'contactpersoon', 'gebruiksfunctie', 'gevaarlijkestof',\
                   'gevaarlijkestof_schade_cirkel', 'historie', 'scenario', 'veilighv_org']
