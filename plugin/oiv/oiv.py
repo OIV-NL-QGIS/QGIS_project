@@ -51,8 +51,8 @@ from .repressief_object.oiv_objectnieuw import oivObjectNieuwWidget
 class oiv:
     """initialize class attributes"""
 
-    compatibleVersion = [315, 319]
-    pluginVersion = '3.1.9'
+    compatibleVersion = [315, 320]
+    pluginVersion = '3.2.0'
     minBouwlaag = -10
     maxBouwlaag = 30
     checkVisibility = False
