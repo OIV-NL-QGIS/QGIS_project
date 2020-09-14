@@ -3,6 +3,7 @@ import os
 import sqlite3
 import time
 import requests
+from requests.auth import HTTPBasicAuth
 
 def get_geoserver_conf(confPath):
     """get geoserver connection parametres"""
@@ -13,11 +14,11 @@ def get_geoserver_conf(confPath):
         with open(filePath, 'r') as f:
             x = f.read().splitlines()
         geoserverURL = "{}".format(x[0])
-        geoserverURL = geoserverURL.replace('http://', 'http://{}:{}@'.format(x[2], x[3]))
+        userpass = HTTPBasicAuth(x[2], x[3])
         geoserverBron = x[1]
     except: # pylint: disable=bare-except
         print('Configfile not found or not complete!')
-    return geoserverURL, geoserverBron
+    return geoserverURL, geoserverBron, userpass
 
 def setup_db_connection(dbrelPath):
     """setup the sqlite database connection"""
@@ -42,13 +43,13 @@ def close_db_connection(cursor, conn):
     if conn:
         conn.close()
 
-def execute_update(geoserverURL, geoserverBron, cursor, allTables):
+def execute_update(geoserverURL, geoserverBron, cursor, allTables, auth):
     """update all the tables, insert extra rows and delete not existing"""
     for table in allTables:
         layerName = table[0]
         params = {'request' : 'GetFeature', 'outputFormat' : 'json', 'typename': '{}:{}'.format(geoserverBron, layerName)}
         try:
-            r = requests.get(geoserverURL, params=params)
+            r = requests.get(geoserverURL, params=params, auth=auth)
         except requests.exceptions.RequestException as e:
             print('The connection with GeoServer could not be established!', e)
             return 'not ok'
@@ -92,10 +93,10 @@ def run_update_dimension_tables():
     """execute all the real work"""
     print ('Start : ', time.ctime())
     result = None
-    geoserverURL, geoserverBron = get_geoserver_conf('geoserver.conf')
+    geoserverURL, geoserverBron, auth = get_geoserver_conf('geoserver.conf')
     conn, cursor, allTables = setup_db_connection('.\\db\\dimension_tables.db')
     if geoserverURL and geoserverBron and allTables:
-        result = execute_update(geoserverURL, geoserverBron, cursor, allTables)
+        result = execute_update(geoserverURL, geoserverBron, cursor, allTables, auth)
     if result == 'ok':
         conn.commit()
         print('Dimension tables are correct updatet!')
