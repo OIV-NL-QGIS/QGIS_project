@@ -41,7 +41,6 @@ from .tools.utils_gui import read_settings, set_layer_substring
 from .tools.mapTool import CaptureTool
 from .tools.movepointTool import MovePointTool
 from .tools.snappointTool import SnapPointTool
-from .tools.update_dimension_tables import run_update_dimension_tables
 from .tools.filter_object import init_filter_section, set_object_filter
 from .oiv_base_widget import oivBaseWidget
 from .bag_pand.oiv_pandgegevens import oivPandWidget
@@ -51,7 +50,7 @@ from .repressief_object.oiv_objectnieuw import oivObjectNieuwWidget
 class oiv:
     """initialize class attributes"""
 
-    compatibleVersion = [315, 320]
+    compatibleVersion = [320, 320]
     pluginVersion = '3.2.0'
     minBouwlaag = -10
     maxBouwlaag = 30
@@ -97,18 +96,12 @@ class oiv:
         self.projCombo.currentIndexChanged.connect(self.set_layer_subset_toolbar)
         #init projectVariable to communicate from plugin to original drawing possibilities
         QgsExpressionContextUtils.setProjectVariable(QgsProject.instance(), 'actieve_bouwlaag', 1)
-        self.action2 = QAction(QIcon(":/plugins/oiv/config_files/png/oiv_update.png"), "Update dimension tables", self.iface.mainWindow())
-        self.action2.triggered.connect(self.update_dimension_tables_project)
-        self.iface.addPluginToMenu('&OIV Objecten', self.action2)
-        self.action2.setEnabled(False)
-        self.update_dimension_tables()
 
     def close_basewidget(self):
         """close plugin and re-activate toolbar combobox"""
         self.basewidget.close()
         self.toolbar.setEnabled(True)
         self.projCombo.setEnabled(True)
-        self.action2.setEnabled(False)
         self.checkVisibility = False
 
     def unload(self):
@@ -126,24 +119,11 @@ class oiv:
         except: # pylint: disable=bare-except
             pass
         self.iface.removePluginMenu("&OIV Objecten", self.action)
-        self.iface.removePluginMenu("&OIV Objecten", self.action2)
         self.projCombo.currentIndexChanged.disconnect()
         self.action.triggered.disconnect()
-        self.action2.triggered.disconnect()
         del self.toolbar
         self.checkVisibility = None
         self.iface.removeToolBarIcon(self.action)
-
-    def update_dimension_tables(self):
-        run_update_dimension_tables('..\\config_files\\geoserver.conf', '..\\config_files\\dimension_tables.db', False)
-
-    def update_dimension_tables_project(self):
-        project = QgsProject.instance()
-        projectConn = str(QgsExpressionContextUtils.projectScope(project).variable('connection'))
-        if projectConn == 'WFS':
-            projPath = QgsProject.instance().readPath("./")
-            dbPath = projPath + '/db/dimension_tables.db'
-            run_update_dimension_tables('..\\config_files\\geoserver.conf', dbPath, True)
 
     def run_identify_pand(self):
         """get the identification of a building from the user"""
@@ -280,7 +260,6 @@ class oiv:
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
-            self.action2.setEnabled(False)
         elif dbVersion < self.compatibleVersion[0] or dbVersion > self.compatibleVersion[1]:
             QMessageBox.critical(None, "Database versie klopt niet",
                                  "De plugin of het project komt niet overeen met database versie!\
@@ -288,7 +267,6 @@ class oiv:
                                  Excuses voor het ongemak.")
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
-            self.action2.setEnabled(False)
         else:
             #always start from floor 1
             subString = "bouwlaag = 1"
@@ -303,7 +281,6 @@ class oiv:
             self.basewidget.filter_objecten.clicked.connect(lambda: init_filter_section(self.basewidget))
             self.basewidget.filterBtn.clicked.connect(lambda: set_object_filter(self.basewidget))
             self.basewidget.closewidget.clicked.connect(self.close_basewidget)
-            self.action2.setEnabled(True)
             self.basewidget.show()
             self.toolbar.setEnabled(False)
             self.projCombo.setEnabled(False)
