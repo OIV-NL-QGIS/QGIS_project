@@ -41,10 +41,18 @@ def check_layer_type(layer):
 def write_layer(layer, childFeature):
     """write the attributes to layer"""
     layer.startEditing()
-    dummy, newFeatures = layer.dataProvider().addFeatures([childFeature])
-    layer.commitChanges()
-    layer.triggerRepaint()
-    return newFeatures[0].id()
+    checkGeomValidity = childFeature.geometry().isGeosValid()
+    if checkGeomValidity:
+        dummy, newFeatures = layer.dataProvider().addFeatures([childFeature])
+        layer.commitChanges()
+        layer.triggerRepaint()
+        return newFeatures[0].id()
+    else:
+        layer.commitChanges()
+        QMessageBox.warning(None, 'Let op: Ongeldige geometrie!',
+                            "Vermoedelijk heeft u 2x op hetzelfde punt geklikt of doorkruist de geometrie zichzelf.\n\n"
+                            "De geometrie wordt niet opgeslagen.",
+                            QMessageBox.Ok)
 
 def nearest_neighbor(iface, layer, point):
     """search the nearest parent feature id"""
