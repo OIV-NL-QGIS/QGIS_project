@@ -29010,7 +29010,7 @@ def openProject():&#xd;	layer = None&#xd;	layername = 'Veiligheidsregio'&#xd;	la
 	projPath = QgsProject.instance().readPath("./")&#xd;
 	dbPath = projPath + '/db/dimension_tables.db'&#xd;
 	if projectConn == 'WFS':&#xd;
-		run_update_dimension_tables('..\\config_files\\geoserver.conf', dbPath, True, projectConn)&#xd;
+		run_update_dimension_tables('geoserver.conf', dbPath, True, projectConn)&#xd;
 	else:&#xd;
 		run_update_dimension_tables('', dbPath, True, projectConn)&#xd;&#xd;
 def saveProject():&#xd;    pass&#xd;&#xd;
