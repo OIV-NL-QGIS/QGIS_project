@@ -160,7 +160,7 @@ def execute_update_by_db(cursorOIV, cursor, allTables):
 
 def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
     """execute all the update work"""
-    print('Start : ', time.ctime())
+    print('Start: ', time.ctime())
     result = None
     connOIV = None
     cursorOIV = None
