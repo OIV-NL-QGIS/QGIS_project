@@ -1,9 +1,11 @@
 """Import dimension tables from the WFS en updat sqlite db"""
 import os
 import sqlite3
+import json
 import time
 import requests
 import psycopg2
+from qgis.core import QgsProject, QgsGeometry, QgsVectorLayer
 from psycopg2.extras import RealDictCursor
 
 def get_geoserver_conf(confPath):
@@ -158,6 +160,12 @@ def execute_update_by_db(cursorOIV, cursor, allTables):
                 print("The {} table is corrupt!".format(layerName))
     return 'ok'
 
+def getlayer_byname(layername):
+    layer = None
+    layers = QgsProject.instance().mapLayersByName(layername)
+    layer = layers[0]
+    return (layer)
+
 def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
     """execute all the update work"""
     print('Start: ', time.ctime())
@@ -168,13 +176,31 @@ def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
     if connectType == 'WFS':
         geoserverURL, geoserverBron = get_geoserver_conf(confFile)
         result = execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables)
+        close_db_connection(cursor, conn)
+        layerName = 'Veiligheidsregio'
+        params = {'request' : 'GetFeature', 'outputFormat' : 'json', 'typename': '{}:{}'.format(geoserverBron, 'veiligheidsregio_huidig')}
+        r = requests.get(geoserverURL, params=params)
+        geojson = json.dumps(r.json()["features"][0]["geometry"])
+        vlayer = QgsVectorLayer(geojson,"tempLayer", "ogr")
+        for feature in vlayer.getFeatures():
+            geom = feature.geometry()
+        layer = getlayer_byname(layerName)
+        layer.startEditing()
+        layer.changeGeometry(1, geom)
+        layer.commitChanges()
     else:
         connOIV, cursorOIV = setup_postgisdb_connection("service='oiv'")
         if cursorOIV:
             result = execute_update_by_db(cursorOIV, cursor, allTables)
+            close_db_connection(cursorOIV, connOIV)
+            layerName = 'Veiligheidsregio'
+            query = "SELECT ST_AsText(geom) as geom FROM {}.{}".format('algemeen', 'veiligheidsregio_huidig')
+            cursorOIV.execute(query)
+            geom = QgsGeometry.fromWkt(cursorOIV.fetchone()["geom"])
+            layer = getlayer_byname(layerName)
+            layer.startEditing()
+            layer.changeGeometry(1, geom)
+            layer.commitChanges()
     if result == 'ok':
-        conn.commit()
         print('Dimension tables are correct updatet!')
-    close_db_connection(cursor, conn)
-    close_db_connection(cursorOIV, connOIV)
     print('Stop : ', time.ctime())
