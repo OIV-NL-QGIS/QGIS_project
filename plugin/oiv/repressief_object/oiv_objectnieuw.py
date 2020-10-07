@@ -84,6 +84,7 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
             tempFeature = QgsFeature()
             self.newObject = newFeatureId
             request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(self.newObject))
+            self.drawLayer.reload()
             tempFeature = next(self.drawLayer.getFeatures(request))
             #with new created feature run existing object widget
             self.run_objectgegevens(tempFeature, newFeatureId)
