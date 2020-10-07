@@ -12,16 +12,17 @@ def get_geoserver_conf(confPath):
     """get geoserver connection parametres"""
     geoserverURL = None
     geoserverBron = None
+    auth = None
     filePath = os.path.join(os.path.dirname(__file__), confPath)
     try:
         with open(filePath, 'r') as f:
             x = f.read().splitlines()
         geoserverURL = "{}".format(x[0])
-        geoserverURL = geoserverURL.replace('http://', 'http://{}:{}@'.format(x[2], x[3]))
+        auth = (x[2], x[3])
         geoserverBron = x[1]
     except: # pylint: disable=bare-except
         print('Configfile not found or not complete!')
-    return geoserverURL, geoserverBron
+    return geoserverURL, geoserverBron, auth
 
 def setup_sqlitedb_connection(dbrelPath, isProject):
     """setup the sqlite database connection"""
@@ -49,13 +50,13 @@ def close_db_connection(cursor, conn):
     if conn:
         conn.close()
 
-def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables):
+def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth):
     """update all the tables, insert extra rows and delete not existing"""
     for table in allTables:
         layerName = table[0]
         params = {'request' : 'GetFeature', 'outputFormat' : 'json', 'typename': '{}:{}'.format(geoserverBron, layerName)}
         try:
-            r = requests.get(geoserverURL, params=params)
+            r = requests.get(geoserverURL, params=params, auth=auth)
         except requests.exceptions.RequestException as e:
             print('The connection with GeoServer could not be established!', e)
             return 'not ok'
@@ -174,12 +175,12 @@ def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
     cursorOIV = None
     conn, cursor, allTables = setup_sqlitedb_connection(dbFile, isProjectDb)
     if connectType == 'WFS':
-        geoserverURL, geoserverBron = get_geoserver_conf(confFile)
-        result = execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables)
+        geoserverURL, geoserverBron, auth = get_geoserver_conf(confFile)
+        result = execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth)
         close_db_connection(cursor, conn)
         layerName = 'Veiligheidsregio'
         params = {'request' : 'GetFeature', 'outputFormat' : 'json', 'typename': '{}:{}'.format(geoserverBron, 'veiligheidsregio_huidig')}
-        r = requests.get(geoserverURL, params=params)
+        r = requests.get(geoserverURL, params=params, auth=auth)
         geojson = json.dumps(r.json()["features"][0]["geometry"])
         vlayer = QgsVectorLayer(geojson,"tempLayer", "ogr")
         for feature in vlayer.getFeatures():
