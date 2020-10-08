@@ -164,7 +164,8 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
         """na de actie verschuiven/bewerken moeten de betreffende lagen opgeslagen worden en bewerken moet worden uitgezet"""
         for lyrName in self.moveLayerNames:
             moveLayer = getlayer_byname(lyrName)
-            moveLayer.commitChanges()        
+            moveLayer.commitChanges()
+            moveLayer.reload()
         self.activatePan()
 
     def run_tekenen(self, dummy, runLayer, feature_id):

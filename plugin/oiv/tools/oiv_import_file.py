@@ -1,5 +1,6 @@
 """extension to plugin to import AutoCad or Shape files"""
 import os
+from osgeo import ogr
 from qgis.PyQt import uic
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtWidgets import QDockWidget, QPushButton, QFileDialog, QMessageBox, QDialog, QComboBox, QGridLayout, QLabel, QDialogButtonBox, QVBoxLayout, QCheckBox
@@ -39,7 +40,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
     def selectfile(self):
         """select the import shape or dxf file"""
         dxf_info = None
-        importFile = QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, "AutoCad (*.dxf);;Shape (*.shp)")[0]
+        importFile = QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, "AutoCad (*.dxf);;Shape (*.shp);;GeoPackage (*.gpkg)")[0]
         self.bestandsnaam.setText(importFile)
         if importFile:
             if importFile.endswith('.dxf'):
@@ -49,6 +50,12 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                 if not self.layerImportType or not ok:
                     return
                 self.importLayer = QgsVectorLayer(importFileFeat, "import", "ogr")
+            elif importFile.endswith('.gpkg'):
+                layerNames = [l.GetName() for l in ogr.Open(importFile)]
+                GpkgDialog.layerNames = layerNames
+                layerName, dummy = GpkgDialog.getLayerName()
+                gpkgInfo = "|layername = " + layerName
+                importFileFeat = importFile + gpkgInfo
             else:
                 importFileFeat = importFile
                 self.importLayer = QgsVectorLayer(importFileFeat, "import", "ogr")
@@ -372,3 +379,31 @@ class LabelDialog(QDialog):
         result = dialog.exec_()
         labelAtrribute = dialog.labelAtrribute.currentText()
         return (labelAtrribute, result == QDialog.Accepted)
+
+class GpkgDialog(QDialog):
+    """construct the import GUI"""
+    layerNames = []
+
+    def __init__(self, parent=None):
+        super(GpkgDialog, self).__init__(parent)
+        self.setWindowTitle("Kies de laag die u wilt importeren")
+        qlayout = QVBoxLayout(self)
+        self.qComboA = QComboBox(self)
+        self.qComboA.addItems(self.layerNames)
+        self.qComboA.setFixedWidth(300)
+        self.qComboA.setMaxVisibleItems(30)
+        self.label3 = QLabel(self)
+        qlayout.addWidget(self.qComboA)
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
+            Qt.Horizontal, self)
+        buttons.accepted.connect(self.accept)
+        buttons.rejected.connect(self.reject)
+        qlayout.addWidget(buttons)
+
+    @staticmethod
+    def getLayerName(parent = None):
+        """Contains GeoPackage layername"""
+        dialog = GpkgDialog(parent)
+        result = dialog.exec_()
+        return (dialog.qComboA.currentText(), result == QDialog.Accepted)

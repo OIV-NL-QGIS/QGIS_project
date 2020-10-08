@@ -170,6 +170,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         for lyrName in self.moveLayerNames:
             moveLayer = getlayer_byname(lyrName)
             moveLayer.commitChanges()
+            moveLayer.reload()
         self.activatePan()
 
     def run_tekenen(self, dummy, runLayer, feature_id):
