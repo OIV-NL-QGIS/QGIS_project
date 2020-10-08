@@ -23,7 +23,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
     read_config = None
     mappingDict = {}
     importlagen = ["Bouwkundige veiligheidsvoorzieningen", "Ruimten"]
-    importlagen_types = {"Bouwkundige veiligheidsvoorzieningen": "veiligh_bouwk_types", "Ruimten" : "ruimten_type"}
+    importlagen_types = {"Bouwkundige veiligheidsvoorzieningen": "veiligh_bouwk_type", "Ruimten" : "ruimten_type"}
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -141,7 +141,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         types = []
         layer = getlayer_byname(layername)
         for feat in layer.getFeatures():
-            types.append(feat[1])
+            types.append(feat["naam"])
         return types
 
     def progressdialog(self, progress):
@@ -293,7 +293,7 @@ class MappingDialog(QDialog):
             self.labels[i].setText(importType)
             self.comboBoxes[i] = QComboBox(self)
             self.comboBoxes[i].addItems(self.targetTypes)
-            qlayout.addWidget(self.labels[i],i,0)
+            qlayout.addWidget(self.labels[i], i, 0)
             qlayout.addWidget(self.comboBoxes[i], i, 1)
             i += 1
         buttons = QDialogButtonBox(
