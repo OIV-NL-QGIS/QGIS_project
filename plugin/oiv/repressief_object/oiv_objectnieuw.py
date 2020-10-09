@@ -77,15 +77,18 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
         #set geometry from the point clicked on the canvas
         childFeature.setGeometry(QgsGeometry.fromPointXY(point))
         foreignKey = self.identificatienummer.text()
-        buttonCheck = self.get_attributes(foreignKey, childFeature)
+        buttonCheck, formeleNaam = self.get_attributes(foreignKey, childFeature)
         #return of new created feature id
         if buttonCheck != 'Cancel':
             newFeatureId = write_layer(self.drawLayer, childFeature)
             tempFeature = QgsFeature()
-            self.newObject = newFeatureId
-            request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(self.newObject))
+            request = QgsFeatureRequest().setFilterExpression('"basisreg_identifier" = ' + str(foreignKey))
             self.drawLayer.reload()
-            tempFeature = next(self.drawLayer.getFeatures(request))
+            tempFeatureIt = self.drawLayer.getFeatures(request)
+            for feat in tempFeatureIt:
+                if feat["formelenaam"] == formeleNaam:
+                    newFeatureId = feat["id"]
+                    tempFeature = feat
             #with new created feature run existing object widget
             self.run_objectgegevens(tempFeature, newFeatureId)
         else:
@@ -107,7 +110,7 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
                 childFeature[attrs[0]] = foreignKey
             childFeature["bron"] = self.bron.text()
             childFeature["bron_tabel"] = self.bron_table.text()
-            return childFeature
+            return childFeature, labelTekst
         else:
             return 'Cancel'
 
