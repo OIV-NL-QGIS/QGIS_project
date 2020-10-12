@@ -164,9 +164,11 @@ def construct_feature(layerType, parentLayerName, points, objectId, iface):
     if parentLayerName != '' and parentLayerName == 'Objecten':
         parentlayer = getlayer_byname(parentLayerName)
         parentId = int(objectId)
-    elif parentLayerName != '':
+    elif parentLayerName != '' and parentLayerName is not None:
         parentlayer = getlayer_byname(parentLayerName)
         dummy, parentId = nearest_neighbor(iface, parentlayer, geom)
+    elif parentLayerName is None:
+        parentId = ''
     else:
         parentId = None
     #foutafhandeling ivm als er geen parentId is

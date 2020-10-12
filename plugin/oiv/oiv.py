@@ -178,9 +178,9 @@ class oiv:
             self.run_object(ifeature, objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
         else:
-            QMessageBox.information(None, "Oeps:", "Geen repressief object gevonden!\
-                Heeft u op een terrein of een object geklikt?\
-                Selecteer opnieuw.")
+            QMessageBox.information(None, "Oeps:", 'Geen repressief object gevonden!\n'
+                                    'Heeft u op een terrein of een object geklikt?\n\n'
+                                    'Selecteer opnieuw.')
         self.identifyTool.geomIdentified.disconnect()
 
     def set_layer_subset_toolbar(self):
@@ -262,9 +262,9 @@ class oiv:
             self.action.setEnabled(False)
         elif dbVersion < self.compatibleVersion[0] or dbVersion > self.compatibleVersion[1]:
             QMessageBox.critical(None, "Database versie klopt niet",
-                                 "De plugin of het project komt niet overeen met database versie!\
-                                 Vraag aan uw regionaal beheerder om een database update!\
-                                 Excuses voor het ongemak.")
+                                 'De plugin of het project komt niet overeen met database versie!\n'
+                                 'Vraag aan uw regionaal beheerder om een database update.\n\n'
+                                 'Excuses voor het ongemak.')
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
         else:

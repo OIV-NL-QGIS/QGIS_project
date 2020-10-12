@@ -21,7 +21,6 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
     canvas = None
     selectTool = None
     importLayer = None
-    read_config = None
     mappingDict = {}
     importlagen = ["Bouwkundige veiligheidsvoorzieningen", "Ruimten"]
     importlagen_types = {"Bouwkundige veiligheidsvoorzieningen": "veiligh_bouwk_type", "Ruimten" : "ruimten_type"}
@@ -45,7 +44,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
 
     def selectfile(self):
         """select the import shap or dxf file"""
-        dxf_info = None
+        dxfInfo = None
         importFile = QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, "AutoCad (*.dxf);;Shape (*.shp);;GeoPackage (*.gpkg)")[0]
         self.bestandsnaam.setText(importFile)
         checkBouwlaag = False

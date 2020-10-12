@@ -1,5 +1,5 @@
 """extension to plugin to import AutoCad or Shape files"""
-import os
+import os 
 from osgeo import ogr
 from qgis.PyQt import uic
 from qgis.PyQt.QtCore import Qt
@@ -39,14 +39,14 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
 
     def selectfile(self):
         """select the import shape or dxf file"""
-        dxf_info = None
+        dxfInfo = None
         importFile = QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, "AutoCad (*.dxf);;Shape (*.shp);;GeoPackage (*.gpkg)")[0]
         self.bestandsnaam.setText(importFile)
         if importFile:
             if importFile.endswith('.dxf'):
                 self.layerImportType, ok = DxfDialogObject.getGeometryType()
-                dxf_info = "|layername = entities|geometrytype=" + self.layerImportType
-                importFileFeat = importFile + dxf_info
+                dxfInfo = "|layername = entities|geometrytype=" + self.layerImportType
+                importFileFeat = importFile + dxfInfo
                 if not self.layerImportType or not ok:
                     return
                 self.importLayer = QgsVectorLayer(importFileFeat, "import", "ogr")
