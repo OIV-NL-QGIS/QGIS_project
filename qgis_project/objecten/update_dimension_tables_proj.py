@@ -193,15 +193,15 @@ def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
         connOIV, cursorOIV = setup_postgisdb_connection("service='oiv'")
         if cursorOIV:
             result = execute_update_by_db(cursorOIV, cursor, allTables)
-            close_db_connection(cursorOIV, connOIV)
             layerName = 'Veiligheidsregio'
             query = "SELECT ST_AsText(geom) as geom FROM {}.{}".format('algemeen', 'veiligheidsregio_huidig')
-            cursorOIV.execute(query)
+            cursorOIV.execute(query)          
             geom = QgsGeometry.fromWkt(cursorOIV.fetchone()["geom"])
             layer = getlayer_byname(layerName)
             layer.startEditing()
             layer.changeGeometry(1, geom)
             layer.commitChanges()
+            close_db_connection(cursorOIV, connOIV)              
     if result == 'ok':
         print('Dimension tables are correct updatet!')
     print('Stop : ', time.ctime())
