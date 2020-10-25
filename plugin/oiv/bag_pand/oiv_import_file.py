@@ -21,6 +21,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
     canvas = None
     selectTool = None
     importLayer = None
+    importTypeFile = None
     mappingDict = {}
     importlagen = ["Bouwkundige veiligheidsvoorzieningen", "Ruimten"]
     importlagen_types = {"Bouwkundige veiligheidsvoorzieningen": "veiligh_bouwk_type", "Ruimten" : "ruimten_type"}
@@ -54,10 +55,11 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                 layerType = 'LineString'
             else:
                 layerType = 'Polygon'
-            dxfInfo = "|layername = entities|geometrytype=" + layerType
+            dxfInfo = "|layername=entities|geometrytype=" + layerType
             importFileFeat = importFile + dxfInfo
+            self.importTypeFile = 'DXF' 
             if checkBouwlaag:
-                importFilePolygon = importFile + "|layername = entities|geometrytype=Polygon"
+                importFilePolygon = importFile + "|layername=entities|geometrytype=Polygon"
                 self.importPolygonLayer = QgsVectorLayer(importFilePolygon, "import", "ogr")
                 it = self.importPolygonLayer.getFeatures()
                 bouwlaagFeature = next(it)
@@ -67,12 +69,14 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
             layerNames = [l.GetName() for l in ogr.Open(importFile)]
             GpkgDialog.layerNames = layerNames
             layerName, dummy = GpkgDialog.getLayerName()
-            gpkgInfo = "|layername = " + layerName
+            gpkgInfo = "|layername={}".format(layerName)
             importFileFeat = importFile + gpkgInfo
+            self.importTypeFile = 'GPKG'
         else:
             importFileFeat = importFile
+            self.importTypeFile = 'SHP'
         self.importLayer = QgsVectorLayer(importFileFeat, "import", "ogr")
-        QgsProject.instance().addMapLayer(self.importLayer, False)
+        QgsProject.instance().addMapLayer(self.importLayer, True)
         fields = self.importLayer.fields()
         for field in fields:
             self.type.addItem(field.name())
@@ -115,7 +119,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
 
     def check_importlayer(self):
         """perform geometric checks on importlayer"""
-        checks = [None ,None]
+        checks = [None, None]
         message = ''
         crsCheck = self.importLayer.crs().authid()
         if crsCheck == 'EPSG:28992':
@@ -182,14 +186,17 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         cntFeat = self.importLayer.featureCount()
         for feature in self.importLayer.getFeatures():
             count += 1
-            if self.mappingDict[feature[self.type.currentText()]] != 'niet importeren':
-                if self.importLayer.geometryType() == QgsWkbTypes.PolygonGeometry:
-                    geom = QgsGeometry.fromPolygonXY(feature.geometry().asPolygon())
-                elif self.importLayer.wkbType() == QgsWkbTypes.MultiLineString:
-                    geom = QgsGeometry.fromMultiPolylineXY(feature.geometry().asMultiPolyline())
-                else:
-                    geom = QgsGeometry.fromPolylineXY(feature.geometry().asPolyline())
-
+            if self.mappingDict[feature[self.type.currentText()]] != 'niet importeren' and feature.geometry():
+                if self.importTypeFile == 'DXF':
+                    if self.importLayer.geometryType() == QgsWkbTypes.PolygonGeometry:
+                        geom = QgsGeometry.fromPolygonXY(feature.geometry().asPolygon())
+                    elif self.importLayer.wkbType() == QgsWkbTypes.MultiLineString:
+                        geom = QgsGeometry.fromMultiPolylineXY(feature.geometry().asMultiPolyline())
+                    else:
+                        geom = QgsGeometry.fromPolylineXY(feature.geometry().asPolyline())
+                elif self.importTypeFile in ('GPKG', 'SHP'):
+                    print(self.importTypeFile)
+                    geom = feature.geometry()
                 targetFeature.setGeometry(geom)
                 targetFeature["bouwlaag_id"] = int(self.bouwlaag_id.text())
                 if targetLayerName == "Ruimten":
@@ -296,7 +303,7 @@ class MappingDialog(QDialog):
         i = 0
         for importType in self.importTypes:
             self.labels[i] = QLabel(self)
-            self.labels[i].setText(importType)
+            self.labels[i].setText(str(importType))
             self.comboBoxes[i] = QComboBox(self)
             self.comboBoxes[i].addItems(self.targetTypes)
             qlayout.addWidget(self.labels[i], i, 0)

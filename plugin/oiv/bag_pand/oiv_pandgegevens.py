@@ -209,7 +209,7 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         ilayer = getlayer_byname(layerName)
         self.iface.setActiveLayer(ilayer)
         objectId = self.pand_id.text()
-        request = QgsFeatureRequest().setFilterExpression('"pand_id" = ' + str(objectId)).setFlags(QgsFeatureRequest.NoGeometry).setSubsetOfAttributes([])
+        request = QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
         ifeature = next(ilayer.getFeatures(request))
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
