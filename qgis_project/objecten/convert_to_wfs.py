@@ -79,4 +79,4 @@ for elem in root.iter('Variables'):
         var[index].text = 'WFS'
 
 tree.write('./OIV_Objecten.qgs')
-os.remove('./geoserver.conf')
+#os.remove('./geoserver.conf')
