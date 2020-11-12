@@ -50,7 +50,7 @@ def close_db_connection(cursor, conn):
     if conn:
         conn.close()
 
-def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth):
+def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth, conn):
     """update all the tables, insert extra rows and delete not existing"""
     for table in allTables:
         layerName = table[0]
@@ -73,6 +73,7 @@ def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth):
                                     query = "UPDATE {} SET {} = '{}' WHERE id = {}"\
                                         .format(layerName, key, feat["properties"][key], feat["properties"]["id"])
                                     cursor.execute(query)
+                                    conn.commit()
                             ids.remove(feat["properties"]["id"])
                         else:
                             columns = []
@@ -86,7 +87,8 @@ def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth):
                             columnNames = ', '.join(columns)
                             valuesProp = ', '.join(map(str, values))
                             query = "INSERT INTO {} ({}) VALUES ({})".format(layerName, columnNames, valuesProp)
-                            cursor.execute(query)
+                            result = cursor.execute(query)
+                            conn.commit()
                     else:
                         print("Let op {} is niet ingelezen!".format(layerName))
                 for remainingId in ids:
@@ -107,7 +109,7 @@ def setup_postgisdb_connection(service):
         print("Failed to connect to the oiv database")
     return conn, cursor
 
-def execute_update_by_db(cursorOIV, cursor, allTables):
+def execute_update_by_db(cursorOIV, cursor, allTables, conn):
     """update all the tables, insert extra rows and delete not existing"""
     for table in allTables:
         tableCheck = True
@@ -138,6 +140,7 @@ def execute_update_by_db(cursorOIV, cursor, allTables):
                                     query = "UPDATE {} SET {} = '{}' WHERE id = {}"\
                                         .format(layerName, key, record[key], record["id"])
                                     cursor.execute(query)
+                                    conn.commit()
                             ids.remove(record["id"])
                         else:
                             columns = []
@@ -152,6 +155,7 @@ def execute_update_by_db(cursorOIV, cursor, allTables):
                             valuesProp = ', '.join(map(str, values))
                             query = "INSERT INTO {} ({}) VALUES ({})".format(layerName, columnNames, valuesProp)
                             cursor.execute(query)
+                            conn.commit()
                     else:
                         print("Let op {} is niet ingelezen!".format(layerName))
                 for remainingId in ids:
@@ -176,7 +180,7 @@ def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
     conn, cursor, allTables = setup_sqlitedb_connection(dbFile, isProjectDb)
     if connectType == 'WFS':
         geoserverURL, geoserverBron, auth = get_geoserver_conf(confFile)
-        result = execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth)
+        result = execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth, conn)
         close_db_connection(cursor, conn)
         layerName = 'Veiligheidsregio'
         params = {'request' : 'GetFeature', 'outputFormat' : 'json', 'typename': '{}:{}'.format(geoserverBron, 'veiligheidsregio_huidig')}
