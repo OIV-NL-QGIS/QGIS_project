@@ -24,7 +24,7 @@ import os
 
 from qgis.PyQt import uic
 from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtWidgets import QDockWidget
+from qgis.PyQt.QtWidgets import QDockWidget, QMessageBox
 
 from qgis.core import QgsFeatureRequest, QgsFeature, QgsGeometry
 from qgis.utils import iface
@@ -73,7 +73,9 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
     #construct the feature and save
     def place_feature(self, point):
         childFeature = QgsFeature()
+        newFeatureId = None
         self.iface.setActiveLayer(self.drawLayer)
+        objectLayer = getlayer_byname('Objecten')
         #set geometry from the point clicked on the canvas
         childFeature.setGeometry(QgsGeometry.fromPointXY(point))
         foreignKey = self.identificatienummer.text()
@@ -81,16 +83,23 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
         #return of new created feature id
         if buttonCheck != 'Cancel':
             newFeatureId = write_layer(self.drawLayer, childFeature)
-            tempFeature = QgsFeature()
-            request = QgsFeatureRequest().setFilterExpression('"basisreg_identifier" = ' + str(foreignKey))
-            self.drawLayer.reload()
-            tempFeatureIt = self.drawLayer.getFeatures(request)
-            for feat in tempFeatureIt:
-                if feat["formelenaam"] == formeleNaam:
-                    newFeatureId = feat["id"]
-                    tempFeature = feat
+            objectLayer.reload()
+            if not newFeatureId:
+                idx = objectLayer.fields().indexFromName('id')
+                maxObjectId = objectLayer.maximumValue(idx)
+                request = QgsFeatureRequest().setFilterExpression('"id" > {}'.format(maxObjectId))
+                self.drawLayer.reload()
+                tempFeatureIt = objectLayer.getFeatures(request)
+                for feat in tempFeatureIt:
+                    if feat["formelenaam"] == formeleNaam:
+                        newFeatureId = feat["id"]
             #with new created feature run existing object widget
-            self.run_objectgegevens(tempFeature, newFeatureId)
+            if newFeatureId:
+                self.run_objectgegevens(formeleNaam, newFeatureId)
+            else:
+                QMessageBox.warning(None, "GeoServer antwoord te traag",
+                                    'Geoserver antwoord te traag. Object is wel geplaatst.\n'
+                                    'Open het object door terug te gaan en hem te selecteren.')
         else:
             self.iface.actionPan().trigger()
 
@@ -114,11 +123,11 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
         else:
             return 'Cancel'
 
-    def run_objectgegevens(self, tempFeature, objectId):
+    def run_objectgegevens(self, formeleNaam, objectId):
         """continue to existing object woth the newly created feature and already searched address"""
         self.objectwidget.drawLayer = getlayer_byname('Objecten')
         self.objectwidget.object_id.setText(str(objectId))
-        self.objectwidget.formelenaam.setText(tempFeature["formelenaam"])
+        self.objectwidget.formelenaam.setText(formeleNaam)
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.objectwidget)
         self.objectwidget.initActions()
         self.objectwidget.show()

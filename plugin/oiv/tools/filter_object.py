@@ -4,6 +4,7 @@ from .utils_core import getlayer_byname, read_settings
 
 def init_filter_section(wdgt):
     wdgt.filterframe.setVisible(True)
+    wdgt.objecttype.clear()
     wdgt.objecttype.addItems(['Evenement', 'Gebouw', 'Natuur', 'Waterongeval'])
     set_current_date(wdgt)
 
