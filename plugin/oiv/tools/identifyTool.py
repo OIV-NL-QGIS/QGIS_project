@@ -64,15 +64,18 @@ class SelectTool(QgsMapToolIdentify, QgsMapTool):
         attrs = read_settings(query, False)
         sortList = []
         for feat in allFeatures:
-            if attrs[1]:
+            if len(attrs) > 1:
                 request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(feat[attrs[0]]))
                 type_layer = getlayer_byname(attrs[1])
                 tempFeature = next(type_layer.getFeatures(request))
                 sortList.append([feat["id"], tempFeature["naam"]])
-            else:
+            elif attrs:
                 sortList.append([feat["id"], feat[attrs[0]]])
-        AskFeatureDialog.askList = sortList
-        chosen, dummy = AskFeatureDialog.askFeature()
+            else:
+                sortList = None
+        if sortList:
+            AskFeatureDialog.askList = sortList
+            chosen, dummy = AskFeatureDialog.askFeature()
         for feat in allFeatures:
             if feat["id"] == int(chosen):
                 targetFeature = feat

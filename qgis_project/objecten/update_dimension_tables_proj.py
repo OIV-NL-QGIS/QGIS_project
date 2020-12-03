@@ -196,7 +196,7 @@ def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
     else:
         connOIV, cursorOIV = setup_postgisdb_connection("service='oiv'")
         if cursorOIV:
-            result = execute_update_by_db(cursorOIV, cursor, allTables)
+            result = execute_update_by_db(cursorOIV, cursor, allTables, conn)
             layerName = 'Veiligheidsregio'
             query = "SELECT ST_AsText(geom) as geom FROM {}.{}".format('algemeen', 'veiligheidsregio_huidig')
             cursorOIV.execute(query)          

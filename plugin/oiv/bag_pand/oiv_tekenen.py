@@ -63,7 +63,6 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
         super(oivTekenWidget, self).__init__(parent)
         self.setupUi(self)
         self.iface = iface
-        self.stackwidget = oivStackWidget()
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
@@ -144,11 +143,12 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.stackwidget)
-        self.stackwidget.parentWidget = self
-        self.stackwidget.open_feature_form(ilayer, ifeature)
+        stackWidget = oivStackWidget()
+        self.iface.addDockWidget(Qt.RightDockWidgetArea, stackWidget)
+        stackWidget.parentWidget = self
+        stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
-        self.stackwidget.show()
+        stackWidget.show()
         self.selectTool.geomSelected.disconnect(self.edit_attribute)
         self.run_edit_tool()
 
@@ -224,10 +224,6 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
         self.delete_f.clicked.disconnect()
         self.pan.clicked.disconnect()
         self.terug.clicked.disconnect()
-        try:
-            del self.stackwidget
-        except: # pylint: disable=bare-except
-            pass
         for widget in self.children():
             if isinstance(widget, QPushButton):
                 try:

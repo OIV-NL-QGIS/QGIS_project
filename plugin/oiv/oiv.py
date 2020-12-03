@@ -8,7 +8,7 @@
         git sha              : $Format:%H$
         copyright            : (C) 2019 by Joost Deen
         email                : j.deen@safetyct.com
-        versie               : 2.9.93
+        versie               : 3.2.4
  ***************************************************************************/
 /***************************************************************************
  *                                                                         *
@@ -50,8 +50,8 @@ from .repressief_object.oiv_objectnieuw import oivObjectNieuwWidget
 class oiv:
     """initialize class attributes"""
 
-    compatibleVersion = [315, 323]
-    pluginVersion = '3.2.2'
+    compatibleVersion = [315, 324]
+    pluginVersion = '3.2.4'
     minBouwlaag = -10
     maxBouwlaag = 30
     checkVisibility = False
