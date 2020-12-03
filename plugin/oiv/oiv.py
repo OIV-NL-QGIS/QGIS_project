@@ -7,7 +7,7 @@
         begin                : 2019-08-15
         git sha              : $Format:%H$
         copyright            : (C) 2019 by Joost Deen
-        email                : jdeen@vrnhn.nl
+        email                : j.deen@safetyct.com
         versie               : 2.9.93
  ***************************************************************************/
 /***************************************************************************
@@ -28,7 +28,7 @@ import os
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QLabel, QComboBox, QMessageBox
-from qgis.core import QgsProject, QgsExpressionContextUtils, QgsDataSourceUri, QgsVectorLayer
+from qgis.core import QgsProject, QgsExpressionContextUtils, QgsFeatureRequest
 from qgis.gui import QgsMapToolEmitPoint
 
 #initialize Qt resources from file resources.py
@@ -36,11 +36,12 @@ from .resources import *
 
 #import plugin widget and tools
 from .tools.identifyTool import IdentifyGeometryTool, SelectTool
-from .tools.utils_core import getlayer_byname, set_layer_substring
-from .tools.utils_gui import read_config_file
+from .tools.utils_core import getlayer_byname
+from .tools.utils_gui import read_settings, set_layer_substring
 from .tools.mapTool import CaptureTool
 from .tools.movepointTool import MovePointTool
 from .tools.snappointTool import SnapPointTool
+from .tools.filter_object import init_filter_section, set_object_filter
 from .oiv_base_widget import oivBaseWidget
 from .bag_pand.oiv_pandgegevens import oivPandWidget
 from .repressief_object.oiv_repressief_object import oivRepressiefObjectWidget
@@ -49,10 +50,8 @@ from .repressief_object.oiv_objectnieuw import oivObjectNieuwWidget
 class oiv:
     """initialize class attributes"""
 
-    configFileBouwlaag = []
-    configFileObject = []
-    compatibleVersion = [305, 310]
-    pluginVersion = '3.1.1'
+    compatibleVersion = [315, 323]
+    pluginVersion = '3.2.2'
     minBouwlaag = -10
     maxBouwlaag = 30
     checkVisibility = False
@@ -69,7 +68,6 @@ class oiv:
         self.basewidget = oivBaseWidget()
         self.drawTool = CaptureTool(self.canvas)
         self.moveTool = MovePointTool(self.canvas, self.drawLayer)
-        self.configFileBouwlaag = read_config_file("/config_files/csv/config_bouwlaag.csv", None)
 
     def initGui(self):
         """init actions plugin"""
@@ -136,14 +134,14 @@ class oiv:
             pass
         self.identifyTool.geomIdentified.connect(self.get_identified_pand)
 
-    def run_identify_gebouw_terrein(self):
+    def run_identify_terrein(self):
         """get the identification of a building from the user"""
         self.canvas.setMapTool(self.identifyTool)
         try:
             self.identifyTool.geomIdentified.disconnect()
         except: # pylint: disable=bare-except
             pass
-        self.identifyTool.geomIdentified.connect(self.get_identified_gebouw_terrein)
+        self.identifyTool.geomIdentified.connect(self.get_identified_terrein)
 
     def get_identified_pand(self, ilayer, ifeature):
         """Return of identified layer and feature and get related object"""
@@ -159,27 +157,37 @@ class oiv:
             QMessageBox.information(None, "Oeps:", "Geen pand gevonden! Klik boven op een pand.")
         self.identifyTool.geomIdentified.disconnect()
 
-    def get_identified_gebouw_terrein(self, ilayer, ifeature):
+    def get_identified_terrein(self, ilayer, ifeature):
         """Return of identified layer and feature and get related object"""
         #the identified layer must be "Object" or "Object terrein"
+        self.drawLayer = getlayer_byname("Objecten")
         if ilayer is None:
-            self.run_new_object(ifeature, 'wordt gekoppeld in de database', 'BGT', 'wordt gekoppeld in de database')
-        elif ilayer.name() == "Objecten" or ilayer.name() == "Object terrein":
+            self.run_new_object('wordt gekoppeld in de database', 'BGT', 'wordt gekoppeld in de database')
+        elif ilayer.name() == "BAG panden":
+            objectId   = str(ifeature["identificatie"])
+            bron       = ifeature["bron"]
+            bron_tabel = ifeature["bron_tbl"]
+            self.run_new_object(objectId, bron, bron_tabel) 
+        elif ilayer.name() == "Objecten":
             objectId = ifeature["id"]
-            self.drawLayer = getlayer_byname("Objecten")
+            self.run_object(ifeature, objectId)
+        elif ilayer.name() == "Object terrein":
+            objectId = ifeature["object_id"]
+            request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
+            ifeature = next(self.drawLayer.getFeatures(request))
             self.run_object(ifeature, objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
         else:
-            QMessageBox.information(None, "Oeps:", "Geen repressief object gevonden!\n\
-                                    Heeft u op een Terrein of een object geklikt?\n\
-                                    Selecteer opnieuw.")
+            QMessageBox.information(None, "Oeps:", 'Geen repressief object gevonden!\n'
+                                    'Heeft u op een terrein of een object geklikt?\n\n'
+                                    'Selecteer opnieuw.')
         self.identifyTool.geomIdentified.disconnect()
 
     def set_layer_subset_toolbar(self):
         """laag filter aanpassen naar de geselecteerd bouwlaag"""
         QgsExpressionContextUtils.setProjectVariable(QgsProject.instance(), 'actieve_bouwlaag', int(self.projCombo.currentText()))
         subString = "bouwlaag = " + str(self.projCombo.currentText())
-        set_layer_substring(self.configFileBouwlaag, subString)
+        set_layer_substring(subString)
 
     def init_object_widget(self, objectId):
         """pass on the tools to objectgegevens widget, intitializing the tools in the sub widget, draws an error"""
@@ -197,8 +205,9 @@ class oiv:
     def init_repressief_object_widget(self, ifeature, objectId):
         """pass on the tools to objectgegevens widget, intitializing the tools in the sub widget, draws an error"""
         self.repressiefobjectwidget = oivRepressiefObjectWidget()
-        self.repressiefobjectwidget.object_id.setText(str(objectId))
-        self.repressiefobjectwidget.formelenaam.setText(ifeature["formelenaam"])
+        if ifeature:
+            self.repressiefobjectwidget.object_id.setText(str(objectId))
+            self.repressiefobjectwidget.formelenaam.setText(ifeature["formelenaam"])
         self.repressiefobjectwidget.canvas = self.canvas
         self.repressiefobjectwidget.drawLayer = self.drawLayer
         self.repressiefobjectwidget.selectTool = self.selectTool
@@ -227,14 +236,13 @@ class oiv:
         self.basewidget.close()
         self.repressiefobjectwidget.initActions()
 
-    def run_new_object(self, ifeature, objectId, bron, bron_tbl):
+    def run_new_object(self, objectId, bron, bron_tbl):
         """tart new object widget, eventhough passing trough the tools to objectgegevens widget"""
-        self.init_repressief_object_widget(ifeature, objectId)
         self.objectnieuwwidget = oivObjectNieuwWidget()
+        self.init_repressief_object_widget(None, None)
         self.objectnieuwwidget.basewidget = self.basewidget
         self.objectnieuwwidget.objectwidget = self.repressiefobjectwidget
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.objectnieuwwidget)
-        self.objectnieuwwidget.configFileObject = self.configFileObject
         self.objectnieuwwidget.canvas = self.canvas
         self.objectnieuwwidget.mapTool = self.pinTool
         self.objectnieuwwidget.identificatienummer.setText(str(objectId))
@@ -244,44 +252,34 @@ class oiv:
         self.objectnieuwwidget.show()
         self.basewidget.close()
 
-    def check_database_version(self):
-        layer = self.iface.activeLayer()
-        provider = layer.dataProvider()
-        uri = QgsDataSourceUri(provider.dataSourceUri())
-        print(uri.uri())
-        uri.setDataSource("algemeen", "applicatie", None)
-        # add the layer to the canvas
-        print(uri.uri())
-        vlayer = QgsVectorLayer(uri.uri(), "app", "postgres")
-        print(vlayer)
-        # now query the table
-        featIt = vlayer.getFeatures()
-        feature = next(featIt)
-        return feature["db_versie"]
-
     def run(self):
         """run the plugin, if project is not OIV object, deactivate plugin when clicked on icon"""
         project = QgsProject.instance()
         projectTest = str(QgsExpressionContextUtils.projectScope(project).variable('project_title'))
-        dbVersion = self.compatibleVersion[1]
-        #dbVersion = self.check_database_version()
+        dbVersion = read_settings("SELECT db_versie FROM applicatie;", False)[0]
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
         elif dbVersion < self.compatibleVersion[0] or dbVersion > self.compatibleVersion[1]:
             QMessageBox.critical(None, "Database versie klopt niet",
-                                 "De plugin of het project komt niet overeen met database versie!\
-                                 Vraag aan uw regionaal beheerder om een database update!\
-                                 Excuses voor het ongemak.")
+                                 'De plugin of het project komt niet overeen met database versie!\n'
+                                 'Vraag aan uw regionaal beheerder om een database update.\n\n'
+                                 'Excuses voor het ongemak.')
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
         else:
             #always start from floor 1
             subString = "bouwlaag = 1"
-            set_layer_substring(self.configFileBouwlaag, subString)
+            set_layer_substring(subString)
+            self.basewidget.filterframe.setVisible(False)
+            index = self.projCombo.findText('1', Qt.MatchFixedString)
+            if index >= 0:
+                self.projCombo.setCurrentIndex(index)
             self.iface.addDockWidget(Qt.RightDockWidgetArea, self.basewidget)
             self.basewidget.identify_pand.clicked.connect(self.run_identify_pand)
-            self.basewidget.identify_gebouw.clicked.connect(self.run_identify_gebouw_terrein)
+            self.basewidget.identify_gebouw.clicked.connect(self.run_identify_terrein)
+            self.basewidget.filter_objecten.clicked.connect(lambda: init_filter_section(self.basewidget))
+            self.basewidget.filterBtn.clicked.connect(lambda: set_object_filter(self.basewidget))
             self.basewidget.closewidget.clicked.connect(self.close_basewidget)
             self.basewidget.show()
             self.toolbar.setEnabled(False)

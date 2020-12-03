@@ -12,7 +12,7 @@ qgisMinimumVersion=3.0
 description=place oiv objects
 version=0.1
 author=Joost Deen
-email=jdeen@vrnhn.nl
+email=j.deen@safetyct.com
 
 about=place objects acoording tot the oiv database model
 

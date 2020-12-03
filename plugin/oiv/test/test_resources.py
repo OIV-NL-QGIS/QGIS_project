@@ -8,7 +8,7 @@
 
 """
 
-__author__ = 'jdeen@vrnhn.nl'
+__author__ = 'j.deen@safetyct.com'
 __date__ = '2017-11-14'
 __copyright__ = 'Copyright 2017, Joost Deen'
 

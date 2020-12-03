@@ -3,6 +3,7 @@
         <file>config_files/png/info.png</file>
         <file>config_files/png/select.png</file>
         <file>config_files/png/identify.png</file>
+        <file>config_files/png/terrein.png</file>
         <file>config_files/png/move.png</file>
         <file>config_files/png/delete.png</file>
         <file>config_files/png/rotate.png</file>
@@ -12,22 +13,8 @@
         <file>config_files/png/save.png</file>
         <file>config_files/png/settings.png</file>
         <file>config_files/png/oiv_plugin.png</file>
-        <file>config_files/csv/install_veilighv.csv</file>
-        <file>config_files/csv/sleutelkluis_object.csv</file>
-        <file>config_files/csv/sleutelkluis_bouwlaag.csv</file>
-        <file>config_files/csv/ruimten.csv</file>
-        <file>config_files/csv/ruimtelijke_veiligheidsv.csv</file>
-        <file>config_files/csv/opstelplaats.csv</file>
-        <file>config_files/csv/opslag_stoffen.csv</file>
-        <file>config_files/csv/labels.csv</file>
-        <file>config_files/csv/isolijnen.csv</file>
-        <file>config_files/csv/ingang_object.csv</file>
-        <file>config_files/csv/ingang_bouwlaag.csv</file>
-        <file>config_files/csv/bouwkundige_veiligheidsv.csv</file>
-        <file>config_files/csv/bereikbaarheid.csv</file>
-        <file>config_files/csv/afw_binnendekking.csv</file>
-        <file>config_files/csv/sectoren.csv</file>
-        <file>config_files/csv/bluswater.csv</file>
+        <file>config_files/png/oiv_update.png</file>
+        <file>config_files/png/filter.png</file>
         <file>config_files/png/aanrijdroute.png</file>
         <file>config_files/png/brandweerlift.png</file>
 		<file>config_files/png/brandmeldpaneel.png</file>
@@ -113,10 +100,19 @@
         <file>config_files/png/evenementen_tent.png</file>
         <file>config_files/png/vluchtroute_publiek.png</file>
         <file>config_files/png/calamiteiten_route.png</file>
-        <file>config_files/png/evenementen_eten.png</file>
-        <file>config_files/png/evenementen_eten_gas.png</file>
+        <file>config_files/png/kraam_elektra.png</file>
+        <file>config_files/png/kraam_gas.png</file>
+        <file>config_files/png/attractie.png</file>
+        <file>config_files/png/feesttent.png</file>
+        <file>config_files/png/straattheater.png</file>
+        <file>config_files/png/kleedkamer.png</file>
+        <file>config_files/png/vuurwerkafsteekplaats.png</file>
+        <file>config_files/png/restaurant.png</file>
+        <file>config_files/png/tijdelijke_wegafsluiting.png</file>
         <file>config_files/png/ehbo.png</file>
         <file>config_files/png/parkeerplaats.png</file>
+        <file>config_files/png/parkeerzone.png</file>
+        <file>config_files/png/evenementenroute.png</file>
         <file>config_files/png/aed.png</file>
         <file>config_files/png/generator.png</file>
         <file>config_files/png/activering_blussysteem.png</file>

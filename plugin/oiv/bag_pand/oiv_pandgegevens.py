@@ -7,7 +7,7 @@
         begin                : 2019-08-15
         git sha              : $Format:%H$
         copyright            : (C) 2019 by Joost Deen
-        email                : jdeen@vrnhn.nl
+        email                : j.deen@safetyct.com
         versie               : 2.9.93
  ***************************************************************************/
 /***************************************************************************
@@ -30,8 +30,8 @@ from qgis.PyQt.QtWidgets import QDialog, QDockWidget, QVBoxLayout, QLabel, QMess
 from qgis.core import QgsFeatureRequest
 from qgis.utils import iface
 
-from ..tools.utils_core import getlayer_byname, set_layer_substring, create_unique_sorted_list, get_draw_layer_attr, refresh_layers
-from ..tools.utils_gui import read_config_file
+from ..tools.utils_core import getlayer_byname, create_unique_sorted_list, refresh_layers, read_settings
+from ..tools.utils_gui import set_layer_substring
 from ..tools.query_bag import ask_bag_adress
 from ..tools.oiv_stackwidget import oivStackWidget
 
@@ -44,7 +44,6 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class oivPandWidget(QDockWidget, FORM_CLASS):
 
-    configFileBouwlaag = None
     iface = None
     canvas = None
     basewidget = None
@@ -63,7 +62,6 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         super(oivPandWidget, self).__init__(parent)
         self.setupUi(self)
         self.iface = iface
-        self.configFileBouwlaag = read_config_file("/config_files/csv/config_bouwlaag.csv", None)
         self.bouwlaagwidget = oivBouwlaagWidget()
         self.tekenwidget = oivTekenWidget()
         self.importwidget = oivImportFileWidget()
@@ -83,8 +81,7 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
             self.adres_1.setText(bagAdres1)
             self.adres_2.setText(bagAdres2)
             self.gebruiksdoel.setText(bagGebruiksdoel)
-        #set actieve bouwlaag to 1 and fill combobox
-        self.bouwlagen_to_combobox(objectId, 1)
+        self.bouwlagen_to_combobox(objectId, None)
 
     def initActions(self):
         """connect the buttons to their actions"""
@@ -111,11 +108,11 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         runLayer = 'Bouwlagen'
         tempLayer = getlayer_byname(runLayer)
         objectId = self.pand_id.text()
-        attrs = {"foreign_key" : ''}
-        attrs = get_draw_layer_attr(attrs, runLayer, self.configFileBouwlaag)
+        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(runLayer)
+        foreignKey = read_settings(query, False)[0]
         tempLayer.setSubsetString('')
         #request all existing floors of object feature
-        request = QgsFeatureRequest().setFilterExpression(attrs["foreign_key"] + " = '" + str(objectId) + "'")
+        request = QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + str(objectId) + "'")
         tempFeatureIt = tempLayer.getFeatures(request)
         #create unique list of existing floors and sort it from small to big
         bouwlaagList = [it["bouwlaag"] for it in tempFeatureIt]
@@ -123,17 +120,20 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         #block signal of combobox to add existing floors
         self.comboBox.blockSignals(True)
         self.comboBox.clear()
-        for i in range(len(self.sortedList)):
-            self.comboBox.addItem(str(self.sortedList[i]))
+        for bouwlaag in reversed(self.sortedList):
+            self.comboBox.addItem(str(bouwlaag))
         #if there are existing floors "tekenen" can be enabled
         if self.sortedList:
             self.tekenen.setEnabled(True)
+            if actieveBouwlaag is None:
+                actieveBouwlaag = min(reversed(self.sortedList), key=abs)
         else:
             self.tekenen.setEnabled(False)
+            actieveBouwlaag = 1
         self.comboBox.blockSignals(False)
         #set substring of childlayers
         subString = "bouwlaag = " + str(actieveBouwlaag)
-        set_layer_substring(self.configFileBouwlaag, subString)
+        set_layer_substring(subString)
         index = self.comboBox.findText(str(actieveBouwlaag), Qt.MatchFixedString)
         if index >= 0:
             self.comboBox.setCurrentIndex(index)
@@ -142,16 +142,16 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
     def set_layer_subset_object(self):
         """if index of combobox has changed set cql filter of childlayers"""
         subString = "bouwlaag = " + str(self.comboBox.currentText())
-        set_layer_substring(self.configFileBouwlaag, subString)
+        set_layer_substring(subString)
 
     #select bouwlaag on canvas to edit the atrribute form
     def run_bouwlaag_bewerken(self):
         runLayer = "Bouwlagen"
         ilayer = getlayer_byname(runLayer)
         objectId = self.pand_id.text()
-        attrs = {"foreign_key" : ''}
-        attrs = get_draw_layer_attr(attrs, runLayer, self.configFileBouwlaag)
-        request = QgsFeatureRequest().setFilterExpression(attrs["foreign_key"] + " = '" + str(objectId) + "'")
+        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(runLayer)
+        foreignKey = read_settings(query, False)[0]
+        request = QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + str(objectId) + "'")
         ifeature = next(ilayer.getFeatures(request))
         self.run_edit_bouwlagen(ilayer, ifeature)
 
@@ -164,7 +164,6 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
                 self.iface.addDockWidget(Qt.RightDockWidgetArea, self.bouwlaagwidget)
                 self.bouwlaagwidget.canvas = self.canvas
                 self.bouwlaagwidget.bouwlaagList = self.sortedList
-                #self.bouwlaagwidget.configFileBouwlaag = self.configFileBouwlaag
                 self.bouwlaagwidget.objectId = self.pand_id.text()
                 self.bouwlaagwidget.objectwidget = self
                 self.bouwlaagwidget.selectTool = self.selectTool
@@ -175,7 +174,7 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
                 self.bouwlaagwidget.bouwlaag_max.setText(str(bouwlaagMax))
                 self.bouwlaagwidget.teken_bouwlaag.setEnabled(False)
                 subString = "bouwlaag = " + str(bouwlaag)
-                set_layer_substring(self.configFileBouwlaag, subString)
+                set_layer_substring(subString)
                 self.bouwlaagwidget.show()
                 break
             elif bouwlaagMax < bouwlaag:
@@ -192,13 +191,13 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         self.tekenwidget.selectTool = self.selectTool
         self.tekenwidget.objectwidget = self
         subString = "bouwlaag = " + str(self.comboBox.currentText())
-        set_layer_substring(self.configFileBouwlaag, subString)
+        set_layer_substring(subString)
         self.tekenwidget.bouwlaag.setText(str(self.comboBox.currentText()))
         self.tekenwidget.pand_id.setText(self.pand_id.text())
+        self.tekenwidget.initUI()
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.tekenwidget)
         self.close()
         self.tekenwidget.show()
-        #self.tekenwidget.connect_buttons(self.read_config)
 
     def openBagviewer(self):
         """open url based on BAG pand_id, i.v.m. terugmelden"""
@@ -210,7 +209,7 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         ilayer = getlayer_byname(layerName)
         self.iface.setActiveLayer(ilayer)
         objectId = self.pand_id.text()
-        request = QgsFeatureRequest().setFilterExpression('"pand_id" = ' + str(objectId)).setFlags(QgsFeatureRequest.NoGeometry).setSubsetOfAttributes([])
+        request = QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
         ifeature = next(ilayer.getFeatures(request))
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
@@ -236,14 +235,13 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         self.importwidget.bouwlaag.setText(self.comboBox.currentText())
         self.importwidget.selectTool = self.selectTool
         self.importwidget.canvas = self.canvas
-        self.importwidget.configFileBouwlaag = self.configFileBouwlaag
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.importwidget) 
+        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.importwidget)
         self.close()
         self.importwidget.show()
 
     def close_object_show_base(self):
         subString = "bouwlaag = 1"
-        set_layer_substring(self.configFileBouwlaag, subString)
+        set_layer_substring(subString)
         try:
             del self.tekenwidget
         except: # pylint: disable=bare-except

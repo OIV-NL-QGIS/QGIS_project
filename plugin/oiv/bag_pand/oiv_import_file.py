@@ -1,5 +1,6 @@
 """extension to plugin to import AutoCad or Shape files"""
 import os
+from osgeo import ogr
 from qgis.PyQt import uic
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtWidgets import QDockWidget, QFileDialog, QMessageBox, QProgressDialog, QProgressBar, QDialog, QComboBox, QGridLayout, QLabel, QDialogButtonBox, QVBoxLayout, QCheckBox
@@ -8,10 +9,10 @@ from qgis.core import QgsVectorLayer, QgsFeature, QgsGeometry, QgsProject, QgsFe
 from qgis.utils import iface
 
 #from ..tools.identifyTool import IdentifyGeometryTool
-from ..tools.utils_core import getlayer_byname, get_draw_layer_attr, write_layer
+from ..tools.utils_core import getlayer_byname, get_draw_layer_attr, write_layer, read_settings
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_import_filewidget.ui'))
+    os.path.dirname(__file__), 'oiv_import_file_widget.ui'))
 
 class oivImportFileWidget(QDockWidget, FORM_CLASS):
     """the actions class for the import"""
@@ -20,10 +21,10 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
     canvas = None
     selectTool = None
     importLayer = None
-    read_config = None
+    importTypeFile = None
     mappingDict = {}
     importlagen = ["Bouwkundige veiligheidsvoorzieningen", "Ruimten"]
-    importlagen_types = {"Bouwkundige veiligheidsvoorzieningen": "veiligh_bouwk_types", "Ruimten" : "ruimten_type"}
+    importlagen_types = {"Bouwkundige veiligheidsvoorzieningen": "veiligh_bouwk_type", "Ruimten" : "ruimten_type"}
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -44,8 +45,8 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
 
     def selectfile(self):
         """select the import shap or dxf file"""
-        dxf_info = None
-        importFile = QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, "AutoCad (*.dxf);;Shape (*.shp)")[0]
+        dxfInfo = None
+        importFile = QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, "AutoCad (*.dxf);;Shape (*.shp);;GeoPackage (*.gpkg)")[0]
         self.bestandsnaam.setText(importFile)
         checkBouwlaag = False
         if importFile.endswith('.dxf'):
@@ -54,19 +55,28 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                 layerType = 'LineString'
             else:
                 layerType = 'Polygon'
-            dxf_info = "|layername = entities|geometrytype=" + layerType
-            importFileFeat = importFile + dxf_info
+            dxfInfo = "|layername=entities|geometrytype=" + layerType
+            importFileFeat = importFile + dxfInfo
+            self.importTypeFile = 'DXF' 
             if checkBouwlaag:
-                importFilePolygon = importFile + "|layername = entities|geometrytype=Polygon"
+                importFilePolygon = importFile + "|layername=entities|geometrytype=Polygon"
                 self.importPolygonLayer = QgsVectorLayer(importFilePolygon, "import", "ogr")
                 it = self.importPolygonLayer.getFeatures()
                 bouwlaagFeature = next(it)
                 self.bouwlaag.setText(str(importBouwlaag))
                 self.import_bouwlaag(bouwlaagFeature)
+        elif importFile.endswith('.gpkg'):
+            layerNames = [l.GetName() for l in ogr.Open(importFile)]
+            GpkgDialog.layerNames = layerNames
+            layerName, dummy = GpkgDialog.getLayerName()
+            gpkgInfo = "|layername={}".format(layerName)
+            importFileFeat = importFile + gpkgInfo
+            self.importTypeFile = 'GPKG'
         else:
             importFileFeat = importFile
+            self.importTypeFile = 'SHP'
         self.importLayer = QgsVectorLayer(importFileFeat, "import", "ogr")
-        QgsProject.instance().addMapLayer(self.importLayer, False)
+        QgsProject.instance().addMapLayer(self.importLayer, True)
         fields = self.importLayer.fields()
         for field in fields:
             self.type.addItem(field.name())
@@ -80,15 +90,14 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         layerName = 'Bouwlagen'
         layer = getlayer_byname(layerName)
         #get necessary attributes from config file
-        attrs = {"foreign_key" : ''}
-        attrs = get_draw_layer_attr(attrs, layer.name(), self.configFileBouwlaag)
-        self.iface.setActiveLayer(layer)
+        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
+        foreignKey = read_settings(query, False)[0]
         #construct QgsFeature to save
         childFeature.setGeometry(bouwlaagFeature.geometry())
         fields = layer.fields()
         childFeature.initAttributes(fields.count())
         childFeature.setFields(fields)
-        childFeature[attrs["foreign_key"]] = str(self.object_id.text())
+        childFeature[foreignKey] = str(self.object_id.text())
         childFeature["bouwlaag"] = int(self.bouwlaag.text())
         newFeatureId = write_layer(layer, childFeature)
         self.bouwlaag_id.setText(str(newFeatureId))
@@ -110,7 +119,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
 
     def check_importlayer(self):
         """perform geometric checks on importlayer"""
-        checks = [None ,None]
+        checks = [None, None]
         message = ''
         crsCheck = self.importLayer.crs().authid()
         if crsCheck == 'EPSG:28992':
@@ -142,7 +151,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         types = []
         layer = getlayer_byname(layername)
         for feat in layer.getFeatures():
-            types.append(feat[1])
+            types.append(feat["naam"])
         return types
 
     def progressdialog(self, progress):
@@ -166,8 +175,8 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         targetLayer = getlayer_byname(targetLayerName)
         targetFields = targetLayer.fields()
         targetFeature.initAttributes(targetFields.count())
-        attrs = {"identifier" : ''}
-        attrs = get_draw_layer_attr(attrs, targetLayerName, self.configFileObject)
+        query = "SELECT identifier FROM config_bouwlaag WHERE child_layer = '{}'".format(targetLayerName)
+        identifier = read_settings(query, False)[0]        
         targetFeature.setFields(targetFields)
         self.iface.setActiveLayer(self.importLayer)
         dummy, progressBar = self.progressdialog(0)
@@ -177,22 +186,25 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         cntFeat = self.importLayer.featureCount()
         for feature in self.importLayer.getFeatures():
             count += 1
-            if self.mappingDict[feature[self.type.currentText()]] != 'niet importeren':
-                if self.importLayer.geometryType() == QgsWkbTypes.PolygonGeometry:
-                    geom = QgsGeometry.fromPolygonXY(feature.geometry().asPolygon())
-                elif self.importLayer.wkbType() == QgsWkbTypes.MultiLineString:
-                    geom = QgsGeometry.fromMultiPolylineXY(feature.geometry().asMultiPolyline())
-                else:
-                    geom = QgsGeometry.fromPolylineXY(feature.geometry().asPolyline())
-
+            if self.mappingDict[feature[self.type.currentText()]] != 'niet importeren' and feature.geometry():
+                if self.importTypeFile == 'DXF':
+                    if self.importLayer.geometryType() == QgsWkbTypes.PolygonGeometry:
+                        geom = QgsGeometry.fromPolygonXY(feature.geometry().asPolygon())
+                    elif self.importLayer.wkbType() == QgsWkbTypes.MultiLineString:
+                        geom = QgsGeometry.fromMultiPolylineXY(feature.geometry().asMultiPolyline())
+                    else:
+                        geom = QgsGeometry.fromPolylineXY(feature.geometry().asPolyline())
+                elif self.importTypeFile in ('GPKG', 'SHP'):
+                    print(self.importTypeFile)
+                    geom = feature.geometry()
                 targetFeature.setGeometry(geom)
                 targetFeature["bouwlaag_id"] = int(self.bouwlaag_id.text())
                 if targetLayerName == "Ruimten":
                     request = QgsFeatureRequest().setFilterExpression('"naam" = ' + "'" + self.mappingDict[feature[self.type.currentText()]] + "'")
                     tempFeature = next(typeLayer.getFeatures(request))
-                    targetFeature[attrs["identifier"]] = tempFeature["id"]
+                    targetFeature[identifier] = tempFeature["id"]
                 else:
-                    targetFeature[attrs["identifier"]] = self.mappingDict[feature[self.type.currentText()]]
+                    targetFeature[identifier] = self.mappingDict[feature[self.type.currentText()]]
                 write_layer(targetLayer, targetFeature)
             progress = (float(count)/float(cntFeat)) * 100
             progressBar.setValue(progress)
@@ -291,10 +303,10 @@ class MappingDialog(QDialog):
         i = 0
         for importType in self.importTypes:
             self.labels[i] = QLabel(self)
-            self.labels[i].setText(importType)
+            self.labels[i].setText(str(importType))
             self.comboBoxes[i] = QComboBox(self)
             self.comboBoxes[i].addItems(self.targetTypes)
-            qlayout.addWidget(self.labels[i],i,0)
+            qlayout.addWidget(self.labels[i], i, 0)
             qlayout.addWidget(self.comboBoxes[i], i, 1)
             i += 1
         buttons = QDialogButtonBox(
@@ -372,3 +384,31 @@ class DxfDialog(QDialog):
         dialog = DxfDialog(parent)
         result = dialog.exec_()
         return (dialog.checkBouwlaag.isChecked(), dialog.inputGeometry.currentText(), dialog.qComboA.currentText(), result == QDialog.Accepted)
+
+class GpkgDialog(QDialog):
+    """construct the import GUI"""
+    layerNames = []
+
+    def __init__(self, parent=None):
+        super(GpkgDialog, self).__init__(parent)
+        self.setWindowTitle("Kies de laag die u wilt importeren")
+        qlayout = QVBoxLayout(self)
+        self.qComboA = QComboBox(self)
+        self.qComboA.addItems(self.layerNames)
+        self.qComboA.setFixedWidth(300)
+        self.qComboA.setMaxVisibleItems(30)
+        self.label3 = QLabel(self)
+        qlayout.addWidget(self.qComboA)
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
+            Qt.Horizontal, self)
+        buttons.accepted.connect(self.accept)
+        buttons.rejected.connect(self.reject)
+        qlayout.addWidget(buttons)
+
+    @staticmethod
+    def getLayerName(parent = None):
+        """Contains GeoPackage layername"""
+        dialog = GpkgDialog(parent)
+        result = dialog.exec_()
+        return (dialog.qComboA.currentText(), result == QDialog.Accepted)

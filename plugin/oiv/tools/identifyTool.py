@@ -6,7 +6,7 @@ from qgis.PyQt.QtWidgets import QDialog, QVBoxLayout, QLabel, QDialogButtonBox, 
 from qgis.gui import QgsMapToolIdentify, QgsMapTool
 from qgis.core import QgsFeatureRequest, QgsFeature
 
-from .utils_core import get_draw_layer_attr, getlayer_byname
+from .utils_core import getlayer_byname, read_settings
 
 class IdentifyGeometryTool(QgsMapToolIdentify, QgsMapTool):
     """identify geometry on the map"""
@@ -31,7 +31,7 @@ class IdentifyGeometryTool(QgsMapToolIdentify, QgsMapTool):
 class SelectTool(QgsMapToolIdentify, QgsMapTool):
     """select geometry on the map"""
 
-    read_config = []
+    whichConfig = ''
 
     def __init__(self, canvas):
         self.canvas = canvas
@@ -60,17 +60,17 @@ class SelectTool(QgsMapToolIdentify, QgsMapTool):
     def ask_user_for_feature(self, idLayer, allFeatures):
         """if more features are identified ask user which one to choose"""
         targetFeature = None
-        type_layer_name = get_draw_layer_attr(idLayer.name(), "type_layer_name", self.read_config)
-        attr_id = get_draw_layer_attr(idLayer.name(), "identifier", self.read_config)
+        query = "SELECT identifier, type_layer_name FROM {} WHERE child_layer = '{}'".format(self.whichConfig, idLayer.name())
+        attrs = read_settings(query, False)
         sortList = []
         for feat in allFeatures:
-            if type_layer_name != '':
-                request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(feat[attr_id]))
-                type_layer = getlayer_byname(type_layer_name)
+            if attrs[1]:
+                request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(feat[attrs[0]]))
+                type_layer = getlayer_byname(attrs[1])
                 tempFeature = next(type_layer.getFeatures(request))
                 sortList.append([feat["id"], tempFeature["naam"]])
             else:
-                sortList.append([feat["id"], feat[attr_id]])
+                sortList.append([feat["id"], feat[attrs[0]]])
         AskFeatureDialog.askList = sortList
         chosen, dummy = AskFeatureDialog.askFeature()
         for feat in allFeatures:
@@ -95,7 +95,7 @@ class AskFeatureDialog(QDialog):
         self.qComboA.setFixedWidth(100)
         self.qComboA.setMaxVisibleItems(30)
         for item in self.askList:
-            self.qComboA.addItem(str(item[1]), str(self.item[0]))
+            self.qComboA.addItem(str(item[1]), str(item[0]))
         qlayout.addWidget(self.qlineA)
         qlayout.addWidget(self.qlineB)
         qlayout.addWidget(self.qComboA)

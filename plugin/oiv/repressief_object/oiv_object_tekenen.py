@@ -7,7 +7,7 @@
         begin                : 2019-08-15
         git sha              : $Format:%H$
         copyright            : (C) 2019 by Joost Deen
-        email                : jdeen@vrnhn.nl
+        email                : j.deen@safetyct.com
         versie               : 2.9.93
  ***************************************************************************/
 /***************************************************************************
@@ -29,17 +29,17 @@ from qgis.PyQt.QtCore import Qt
 from qgis.core import QgsFeature, QgsGeometry
 from qgis.utils import iface
 
-from ..tools.utils_core import check_layer_type, get_draw_layer_attr, getlayer_byname, write_layer, get_attributes
-from ..tools.utils_core import construct_feature, get_possible_snapFeatures_object
-from ..tools.utils_gui import read_config_file, get_actions, set_lengte_oppervlakte_visibility
+from ..tools.utils_core import check_layer_type, getlayer_byname, write_layer, get_attributes
+from ..tools.utils_core import construct_feature, get_possible_snapFeatures_object, read_settings
+from ..tools.utils_gui import get_actions, set_lengte_oppervlakte_visibility
 from ..tools.oiv_stackwidget import oivStackWidget
+from ..tools.editFeature import delete_feature
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_object_tekenen_widget.ui'))
 
 class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
 
-    configFileObject = None
     repressiefobjectwidget = None
     iface = None
     canvas = None
@@ -61,8 +61,6 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.setupUi(self)
         self.iface = iface
         self.stackwidget = oivStackWidget()
-        self.configFileObject = read_config_file("/config_files/csv/config_object.csv", None)
-        self.initUI()
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
@@ -74,7 +72,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.delete_f.clicked.connect(self.run_delete_tool)
         self.pan.clicked.connect(self.activatePan)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
-        actionList, self.editableLayerNames, self.moveLayerNames = get_actions(self.configFileObject)
+        actionList, self.editableLayerNames, self.moveLayerNames = get_actions('config_object')
         self.initActions(actionList)
 
     def initActions(self, actionList):
@@ -85,7 +83,6 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
                 buttonNr = action[1]
                 buttonName = str(action[2].lower())
                 strButton = self.findChild(QPushButton, buttonName)
-
                 if strButton:
                     #set tooltip per buttonn
                     strButton.setToolTip(buttonName)
@@ -113,7 +110,6 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
             buttonNr = action[0]
             buttonName = str(action[1].lower())
             strButton = self.findChild(QPushButton, buttonName)
-
             if strButton:
                 #set tooltip per buttonn
                 strButton.setToolTip(buttonName)
@@ -124,7 +120,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.iface.actionPan().trigger()
 
     def run_edit_tool(self):
-        self.selectTool.read_config = self.configFileObject
+        self.selectTool.whichConfig = 'config_object'
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
@@ -141,43 +137,16 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.disconnect(self.select_feature)
 
     def run_delete_tool(self):
-        self.selectTool.read_config = self.configFileObject
+        self.selectTool.whichConfig = 'config_object'
         self.canvas.setMapTool(self.selectTool)
-        self.selectTool.geomSelected.connect(self.delete_feature)
+        self.selectTool.geomSelected.connect(self.delete)
 
-    def delete_feature(self, ilayer, ifeature):
+    def delete(self, ilayer, ifeature):
         """delete a feature"""
-        if ilayer.name() in self.editableLayerNames:
-            self.iface.setActiveLayer(ilayer)
-            ids = []
-            ids.append(ifeature.id())
-            ilayer.selectByIds(ids)
-            ilayer.startEditing()
-            reply = QMessageBox.question(self.iface.mainWindow(), 'Continue?',
-                                         "Weet u zeker dat u de geselecteerde feature wilt weggooien?",
-                                         QMessageBox.Yes, QMessageBox.No)
-            if reply == QMessageBox.No:
-                #als "nee" deselecteer alle geselecteerde features
-                self.selectTool.geomSelected.disconnect(self.delete_feature)
-                ilayer.selectByIds([])
-            elif reply == QMessageBox.Yes:
-                #als "ja" -> verwijder de feature op basis van het unieke feature id
-                ilayer.deleteFeature(ifeature.id())
-                ilayer.commitChanges()
-                self.selectTool.geomSelected.disconnect(self.delete_feature)
-        #als er een feature is aangeklikt uit een andere laag, geef dan een melding
-        else:
-            reply = QMessageBox.information(self.iface.mainWindow(), 'Geen tekenlaag!',
-                                            "U heeft geen feature op een tekenlaag aangeklikt!\n\n\
-                                            Klik a.u.b. op de juiste locatie.\n\n\
-                                            Weet u zeker dat u iets wilt weggooien?",
-                                            QMessageBox.Yes, QMessageBox.No)
-            if reply == QMessageBox.No:
-                self.selectTool.geomSelected.disconnect(self.delete_feature)
-                ilayer.selectByIds([])
-            else:
-                self.selectTool.geomSelected.disconnect(self.delete_feature)
-                self.run_delete_tool()
+        reply = delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
+        if reply == 'Retry':
+            self.run_run_delete_tool()
+        self.selectTool.geomSelected.disconnect(self.delete)
 
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt
     def edit_attribute(self, ilayer, ifeature):
@@ -201,16 +170,16 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         for lyrName in self.moveLayerNames:
             moveLayer = getlayer_byname(lyrName)
             moveLayer.commitChanges()
+            moveLayer.reload()
         self.activatePan()
 
-    def run_tekenen(self, dummy, run_layer, feature_id):
+    def run_tekenen(self, dummy, runLayer, feature_id):
         #welke pictogram is aangeklikt en wat is de bijbehorende tekenlaag
         self.identifier = feature_id
-        self.drawLayer = getlayer_byname(run_layer)
+        self.drawLayer = getlayer_byname(runLayer)
         self.drawLayerType = check_layer_type(self.drawLayer)
-        attrs = {"parent_layer" : ''}
-        attrs = get_draw_layer_attr(attrs, run_layer, self.configFileObject)
-        self.parentLayerName = attrs["parent_layer"]
+        query = "SELECT parent_layer FROM config_object WHERE child_layer = '{}'".format(runLayer)
+        self.parentLayerName = read_settings(query, False)[0]
         objectId = self.object_id.text()
         possibleSnapFeatures = get_possible_snapFeatures_object(self.snapLayerNames, objectId)
         if self.drawLayerType == "Point":
@@ -225,7 +194,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
             set_lengte_oppervlakte_visibility(self, False, False, False, False)
             self.pointTool.onGeometryAdded = self.place_feature
         else:
-            if self.drawLayerType == "Line":
+            if self.drawLayerType == "LineString":
                 self.drawTool.captureMode = 1
                 set_lengte_oppervlakte_visibility(self, True, True, False, True)
             else:
@@ -244,8 +213,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         if points:
             parentId, childFeature = construct_feature(self.drawLayerType, self.parentLayerName, points, self.object_id.text(), self.iface)
         if parentId is not None:
-            buttonCheck = get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, self.configFileObject)
+            buttonCheck = get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, 'config_object')
             if buttonCheck != 'Cancel':
                 write_layer(self.drawLayer, childFeature)
-
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
