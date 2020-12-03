@@ -65,7 +65,6 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         self.bouwlaagwidget = oivBouwlaagWidget()
         self.tekenwidget = oivTekenWidget()
         self.importwidget = oivImportFileWidget()
-        self.stackwidget = oivStackWidget()
 
     def initUI(self):
         """fill the lineedits with values"""
@@ -96,12 +95,13 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
 
     def run_edit_bouwlagen(self, ilayer, ifeature):
         """edit attribute form of floor feature"""
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.stackwidget)
-        self.stackwidget.update()
-        self.stackwidget.parentWidget = self
-        self.stackwidget.open_feature_form(ilayer, ifeature)
+        stackWidget = oivStackWidget()
+        self.iface.addDockWidget(Qt.RightDockWidgetArea, stackWidget)
+        stackWidget.update()
+        stackWidget.parentWidget = self
+        stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
-        self.stackwidget.show()
+        stackWidget.show()
 
     def bouwlagen_to_combobox(self, objectId, actieveBouwlaag):
         """fill combobox with existing floors"""
@@ -244,10 +244,6 @@ class oivPandWidget(QDockWidget, FORM_CLASS):
         set_layer_substring(subString)
         try:
             del self.tekenwidget
-        except: # pylint: disable=bare-except
-            pass
-        try:
-            del self.stackwidget
         except: # pylint: disable=bare-except
             pass
         try:

@@ -63,7 +63,6 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         super(oivRepressiefObjectWidget, self).__init__(parent)
         self.setupUi(self)
         self.iface = iface
-        self.stackwidget = oivStackWidget()
         self.tekensymbolenwidget = oivObjectTekenWidget()
         self.object_id.setVisible(False)
         set_lengte_oppervlakte_visibility(self, False, False, False, False)
@@ -94,10 +93,6 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
             self.terrein_tekenen.clicked.disconnect()
             self.delete_f.clicked.disconnect()
             self.pan.clicked.disconnect()
-        except: # pylint: disable=bare-except
-            pass
-        try:
-            del self.stackwidget
         except: # pylint: disable=bare-except
             pass
         self.close()
@@ -148,11 +143,12 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.stackwidget)
-        self.stackwidget.parentWidget = self
-        self.stackwidget.open_feature_form(ilayer, ifeature)
+        stackWidget = oivStackWidget()
+        self.iface.addDockWidget(Qt.RightDockWidgetArea, stackWidget)
+        stackWidget.parentWidget = self
+        stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
-        self.stackwidget.show()
+        stackWidget.show()
         try:
             self.selectTool.geomSelected.disconnect(self.edit_attribute)
         except: # pylint: disable=bare-except

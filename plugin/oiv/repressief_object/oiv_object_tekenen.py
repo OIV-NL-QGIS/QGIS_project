@@ -60,7 +60,6 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         super(oivObjectTekenWidget, self).__init__(parent)
         self.setupUi(self)
         self.iface = iface
-        self.stackwidget = oivStackWidget()
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
@@ -96,10 +95,6 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.delete_f.clicked.disconnect()
         self.pan.clicked.disconnect()
         self.terug.clicked.disconnect()
-        try:
-            del self.stackwidget
-        except: # pylint: disable=bare-except
-            pass
         self.close()
         self.repressiefobjectwidget.show()
         del self
@@ -150,11 +145,12 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
 
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt
     def edit_attribute(self, ilayer, ifeature):
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.stackwidget)
-        self.stackwidget.parentWidget = self
-        self.stackwidget.open_feature_form(ilayer, ifeature)
+        stackWidget = oivStackWidget()
+        self.iface.addDockWidget(Qt.RightDockWidgetArea, stackWidget)
+        stackWidget.parentWidget = self
+        stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
-        self.stackwidget.show()
+        stackWidget.show()
         self.selectTool.geomSelected.disconnect(self.edit_attribute)
 
     #om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet
