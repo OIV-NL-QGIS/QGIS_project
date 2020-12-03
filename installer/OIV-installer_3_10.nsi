@@ -23,8 +23,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.1.8
-!define PLUGINVERSION 3.1.8
+!define VERSION 3.2.4
+!define PLUGINVERSION 3.2.4
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION}"
 !define WEBSITE "https://www.safetyct.com"
@@ -193,8 +193,8 @@ Section "${APPNAME} (required)" SectionMain
 	File /a license.txt
 	File /a nircmd.exe
 	File /a dos2unix.exe
-	File /r ..\oiv_project\qgis_project\ini
-  File /a ..\oiv_project\qgis_project\pg_service.conf
+	File /r ..\oiv_project\qgis_project\objecten\ini
+    File /a ..\oiv_project\qgis_project\objecten\pg_service.conf
 	
   ;Create db-connection service file
   ${IfNot} $Dbname == ""
@@ -264,6 +264,7 @@ Section "Objecten" SectionObjecten
 	File /a ..\oiv_project\qgis_project\objecten\objecten.ico
 	File /r ..\oiv_project\qgis_project\objecten\ui
 	File /r ..\oiv_project\qgis_project\objecten\svg
+    File /r ..\oiv_project\qgis_project\objecten\db
  
 	; Create desktop shortcuts
 	;ReadRegStr $R0 HKLM "Software\QGIS" "InstallPath"
@@ -284,9 +285,8 @@ Section "Bluswater" SectionBluswater
 	; Section Files
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
-	File /a ..\oiv_project\qgis_project\bluswater\Bluswater_Beheer.qgs
-	File /a ..\oiv_project\qgis_project\bluswater\bluswater.ico
-	File /r ..\oiv_project\qgis_project\bluswater\svg
+	File /a ..\oiv_project\qgis_project\objecten\Bluswater_Beheer.qgs
+	File /a ..\oiv_project\qgis_project\objecten\bluswater.ico
  
 	; Create desktop shortcuts
 	;ReadRegStr $R0 HKLM "Software\QGIS" "InstallPath"
@@ -337,9 +337,9 @@ Section "WFS" SectionWFS
 	; Section Files
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
-  File /a ..\oiv_project\qgis_project\objecten\convert_to_wfs.py
-  File /a ..\oiv_project\qgis_project\objecten\update_dimension_tables.py
-  File /r ..\oiv_project\qgis_project\objecten\db
+  File /a ..\oiv_project\qgis_project\objecten\convert_objecten_to_wfs.py
+  File /a ..\oiv_project\qgis_project\objecten\convert_bluswater_to_wfs.py
+  File /a ..\oiv_project\qgis_project\objecten\update_dimension_tables_proj.py
  
 	; Create desktop shortcuts
 	ReadRegStr $R0 HKCR "QGIS Project\Shell\open\command" ""
@@ -353,7 +353,8 @@ Section "WFS" SectionWFS
   SetRegView 64
   ReadRegStr $R0 HKLM "SOFTWARE\QGIS 3.10" "InstallPath"
   ;ExecWait "python.exe $INSTDIR\convert_to_wfs.py"
-  ExecWait "$R0\apps\Python37\python.exe $INSTDIR\convert_to_wfs.py"
+  ExecWait "$R0\apps\Python37\python.exe $INSTDIR\convert_objecten_to_wfs.py"
+  ExecWait "$R0\apps\Python37\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
 
 SectionEnd
 
@@ -418,7 +419,7 @@ Function nsDialogHost
     ${NSD_CreatePassword} 80u 98u 160u 14u $5
     Pop $5
 
-    ${NSD_CreateLabel} 20u 80u 100% 14u "Example valid database hosts are: localhost, data.geoatlas.nl"
+    ${NSD_CreateLabel} 20u 120u 100% 14u "Example valid database hosts are: localhost, data.geoatlas.nl"
 
     nsDialogs::Show  
 
