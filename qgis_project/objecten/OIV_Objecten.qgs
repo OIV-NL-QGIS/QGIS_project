@@ -191,7 +191,7 @@
     </layer-tree-group>
     <layer-tree-group name="Basisregistratie" checked="Qt::Checked" expanded="0">
       <customproperties/>
-      <layer-tree-layer name="BAG panden" checked="Qt::Unchecked" source="service='oiv' sslmode=allow key='gid' srid=28992 type=PolygonZ checkPrimaryKeyUnicity='1' table=&quot;algemeen&quot;.&quot;bag_extent&quot; (geovlak) sql=" expanded="0" id="bag_extent20180222160304157" providerKey="postgres">
+      <layer-tree-layer name="BAG panden" checked="Qt::Checked" source="service='oiv' sslmode=allow key='gid' srid=28992 type=PolygonZ checkPrimaryKeyUnicity='1' table=&quot;algemeen&quot;.&quot;bag_extent&quot; (geovlak) sql=" expanded="0" id="bag_extent20180222160304157" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
@@ -405,14 +405,14 @@
         </layer-tree-layer>
       </layer-tree-group>
     </layer-tree-group>
-    <layer-tree-group name="Achtergrondkaarten" mutually-exclusive="1" checked="Qt::Checked" expanded="1" mutually-exclusive-child="1">
+    <layer-tree-group name="Achtergrondkaarten" mutually-exclusive="1" checked="Qt::Checked" expanded="1" mutually-exclusive-child="0">
       <customproperties/>
-      <layer-tree-layer name="OpenTopo" checked="Qt::Unchecked" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=opentopo&amp;styles=default&amp;format=image/jpeg&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" expanded="0" id="opentopo_6d564ab7_6295_45ed_8b83_3042f6702823" providerKey="wms">
+      <layer-tree-layer name="OpenTopo" checked="Qt::Checked" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=opentopo&amp;styles=default&amp;format=image/jpeg&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" expanded="0" id="opentopo_6d564ab7_6295_45ed_8b83_3042f6702823" providerKey="wms">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer name="PDOK Basisregistratie Topografie" checked="Qt::Checked" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=brtachtergrondkaart&amp;styles=default&amp;format=image/png&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" expanded="0" id="brtachtergrondkaart_37d0f090_ae37_4c37_8b4b_9d6c02010571" providerKey="wms">
+      <layer-tree-layer name="PDOK Basisregistratie Topografie" checked="Qt::Unchecked" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=brtachtergrondkaart&amp;styles=default&amp;format=image/png&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" expanded="0" id="brtachtergrondkaart_37d0f090_ae37_4c37_8b4b_9d6c02010571" providerKey="wms">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
@@ -607,10 +607,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>81794.91762599268986378</xmin>
-      <ymin>434988.84300104418070987</ymin>
-      <xmax>82013.34587911768176127</xmax>
-      <ymax>435164.82733268482843414</ymax>
+      <xmin>81964.02070672891568393</xmin>
+      <ymin>435068.19700083555653691</ymin>
+      <xmax>82182.44895985390758142</xmax>
+      <ymax>435244.18133247620426118</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -794,9 +794,9 @@
       </legendlayer>
     </legendgroup>
     <legendgroup name="Basisregistratie" checked="Qt::Checked" open="false">
-      <legendlayer showFeatureCount="0" name="BAG panden" drawingOrder="-1" checked="Qt::Unchecked" open="false">
+      <legendlayer showFeatureCount="0" name="BAG panden" drawingOrder="-1" checked="Qt::Checked" open="false">
         <filegroup open="false" hidden="false">
-          <legendlayerfile visible="0" layerid="bag_extent20180222160304157" isInOverview="0"/>
+          <legendlayerfile visible="1" layerid="bag_extent20180222160304157" isInOverview="0"/>
         </filegroup>
       </legendlayer>
       <legendlayer showFeatureCount="0" name="Object terrein" drawingOrder="-1" checked="Qt::Checked" open="false">
@@ -1042,14 +1042,14 @@
       </legendgroup>
     </legendgroup>
     <legendgroup name="Achtergrondkaarten" checked="Qt::Checked" open="true">
-      <legendlayer showFeatureCount="0" name="OpenTopo" drawingOrder="-1" checked="Qt::Unchecked" open="false">
+      <legendlayer showFeatureCount="0" name="OpenTopo" drawingOrder="-1" checked="Qt::Checked" open="false">
         <filegroup open="false" hidden="false">
-          <legendlayerfile visible="0" layerid="opentopo_6d564ab7_6295_45ed_8b83_3042f6702823" isInOverview="0"/>
+          <legendlayerfile visible="1" layerid="opentopo_6d564ab7_6295_45ed_8b83_3042f6702823" isInOverview="0"/>
         </filegroup>
       </legendlayer>
-      <legendlayer showFeatureCount="0" name="PDOK Basisregistratie Topografie" drawingOrder="-1" checked="Qt::Checked" open="false">
+      <legendlayer showFeatureCount="0" name="PDOK Basisregistratie Topografie" drawingOrder="-1" checked="Qt::Unchecked" open="false">
         <filegroup open="false" hidden="false">
-          <legendlayerfile visible="1" layerid="brtachtergrondkaart_37d0f090_ae37_4c37_8b4b_9d6c02010571" isInOverview="0"/>
+          <legendlayerfile visible="0" layerid="brtachtergrondkaart_37d0f090_ae37_4c37_8b4b_9d6c02010571" isInOverview="0"/>
         </filegroup>
       </legendlayer>
       <legendlayer showFeatureCount="0" name="Luchtfoto Actueel Ortho 25cm RGB" drawingOrder="-1" checked="Qt::Unchecked" open="false">
@@ -29846,7 +29846,7 @@ def closeProject():&#xd;    pass</pythonCode>
   </projectMetadata>
   <Annotations/>
   <Layouts>
-    <Layout name="print_pdf" worldFileMap="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" units="mm" printResolution="300">
+    <Layout name="print_pdf_A3" worldFileMap="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" units="mm" printResolution="300">
       <Snapper tolerance="5" snapToGuides="1" snapToGrid="0" snapToItems="1"/>
       <Grid offsetUnits="mm" resUnits="mm" offsetY="0" offsetX="0" resolution="10"/>
       <PageCollection>
@@ -29910,85 +29910,7 @@ def closeProject():&#xd;    pass</pythonCode>
         </LayoutItem>
         <GuideCollection visible="1"/>
       </PageCollection>
-      <LayoutItem htmlState="0" groupUuid="" id="" size="70.1789,11.4009,mm" position="10.3875,4.56036,mm" uuid="{114af9c6-8c8f-4ad3-89f9-75d32b6a57a3}" valign="32" opacity="1" positionOnPage="10.3875,4.56036,mm" marginX="0" halign="8" frame="false" frameJoinStyle="miter" blendMode="0" positionLock="false" excludeFromExports="0" visibility="1" labelText="[% &quot;formelenaam&quot;%]" itemRotation="0" outlineWidthM="0.3,mm" type="65641" marginY="0" referencePoint="0" templateUuid="{114af9c6-8c8f-4ad3-89f9-75d32b6a57a3}" background="false" zValue="4">
-        <FrameColor red="0" blue="0" green="0" alpha="255"/>
-        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
-        <LayoutObject>
-          <dataDefinedProperties>
-            <Option type="Map">
-              <Option type="QString" name="name" value=""/>
-              <Option name="properties"/>
-              <Option type="QString" name="type" value="collection"/>
-            </Option>
-          </dataDefinedProperties>
-          <customproperties/>
-        </LayoutObject>
-        <LabelFont description="Verdana,24,-1,5,75,0,1,0,0,0,Vet" style="Vet"/>
-        <FontColor red="0" blue="0" green="0" alpha="255"/>
-      </LayoutItem>
-      <LayoutItem mapUuid="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" groupUuid="" id="Noordpijl" size="19.7616,28.1222,mm" anchorPoint="0" position="12.6677,251.1,mm" uuid="{b829e2e5-b0cc-424c-957a-bb2dbbd861b0}" pictureRotation="0" opacity="1" positionOnPage="12.6677,251.1,mm" frame="false" frameJoinStyle="miter" blendMode="0" svgBorderColor="0,0,0,255" pictureHeight="28.1222" positionLock="false" excludeFromExports="0" svgBorderWidth="0.2" visibility="1" northMode="0" itemRotation="0" svgFillColor="125,139,143,255" outlineWidthM="0.3,mm" type="65640" pictureWidth="17.6851" referencePoint="0" file="arrows/NorthArrow_02.svg" resizeMode="0" templateUuid="{b829e2e5-b0cc-424c-957a-bb2dbbd861b0}" northOffset="0" background="false" zValue="3">
-        <FrameColor red="0" blue="0" green="0" alpha="255"/>
-        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
-        <LayoutObject>
-          <dataDefinedProperties>
-            <Option type="Map">
-              <Option type="QString" name="name" value=""/>
-              <Option name="properties"/>
-              <Option type="QString" name="type" value="collection"/>
-            </Option>
-          </dataDefinedProperties>
-          <customproperties/>
-        </LayoutObject>
-      </LayoutItem>
-      <LayoutItem groupUuid="" id="" size="420,297,mm" position="0,0,mm" uuid="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" opacity="1" mapRotation="0" keepLayerSet="true" mapFlags="0" positionOnPage="0,0,mm" followPreset="false" frame="false" frameJoinStyle="miter" blendMode="0" positionLock="false" drawCanvasItems="true" excludeFromExports="0" visibility="1" itemRotation="0" outlineWidthM="0.3,mm" type="65639" referencePoint="0" labelMargin="0,mm" templateUuid="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" followPresetName="" background="true" zValue="2">
-        <FrameColor red="0" blue="0" green="0" alpha="255"/>
-        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
-        <LayoutObject>
-          <dataDefinedProperties>
-            <Option type="Map">
-              <Option type="QString" name="name" value=""/>
-              <Option name="properties"/>
-              <Option type="QString" name="type" value="collection"/>
-            </Option>
-          </dataDefinedProperties>
-          <customproperties/>
-        </LayoutObject>
-        <Extent ymin="399568.04301724716788158" xmin="138010.38740615794085898" xmax="138243.74418629324645735" ymax="399733.05959748569875956"/>
-        <LayerSet>
-          <Layer name="Objecten" source="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom) sql=" provider="postgres">objectgegevens20160318144112880</Layer>
-          <Layer name="Afwijkende binnendekking" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_afw_binnendekking&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_afw_binnendekking20180911161155176</Layer>
-          <Layer name="Installatietechnische veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_install&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_veiligh_install20180905164515399</Layer>
-          <Layer name="Ingang bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ingang&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_ingang_bouwlaag20180906201337250</Layer>
-          <Layer name="Sleutelkluis bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_sleutelkluis&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_sleutelkluis_bouwlaag20180906202953370</Layer>
-          <Layer name="Opslag stoffen bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_opslag&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_opslag20171206142819813</Layer>
-          <Layer name="Dreiging bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_dreiging&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_dreiging20180906174253505</Layer>
-          <Layer name="Labels bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_label&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_label20171206134310954</Layer>
-          <Layer name="Bouwkundige veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_bouwk&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_veiligh_bouwk20180905151458681</Layer>
-          <Layer name="Ruimten" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ruimten&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_ruimten20180905142047305</Layer>
-          <Layer name="Bouwlagen" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlagen&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlagen20180226231427375</Layer>
-          <Layer name="Alternatief bluswater" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;alternatieve&quot; (geom) sql=" provider="postgres">alternatieve20171110074120161</Layer>
-          <Layer name="Brandkranen (alleen-lezen)" source="service='oiv' sslmode=allow key='nummer' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;brandkranen&quot; (geom) sql=" provider="postgres">brandkraan_2017_120170504220758524</Layer>
-          <Layer name="Leidingen (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;leidingen&quot; (geom) sql=" provider="postgres">leidingen_f8765a2a_2685_44e3_9062_a5804129ec78</Layer>
-          <Layer name="Ruimtelijke veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_veiligh_ruimtelijk&quot; (geom) sql=" provider="postgres">veiligh_ruimtelijk20180912181737656</Layer>
-          <Layer name="Ingang ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_ingang&quot; (geom) sql=" provider="postgres">ingang_object20180912142318108</Layer>
-          <Layer name="Sleutelkluis ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sleutelkluis&quot; (geom) sql=" provider="postgres">ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152</Layer>
-          <Layer name="Opstelplaats" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opstelplaats&quot; (geom) sql=" provider="postgres">opstelplaats20180831134019368</Layer>
-          <Layer name="Opslag stoffen ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opslag&quot; (geom) sql=" provider="postgres">gevaarlijkestof_opslag_object20180921133701908</Layer>
-          <Layer name="Dreiging ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_dreiging&quot; (geom) sql=" provider="postgres">dreiging_ruimtelijk20180912203007764</Layer>
-          <Layer name="Labels ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_label&quot; (geom) sql=" provider="postgres">label_object20180912203855251</Layer>
-          <Layer name="Bereikbaarheid" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bereikbaarheid&quot; (geom) sql=" provider="postgres">bereikbaarheid20180831134019212</Layer>
-          <Layer name="Sectoren" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sectoren&quot; (geom) sql=" provider="postgres">sectoren20190320103814390</Layer>
-          <Layer name="Isolijnen" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_isolijnen&quot; (geom) sql=" provider="postgres">isolijnen_da3e3ee0_539b_40db_8f06_3690b840cfea</Layer>
-          <Layer name="Schade cirkel (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;schade_cirkel_calc&quot; (geom_cirkel) sql=" provider="postgres">schade_cirkel_calc20170912163056737</Layer>
-          <Layer name="Object terrein" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_terrein&quot; (geom) sql=" provider="postgres">terrein_eff10e61_89d2_4362_801d_84f487d77852</Layer>
-          <Layer name="Grid" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_grid&quot; (geom) sql=" provider="postgres">grid_33a2aa94_9575_44b1_a5be_645450b0209f</Layer>
-          <Layer name="Veiligheidsregio" source="dbname='C:/Users/joost/Documents/github_repositories/oiv/oiv_project/qgis_project/objecten/db/dimension_tables.db' table=&quot;veiligheidsregio_huidig&quot; (geom) sql=" provider="spatialite">veiligheidsregio_huidig_82c908ad_f5e9_4bbc_93dd_a0f989910394</Layer>
-          <Layer name="OpenTopo" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=opentopo&amp;styles=default&amp;format=image/jpeg&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" provider="wms">opentopo_6d564ab7_6295_45ed_8b83_3042f6702823</Layer>
-        </LayerSet>
-        <AtlasMap atlasDriven="1" scalingMode="2" margin="0.04"/>
-        <labelBlockingItems/>
-      </LayoutItem>
-      <LayoutItem position="10.3875,281.222,mm" labelVerticalPlacement="0" boxContentSpace="1" alignment="0" minBarWidth="50" mapUuid="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" excludeFromExports="0" id="" groupUuid="" segmentMillimeters="35.9964" frame="false" labelHorizontalPlacement="0" height="2" numSegmentsLeft="0" positionLock="false" visibility="1" zValue="2" maxBarWidth="150" opacity="1" numMapUnitsPerScaleBarUnit="1" blendMode="0" frameJoinStyle="miter" numUnitsPerSegment="20" style="Single Box" unitLabel="m" lineJoinStyle="miter" referencePoint="0" templateUuid="{aeed227a-f607-4a2e-b46d-254d2e76b808}" labelBarSpace="3" segmentSizeMode="0" background="false" outlineWidthM="0.3,mm" numSegments="5" uuid="{aeed227a-f607-4a2e-b46d-254d2e76b808}" size="193.582,12.3,mm" type="65646" lineCapStyle="square" outlineWidth="0.3" unitType="meters" itemRotation="0" positionOnPage="10.3875,281.222,mm">
+      <LayoutItem position="10.3875,281.222,mm" labelVerticalPlacement="0" boxContentSpace="1" alignment="0" minBarWidth="50" mapUuid="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" excludeFromExports="0" id="" groupUuid="" segmentMillimeters="25.251" frame="false" labelHorizontalPlacement="0" height="2" numSegmentsLeft="0" positionLock="false" visibility="1" zValue="4" maxBarWidth="150" opacity="1" numMapUnitsPerScaleBarUnit="1" blendMode="0" frameJoinStyle="miter" numUnitsPerSegment="20" style="Single Box" unitLabel="m" lineJoinStyle="miter" referencePoint="0" templateUuid="{aeed227a-f607-4a2e-b46d-254d2e76b808}" labelBarSpace="3" segmentSizeMode="0" background="false" outlineWidthM="0.3,mm" numSegments="5" uuid="{aeed227a-f607-4a2e-b46d-254d2e76b808}" size="400.582,12.3,mm" type="65646" lineCapStyle="square" outlineWidth="0.3" unitType="meters" itemRotation="0" positionOnPage="10.3875,281.222,mm">
         <FrameColor red="0" blue="0" green="0" alpha="255"/>
         <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
         <LayoutObject>
@@ -30016,6 +29938,258 @@ def closeProject():&#xd;    pass</pythonCode>
         <fillColor red="0" blue="0" green="0" alpha="255"/>
         <fillColor2 red="255" blue="255" green="255" alpha="255"/>
         <strokeColor red="0" blue="0" green="0" alpha="255"/>
+      </LayoutItem>
+      <LayoutItem htmlState="0" groupUuid="" id="" size="400.582,11.4009,mm" position="10.3875,4.56036,mm" uuid="{114af9c6-8c8f-4ad3-89f9-75d32b6a57a3}" valign="32" opacity="1" positionOnPage="10.3875,4.56036,mm" marginX="0" halign="8" frame="false" frameJoinStyle="miter" blendMode="0" positionLock="false" excludeFromExports="0" visibility="1" labelText="[% &quot;formelenaam&quot;%]" itemRotation="0" outlineWidthM="0.3,mm" type="65641" marginY="0" referencePoint="0" templateUuid="{114af9c6-8c8f-4ad3-89f9-75d32b6a57a3}" background="false" zValue="3">
+        <FrameColor red="0" blue="0" green="0" alpha="255"/>
+        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <LabelFont description="Verdana,24,-1,5,75,0,1,0,0,0,Vet" style="Vet"/>
+        <FontColor red="0" blue="0" green="0" alpha="255"/>
+      </LayoutItem>
+      <LayoutItem mapUuid="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" groupUuid="" id="Noordpijl" size="19.7616,28.1222,mm" anchorPoint="0" position="12.6677,251.1,mm" uuid="{b829e2e5-b0cc-424c-957a-bb2dbbd861b0}" pictureRotation="0" opacity="1" positionOnPage="12.6677,251.1,mm" frame="false" frameJoinStyle="miter" blendMode="0" svgBorderColor="0,0,0,255" pictureHeight="28.1222" positionLock="false" excludeFromExports="0" svgBorderWidth="0.2" visibility="1" northMode="0" itemRotation="0" svgFillColor="125,139,143,255" outlineWidthM="0.3,mm" type="65640" pictureWidth="17.6851" referencePoint="0" file="arrows/NorthArrow_02.svg" resizeMode="0" templateUuid="{b829e2e5-b0cc-424c-957a-bb2dbbd861b0}" northOffset="0" background="false" zValue="2">
+        <FrameColor red="0" blue="0" green="0" alpha="255"/>
+        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+      </LayoutItem>
+      <LayoutItem groupUuid="" id="" size="420,297,mm" position="0,0,mm" uuid="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" opacity="1" mapRotation="0" keepLayerSet="true" mapFlags="0" positionOnPage="0,0,mm" followPreset="false" frame="false" frameJoinStyle="miter" blendMode="0" positionLock="false" drawCanvasItems="true" excludeFromExports="0" visibility="1" itemRotation="0" outlineWidthM="0.3,mm" type="65639" referencePoint="0" labelMargin="0,mm" templateUuid="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" followPresetName="" background="true" zValue="1">
+        <FrameColor red="0" blue="0" green="0" alpha="255"/>
+        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <Extent ymin="434997.96938400040380657" xmin="81140.19014555508329067" xmax="81472.85055444469617214" ymax="435233.20781600038753822"/>
+        <LayerSet>
+          <Layer name="Objecten" source="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom) sql=" provider="postgres">objectgegevens20160318144112880</Layer>
+          <Layer name="Afwijkende binnendekking" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_afw_binnendekking&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_afw_binnendekking20180911161155176</Layer>
+          <Layer name="Installatietechnische veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_install&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_veiligh_install20180905164515399</Layer>
+          <Layer name="Ingang bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ingang&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_ingang_bouwlaag20180906201337250</Layer>
+          <Layer name="Sleutelkluis bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_sleutelkluis&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_sleutelkluis_bouwlaag20180906202953370</Layer>
+          <Layer name="Opslag stoffen bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_opslag&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_opslag20171206142819813</Layer>
+          <Layer name="Dreiging bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_dreiging&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_dreiging20180906174253505</Layer>
+          <Layer name="Labels bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_label&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_label20171206134310954</Layer>
+          <Layer name="Bouwkundige veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_bouwk&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_veiligh_bouwk20180905151458681</Layer>
+          <Layer name="Ruimten" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ruimten&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_ruimten20180905142047305</Layer>
+          <Layer name="Bouwlagen" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlagen&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlagen20180226231427375</Layer>
+          <Layer name="Alternatief bluswater" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;alternatieve&quot; (geom) sql=" provider="postgres">alternatieve20171110074120161</Layer>
+          <Layer name="Brandkranen (alleen-lezen)" source="service='oiv' sslmode=allow key='nummer' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;brandkranen&quot; (geom) sql=" provider="postgres">brandkraan_2017_120170504220758524</Layer>
+          <Layer name="Leidingen (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;leidingen&quot; (geom) sql=" provider="postgres">leidingen_f8765a2a_2685_44e3_9062_a5804129ec78</Layer>
+          <Layer name="Ruimtelijke veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_veiligh_ruimtelijk&quot; (geom) sql=" provider="postgres">veiligh_ruimtelijk20180912181737656</Layer>
+          <Layer name="Ingang ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_ingang&quot; (geom) sql=" provider="postgres">ingang_object20180912142318108</Layer>
+          <Layer name="Sleutelkluis ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sleutelkluis&quot; (geom) sql=" provider="postgres">ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152</Layer>
+          <Layer name="Opstelplaats" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opstelplaats&quot; (geom) sql=" provider="postgres">opstelplaats20180831134019368</Layer>
+          <Layer name="Opslag stoffen ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opslag&quot; (geom) sql=" provider="postgres">gevaarlijkestof_opslag_object20180921133701908</Layer>
+          <Layer name="Dreiging ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_dreiging&quot; (geom) sql=" provider="postgres">dreiging_ruimtelijk20180912203007764</Layer>
+          <Layer name="Labels ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_label&quot; (geom) sql=" provider="postgres">label_object20180912203855251</Layer>
+          <Layer name="Bereikbaarheid" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bereikbaarheid&quot; (geom) sql=" provider="postgres">bereikbaarheid20180831134019212</Layer>
+          <Layer name="Sectoren" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sectoren&quot; (geom) sql=" provider="postgres">sectoren20190320103814390</Layer>
+          <Layer name="Isolijnen" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_isolijnen&quot; (geom) sql=" provider="postgres">isolijnen_da3e3ee0_539b_40db_8f06_3690b840cfea</Layer>
+          <Layer name="Schade cirkel (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;schade_cirkel_calc&quot; (geom_cirkel) sql=" provider="postgres">schade_cirkel_calc20170912163056737</Layer>
+          <Layer name="Grid" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_grid&quot; (geom) sql=" provider="postgres">grid_33a2aa94_9575_44b1_a5be_645450b0209f</Layer>
+          <Layer name="Veiligheidsregio" source="dbname='C:/Users/joost/Documents/github_repositories/oiv/oiv_project/qgis_project/objecten/db/dimension_tables.db' table=&quot;veiligheidsregio_huidig&quot; (geom) sql=" provider="spatialite">veiligheidsregio_huidig_82c908ad_f5e9_4bbc_93dd_a0f989910394</Layer>
+          <Layer name="OpenTopo" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=opentopo&amp;styles=default&amp;format=image/jpeg&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" provider="wms">opentopo_6d564ab7_6295_45ed_8b83_3042f6702823</Layer>
+        </LayerSet>
+        <AtlasMap atlasDriven="1" scalingMode="2" margin="0.04"/>
+        <labelBlockingItems/>
+      </LayoutItem>
+      <customproperties>
+        <property key="atlasRasterFormat" value="png"/>
+      </customproperties>
+      <Atlas coverageLayerName="Object terrein" enabled="1" coverageLayer="terrein_eff10e61_89d2_4362_801d_84f487d77852" coverageLayerSource="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_terrein&quot; (geom) sql=" filenamePattern="'output_'||@atlas_featurenumber" pageNameExpression="&quot;object_id&quot;" sortFeatures="0" coverageLayerProvider="postgres" hideCoverage="1" filterFeatures="0"/>
+    </Layout>
+    <Layout name="print_pdf_A4" worldFileMap="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" units="mm" printResolution="300">
+      <Snapper tolerance="5" snapToGuides="1" snapToGrid="0" snapToItems="1"/>
+      <Grid offsetUnits="mm" resUnits="mm" offsetY="0" offsetX="0" resolution="10"/>
+      <PageCollection>
+        <symbol clip_to_extent="1" type="fill" force_rhr="0" name="" alpha="1">
+          <layer class="SimpleFill" enabled="1" pass="0" locked="0">
+            <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+            <prop v="255,255,255,255" k="color"/>
+            <prop v="miter" k="joinstyle"/>
+            <prop v="0,0" k="offset"/>
+            <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+            <prop v="MM" k="offset_unit"/>
+            <prop v="35,35,35,255" k="outline_color"/>
+            <prop v="no" k="outline_style"/>
+            <prop v="0.26" k="outline_width"/>
+            <prop v="MM" k="outline_width_unit"/>
+            <prop v="solid" k="style"/>
+            <data_defined_properties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </data_defined_properties>
+          </layer>
+        </symbol>
+        <LayoutItem groupUuid="" id="" size="297,210,mm" position="0,0,mm" uuid="{affeac2b-d549-45d5-addc-150940247052}" opacity="1" positionOnPage="0,0,mm" frame="false" frameJoinStyle="miter" blendMode="0" positionLock="false" excludeFromExports="0" visibility="1" itemRotation="0" outlineWidthM="0.3,mm" type="65638" referencePoint="0" templateUuid="{affeac2b-d549-45d5-addc-150940247052}" background="true" zValue="0">
+          <FrameColor red="0" blue="0" green="0" alpha="255"/>
+          <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
+          <LayoutObject>
+            <dataDefinedProperties>
+              <Option type="Map">
+                <Option type="QString" name="name" value=""/>
+                <Option name="properties"/>
+                <Option type="QString" name="type" value="collection"/>
+              </Option>
+            </dataDefinedProperties>
+            <customproperties/>
+          </LayoutObject>
+          <symbol clip_to_extent="1" type="fill" force_rhr="0" name="" alpha="1">
+            <layer class="SimpleFill" enabled="1" pass="0" locked="0">
+              <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+              <prop v="255,255,255,255" k="color"/>
+              <prop v="miter" k="joinstyle"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="35,35,35,255" k="outline_color"/>
+              <prop v="no" k="outline_style"/>
+              <prop v="0.26" k="outline_width"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="solid" k="style"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+        </LayoutItem>
+        <GuideCollection visible="1"/>
+      </PageCollection>
+      <LayoutItem position="7.2428,196.7,mm" labelVerticalPlacement="0" boxContentSpace="1" alignment="0" minBarWidth="50" mapUuid="{0db05e4d-ff0a-492b-a2fe-c5208c6ea270}" excludeFromExports="0" id="" groupUuid="" segmentMillimeters="17.856" frame="false" labelHorizontalPlacement="0" height="2" numSegmentsLeft="0" positionLock="false" visibility="1" zValue="4" maxBarWidth="150" opacity="1" numMapUnitsPerScaleBarUnit="1" blendMode="0" frameJoinStyle="miter" numUnitsPerSegment="20" style="Single Box" unitLabel="m" lineJoinStyle="miter" referencePoint="0" templateUuid="{fe523c29-3782-4ab1-ae6e-68fb4473ba96}" labelBarSpace="3" segmentSizeMode="0" background="false" outlineWidthM="0.3,mm" numSegments="5" uuid="{fe523c29-3782-4ab1-ae6e-68fb4473ba96}" size="282.398,12.3,mm" type="65646" lineCapStyle="square" outlineWidth="0.3" unitType="meters" itemRotation="0" positionOnPage="7.2428,196.7,mm">
+        <FrameColor red="0" blue="0" green="0" alpha="255"/>
+        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <text-style fontFamily="Verdana" fontWeight="50" textColor="0,0,0,255" multilineHeight="1" fontStrikeout="0" namedStyle="" textOpacity="1" fontKerning="1" fontSize="12" fontUnderline="0" fontSizeUnit="Point" blendMode="0" textOrientation="horizontal" fontCapitals="0" fontLetterSpacing="0" fontWordSpacing="0" fontItalic="0" previewBkgrdColor="255,255,255,255" fontSizeMapUnitScale="3x:0,0,0,0,0,0">
+          <text-buffer bufferOpacity="1" bufferDraw="0" bufferColor="255,255,255,255" bufferBlendMode="0" bufferNoFill="1" bufferSize="1" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferJoinStyle="128"/>
+          <background shapeSizeType="0" shapeRotation="0" shapeSVGFile="" shapeOpacity="1" shapeRadiiX="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeBorderColor="128,128,128,255" shapeFillColor="255,255,255,255" shapeOffsetX="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeSizeX="0" shapeSizeY="0" shapeType="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0" shapeRadiiUnit="MM" shapeJoinStyle="64" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeBlendMode="0" shapeOffsetUnit="MM" shapeBorderWidthUnit="MM" shapeBorderWidth="0" shapeDraw="0" shapeSizeUnit="MM" shapeRadiiY="0"/>
+          <shadow shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100" shadowDraw="0" shadowRadius="1.5" shadowOffsetUnit="MM" shadowOffsetAngle="135" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusAlphaOnly="0" shadowOffsetDist="1" shadowOffsetGlobal="1" shadowColor="0,0,0,255" shadowRadiusUnit="MM" shadowOpacity="0.7" shadowBlendMode="6" shadowUnder="0"/>
+          <dd_properties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </dd_properties>
+        </text-style>
+        <fillColor red="0" blue="0" green="0" alpha="255"/>
+        <fillColor2 red="255" blue="255" green="255" alpha="255"/>
+        <strokeColor red="0" blue="0" green="0" alpha="255"/>
+      </LayoutItem>
+      <LayoutItem htmlState="0" groupUuid="" id="" size="290.31,11.4009,mm" position="3.86898,2.84431,mm" uuid="{65981d76-548d-47de-b38c-2f00f12f9f29}" valign="32" opacity="1" positionOnPage="3.86898,2.84431,mm" marginX="0" halign="8" frame="false" frameJoinStyle="miter" blendMode="0" positionLock="false" excludeFromExports="0" visibility="1" labelText="[% &quot;formelenaam&quot;%]" itemRotation="0" outlineWidthM="0.3,mm" type="65641" marginY="0" referencePoint="0" templateUuid="{65981d76-548d-47de-b38c-2f00f12f9f29}" background="false" zValue="3">
+        <FrameColor red="0" blue="0" green="0" alpha="255"/>
+        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <LabelFont description="Verdana,16,-1,5,75,0,1,0,0,0,Vet" style="Vet"/>
+        <FontColor red="0" blue="0" green="0" alpha="255"/>
+      </LayoutItem>
+      <LayoutItem mapUuid="{0db05e4d-ff0a-492b-a2fe-c5208c6ea270}" groupUuid="" id="Noordpijl" size="19.7616,23.7248,mm" anchorPoint="0" position="7.2428,172.975,mm" uuid="{42e86c16-bac7-4f37-9dfa-fd83060b83f1}" pictureRotation="0" opacity="1" positionOnPage="7.2428,172.975,mm" frame="false" frameJoinStyle="miter" blendMode="0" svgBorderColor="0,0,0,255" pictureHeight="23.7248" positionLock="false" excludeFromExports="0" svgBorderWidth="0.2" visibility="1" northMode="0" itemRotation="0" svgFillColor="125,139,143,255" outlineWidthM="0.3,mm" type="65640" pictureWidth="14.9197" referencePoint="0" file="arrows/NorthArrow_02.svg" resizeMode="0" templateUuid="{42e86c16-bac7-4f37-9dfa-fd83060b83f1}" northOffset="0" background="false" zValue="2">
+        <FrameColor red="0" blue="0" green="0" alpha="255"/>
+        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+      </LayoutItem>
+      <LayoutItem groupUuid="" id="" size="297,210,mm" position="-2.84217e-14,0,mm" uuid="{0db05e4d-ff0a-492b-a2fe-c5208c6ea270}" opacity="1" mapRotation="0" keepLayerSet="true" mapFlags="0" positionOnPage="-2.84217e-14,0,mm" followPreset="false" frame="false" frameJoinStyle="miter" blendMode="0" positionLock="false" drawCanvasItems="true" excludeFromExports="0" visibility="1" itemRotation="0" outlineWidthM="0.3,mm" type="65639" referencePoint="0" labelMargin="0,mm" templateUuid="{0db05e4d-ff0a-492b-a2fe-c5208c6ea270}" followPresetName="" background="true" zValue="1">
+        <FrameColor red="0" blue="0" green="0" alpha="255"/>
+        <BackgroundColor red="255" blue="255" green="255" alpha="255"/>
+        <LayoutObject>
+          <dataDefinedProperties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </dataDefinedProperties>
+          <customproperties/>
+        </LayoutObject>
+        <Extent ymin="434997.98138473636936396" xmin="81140.19014555508329067" xmax="81472.85055444469617214" ymax="435233.19581526436377317"/>
+        <LayerSet>
+          <Layer name="Objecten" source="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom) sql=" provider="postgres">objectgegevens20160318144112880</Layer>
+          <Layer name="Afwijkende binnendekking" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_afw_binnendekking&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_afw_binnendekking20180911161155176</Layer>
+          <Layer name="Installatietechnische veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_install&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_veiligh_install20180905164515399</Layer>
+          <Layer name="Ingang bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ingang&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_ingang_bouwlaag20180906201337250</Layer>
+          <Layer name="Sleutelkluis bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_sleutelkluis&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_sleutelkluis_bouwlaag20180906202953370</Layer>
+          <Layer name="Opslag stoffen bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_opslag&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_opslag20171206142819813</Layer>
+          <Layer name="Dreiging bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_dreiging&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_dreiging20180906174253505</Layer>
+          <Layer name="Labels bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_label&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_label20171206134310954</Layer>
+          <Layer name="Bouwkundige veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_bouwk&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_veiligh_bouwk20180905151458681</Layer>
+          <Layer name="Ruimten" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ruimten&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlaag_ruimten20180905142047305</Layer>
+          <Layer name="Bouwlagen" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlagen&quot; (geom) sql=bouwlaag = 1" provider="postgres">bouwlagen20180226231427375</Layer>
+          <Layer name="Alternatief bluswater" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;alternatieve&quot; (geom) sql=" provider="postgres">alternatieve20171110074120161</Layer>
+          <Layer name="Brandkranen (alleen-lezen)" source="service='oiv' sslmode=allow key='nummer' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;brandkranen&quot; (geom) sql=" provider="postgres">brandkraan_2017_120170504220758524</Layer>
+          <Layer name="Leidingen (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;leidingen&quot; (geom) sql=" provider="postgres">leidingen_f8765a2a_2685_44e3_9062_a5804129ec78</Layer>
+          <Layer name="Ruimtelijke veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_veiligh_ruimtelijk&quot; (geom) sql=" provider="postgres">veiligh_ruimtelijk20180912181737656</Layer>
+          <Layer name="Ingang ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_ingang&quot; (geom) sql=" provider="postgres">ingang_object20180912142318108</Layer>
+          <Layer name="Sleutelkluis ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sleutelkluis&quot; (geom) sql=" provider="postgres">ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152</Layer>
+          <Layer name="Opstelplaats" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opstelplaats&quot; (geom) sql=" provider="postgres">opstelplaats20180831134019368</Layer>
+          <Layer name="Opslag stoffen ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opslag&quot; (geom) sql=" provider="postgres">gevaarlijkestof_opslag_object20180921133701908</Layer>
+          <Layer name="Dreiging ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_dreiging&quot; (geom) sql=" provider="postgres">dreiging_ruimtelijk20180912203007764</Layer>
+          <Layer name="Labels ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_label&quot; (geom) sql=" provider="postgres">label_object20180912203855251</Layer>
+          <Layer name="Bereikbaarheid" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bereikbaarheid&quot; (geom) sql=" provider="postgres">bereikbaarheid20180831134019212</Layer>
+          <Layer name="Sectoren" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sectoren&quot; (geom) sql=" provider="postgres">sectoren20190320103814390</Layer>
+          <Layer name="Isolijnen" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_isolijnen&quot; (geom) sql=" provider="postgres">isolijnen_da3e3ee0_539b_40db_8f06_3690b840cfea</Layer>
+          <Layer name="Schade cirkel (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;schade_cirkel_calc&quot; (geom_cirkel) sql=" provider="postgres">schade_cirkel_calc20170912163056737</Layer>
+          <Layer name="Grid" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_grid&quot; (geom) sql=" provider="postgres">grid_33a2aa94_9575_44b1_a5be_645450b0209f</Layer>
+          <Layer name="Veiligheidsregio" source="dbname='C:/Users/joost/Documents/github_repositories/oiv/oiv_project/qgis_project/objecten/db/dimension_tables.db' table=&quot;veiligheidsregio_huidig&quot; (geom) sql=" provider="spatialite">veiligheidsregio_huidig_82c908ad_f5e9_4bbc_93dd_a0f989910394</Layer>
+          <Layer name="OpenTopo" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=opentopo&amp;styles=default&amp;format=image/jpeg&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" provider="wms">opentopo_6d564ab7_6295_45ed_8b83_3042f6702823</Layer>
+        </LayerSet>
+        <AtlasMap atlasDriven="1" scalingMode="2" margin="0.04"/>
+        <labelBlockingItems/>
       </LayoutItem>
       <customproperties>
         <property key="atlasRasterFormat" value="png"/>
