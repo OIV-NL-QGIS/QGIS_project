@@ -607,10 +607,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>81964.02070672891568393</xmin>
-      <ymin>435068.19700083555653691</ymin>
-      <xmax>82182.44895985390758142</xmax>
-      <ymax>435244.18133247620426118</ymax>
+      <xmin>82023.53249139951367397</xmin>
+      <ymin>435167.68231976206880063</ymin>
+      <xmax>82132.74661796200962272</xmax>
+      <ymax>435255.67448558239266276</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -5438,7 +5438,7 @@ def my_form_open(dialog, layer, feature):
       <dataDependencies/>
       <legend type="default-vector"/>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <map-layer-style-manager current="standaard">
         <map-layer-style name="standaard"/>
@@ -5859,7 +5859,7 @@ def my_form_open(dialog, layer, feature):
         <constraint desc="" exp="" field="offset"/>
       </constraintExpressions>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
@@ -6016,7 +6016,7 @@ def my_form_open(dialog, layer, feature):
       <dataDependencies/>
       <legend type="default-vector"/>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <map-layer-style-manager current="standaard">
         <map-layer-style name="standaard"/>
@@ -6424,7 +6424,7 @@ def my_form_open(dialog, layer, feature):
         <constraint desc="" exp="" field="offset"/>
       </constraintExpressions>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
@@ -6592,7 +6592,7 @@ def my_form_open(dialog, layer, feature):
       <dataDependencies/>
       <legend type="default-vector"/>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <map-layer-style-manager current="standaard">
         <map-layer-style name="standaard"/>
@@ -7042,7 +7042,7 @@ def my_form_open(dialog, layer, feature):
         <constraint desc="" exp="" field="offset"/>
       </constraintExpressions>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
@@ -9003,7 +9003,7 @@ def my_form_open(dialog, layer, feature):
       <dataDependencies/>
       <legend type="default-vector"/>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <map-layer-style-manager current="standaard">
         <map-layer-style name="standaard"/>
@@ -9431,7 +9431,7 @@ def my_form_open(dialog, layer, feature):
         <constraint desc="" exp="" field="offset"/>
       </constraintExpressions>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
@@ -9958,7 +9958,7 @@ def my_form_open(dialog, layer, feature):
       <dataDependencies/>
       <legend type="default-vector"/>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <map-layer-style-manager current="standaard">
         <map-layer-style name="standaard"/>
@@ -10301,8 +10301,8 @@ def my_form_open(dialog, layer, feature):
           <editWidget type="TextEdit">
             <config>
               <Option type="Map">
-                <Option type="QString" name="IsMultiline" value="0"/>
-                <Option type="QString" name="UseHtml" value="0"/>
+                <Option type="bool" name="IsMultiline" value="false"/>
+                <Option type="bool" name="UseHtml" value="false"/>
               </Option>
             </config>
           </editWidget>
@@ -10367,7 +10367,7 @@ def my_form_open(dialog, layer, feature):
         <constraint desc="" exp="" field="offset"/>
       </constraintExpressions>
       <expressionfields>
-        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,3.5'&#xd;&#xa;ELSE concat( -3.5 * sin( &quot;rotatie&quot; *pi()/180) , ',', 3.5 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
+        <field precision="-1" type="10" name="offset" expression="CASE WHEN &quot;rotatie&quot; is null THEN '0,2'&#xd;&#xa;ELSE concat( -2 * sin( &quot;rotatie&quot; *pi()/180) , ',', 2 * cos( &quot;rotatie&quot; *pi()/180) )&#xd;&#xa;END" typeName="varchar" comment="" length="25" subType="0"/>
       </expressionfields>
       <attributeactions>
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
@@ -28478,7 +28478,7 @@ def my_form_open(dialog, layer, feature):
           <column type="field" name="rotatie" width="-1" hidden="1"/>
           <column type="field" name="label" width="-1" hidden="0"/>
           <column type="actions" width="-1" hidden="1"/>
-          <column type="field" name="veiligh_ruimtelijk_type_id" width="-1" hidden="0"/>
+          <column type="field" name="veiligh_ruimtelijk_type_id" width="337" hidden="0"/>
           <column type="field" name="object_id" width="-1" hidden="0"/>
           <column type="field" name="offset" width="-1" hidden="0"/>
           <column type="field" name="fotografie_id" width="-1" hidden="0"/>
@@ -28486,7 +28486,7 @@ def my_form_open(dialog, layer, feature):
           <column type="field" name="datum_geldig_vanaf" width="-1" hidden="0"/>
           <column type="field" name="datum_geldig_tot" width="-1" hidden="0"/>
           <column type="field" name="typeobject" width="-1" hidden="0"/>
-          <column type="field" name="symbol_name" width="-1" hidden="0"/>
+          <column type="field" name="symbol_name" width="255" hidden="0"/>
           <column type="field" name="size" width="-1" hidden="0"/>
           <column type="field" name="bijzonderheid" width="-1" hidden="0"/>
         </columns>
