@@ -182,5 +182,37 @@
         <file>config_files/png/diepte_4m.png</file>
         <file>config_files/png/diepte_9m.png</file>
         <file>config_files/png/diepte_15m.png</file>
+        <file>config_files/png/natuur/N19P01.png</file>
+        <file>config_files/png/natuur/N19P02.png</file>
+        <file>config_files/png/natuur/N19P03.png</file>
+        <file>config_files/png/natuur/N19P04.png</file>
+        <file>config_files/png/natuur/N19P05.png</file>
+        <file>config_files/png/natuur/N19P06.png</file>
+        <file>config_files/png/natuur/N19P07.png</file>
+        <file>config_files/png/natuur/N19P08.png</file>
+        <file>config_files/png/natuur/N19P09.png</file>
+        <file>config_files/png/natuur/N19P10.png</file>
+        <file>config_files/png/natuur/N19P11.png</file>
+        <file>config_files/png/natuur/N19P12.png</file>
+        <file>config_files/png/natuur/N19P13.png</file>
+        <file>config_files/png/natuur/N19P14.png</file>
+        <file>config_files/png/natuur/N19P15.png</file>
+        <file>config_files/png/natuur/N19P16.png</file>
+        <file>config_files/png/natuur/N19P17.png</file>
+        <file>config_files/png/natuur/N19P18.png</file>
+        <file>config_files/png/natuur/N19P19.png</file>
+        <file>config_files/png/natuur/N19P20.png</file>
+        <file>config_files/png/natuur/N19P21.png</file>
+        <file>config_files/png/natuur/N19P22.png</file>
+        <file>config_files/png/natuur/N19P23.png</file>
+        <file>config_files/png/natuur/N19P24.png</file>
+        <file>config_files/png/natuur/N19P25.png</file>
+        <file>config_files/png/natuur/N19P26.png</file>
+        <file>config_files/png/natuur/N19P27.png</file>
+        <file>config_files/png/natuur/N19P28.png</file>
+        <file>config_files/png/natuur/N19P29.png</file>
+        <file>config_files/png/natuur/N19P30.png</file>
+        <file>config_files/png/natuur/N19P31.png</file>
+        <file>config_files/png/natuur/N19P32.png</file>
     </qresource>
 </RCC>
