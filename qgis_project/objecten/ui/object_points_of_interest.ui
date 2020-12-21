@@ -86,7 +86,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="veiligh_ruimtelijk_type_id">
+        <widget class="QComboBox" name="points_of_interest_type_id">
          <property name="maxVisibleItems">
           <number>30</number>
          </property>
@@ -121,7 +121,7 @@
       <zorder>label_3</zorder>
       <zorder>object_id</zorder>
       <zorder>label_5</zorder>
-      <zorder>veiligh_ruimtelijk_type_id</zorder>
+      <zorder>points_of_interest_type_id</zorder>
       <zorder>label_6</zorder>
       <zorder>label</zorder>
      </widget>
