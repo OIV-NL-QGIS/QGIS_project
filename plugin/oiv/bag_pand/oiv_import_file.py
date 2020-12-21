@@ -3,7 +3,8 @@ import os
 from osgeo import ogr
 from qgis.PyQt import uic
 from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtWidgets import QDockWidget, QFileDialog, QMessageBox, QProgressDialog, QProgressBar, QDialog, QComboBox, QGridLayout, QLabel, QDialogButtonBox, QVBoxLayout, QCheckBox
+from qgis.PyQt.QtWidgets import QDockWidget, QFileDialog, QMessageBox, QProgressDialog, QProgressBar, QDialog, QWidget
+from qgis.PyQt.QtWidgets import QScrollArea, QComboBox, QGridLayout, QLabel, QDialogButtonBox, QVBoxLayout, QCheckBox
 
 from qgis.core import QgsVectorLayer, QgsFeature, QgsGeometry, QgsProject, QgsFeatureRequest, QgsWkbTypes
 from qgis.utils import iface
@@ -299,7 +300,11 @@ class MappingDialog(QDialog):
     def __init__(self, parent=None):
         super(MappingDialog, self).__init__(parent)
         self.setWindowTitle("Maak een mapping t.b.v. het importeren")
-        qlayout = QGridLayout(self)
+        mainLayout = QVBoxLayout()
+        qlayout = QGridLayout()
+        widget = QWidget()
+        scrollArea = QScrollArea()
+        widget.setLayout(qlayout)
         i = 0
         for importType in self.importTypes:
             self.labels[i] = QLabel(self)
@@ -315,6 +320,9 @@ class MappingDialog(QDialog):
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
         qlayout.addWidget(buttons)
+        scrollArea.setWidget(widget)
+        mainLayout.addWidget(scrollArea)
+        self.setLayout(mainLayout)
 
     @staticmethod
     def getMapping(parent=None):
@@ -407,7 +415,7 @@ class GpkgDialog(QDialog):
         qlayout.addWidget(buttons)
 
     @staticmethod
-    def getLayerName(parent = None):
+    def getLayerName(parent=None):
         """Contains GeoPackage layername"""
         dialog = GpkgDialog(parent)
         result = dialog.exec_()
