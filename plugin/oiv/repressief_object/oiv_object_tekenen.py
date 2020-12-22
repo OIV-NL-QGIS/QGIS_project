@@ -52,7 +52,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
     editableLayerNames = []
     drawTool = None
     moveTool = None
-    snapPicto = ['32', '47', '148', '150', '152', 'Algemeen', 'Voorzichtig', 'Waarschuwing', 'Gevaar'] #id van pictogram
+    snapPicto = ['32', '47', '148', '150', '152', '301', 'Algemeen', 'Voorzichtig', 'Waarschuwing', 'Gevaar'] #id van pictogram
     moveLayerNames = []
     snapLayerNames = ["Object terrein", "Isolijnen", "Bereikbaarheid", "Sectoren"]
 
