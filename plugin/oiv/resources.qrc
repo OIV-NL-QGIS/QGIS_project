@@ -214,5 +214,28 @@
         <file>config_files/png/natuur/N19P30.png</file>
         <file>config_files/png/natuur/N19P31.png</file>
         <file>config_files/png/natuur/N19P32.png</file>
+        <file>config_files/png/natuur/N19L03.png</file>
+        <file>config_files/png/natuur/N19L04.png</file>
+        <file>config_files/png/natuur/N19L05.png</file>
+        <file>config_files/png/natuur/N19V01.png</file>
+        <file>config_files/png/natuur/N19V02.png</file>
+        <file>config_files/png/natuur/N19V03.png</file>
+        <file>config_files/png/natuur/N19L20.png</file>
+        <file>config_files/png/natuur/N19L21.png</file>
+        <file>config_files/png/natuur/N19L22.png</file>
+        <file>config_files/png/natuur/N19L23.png</file>
+        <file>config_files/png/natuur/N19L24.png</file>
+        <file>config_files/png/natuur/N19L25.png</file>
+        <file>config_files/png/natuur/N19L26.png</file>
+        <file>config_files/png/natuur/N19L30.png</file>
+        <file>config_files/png/natuur/N19L31.png</file>
+        <file>config_files/png/natuur/N19L40.png</file>
+        <file>config_files/png/natuur/N19L41.png</file>
+        <file>config_files/png/natuur/N19L42.png</file>
+        <file>config_files/png/natuur/N19L43.png</file>
+        <file>config_files/png/natuur/N19L13.png</file>
+        <file>config_files/png/natuur/N19L14.png</file>
+        <file>config_files/png/natuur/N19L15.png</file>
+        <file>config_files/png/natuur/N19L16.png</file>
     </qresource>
 </RCC>
