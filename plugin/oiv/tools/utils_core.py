@@ -59,10 +59,12 @@ def check_layer_type(layer):
         layerType = "undefined"
     return layerType
 
-def write_layer(layer, childFeature):
+def write_layer(layer, childFeature, checkGeom=True):
     """write the attributes to layer"""
     layer.startEditing()
-    checkGeomValidity = childFeature.geometry().isGeosValid()
+    checkGeomValidity = True
+    if checkGeom:
+        checkGeomValidity = childFeature.geometry().isGeosValid()
     if checkGeomValidity:
         dummy, newFeatures = layer.dataProvider().addFeatures([childFeature])
         layer.commitChanges()

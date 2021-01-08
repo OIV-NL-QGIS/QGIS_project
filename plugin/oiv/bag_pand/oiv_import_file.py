@@ -196,7 +196,6 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                     else:
                         geom = QgsGeometry.fromPolylineXY(feature.geometry().asPolyline())
                 elif self.importTypeFile in ('GPKG', 'SHP'):
-                    print(self.importTypeFile)
                     geom = feature.geometry()
                 targetFeature.setGeometry(geom)
                 targetFeature["bouwlaag_id"] = int(self.bouwlaag_id.text())
@@ -206,7 +205,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                     targetFeature[identifier] = tempFeature["id"]
                 else:
                     targetFeature[identifier] = self.mappingDict[feature[self.type.currentText()]]
-                write_layer(targetLayer, targetFeature)
+                write_layer(targetLayer, targetFeature, False)
             progress = (float(count)/float(cntFeat)) * 100
             progressBar.setValue(progress)
         message = 'Alle feature zijn succesvol geimporteerd!'

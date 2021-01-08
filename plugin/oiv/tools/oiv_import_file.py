@@ -131,7 +131,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                                 targetFeature[attrs[2]] = 'geen label'
                     if geom:
                         targetFeature.setGeometry(geom)
-                        write_layer(targetLayer, targetFeature)
+                        write_layer(targetLayer, targetFeature, False)
                 targetLayer.commitChanges()
         message = 'Alle feature zijn succesvol geimporteerd!'
         QMessageBox.information(None, "INFO:", message)
