@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>393</width>
-    <height>864</height>
+    <height>893</height>
    </rect>
   </property>
   <property name="features">
@@ -85,7 +85,7 @@
       <item>
        <widget class="QPushButton" name="next">
         <property name="text">
-         <string>Next</string>
+         <string>Volgende</string>
         </property>
        </widget>
       </item>
@@ -298,7 +298,7 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="QSpinBox" name="scale_changed">
+                 <widget class="QSpinBox" name="scale_custom">
                   <property name="buttonSymbols">
                    <enum>QAbstractSpinBox::PlusMinus</enum>
                   </property>
@@ -372,7 +372,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>334</width>
+              <width>351</width>
               <height>92</height>
              </rect>
             </property>
@@ -469,6 +469,19 @@
          <bool>true</bool>
         </property>
        </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>

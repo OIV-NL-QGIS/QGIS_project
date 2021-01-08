@@ -12,7 +12,7 @@ from qgis.core import QgsCoordinateReferenceSystem
 
 from ..tools.utils_core import getlayer_byname, write_layer, read_settings
 from ..tools.rubberbands import init_rubberband
-from ..config_files.papersizesscale import PAPERTOPOLYGONRD
+from ..config_files.papersizesscale import PAPERTOPOLYGONRD, DEFAULTSCALE, PAPERSIZES
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_create_grid_widget.ui'))
@@ -24,7 +24,6 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
     canvas = None
     objectWidget = None
     rubberBand = None
-    paperSizes = ['A4', 'A3', 'A2', 'A1', 'A0']
     xWidth = None
     yWidth = None
 
@@ -48,25 +47,28 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             self.make_grid.clicked.connect(self.create_grid)
         else:
             self.kaartblad_frame.setVisible(True)
-            self.format_combo.addItems(self.paperSizes)
+            self.format_combo.addItems(PAPERSIZES)
             self.preview.clicked.connect(self.create_preview)
             self.make_kaartblad.clicked.connect(self.create_kaartblad)
 
     def create_preview(self):
-        dist = self.distance_grid.value()
         self.rubberBand = init_rubberband(QColor("red"), Qt.SolidLine, 10, 1, QgsWkbTypes.PolygonGeometry, self.canvas)
         self.canvas.mapCanvasRefreshed.connect(self.refresh_kaartblad)
         paperSize = self.format_combo.currentText()
+        if self.scale_25000.isChecked():
+            scale = 25000
+            self.distance_grid.setEnabled(False)
+        else:
+            scale = self.scale_custom.value()
+            self.distance_grid.setEnabled(True)
+        scaleRatio = scale/DEFAULTSCALE
         if self.orient_landscape.isChecked():
             orienTation = 'landscape'
         else:
             orienTation = 'portrait'
-        self.xWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['x_width']
-        self.yWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['y_width']
-        xmin, xmax, ymin, ymax, xIt, yIt = self.calculate_extent(dist)
-        xmax = xmin + self.xWidth
-        ymax = ymin + self.yWidth
-        self.place_rubberband(xmin, xmax, ymin, ymax)
+        self.xWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['x_width'] * scaleRatio
+        self.yWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['y_width'] * scaleRatio
+        self.refresh_kaartblad()
 
     def refresh_kaartblad(self):
         dist = self.distance_grid.value()
