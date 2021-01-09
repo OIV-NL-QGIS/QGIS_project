@@ -185,6 +185,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
         progressBar.setMaximum(100)
         count = 0
         cntFeat = self.importLayer.featureCount()
+        invalidCount = 0
         for feature in self.importLayer.getFeatures():
             count += 1
             if self.mappingDict[feature[self.type.currentText()]] != 'niet importeren' and feature.geometry():
@@ -205,10 +206,16 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                     targetFeature[identifier] = tempFeature["id"]
                 else:
                     targetFeature[identifier] = self.mappingDict[feature[self.type.currentText()]]
-                write_layer(targetLayer, targetFeature, False)
+                    invalidCheck = write_layer(targetLayer, targetFeature, True)
+                    if invalidCheck == 'invalid':
+                        invalidCount += 1
             progress = (float(count)/float(cntFeat)) * 100
             progressBar.setValue(progress)
-        message = 'Alle feature zijn succesvol geimporteerd!'
+        if invalidCount > 0:
+            message = ('Features zijn geimporteerd.\n'
+                       '{} features zijn niet geimporteerd vanwege ongeldige geometrie!'.format(invalidCount))
+        else:
+            message = 'Alle feature zijn succesvol geimporteerd!'
         QMessageBox.information(None, "INFO:", message)
         QgsProject.instance().removeMapLayers([self.importLayer.id()])
 

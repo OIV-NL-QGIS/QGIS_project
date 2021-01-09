@@ -59,12 +59,10 @@ def check_layer_type(layer):
         layerType = "undefined"
     return layerType
 
-def write_layer(layer, childFeature, checkGeom=True):
+def write_layer(layer, childFeature, count=False):
     """write the attributes to layer"""
     layer.startEditing()
-    checkGeomValidity = True
-    if checkGeom:
-        checkGeomValidity = childFeature.geometry().isGeosValid()
+    checkGeomValidity = childFeature.geometry().isGeosValid()
     if checkGeomValidity:
         dummy, newFeatures = layer.dataProvider().addFeatures([childFeature])
         layer.commitChanges()
@@ -77,6 +75,8 @@ def write_layer(layer, childFeature, checkGeom=True):
                             "Vermoedelijk heeft u 2x op hetzelfde punt geklikt of doorkruist de geometrie zichzelf.\n\n"
                             "De geometrie wordt niet opgeslagen.",
                             QMessageBox.Ok)
+        if count:
+            return 'invalid'
 
 def nearest_neighbor(iface, layer, point):
     """search the nearest parent feature id"""

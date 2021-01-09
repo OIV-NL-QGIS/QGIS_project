@@ -97,6 +97,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
     def inlezen(self):
         """import the file after all settings wehere made"""
         importAttr = self.type.currentText()
+        invalidCount = 0
         for importType in self.mappingDict:
             if self.mappingDict[importType]["targetType"] != 'niet importeren':
                 checkConv = False
@@ -131,9 +132,15 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                                 targetFeature[attrs[2]] = 'geen label'
                     if geom:
                         targetFeature.setGeometry(geom)
-                        write_layer(targetLayer, targetFeature, False)
+                        invalidCheck = write_layer(targetLayer, targetFeature, True)
+                        if invalidCheck == 'invalid':
+                            invalidCount += 1
                 targetLayer.commitChanges()
-        message = 'Alle feature zijn succesvol geimporteerd!'
+        if invalidCount > 0:
+            message = ('Features zijn geimporteerd.\n'
+                       '{} features zijn niet geimporteerd vanwege ongeldige geometrie!'.format(invalidCount))
+        else:
+            message = 'Alle feature zijn succesvol geimporteerd!'
         QMessageBox.information(None, "INFO:", message)
         QgsProject.instance().removeMapLayers([self.importLayer.id()])
 
