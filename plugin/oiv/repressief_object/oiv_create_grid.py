@@ -43,16 +43,18 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
 
     def run_grid(self):
         if self.type_single_grid.isChecked():
+            self.kaartblad_frame.setVisible(False)
             self.grid_frame.setVisible(True)
             self.make_grid.clicked.connect(self.create_grid)
         else:
+            self.grid_frame.setVisible(False)
             self.kaartblad_frame.setVisible(True)
             self.format_combo.addItems(PAPERSIZES)
             self.preview.clicked.connect(self.create_preview)
             self.make_kaartblad.clicked.connect(self.create_kaartblad)
+            self.rubberBand = init_rubberband(QColor("red"), Qt.SolidLine, 10, 1, QgsWkbTypes.PolygonGeometry, self.canvas)
 
     def create_preview(self):
-        self.rubberBand = init_rubberband(QColor("red"), Qt.SolidLine, 10, 1, QgsWkbTypes.PolygonGeometry, self.canvas)
         self.canvas.mapCanvasRefreshed.connect(self.refresh_kaartblad)
         paperSize = self.format_combo.currentText()
         if self.scale_25000.isChecked():
@@ -69,16 +71,20 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.xWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['x_width'] * scaleRatio
         self.yWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['y_width'] * scaleRatio
         self.refresh_kaartblad()
+        if self.scale_diff.isChecked():
+            self.distance_grid.setEnabled(True)
 
     def refresh_kaartblad(self):
         dist = self.distance_grid.value()
-        xmin, xmax, ymin, ymax, xIt, yIt = self.calculate_extent(dist)
+        extent = self.canvas.extent()
+        xmin, xmax, ymin, ymax, xIt, yIt = self.calculate_extent(dist, extent)
         xmax = xmin + self.xWidth
         ymax = ymin + self.yWidth
         self.place_rubberband(xmin, xmax, ymin, ymax)
 
     def place_rubberband(self, xmin, xmax, ymin, ymax):
         try:
+            self.rubberBand.reset()
             self.canvas.scene().removeItem(self.rubberBand)
         except:
             pass
@@ -91,44 +97,81 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.rubberBand.show()
 
     def create_kaartblad(self):
-        self.canvas.scene().removeItem(self.rubberBand)
-        print('Maak de geometrie en het grid aan!')
-
-    def calculate_extent(self, dist):
-        extent = self.canvas.extent()
-        xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % dist + dist
-        xmax = int(extent.xMaximum()) - int(extent.xMaximum()) % dist
-        ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % dist + dist
-        ymax = int(extent.yMaximum()) - int(extent.yMaximum()) % dist
-        xIt = int((xmax - xmin)/dist)
-        yIt = int((ymax - ymin)/dist)
-        return xmin, xmax, ymin, ymax, xIt, yIt
-
-    def create_grid(self):
-        dist = self.distance.value()
+        geom = self.rubberBand.asGeometry()
+        geom.convertToMultiType()
+        self.canvas.mapCanvasRefreshed.disconnect()
         layerName = 'Grid'
         layer = getlayer_byname(layerName)
         targetFeature = QgsFeature()
         targetFields = layer.fields()
         targetFeature.initAttributes(targetFields.count())
-        targetFeature.setFields(targetFields)      
+        targetFeature.setFields(targetFields)
+        targetFeature.setGeometry(geom)
+        targetFeature["type"] = 'Kaartblad'
+        if self.scale_25000.isChecked():
+            targetFeature["scale"] = 25000
+        else:
+            targetFeature["scale"] = self.scale_custom.value()
+        targetFeature["papersize"] = self.format_combo.currentText()
+        if self.orient_landscape.isChecked():
+            targetFeature["orientation"] = 'landscape'
+        else:
+            targetFeature["orientation"] = 'portrait'
         query = "SELECT foreign_key FROM config_object WHERE child_layer = '{}'".format(layerName)
         foreignKey = read_settings(query, False)[0]
-        xmin, xmax, ymin, ymax, xIt, yIt = self.calculate_extent(dist)
+        targetFeature[foreignKey] = self.object_id.text()
+        write_layer(layer, targetFeature)
+        dist = self.distance_grid.value()
+        bbox = geom.boundingBox()
+        self.create_grid(dist, bbox, 'Kaartblad')
+        self.canvas.scene().removeItem(self.rubberBand)
+
+    def calculate_extent(self, dist, extent, gridType='Grid'):
+        if gridType == 'Grid':
+            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % dist + dist
+            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % dist + dist
+        else:
+            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % dist
+            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % dist
+        xmax = int(extent.xMaximum()) - int(extent.xMaximum()) % dist
+        ymax = int(extent.yMaximum()) - int(extent.yMaximum()) % dist
+        xIt = int((xmax - xmin)/dist)
+        yIt = int((ymax - ymin)/dist)
+        if gridType == 'Kaartblad':
+            if xmin + xIt * dist < extent.xMaximum():
+                xIt += 1
+            if ymin + yIt * dist < extent.yMaximum():
+                yIt += 1
+        return xmin, xmax, ymin, ymax, xIt, yIt
+
+    def create_grid(self, dist=None, extent=None, gridType='Grid'):
+        if not dist and not extent:
+            extent = self.canvas.extent()
+            dist = self.distance.value()
+        layerName = 'Grid'
+        layer = getlayer_byname(layerName)
+        targetFeature = QgsFeature()
+        targetFields = layer.fields()
+        targetFeature.initAttributes(targetFields.count())
+        targetFeature.setFields(targetFields)
+        query = "SELECT foreign_key FROM config_object WHERE child_layer = '{}'".format(layerName)
+        foreignKey = read_settings(query, False)[0]
+        xmin, xmax, ymin, ymax, xIt, yIt = self.calculate_extent(dist, extent, gridType)
         objectId = self.object_id.text()
         targetFeature[foreignKey] = objectId
+        targetFeature["type"] = 'Grid'
         for x in range(0, xIt):
             for y in range(0, yIt):
-                yLabel = str(yIt - y)
+                yLabel = str(y + 1)
                 if xIt < 26:
                     xLabel = chr(x + 97).upper()
                 elif xIt >= 26:
                     xLabel = chr(int(math.floor(x/26)) + 97).upper() + chr(x % 26 + 97).upper()
-                geom = self.calculate_geometry(dist, xmin, ymax, x, y)
+                geom = self.calculate_geometry(dist, xmin, ymin, x, y, gridType)
                 targetFeature['vaknummer'] = xLabel + yLabel
                 if x != 0:
                     yLabel = ''
-                if y != yIt - 1:
+                if y != 0:
                     xLabel = ''
                 targetFeature.setGeometry(geom)
                 targetFeature['y_as_label'] = yLabel
@@ -138,13 +181,21 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         message = 'Het grid is succesvol aangemaakt!'
         QMessageBox.information(None, "INFO:", message)
 
-    def calculate_geometry(self, dist, xmin, ymax, x, y):
+    def calculate_geometry(self, dist, xmin, ymin, x, y, gridType):
         """calculate grid polygons"""
         points = []
-        points.append(QgsPointXY(xmin + x * dist, ymax - y * dist))
-        points.append(QgsPointXY(xmin + (x + 1) * dist, ymax - y * dist))
-        points.append(QgsPointXY(xmin + (x + 1) * dist, ymax - (y + 1) * dist))
-        points.append(QgsPointXY(xmin + x * dist, ymax - (y + 1) * dist))
+        if (x + 1) * dist > self.xWidth and gridType == 'Kaartblad':
+            xmax = xmin + x * dist + (self.xWidth - x * dist)
+        else:
+            xmax = xmin + (x + 1) * dist
+        if (y + 1) * dist > self.yWidth and gridType == 'Kaartblad':
+            ymax = ymin + y * dist + (self.yWidth - y * dist)
+        else:
+            ymax = ymin + (y + 1) * dist
+        points.append(QgsPointXY(xmin + x * dist, ymin + y * dist))
+        points.append(QgsPointXY(xmax, ymin + y * dist))
+        points.append(QgsPointXY(xmax, ymax))
+        points.append(QgsPointXY(xmin + x * dist, ymax))
         return QgsGeometry.fromMultiPolygonXY([[points]])
 
     def delete_existing_grid(self):
@@ -188,6 +239,9 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             self.make_kaartblad.disconnect()
         except:
             pass
+        if self.rubberBand:
+            self.canvas.scene().removeItem(self.rubberBand)
+            self.rubberBand = None
         self.close()
         self.objectWidget.show()
         del self
