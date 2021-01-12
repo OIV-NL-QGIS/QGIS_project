@@ -195,7 +195,7 @@
         </customproperties>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group expanded="1" name="Basisregistratie" checked="Qt::Checked">
+    <layer-tree-group expanded="0" name="Basisregistratie" checked="Qt::Checked">
       <customproperties/>
       <layer-tree-layer legend_exp="" id="bag_extent20180222160304157" expanded="0" source="service='oiv' sslmode=allow key='gid' srid=28992 type=PolygonZ checkPrimaryKeyUnicity='1' table=&quot;algemeen&quot;.&quot;bag_extent&quot; (geovlak) sql=" name="BAG panden" providerKey="postgres" checked="Qt::Checked">
         <customproperties>
@@ -628,10 +628,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>57829.89580610723351128</xmin>
-      <ymin>414303.57493667100789025</ymin>
-      <xmax>71809.30400610718061216</xmax>
-      <ymax>425566.57216167246224359</ymax>
+      <xmin>55264.36494214458070928</xmin>
+      <ymin>417429.7218042403110303</ymin>
+      <xmax>69243.7731421445205342</xmax>
+      <ymax>428692.71902924176538363</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -824,7 +824,7 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup name="Basisregistratie" checked="Qt::Checked" open="true">
+    <legendgroup name="Basisregistratie" checked="Qt::Checked" open="false">
       <legendlayer checked="Qt::Checked" name="BAG panden" drawingOrder="-1" open="false" showFeatureCount="0">
         <filegroup hidden="false" open="false">
           <legendlayerfile visible="1" layerid="bag_extent20180222160304157" isInOverview="0"/>
@@ -32411,7 +32411,7 @@ def closeProject():&#xd;    pass</pythonCode>
       </customproperties>
       <Atlas coverageLayerName="Object terrein" coverageLayer="terrein_eff10e61_89d2_4362_801d_84f487d77852" hideCoverage="1" pageNameExpression="&quot;object_id&quot;" filenamePattern="'output_'||@atlas_featurenumber" filterFeatures="0" enabled="1" coverageLayerSource="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_terrein&quot; (geom) sql=" coverageLayerProvider="postgres" sortFeatures="0"/>
     </Layout>
-    <Layout worldFileMap="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" name="natuur_A3_print_pdf" printResolution="300" units="mm">
+    <Layout worldFileMap="{64a99fab-663b-4dbe-a1a1-1cf21ebe1ba7}" name="natuur_A3" printResolution="300" units="mm">
       <Snapper tolerance="5" snapToGuides="1" snapToGrid="0" snapToItems="1"/>
       <Grid offsetX="0" resolution="10" offsetY="0" resUnits="mm" offsetUnits="mm"/>
       <PageCollection>

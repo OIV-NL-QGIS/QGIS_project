@@ -40,6 +40,8 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.next.clicked.connect(self.run_grid)
         self.closewidget.clicked.connect(self.close_grid_open_repressief_object)
         self.delete_grid.clicked.connect(self.delete_existing_grid)
+        self.scale_25000.toggled.connect(self.adjust_kaartblad_settings)
+        self.scale_diff.toggled.connect(self.adjust_kaartblad_settings)
 
     def run_grid(self):
         if self.type_single_grid.isChecked():
@@ -54,15 +56,22 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             self.make_kaartblad.clicked.connect(self.create_kaartblad)
             self.rubberBand = init_rubberband(QColor("red"), Qt.SolidLine, 10, 1, QgsWkbTypes.PolygonGeometry, self.canvas)
 
+    def adjust_kaartblad_settings(self):
+        if self.scale_25000.isChecked():
+            self.distance_grid.setValue(SINGLEGRIDSIZE)
+            self.distance_grid.setEnabled(False)
+            self.scale_custom.setEnabled(False)
+        else:
+            self.distance_grid.setEnabled(True)
+            self.scale_custom.setEnabled(True)
+
     def create_preview(self):
         self.canvas.mapCanvasRefreshed.connect(self.refresh_kaartblad)
         paperSize = self.format_combo.currentText()
         if self.scale_25000.isChecked():
-            scale = 25000
-            self.distance_grid.setEnabled(False)
+            scale = DEFAULTSCALE
         else:
             scale = self.scale_custom.value()
-            self.distance_grid.setEnabled(True)
         scaleRatio = scale/DEFAULTSCALE
         if self.orient_landscape.isChecked():
             orienTation = 'landscape'
@@ -71,8 +80,6 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.xWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['x_width'] * scaleRatio
         self.yWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['y_width'] * scaleRatio
         self.refresh_kaartblad()
-        if self.scale_diff.isChecked():
-            self.distance_grid.setEnabled(True)
 
     def refresh_kaartblad(self):
         dist = self.distance_grid.value()
@@ -109,7 +116,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         targetFeature.setGeometry(geom)
         targetFeature["type"] = 'Kaartblad'
         if self.scale_25000.isChecked():
-            targetFeature["scale"] = 25000
+            targetFeature["scale"] = DEFAULTSCALE
         else:
             targetFeature["scale"] = self.scale_custom.value()
         targetFeature["papersize"] = self.format_combo.currentText()
@@ -121,8 +128,8 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         foreignKey = read_settings(query, False)[0]
         targetFeature[foreignKey] = self.object_id.text()
         write_layer(layer, targetFeature)
-        dist = self.distance_grid.value()
         bbox = geom.boundingBox()
+        dist = self.distance_grid.value()
         self.create_grid(dist, bbox, 'Kaartblad')
         self.canvas.scene().removeItem(self.rubberBand)
 
