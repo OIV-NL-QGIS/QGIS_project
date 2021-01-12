@@ -1,6 +1,8 @@
 """predifened constant for Kaartblad and Grid"""
 DEFAULTSCALE = 25000
 
+SINGLEGRIDSIZE = 1000
+
 PAPERSIZES = ['A4', 'A3', 'A2', 'A1', 'A0']
 
 """Standarised sizes based on A3 format and 40cm x 28cm map print size"""

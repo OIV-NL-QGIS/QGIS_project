@@ -12,7 +12,7 @@ from qgis.core import QgsCoordinateReferenceSystem
 
 from ..tools.utils_core import getlayer_byname, write_layer, read_settings
 from ..tools.rubberbands import init_rubberband
-from ..config_files.papersizesscale import PAPERTOPOLYGONRD, DEFAULTSCALE, PAPERSIZES
+from ..config_files.papersizesscale import PAPERTOPOLYGONRD, DEFAULTSCALE, PAPERSIZES, SINGLEGRIDSIZE
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_create_grid_widget.ui'))
@@ -128,13 +128,15 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
 
     def calculate_extent(self, dist, extent, gridType='Grid'):
         if gridType == 'Grid':
-            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % dist + dist
-            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % dist + dist
+            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % SINGLEGRIDSIZE + SINGLEGRIDSIZE
+            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % SINGLEGRIDSIZE + SINGLEGRIDSIZE
+            xmax = int(extent.xMaximum()) - int(extent.xMaximum()) % dist
+            ymax = int(extent.yMaximum()) - int(extent.yMaximum()) % dist
         else:
-            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % dist
-            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % dist
-        xmax = int(extent.xMaximum()) - int(extent.xMaximum()) % dist
-        ymax = int(extent.yMaximum()) - int(extent.yMaximum()) % dist
+            xmin = extent.xMinimum()
+            ymin = extent.yMinimum()
+            xmax = extent.xMaximum()
+            ymax = extent.yMaximum()
         xIt = int((xmax - xmin)/dist)
         yIt = int((ymax - ymin)/dist)
         if gridType == 'Kaartblad':
