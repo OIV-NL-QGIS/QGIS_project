@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>359</width>
-    <height>451</height>
+    <width>393</width>
+    <height>850</height>
    </rect>
   </property>
   <property name="features">
@@ -17,6 +17,12 @@
    <string>OIV Objecten</string>
   </property>
   <widget class="QWidget" name="dockWidgetContents">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -31,7 +37,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Aanmaken van een GRID</string>
+         <string>Aanmaken van een los GRID of Kaartblad met grid</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -49,63 +55,375 @@
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="type_label">
         <property name="text">
-         <string>Afstand tussen grid lijnen (meters)</string>
+         <string>Kies soort grid:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="distance">
-        <property name="minimum">
-         <number>10</number>
-        </property>
-        <property name="maximum">
-         <number>1000000</number>
-        </property>
-        <property name="singleStep">
-         <number>10</number>
-        </property>
-        <property name="value">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
+       <widget class="QRadioButton" name="type_single_grid">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Let op:&lt;br/&gt;&lt;br/&gt;Het Grid wordt gelabeld.&lt;br/&gt;Horizontaal met letters en verticaal met cijfers.&lt;br/&gt;Indien er meer dan 26 kolommen worden aangemaakt worden er dubbele letters als labels toegekend.&lt;/p&gt;&lt;p&gt;Het Grid volgt het kilomtergrid van het RD-stelsel.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>Losstaand grid</string>
         </property>
-        <property name="wordWrap">
+        <property name="checked">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="make_grid">
+       <widget class="QRadioButton" name="type_kaartblad_grid">
         <property name="text">
-         <string>Maak een grid aan</string>
+         <string>Kaartblad met kilometergrid</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="delete_grid">
+       <widget class="QPushButton" name="next">
         <property name="text">
-         <string>Verwijder het bestaande grid</string>
+         <string>Volgende</string>
         </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="kaartblad_frame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>430</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="0">
+          <widget class="QScrollArea" name="scrollArea_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents_2">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>351</width>
+              <height>408</height>
+             </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="9" column="0" colspan="2">
+              <widget class="QPushButton" name="preview">
+               <property name="text">
+                <string>Kaartblad preview</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" colspan="2">
+              <widget class="QFrame" name="format_orient_frame">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_5">
+                <item row="1" column="0">
+                 <widget class="QRadioButton" name="orient_landscape">
+                  <property name="text">
+                   <string>Liggend</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="orient_label">
+                  <property name="text">
+                   <string>Liggend of staand:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QRadioButton" name="orient_portrait">
+                  <property name="text">
+                   <string>Staand</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QComboBox" name="format_combo">
+                  <property name="currentText">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0" colspan="2">
+                 <widget class="QLabel" name="format_label">
+                  <property name="text">
+                   <string>Papierformaat</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="12" column="0" colspan="2">
+              <widget class="QPushButton" name="make_kaartblad">
+               <property name="text">
+                <string>Maak kaartblad met grid aan</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0" colspan="2">
+              <widget class="QLabel" name="preview_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="inputMethodHints">
+                <set>Qt::ImhMultiLine</set>
+               </property>
+               <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Door op preview te klikken zet u tijdelijk een kaartblad op de kaart. U kunt nu de kaart pannen en zoomen totdat het kaartblad op de juiste locatie staat.&lt;/p&gt;&lt;p&gt;De linker onderhoek van het kaartblad valt altijd gelijk met het kilometergrid van het RD-stelsel. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0" colspan="2">
+              <widget class="QSpinBox" name="distance_grid">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="minimum">
+                <number>10</number>
+               </property>
+               <property name="maximum">
+                <number>1000000</number>
+               </property>
+               <property name="singleStep">
+                <number>10</number>
+               </property>
+               <property name="value">
+                <number>1000</number>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0" colspan="2">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Afstand tussen grid lijnen (meters)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="2">
+              <widget class="QFrame" name="scale_frame">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_4">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="scale_label">
+                  <property name="text">
+                   <string>Kies de schaal:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QRadioButton" name="scale_25000">
+                  <property name="text">
+                   <string>1:25.000</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QRadioButton" name="scale_diff">
+                  <property name="text">
+                   <string>Anders...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QSpinBox" name="scale_custom">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="buttonSymbols">
+                   <enum>QAbstractSpinBox::PlusMinus</enum>
+                  </property>
+                  <property name="prefix">
+                   <string>1:</string>
+                  </property>
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>1000000</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>1000</number>
+                  </property>
+                  <property name="value">
+                   <number>25000</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="grid_frame">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QScrollArea" name="scrollArea">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>86</height>
+            </size>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>351</width>
+              <height>92</height>
+             </rect>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Afstand tussen grid lijnen (meters)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="distance">
+               <property name="minimum">
+                <number>10</number>
+               </property>
+               <property name="maximum">
+                <number>1000000</number>
+               </property>
+               <property name="singleStep">
+                <number>10</number>
+               </property>
+               <property name="value">
+                <number>1000</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="make_grid">
+               <property name="text">
+                <string>Maak een grid aan</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -120,6 +438,13 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="delete_grid">
+        <property name="text">
+         <string>Verwijder het bestaande grid</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="closewidget">
