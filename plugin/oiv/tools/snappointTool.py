@@ -3,7 +3,7 @@
 from qgis.PyQt.QtGui import QColor
 from qgis.PyQt.QtCore import Qt, QPoint
 
-from qgis.core import QgsWkbTypes, QgsFeatureRequest, QgsSpatialIndex, QgsRectangle
+from qgis.core import QgsWkbTypes, QgsFeatureRequest, QgsSpatialIndex, QgsRectangle, QgsPointXY
 from qgis.gui import QgsRubberBand, QgsMapTool, QgsVertexMarker
 
 class SnapPointTool(QgsMapTool):
@@ -95,17 +95,14 @@ class SnapPointTool(QgsMapTool):
         tolerance = pow(self.calcTolerance(pos), 2)
         minDist = tolerance
         snapPoint = None
-
         if self.vertexmarker is None:
             self.init_vertexmarker()
-
         for geom in self.possibleSnapFeatures:
             closestSegm = geom.closestSegmentWithContext(layerPt)
             if closestSegm[0] < minDist:
                 minDist = closestSegm[0]
                 snapPoint = closestSegm[1]
-
-        if snapPoint:
+        if snapPoint and snapPoint != QgsPointXY(0, 0):
             return snapPoint
 
     def init_vertexmarker(self):
