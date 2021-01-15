@@ -82,7 +82,7 @@
           <se:TextSymbolizer>
             <se:Label>
               <ogc:Function name="Concatenate">
-                <ogc:PropertyName>postalNumber</ogc:PropertyName>
+                <ogc:PropertyName>hoogte</ogc:PropertyName>
                 <ogc:Literal> m</ogc:Literal>                
               </ogc:Function>              
             </se:Label>
