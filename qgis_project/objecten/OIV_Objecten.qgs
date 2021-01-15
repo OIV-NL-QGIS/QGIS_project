@@ -628,10 +628,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>58922.82751924147305544</xmin>
-      <ymin>422399.07368463999591768</ymin>
-      <xmax>63984.22428256807324942</xmax>
-      <ymax>426476.96431379928253591</ymax>
+      <xmin>55217.21349800737516489</xmin>
+      <ymin>416288.02550132403848693</ymin>
+      <xmax>75462.8005513137759408</xmax>
+      <ymax>432599.58801796118495986</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -15021,9 +15021,9 @@ def my_form_open(dialog, layer, feature):
               <prop v="0,0" k="offset"/>
               <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
               <prop v="MM" k="offset_unit"/>
-              <prop v="0,0,0,255" k="outline_color"/>
+              <prop v="0,0,0,119" k="outline_color"/>
               <prop v="solid" k="outline_style"/>
-              <prop v="0.26" k="outline_width"/>
+              <prop v="0.1" k="outline_width"/>
               <prop v="MM" k="outline_width_unit"/>
               <prop v="solid" k="style"/>
               <data_defined_properties>
@@ -15122,8 +15122,8 @@ def my_form_open(dialog, layer, feature):
         </symbols>
       </renderer-v2>
       <labeling type="rule-based">
-        <rules key="{14521dc8-4639-4adf-b110-c34dc6329f7a}">
-          <rule filter=" &quot;y_as_label&quot;  != ''" key="{ea26a6fd-0f7a-42df-8de2-bdec201d41d0}">
+        <rules key="{e328d823-5289-43f7-8ca5-8ba08e6dcac2}">
+          <rule filter=" &quot;y_as_label&quot;  != ''" key="{6db38559-64be-4e82-ba4f-91f7f0d4b9d9}">
             <settings calloutType="simple">
               <text-style fontWordSpacing="0" fieldName="y_as_label" fontFamily="MS Shell Dlg 2" multilineHeight="1" useSubstitutions="0" textOrientation="horizontal" fontStrikeout="0" textOpacity="1" textColor="0,0,0,255" fontWeight="50" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" previewBkgrdColor="0,0,0,255" fontSize="15" fontCapitals="0" fontItalic="0" namedStyle="Standaard" fontUnderline="0" fontKerning="1" fontLetterSpacing="0" fontSizeUnit="MM">
                 <text-buffer bufferNoFill="1" bufferOpacity="1" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferDraw="1" bufferColor="255,255,255,255" bufferBlendMode="0" bufferJoinStyle="128" bufferSize="1"/>
@@ -15218,7 +15218,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule filter=" &quot;x_as_label&quot;  != ''" key="{839a7212-bc81-4a72-a48a-81077cc77974}">
+          <rule filter=" &quot;x_as_label&quot;  != ''" key="{44ed2e14-2313-42d5-afd7-f6411a08d8ed}">
             <settings calloutType="simple">
               <text-style fontWordSpacing="0" fieldName="x_as_label" fontFamily="MS Shell Dlg 2" multilineHeight="1" useSubstitutions="0" textOrientation="horizontal" fontStrikeout="0" textOpacity="1" textColor="0,0,0,255" fontWeight="50" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" previewBkgrdColor="0,0,0,255" fontSize="1.5" fontCapitals="0" fontItalic="0" namedStyle="Standaard" fontUnderline="0" fontKerning="1" fontLetterSpacing="0" fontSizeUnit="MM">
                 <text-buffer bufferNoFill="1" bufferOpacity="1" bufferSizeUnits="MM" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferDraw="1" bufferColor="255,255,255,255" bufferBlendMode="0" bufferJoinStyle="128" bufferSize="1"/>
@@ -15286,6 +15286,85 @@ def my_form_open(dialog, layer, feature):
                       <Option type="int" name="type" value="3"/>
                     </Option>
                   </Option>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </dd_properties>
+              <callout type="simple">
+                <Option type="Map">
+                  <Option type="QString" name="anchorPoint" value="pole_of_inaccessibility"/>
+                  <Option type="Map" name="ddProperties">
+                    <Option type="QString" name="name" value=""/>
+                    <Option name="properties"/>
+                    <Option type="QString" name="type" value="collection"/>
+                  </Option>
+                  <Option type="bool" name="drawToAllParts" value="false"/>
+                  <Option type="QString" name="enabled" value="0"/>
+                  <Option type="QString" name="lineSymbol" value="&lt;symbol type=&quot;line&quot; clip_to_extent=&quot;1&quot; name=&quot;symbol&quot; force_rhr=&quot;0&quot; alpha=&quot;1&quot;>&lt;layer locked=&quot;0&quot; class=&quot;SimpleLine&quot; pass=&quot;0&quot; enabled=&quot;1&quot;>&lt;prop v=&quot;square&quot; k=&quot;capstyle&quot;/>&lt;prop v=&quot;5;2&quot; k=&quot;customdash&quot;/>&lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;customdash_map_unit_scale&quot;/>&lt;prop v=&quot;MM&quot; k=&quot;customdash_unit&quot;/>&lt;prop v=&quot;0&quot; k=&quot;draw_inside_polygon&quot;/>&lt;prop v=&quot;bevel&quot; k=&quot;joinstyle&quot;/>&lt;prop v=&quot;60,60,60,255&quot; k=&quot;line_color&quot;/>&lt;prop v=&quot;solid&quot; k=&quot;line_style&quot;/>&lt;prop v=&quot;0.3&quot; k=&quot;line_width&quot;/>&lt;prop v=&quot;MM&quot; k=&quot;line_width_unit&quot;/>&lt;prop v=&quot;0&quot; k=&quot;offset&quot;/>&lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;offset_map_unit_scale&quot;/>&lt;prop v=&quot;MM&quot; k=&quot;offset_unit&quot;/>&lt;prop v=&quot;0&quot; k=&quot;ring_filter&quot;/>&lt;prop v=&quot;0&quot; k=&quot;use_custom_dash&quot;/>&lt;prop v=&quot;3x:0,0,0,0,0,0&quot; k=&quot;width_map_unit_scale&quot;/>&lt;data_defined_properties>&lt;Option type=&quot;Map&quot;>&lt;Option type=&quot;QString&quot; name=&quot;name&quot; value=&quot;&quot;/>&lt;Option name=&quot;properties&quot;/>&lt;Option type=&quot;QString&quot; name=&quot;type&quot; value=&quot;collection&quot;/>&lt;/Option>&lt;/data_defined_properties>&lt;/layer>&lt;/symbol>"/>
+                  <Option type="double" name="minLength" value="0"/>
+                  <Option type="QString" name="minLengthMapUnitScale" value="3x:0,0,0,0,0,0"/>
+                  <Option type="QString" name="minLengthUnit" value="MM"/>
+                  <Option type="double" name="offsetFromAnchor" value="0"/>
+                  <Option type="QString" name="offsetFromAnchorMapUnitScale" value="3x:0,0,0,0,0,0"/>
+                  <Option type="QString" name="offsetFromAnchorUnit" value="MM"/>
+                  <Option type="double" name="offsetFromLabel" value="0"/>
+                  <Option type="QString" name="offsetFromLabelMapUnitScale" value="3x:0,0,0,0,0,0"/>
+                  <Option type="QString" name="offsetFromLabelUnit" value="MM"/>
+                </Option>
+              </callout>
+            </settings>
+          </rule>
+          <rule scalemaxdenom="10000" key="{a87d53f3-b195-4fea-a48a-ad87eefe0ebd}" scalemindenom="1" description="vaknummer">
+            <settings calloutType="simple">
+              <text-style fontWordSpacing="0" fieldName="vaknummer" fontFamily="MS Shell Dlg 2" multilineHeight="1" useSubstitutions="0" textOrientation="horizontal" fontStrikeout="0" textOpacity="1" textColor="0,0,0,255" fontWeight="75" blendMode="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" isExpression="0" previewBkgrdColor="255,255,255,255" fontSize="35" fontCapitals="0" fontItalic="0" namedStyle="Vet" fontUnderline="0" fontKerning="1" fontLetterSpacing="0" fontSizeUnit="MapUnit">
+                <text-buffer bufferNoFill="1" bufferOpacity="1" bufferSizeUnits="MapUnit" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferDraw="1" bufferColor="255,255,255,255" bufferBlendMode="0" bufferJoinStyle="128" bufferSize="3"/>
+                <background shapeBorderColor="128,128,128,255" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeSizeX="0" shapeRadiiUnit="MM" shapeRotation="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeType="0" shapeBorderWidthUnit="MM" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeOpacity="1" shapeRadiiY="0" shapeJoinStyle="64" shapeSizeY="0" shapeRadiiX="0" shapeDraw="0" shapeOffsetUnit="MM" shapeFillColor="255,255,255,255" shapeOffsetY="0" shapeSizeUnit="MM" shapeRotationType="0" shapeSizeType="0" shapeBorderWidth="0" shapeBlendMode="0" shapeOffsetX="0">
+                  <symbol type="marker" clip_to_extent="1" name="markerSymbol" force_rhr="0" alpha="1">
+                    <layer locked="0" class="SimpleMarker" pass="0" enabled="1">
+                      <prop v="0" k="angle"/>
+                      <prop v="213,180,60,255" k="color"/>
+                      <prop v="1" k="horizontal_anchor_point"/>
+                      <prop v="bevel" k="joinstyle"/>
+                      <prop v="circle" k="name"/>
+                      <prop v="0,0" k="offset"/>
+                      <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+                      <prop v="MM" k="offset_unit"/>
+                      <prop v="35,35,35,255" k="outline_color"/>
+                      <prop v="solid" k="outline_style"/>
+                      <prop v="0" k="outline_width"/>
+                      <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+                      <prop v="MM" k="outline_width_unit"/>
+                      <prop v="diameter" k="scale_method"/>
+                      <prop v="2" k="size"/>
+                      <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+                      <prop v="MM" k="size_unit"/>
+                      <prop v="1" k="vertical_anchor_point"/>
+                      <data_defined_properties>
+                        <Option type="Map">
+                          <Option type="QString" name="name" value=""/>
+                          <Option name="properties"/>
+                          <Option type="QString" name="type" value="collection"/>
+                        </Option>
+                      </data_defined_properties>
+                    </layer>
+                  </symbol>
+                </background>
+                <shadow shadowDraw="0" shadowOffsetDist="1" shadowOffsetGlobal="1" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowUnder="0" shadowScale="100" shadowRadiusAlphaOnly="0" shadowOffsetAngle="135" shadowRadius="1.5" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowBlendMode="6" shadowRadiusUnit="MM" shadowOffsetUnit="MM" shadowOpacity="0.7" shadowColor="0,0,0,255"/>
+                <dd_properties>
+                  <Option type="Map">
+                    <Option type="QString" name="name" value=""/>
+                    <Option name="properties"/>
+                    <Option type="QString" name="type" value="collection"/>
+                  </Option>
+                </dd_properties>
+                <substitutions/>
+              </text-style>
+              <text-format decimals="3" plussign="0" useMaxLineLengthForAutoWrap="1" addDirectionSymbol="0" leftDirectionSymbol="&lt;" multilineAlign="0" rightDirectionSymbol=">" reverseDirectionSymbol="0" wrapChar="" autoWrapLength="0" placeDirectionSymbol="0" formatNumbers="0"/>
+              <placement yOffset="450" distUnits="MM" geometryGeneratorEnabled="0" xOffset="-450" centroidWhole="1" layerType="PolygonGeometry" dist="0" centroidInside="1" rotationAngle="0" overrunDistanceMapUnitScale="3x:0,0,0,0,0,0" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" distMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleOut="-25" placement="1" geometryGeneratorType="PointGeometry" fitInPolygonOnly="0" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" quadOffset="4" repeatDistanceUnits="MM" overrunDistanceUnit="MM" offsetUnits="MapUnit" priority="5" repeatDistance="0" maxCurvedCharAngleIn="25" preserveRotation="1" geometryGenerator="" overrunDistance="0" offsetType="0" placementFlags="10" labelOffsetMapUnitScale="3x:0,0,0,0,0,0"/>
+              <rendering fontLimitPixelSize="0" fontMaxPixelSize="10000" maxNumLabels="2000" obstacle="0" scaleVisibility="0" upsidedownLabels="0" minFeatureSize="0" zIndex="0" mergeLines="0" obstacleType="0" scaleMin="0" fontMinPixelSize="3" obstacleFactor="1" displayAll="1" labelPerPart="0" limitNumLabels="0" scaleMax="0" drawLabels="1"/>
+              <dd_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option name="properties"/>
                   <Option type="QString" name="type" value="collection"/>
                 </Option>
               </dd_properties>
@@ -29177,7 +29256,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
       </attributeactions>
-      <attributetableconfig sortExpression="&quot;soortnaam&quot;" actionWidgetStyle="dropDown" sortOrder="0">
+      <attributetableconfig sortExpression="&quot;laagnaam&quot;" actionWidgetStyle="dropDown" sortOrder="0">
         <columns>
           <column type="field" width="-1" name="id" hidden="0"/>
           <column type="field" width="-1" name="laagnaam" hidden="0"/>
@@ -32635,7 +32714,7 @@ def closeProject():&#xd;    pass</pythonCode>
           <customproperties/>
         </LayoutObject>
       </LayoutItem>
-      <LayoutItem mapRotation="0" frame="true" followPresetName="" itemRotation="0" zValue="2" drawCanvasItems="true" outlineWidthM="1,mm" positionOnPage="10.2907,6.54571,mm" followPreset="false" positionLock="false" blendMode="0" labelMargin="0,mm" uuid="{baebd038-e410-4f24-878a-704f060bc0ac}" visibility="1" mapFlags="0" frameJoinStyle="round" id="" size="400,280,mm" excludeFromExports="0" opacity="1" position="10.2907,6.54571,mm" background="true" type="65639" keepLayerSet="true" templateUuid="{baebd038-e410-4f24-878a-704f060bc0ac}" groupUuid="" referencePoint="0">
+      <LayoutItem mapRotation="0" frame="true" followPresetName="" itemRotation="0" zValue="2" drawCanvasItems="true" outlineWidthM="1,mm" positionOnPage="10.2907,6.54571,mm" followPreset="false" positionLock="false" blendMode="0" labelMargin="0,mm" uuid="{baebd038-e410-4f24-878a-704f060bc0ac}" visibility="1" mapFlags="0" frameJoinStyle="round" id="" size="400,280,mm" excludeFromExports="0" opacity="1" position="10.2907,6.54571,mm" background="true" type="65639" keepLayerSet="false" templateUuid="{baebd038-e410-4f24-878a-704f060bc0ac}" groupUuid="" referencePoint="0">
         <FrameColor green="0" red="0" alpha="255" blue="0"/>
         <BackgroundColor green="255" red="255" alpha="255" blue="255"/>
         <LayoutObject>
@@ -32668,24 +32747,7 @@ def closeProject():&#xd;    pass</pythonCode>
             <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
-        <LayerSet>
-          <Layer name="Alternatief bluswater" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;alternatieve&quot; (geom) sql=" provider="postgres">alternatieve20171110074120161</Layer>
-          <Layer name="Brandkranen (alleen-lezen)" source="service='oiv' sslmode=allow key='nummer' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;brandkranen&quot; (geom) sql=" provider="postgres">brandkraan_2017_120170504220758524</Layer>
-          <Layer name="Ruimtelijke veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_veiligh_ruimtelijk&quot; (geom) sql=" provider="postgres">veiligh_ruimtelijk20180912181737656</Layer>
-          <Layer name="Ingang ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_ingang&quot; (geom) sql=" provider="postgres">ingang_object20180912142318108</Layer>
-          <Layer name="Sleutelkluis ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sleutelkluis&quot; (geom) sql=" provider="postgres">ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152</Layer>
-          <Layer name="Opstelplaats" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opstelplaats&quot; (geom) sql=" provider="postgres">opstelplaats20180831134019368</Layer>
-          <Layer name="Opslag stoffen ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opslag&quot; (geom) sql=" provider="postgres">gevaarlijkestof_opslag_object20180921133701908</Layer>
-          <Layer name="Dreiging ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_dreiging&quot; (geom) sql=" provider="postgres">dreiging_ruimtelijk20180912203007764</Layer>
-          <Layer name="Points of interest" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_points_of_interest&quot; (geom) sql=" provider="postgres">object_points_of_interest_c8201bff_1789_4706_b2f1_5fb28f3c2a0c</Layer>
-          <Layer name="Labels ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_label&quot; (geom) sql=" provider="postgres">label_object20180912203855251</Layer>
-          <Layer name="Bereikbaarheid" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bereikbaarheid&quot; (geom) sql=" provider="postgres">bereikbaarheid20180831134019212</Layer>
-          <Layer name="Gebiedsgerichte aanpak" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_gebiedsgerichte_aanpak&quot; (geom) sql=" provider="postgres">object_gebiedsgerichte_aanpak_e08cb0f0_bb98_4c52_b50a_e829ff0ef5ec</Layer>
-          <Layer name="Sectoren" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sectoren&quot; (geom) sql=" provider="postgres">sectoren20190320103814390</Layer>
-          <Layer name="Isolijnen" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_isolijnen&quot; (geom) sql=" provider="postgres">isolijnen_da3e3ee0_539b_40db_8f06_3690b840cfea</Layer>
-          <Layer name="Schade cirkel (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;schade_cirkel_calc&quot; (geom_cirkel) sql=" provider="postgres">schade_cirkel_calc20170912163056737</Layer>
-          <Layer name="top25raster" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=top25raster&amp;styles=default&amp;format=image/png&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" provider="wms">top25raster_b169e701_453f_4b7a_a0c9_b4daaac0df0e</Layer>
-        </LayerSet>
+        <LayerSet/>
         <ComposerMapGrid gridFrameSideFlags="15" crossLength="3" rightAnnotationPosition="1" annotationPrecision="3" leftAnnotationPosition="1" topFrameDivisions="0" leftFrameDivisions="0" maximumIntervalWidth="100" offsetX="0" position="3" frameAnnotationDistance="0" intervalX="1000" leftAnnotationDisplay="0" bottomFrameDivisions="0" intervalY="1000" show="1" unit="0" offsetY="0" rightFrameDivisions="0" uuid="{885d44c2-8cbb-498e-9ce6-e8ddc498b12d}" minimumIntervalWidth="50" bottomAnnotationPosition="1" gridFramePenThickness="0.29999999999999999" gridFrameStyle="3" rightAnnotationDirection="0" name="Kilometergrid" gridFramePenColor="0,0,0,255" frameFillColor1="255,255,255,255" rightAnnotationDisplay="0" gridFrameWidth="2" annotationFontColor="0,0,0,255" blendMode="19" leftAnnotationDirection="0" gridStyle="0" bottomAnnotationDisplay="0" annotationFormat="8" gridFrameMargin="0" frameFillColor2="0,0,0,255" showAnnotation="1" bottomAnnotationDirection="0" topAnnotationDisplay="0" topAnnotationDirection="0" annotationExpression="CASE&#xd;&#xa;  WHEN length(to_string(abs(@grid_number))) = 6&#xd;&#xa;&#x9;THEN replace(@grid_number,'000','')&#xd;&#xa;  ELSE CONCAT('0', replace(@grid_number,'000',''))&#xd;&#xa;END" topAnnotationPosition="1">
           <lineStyle>
             <symbol type="line" clip_to_extent="1" name="" force_rhr="0" alpha="0.392157">
