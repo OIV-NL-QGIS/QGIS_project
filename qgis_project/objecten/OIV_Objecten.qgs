@@ -628,10 +628,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>59327.01990671066596406</xmin>
-      <ymin>421293.91136044875020161</ymin>
-      <xmax>62787.48825341341580497</xmax>
-      <ymax>424081.95823829300934449</ymax>
+      <xmin>59591.93002052992960671</xmin>
+      <ymin>423704.62559858843451366</ymin>
+      <xmax>60024.48856386778788874</xmax>
+      <ymax>424053.13145831896690652</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -2023,7 +2023,11 @@ def my_form_open(dialog, layer, feature):
         <Removable>1</Removable>
         <Searchable>1</Searchable>
       </flags>
-      <renderer-v2 type="singleSymbol" symbollevels="0" forceraster="0" enableorderby="0">
+      <renderer-v2 type="RuleRenderer" symbollevels="0" forceraster="0" enableorderby="0">
+        <rules key="{ea9df5dc-77cb-4b16-bb06-6253434d62b7}">
+          <rule scalemaxdenom="2500" symbol="0" label="low_scale" key="{acd66ddd-4215-44de-a0c6-db8cecbd996f}" scalemindenom="1"/>
+          <rule scalemaxdenom="50000" symbol="1" label="high_scale" key="{31e9d906-da19-44ff-b463-73879a72fdc3}" scalemindenom="2500"/>
+        </rules>
         <symbols>
           <symbol type="marker" clip_to_extent="1" name="0" force_rhr="0" alpha="1">
             <layer locked="0" class="SvgMarker" pass="0" enabled="1">
@@ -2107,9 +2111,89 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
+          <symbol type="marker" clip_to_extent="1" name="1" force_rhr="0" alpha="1">
+            <layer locked="0" class="SvgMarker" pass="0" enabled="1">
+              <prop v="0" k="angle"/>
+              <prop v="0,0,0,255" k="color"/>
+              <prop v="0" k="fixedAspectRatio"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="backgrounds/background_circle.svg" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="255,255,255,255" k="outline_color"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="12" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option type="Map" name="properties">
+                    <Option type="Map" name="angle">
+                      <Option type="bool" name="active" value="false"/>
+                      <Option type="QString" name="expression" value=""/>
+                      <Option type="int" name="type" value="3"/>
+                    </Option>
+                    <Option type="Map" name="name">
+                      <Option type="bool" name="active" value="true"/>
+                      <Option type="QString" name="expression" value="CONCAT('/svg/', attribute(get_feature( 'alternatieve_type_bfa3175e_2396_479e_bd67_f2c306e9528c', 'id',    &quot;type_id&quot;   ), 'symbol_name'), '.svg')"/>
+                      <Option type="int" name="type" value="3"/>
+                    </Option>
+                    <Option type="Map" name="size">
+                      <Option type="bool" name="active" value="true"/>
+                      <Option type="QString" name="expression" value="&quot;size&quot; *2"/>
+                      <Option type="int" name="type" value="3"/>
+                    </Option>
+                  </Option>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+            <layer locked="0" class="SimpleMarker" pass="0" enabled="1">
+              <prop v="0" k="angle"/>
+              <prop v="255,0,213,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="star" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="0,0,0,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="1" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" name="name" value=""/>
+                  <Option type="Map" name="properties">
+                    <Option type="Map" name="angle">
+                      <Option type="bool" name="active" value="true"/>
+                      <Option type="QString" name="field" value="rotatie"/>
+                      <Option type="int" name="type" value="2"/>
+                    </Option>
+                    <Option type="Map" name="size">
+                      <Option type="bool" name="active" value="true"/>
+                      <Option type="QString" name="expression" value="0.0833333*(&quot;size&quot; *2)"/>
+                      <Option type="int" name="type" value="3"/>
+                    </Option>
+                  </Option>
+                  <Option type="QString" name="type" value="collection"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
         </symbols>
-        <rotation/>
-        <sizescale/>
       </renderer-v2>
       <labeling type="simple">
         <settings calloutType="simple">
@@ -30338,15 +30422,15 @@ def my_form_open(dialog, layer, feature):
               <prop v="backgrounds/background_circle.svg" k="name"/>
               <prop v="0,0" k="offset"/>
               <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
-              <prop v="MapUnit" k="offset_unit"/>
+              <prop v="MM" k="offset_unit"/>
               <prop v="255,255,255,255" k="outline_color"/>
               <prop v="0" k="outline_width"/>
               <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
-              <prop v="MapUnit" k="outline_width_unit"/>
+              <prop v="MM" k="outline_width_unit"/>
               <prop v="diameter" k="scale_method"/>
               <prop v="12" k="size"/>
               <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
-              <prop v="MapUnit" k="size_unit"/>
+              <prop v="MM" k="size_unit"/>
               <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
@@ -30380,16 +30464,16 @@ def my_form_open(dialog, layer, feature):
               <prop v="star" k="name"/>
               <prop v="0,0" k="offset"/>
               <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
-              <prop v="MapUnit" k="offset_unit"/>
+              <prop v="MM" k="offset_unit"/>
               <prop v="0,0,0,255" k="outline_color"/>
               <prop v="solid" k="outline_style"/>
               <prop v="0" k="outline_width"/>
               <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
-              <prop v="MapUnit" k="outline_width_unit"/>
+              <prop v="MM" k="outline_width_unit"/>
               <prop v="diameter" k="scale_method"/>
               <prop v="1" k="size"/>
               <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
-              <prop v="MapUnit" k="size_unit"/>
+              <prop v="MM" k="size_unit"/>
               <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
