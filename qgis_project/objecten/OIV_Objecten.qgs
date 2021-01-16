@@ -628,10 +628,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>50832.66624267591396347</xmin>
-      <ymin>411498.52232701680622995</ymin>
-      <xmax>91323.84034928871551529</xmax>
-      <ymax>444121.64736029109917581</ymax>
+      <xmin>60170.12513851825497113</xmin>
+      <ymin>421878.30428756168112159</ymin>
+      <xmax>61900.35931186962989159</xmax>
+      <ymax>423272.32772648357786238</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -3777,9 +3777,9 @@ def my_form_open(dialog, layer, feature):
     <maplayer readOnly="0" minScale="30000" styleCategories="AllStyleCategories" autoRefreshTime="0" simplifyDrawingTol="1" refreshOnNotifyEnabled="0" geometry="Line" wkbType="MultiLineString" hasScaleBasedVisibilityFlag="1" autoRefreshEnabled="0" simplifyDrawingHints="1" maxScale="1" refreshOnNotifyMessage="" simplifyAlgorithm="0" simplifyMaxScale="1" labelsEnabled="1" type="vector" simplifyLocal="1">
       <extent>
         <xmin>54989.33020000159740448</xmin>
-        <ymin>411225.5357000008225441</ymin>
-        <xmax>102633.57640000060200691</xmax>
-        <ymax>451456.98099999874830246</ymax>
+        <ymin>411225.53570000099716708</ymin>
+        <xmax>102633.57640000099490862</xmax>
+        <ymax>451456.9809999989811331</ymax>
       </extent>
       <id>bereikbaarheid20180831134019212</id>
       <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table="objecten"."object_bereikbaarheid" (geom) sql=</datasource>
@@ -3876,7 +3876,7 @@ def my_form_open(dialog, layer, feature):
               <prop v="4" k="average_angle_length"/>
               <prop v="3x:0,0,0,0,0,0" k="average_angle_map_unit_scale"/>
               <prop v="MM" k="average_angle_unit"/>
-              <prop v="20" k="interval"/>
+              <prop v="60" k="interval"/>
               <prop v="3x:0,0,0,0,0,0" k="interval_map_unit_scale"/>
               <prop v="MapUnit" k="interval_unit"/>
               <prop v="0" k="offset"/>
@@ -32557,7 +32557,7 @@ def closeProject():&#xd;    pass</pythonCode>
         </LayoutItem>
         <GuideCollection visible="1"/>
       </PageCollection>
-      <LayoutItem frame="false" itemRotation="0" zValue="9" outlineWidthM="0.3,mm" positionOnPage="15,273,mm" positionLock="false" blendMode="0" uuid="{2ee08b9d-271d-4f9e-a173-11542295538e}" visibility="1" frameJoinStyle="miter" id="" size="91.5,15.3127,mm" excludeFromExports="0" opacity="1" position="15,273,mm" background="true" type="65637" templateUuid="{2ee08b9d-271d-4f9e-a173-11542295538e}" groupUuid="" referencePoint="0">
+      <LayoutItem frame="false" itemRotation="0" zValue="9" outlineWidthM="0.3,mm" positionOnPage="15,273,mm" positionLock="false" blendMode="0" uuid="{2ee08b9d-271d-4f9e-a173-11542295538e}" visibility="1" frameJoinStyle="miter" id="" size="90.5,15.3127,mm" excludeFromExports="0" opacity="1" position="15,273,mm" background="true" type="65637" templateUuid="{2ee08b9d-271d-4f9e-a173-11542295538e}" groupUuid="" referencePoint="0">
         <FrameColor green="0" red="0" alpha="255" blue="0"/>
         <BackgroundColor green="255" red="255" alpha="255" blue="255"/>
         <LayoutObject>
@@ -32655,7 +32655,7 @@ def closeProject():&#xd;    pass</pythonCode>
         <LabelFont style="Standaard" description="Verdana,6,-1,5,50,0,0,0,0,0,Standaard"/>
         <FontColor green="0" red="0" alpha="255" blue="0"/>
       </LayoutItem>
-      <LayoutItem labelHorizontalPlacement="0" mapUuid="{baebd038-e410-4f24-878a-704f060bc0ac}" boxContentSpace="1" size="50.7,15.3127,mm" lineCapStyle="square" labelVerticalPlacement="0" frame="false" unitLabel="km" outlineWidth="0.3" id="" minBarWidth="50" position="15,273,mm" positionLock="false" segmentSizeMode="0" height="3" uuid="{f59b0ed2-0ec0-4acc-8ea2-9dee3f65f986}" unitType="km" segmentMillimeters="20" alignment="0" frameJoinStyle="miter" excludeFromExports="0" visibility="1" labelBarSpace="2" opacity="1" lineJoinStyle="miter" numSegmentsLeft="0" referencePoint="0" itemRotation="0" groupUuid="{2ee08b9d-271d-4f9e-a173-11542295538e}" numUnitsPerSegment="0.5" zValue="6" blendMode="0" numSegments="2" outlineWidthM="0.3,mm" background="false" templateUuid="{f59b0ed2-0ec0-4acc-8ea2-9dee3f65f986}" numMapUnitsPerScaleBarUnit="1" positionOnPage="15,273,mm" maxBarWidth="150" style="Double Box" type="65646">
+      <LayoutItem labelHorizontalPlacement="0" mapUuid="{baebd038-e410-4f24-878a-704f060bc0ac}" boxContentSpace="1" size="50.5,15.3127,mm" lineCapStyle="square" labelVerticalPlacement="0" frame="false" unitLabel="km" outlineWidth="0.3" id="" minBarWidth="50" position="15,273,mm" positionLock="false" segmentSizeMode="0" height="3" uuid="{f59b0ed2-0ec0-4acc-8ea2-9dee3f65f986}" unitType="km" segmentMillimeters="20" alignment="0" frameJoinStyle="miter" excludeFromExports="0" visibility="1" labelBarSpace="2" opacity="1" lineJoinStyle="miter" numSegmentsLeft="0" referencePoint="0" itemRotation="0" groupUuid="{2ee08b9d-271d-4f9e-a173-11542295538e}" numUnitsPerSegment="0.5" zValue="6" blendMode="0" numSegments="2" outlineWidthM="0.3,mm" background="false" templateUuid="{f59b0ed2-0ec0-4acc-8ea2-9dee3f65f986}" numMapUnitsPerScaleBarUnit="1" positionOnPage="15,273,mm" maxBarWidth="150" style="Double Box" type="65646">
         <FrameColor green="0" red="0" alpha="255" blue="0"/>
         <BackgroundColor green="255" red="255" alpha="255" blue="255"/>
         <LayoutObject>
@@ -32714,7 +32714,7 @@ def closeProject():&#xd;    pass</pythonCode>
         <fillColor2 green="255" red="255" alpha="255" blue="255"/>
         <strokeColor green="0" red="0" alpha="255" blue="0"/>
       </LayoutItem>
-      <LayoutItem labelHorizontalPlacement="0" mapUuid="{baebd038-e410-4f24-878a-704f060bc0ac}" boxContentSpace="1" size="91.5,10,mm" lineCapStyle="square" labelVerticalPlacement="0" frame="false" unitLabel="km" outlineWidth="0.3" id="" minBarWidth="50" position="15,273,mm" positionLock="false" segmentSizeMode="0" height="3" uuid="{475534ef-8d2b-4819-a90f-372a6ce03b69}" unitType="km" segmentMillimeters="40" alignment="0" frameJoinStyle="miter" excludeFromExports="0" visibility="1" labelBarSpace="2" opacity="1" lineJoinStyle="miter" numSegmentsLeft="0" referencePoint="0" itemRotation="0" groupUuid="{2ee08b9d-271d-4f9e-a173-11542295538e}" numUnitsPerSegment="1" zValue="5" blendMode="0" numSegments="2" outlineWidthM="0.3,mm" background="false" templateUuid="{475534ef-8d2b-4819-a90f-372a6ce03b69}" numMapUnitsPerScaleBarUnit="1" positionOnPage="15,273,mm" maxBarWidth="150" style="Single Box" type="65646">
+      <LayoutItem labelHorizontalPlacement="0" mapUuid="{baebd038-e410-4f24-878a-704f060bc0ac}" boxContentSpace="1" size="90.5,10,mm" lineCapStyle="square" labelVerticalPlacement="0" frame="false" unitLabel="km" outlineWidth="0.3" id="" minBarWidth="50" position="15,273,mm" positionLock="false" segmentSizeMode="0" height="3" uuid="{475534ef-8d2b-4819-a90f-372a6ce03b69}" unitType="km" segmentMillimeters="40" alignment="0" frameJoinStyle="miter" excludeFromExports="0" visibility="1" labelBarSpace="2" opacity="1" lineJoinStyle="miter" numSegmentsLeft="0" referencePoint="0" itemRotation="0" groupUuid="{2ee08b9d-271d-4f9e-a173-11542295538e}" numUnitsPerSegment="1" zValue="5" blendMode="0" numSegments="2" outlineWidthM="0.3,mm" background="false" templateUuid="{475534ef-8d2b-4819-a90f-372a6ce03b69}" numMapUnitsPerScaleBarUnit="1" positionOnPage="15,273,mm" maxBarWidth="150" style="Single Box" type="65646">
         <FrameColor green="0" red="0" alpha="255" blue="0"/>
         <BackgroundColor green="255" red="255" alpha="255" blue="255"/>
         <LayoutObject>
@@ -32822,7 +32822,7 @@ def closeProject():&#xd;    pass</pythonCode>
           </dataDefinedProperties>
           <customproperties/>
         </LayoutObject>
-        <Extent xmax="70000.00000510000973009" xmin="59999.99999490000482183" ymax="429000.00000356999225914" ymin="421999.99999643000774086"/>
+        <Extent xmax="66000.00000510000973009" xmin="55999.99999490000482183" ymax="426000.00000356999225914" ymin="418999.99999643000774086"/>
         <crs>
           <spatialrefsys>
             <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
@@ -32954,7 +32954,7 @@ def closeProject():&#xd;    pass</pythonCode>
           </dataDefinedProperties>
           <customproperties/>
         </LayoutObject>
-        <Extent xmax="70250.00000535500294063" xmin="59749.99999464499705937" ymax="429260.03086803277255967" ymin="421739.96913196722744033"/>
+        <Extent xmax="66250.00000535500294063" xmin="55749.99999464499705937" ymax="426260.03086803277255967" ymin="418739.96913196722744033"/>
         <LayerSet>
           <Layer name="Grid" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_grid&quot; (geom) sql=" provider="postgres">grid_33a2aa94_9575_44b1_a5be_645450b0209f</Layer>
         </LayerSet>
