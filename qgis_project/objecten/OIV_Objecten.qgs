@@ -628,10 +628,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>60170.12513851825497113</xmin>
-      <ymin>421878.30428756168112159</ymin>
-      <xmax>61900.35931186962989159</xmax>
-      <ymax>423272.32772648357786238</ymax>
+      <xmin>59327.01990671066596406</xmin>
+      <ymin>421293.91136044875020161</ymin>
+      <xmax>62787.48825341341580497</xmax>
+      <ymax>424081.95823829300934449</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -21403,10 +21403,10 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer readOnly="0" minScale="30000" styleCategories="AllStyleCategories" autoRefreshTime="0" simplifyDrawingTol="1" refreshOnNotifyEnabled="0" geometry="Line" wkbType="MultiLineString" hasScaleBasedVisibilityFlag="1" autoRefreshEnabled="0" simplifyDrawingHints="1" maxScale="0" refreshOnNotifyMessage="" simplifyAlgorithm="0" simplifyMaxScale="1" labelsEnabled="1" type="vector" simplifyLocal="1">
       <extent>
-        <xmin>60503.36878543329657987</xmin>
-        <ymin>422583.65124162199208513</ymin>
-        <xmax>60740.89565848159691086</xmax>
-        <ymax>422841.84349737101001665</ymax>
+        <xmin>60009.89634767809911864</xmin>
+        <ymin>422412.39369762799469754</ymin>
+        <xmax>60870.92116908569732914</xmax>
+        <ymax>423556.67897671100217849</ymax>
       </extent>
       <id>object_gebiedsgerichte_aanpak_e08cb0f0_bb98_4c52_b50a_e829ff0ef5ec</id>
       <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table="objecten"."object_gebiedsgerichte_aanpak" (geom) sql=</datasource>
@@ -29250,7 +29250,7 @@ def my_form_open(dialog, layer, feature):
       <attributeactions>
         <defaultAction value="{00000000-0000-0000-0000-000000000000}" key="Canvas"/>
       </attributeactions>
-      <attributetableconfig sortExpression="&quot;laagnaam&quot;" actionWidgetStyle="dropDown" sortOrder="0">
+      <attributetableconfig sortExpression="&quot;laagnaam&quot;" actionWidgetStyle="dropDown" sortOrder="1">
         <columns>
           <column type="field" width="-1" name="id" hidden="0"/>
           <column type="field" width="-1" name="laagnaam" hidden="0"/>
