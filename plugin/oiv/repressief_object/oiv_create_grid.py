@@ -2,6 +2,7 @@
 
 import os
 import math
+import uuid
 
 from qgis.PyQt import uic
 from qgis.PyQt.QtGui import QColor
@@ -26,6 +27,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
     rubberBand = None
     xWidth = None
     yWidth = None
+    gridUUID = None
 
     def __init__(self, parent=None):
         """Constructor."""
