@@ -23,8 +23,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.2.7
-!define PLUGINVERSION 3.2.7
+!define VERSION 3.2.8
+!define PLUGINVERSION 3.2.8
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION}"
 !define WEBSITE "https://www.safetyct.com"
