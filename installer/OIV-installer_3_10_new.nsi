@@ -584,6 +584,7 @@ Section Uninstall
   RMDir /r "$INSTDIR\db"  
   RMDir /r "$INSTDIR\ini"
   RMDir /r "$INSTDIR\svg"
+  RMDir /r "$INSTDIR\__pycache__"
   Delete "$INSTDIR\*.*"
 
   RMDir "$INSTDIR\" ; no /r!
