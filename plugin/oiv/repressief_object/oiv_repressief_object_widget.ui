@@ -131,7 +131,7 @@ border-color: rgba(255, 255, 255, 0);</string>
           <item>
            <widget class="QPushButton" name="create_grid">
             <property name="text">
-             <string>Maak een Grid aan</string>
+             <string>Maak een Kaartblad en/of Grid aan</string>
             </property>
            </widget>
           </item>

@@ -88,7 +88,7 @@
       <item>
        <widget class="QFrame" name="kaartblad_frame">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -96,7 +96,7 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>430</height>
+          <height>200</height>
          </size>
         </property>
         <property name="frameShape">
@@ -128,8 +128,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>351</width>
-              <height>408</height>
+              <width>334</width>
+              <height>422</height>
              </rect>
             </property>
             <property name="sizePolicy">
@@ -139,13 +139,6 @@
              </sizepolicy>
             </property>
             <layout class="QGridLayout" name="gridLayout_3">
-             <item row="9" column="0" colspan="2">
-              <widget class="QPushButton" name="preview">
-               <property name="text">
-                <string>Kaartblad preview</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="0" colspan="2">
               <widget class="QFrame" name="format_orient_frame">
                <property name="minimumSize">
@@ -202,6 +195,13 @@
                </layout>
               </widget>
              </item>
+             <item row="9" column="0" colspan="2">
+              <widget class="QPushButton" name="preview">
+               <property name="text">
+                <string>Kaartblad preview</string>
+               </property>
+              </widget>
+             </item>
              <item row="12" column="0" colspan="2">
               <widget class="QPushButton" name="make_kaartblad">
                <property name="text">
@@ -228,6 +228,13 @@
                </property>
               </widget>
              </item>
+             <item row="10" column="0" colspan="2">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Afstand tussen grid lijnen (meters)</string>
+               </property>
+              </widget>
+             </item>
              <item row="11" column="0" colspan="2">
               <widget class="QSpinBox" name="distance_grid">
                <property name="enabled">
@@ -244,13 +251,6 @@
                </property>
                <property name="value">
                 <number>1000</number>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0" colspan="2">
-              <widget class="QLabel" name="label_7">
-               <property name="text">
-                <string>Afstand tussen grid lijnen (meters)</string>
                </property>
               </widget>
              </item>
@@ -321,6 +321,13 @@
                </layout>
               </widget>
              </item>
+             <item row="13" column="0" colspan="2">
+              <widget class="QPushButton" name="make_kaartblad_only">
+               <property name="text">
+                <string>Maak kaartblad zonder grid aan</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </widget>
@@ -331,7 +338,7 @@
       <item>
        <widget class="QFrame" name="grid_frame">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>

@@ -56,6 +56,7 @@ class oivImportFileWidget(QDockWidget, FORM_CLASS):
                 layerName, dummy = GpkgDialog.getLayerName()
                 gpkgInfo = "|layername={}".format(layerName)
                 importFileFeat = importFile + gpkgInfo
+                self.importLayer = QgsVectorLayer(importFileFeat, "import", "ogr")
             else:
                 importFileFeat = importFile
                 self.importLayer = QgsVectorLayer(importFileFeat, "import", "ogr")

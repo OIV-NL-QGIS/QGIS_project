@@ -2,6 +2,7 @@
 
 import os
 import math
+import uuid
 
 from qgis.PyQt import uic
 from qgis.PyQt.QtGui import QColor
@@ -26,6 +27,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
     rubberBand = None
     xWidth = None
     yWidth = None
+    gridUUID = None
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -53,7 +55,8 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             self.kaartblad_frame.setVisible(True)
             self.format_combo.addItems(PAPERSIZES)
             self.preview.clicked.connect(self.create_preview)
-            self.make_kaartblad.clicked.connect(self.create_kaartblad)
+            self.make_kaartblad.clicked.connect(lambda: self.create_kaartblad(True))
+            self.make_kaartblad_only.clicked.connect(lambda: self.create_kaartblad(False))
             self.rubberBand = init_rubberband(QColor("red"), Qt.SolidLine, 10, 1, QgsWkbTypes.PolygonGeometry, self.canvas)
 
     def adjust_kaartblad_settings(self):
@@ -103,10 +106,9 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.rubberBand.setToGeometry(tempGeom, crs)
         self.rubberBand.show()
 
-    def create_kaartblad(self):
+    def create_kaartblad(self, withGrid):
         geom = self.rubberBand.asGeometry()
         geom.convertToMultiType()
-        self.canvas.mapCanvasRefreshed.disconnect()
         layerName = 'Grid'
         layer = getlayer_byname(layerName)
         targetFeature = QgsFeature()
@@ -130,7 +132,8 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         write_layer(layer, targetFeature)
         bbox = geom.boundingBox()
         dist = self.distance_grid.value()
-        self.create_grid(dist, bbox, 'Kaartblad')
+        if withGrid:
+            self.create_grid(dist, bbox, 'Kaartblad')
         self.canvas.scene().removeItem(self.rubberBand)
 
     def calculate_extent(self, dist, extent, gridType='Grid'):

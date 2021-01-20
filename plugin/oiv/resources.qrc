@@ -237,5 +237,7 @@
         <file>config_files/png/natuur/N19L14.png</file>
         <file>config_files/png/natuur/N19L15.png</file>
         <file>config_files/png/natuur/N19L16.png</file>
+        <file>config_files/png/copi.png</file>
+        <file>config_files/png/ugs.png</file>
     </qresource>
 </RCC>
