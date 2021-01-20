@@ -193,8 +193,8 @@ Section "${APPNAME} (required)" SectionMain
 	File /a license.txt
 	File /a nircmd.exe
 	File /a dos2unix.exe
-	File /r ..\oiv_project\qgis_project\objecten\ini
-    File /a ..\oiv_project\qgis_project\objecten\pg_service.conf
+	File /r ..\qgis_project\objecten\ini
+  File /a ..\qgis_project\objecten\pg_service.conf
 	
   ;Create db-connection service file
   ${IfNot} $Dbname == ""
@@ -260,12 +260,12 @@ Section "Objecten" SectionObjecten
 	; Section Files
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
-	File /a ..\oiv_project\qgis_project\objecten\OIV_Objecten.qgs
-    File /a ..\oiv_project\qgis_project\objecten\update_dimension_tables_proj.py
-	File /a ..\oiv_project\qgis_project\objecten\objecten.ico
-	File /r ..\oiv_project\qgis_project\objecten\ui
-	File /r ..\oiv_project\qgis_project\objecten\svg
-    File /r ..\oiv_project\qgis_project\objecten\db
+	File /a ..\qgis_project\objecten\OIV_Objecten.qgs
+  File /a ..\qgis_project\objecten\update_dimension_tables_proj.py
+	File /a ..\qgis_project\objecten\objecten.ico
+	File /r ..\qgis_project\objecten\ui
+	File /r ..\qgis_project\objecten\svg
+  File /r ..\qgis_project\objecten\db
  
 	; Create desktop shortcuts
 	;ReadRegStr $R0 HKLM "Software\QGIS" "InstallPath"
@@ -286,8 +286,8 @@ Section "Bluswater" SectionBluswater
 	; Section Files
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
-	File /a ..\oiv_project\qgis_project\objecten\Bluswater_Beheer.qgs
-	File /a ..\oiv_project\qgis_project\objecten\bluswater.ico
+	File /a ..\qgis_project\objecten\Bluswater_Beheer.qgs
+	File /a ..\qgis_project\objecten\bluswater.ico
  
 	; Create desktop shortcuts
 	;ReadRegStr $R0 HKLM "Software\QGIS" "InstallPath"
@@ -313,7 +313,7 @@ Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	; Section Files
 	CreateDirectory "$R1"
 	SetOutPath "$R1"
-	File /r ..\oiv_project\plugin\oiv
+	File /r ..\plugin\oiv
 	
 	SetRegView 32
 	WriteRegStr HKLM "${REG_APPSETTINGS}" "PluginDir" "$R1\oiv"
@@ -338,8 +338,8 @@ Section "WFS" SectionWFS
 	; Section Files
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
-    File /a ..\oiv_project\qgis_project\objecten\convert_objecten_to_wfs.py
-    File /a ..\oiv_project\qgis_project\objecten\convert_bluswater_to_wfs.py
+    File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
+    File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
  
 	; Create desktop shortcuts
 	ReadRegStr $R0 HKCR "QGIS Project\Shell\open\command" ""
