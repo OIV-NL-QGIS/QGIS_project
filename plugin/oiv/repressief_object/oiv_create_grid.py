@@ -107,6 +107,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.rubberBand.show()
 
     def create_kaartblad(self, withGrid):
+        gridUUID = uuid.uuid4()
         geom = self.rubberBand.asGeometry()
         geom.convertToMultiType()
         layerName = 'Grid'
@@ -126,6 +127,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             targetFeature["orientation"] = 'landscape'
         else:
             targetFeature["orientation"] = 'portrait'
+        targetFeature["uuid"] = str(gridUUID)
         query = "SELECT foreign_key FROM config_object WHERE child_layer = '{}'".format(layerName)
         foreignKey = read_settings(query, False)[0]
         targetFeature[foreignKey] = self.object_id.text()
@@ -133,7 +135,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         bbox = geom.boundingBox()
         dist = self.distance_grid.value()
         if withGrid:
-            self.create_grid(dist, bbox, 'Kaartblad')
+            self.create_grid(gridUUID, dist, bbox, 'Kaartblad')
         self.canvas.scene().removeItem(self.rubberBand)
 
     def calculate_extent(self, dist, extent, gridType='Grid'):
@@ -156,7 +158,9 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
                 yIt += 1
         return xmin, xmax, ymin, ymax, xIt, yIt
 
-    def create_grid(self, dist=None, extent=None, gridType='Grid'):
+    def create_grid(self, gridUUID=None, dist=None, extent=None, gridType='Grid'):
+        if not gridUUID:
+            gridUUID = uuid.uuid4()
         if not dist and not extent:
             extent = self.canvas.extent()
             dist = self.distance.value()
@@ -189,6 +193,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
                 targetFeature['y_as_label'] = yLabel
                 targetFeature['x_as_label'] = xLabel
                 targetFeature['afstand'] = dist
+                targetFeature["uuid"] = str(gridUUID)
                 write_layer(layer, targetFeature)
         message = 'Het grid is succesvol aangemaakt!'
         QMessageBox.information(None, "INFO:", message)
