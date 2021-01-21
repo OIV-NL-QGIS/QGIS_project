@@ -140,7 +140,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         """delete a feature"""
         reply = delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
         if reply == 'Retry':
-            self.run_run_delete_tool()
+            self.run_delete_tool()
         self.selectTool.geomSelected.disconnect(self.delete)
 
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt

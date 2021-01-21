@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>393</width>
-    <height>850</height>
+    <height>712</height>
    </rect>
   </property>
   <property name="features">
@@ -449,7 +449,7 @@
       <item>
        <widget class="QPushButton" name="delete_grid">
         <property name="text">
-         <string>Verwijder het bestaande grid</string>
+         <string>Verwijder een bestaande grid</string>
         </property>
        </widget>
       </item>
