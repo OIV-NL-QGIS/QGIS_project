@@ -48,6 +48,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
     canvas = None
     basewidget = None
     selectTool = None
+    identifyTool = None
     pointTool = None
     attributeform = None
     drawLayer = None
@@ -175,6 +176,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         self.gridWidget.object_id.setText(self.object_id.text())
         self.gridWidget.canvas = self.canvas
         self.gridWidget.iface = self.iface
+        self.gridWidget.identifyTool = self.identifyTool
         self.gridWidget.objectWidget = self
         self.iface.addDockWidget(Qt.RightDockWidgetArea, self.gridWidget)
         self.gridWidget.show()

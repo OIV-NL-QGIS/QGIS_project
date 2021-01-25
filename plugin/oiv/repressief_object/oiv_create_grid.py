@@ -27,7 +27,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
     rubberBand = None
     xWidth = None
     yWidth = None
-    gridUUID = None
+    identifyTool = None
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -41,7 +41,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.grid_frame.setVisible(False)
         self.next.clicked.connect(self.run_grid)
         self.closewidget.clicked.connect(self.close_grid_open_repressief_object)
-        self.delete_grid.clicked.connect(self.delete_existing_grid)
+        self.delete_grid.clicked.connect(self.run_delete_tool)
         self.scale_25000.toggled.connect(self.adjust_kaartblad_settings)
         self.scale_diff.toggled.connect(self.adjust_kaartblad_settings)
 
@@ -107,6 +107,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.rubberBand.show()
 
     def create_kaartblad(self, withGrid):
+        gridUUID = uuid.uuid4()
         geom = self.rubberBand.asGeometry()
         geom.convertToMultiType()
         layerName = 'Grid'
@@ -126,6 +127,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             targetFeature["orientation"] = 'landscape'
         else:
             targetFeature["orientation"] = 'portrait'
+        targetFeature["uuid"] = str(gridUUID)
         query = "SELECT foreign_key FROM config_object WHERE child_layer = '{}'".format(layerName)
         foreignKey = read_settings(query, False)[0]
         targetFeature[foreignKey] = self.object_id.text()
@@ -133,7 +135,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         bbox = geom.boundingBox()
         dist = self.distance_grid.value()
         if withGrid:
-            self.create_grid(dist, bbox, 'Kaartblad')
+            self.create_grid(gridUUID, dist, bbox, 'Kaartblad')
         self.canvas.scene().removeItem(self.rubberBand)
 
     def calculate_extent(self, dist, extent, gridType='Grid'):
@@ -156,7 +158,9 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
                 yIt += 1
         return xmin, xmax, ymin, ymax, xIt, yIt
 
-    def create_grid(self, dist=None, extent=None, gridType='Grid'):
+    def create_grid(self, gridUUID=None, dist=None, extent=None, gridType='Grid'):
+        if not gridUUID:
+            gridUUID = uuid.uuid4()
         if not dist and not extent:
             extent = self.canvas.extent()
             dist = self.distance.value()
@@ -189,6 +193,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
                 targetFeature['y_as_label'] = yLabel
                 targetFeature['x_as_label'] = xLabel
                 targetFeature['afstand'] = dist
+                targetFeature["uuid"] = str(gridUUID)
                 write_layer(layer, targetFeature)
         message = 'Het grid is succesvol aangemaakt!'
         QMessageBox.information(None, "INFO:", message)
@@ -210,11 +215,8 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         points.append(QgsPointXY(xmin + x * dist, ymax))
         return QgsGeometry.fromMultiPolygonXY([[points]])
 
-    def delete_existing_grid(self):
-        layerName = 'Grid'
-        layer = getlayer_byname(layerName)        
-        objectId = self.object_id.text()
-        request = QgsFeatureRequest().setFilterExpression('"object_id" = ' + str(objectId))
+    def delete_existing_grid(self, gridUUID, layer):
+        request = QgsFeatureRequest().setFilterExpression('"uuid" = ' + "'{}'".format(gridUUID))
         featureIt = layer.getFeatures(request)
         reply = QMessageBox.question(self.iface.mainWindow(), 'Continue?',
                                      "Weet u zeker dat u het bestaande grid wilt weggooien?",
@@ -227,6 +229,26 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
                 layer.deleteFeature(feat.id())
             layer.commitChanges()
             return "Done"
+
+    def run_delete_tool(self):
+        QMessageBox.information(None, 'Selecteer grid!',
+                                "Selecteer het grid dat u wilt weggooien op de kaart."\
+                                , QMessageBox.Ok)
+        self.canvas.setMapTool(self.identifyTool)
+        self.identifyTool.geomIdentified.connect(self.delete)
+
+    def delete(self, ilayer, ifeature):
+        """delete a feature"""
+        if ilayer.name() == 'Grid':
+            gridUUID = ifeature["uuid"]
+            self.delete_existing_grid(gridUUID, ilayer)
+        else:
+            QMessageBox.information(None, 'Geen tekenlaag!',
+                                    "U heeft geen grid of kaartblad aangeklikt!\n\nKlik a.u.b. op de juiste locatie."\
+                                    , QMessageBox.Ok)
+            self.run_delete_tool()
+        self.identifyTool.geomIdentified.disconnect(self.delete)
+        self.iface.actionPan().trigger()
 
     def close_grid_open_repressief_object(self):
         """close this gui and return to the main page"""
