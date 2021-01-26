@@ -1,12 +1,9 @@
 """Move or rotate a point feature on the map canvas"""
+from qgis.PyQt.QtCore import Qt #pylint: disable=import-error
+from qgis.core import QgsGeometry #pylint: disable=import-error
+from qgis.gui import QgsMapToolIdentify #pylint: disable=import-error
 
-from qgis.PyQt.QtGui import QColor
-from qgis.PyQt.QtCore import Qt
-
-from qgis.core import QgsWkbTypes, QgsGeometry
-from qgis.gui import QgsRubberBand, QgsMapToolIdentify, QgsVertexMarker
-
-from .rubberbands import init_rubberband
+from ..plugin_helpers.rubberband_helper import init_rubberband, init_vertexmarker
 from .utils_core import check_layer_type
 
 class MovePointTool(QgsMapToolIdentify):
@@ -40,11 +37,7 @@ class MovePointTool(QgsMapToolIdentify):
             if found_features is not None and type_check == "Point":
                 self.dragging = True
                 #init drag point
-                self.vertexMarker = QgsVertexMarker(self.canvas)
-                self.vertexMarker.setColor(QColor(0, 0, 255))
-                self.vertexMarker.setIconSize(5)
-                self.vertexMarker.setIconType(QgsVertexMarker.ICON_X)
-                self.vertexMarker.setPenWidth(3)
+                self.vertexMarker = init_vertexmarker("movepoint", self.canvas)
                 self.vertexMarker.show()
             #anders doe niets
             else:
@@ -62,7 +55,7 @@ class MovePointTool(QgsMapToolIdentify):
     def start_to_rotate(self, event):
         """init tempRubberband indicating rotation"""
         layerPt = self.toMapCoordinates(event.pos())
-        self.tempRubberBand = init_rubberband(QColor("black"), Qt.DashLine, 25, 1, QgsWkbTypes.LineGeometry, self.canvas)
+        self.tempRubberBand = init_rubberband("moveandrotatepoint", self.canvas, 'line')
         self.tempRubberBand.show()
         self.tempRubberBand.addPoint(layerPt)
         self.startRotate = True
@@ -71,7 +64,7 @@ class MovePointTool(QgsMapToolIdentify):
         """als verslepen -> verplaats de indicatieve marker"""
         layerPt = self.toMapCoordinates(event.pos())
         if self.tempRubberBand is None:
-            self.tempRubberBand = init_rubberband(QColor("black"), Qt.DashLine, 25, 1, QgsWkbTypes.LineGeometry, self.canvas)     
+            self.tempRubberBand = init_rubberband("moveandrotatepoint", self.canvas, 'line')
         if self.dragging:
             self.point = layerPt
             self.vertexMarker.setCenter(layerPt)

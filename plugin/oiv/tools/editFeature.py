@@ -1,17 +1,16 @@
 
-from qgis.PyQt.QtWidgets import QMessageBox
-from qgis.core import QgsGeometry
+from qgis.PyQt.QtWidgets import QMessageBox #pylint: disable=import-error
+from qgis.core import QgsGeometry #pylint: disable=import-error
+from ..plugin_helpers.messages import showMsgBox
 
-def delete_feature(ilayer, ifeature, rightLayerNames, iface):
+def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
     """delete a feature"""
     if ilayer.name() in rightLayerNames:
         ids = []
         ids.append(ifeature.id())
         ilayer.selectByIds(ids)
         ilayer.startEditing()
-        reply = QMessageBox.question(iface.mainWindow(), 'Continue?',
-                                     "Weet u zeker dat u de geselecteerde feature wilt weggooien?",
-                                     QMessageBox.Yes, QMessageBox.No)
+        reply = showMsgBox('deleteobject')
         if reply == QMessageBox.No:
             ilayer.selectByIds([])
         elif reply == QMessageBox.Yes:
@@ -19,11 +18,7 @@ def delete_feature(ilayer, ifeature, rightLayerNames, iface):
             ilayer.commitChanges()
         return "Done"
     else:
-        reply = QMessageBox.information(iface.mainWindow(), 'Geen tekenlaag!',
-                                        "U heeft geen feature op een tekenlaag aangeklikt!"
-                                        "Klik a.u.b. op de juiste locatie."
-                                        "Weet u zeker dat u iets wilt weggooien?",
-                                        QMessageBox.Yes, QMessageBox.No)
+        reply = showMsgBox('noselectedtodelete')
         if reply == QMessageBox.No:
             ilayer.selectByIds([])
             return "Done"

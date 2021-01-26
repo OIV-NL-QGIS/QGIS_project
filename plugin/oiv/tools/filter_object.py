@@ -1,11 +1,12 @@
 
-from qgis.PyQt.QtCore import QDateTime
+from qgis.PyQt.QtCore import QDateTime #pylint: disable=import-error
 from .utils_core import getlayer_byname, read_settings
+from ..plugin_helpers.drawing_helper import OBJECTTYPES
 
 def init_filter_section(wdgt):
     wdgt.filterframe.setVisible(True)
     wdgt.objecttype.clear()
-    wdgt.objecttype.addItems(['Evenement', 'Gebouw', 'Natuur', 'Waterongeval'])
+    wdgt.objecttype.addItems(OBJECTTYPES)
     set_current_date(wdgt)
 
 def set_current_date(wdgt):
@@ -27,6 +28,6 @@ def set_object_filter(wdgt):
     else:
         subString = ''
     for layerName in layerNames:
-        if layerName[0] != 'Alternatief bluswater':
+        if layerName[0] != 'Alternatief bluswater':#TO_DO:alle lagen die geen objecten als parent hebben
             layer = getlayer_byname(layerName[0])
             layer.setSubsetString(subString)

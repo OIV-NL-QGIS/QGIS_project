@@ -1,10 +1,10 @@
 """Tool to draw lines and polygons on the map canvas"""
 from qgis.PyQt.QtGui import QColor
-from qgis.PyQt.QtCore import Qt, QPoint
-from qgis.core import QgsDistanceArea, QgsPoint, QgsWkbTypes, QgsCircle, QgsGeometry
-from qgis.gui import QgsVertexMarker, QgsMapTool, QgsRubberBand
+from qgis.PyQt.QtCore import Qt, QPoint #pylint: disable=import-error
+from qgis.core import QgsDistanceArea, QgsPoint, QgsWkbTypes, QgsCircle, QgsGeometry #pylint: disable=import-error
+from qgis.gui import QgsVertexMarker, QgsMapTool #pylint: disable=import-error
 
-from .rubberbands import init_rubberband, calculate_perpendicularbands
+from ..plugin_helpers.rubberband_helper import init_rubberband, calculate_perpendicularbands, init_vertexmarker
 
 class CaptureTool(QgsMapTool):
     """QgsMapTool to draw lines and polygons on the map canvas"""
@@ -110,7 +110,7 @@ class CaptureTool(QgsMapTool):
         #add rubberbands as possible snapfeatures
         snappableFeatures = self.possibleSnapFeatures + self.snapRubberBand
         if self.vertexmarker is None:
-            self.init_vertexmarker()
+            self.vertexmarker = init_vertexmarker("snappoint", self.canvas)
         for geom in snappableFeatures:
             closestSegm = geom.closestSegmentWithContext(layerPt)
             vertexCoord, vertex, prevVertex, dummy, distSquared = geom.closestVertex(layerPt)
@@ -159,33 +159,29 @@ class CaptureTool(QgsMapTool):
             self.getCapturedGeometry()
             self.stopCapturing()
 
-    def init_vertexmarker(self):
-        self.vertexmarker = QgsVertexMarker(self.canvas)
-        self.vertexmarker.setColor(QColor(255, 0, 255))
-        self.vertexmarker.setIconSize(8)
-        self.vertexmarker.setIconType(QgsVertexMarker.ICON_X) # or ICON_CROSS, ICON_X
-        self.vertexmarker.setPenWidth(5)
-        self.vertexmarker.show()
-
     def startCapturing(self):
         """bij starten van het tekenen intialiseer de rubberbands"""
+        if self.bandType() == QgsWkbTypes.PolygonGeometry:
+            rbType = 'polygon'
+        else:
+            rbType = 'line'
         #rubberband voor de al vastgelegde punten
-        self.rubberBand = init_rubberband(QColor("red"), Qt.SolidLine, 50, 1, self.bandType(), self.canvas)
+        self.rubberBand = init_rubberband("drawn", self.canvas, rbType)
         self.rubberBand.show()
         #gestippelde rubberband -> voor het tekenen
-        self.tempRubberBand = init_rubberband(QColor("red"), Qt.DashLine, 25, 1, self.bandType(), self.canvas)
-        self.tempRubberBandExt = init_rubberband(QColor("blue"), Qt.DotLine, 255, 0.5, QgsWkbTypes.LineGeometry, self.canvas)
+        self.tempRubberBand = init_rubberband("newpoint", self.canvas, rbType)
+        self.tempRubberBandExt = init_rubberband("drawinghelpers", self.canvas, "line")
         self.tempRubberBandExt.show()
         self.tempRubberBand.show()
         #2x loodrechte hulp tekenlijnen
-        self.perpRubberBand = init_rubberband(QColor("blue"), Qt.DotLine, 255, 1, QgsWkbTypes.LineGeometry, self.canvas)
-        self.perpRubberBand2 = init_rubberband(QColor("blue"), Qt.DotLine, 255, 1, QgsWkbTypes.LineGeometry, self.canvas)
+        self.perpRubberBand = init_rubberband("drawinghelpers", self.canvas, "line")
+        self.perpRubberBand2 = init_rubberband("drawinghelpers", self.canvas, "line")
         self.perpRubberBand.show()
         self.perpRubberBand2.show()
-        self.parallelRubberBand = init_rubberband(QColor("blue"), Qt.DotLine, 255, 1, QgsWkbTypes.LineGeometry, self.canvas)
+        self.parallelRubberBand = init_rubberband("drawinghelpers", self.canvas, "line")
         self.parallelRubberBand.show()
         #round distance rubberband
-        self.roundRubberBand = init_rubberband(QColor("blue"), Qt.DotLine, 255, 1, QgsWkbTypes.LineGeometry, self.canvas)
+        self.roundRubberBand = init_rubberband("drawinghelpers", self.canvas, "line")
         self.roundRubberBand.show()
         self.parent.straal.valueChanged.connect(self.draw_help_circle)
         self.parent.straal_button.clicked.connect(self.enable_roundrubberband)
