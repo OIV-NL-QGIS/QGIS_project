@@ -1,35 +1,14 @@
-"""
-/***************************************************************************
- oiv
-                                 A QGIS plugin
- place oiv objects
-                              -------------------
-        begin                : 2019-08-15
-        git sha              : $Format:%H$
-        copyright            : (C) 2019 by Joost Deen
-        email                : j.deen@safetyct.com
-        versie               : 2.9.93
- ***************************************************************************/
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
-
+"""create new repressief object"""
 import os
 
-from qgis.PyQt import uic
-from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtWidgets import QDockWidget, QMessageBox
-
-from qgis.core import QgsFeatureRequest, QgsFeature, QgsGeometry
-from qgis.utils import iface
+from qgis.PyQt import uic #pylint: disable=import-error
+from qgis.PyQt.QtWidgets import QDockWidget #pylint: disable=import-error
+from qgis.core import QgsFeatureRequest, QgsFeature, QgsGeometry #pylint: disable=import-error
+from qgis.utils import iface #pylint: disable=import-error
 
 from ..tools.utils_core import user_input_label, getlayer_byname, write_layer, read_settings
+from ..plugin_helpers.messages import showMsgBox
+from ..plugin_helpers.qt_helper import getWidgetType
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_objectnieuw_widget.ui'))
@@ -97,9 +76,7 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
             if newFeatureId:
                 self.run_objectgegevens(formeleNaam, newFeatureId)
             else:
-                QMessageBox.warning(None, "GeoServer antwoord te traag",
-                                    'Geoserver antwoord te traag. Object is wel geplaatst.\n'
-                                    'Open het object door terug te gaan en hem te selecteren.')
+                showMsgBox('newobjectslowanswer')
         else:
             self.iface.actionPan().trigger()
 
@@ -128,7 +105,7 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
         self.objectwidget.drawLayer = getlayer_byname('Objecten')
         self.objectwidget.object_id.setText(str(objectId))
         self.objectwidget.formelenaam.setText(formeleNaam)
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.objectwidget)
+        self.iface.addDockWidget(getWidgetType(), self.objectwidget)
         self.objectwidget.initActions()
         self.objectwidget.show()
         self.iface.actionPan().trigger()

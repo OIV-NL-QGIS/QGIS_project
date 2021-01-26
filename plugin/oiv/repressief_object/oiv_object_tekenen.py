@@ -1,33 +1,9 @@
-"""
-/***************************************************************************
- oiv
-                                 A QGIS plugin
- place oiv objects
-                              -------------------
-        begin                : 2019-08-15
-        git sha              : $Format:%H$
-        copyright            : (C) 2019 by Joost Deen
-        email                : j.deen@safetyct.com
-        versie               : 2.9.93
- ***************************************************************************/
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
-
+"""drawing class for repressief object"""
 import os
 
-from qgis.PyQt import uic
-from qgis.PyQt.QtWidgets import QDockWidget, QPushButton, QMessageBox
-from qgis.PyQt.QtCore import Qt
-
-from qgis.core import QgsFeature, QgsGeometry
-from qgis.utils import iface
+from qgis.PyQt import uic #pylint: disable=import-error
+from qgis.PyQt.QtWidgets import QDockWidget, QPushButton #pylint: disable=import-error
+from qgis.utils import iface #pylint: disable=import-error
 
 from ..tools.utils_core import check_layer_type, getlayer_byname, write_layer, get_attributes
 from ..tools.utils_core import construct_feature, get_possible_snapFeatures_object, read_settings
@@ -35,11 +11,15 @@ from ..tools.utils_gui import get_actions, set_lengte_oppervlakte_visibility
 from ..tools.oiv_stackwidget import oivStackWidget
 from ..tools.editFeature import delete_feature
 
+from ..plugin_helpers.drawing_helper import ROSNAPSYMBOLS, ROSNAPLAYERS
+from ..plugin_helpers.qt_helper import getWidgetType
+
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_object_tekenen_widget.ui'))
 
 class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
 
+    config = 'config_object'
     repressiefobjectwidget = None
     iface = None
     canvas = None
@@ -52,9 +32,9 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
     editableLayerNames = []
     drawTool = None
     moveTool = None
-    snapPicto = ['32', '47', '148', '150', '152', '301', 'Algemeen', 'Voorzichtig', 'Waarschuwing', 'Gevaar'] #id van pictogram
+    snapPicto = ROSNAPSYMBOLS
     moveLayerNames = []
-    snapLayerNames = ["Object terrein", "Isolijnen", "Bereikbaarheid", "Sectoren"]
+    snapLayerNames = ROSNAPLAYERS
 
     def __init__(self, parent=None):
         super(oivObjectTekenWidget, self).__init__(parent)
@@ -71,7 +51,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.delete_f.clicked.connect(self.run_delete_tool)
         self.pan.clicked.connect(self.activatePan)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
-        actionList, self.editableLayerNames, self.moveLayerNames = get_actions('config_object')
+        actionList, self.editableLayerNames, self.moveLayerNames = get_actions(self.config)
         self.initActions(actionList)
 
     def initActions(self, actionList):
@@ -115,7 +95,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.iface.actionPan().trigger()
 
     def run_edit_tool(self):
-        self.selectTool.whichConfig = 'config_object'
+        self.selectTool.whichConfig = self.config
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
@@ -132,7 +112,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.disconnect(self.select_feature)
 
     def run_delete_tool(self):
-        self.selectTool.whichConfig = 'config_object'
+        self.selectTool.whichConfig = self.config
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
 
@@ -146,7 +126,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt
     def edit_attribute(self, ilayer, ifeature):
         stackWidget = oivStackWidget()
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, stackWidget)
+        self.iface.addDockWidget(getWidgetType(), stackWidget)
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
@@ -169,7 +149,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
             moveLayer.reload()
         self.activatePan()
 
-    def run_tekenen(self, dummy, runLayer, feature_id):
+    def run_tekenen(self, _dummy, runLayer, feature_id):
         #welke pictogram is aangeklikt en wat is de bijbehorende tekenlaag
         self.identifier = feature_id
         self.drawLayer = getlayer_byname(runLayer)
@@ -209,7 +189,7 @@ class oivObjectTekenWidget(QDockWidget, FORM_CLASS):
         if points:
             parentId, childFeature = construct_feature(self.drawLayerType, self.parentLayerName, points, self.object_id.text(), self.iface)
         if parentId is not None:
-            buttonCheck = get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, 'config_object')
+            buttonCheck = get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, self.config)
             if buttonCheck != 'Cancel':
                 write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)

@@ -1,40 +1,21 @@
-"""
-/***************************************************************************
- oiv
-                                 A QGIS plugin
- place oiv objects
-                              -------------------
-        begin                : 2019-08-15
-        git sha              : $Format:%H$
-        copyright            : (C) 2019 by Joost Deen
-        email                : j.deen@safetyct.com
-        versie               : 2.9.93
- ***************************************************************************/
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
-
+"""initialize al action for repressief object"""
 import os
 import webbrowser
 
-from qgis.PyQt import uic
-from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtWidgets import QDockWidget, QMessageBox
+from qgis.PyQt import uic #pylint: disable=import-error
+from qgis.PyQt.QtWidgets import QDockWidget, QMessageBox #pylint: disable=import-error
 
-from qgis.core import QgsGeometry, QgsFeatureRequest
-from qgis.utils import iface
+from qgis.core import QgsFeatureRequest #pylint: disable=import-error
+from qgis.utils import iface #pylint: disable=import-error
 
 from ..tools.utils_core import getlayer_byname, refresh_layers, get_possible_snapFeatures_object, construct_feature, write_layer, get_attributes
 from ..tools.utils_gui import set_lengte_oppervlakte_visibility
 from ..tools.editFeature import delete_feature
 from ..tools.oiv_stackwidget import oivStackWidget
 from ..tools.oiv_import_file import oivImportFileWidget
+from ..plugin_helpers.qt_helper import getWidgetType
+from ..plugin_helpers.messages import showMsgBox
+from ..plugin_helpers.drawing_helper import ROSNAPLAYERS
 from .oiv_object_tekenen import oivObjectTekenWidget
 from .oiv_create_grid import oivGridWidget
 
@@ -55,7 +36,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
     identifier = None
     drawTool = None
     moveTool = None
-    snapLayerNames = ["Object terrein", "Isolijnen", "Bereikbaarheid", "Sectoren"]
+    snapLayerNames = ROSNAPLAYERS
     tekensymbolenwidget = None
     importwidget = None
     gridWidget = None
@@ -128,9 +109,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         ifeature = next(ilayer.getFeatures(request))
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
-        reply = QMessageBox.question(self.iface.mainWindow(), 'Continue?',
-                                     "Weet u zeker dat u de geselecteerde feature wilt weggooien?",\
-                                     QMessageBox.Yes, QMessageBox.No)
+        reply = showMsgBox('deleteobject')
         if reply == QMessageBox.No:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.selectByIds([])
@@ -138,14 +117,14 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
             #als "ja" -> verwijder de feature op basis van het unieke feature id
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
-            reply = QMessageBox.information(self.iface.mainWindow(), 'Succesvol!', "Het object is succesvol verwijderd.")
+            reply = showMsgBox('deletedobject')
         refresh_layers(self.iface)
         self.close_repressief_object_show_base()
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
         stackWidget = oivStackWidget()
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, stackWidget)
+        self.iface.addDockWidget(getWidgetType(), stackWidget)
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
@@ -178,7 +157,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         self.gridWidget.iface = self.iface
         self.gridWidget.identifyTool = self.identifyTool
         self.gridWidget.objectWidget = self
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.gridWidget)
+        self.iface.addDockWidget(getWidgetType(), self.gridWidget)
         self.gridWidget.show()
         self.close()
 
@@ -206,7 +185,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
             self.run_delete_terrein()
         self.selectTool.geomSelected.disconnect(self.delete)
 
-    def place_object_terrein(self, points, dummy):
+    def place_object_terrein(self, points, _dummy):
         """save drawn terrain"""
         layer = getlayer_byname("Object terrein")
         if points:
@@ -229,7 +208,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         self.tekensymbolenwidget.formelenaam.setText(self.formelenaam.text())
         self.tekensymbolenwidget.object_id.setText(self.object_id.text())
         self.tekensymbolenwidget.initUI()
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.tekensymbolenwidget)
+        self.iface.addDockWidget(getWidgetType(), self.tekensymbolenwidget)
         self.tekensymbolenwidget.show()
         self.close()
 
@@ -240,7 +219,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         self.importwidget.object_id.setText(self.object_id.text())
         self.importwidget.object.setText(self.formelenaam.text())
         self.importwidget.canvas = self.canvas
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.importwidget)
+        self.iface.addDockWidget(getWidgetType(), self.importwidget)
         self.close()
         self.importwidget.show()
  
