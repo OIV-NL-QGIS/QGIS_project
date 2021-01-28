@@ -25,8 +25,8 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
     canvas = None
     objectWidget = None
     rubberBand = None
-    xWidth = None
-    yWidth = None
+    xWidth = 0
+    yWidth = 0
     identifyTool = None
 
     def __init__(self, parent=None):
