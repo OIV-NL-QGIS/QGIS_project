@@ -7,4 +7,6 @@ QGIS is een Open Source Geografisch Informatie Systeem. Het project OIV-QGIS plu
 
 OIV-QGIS is een eenvoudig te gebruiken GIS dat algemene functies en mogelijkheden bied. In het begin was OIV-QGIS alleen beschikbaar voor NW4 maar vanwege de open source karakter is dit ook gratis beschikbaar voor alle veiligheidsregio's. OIV-QGIS plugin ondersteunt een groot aantal gebruiksfuncties voor het maken van operationele informatie.
 
-OIV-QGIS plugin wordt vrijgegeven onder de GNU Public License (GPL). Deze licentie staat iedereen toe om de broncode te bekijken en te bewerken en garandeert de vrije beschikbaarheid van GIS software die door iedereen kan worden aangepast of uitgebreid. Een actuele versie van de licentie dient te zijn meegeleverd met elke kopie van QGIS. De licentie is ook te lezen in Appendix GNU General Public License
+OIV-QGIS plugin wordt vrijgegeven onder de GNU Public License (GPL). Deze licentie staat iedereen toe om de broncode te bekijken en te bewerken en garandeert de vrije beschikbaarheid van GIS software die door iedereen kan worden aangepast of uitgebreid. Een actuele versie van de licentie dient te zijn meegeleverd met elke kopie van QGIS. De licentie is ook te lezen in Appendix GNU General Public License.
+
+Voor een uitgebreide beschrijving van de plugin en de complete oplossing, zie de [Wiki](https://github.com/OIV-NL-QGIS/OIV_project/wiki).
