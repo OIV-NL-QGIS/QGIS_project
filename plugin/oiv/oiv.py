@@ -19,16 +19,13 @@
  *                                                                         *
  ***************************************************************************/
 """
-#compile resources: pyrcc4 -o C:\Users\oiv\.qgis2\python\plugins\oiv_imroi\resources.py C:\Users\oiv\.qgis2\python\plugins\oiv_imroi\resources.qrc
-#pyrcc4 -o C:\Users\joost\.qgis2\python\plugins\oiv_imroi_v2\resources.py C:\Users\joost\.qgis2\python\plugins\oiv_imroi_v2\resources.qrc
-
 #Import the PyQt and QGIS libraries
 import os
 
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction, QLabel, QComboBox, QMessageBox
-from qgis.core import QgsProject, QgsExpressionContextUtils, QgsFeatureRequest
+from qgis.core import QgsProject, QgsExpressionContextUtils, QgsFeatureRequest, QgsVectorLayer
 from qgis.gui import QgsMapToolEmitPoint
 
 #initialize Qt resources from file resources.py
@@ -146,12 +143,13 @@ class oiv:
     def get_identified_pand(self, ilayer, ifeature):
         """Return of identified layer and feature and get related object"""
         #the identified layer must be "Bouwlagen" or "BAG panden"
-        if ilayer.name() == "Bouwlagen":
-            objectId = str(ifeature["pand_id"])
-            self.run_bouwlagen(objectId)
-        elif ilayer.name() == "BAG panden":
-            objectId = str(ifeature["identificatie"])
-            self.run_bouwlagen(objectId)
+        if isinstance(ilayer, QgsVectorLayer):
+            if ilayer.name() == "Bouwlagen":
+                objectId = str(ifeature["pand_id"])
+                self.run_bouwlagen(objectId)
+            elif ilayer.name() == "BAG panden":
+                objectId = str(ifeature["identificatie"])
+                self.run_bouwlagen(objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
         else:
             QMessageBox.information(None, "Oeps:", "Geen pand gevonden! Klik boven op een pand.")
