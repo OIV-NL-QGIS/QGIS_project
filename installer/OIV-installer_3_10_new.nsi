@@ -160,6 +160,9 @@ FunctionEnd
   ${If} $Dbname == ""
 	StrCpy $Dbname "oiv_prod"
   ${EndIf}
+  ${If} $Port == ""
+	StrCpy $Port "5432"
+  ${EndIf}  
   ${If} $GeoserverUrl == ""
 	StrCpy $GeoserverUrl "http://localhost:8080/geoserver/OIV/wfs?"
   ${EndIf}
@@ -211,6 +214,7 @@ Section "${APPNAME} (required)" SectionMain
 	WriteRegStr HKLM "${REG_APPSETTINGS}" "WebSite" "${WEBSITE}"
 	WriteRegStr HKLM "${REG_APPSETTINGS}" "Host" "$Host"
 	WriteRegStr HKLM "${REG_APPSETTINGS}" "Dbname" "$Dbname"
+  WriteRegStr HKLM "${REG_APPSETTINGS}" "Port" "$Port"
   WriteRegStr HKLM "${REG_APPSETTINGS}" "GeoserverUrl" "$GeoserverUrl"
   WriteRegStr HKLM "${REG_APPSETTINGS}" "GeoserverBron" "$GeoserverBron"
 
@@ -263,7 +267,7 @@ Section "Database" SectionDB
     FileWrite $4 "$\r$\n"
     FileWrite $4 "host=$Host"
     FileWrite $4 "$\r$\n"
-    FileWrite $4 "port=5432"
+    FileWrite $4 "port=$Port"
     FileWrite $4 "$\r$\n"
     FileWrite $4 "dbname=$Dbname"
     FileWrite $4 "$\r$\n"  
@@ -390,16 +394,21 @@ Function nsDialogHost
     Pop $1
     ${NSD_SetText} $1 $Dbname
 
-    ${NSD_CreateLabel} 20u 80u 60u 14u "Username:"  
-    ${NSD_CreateText} 80u 78u 160u 14u $4
+    ${NSD_CreateLabel} 20u 80u 60u 14u "Port:"  
+    ${NSD_CreateText} 80u 78u 160u 14u $1
+    Pop $6
+    ${NSD_SetText} $6 $Port
+
+    ${NSD_CreateLabel} 20u 100u 60u 14u "Username:"  
+    ${NSD_CreateText} 80u 98u 160u 14u $4
     Pop $4
     ${NSD_SetText} $4 $DbUser
 
-    ${NSD_CreateLabel} 20u 100u 60u 14u "Password:"  
-    ${NSD_CreatePassword} 80u 98u 160u 14u $5
+    ${NSD_CreateLabel} 20u 120u 60u 14u "Password:"  
+    ${NSD_CreatePassword} 80u 118u 160u 14u $5
     Pop $5
 
-    ${NSD_CreateLabel} 20u 120u 100% 14u "Example valid database hosts are: localhost, data.geoatlas.nl"
+    ${NSD_CreateLabel} 20u 140u 100% 14u "Example valid database hosts are: localhost, demo.safetymaps.nl"
 
     nsDialogs::Show  
 
@@ -412,6 +421,7 @@ Function nsDialogHostLeave
 	${NSD_GetText} $1 $Dbname
   ${NSD_GetText} $4 $DbUser
   ${NSD_GetText} $5 $DbPassword
+  ${NSD_GetText} $6 $Port
 FunctionEnd
 
 Function nsDialogWFS
@@ -501,7 +511,7 @@ Function Ready
 
     ; Port
     ${NSD_CreateLabel} 10u 85u 35% 24u "Port:"
-    ${NSD_CreateLabel} 40% 85u 60% 24u "5432"
+    ${NSD_CreateLabel} 40% 85u 60% 24u $Port
   ${EndIf}
 
   nsDialogs::Show
