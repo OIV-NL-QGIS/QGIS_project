@@ -26,7 +26,6 @@
             </se:Stroke>
           </se:LineSymbolizer>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:VendorOption name="placement">points</se:VendorOption>
             <se:Stroke>
               <se:GraphicStroke>
                 <se:Graphic>
@@ -48,6 +47,7 @@
               </se:GraphicStroke>
               <se:SvgParameter name="stroke-dasharray">10 30</se:SvgParameter>                  
             </se:Stroke>
+            <se:VendorOption name="placement">points</se:VendorOption>
           </se:LineSymbolizer>
         </se:Rule>
         <se:Rule>
@@ -164,7 +164,7 @@
             </se:Font>
             <se:LabelPlacement>
               <se:LinePlacement>
-                <se:Repeat>true</se:Repeat>
+                <se:IsRepeated>true</se:IsRepeated>
                 <se:Gap>100</se:Gap>
                 <se:GeneralizeLine>true</se:GeneralizeLine>
               </se:LinePlacement>
