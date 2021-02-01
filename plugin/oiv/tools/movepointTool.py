@@ -1,21 +1,18 @@
 """Move or rotate a point feature on the map canvas"""
+import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
+import qgis.gui as QG #pylint: disable=import-error
 
-from qgis.PyQt.QtGui import QColor
-from qgis.PyQt.QtCore import Qt
+import oiv.plugin_helpers.rubberband_helper as RH
+import oiv.tools.utils_core as UC
 
-from qgis.core import QgsWkbTypes, QgsGeometry
-from qgis.gui import QgsRubberBand, QgsMapToolIdentify, QgsVertexMarker
-
-from .rubberbands import init_rubberband
-from .utils_core import check_layer_type
-
-class MovePointTool(QgsMapToolIdentify):
+class MovePointTool(QG.QgsMapToolIdentify):
     """identify the clicked point from the user and proces"""
 
     def __init__(self, canvas, layer):
-        QgsMapToolIdentify.__init__(self, canvas)
+        QG.QgsMapToolIdentify.__init__(self, canvas)
         self.canvas = canvas
-        self.setCursor(Qt.CrossCursor)
+        self.setCursor(PQtC.Qt.CrossCursor)
         self.layer = layer
         self.dragging = False
         self.fields = None
@@ -31,27 +28,23 @@ class MovePointTool(QgsMapToolIdentify):
         """op welke feature wordt er geklikt"""
         found_features = self.identify(event.x(), event.y(), self.TopDownStopAtFirst, self.VectorLayer)
         #check type van de laag, het werkt alleen voor point layers
-        type_check = check_layer_type(found_features[0].mLayer)
+        type_check = UC.check_layer_type(found_features[0].mLayer)
         self.idlayer = found_features[0].mLayer
         feature = found_features[0].mFeature
         self.fid = feature.id()
         #indien de linkesmuisnop wordt geklikt, het betreft een point layer en er is een feature gevonden -> verslepen
-        if event.button() == Qt.LeftButton:
+        if event.button() == PQtC.Qt.LeftButton:
             if found_features is not None and type_check == "Point":
                 self.dragging = True
                 #init drag point
-                self.vertexMarker = QgsVertexMarker(self.canvas)
-                self.vertexMarker.setColor(QColor(0, 0, 255))
-                self.vertexMarker.setIconSize(5)
-                self.vertexMarker.setIconType(QgsVertexMarker.ICON_X)
-                self.vertexMarker.setPenWidth(3)
+                self.vertexMarker = RH.init_vertexmarker("movepoint", self.canvas)
                 self.vertexMarker.show()
             #anders doe niets
             else:
                 self.dragging = False
                 self.fid = None
         #indien de rechtermuisknop wordt geklikt -> roteren
-        if event.button() == Qt.RightButton:
+        if event.button() == PQtC.Qt.RightButton:
             if found_features is not None and type_check == "Point":
                 if not self.startRotate:
                     self.start_to_rotate(event)
@@ -62,7 +55,7 @@ class MovePointTool(QgsMapToolIdentify):
     def start_to_rotate(self, event):
         """init tempRubberband indicating rotation"""
         layerPt = self.toMapCoordinates(event.pos())
-        self.tempRubberBand = init_rubberband(QColor("black"), Qt.DashLine, 25, 1, QgsWkbTypes.LineGeometry, self.canvas)
+        self.tempRubberBand = RH.init_rubberband("moveandrotatepoint", self.canvas, 'line')
         self.tempRubberBand.show()
         self.tempRubberBand.addPoint(layerPt)
         self.startRotate = True
@@ -71,7 +64,7 @@ class MovePointTool(QgsMapToolIdentify):
         """als verslepen -> verplaats de indicatieve marker"""
         layerPt = self.toMapCoordinates(event.pos())
         if self.tempRubberBand is None:
-            self.tempRubberBand = init_rubberband(QColor("black"), Qt.DashLine, 25, 1, QgsWkbTypes.LineGeometry, self.canvas)     
+            self.tempRubberBand = RH.init_rubberband("moveandrotatepoint", self.canvas, 'line')
         if self.dragging:
             self.point = layerPt
             self.vertexMarker.setCenter(layerPt)
@@ -83,7 +76,7 @@ class MovePointTool(QgsMapToolIdentify):
         """als verslepen -> pas de geometry van de betreffende feature aan"""
         if self.dragging:
             self.vertexMarker.hide()
-            geom = QgsGeometry.fromPointXY(self.point)
+            geom = QC.QgsGeometry.fromPointXY(self.point)
             self.idlayer.dataProvider().changeGeometryValues({self.fid : geom})
             self.idlayer.commitChanges()
             self.idlayer.triggerRepaint()

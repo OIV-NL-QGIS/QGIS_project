@@ -1,13 +1,12 @@
 """init the oiv base widget"""
-
 import os
-from qgis.PyQt import uic
-from qgis.PyQt.QtWidgets import QDockWidget
+import qgis.PyQt as PQt #pylint: disable=import-error
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
+FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_base_widget.ui'))
 
-class oivBaseWidget(QDockWidget, FORM_CLASS):
+class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     """create dockwidget as base of the oiv plugin"""
 
     def __init__(self, parent=None):
