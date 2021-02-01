@@ -66,4 +66,4 @@ for layer in root.iter('maplayer'):
         layer.find('datasource').text = sqliteLayers[layer.find('layername').text]
         layer.find('provider').text = 'spatialite'
 
-tree.write('./Bluswater_Beheer.qgs')
+tree.write('./Bluswater_Beheer_WFS.qgs')

@@ -56,6 +56,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
             self.preview.clicked.connect(self.create_preview)
             self.make_kaartblad.clicked.connect(lambda: self.create_kaartblad(True))
             self.make_kaartblad_only.clicked.connect(lambda: self.create_kaartblad(False))
+
             self.rubberBand = RH.init_rubberband('grid', self.canvas, 'polygon')
 
     def adjust_kaartblad_settings(self):

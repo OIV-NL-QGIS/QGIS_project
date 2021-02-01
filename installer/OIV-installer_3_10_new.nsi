@@ -23,8 +23,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.2.7
-!define PLUGINVERSION 3.2.7
+!define VERSION 3.2.8
+!define PLUGINVERSION 3.2.8
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION}"
 !define WEBSITE "https://www.safetyct.com"
@@ -200,7 +200,7 @@ Section "${APPNAME} (required)" SectionMain
 	File /a license.txt
 	File /a nircmd.exe
 	File /a dos2unix.exe
-	File /r ..\oiv_project\qgis_project\objecten\ini
+	File /r ..\qgis_project\objecten\ini
 
 	; Registry
 	DetailPrint "Write ${APPNAME} settings to registry"
@@ -219,7 +219,7 @@ Section "${APPNAME} (required)" SectionMain
 SectionEnd
 
 Section "WFS" SectionWFS
-  File /a ..\oiv_project\qgis_project\objecten\geoserver.conf
+  File /a ..\qgis_project\objecten\geoserver.conf
 	; Section Files
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
@@ -244,7 +244,7 @@ Section "WFS" SectionWFS
 SectionEnd
 
 Section "Database" SectionDB
-  File /a ..\oiv_project\qgis_project\objecten\pg_service.conf
+  File /a ..\qgis_project\objecten\pg_service.conf
 	
 	; set variable
 	DetailPrint "Set windows variable PGSERVICEFILE to $INSTDIR\pg_service.conf"
@@ -282,12 +282,12 @@ Section "Objecten" SectionObjecten
 	; Section Files
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
-	File /a ..\oiv_project\qgis_project\objecten\OIV_Objecten.qgs
-  File /a ..\oiv_project\qgis_project\objecten\update_dimension_tables_proj.py
-	File /a ..\oiv_project\qgis_project\objecten\objecten.ico
-	File /r ..\oiv_project\qgis_project\objecten\ui
-	File /r ..\oiv_project\qgis_project\objecten\svg
-  File /r ..\oiv_project\qgis_project\objecten\db
+	File /a ..\qgis_project\objecten\OIV_Objecten.qgs
+  File /a ..\qgis_project\objecten\update_dimension_tables_proj.py
+	File /a ..\qgis_project\objecten\objecten.ico
+	File /r ..\qgis_project\objecten\ui
+	File /r ..\qgis_project\objecten\svg
+  File /r ..\qgis_project\objecten\db
  
 	; Create desktop shortcuts
 	;ReadRegStr $R0 HKLM "Software\QGIS" "InstallPath"
@@ -309,7 +309,7 @@ Section "Objecten" SectionObjecten
     ;Convert standard PostGres project to geoserver WFS project
     SetRegView 64
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.10" "InstallPath"
-    File /a ..\oiv_project\qgis_project\objecten\convert_objecten_to_wfs.py
+    File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_objecten_to_wfs.py"
     ${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten_WFS.qgs"
     CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" \
@@ -323,8 +323,8 @@ Section "Bluswater" SectionBluswater
 	; Section Files
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
-	File /a ..\oiv_project\qgis_project\objecten\Bluswater_Beheer.qgs
-	File /a ..\oiv_project\qgis_project\objecten\bluswater.ico
+	File /a ..\qgis_project\objecten\Bluswater_Beheer.qgs
+	File /a ..\qgis_project\objecten\bluswater.ico
  
 	; Create desktop shortcuts
 	;ReadRegStr $R0 HKLM "Software\QGIS" "InstallPath"
@@ -343,7 +343,7 @@ Section "Bluswater" SectionBluswater
   ${If} ${SectionIsSelected} ${SectionWFS}
     SetRegView 64
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.10" "InstallPath"
-    File /a ..\oiv_project\qgis_project\objecten\convert_bluswater_to_wfs.py
+    File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
     ${StrRep} $R1 $R0 "%1" "$INSTDIR\Bluswater_Beheer_WFS.qgs"
     CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" \
@@ -362,7 +362,7 @@ Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	; Section Files
 	CreateDirectory "$R1"
 	SetOutPath "$R1"
-	File /r ..\oiv_project\plugin\oiv
+	File /r ..\plugin\oiv
 	
 	SetRegView 32
 	WriteRegStr HKLM "${REG_APPSETTINGS}" "PluginDir" "$R1\oiv"
