@@ -1,7 +1,8 @@
+"""edit specific feature"""
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
 
-from qgis.PyQt.QtWidgets import QMessageBox #pylint: disable=import-error
-from qgis.core import QgsGeometry #pylint: disable=import-error
-from ..plugin_helpers.messages import showMsgBox
+import oiv.plugin_helpers.messages as MSG
 
 def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
     """delete a feature"""
@@ -10,31 +11,32 @@ def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
         ids.append(ifeature.id())
         ilayer.selectByIds(ids)
         ilayer.startEditing()
-        reply = showMsgBox('deleteobject')
-        if reply == QMessageBox.No:
+        reply = MSG.showMsgBox('deleteobject')
+        if reply == PQtW.QMessageBox.No:
             ilayer.selectByIds([])
-        elif reply == QMessageBox.Yes:
+        elif reply == PQtW.QMessageBox.Yes:
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
         return "Done"
     else:
-        reply = showMsgBox('noselectedtodelete')
-        if reply == QMessageBox.No:
+        reply = MSG.showMsgBox('noselectedtodelete')
+        if reply == PQtW.QMessageBox.No:
             ilayer.selectByIds([])
             return "Done"
         else:
             return "Retry"
 
 def getfeature_geometry(featGeom, layerType):
+    """get geometry type of a feature"""
     geom = None
     if layerType == 'LineString' and featGeom.wkbType() in [2, 1002, 2002, 3002, -2147483646]:
-        geom = QgsGeometry.fromMultiPolylineXY([featGeom.asPolyline()])
+        geom = QC.QgsGeometry.fromMultiPolylineXY([featGeom.asPolyline()])
     elif layerType == 'LineString' and featGeom.wkbType() in [5, 1005, 2005, 3005]:
-        geom = QgsGeometry.fromMultiPolylineXY(featGeom.asMultiPolyline())
+        geom = QC.QgsGeometry.fromMultiPolylineXY(featGeom.asMultiPolyline())
     elif layerType == 'Polygon' and featGeom.wkbType() in [3, 1003, 2003, 3003]:
-        geom = QgsGeometry.fromMultiPolygonXY([featGeom.asPolygon()])
+        geom = QC.QgsGeometry.fromMultiPolygonXY([featGeom.asPolygon()])
     elif layerType == 'Polygon' and featGeom.wkbType() in [6, 1006, 2006, 3006]:
-        geom = QgsGeometry.fromMultiPolygonXY(featGeom.asMultiPolygon())
+        geom = QC.QgsGeometry.fromMultiPolygonXY(featGeom.asMultiPolygon())
     elif layerType == 'Point':
-        geom = QgsGeometry.fromPointXY(featGeom.asPoint())
+        geom = QC.QgsGeometry.fromPointXY(featGeom.asPoint())
     return geom

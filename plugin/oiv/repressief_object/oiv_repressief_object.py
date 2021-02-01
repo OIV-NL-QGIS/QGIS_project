@@ -2,27 +2,26 @@
 import os
 import webbrowser
 
-from qgis.PyQt import uic #pylint: disable=import-error
-from qgis.PyQt.QtWidgets import QDockWidget, QMessageBox #pylint: disable=import-error
+import qgis.PyQt as PQt #pylint: disable=import-error
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
+import qgis.utils as QU #pylint: disable=import-error
 
-from qgis.core import QgsFeatureRequest #pylint: disable=import-error
-from qgis.utils import iface #pylint: disable=import-error
+import oiv.tools.utils_core as UC
+import oiv.tools.utils_gui as UG
+import oiv.tools.editFeature as EF
+import oiv.tools.stackwidget as SW
+import oiv.tools.import_file as IFW
+import oiv.repressief_object.oiv_object_tekenen as OTW
+import oiv.repressief_object.oiv_create_grid as GW
+import oiv.plugin_helpers.qt_helper as QH
+import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.drawing_helper as DH
 
-from ..tools.utils_core import getlayer_byname, refresh_layers, get_possible_snapFeatures_object, construct_feature, write_layer, get_attributes
-from ..tools.utils_gui import set_lengte_oppervlakte_visibility
-from ..tools.editFeature import delete_feature
-from ..tools.oiv_stackwidget import oivStackWidget
-from ..tools.oiv_import_file import oivImportFileWidget
-from ..plugin_helpers.qt_helper import getWidgetType
-from ..plugin_helpers.messages import showMsgBox
-from ..plugin_helpers.drawing_helper import ROSNAPLAYERS
-from .oiv_object_tekenen import oivObjectTekenWidget
-from .oiv_create_grid import oivGridWidget
-
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
+FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_repressief_object_widget.ui'))
 
-class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
+class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     """interactive UI management"""
 
     iface = None
@@ -36,7 +35,7 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
     identifier = None
     drawTool = None
     moveTool = None
-    snapLayerNames = ROSNAPLAYERS
+    snapLayerNames = DH.ROSNAPLAYERS
     tekensymbolenwidget = None
     importwidget = None
     gridWidget = None
@@ -44,10 +43,10 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
     def __init__(self, parent=None):
         super(oivRepressiefObjectWidget, self).__init__(parent)
         self.setupUi(self)
-        self.iface = iface
-        self.tekensymbolenwidget = oivObjectTekenWidget()
+        self.iface = QU.iface
+        self.tekensymbolenwidget = OTW.oivObjectTekenWidget()
         self.object_id.setVisible(False)
-        set_lengte_oppervlakte_visibility(self, False, False, False, False)
+        UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
 
     def initActions(self):
         """connect the buttons to their actions"""
@@ -88,14 +87,14 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
     def run_objectgegevens_bewerken(self):
         """select bouwlaag on canvas to edit the atrribute form"""
         objectId = self.object_id.text()
-        request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
+        request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
         tempLayer = self.drawLayer
         objectFeature = next(tempLayer.getFeatures(request))
         self.edit_attribute(tempLayer, objectFeature)
 
     def open_bgt_viewer(self):
         """open url based on BGT location, i.v.m. terugmelden"""
-        e = iface.mapCanvas().extent()
+        e = self.canvas.extent()
         gemx = (e.xMaximum() + e.xMinimum())/2
         gemy = (e.yMaximum() + e.yMinimum())/2
         url2 = 'https://verbeterdekaart.kadaster.nl/#?geometry.x=' + str(gemx) + '&geometry.y=' + str(gemy) + '&zoomlevel=12'
@@ -105,26 +104,26 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         """delete repressief object"""
         ilayer = self.drawLayer
         objectId = self.object_id.text()
-        request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
+        request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
         ifeature = next(ilayer.getFeatures(request))
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
-        reply = showMsgBox('deleteobject')
-        if reply == QMessageBox.No:
+        reply = MSG.showMsgBox('deleteobject')
+        if reply == PQtW.QMessageBox.No:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.selectByIds([])
-        elif reply == QMessageBox.Yes:
+        elif reply == PQtW.QMessageBox.Yes:
             #als "ja" -> verwijder de feature op basis van het unieke feature id
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
-            reply = showMsgBox('deletedobject')
-        refresh_layers(self.iface)
+            reply = MSG.showMsgBox('deletedobject')
+        UC.refresh_layers(self.iface)
         self.close_repressief_object_show_base()
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
-        stackWidget = oivStackWidget()
-        self.iface.addDockWidget(getWidgetType(), stackWidget)
+        stackWidget = SW.oivStackWidget()
+        self.iface.addDockWidget(QH.getWidgetType(), stackWidget)
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
@@ -151,22 +150,22 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
     def run_create_grid(self):
-        self.gridWidget = oivGridWidget()
+        self.gridWidget = GW.oivGridWidget()
         self.gridWidget.object_id.setText(self.object_id.text())
         self.gridWidget.canvas = self.canvas
         self.gridWidget.iface = self.iface
         self.gridWidget.identifyTool = self.identifyTool
         self.gridWidget.objectWidget = self
-        self.iface.addDockWidget(getWidgetType(), self.gridWidget)
+        self.iface.addDockWidget(QH.getWidgetType(), self.gridWidget)
         self.gridWidget.show()
         self.close()
 
     def run_terrein_toevoegen(self):
         objectId = self.object_id.text()
-        possibleSnapFeatures = get_possible_snapFeatures_object(self.snapLayerNames, objectId)
+        possibleSnapFeatures = UC.get_possible_snapFeatures_object(self.snapLayerNames, objectId)
         self.drawTool.parent = self
-        self.drawTool.layer = getlayer_byname("Object terrein")
-        set_lengte_oppervlakte_visibility(self, True, True, True, True)
+        self.drawTool.layer = UC.getlayer_byname("Object terrein")
+        UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
         self.drawTool.possibleSnapFeatures = possibleSnapFeatures
         self.drawTool.canvas = self.canvas
         self.drawTool.onGeometryAdded = self.place_object_terrein
@@ -180,20 +179,20 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
 
     def delete(self, ilayer, ifeature):
         deleteLayerNames = ['Objecten', 'Object terrein']
-        reply = delete_feature(ilayer, ifeature, deleteLayerNames, self.iface)
+        reply = EF.delete_feature(ilayer, ifeature, deleteLayerNames, self.iface)
         if reply == 'Retry':
             self.run_delete_terrein()
         self.selectTool.geomSelected.disconnect(self.delete)
 
     def place_object_terrein(self, points, _dummy):
         """save drawn terrain"""
-        layer = getlayer_byname("Object terrein")
+        layer = UC.getlayer_byname("Object terrein")
         if points:
-            parentId, childFeature = construct_feature('Polygon', 'Objecten', points, self.object_id.text(), self.iface)
+            parentId, childFeature = UC.construct_feature('Polygon', 'Objecten', points, self.object_id.text(), self.iface)
         if parentId is not None:
-            buttonCheck = get_attributes(parentId, childFeature, None, None, layer, 'config_object')
+            buttonCheck = UC.get_attributes(parentId, childFeature, None, None, layer, 'config_object')
             if buttonCheck != 'Cancel':
-                write_layer(layer, childFeature)
+                UC.write_layer(layer, childFeature)
         layer.commitChanges()
         layer.triggerRepaint()
         self.activatePan()
@@ -208,18 +207,18 @@ class oivRepressiefObjectWidget(QDockWidget, FORM_CLASS):
         self.tekensymbolenwidget.formelenaam.setText(self.formelenaam.text())
         self.tekensymbolenwidget.object_id.setText(self.object_id.text())
         self.tekensymbolenwidget.initUI()
-        self.iface.addDockWidget(getWidgetType(), self.tekensymbolenwidget)
+        self.iface.addDockWidget(QH.getWidgetType(), self.tekensymbolenwidget)
         self.tekensymbolenwidget.show()
         self.close()
 
     def run_import(self):
         """initiate import widget"""
-        self.importwidget = oivImportFileWidget()
+        self.importwidget = IFW.oivImportFileWidget()
         self.importwidget.parentWidget = self
         self.importwidget.object_id.setText(self.object_id.text())
         self.importwidget.object.setText(self.formelenaam.text())
         self.importwidget.canvas = self.canvas
-        self.iface.addDockWidget(getWidgetType(), self.importwidget)
+        self.iface.addDockWidget(QH.getWidgetType(), self.importwidget)
         self.close()
         self.importwidget.show()
  

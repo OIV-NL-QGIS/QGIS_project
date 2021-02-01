@@ -1,25 +1,24 @@
 """multiple classes to identify object on the map"""
+import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
+import qgis.gui as QG #pylint: disable=import-error
 
-from qgis.PyQt.QtCore import pyqtSignal, Qt
-from qgis.PyQt.QtWidgets import QDialog, QVBoxLayout, QLabel, QDialogButtonBox, QComboBox, QMessageBox
+import oiv.tools.utils_core as UC
+import oiv.plugin_helpers.messages as MSG
 
-from qgis.gui import QgsMapToolIdentify, QgsMapTool
-from qgis.core import QgsFeatureRequest, QgsFeature
-
-from .utils_core import getlayer_byname, read_settings
-
-class IdentifyGeometryTool(QgsMapToolIdentify, QgsMapTool):
+class IdentifyGeometryTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     """identify geometry on the map"""
 
     def __init__(self, canvas):
         self.canvas = canvas
-        QgsMapToolIdentify.__init__(self, canvas)
+        QG.QgsMapToolIdentify.__init__(self, canvas)
 
-    geomIdentified = pyqtSignal(['QgsVectorLayer', 'QgsFeature'])
+    geomIdentified = PQtC.pyqtSignal(['QgsVectorLayer', 'QgsFeature'])
 
     def canvasReleaseEvent(self, mouseEvent):
         """handle mouse release event and return indetified feature"""
-        tempfeature = QgsFeature()
+        tempfeature = QC.QgsFeature()
         results = self.identify(mouseEvent.x(), mouseEvent.y(), self.TopDownStopAtFirst, self.VectorLayer)
         if not results == []:
             tempfeature = results[0].mFeature
@@ -28,16 +27,16 @@ class IdentifyGeometryTool(QgsMapToolIdentify, QgsMapTool):
         else:
             self.geomIdentified.emit(None, tempfeature)
 
-class SelectTool(QgsMapToolIdentify, QgsMapTool):
+class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     """select geometry on the map"""
 
     whichConfig = ''
 
     def __init__(self, canvas):
         self.canvas = canvas
-        QgsMapToolIdentify.__init__(self, canvas)
+        QG.QgsMapToolIdentify.__init__(self, canvas)
 
-    geomSelected = pyqtSignal(['QgsVectorLayer', 'QgsFeature'])
+    geomSelected = PQtC.pyqtSignal(['QgsVectorLayer', 'QgsFeature'])
 
     def canvasReleaseEvent(self, mouseEvent):
         """handle mouse release event and return indetified feature"""
@@ -53,20 +52,18 @@ class SelectTool(QgsMapToolIdentify, QgsMapTool):
                 tempfeature = results[0].mFeature
             self.geomSelected.emit(idlayer, tempfeature)
         else:
-            QMessageBox.information(None, 'Geen tekenlaag!',
-                                    "U heeft geen feature op een tekenlaag aangeklikt!\n\nKlik a.u.b. op de juiste locatie."\
-                                    , QMessageBox.Ok)
+            MSG.showMsgBox('noidentifiedobject')
 
     def ask_user_for_feature(self, idLayer, allFeatures):
         """if more features are identified ask user which one to choose"""
         targetFeature = None
         query = "SELECT identifier, type_layer_name FROM {} WHERE child_layer = '{}'".format(self.whichConfig, idLayer.name())
-        attrs = read_settings(query, False)
+        attrs = UC.read_settings(query, False)
         sortList = []
         for feat in allFeatures:
             if len(attrs) > 1:
-                request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(feat[attrs[0]]))
-                type_layer = getlayer_byname(attrs[1])
+                request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(feat[attrs[0]]))
+                type_layer = UC.getlayer_byname(attrs[1])
                 tempFeature = next(type_layer.getFeatures(request))
                 sortList.append([feat["id"], tempFeature["naam"]])
             elif attrs:
@@ -81,17 +78,17 @@ class SelectTool(QgsMapToolIdentify, QgsMapTool):
                 targetFeature = feat
         return targetFeature
 
-class AskFeatureDialog(QDialog):
+class AskFeatureDialog(PQtW.QDialog):
     """if more features are identified ask user which one to choose"""
     askList = []
 
     def __init__(self, parent = None):
         super(AskFeatureDialog, self).__init__(parent)
         self.setWindowTitle("Selecteer feature")
-        qlayout = QVBoxLayout(self)
-        self.qlineA = QLabel(self)
-        self.qlineB = QLabel(self)
-        self.qComboA = QComboBox(self)
+        qlayout = PQtW.QVBoxLayout(self)
+        self.qlineA = PQtW.QLabel(self)
+        self.qlineB = PQtW.QLabel(self)
+        self.qComboA = PQtW.QComboBox(self)
         self.qlineA.setText("U heeft meerdere features geselecteerd.")
         self.qlineB.setText("Selecteer in de lijst de feature die u wilt bewerken.")
 
@@ -102,9 +99,9 @@ class AskFeatureDialog(QDialog):
         qlayout.addWidget(self.qlineA)
         qlayout.addWidget(self.qlineB)
         qlayout.addWidget(self.qComboA)
-        buttons = QDialogButtonBox(
-            QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
-            Qt.Horizontal, self)
+        buttons = PQtW.QDialogButtonBox(
+            PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
+            PQtC.Qt.Horizontal, self)
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
         qlayout.addWidget(buttons)
@@ -116,4 +113,4 @@ class AskFeatureDialog(QDialog):
         dialog = AskFeatureDialog(parent)
         result = dialog.exec_()
         indexCombo = dialog.qComboA.currentIndex()
-        return (dialog.qComboA.itemData(indexCombo), result == QDialog.Accepted)         
+        return (dialog.qComboA.itemData(indexCombo), result == PQtW.QDialog.Accepted)

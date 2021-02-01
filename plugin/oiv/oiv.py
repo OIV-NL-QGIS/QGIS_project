@@ -1,43 +1,23 @@
-"""
-/***************************************************************************
- oiv
-                                 A QGIS plugin
- place oiv objects
-                              -------------------
-        begin                : 2019-08-15
-        git sha              : $Format:%H$
-        copyright            : (C) 2019 by Joost Deen
-        email                : j.deen@safetyct.com
-        versie               : 3.2.4
- ***************************************************************************/
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
-#compile resources: pyrcc4 -o C:\Users\oiv\.qgis2\python\plugins\oiv_imroi\resources.py C:\Users\oiv\.qgis2\python\plugins\oiv_imroi\resources.qrc
-#pyrcc4 -o C:\Users\joost\.qgis2\python\plugins\oiv_imroi_v2\resources.py C:\Users\joost\.qgis2\python\plugins\oiv_imroi_v2\resources.qrc
-
+"""main file that's get evrything moving"""
 #Import the PyQt and QGIS libraries
 import os
 
-from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtGui import QIcon
-from qgis.PyQt.QtWidgets import QAction, QLabel, QComboBox, QMessageBox
-from qgis.core import QgsProject, QgsExpressionContextUtils, QgsFeatureRequest
-from qgis.gui import QgsMapToolEmitPoint
+import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
+import qgis.PyQt.QtGui as PQtG #pylint: disable=import-error
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
+import qgis.gui as QG #pylint: disable=import-error
+
+import oiv.plugin_helpers.qt_helper as QT
+import oiv.plugin_helpers.messages as MSG
 
 #initialize Qt resources from file resources.py
-from .resources import *
+from .resources import qInitResources # pylint: disable=unused-import
 
 #import plugin widget and tools
 from .tools.identifyTool import IdentifyGeometryTool, SelectTool
-from .tools.utils_core import getlayer_byname
-from .tools.utils_gui import read_settings, set_layer_substring
+from .tools.utils_core import getlayer_byname, read_settings
+from .tools.utils_gui import set_layer_substring
 from .tools.mapTool import CaptureTool
 from .tools.movepointTool import MovePointTool
 from .tools.snappointTool import SnapPointTool
@@ -62,7 +42,7 @@ class oiv:
         self.iface = iface
         self.canvas = self.iface.mapCanvas()
         self.identifyTool = IdentifyGeometryTool(self.canvas)
-        self.pinTool = QgsMapToolEmitPoint(self.canvas)
+        self.pinTool = QG.QgsMapToolEmitPoint(self.canvas)
         self.pointTool = SnapPointTool(self.canvas)
         self.selectTool = SelectTool(self.canvas)
         self.basewidget = oivBaseWidget()
@@ -72,16 +52,16 @@ class oiv:
     def initGui(self):
         """init actions plugin"""
         self.toolbar = self.iface.addToolBar("OIV Objecten")
-        self.action = QAction(QIcon(":/plugins/oiv/config_files/png/oiv_plugin.png"), "OIV Objecten", self.iface.mainWindow())
+        self.action = PQtW.QAction(PQtG.QIcon(":/plugins/oiv/config_files/png/oiv_plugin.png"), "OIV Objecten", self.iface.mainWindow())
         self.action.triggered.connect(self.run)
         self.toolbar.addAction(self.action)
         self.iface.addPluginToMenu('&OIV Objecten', self.action)
         #add label to toolbar
-        self.label = QLabel(self.iface.mainWindow())
+        self.label = PQtW.QLabel(self.iface.mainWindow())
         self.labelAction = self.toolbar.addWidget(self.label)
         self.label.setText("OIV " + self.pluginVersion + " | Actieve bouwlaag: ")
         #init dropdown to switch floors
-        self.projCombo = QComboBox(self.iface.mainWindow())
+        self.projCombo = PQtW.QComboBox(self.iface.mainWindow())
         for i in range(self.maxBouwlaag - self.minBouwlaag + 1):
             if self.maxBouwlaag - i != 0:
                 if self.maxBouwlaag - i == 1:
@@ -95,7 +75,7 @@ class oiv:
         #connect to set layer subset if the index is changed
         self.projCombo.currentIndexChanged.connect(self.set_layer_subset_toolbar)
         #init projectVariable to communicate from plugin to original drawing possibilities
-        QgsExpressionContextUtils.setProjectVariable(QgsProject.instance(), 'actieve_bouwlaag', 1)
+        QC.QgsExpressionContextUtils.setProjectVariable(QC.QgsProject.instance(), 'actieve_bouwlaag', 1)
 
     def close_basewidget(self):
         """close plugin and re-activate toolbar combobox"""
@@ -146,15 +126,16 @@ class oiv:
     def get_identified_pand(self, ilayer, ifeature):
         """Return of identified layer and feature and get related object"""
         #the identified layer must be "Bouwlagen" or "BAG panden"
-        if ilayer.name() == "Bouwlagen":
-            objectId = str(ifeature["pand_id"])
-            self.run_bouwlagen(objectId)
-        elif ilayer.name() == "BAG panden":
-            objectId = str(ifeature["identificatie"])
-            self.run_bouwlagen(objectId)
+        if isinstance(ilayer, QC.QgsVectorLayer):
+            if ilayer.name() == "Bouwlagen":
+                objectId = str(ifeature["pand_id"])
+                self.run_bouwlagen(objectId)
+            elif ilayer.name() == "BAG panden":
+                objectId = str(ifeature["identificatie"])
+                self.run_bouwlagen(objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
         else:
-            QMessageBox.information(None, "Oeps:", "Geen pand gevonden! Klik boven op een pand.")
+            MSG.showMsgBox('noidentifiedobject')
         self.identifyTool.geomIdentified.disconnect()
 
     def get_identified_terrein(self, ilayer, ifeature):
@@ -173,19 +154,17 @@ class oiv:
             self.run_object(ifeature, objectId)
         elif ilayer.name() == "Object terrein":
             objectId = ifeature["object_id"]
-            request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
+            request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
             ifeature = next(self.drawLayer.getFeatures(request))
             self.run_object(ifeature, objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
         else:
-            QMessageBox.information(None, "Oeps:", 'Geen repressief object gevonden!\n'
-                                    'Heeft u op een terrein of een object geklikt?\n\n'
-                                    'Selecteer opnieuw.')
+            MSG.showMsgBox('noidentifiedobject')
         self.identifyTool.geomIdentified.disconnect()
 
     def set_layer_subset_toolbar(self):
         """laag filter aanpassen naar de geselecteerd bouwlaag"""
-        QgsExpressionContextUtils.setProjectVariable(QgsProject.instance(), 'actieve_bouwlaag', int(self.projCombo.currentText()))
+        QC.QgsExpressionContextUtils.setProjectVariable(QC.QgsProject.instance(), 'actieve_bouwlaag', int(self.projCombo.currentText()))
         subString = "bouwlaag = " + str(self.projCombo.currentText())
         set_layer_substring(subString)
 
@@ -194,6 +173,7 @@ class oiv:
         #Load configuration file
         self.objectwidget = oivPandWidget()
         self.objectwidget.pand_id.setText(str(objectId))
+        self.objectwidget.iface = self.iface
         self.objectwidget.canvas = self.canvas
         self.objectwidget.selectTool = self.selectTool
         self.objectwidget.basewidget = self.basewidget
@@ -220,7 +200,7 @@ class oiv:
     def run_bouwlagen(self, objectId):
         """start objectgegevens widget"""
         self.init_object_widget(objectId)
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.objectwidget)
+        self.iface.addDockWidget(QT.getWidgetType(), self.objectwidget)
         self.iface.actionPan().trigger()
         self.objectwidget.show()
         self.basewidget.close()
@@ -230,7 +210,7 @@ class oiv:
     def run_object(self, ifeature, objectId):
         """start repressief object widget"""
         self.init_repressief_object_widget(ifeature, objectId)
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.repressiefobjectwidget)
+        self.iface.addDockWidget(QT.getWidgetType(), self.repressiefobjectwidget)
         self.iface.actionPan().trigger()
         self.repressiefobjectwidget.show()
         self.basewidget.close()
@@ -242,7 +222,7 @@ class oiv:
         self.init_repressief_object_widget(None, None)
         self.objectnieuwwidget.basewidget = self.basewidget
         self.objectnieuwwidget.objectwidget = self.repressiefobjectwidget
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.objectnieuwwidget)
+        self.iface.addDockWidget(QT.getWidgetType(), self.objectnieuwwidget)
         self.objectnieuwwidget.canvas = self.canvas
         self.objectnieuwwidget.mapTool = self.pinTool
         self.objectnieuwwidget.identificatienummer.setText(str(objectId))
@@ -254,17 +234,14 @@ class oiv:
 
     def run(self):
         """run the plugin, if project is not OIV object, deactivate plugin when clicked on icon"""
-        project = QgsProject.instance()
-        projectTest = str(QgsExpressionContextUtils.projectScope(project).variable('project_title'))
+        project = QC.QgsProject.instance()
+        projectTest = str(QC.QgsExpressionContextUtils.projectScope(project).variable('project_title'))
         dbVersion = read_settings("SELECT db_versie FROM applicatie;", False)[0]
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
         elif dbVersion < self.compatibleVersion[0] or dbVersion > self.compatibleVersion[1]:
-            QMessageBox.critical(None, "Database versie klopt niet",
-                                 'De plugin of het project komt niet overeen met database versie!\n'
-                                 'Vraag aan uw regionaal beheerder om een database update.\n\n'
-                                 'Excuses voor het ongemak.')
+            MSG.showMsgBox('invaliddatabaseversion')
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
         else:
@@ -272,10 +249,10 @@ class oiv:
             subString = "bouwlaag = 1"
             set_layer_substring(subString)
             self.basewidget.filterframe.setVisible(False)
-            index = self.projCombo.findText('1', Qt.MatchFixedString)
+            index = self.projCombo.findText('1', PQtC.Qt.MatchFixedString)
             if index >= 0:
                 self.projCombo.setCurrentIndex(index)
-            self.iface.addDockWidget(Qt.RightDockWidgetArea, self.basewidget)
+            self.iface.addDockWidget(QT.getWidgetType(), self.basewidget)
             self.basewidget.identify_pand.clicked.connect(self.run_identify_pand)
             self.basewidget.identify_gebouw.clicked.connect(self.run_identify_terrein)
             self.basewidget.filter_objecten.clicked.connect(lambda: init_filter_section(self.basewidget))

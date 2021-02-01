@@ -1,16 +1,15 @@
 """snap and place a point feature on the map"""
+import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
+import qgis.gui as QG #pylint: disable=import-error
 
-from qgis.PyQt.QtGui import QColor
-from qgis.PyQt.QtCore import Qt, QPoint
+import oiv.plugin_helpers.rubberband_helper as RH
 
-from qgis.core import QgsWkbTypes, QgsFeatureRequest, QgsSpatialIndex, QgsRectangle, QgsPointXY
-from qgis.gui import QgsRubberBand, QgsMapTool, QgsVertexMarker
-
-class SnapPointTool(QgsMapTool):
+class SnapPointTool(QG.QgsMapTool):
     """snap and place a point feature on the map"""
     def __init__(self, canvas):
         self.canvas = canvas
-        QgsMapTool.__init__(self, canvas)
+        QG.QgsMapTool.__init__(self, canvas)
         self.layer = None
         self.snapping = False
         self.onGeometryAdded = None
@@ -19,14 +18,14 @@ class SnapPointTool(QgsMapTool):
         self.tempRubberBand = None
         self.vertexmarker = None
         self.possibleSnapFeatures = []
-        self.setCursor(Qt.CrossCursor)
+        self.setCursor(PQtC.Qt.CrossCursor)
 
     def canvasReleaseEvent(self, event):
         """handle canvas release event"""
         clickedPt = None
         drawPoint = None
         snapAngle = None
-        if event.button() == Qt.LeftButton:
+        if event.button() == PQtC.Qt.LeftButton:
             #als er gesnapt wordt -> bereken rotatie op basis van geklikt punt en snappunt
             if self.snapPt is not None:
                 dummy, clickedPt = self.transformCoordinates(event.pos())
@@ -47,7 +46,7 @@ class SnapPointTool(QgsMapTool):
             self.onGeometryAdded(drawPoint, snapAngle)
             self.snapPt = None
         #als de rechtermuisknop wordt gebruikt (1e keer) start het roteren
-        if event.button() == Qt.RightButton:
+        if event.button() == PQtC.Qt.RightButton:
             if not self.startRotate:
                 self.start_to_rotate(event)
 
@@ -65,14 +64,9 @@ class SnapPointTool(QgsMapTool):
     def start_to_rotate(self, event):
         """indien roteren -> init temprubberband"""
         mapPt, dummy = self.transformCoordinates(event.pos())
-        color = QColor("black")
-        color.setAlphaF(0.78)
-        self.tempRubberBand = QgsRubberBand(self.canvas, QgsWkbTypes.LineGeometry)
-        self.tempRubberBand.setWidth(4)
-        self.tempRubberBand.setColor(color)
-        self.tempRubberBand.setLineStyle(Qt.DotLine)
+        self.tempRubberBand = RH.init_rubberband("moveandrotatepoint", self.canvas, 'line')
         self.tempRubberBand.show()
-        self.tempRubberBand.addPoint(mapPt) 
+        self.tempRubberBand.addPoint(mapPt)
         self.startRotate = True
 
     def canvasMoveEvent(self, event):
@@ -96,27 +90,19 @@ class SnapPointTool(QgsMapTool):
         minDist = tolerance
         snapPoint = None
         if self.vertexmarker is None:
-            self.init_vertexmarker()
+            self.vertexmarker = RH.init_vertexmarker("snappoint", self.canvas)
         for geom in self.possibleSnapFeatures:
             closestSegm = geom.closestSegmentWithContext(layerPt)
             if closestSegm[0] < minDist:
                 minDist = closestSegm[0]
                 snapPoint = closestSegm[1]
-        if snapPoint and snapPoint != QgsPointXY(0, 0):
+        if snapPoint and snapPoint != QC.QgsPointXY(0, 0):
             return snapPoint
-
-    def init_vertexmarker(self):
-        self.vertexmarker = QgsVertexMarker(self.canvas)
-        self.vertexmarker.setColor(QColor(255, 0, 255))
-        self.vertexmarker.setIconSize(8)
-        self.vertexmarker.setIconType(QgsVertexMarker.ICON_X) # or ICON_CROSS, ICON_X
-        self.vertexmarker.setPenWidth(5)
-        self.vertexmarker.show()
 
     def calcTolerance(self, pos):
         """calculate snap tolerance"""
-        pt1 = QPoint(pos.x(), pos.y())
-        pt2 = QPoint(pos.x() + 20, pos.y())
+        pt1 = PQtC.QPoint(pos.x(), pos.y())
+        pt2 = PQtC.QPoint(pos.x() + 20, pos.y())
         dummy, layerPt1 = self.transformCoordinates(pt1)
         dummy, layerPt2 = self.transformCoordinates(pt2)
         tolerance = layerPt2.x() - layerPt1.x()

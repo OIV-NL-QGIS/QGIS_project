@@ -3,29 +3,27 @@ import os
 import math
 import uuid
 
-from qgis.PyQt import uic #pylint: disable=import-error
-from qgis.PyQt.QtWidgets import QDockWidget, QMessageBox #pylint: disable=import-error
-from qgis.core import QgsGeometry, QgsFeature, QgsPointXY, QgsFeatureRequest #pylint: disable=import-error
-from qgis.core import QgsCoordinateReferenceSystem, QgsRectangle #pylint: disable=import-error
+import qgis.PyQt as PQt #pylint: disable=import-error
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
 
-from ..tools.utils_core import getlayer_byname, write_layer, read_settings
-from ..plugin_helpers.rubberband_helper import init_rubberband
-from ..plugin_helpers.grid_helpers import PAPERTOPOLYGONRD, DEFAULTSCALE, PAPERSIZES
-from ..plugin_helpers.grid_helpers import SINGLEGRIDSIZE, PROJECTCRS
-from ..plugin_helpers.messages import showMsgBox
+import oiv.plugin_helpers.grid_helpers as GH
+import oiv.plugin_helpers.rubberband_helper as RH
+import oiv.plugin_helpers.messages as MSG
+import oiv.tools.utils_core as UC
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
+FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_create_grid_widget.ui'))
 
-class oivGridWidget(QDockWidget, FORM_CLASS):
+class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
     """create dockwidget for creating grid and/or kaartblad"""
 
     iface = None
     canvas = None
     objectWidget = None
     rubberBand = None
-    xWidth = None
-    yWidth = None
+    xWidth = 0
+    yWidth = 0
     identifyTool = None
 
     def __init__(self, parent=None):
@@ -54,16 +52,17 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         else:
             self.grid_frame.setVisible(False)
             self.kaartblad_frame.setVisible(True)
-            self.format_combo.addItems(PAPERSIZES)
+            self.format_combo.addItems(GH.PAPERSIZES)
             self.preview.clicked.connect(self.create_preview)
             self.make_kaartblad.clicked.connect(lambda: self.create_kaartblad(True))
             self.make_kaartblad_only.clicked.connect(lambda: self.create_kaartblad(False))
-            self.rubberBand = init_rubberband('grid', self.canvas, 'polygon')
+
+            self.rubberBand = RH.init_rubberband('grid', self.canvas, 'polygon')
 
     def adjust_kaartblad_settings(self):
         """adjust GUI based on users choice"""
         if self.scale_25000.isChecked():
-            self.distance_grid.setValue(SINGLEGRIDSIZE)
+            self.distance_grid.setValue(GH.SINGLEGRIDSIZE)
             self.distance_grid.setEnabled(False)
             self.scale_custom.setEnabled(False)
         else:
@@ -75,16 +74,16 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         self.canvas.mapCanvasRefreshed.connect(self.refresh_kaartblad)
         paperSize = self.format_combo.currentText()
         if self.scale_25000.isChecked():
-            scale = DEFAULTSCALE
+            scale = GH.DEFAULTSCALE
         else:
             scale = self.scale_custom.value()
-        scaleRatio = scale/DEFAULTSCALE
+        scaleRatio = scale/GH.DEFAULTSCALE
         if self.orient_landscape.isChecked():
             orienTation = 'landscape'
         else:
             orienTation = 'portrait'
-        self.xWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['x_width'] * scaleRatio
-        self.yWidth = PAPERTOPOLYGONRD[paperSize][orienTation]['y_width'] * scaleRatio
+        self.xWidth = GH.PAPERTOPOLYGONRD[paperSize][orienTation]['x_width'] * scaleRatio
+        self.yWidth = GH.PAPERTOPOLYGONRD[paperSize][orienTation]['y_width'] * scaleRatio
         self.refresh_kaartblad()
 
     def refresh_kaartblad(self):
@@ -103,10 +102,10 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             self.canvas.scene().removeItem(self.rubberBand)
         except: #pylint: disable=bare-except
             pass
-        self.rubberBand = init_rubberband('grid', self.canvas, 'polygon')
-        tempRect = QgsRectangle(QgsPointXY(xmin, ymin), QgsPointXY(xmax, ymax))
-        tempGeom = QgsGeometry.fromRect(tempRect)
-        crs = QgsCoordinateReferenceSystem(PROJECTCRS)
+        self.rubberBand = RH.init_rubberband('grid', self.canvas, 'polygon')
+        tempRect = QC.QgsRectangle(QC.QgsPointXY(xmin, ymin), QC.QgsPointXY(xmax, ymax))
+        tempGeom = QC.QgsGeometry.fromRect(tempRect)
+        crs = QC.QgsCoordinateReferenceSystem(GH.PROJECTCRS)
         self.rubberBand.reset()
         self.rubberBand.setToGeometry(tempGeom, crs)
         self.rubberBand.show()
@@ -116,15 +115,15 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
         geom = self.rubberBand.asGeometry()
         geom.convertToMultiType()
         layerName = 'Grid'
-        layer = getlayer_byname(layerName)
-        targetFeature = QgsFeature()
+        layer = UC.getlayer_byname(layerName)
+        targetFeature = QC.QgsFeature()
         targetFields = layer.fields()
         targetFeature.initAttributes(targetFields.count())
         targetFeature.setFields(targetFields)
         targetFeature.setGeometry(geom)
         targetFeature["type"] = 'Kaartblad'
         if self.scale_25000.isChecked():
-            targetFeature["scale"] = DEFAULTSCALE
+            targetFeature["scale"] = GH.DEFAULTSCALE
         else:
             targetFeature["scale"] = self.scale_custom.value()
         targetFeature["papersize"] = self.format_combo.currentText()
@@ -134,9 +133,9 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             targetFeature["orientation"] = 'portrait'
         targetFeature["uuid"] = str(gridUUID)
         query = "SELECT foreign_key FROM config_object WHERE child_layer = '{}'".format(layerName)
-        foreignKey = read_settings(query, False)[0]
+        foreignKey = UC.read_settings(query, False)[0]
         targetFeature[foreignKey] = self.object_id.text()
-        write_layer(layer, targetFeature)
+        UC.write_layer(layer, targetFeature)
         bbox = geom.boundingBox()
         dist = self.distance_grid.value()
         if withGrid:
@@ -145,8 +144,8 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
 
     def calculate_extent(self, dist, extent, gridType='Grid'):
         if gridType == 'Grid':
-            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % SINGLEGRIDSIZE + SINGLEGRIDSIZE
-            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % SINGLEGRIDSIZE + SINGLEGRIDSIZE
+            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % GH.SINGLEGRIDSIZE + GH.SINGLEGRIDSIZE
+            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % GH.SINGLEGRIDSIZE + GH.SINGLEGRIDSIZE
             xmax = int(extent.xMaximum()) - int(extent.xMaximum()) % dist
             ymax = int(extent.yMaximum()) - int(extent.yMaximum()) % dist
         else:
@@ -170,13 +169,13 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             extent = self.canvas.extent()
             dist = self.distance.value()
         layerName = 'Grid'
-        layer = getlayer_byname(layerName)
-        targetFeature = QgsFeature()
+        layer = UC.getlayer_byname(layerName)
+        targetFeature = QC.QgsFeature()
         targetFields = layer.fields()
         targetFeature.initAttributes(targetFields.count())
         targetFeature.setFields(targetFields)
         query = "SELECT foreign_key FROM config_object WHERE child_layer = '{}'".format(layerName)
-        foreignKey = read_settings(query, False)[0]
+        foreignKey = UC.read_settings(query, False)[0]
         xmin, dummy, ymin, dummy, xIt, yIt = self.calculate_extent(dist, extent, gridType)
         objectId = self.object_id.text()
         targetFeature[foreignKey] = objectId
@@ -199,8 +198,8 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
                 targetFeature['x_as_label'] = xLabel
                 targetFeature['afstand'] = dist
                 targetFeature["uuid"] = str(gridUUID)
-                write_layer(layer, targetFeature)
-        showMsgBox('gridcreated')
+                UC.write_layer(layer, targetFeature)
+        MSG.showMsgBox('gridcreated')
 
     def calculate_geometry(self, dist, xmin, ymin, x, y, gridType):
         """calculate grid polygons"""
@@ -213,19 +212,19 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             ymax = ymin + y * dist + (self.yWidth - y * dist)
         else:
             ymax = ymin + (y + 1) * dist
-        points.append(QgsPointXY(xmin + x * dist, ymin + y * dist))
-        points.append(QgsPointXY(xmax, ymin + y * dist))
-        points.append(QgsPointXY(xmax, ymax))
-        points.append(QgsPointXY(xmin + x * dist, ymax))
-        return QgsGeometry.fromMultiPolygonXY([[points]])
+        points.append(QC.QgsPointXY(xmin + x * dist, ymin + y * dist))
+        points.append(QC.QgsPointXY(xmax, ymin + y * dist))
+        points.append(QC.QgsPointXY(xmax, ymax))
+        points.append(QC.QgsPointXY(xmin + x * dist, ymax))
+        return QC.QgsGeometry.fromMultiPolygonXY([[points]])
 
     def delete_existing_grid(self, gridUUID, layer):
-        request = QgsFeatureRequest().setFilterExpression('"uuid" = ' + "'{}'".format(gridUUID))
+        request = QC.QgsFeatureRequest().setFilterExpression('"uuid" = ' + "'{}'".format(gridUUID))
         featureIt = layer.getFeatures(request)
-        reply = showMsgBox('deletegrid')
-        if reply == QMessageBox.No:
+        reply = MSG.showMsgBox('deletegrid')
+        if reply == PQtW.QMessageBox.No:
             return "Exit"
-        if reply == QMessageBox.Yes:
+        if reply == PQtW.QMessageBox.Yes:
             layer.startEditing()
             for feat in featureIt:
                 layer.deleteFeature(feat.id())
@@ -233,7 +232,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             return "Done"
 
     def run_delete_tool(self):
-        showMsgBox('selectgrid')
+        MSG.showMsgBox('selectgrid')
         self.canvas.setMapTool(self.identifyTool)
         self.identifyTool.geomIdentified.connect(self.delete)
 
@@ -243,7 +242,7 @@ class oivGridWidget(QDockWidget, FORM_CLASS):
             gridUUID = ifeature["uuid"]
             self.delete_existing_grid(gridUUID, ilayer)
         else:
-            showMsgBox('nogridselected')
+            MSG.showMsgBox('nogridselected')
             self.run_delete_tool()
         self.identifyTool.geomIdentified.disconnect(self.delete)
         self.iface.actionPan().trigger()

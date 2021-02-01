@@ -1,19 +1,18 @@
 """Tool to draw lines and polygons on the map canvas"""
-from qgis.PyQt.QtGui import QColor
-from qgis.PyQt.QtCore import Qt, QPoint #pylint: disable=import-error
-from qgis.core import QgsDistanceArea, QgsPoint, QgsWkbTypes, QgsCircle, QgsGeometry #pylint: disable=import-error
-from qgis.gui import QgsVertexMarker, QgsMapTool #pylint: disable=import-error
+import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
+import qgis.gui as QG #pylint: disable=import-error
 
-from ..plugin_helpers.rubberband_helper import init_rubberband, calculate_perpendicularbands, init_vertexmarker
+import oiv.plugin_helpers.rubberband_helper as RH
 
-class CaptureTool(QgsMapTool):
+class CaptureTool(QG.QgsMapTool):
     """QgsMapTool to draw lines and polygons on the map canvas"""
     CAPTURE_LINE = 1
     CAPTURE_POLYGON = 2
     snapRubberBand = []
 
     def __init__(self, canvas):
-        QgsMapTool.__init__(self, canvas)
+        QG.QgsMapTool.__init__(self, canvas)
         self.canvas = canvas
         self.captureMode = None
         self.onGeometryAdded = None
@@ -31,7 +30,7 @@ class CaptureTool(QgsMapTool):
         self.possibleSnapFeatures = []
         self.vertexmarker = None
         self.parent = None
-        self.setCursor(Qt.CrossCursor)
+        self.setCursor(PQtC.Qt.CrossCursor)
 
     def canvasReleaseEvent(self, event):
         """#actie gekoppeld aan the mouse release event"""
@@ -46,7 +45,7 @@ class CaptureTool(QgsMapTool):
             self.roundRubberBand.reset()
         #als er met de linker muis geklikt wordt en er wordt nog niet getekend -> start het tekenen
         #anders voeg het aangeklikte punt toe aan de verzameling
-        if event.button() == Qt.LeftButton:
+        if event.button() == PQtC.Qt.LeftButton:
             if not self.capturing:
                 self.startCapturing()
             if self.parent.offset_button.isChecked():
@@ -54,7 +53,7 @@ class CaptureTool(QgsMapTool):
             else:
                 self.addVertex(event.pos())
         #indien het de rechter muisknop is -> stop het tekenen en vertaal de punten tot een geometrie
-        elif event.button() == Qt.RightButton:
+        elif event.button() == PQtC.Qt.RightButton:
             self.getCapturedGeometry()
             self.stopCapturing()
 
@@ -72,22 +71,22 @@ class CaptureTool(QgsMapTool):
                 if self.captureMode == CaptureTool.CAPTURE_LINE:
                     self.tempRubberBandExt.setToGeometry(self.tempRubberBand.asGeometry().extendLine(0, 50))
                     try:
-                        distance = QgsDistanceArea()
+                        distance = QC.QgsDistanceArea()
                         m = distance.measureLine(self.tempRubberBand.getPoint(0, 0), layerPt)
                         self.parent.lengte.setValue(round(m, 2))
                     except: # pylint: disable=bare-except
                         pass
                 else:
-                    geom = QgsGeometry.fromPolylineXY([self.tempRubberBand.getPoint(0, tempBandSize - 2), layerPt]).extendLine(0, 50)
+                    geom = QC.QgsGeometry.fromPolylineXY([self.tempRubberBand.getPoint(0, tempBandSize - 2), layerPt]).extendLine(0, 50)
                     self.tempRubberBandExt.setToGeometry(geom)
             if self.captureMode == CaptureTool.CAPTURE_POLYGON and len(self.capturedPoints) >= 1 and self.capturing:
-                distance = QgsDistanceArea()
+                distance = QC.QgsDistanceArea()
                 m = distance.measureLine(self.tempRubberBand.getPoint(0, tempBandSize - 2), layerPt)
                 self.parent.lengte.setValue(round(m, 2))
                 try:
                     polygon = self.rubberBand.asGeometry().asPolygon()[0]
                     temppolygon = self.tempRubberBand.asGeometry().asPolygon()[0]
-                    area = QgsDistanceArea()
+                    area = QC.QgsDistanceArea()
                     a = area.measurePolygon(polygon)
                     b = area.measurePolygon(temppolygon)
                     self.parent.oppervlakte.setValue(round(a + b, 2))
@@ -110,7 +109,7 @@ class CaptureTool(QgsMapTool):
         #add rubberbands as possible snapfeatures
         snappableFeatures = self.possibleSnapFeatures + self.snapRubberBand
         if self.vertexmarker is None:
-            self.vertexmarker = init_vertexmarker("snappoint", self.canvas)
+            self.vertexmarker = RH.init_vertexmarker("snappoint", self.canvas)
         for geom in snappableFeatures:
             closestSegm = geom.closestSegmentWithContext(layerPt)
             vertexCoord, vertex, prevVertex, dummy, distSquared = geom.closestVertex(layerPt)
@@ -126,9 +125,9 @@ class CaptureTool(QgsMapTool):
         if snapPoints:
             snapPoint = snapPoints[0]
             igeometry = snapPoints[4]
-            if igeometry.wkbType() == QgsWkbTypes.LineString:
+            if igeometry.wkbType() == QC.QgsWkbTypes.LineString:
                 polygon = igeometry.asPolyline()
-            elif igeometry.wkbType() == QgsWkbTypes.MultiLineString:
+            elif igeometry.wkbType() == QC.QgsWkbTypes.MultiLineString:
                 polygon = igeometry.asMultiPolyline()[0]
             elif igeometry.wkbType() == 1003 or igeometry.wkbType() == 6:
                 polygon = igeometry.asMultiPolygon()[0][0]
@@ -142,8 +141,8 @@ class CaptureTool(QgsMapTool):
 
     def calcTolerance(self, pos):
         """calculate the tolerance of snapping"""
-        pt1 = QPoint(pos.x(), pos.y())
-        pt2 = QPoint(pos.x() + 10, pos.y())
+        pt1 = PQtC.QPoint(pos.x(), pos.y())
+        pt2 = PQtC.QPoint(pos.x() + 10, pos.y())
         layerPt1 = self.toMapCoordinates(pt1)
         layerPt2 = self.toMapCoordinates(pt2)
         tolerance = layerPt2.x() - layerPt1.x()
@@ -151,37 +150,37 @@ class CaptureTool(QgsMapTool):
 
     def keyPressEvent(self, event):
         """handle keypress events"""
-        if event.key() == Qt.Key_Backspace or \
-           event.key() == Qt.Key_Delete:
+        if event.key() == PQtC.Qt.Key_Backspace or \
+           event.key() == PQtC.Qt.Key_Delete:
             self.removeLastVertex()
             event.ignore()
-        if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
+        if event.key() == PQtC.Qt.Key_Return or event.key() == PQtC.Qt.Key_Enter:
             self.getCapturedGeometry()
             self.stopCapturing()
 
     def startCapturing(self):
         """bij starten van het tekenen intialiseer de rubberbands"""
-        if self.bandType() == QgsWkbTypes.PolygonGeometry:
+        if self.bandType() == QC.QgsWkbTypes.PolygonGeometry:
             rbType = 'polygon'
         else:
             rbType = 'line'
         #rubberband voor de al vastgelegde punten
-        self.rubberBand = init_rubberband("drawn", self.canvas, rbType)
+        self.rubberBand = RH.init_rubberband("drawn", self.canvas, rbType)
         self.rubberBand.show()
         #gestippelde rubberband -> voor het tekenen
-        self.tempRubberBand = init_rubberband("newpoint", self.canvas, rbType)
-        self.tempRubberBandExt = init_rubberband("drawinghelpers", self.canvas, "line")
+        self.tempRubberBand = RH.init_rubberband("newpoint", self.canvas, rbType)
+        self.tempRubberBandExt = RH.init_rubberband("drawinghelpers", self.canvas, "line")
         self.tempRubberBandExt.show()
         self.tempRubberBand.show()
         #2x loodrechte hulp tekenlijnen
-        self.perpRubberBand = init_rubberband("drawinghelpers", self.canvas, "line")
-        self.perpRubberBand2 = init_rubberband("drawinghelpers", self.canvas, "line")
+        self.perpRubberBand = RH.init_rubberband("drawinghelpers", self.canvas, "line")
+        self.perpRubberBand2 = RH.init_rubberband("drawinghelpers", self.canvas, "line")
         self.perpRubberBand.show()
         self.perpRubberBand2.show()
-        self.parallelRubberBand = init_rubberband("drawinghelpers", self.canvas, "line")
+        self.parallelRubberBand = RH.init_rubberband("drawinghelpers", self.canvas, "line")
         self.parallelRubberBand.show()
         #round distance rubberband
-        self.roundRubberBand = init_rubberband("drawinghelpers", self.canvas, "line")
+        self.roundRubberBand = RH.init_rubberband("drawinghelpers", self.canvas, "line")
         self.roundRubberBand.show()
         self.parent.straal.valueChanged.connect(self.draw_help_circle)
         self.parent.straal_button.clicked.connect(self.enable_roundrubberband)
@@ -190,9 +189,9 @@ class CaptureTool(QgsMapTool):
     def bandType(self):
         """bepaal het type rubberband (polygoon of line)"""
         if self.captureMode == CaptureTool.CAPTURE_POLYGON:
-            return QgsWkbTypes.PolygonGeometry
+            return QC.QgsWkbTypes.PolygonGeometry
         else:
-            return QgsWkbTypes.LineGeometry
+            return QC.QgsWkbTypes.LineGeometry
 
     def enable_roundrubberband(self):
         """hide/show the help circle"""
@@ -259,7 +258,7 @@ class CaptureTool(QgsMapTool):
             self.draw_helplines(layerPt, snapAngle)
         #reset de temprubberband t.b.v. het volgende punt
         self.tempRubberBand.reset(self.bandType())
-        self.tempRubberBandExt.reset(QgsWkbTypes.LineGeometry)
+        self.tempRubberBandExt.reset(QC.QgsWkbTypes.LineGeometry)
         if self.captureMode == CaptureTool.CAPTURE_LINE:
             self.tempRubberBand.addPoint(layerPt)
         elif self.captureMode == CaptureTool.CAPTURE_POLYGON:
@@ -278,15 +277,15 @@ class CaptureTool(QgsMapTool):
             #bereken de snaphoek van het geklikte punt ten opzichte van het snappunt
             snapAngle = clickedPt.azimuth(layerPt) + 90
             offset = self.parent.offset.value()
-            distance = QgsDistanceArea()
+            distance = QC.QgsDistanceArea()
             m = distance.measureLine(layerPt, clickedPt)
-            geom = QgsGeometry.fromPolylineXY([layerPt, clickedPt])
+            geom = QC.QgsGeometry.fromPolylineXY([layerPt, clickedPt])
             if offset > m:
                 geom = geom.extendLine(0, offset - m)
                 offsetPt = geom.asPolyline()[-1]
             else:
                 offsetPt = geom.interpolate(offset).asPoint()
-            point1, point2, dummy, dummy = calculate_perpendicularbands(offsetPt, snapAngle)
+            point1, point2, dummy, dummy = RH.calculate_perpendicularbands(offsetPt, snapAngle)
             self.parallelRubberBand.addPoint(point1)
             self.parallelRubberBand.addPoint(point2, True)
             self.snapRubberBand.append(self.parallelRubberBand.asGeometry())
@@ -301,15 +300,15 @@ class CaptureTool(QgsMapTool):
         if self.parent.straal_button.isChecked() and self.capturing:
             straal = self.parent.straal.value()
             startPt = self.capturedPoints[-1]
-            circle = QgsCircle(QgsPoint(startPt), straal)
+            circle = QC.QgsCircle(QC.QgsPoint(startPt), straal)
             cString = circle.toCircularString()
-            geom_from_curve = QgsGeometry(cString)
+            geom_from_curve = QC.QgsGeometry(cString)
             self.roundRubberBand.setToGeometry(geom_from_curve)
             self.snapRubberBand.append(self.roundRubberBand.asGeometry())
 
     def draw_helplines(self, startPt, angle):
         """bereken de haakse lijnen op basis van de gesnapte feature"""
-        point1, point2, point3, point4 = calculate_perpendicularbands(startPt, angle)
+        point1, point2, point3, point4 = RH.calculate_perpendicularbands(startPt, angle)
         self.perpRubberBand.addPoint(point1)
         self.perpRubberBand.addPoint(point2, True)
         self.snapRubberBand.append(self.perpRubberBand.asGeometry())
