@@ -9,6 +9,7 @@ import qgis.core as QC #pylint: disable=import-error
 
 import oiv.tools.utils_core as UC
 import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.configdb_helper as CH
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_import_file_widget.ui'))
@@ -90,8 +91,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         layerName = 'Bouwlagen'
         layer = UC.getlayer_byname(layerName)
         #get necessary attributes from config file
-        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
-        foreignKey = UC.read_settings(query, False)[0]
+        foreignKey = CH.get_foreign_key_bl(layerName)
         #construct QgsFeature to save
         childFeature.setGeometry(bouwlaagFeature.geometry())
         fields = layer.fields()
@@ -172,8 +172,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         targetLayer = UC.getlayer_byname(targetLayerName)
         targetFields = targetLayer.fields()
         targetFeature.initAttributes(targetFields.count())
-        query = "SELECT identifier FROM config_bouwlaag WHERE child_layer = '{}'".format(targetLayerName)
-        identifier = UC.read_settings(query, False)[0]        
+        identifier = CH.get_identifier_bl(targetLayerName)
         targetFeature.setFields(targetFields)
         self.iface.setActiveLayer(self.importLayer)
         dummy, progressBar = self.progressdialog(0)

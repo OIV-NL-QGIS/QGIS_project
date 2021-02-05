@@ -3,6 +3,7 @@ import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 
 import oiv.tools.utils_core as UC
 import oiv.plugin_helpers.drawing_helper as DH
+import oiv.plugin_helpers.configdb_helper as CH
 
 def init_filter_section(wdgt):
     wdgt.filterframe.setVisible(True)
@@ -23,7 +24,7 @@ def set_object_filter(wdgt):
         filters.append("(datum_geldig_tot < '{}' OR datum_geldig_tot IS NULL)".format(wdgt.datum_tot.date().toPyDate()))
     if wdgt.checkSoort.isChecked():
         filters.append("typeobject = '{}'".format(wdgt.objecttype.currentText()))
-    layerNames = UC.read_settings("SELECT child_layer FROM config_object;", True)
+    layerNames = CH.get_chidlayers_ob()
     if filters:
         subString = ' AND '.join(filters)
     else:

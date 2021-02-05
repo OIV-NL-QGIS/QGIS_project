@@ -11,6 +11,7 @@ import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
 import oiv.plugin_helpers.drawing_helper as DH
 import oiv.plugin_helpers.qt_helper as QH
+import oiv.plugin_helpers.configdb_helper as CH
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_object_tekenen_widget.ui'))
@@ -152,8 +153,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identifier = feature_id
         self.drawLayer = UC.getlayer_byname(runLayer)
         self.drawLayerType = UC.check_layer_type(self.drawLayer)
-        query = "SELECT parent_layer FROM config_object WHERE child_layer = '{}'".format(runLayer)
-        self.parentLayerName = UC.read_settings(query, False)[0]
+        self.parentLayerName = CH.get_parentlayer_ob(runLayer)
         objectId = self.object_id.text()
         possibleSnapFeatures = UC.get_possible_snapFeatures_object(self.snapLayerNames, objectId)
         if self.drawLayerType == "Point":

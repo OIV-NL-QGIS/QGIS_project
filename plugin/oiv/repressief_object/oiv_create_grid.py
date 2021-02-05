@@ -10,6 +10,7 @@ import qgis.core as QC #pylint: disable=import-error
 import oiv.plugin_helpers.grid_helpers as GH
 import oiv.plugin_helpers.rubberband_helper as RH
 import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.configdb_helper as CH
 import oiv.tools.utils_core as UC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
@@ -56,7 +57,6 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
             self.preview.clicked.connect(self.create_preview)
             self.make_kaartblad.clicked.connect(lambda: self.create_kaartblad(True))
             self.make_kaartblad_only.clicked.connect(lambda: self.create_kaartblad(False))
-
             self.rubberBand = RH.init_rubberband('grid', self.canvas, 'polygon')
 
     def adjust_kaartblad_settings(self):
@@ -132,8 +132,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             targetFeature["orientation"] = 'portrait'
         targetFeature["uuid"] = str(gridUUID)
-        query = "SELECT foreign_key FROM config_object WHERE child_layer = '{}'".format(layerName)
-        foreignKey = UC.read_settings(query, False)[0]
+        foreignKey = CH.get_foreign_key_ob(layerName)
         targetFeature[foreignKey] = self.object_id.text()
         UC.write_layer(layer, targetFeature)
         bbox = geom.boundingBox()
@@ -174,8 +173,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         targetFields = layer.fields()
         targetFeature.initAttributes(targetFields.count())
         targetFeature.setFields(targetFields)
-        query = "SELECT foreign_key FROM config_object WHERE child_layer = '{}'".format(layerName)
-        foreignKey = UC.read_settings(query, False)[0]
+        foreignKey = CH.get_foreign_key_ob(layerName)
         xmin, dummy, ymin, dummy, xIt, yIt = self.calculate_extent(dist, extent, gridType)
         objectId = self.object_id.text()
         targetFeature[foreignKey] = objectId

@@ -9,6 +9,7 @@ import qgis.utils as QU #pylint: disable=import-error
 import oiv.tools.utils_core as UC
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.qt_helper as QH
+import oiv.plugin_helpers.configdb_helper as CH
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_objectnieuw_widget.ui'))
@@ -82,9 +83,7 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
 
     #get the right attributes from user
     def get_attributes(self, foreignKey, childFeature):
-        query = "SELECT foreign_key, input_label, question, label_required\
-             FROM config_object WHERE child_layer = '{}'".format(self.drawLayer.name())
-        attrs = UC.read_settings(query, False)
+        attrs = CH.get_allkeys_ob(self.drawLayer.name())
         labelTekst = UC.user_input_label(attrs[3], attrs[2])
         if labelTekst != 'Cancel':
             fields = self.drawLayer.fields()

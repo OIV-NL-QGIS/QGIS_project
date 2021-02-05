@@ -10,13 +10,15 @@ import qgis.gui as QG #pylint: disable=import-error
 
 import oiv.plugin_helpers.qt_helper as QT
 import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.plugin_constants as PC
 
 #initialize Qt resources from file resources.py
 from .resources import qInitResources # pylint: disable=unused-import
 
 #import plugin widget and tools
 from .tools.identifyTool import IdentifyGeometryTool, SelectTool
-from .tools.utils_core import getlayer_byname, read_settings
+from .tools.utils_core import getlayer_byname
 from .tools.utils_gui import set_layer_substring
 from .tools.mapTool import CaptureTool
 from .tools.movepointTool import MovePointTool
@@ -30,10 +32,9 @@ from .repressief_object.oiv_objectnieuw import oivObjectNieuwWidget
 class oiv:
     """initialize class attributes"""
 
-    compatibleVersion = [324, 329]
-    pluginVersion = '3.2.9'
-    minBouwlaag = -10
-    maxBouwlaag = 30
+    action = None
+    toolbar = None
+    projCombo = None
     checkVisibility = False
     drawLayer = None
 
@@ -51,22 +52,24 @@ class oiv:
 
     def initGui(self):
         """init actions plugin"""
-        self.toolbar = self.iface.addToolBar("OIV Objecten")
-        self.action = PQtW.QAction(PQtG.QIcon(":/plugins/oiv/config_files/png/oiv_plugin.png"), "OIV Objecten", self.iface.mainWindow())
+        self.toolbar = self.iface.addToolBar(PC.PLUGIN["name"])
+        self.action = PQtW.QAction(PQtG.QIcon(PC.PLUGIN["icon"]), PC.PLUGIN["name"], self.iface.mainWindow())
         self.action.triggered.connect(self.run)
         self.toolbar.addAction(self.action)
-        self.iface.addPluginToMenu('&OIV Objecten', self.action)
+        self.iface.addPluginToMenu(PC.PLUGIN["menulocation"], self.action)
         #add label to toolbar
-        self.label = PQtW.QLabel(self.iface.mainWindow())
-        self.labelAction = self.toolbar.addWidget(self.label)
-        self.label.setText("OIV " + self.pluginVersion + " | Actieve bouwlaag: ")
+        label = PQtW.QLabel()
+        self.toolbar.addWidget(label)
+        label.setText(PC.PLUGIN["toolbartext"])
         #init dropdown to switch floors
         self.projCombo = PQtW.QComboBox(self.iface.mainWindow())
-        for i in range(self.maxBouwlaag - self.minBouwlaag + 1):
-            if self.maxBouwlaag - i != 0:
-                if self.maxBouwlaag - i == 1:
+        minBouwlaag = PC.BOUWLAAG["minbouwlaag"]
+        maxBouwlaag = PC.BOUWLAAG["maxbouwlaag"]
+        for i in range(maxBouwlaag - minBouwlaag + 1):
+            if maxBouwlaag - i != 0:
+                if maxBouwlaag - i == 1:
                     init_index = i
-                self.projCombo.addItem(str(self.maxBouwlaag - i))
+                self.projCombo.addItem(str(maxBouwlaag - i))
         self.projComboAction = self.toolbar.addWidget(self.projCombo)
         self.projCombo.setFixedWidth(100)
         self.projCombo.setMaxVisibleItems(30)
@@ -98,7 +101,7 @@ class oiv:
             del self.objectnieuwwidget
         except: # pylint: disable=bare-except
             pass
-        self.iface.removePluginMenu("&OIV Objecten", self.action)
+        self.iface.removePluginMenu(PC.PLUGIN["menulocation"], self.action)
         self.projCombo.currentIndexChanged.disconnect()
         self.action.triggered.disconnect()
         del self.toolbar
@@ -148,7 +151,7 @@ class oiv:
             objectId   = str(ifeature["identificatie"])
             bron       = ifeature["bron"]
             bron_tabel = ifeature["bron_tbl"]
-            self.run_new_object(objectId, bron, bron_tabel) 
+            self.run_new_object(objectId, bron, bron_tabel)
         elif ilayer.name() == "Objecten":
             objectId = ifeature["id"]
             self.run_object(ifeature, objectId)
@@ -164,9 +167,16 @@ class oiv:
 
     def set_layer_subset_toolbar(self):
         """laag filter aanpassen naar de geselecteerd bouwlaag"""
-        QC.QgsExpressionContextUtils.setProjectVariable(QC.QgsProject.instance(), 'actieve_bouwlaag', int(self.projCombo.currentText()))
         subString = "bouwlaag = " + str(self.projCombo.currentText())
-        set_layer_substring(subString)
+        reply = set_layer_substring(subString)
+        project = QC.QgsProject.instance()
+        if reply == 'succes':
+            QC.QgsExpressionContextUtils.setProjectVariable(project, 'actieve_bouwlaag', int(self.projCombo.currentText()))
+        else:
+            activeBl = QC.QgsExpressionContextUtils.projectScope(project).variable('actieve_bouwlaag')
+            self.projCombo.blockSignals(True)
+            self.projCombo.setCurrentText(str(activeBl))
+            self.projCombo.blockSignals(False)
 
     def init_object_widget(self, objectId):
         """pass on the tools to objectgegevens widget, intitializing the tools in the sub widget, draws an error"""
@@ -236,11 +246,11 @@ class oiv:
         """run the plugin, if project is not OIV object, deactivate plugin when clicked on icon"""
         project = QC.QgsProject.instance()
         projectTest = str(QC.QgsExpressionContextUtils.projectScope(project).variable('project_title'))
-        dbVersion = read_settings("SELECT db_versie FROM applicatie;", False)[0]
+        dbVersion = CH.get_app_version()
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
-        elif dbVersion < self.compatibleVersion[0] or dbVersion > self.compatibleVersion[1]:
+        elif PC.PLUGIN["compatibleDbVersion"][1] > dbVersion < PC.PLUGIN["compatibleDbVersion"][0]:
             MSG.showMsgBox('invaliddatabaseversion')
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)

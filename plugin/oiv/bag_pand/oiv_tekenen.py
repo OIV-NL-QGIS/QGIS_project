@@ -10,7 +10,7 @@ import oiv.tools.utils_gui as UG
 import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
 import oiv.plugin_helpers.drawing_helper as DW
-import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.configdb_helper as CH
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_tekenen_widget.ui'))
@@ -149,8 +149,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identifier = feature_id
         self.drawLayer = UC.getlayer_byname(runLayer)
         self.drawLayerType = UC.check_layer_type(self.drawLayer)
-        query = "SELECT parent_layer FROM config_bouwlaag WHERE child_layer = '{}'".format(runLayer)
-        self.parentLayerName = UC.read_settings(query, False)[0]
+        self.parentLayerName = CH.get_parentlayer_bl(runLayer)
         objectId = self.pand_id.text()
         #aan welke lagen kan worden gesnapt?
         possibleSnapFeatures = UC.get_possible_snapFeatures_bouwlaag(self.snapLayerNames, objectId)

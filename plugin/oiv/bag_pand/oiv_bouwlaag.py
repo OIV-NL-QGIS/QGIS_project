@@ -10,6 +10,7 @@ import oiv.tools.utils_core as UC
 import oiv.tools.utils_gui as UG
 import oiv.plugin_helpers.drawing_helper as DW
 import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.configdb_helper as CH
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_bouwlaag_widget.ui'))
@@ -105,8 +106,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         newFeature = QC.QgsFeature()
         newFeature.initAttributes(fields.count())
         newFeature.setFields(fields)
-        query = "SELECT foreign_key, identifier, input_label, rotatie FROM config_bouwlaag WHERE child_layer = '{}'".format(layer.name())
-        attrs = UC.read_settings(query, False)
+        attrs = CH.get_allkeys_bl(layer.name())
         #get features by bouwlaag ID
         it = layer.getFeatures(QC.QgsFeatureRequest().setFilterExpression(attrs[0] + '=' + str(parentID)))
         for feat in it:
@@ -141,8 +141,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         childFeature = QC.QgsFeature()
         layerName = 'Bouwlagen'
         layer = UC.getlayer_byname(layerName)
-        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
-        foreignKey = UC.read_settings(query, False)[0]
+        foreignKey = CH.get_foreign_key_bl(layerName)
         #construct QgsFeature to save
         for i in range(minBouwlaag, maxBouwlaag + 1):
             if i != 0:
@@ -178,8 +177,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             maxBouwlaag = int(self.bouwlaag_max.text())
             layer = UC.getlayer_byname(layerName)
             #get necessary attributes from config file
-            query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
-            foreignKey = UC.read_settings(query, False)[0]
+            foreignKey = CH.get_foreign_key_bl(layerName)
             #construct QgsFeature to save
             for i in range(minBouwlaag, maxBouwlaag + 1):
                 if i != 0:

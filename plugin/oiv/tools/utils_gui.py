@@ -1,12 +1,29 @@
 """utilities to adjust the UI of the widgets"""
-import oiv.tools.utils_core as UC #import getlayer_byname, check_layer_type, read_settings
+import oiv.tools.utils_core as UC
+import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.messages as MSG
 
 def set_layer_substring(subString):
     """set layer subset according (you can check the subset under properties of the layer)"""
-    layerNames = UC.read_settings("SELECT child_layer FROM config_bouwlaag;", True)
+    unSavedChanges = False
+    layersInEditMode = []
+    layerNames = CH.get_chidlayers_bl()
     for layerName in layerNames:
         layer = UC.getlayer_byname(layerName[0])
-        layer.setSubsetString(subString)
+        if layer.isModified():
+            unSavedChanges = True
+            MSG.showMsgBox('unsavedchanges')
+            return 'unsavedchanges'
+        if layer.isEditable() and not layer.isModified():
+            layersInEditMode.append(layer)
+            layer.commitChanges()
+    if not unSavedChanges:
+        for layerName in layerNames:
+            lyr = UC.getlayer_byname(layerName[0])
+            lyr.setSubsetString(subString)
+            if lyr in layersInEditMode:
+                lyr.startEditing()
+        return "succes"
 
 def set_lengte_oppervlakte_visibility(widget, lengteTF, straalTF, oppTF, offsetTF):
     """change UI based on drawing lines/polygons"""

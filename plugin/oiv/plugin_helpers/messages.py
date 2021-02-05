@@ -121,4 +121,9 @@ MESSAGES = {
                 'Vraag aan uw regionaal beheerder om een database update.\n\n'
                 'Excuses voor het ongemak.'
     },
+    'unsavedchanges': {
+        "type": 'warning',
+        "header": 'Niet opgeslagen',
+        "body": 'Om van bouwlaag te veranderen moet u eerst de bewerkingen opslaan!\n\nVoer daarna de actie opnieuw uit!'
+    },
 }

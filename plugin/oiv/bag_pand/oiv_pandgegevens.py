@@ -12,6 +12,7 @@ import oiv.tools.utils_gui as UG
 import oiv.tools.query_bag as QB
 import oiv.tools.stackwidget as SW
 import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.configdb_helper as CH
 
 from .oiv_bouwlaag import oivBouwlaagWidget
 from .oiv_tekenen import oivTekenWidget
@@ -85,8 +86,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         runLayer = 'Bouwlagen'
         tempLayer = UC.getlayer_byname(runLayer)
         objectId = self.pand_id.text()
-        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(runLayer)
-        foreignKey = UC.read_settings(query, False)[0]
+        foreignKey = CH.get_foreign_key_bl(runLayer)
         tempLayer.setSubsetString('')
         #request all existing floors of object feature
         request = QC.QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + str(objectId) + "'")
@@ -126,8 +126,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         runLayer = "Bouwlagen"
         ilayer = UC.getlayer_byname(runLayer)
         objectId = self.pand_id.text()
-        query = "SELECT foreign_key FROM config_bouwlaag WHERE child_layer = '{}'".format(runLayer)
-        foreignKey = UC.read_settings(query, False)[0]
+        foreignKey = CH.get_foreign_key_bl(runLayer)
         request = QC.QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + str(objectId) + "'")
         ifeature = next(ilayer.getFeatures(request))
         self.run_edit_bouwlagen(ilayer, ifeature)
