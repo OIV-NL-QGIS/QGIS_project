@@ -168,15 +168,9 @@ class oiv:
     def set_layer_subset_toolbar(self):
         """laag filter aanpassen naar de geselecteerd bouwlaag"""
         subString = "bouwlaag = " + str(self.projCombo.currentText())
-        reply = set_layer_substring(subString)
+        set_layer_substring(subString)
         project = QC.QgsProject.instance()
-        if reply == 'succes':
-            QC.QgsExpressionContextUtils.setProjectVariable(project, 'actieve_bouwlaag', int(self.projCombo.currentText()))
-        else:
-            activeBl = QC.QgsExpressionContextUtils.projectScope(project).variable('actieve_bouwlaag')
-            self.projCombo.blockSignals(True)
-            self.projCombo.setCurrentText(str(activeBl))
-            self.projCombo.blockSignals(False)
+        QC.QgsExpressionContextUtils.setProjectVariable(project, 'actieve_bouwlaag', int(self.projCombo.currentText()))
 
     def init_object_widget(self, objectId):
         """pass on the tools to objectgegevens widget, intitializing the tools in the sub widget, draws an error"""

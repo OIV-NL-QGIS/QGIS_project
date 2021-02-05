@@ -5,25 +5,25 @@ import oiv.plugin_helpers.messages as MSG
 
 def set_layer_substring(subString):
     """set layer subset according (you can check the subset under properties of the layer)"""
-    unSavedChanges = False
     layersInEditMode = []
     layerNames = CH.get_chidlayers_bl()
     for layerName in layerNames:
         layer = UC.getlayer_byname(layerName[0])
         if layer.isModified():
-            unSavedChanges = True
-            MSG.showMsgBox('unsavedchanges')
-            return 'unsavedchanges'
-        if layer.isEditable() and not layer.isModified():
+            saveChanges = MSG.showMsgBox('unsavedchanges', layerName[0])
+            if saveChanges:
+                layer.commitChanges()
+            else:
+                layer.rollBack()
+        elif layer.isEditable():
             layersInEditMode.append(layer)
             layer.commitChanges()
-    if not unSavedChanges:
-        for layerName in layerNames:
-            lyr = UC.getlayer_byname(layerName[0])
-            lyr.setSubsetString(subString)
-            if lyr in layersInEditMode:
-                lyr.startEditing()
-        return "succes"
+    for layerName in layerNames:
+        lyr = UC.getlayer_byname(layerName[0])
+        lyr.setSubsetString(subString)
+        if lyr in layersInEditMode:
+            lyr.startEditing()
+    return "succes"
 
 def set_lengte_oppervlakte_visibility(widget, lengteTF, straalTF, oppTF, offsetTF):
     """change UI based on drawing lines/polygons"""

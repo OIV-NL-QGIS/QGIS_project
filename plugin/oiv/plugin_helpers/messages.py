@@ -10,7 +10,15 @@ def showMsgBox(msgName, extraBody=''):
     if msgSettings["type"] == 'critical':
         return QMessageBox.critical(None, msgSettings["header"], msgSettings["body"] + extraBody)
     if msgSettings["type"] == 'question':
-        return QMessageBox.warning(None, msgSettings["header"], msgSettings["body"] + extraBody, QMessageBox.Yes, QMessageBox.No)
+        reply = QMessageBox.warning(None, msgSettings["header"], msgSettings["body"] + extraBody, QMessageBox.Yes, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            return True
+        return False
+    if msgSettings["type"] == 'question_save':
+        reply = QMessageBox.warning(None, msgSettings["header"], msgSettings["body"] + extraBody, QMessageBox.Save, QMessageBox.Discard)
+        if reply == QMessageBox.Save:
+            return True
+        return False
 
 #All messages
 MESSAGES = {
@@ -122,8 +130,8 @@ MESSAGES = {
                 'Excuses voor het ongemak.'
     },
     'unsavedchanges': {
-        "type": 'warning',
-        "header": 'Niet opgeslagen',
-        "body": 'Om van bouwlaag te veranderen moet u eerst de bewerkingen opslaan!\n\nVoer daarna de actie opnieuw uit!'
+        "type": 'question_save',
+        "header": 'Niet opgeslagen wijzigingen!',
+        "body": 'Om van bouwlaag te veranderen moet u eerst de bewerkingen opslaan!\n\nIn de volgende laag zijn nog niet opgeslagen wijzigingen: '
     },
 }
