@@ -23,8 +23,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.2.8
-!define PLUGINVERSION 3.2.8
+!define VERSION 3.2.9
+!define PLUGINVERSION 3.2.9
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION}"
 !define WEBSITE "https://www.safetyct.com"
@@ -35,6 +35,7 @@
 ; Might be the same as !define
 Var Host
 Var Dbname
+Var Port
 Var GeoserverUrl
 Var GeoserverBron
 Var DbUser
@@ -146,6 +147,7 @@ FunctionEnd
 
   ReadRegStr $Host HKLM "${REG_APPSETTINGS}" "Host"
   ReadRegStr $Dbname HKLM "${REG_APPSETTINGS}" "Dbname"
+  ReadRegStr $Port HKLM "${REG_APPSETTINGS}" "Port"
   ReadRegStr $GeoserverUrl HKLM "${REG_APPSETTINGS}" "GeoserverUrl"
   ReadRegStr $GeoserverBron HKLM "${REG_APPSETTINGS}" "GeoserverBron"
   ReadRegStr $DbUser HKLM "${REG_APPSETTINGS}" "DbUser"
