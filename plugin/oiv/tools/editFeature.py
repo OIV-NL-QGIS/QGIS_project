@@ -12,9 +12,9 @@ def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
         ilayer.selectByIds(ids)
         ilayer.startEditing()
         reply = MSG.showMsgBox('deleteobject')
-        if reply == PQtW.QMessageBox.No:
+        if not reply:
             ilayer.selectByIds([])
-        elif reply == PQtW.QMessageBox.Yes:
+        elif reply:
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
         return "Done"

@@ -13,13 +13,15 @@ import oiv.tools.query_bag as QB
 import oiv.tools.stackwidget as SW
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.qt_helper as QH
+import oiv.plugin_helpers.plugin_constants as PC
 
 from .oiv_bouwlaag import oivBouwlaagWidget
 from .oiv_tekenen import oivTekenWidget
 from .oiv_import_file import oivImportFileWidget
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_pandgegevens_widget.ui'))
+    os.path.dirname(__file__), PC.PAND["pandui"]))
 
 class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
@@ -40,8 +42,6 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def __init__(self, parent=None):
         super(oivPandWidget, self).__init__(parent)
         self.setupUi(self)
-        self.bouwlaagwidget = oivBouwlaagWidget()
-        self.tekenwidget = oivTekenWidget()
         self.importwidget = oivImportFileWidget()
 
     def initUI(self):
@@ -64,7 +64,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         """connect the buttons to their actions"""
         self.bouwlaag_toevoegen.clicked.connect(self.run_bouwlaag)
         self.tekenen.clicked.connect(self.run_tekenen)
-        self.comboBox.currentIndexChanged.connect(self.set_layer_subset_object)
+        self.comboBox.currentIndexChanged.connect(self.set_layer_subset_bouwlaag)
         self.bouwlaag_bewerken.clicked.connect(self.run_bouwlaag_bewerken)
         self.import_2.clicked.connect(self.run_import)
         self.terug.clicked.connect(self.close_object_show_base)
@@ -74,7 +74,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_edit_bouwlagen(self, ilayer, ifeature):
         """edit attribute form of floor feature"""
         stackWidget = SW.oivStackWidget()
-        self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, stackWidget)
+        self.iface.addDockWidget(QH.getWidgetType(), stackWidget)
         stackWidget.update()
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
@@ -83,7 +83,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def bouwlagen_to_combobox(self, objectId, actieveBouwlaag):
         """fill combobox with existing floors"""
-        runLayer = 'Bouwlagen'
+        runLayer = PC.PAND["bouwlaaglayername"]
         tempLayer = UC.getlayer_byname(runLayer)
         objectId = self.pand_id.text()
         foreignKey = CH.get_foreign_key_bl(runLayer)
@@ -116,14 +116,14 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             self.comboBox.setCurrentIndex(index)
         self.iface.actionPan().trigger()
 
-    def set_layer_subset_object(self):
+    def set_layer_subset_bouwlaag(self):
         """if index of combobox has changed set cql filter of childlayers"""
         subString = "bouwlaag = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)
 
     #select bouwlaag on canvas to edit the atrribute form
     def run_bouwlaag_bewerken(self):
-        runLayer = "Bouwlagen"
+        runLayer = PC.PAND["bouwlaaglayername"]
         ilayer = UC.getlayer_byname(runLayer)
         objectId = self.pand_id.text()
         foreignKey = CH.get_foreign_key_bl(runLayer)
@@ -137,22 +137,18 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             bouwlaag, bouwlaagMax, ok = BouwlaagDialog.getBouwlagen()
             if (bouwlaag != 0 and bouwlaagMax >= bouwlaag and ok is True):
                 self.close()
-                self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, self.bouwlaagwidget)
-                self.bouwlaagwidget.canvas = self.canvas
-                self.bouwlaagwidget.iface = self.iface
-                self.bouwlaagwidget.bouwlaagList = self.sortedList
-                self.bouwlaagwidget.objectId = self.pand_id.text()
-                self.bouwlaagwidget.objectwidget = self
-                self.bouwlaagwidget.selectTool = self.selectTool
-                self.bouwlaagwidget.identifyTool = self.identifyTool
-                self.bouwlaagwidget.drawTool = self.drawTool
-                self.bouwlaagwidget.teken_bouwlaag.setText(str(bouwlaag) + ' t/m ' + str(bouwlaagMax))
-                self.bouwlaagwidget.bouwlaag_min.setText(str(bouwlaag))
-                self.bouwlaagwidget.bouwlaag_max.setText(str(bouwlaagMax))
-                self.bouwlaagwidget.teken_bouwlaag.setEnabled(False)
+                bouwlaagwidget = oivBouwlaagWidget(self)
+                self.iface.addDockWidget(QH.getWidgetType(), bouwlaagwidget)
+                bouwlaagwidget.canvas = self.canvas
+                bouwlaagwidget.iface = self.iface
+                bouwlaagwidget.bouwlaagList = self.sortedList
+                bouwlaagwidget.teken_bouwlaag.setText(str(bouwlaag) + ' t/m ' + str(bouwlaagMax))
+                bouwlaagwidget.bouwlaag_min.setText(str(bouwlaag))
+                bouwlaagwidget.bouwlaag_max.setText(str(bouwlaagMax))
+                bouwlaagwidget.teken_bouwlaag.setEnabled(False)
                 subString = "bouwlaag = " + str(bouwlaag)
                 UG.set_layer_substring(subString)
-                self.bouwlaagwidget.show()
+                bouwlaagwidget.show()
                 break
             elif bouwlaagMax < bouwlaag:
                 MSG.showMsgBox('bouwlaagvolgorde')
@@ -161,29 +157,24 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_tekenen(self):
         """init teken widget"""
-        self.tekenwidget.canvas = self.canvas
-        self.tekenwidget.iface = self.iface
-        self.tekenwidget.pointTool = self.pointTool
-        self.tekenwidget.drawTool = self.drawTool
-        self.tekenwidget.moveTool = self.moveTool
-        self.tekenwidget.selectTool = self.selectTool
-        self.tekenwidget.objectwidget = self
+        tekenwidget = oivTekenWidget(self)
+        tekenwidget.canvas = self.canvas
+        tekenwidget.iface = self.iface
         subString = "bouwlaag = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)
-        self.tekenwidget.bouwlaag.setText(str(self.comboBox.currentText()))
-        self.tekenwidget.pand_id.setText(self.pand_id.text())
-        self.tekenwidget.initUI()
-        self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, self.tekenwidget)
+        tekenwidget.bouwlaag.setText(str(self.comboBox.currentText()))
+        tekenwidget.pand_id.setText(self.pand_id.text())
+        self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, tekenwidget)
         self.close()
-        self.tekenwidget.show()
+        tekenwidget.show()
 
     def openBagviewer(self):
         """open url based on BAG pand_id, i.v.m. terugmelden"""
-        url = 'https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery=' + str(self.pand_id.text())
+        url = PC.PAND["bagviewerurl"] + str(self.pand_id.text())
         webbrowser.open(url)
 
     def run_delete(self):
-        layerName = "Bouwlagen"
+        layerName = PC.PAND["bouwlaaglayername"]
         ilayer = UC.getlayer_byname(layerName)
         self.iface.setActiveLayer(ilayer)
         objectId = self.pand_id.text()
@@ -192,10 +183,10 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
         reply = MSG.showMsgBox('deleteobject')
-        if reply == PQtW.QMessageBox.No:
+        if not reply:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.setSelectedFeatures([])
-        elif reply == PQtW.QMessageBox.Yes:
+        elif reply:
             #als "ja" -> verwijder de feature op basis van het unieke feature id
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
@@ -212,21 +203,13 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.importwidget.selectTool = self.selectTool
         self.importwidget.canvas = self.canvas
         self.importwidget.iface = self.iface
-        self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, self.importwidget)
+        self.iface.addDockWidget(QH.getWidgetType(), self.importwidget)
         self.close()
         self.importwidget.show()
 
     def close_object_show_base(self):
         subString = "bouwlaag = 1"
         UG.set_layer_substring(subString)
-        try:
-            del self.tekenwidget
-        except: # pylint: disable=bare-except
-            pass
-        try:
-            del self.bouwlaagwidget
-        except: # pylint: disable=bare-except
-            pass
         for widget in self.children():
             if isinstance(widget, PQtW.QPushButton):
                 try:

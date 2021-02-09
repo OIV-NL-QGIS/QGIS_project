@@ -8,8 +8,14 @@ PLUGIN = {
     "menulocation": "&OIV Objecten"
 }
 
-BOUWLAAG = {
-    "layername": "Bouwlagen",
+PAND = {
+    "bagpandlayername": "BAG panden",
+    "bouwlaaglayername": "Bouwlagen",
     "minbouwlaag": -10,
     "maxbouwlaag": 30,
+    "configtable": "config_bouwlaag",
+    "tekenwidgetui": "oiv_tekenen_widget.ui",
+    "bouwlaagui": "oiv_bouwlaag_widget.ui",
+    "pandui": "oiv_pandgegevens_widget.ui",
+    "bagviewerurl": "https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery=",
 }

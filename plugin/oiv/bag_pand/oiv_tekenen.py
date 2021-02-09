@@ -11,25 +11,22 @@ import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
 import oiv.plugin_helpers.drawing_helper as DW
 import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.plugin_constants as PC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_tekenen_widget.ui'))
+    os.path.dirname(__file__), PC.PAND["tekenwidgetui"]))
 
 class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     """Organize all draw features on the map"""
 
     iface = None
     canvas = None
-    pointTool = None
+    parent = None
     identifier = None
     parentLayerName = None
     drawLayerType = None
     drawLayer = None
     editableLayerNames = []
-    objectwidget = None
-    drawTool = None
-    moveTool = None
-    selectTool = None
     snapPicto = DW.BLSNAPSYMBOLS
     moveLayerNames = []
     snapLayerNames = DW.BLSNAPLAYERS
@@ -38,6 +35,9 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         """Constructor."""
         super(oivTekenWidget, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
+        self.selectTool = parent.selectTool
+        self.initUI()
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
@@ -50,7 +50,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.delete_f.clicked.connect(self.run_delete_tool)
         self.pan.clicked.connect(self.activatePan)
         self.terug.clicked.connect(self.close_teken_show_object)
-        actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions('config_bouwlaag')
+        actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.PAND["configtable"])
         self.initActions(actionList)
 
     def initActions(self, actionList):
@@ -77,7 +77,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except: # pylint: disable=bare-except
             pass
-        self.selectTool.whichConfig = 'config_bouwlaag'
+        self.selectTool.whichConfig = PC.PAND["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
@@ -105,7 +105,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except: # pylint: disable=bare-except
             pass
-        self.selectTool.whichConfig = 'config_bouwlaag'
+        self.selectTool.whichConfig = PC.PAND["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
 
@@ -132,8 +132,8 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         for lyrName in self.moveLayerNames:
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.startEditing()
-        self.moveTool.onMoved = self.stop_moveTool
-        self.canvas.setMapTool(self.moveTool)
+        self.parent.moveTool.onMoved = self.stop_moveTool
+        self.canvas.setMapTool(self.parent.moveTool)
 
     def stop_moveTool(self):
         """na de actie verschuiven/bewerken moeten de betreffende lagen opgeslagen worden en bewerken moet worden uitgezet"""
@@ -154,29 +154,31 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         #aan welke lagen kan worden gesnapt?
         possibleSnapFeatures = UC.get_possible_snapFeatures_bouwlaag(self.snapLayerNames, objectId)
         if self.drawLayerType == "Point":
-            self.pointTool.snapPt = None
-            self.pointTool.snapping = False
-            self.pointTool.startRotate = False
-            self.pointTool.possibleSnapFeatures = possibleSnapFeatures
+            pointTool = self.parent.pointTool
+            pointTool.snapPt = None
+            pointTool.snapping = False
+            pointTool.startRotate = False
+            pointTool.possibleSnapFeatures = possibleSnapFeatures
             if self.identifier in self.snapPicto:
-                self.pointTool.snapping = True
-            self.pointTool.layer = self.drawLayer
-            self.canvas.setMapTool(self.pointTool)
+                pointTool.snapping = True
+            pointTool.layer = self.drawLayer
+            self.canvas.setMapTool(pointTool)
             UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
-            self.pointTool.onGeometryAdded = self.place_feature
+            pointTool.onGeometryAdded = self.place_feature
         else:
+            drawTool = self.parent.drawTool
             if self.drawLayerType == "LineString":
-                self.drawTool.captureMode = 1
+                drawTool.captureMode = 1
                 UG.set_lengte_oppervlakte_visibility(self, True, True, False, True)
             else:
-                self.drawTool.captureMode = 2
+                drawTool.captureMode = 2
                 UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
-            self.drawTool.layer = self.drawLayer
-            self.drawTool.possibleSnapFeatures = possibleSnapFeatures
-            self.drawTool.canvas = self.canvas
-            self.drawTool.onGeometryAdded = self.place_feature
-            self.canvas.setMapTool(self.drawTool)
-            self.drawTool.parent = self
+            drawTool.layer = self.drawLayer
+            drawTool.possibleSnapFeatures = possibleSnapFeatures
+            drawTool.canvas = self.canvas
+            drawTool.onGeometryAdded = self.place_feature
+            self.canvas.setMapTool(drawTool)
+            drawTool.parent = self
 
     def place_feature(self, points, snapAngle):
         """Save and place feature on the canvas"""
@@ -185,7 +187,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         if points:
             parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, None, self.iface)
         if parentId is not None:
-            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, 'config_bouwlaag')
+            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.PAND["configtable"])
             if buttonCheck != 'Cancel':
                 UC.write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
@@ -205,5 +207,5 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 except: # pylint: disable=bare-except
                     pass
         self.close()
-        self.objectwidget.show()
+        self.parent.show()
         del self

@@ -58,53 +58,53 @@
     </layer-tree-group>
     <layer-tree-group checked="Qt::Checked" name="Bouwlaag" expanded="0">
       <customproperties/>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_afw_binnendekking&quot; (geom) sql=bouwlaag = 2" name="Afwijkende binnendekking" id="bouwlaag_afw_binnendekking20180911161155176" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_afw_binnendekking&quot; (geom) sql=bouwlaag = 1" name="Afwijkende binnendekking" id="bouwlaag_afw_binnendekking20180911161155176" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_install&quot; (geom) sql=bouwlaag = 2" name="Installatietechnische veiligheidsvoorzieningen" id="bouwlaag_veiligh_install20180905164515399" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_install&quot; (geom) sql=bouwlaag = 1" name="Installatietechnische veiligheidsvoorzieningen" id="bouwlaag_veiligh_install20180905164515399" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ingang&quot; (geom) sql=bouwlaag = 2" name="Ingang bouwlaag" id="bouwlaag_ingang_bouwlaag20180906201337250" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ingang&quot; (geom) sql=bouwlaag = 1" name="Ingang bouwlaag" id="bouwlaag_ingang_bouwlaag20180906201337250" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_sleutelkluis&quot; (geom) sql=bouwlaag = 2" name="Sleutelkluis bouwlaag" id="bouwlaag_sleutelkluis_bouwlaag20180906202953370" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_sleutelkluis&quot; (geom) sql=bouwlaag = 1" name="Sleutelkluis bouwlaag" id="bouwlaag_sleutelkluis_bouwlaag20180906202953370" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_opslag&quot; (geom) sql=bouwlaag = 2" name="Opslag stoffen bouwlaag" id="bouwlaag_opslag20171206142819813" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_opslag&quot; (geom) sql=bouwlaag = 1" name="Opslag stoffen bouwlaag" id="bouwlaag_opslag20171206142819813" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_dreiging&quot; (geom) sql=bouwlaag = 2" name="Dreiging bouwlaag" id="bouwlaag_dreiging20180906174253505" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_dreiging&quot; (geom) sql=bouwlaag = 1" name="Dreiging bouwlaag" id="bouwlaag_dreiging20180906174253505" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_label&quot; (geom) sql=bouwlaag = 2" name="Labels bouwlaag" id="bouwlaag_label20171206134310954" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_label&quot; (geom) sql=bouwlaag = 1" name="Labels bouwlaag" id="bouwlaag_label20171206134310954" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_bouwk&quot; (geom) sql=bouwlaag = 2" name="Bouwkundige veiligheidsvoorzieningen" id="bouwlaag_veiligh_bouwk20180905151458681" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_bouwk&quot; (geom) sql=bouwlaag = 1" name="Bouwkundige veiligheidsvoorzieningen" id="bouwlaag_veiligh_bouwk20180905151458681" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
           <property key="overview" value="1"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ruimten&quot; (geom) sql=bouwlaag = 2" name="Ruimten" id="bouwlaag_ruimten20180905142047305" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ruimten&quot; (geom) sql=bouwlaag = 1" name="Ruimten" id="bouwlaag_ruimten20180905142047305" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlagen&quot; (geom) sql=bouwlaag = 2" name="Bouwlagen" id="bouwlagen20180226231427375" expanded="0" legend_exp="" providerKey="postgres">
+      <layer-tree-layer checked="Qt::Checked" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlagen&quot; (geom) sql=bouwlaag = 1" name="Bouwlagen" id="bouwlagen20180226231427375" expanded="0" legend_exp="" providerKey="postgres">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
@@ -488,43 +488,43 @@
   </layer-tree-group>
   <snapping-settings mode="3" intersection-snapping="1" enabled="1" tolerance="10" type="1" unit="1">
     <individual-layer-settings>
-      <layer-setting enabled="0" tolerance="10" type="2" id="objectgegevens20160318144112880" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="stavaza_volgende_update20190410123510091" units="1"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="ingang_object20180912142318108" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_ingang_bouwlaag20180906201337250" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="stavaza_objecten20190410123510091" units="1"/>
-      <layer-setting enabled="1" tolerance="12" type="2" id="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" units="1"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_afw_binnendekking20180911161155176" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="sectoren20190320103814390" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="schade_cirkel_calc20170912163056737" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_dreiging20180906174253505" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_opslag20171206142819813" units="2"/>
       <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_label20171206134310954" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_sleutelkluis_bouwlaag20180906202953370" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="stavaza_volgende_update20190410123510091" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="opstelplaats20180831134019368" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="stavaza_update_gemeente20190410123510075" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="veiligh_ruimtelijk20180912181737656" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="ingang_object20180912142318108" units="2"/>
+      <layer-setting enabled="1" tolerance="12" type="2" id="terrein_eff10e61_89d2_4362_801d_84f487d77852" units="1"/>
+      <layer-setting enabled="1" tolerance="12" type="2" id="object_points_of_interest_c8201bff_1789_4706_b2f1_5fb28f3c2a0c" units="1"/>
+      <layer-setting enabled="1" tolerance="2" type="2" id="bouwlagen20180226231427375" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_ingang_bouwlaag20180906201337250" units="2"/>
+      <layer-setting enabled="1" tolerance="12" type="2" id="object_gebiedsgerichte_aanpak_e08cb0f0_bb98_4c52_b50a_e829ff0ef5ec" units="1"/>
+      <layer-setting enabled="1" tolerance="2" type="2" id="bag_extent20180222160304157" units="2"/>
+      <layer-setting enabled="1" tolerance="12" type="2" id="ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152" units="1"/>
       <layer-setting enabled="0" tolerance="0" type="2" id="brandkraan_2017_120170504220758524" units="2"/>
       <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_veiligh_install20180905164515399" units="2"/>
-      <layer-setting enabled="1" tolerance="12" type="2" id="isolijnen_da3e3ee0_539b_40db_8f06_3690b840cfea" units="1"/>
-      <layer-setting enabled="1" tolerance="12" type="2" id="object_points_of_interest_c8201bff_1789_4706_b2f1_5fb28f3c2a0c" units="1"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="alternatieve20171110074120161" units="2"/>
-      <layer-setting enabled="1" tolerance="12" type="2" id="terrein_eff10e61_89d2_4362_801d_84f487d77852" units="1"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="stavaza_status_gemeente20190410123509951" units="1"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="veiligh_ruimtelijk20180912181737656" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="gevaarlijkestof_opslag_object20180921133701908" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="opstelplaats20180831134019368" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="dreiging_ruimtelijk20180912203007764" units="2"/>
-      <layer-setting enabled="1" tolerance="12" type="2" id="object_gebiedsgerichte_aanpak_e08cb0f0_bb98_4c52_b50a_e829ff0ef5ec" units="1"/>
-      <layer-setting enabled="1" tolerance="2" type="2" id="bereikbaarheid20180831134019212" units="2"/>
       <layer-setting enabled="0" tolerance="0" type="2" id="label_object20180912203855251" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="status_objectgegevens20190410123509951" units="1"/>
-      <layer-setting enabled="1" tolerance="12" type="2" id="leidingen_f8765a2a_2685_44e3_9062_a5804129ec78" units="1"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_dreiging20180906174253505" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="stavaza_update_gemeente20190410123510075" units="1"/>
-      <layer-setting enabled="1" tolerance="2" type="2" id="bouwlagen20180226231427375" units="2"/>
-      <layer-setting enabled="1" tolerance="2" type="2" id="bouwlaag_ruimten20180905142047305" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="schade_cirkel_calc20170912163056737" units="2"/>
-      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_opslag20171206142819813" units="2"/>
-      <layer-setting enabled="1" tolerance="2" type="2" id="bouwlaag_veiligh_bouwk20180905151458681" units="2"/>
-      <layer-setting enabled="1" tolerance="2" type="2" id="bag_extent20180222160304157" units="2"/>
       <layer-setting enabled="1" tolerance="12" type="2" id="grid_33a2aa94_9575_44b1_a5be_645450b0209f" units="1"/>
-      <layer-setting enabled="1" tolerance="12" type="2" id="ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152" units="1"/>
       <layer-setting enabled="1" tolerance="12" type="2" id="veiligheidsregio_huidig_119f3d68_317c_465f_b0c3_945aa8fdc70a" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="stavaza_status_gemeente20190410123509951" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="dreiging_ruimtelijk20180912203007764" units="2"/>
+      <layer-setting enabled="1" tolerance="2" type="2" id="bouwlaag_ruimten20180905142047305" units="2"/>
+      <layer-setting enabled="1" tolerance="2" type="2" id="bouwlaag_veiligh_bouwk20180905151458681" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="alternatieve20171110074120161" units="2"/>
+      <layer-setting enabled="1" tolerance="12" type="2" id="leidingen_f8765a2a_2685_44e3_9062_a5804129ec78" units="1"/>
+      <layer-setting enabled="1" tolerance="12" type="2" id="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="status_objectgegevens20190410123509951" units="1"/>
+      <layer-setting enabled="1" tolerance="2" type="2" id="bereikbaarheid20180831134019212" units="2"/>
+      <layer-setting enabled="0" tolerance="10" type="2" id="objectgegevens20160318144112880" units="2"/>
+      <layer-setting enabled="1" tolerance="12" type="2" id="isolijnen_da3e3ee0_539b_40db_8f06_3690b840cfea" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="stavaza_objecten20190410123510091" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="sectoren20190320103814390" units="1"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_afw_binnendekking20180911161155176" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="bouwlaag_sleutelkluis_bouwlaag20180906202953370" units="2"/>
+      <layer-setting enabled="0" tolerance="0" type="2" id="gevaarlijkestof_opslag_object20180921133701908" units="2"/>
     </individual-layer-settings>
   </snapping-settings>
   <relations>
@@ -628,10 +628,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>61851.34437710641213926</xmin>
-      <ymin>421684.78654921182896942</ymin>
-      <xmax>61905.95144038766011363</xmax>
-      <ymax>421728.78263212204910815</ymax>
+      <xmin>137982.34122031281003729</xmin>
+      <ymin>394234.04341741919051856</ymin>
+      <xmax>153329.02820752485422418</xmax>
+      <ymax>406598.63643003103788942</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -5519,7 +5519,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyDrawingHints="0" readOnly="0" geometry="Point" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="1" minScale="2500" autoRefreshTime="0" type="vector" wkbType="Point" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="1" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
       <id>bouwlaag_afw_binnendekking20180911161155176</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_afw_binnendekking" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_afw_binnendekking" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6091,13 +6091,13 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyDrawingHints="0" readOnly="0" geometry="Point" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="1" minScale="2500" autoRefreshTime="0" type="vector" wkbType="Point" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="1" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
       <extent>
-        <xmin>66262.37770000100135803</xmin>
-        <ymin>418664.10229999898001552</ymin>
-        <xmax>96404.77809999880264513</xmax>
-        <ymax>433434.26489999901968986</ymax>
+        <xmin>62169.00620000060007442</xmin>
+        <ymin>411845.37889999902108684</ymin>
+        <xmax>101256.77910000100382604</xmax>
+        <ymax>451290.52670000097714365</ymax>
       </extent>
       <id>bouwlaag_dreiging20180906174253505</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_dreiging" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_dreiging" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -6667,13 +6667,13 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyDrawingHints="0" readOnly="0" geometry="Point" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="1" minScale="2500" autoRefreshTime="0" type="vector" wkbType="Point" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="1" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
       <extent>
-        <xmin>54782.80200000110198744</xmin>
-        <ymin>412416.5524999980116263</ymin>
-        <xmax>100759.97430000100575853</xmax>
-        <ymax>445433.87750000099185854</ymax>
+        <xmin>54772.2204000018973602</xmin>
+        <ymin>410690.08580000000074506</ymin>
+        <xmax>102696.14110000099753961</xmax>
+        <ymax>451387.88579999998910353</ymax>
       </extent>
       <id>bouwlaag_ingang_bouwlaag20180906201337250</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_ingang" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_ingang" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -7286,13 +7286,13 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyDrawingHints="0" readOnly="0" geometry="Point" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="1" minScale="2500" autoRefreshTime="0" type="vector" wkbType="Point" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="0" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
       <extent>
-        <xmin>66231.18729999939387199</xmin>
-        <ymin>418677.20138358499389142</ymin>
-        <xmax>99060.16306691410136409</xmax>
-        <ymax>441024.99190000101225451</ymax>
+        <xmin>61867.63612088630179642</xmin>
+        <ymin>410584.62690000102156773</ymin>
+        <xmax>102684.7654500009957701</xmax>
+        <ymax>451379.30095000000437722</ymax>
       </extent>
       <id>bouwlaag_label20171206134310954</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_label" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_label" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -8245,13 +8245,13 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyDrawingHints="0" readOnly="0" geometry="Point" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="0" minScale="2500" autoRefreshTime="0" type="vector" wkbType="Point" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="0" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
       <extent>
-        <xmin>66255.52250000089406967</xmin>
-        <ymin>418693.63479999802075326</ymin>
-        <xmax>96386.94000000129744876</xmax>
-        <ymax>435214.94289999798638746</ymax>
+        <xmin>66211.71499999989464413</xmin>
+        <ymin>413059.77079999801935628</ymin>
+        <xmax>102675.94819999899482355</xmax>
+        <ymax>449129.43389999901410192</ymax>
       </extent>
       <id>bouwlaag_opslag20171206142819813</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_opslag" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_opslag" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -8695,8 +8695,14 @@ def my_form_open(dialog, layer, feature):
       <mapTip>ogr_fid</mapTip>
     </maplayer>
     <maplayer simplifyDrawingHints="1" readOnly="0" geometry="Polygon" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="0" minScale="2500" autoRefreshTime="0" type="vector" wkbType="MultiPolygon" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="1" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
+      <extent>
+        <xmin>54775.8618000001006294</xmin>
+        <ymin>410681.22520000097574666</ymin>
+        <xmax>102700.58720000099856406</xmax>
+        <ymax>451444.49639999901410192</ymax>
+      </extent>
       <id>bouwlaag_ruimten20180905142047305</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_ruimten" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_ruimten" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -9072,13 +9078,13 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyDrawingHints="0" readOnly="0" geometry="Point" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="1" minScale="2500" autoRefreshTime="0" type="vector" wkbType="Point" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="1" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
       <extent>
-        <xmin>67582.89200000089476816</xmin>
-        <ymin>427272.41979999799514189</ymin>
-        <xmax>97821.6898000016954029</xmax>
-        <ymax>444560.59959999797865748</ymax>
+        <xmin>54791.19999999929859769</xmin>
+        <ymin>410702.72600000002421439</ymin>
+        <xmax>102619.06639999900653493</xmax>
+        <ymax>451459.91010000201640651</ymax>
       </extent>
       <id>bouwlaag_sleutelkluis_bouwlaag20180906202953370</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_sleutelkluis" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_sleutelkluis" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -9665,12 +9671,12 @@ def my_form_open(dialog, layer, feature):
     <maplayer simplifyDrawingHints="1" readOnly="0" geometry="Line" simplifyDrawingTol="1" simplifyLocal="0" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="0" minScale="2500" autoRefreshTime="0" type="vector" wkbType="MultiLineString" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="1" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
       <extent>
         <xmin>54773.90300000090064714</xmin>
-        <ymin>412399.40599999902769923</ymin>
-        <xmax>100776.05559999900287949</xmax>
-        <ymax>445432.17799999902490526</ymax>
+        <ymin>410579.05550000100629404</ymin>
+        <xmax>102702.24350000200502109</xmax>
+        <ymax>451444.49639999901410192</ymax>
       </extent>
       <id>bouwlaag_veiligh_bouwk20180905151458681</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_veiligh_bouwk" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_veiligh_bouwk" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -10026,8 +10032,14 @@ def my_form_open(dialog, layer, feature):
       <mapTip>ogr_fid</mapTip>
     </maplayer>
     <maplayer simplifyDrawingHints="0" readOnly="0" geometry="Point" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="1" minScale="2500" autoRefreshTime="0" type="vector" wkbType="Point" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="1" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
+      <extent>
+        <xmin>82082.67825208579597529</xmin>
+        <ymin>433635.35339999897405505</ymin>
+        <xmax>98380.68800000099872705</xmax>
+        <ymax>440649.12959999998565763</ymax>
+      </extent>
       <id>bouwlaag_veiligh_install20180905164515399</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_veiligh_install" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_veiligh_install" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -10584,13 +10596,13 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer simplifyDrawingHints="1" readOnly="0" geometry="Polygon" simplifyDrawingTol="1" simplifyLocal="1" simplifyMaxScale="1" refreshOnNotifyEnabled="0" labelsEnabled="0" minScale="5000" autoRefreshTime="0" type="vector" wkbType="MultiPolygon" hasScaleBasedVisibilityFlag="1" simplifyAlgorithm="0" autoRefreshEnabled="0" maxScale="0" styleCategories="AllStyleCategories" refreshOnNotifyMessage="">
       <extent>
-        <xmin>54773.90300000090064714</xmin>
-        <ymin>412399.40599999902769923</ymin>
-        <xmax>100776.05559999900287949</xmax>
-        <ymax>445432.17799999902490526</ymax>
+        <xmin>54384.54699999999866122</xmin>
+        <ymin>410573.53400000202236697</ymin>
+        <xmax>102702.24350000200502109</xmax>
+        <ymax>451417.17240000102901831</ymax>
       </extent>
       <id>bouwlagen20180226231427375</id>
-      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table="objecten"."bouwlagen" (geom) sql=bouwlaag = 2</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table="objecten"."bouwlagen" (geom) sql=bouwlaag = 1</datasource>
       <keywordList>
         <value></value>
       </keywordList>

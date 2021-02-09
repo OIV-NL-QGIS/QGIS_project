@@ -120,7 +120,6 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     def check_importlayer(self):
         """perform geometric checks on importlayer"""
         checks = [None, None]
-        message = ''
         crsCheck = self.importLayer.crs().authid()
         if crsCheck == 'EPSG:28992':
             checks[0] = 'RD'

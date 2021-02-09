@@ -109,10 +109,10 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
         reply = MSG.showMsgBox('deleteobject')
-        if reply == PQtW.QMessageBox.No:
+        if not reply:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.selectByIds([])
-        elif reply == PQtW.QMessageBox.Yes:
+        elif reply:
             #als "ja" -> verwijder de feature op basis van het unieke feature id
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
