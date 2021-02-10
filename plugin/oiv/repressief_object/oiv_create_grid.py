@@ -11,26 +11,29 @@ import oiv.plugin_helpers.grid_helpers as GH
 import oiv.plugin_helpers.rubberband_helper as RH
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.plugin_constants as PC
 import oiv.tools.utils_core as UC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_create_grid_widget.ui'))
+    os.path.dirname(__file__), PC.OBJECT["gridwidgetui"]))
 
 class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
     """create dockwidget for creating grid and/or kaartblad"""
 
     iface = None
     canvas = None
-    objectWidget = None
     rubberBand = None
     xWidth = 0
     yWidth = 0
-    identifyTool = None
+    parent = None
+    objectId = None
 
     def __init__(self, parent=None):
         """Constructor."""
         super(oivGridWidget, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
+        self.objectId = self.parent.object_id.text()
         self.initUI()
 
     def initUI(self):
@@ -133,7 +136,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
             targetFeature["orientation"] = 'portrait'
         targetFeature["uuid"] = str(gridUUID)
         foreignKey = CH.get_foreign_key_ob(layerName)
-        targetFeature[foreignKey] = self.object_id.text()
+        targetFeature[foreignKey] = self.objectId
         UC.write_layer(layer, targetFeature)
         bbox = geom.boundingBox()
         dist = self.distance_grid.value()
@@ -175,7 +178,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         targetFeature.setFields(targetFields)
         foreignKey = CH.get_foreign_key_ob(layerName)
         xmin, dummy, ymin, dummy, xIt, yIt = self.calculate_extent(dist, extent, gridType)
-        objectId = self.object_id.text()
+        objectId = self.objectId
         targetFeature[foreignKey] = objectId
         targetFeature["type"] = 'Grid'
         for x in range(0, xIt):
@@ -220,19 +223,18 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         request = QC.QgsFeatureRequest().setFilterExpression('"uuid" = ' + "'{}'".format(gridUUID))
         featureIt = layer.getFeatures(request)
         reply = MSG.showMsgBox('deletegrid')
-        if reply == PQtW.QMessageBox.No:
-            return "Exit"
-        if reply == PQtW.QMessageBox.Yes:
+        if reply:
             layer.startEditing()
             for feat in featureIt:
                 layer.deleteFeature(feat.id())
             layer.commitChanges()
             return "Done"
+        return "Exit"
 
     def run_delete_tool(self):
         MSG.showMsgBox('selectgrid')
-        self.canvas.setMapTool(self.identifyTool)
-        self.identifyTool.geomIdentified.connect(self.delete)
+        self.canvas.setMapTool(self.parent.identifyTool)
+        self.parent.identifyTool.geomIdentified.connect(self.delete)
 
     def delete(self, ilayer, ifeature):
         """delete a feature"""
@@ -242,7 +244,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             MSG.showMsgBox('nogridselected')
             self.run_delete_tool()
-        self.identifyTool.geomIdentified.disconnect(self.delete)
+        self.parent.identifyTool.geomIdentified.disconnect(self.delete)
         self.iface.actionPan().trigger()
 
     def close_grid_open_repressief_object(self):
@@ -272,5 +274,5 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
             self.canvas.scene().removeItem(self.rubberBand)
             self.rubberBand = None
         self.close()
-        self.objectWidget.show()
+        self.parent.show()
         del self

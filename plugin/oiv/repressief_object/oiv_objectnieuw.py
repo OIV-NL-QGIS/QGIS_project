@@ -10,9 +10,10 @@ import oiv.tools.utils_core as UC
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.qt_helper as QH
 import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.plugin_constants as PC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_objectnieuw_widget.ui'))
+    os.path.dirname(__file__), PC.OBJECT["objectnieuwwidgetui"]))
 
 class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
 
@@ -43,9 +44,9 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
     #place new object (i-tje)
     def run_tekenen(self):
         if self.bron.text() == 'BAG':
-            runLayer = "Objecten"
+            runLayer = PC.OBJECT["objectlayername"]
         else:
-            runLayer = "Objecten BGT"
+            runLayer = PC.OBJECT["objectbgtlayername"]
         self.drawLayer = UC.getlayer_byname(runLayer)
         self.canvas.setMapTool(self.mapTool)
         self.mapTool.canvasClicked.connect(self.place_feature)
@@ -55,7 +56,7 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
         childFeature = QC.QgsFeature()
         newFeatureId = None
         self.iface.setActiveLayer(self.drawLayer)
-        objectLayer = UC.getlayer_byname('Objecten')
+        objectLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         #set geometry from the point clicked on the canvas
         childFeature.setGeometry(QC.QgsGeometry.fromPointXY(point))
         foreignKey = self.identificatienummer.text()
@@ -101,7 +102,7 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_objectgegevens(self, formeleNaam, objectId):
         """continue to existing object woth the newly created feature and already searched address"""
-        self.objectwidget.drawLayer = UC.getlayer_byname('Objecten')
+        self.objectwidget.drawLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         self.objectwidget.object_id.setText(str(objectId))
         self.objectwidget.formelenaam.setText(formeleNaam)
         self.iface.addDockWidget(QH.getWidgetType(), self.objectwidget)

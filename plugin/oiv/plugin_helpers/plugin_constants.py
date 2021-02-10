@@ -19,3 +19,16 @@ PAND = {
     "pandui": "oiv_pandgegevens_widget.ui",
     "bagviewerurl": "https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery=",
 }
+
+OBJECT = {
+    "objectlayername": "Objecten",
+    "terreinlayername": "Object terrein",
+    "objectbgtlayername": "Objecten BGT",
+    "configtable": "config_object",
+    "gridwidgetui": "oiv_create_grid_widget.ui",
+    "objectnieuwwidgetui": "oiv_objectnieuw_widget.ui",
+    "tekenwidgetui": "oiv_object_tekenen_widget.ui",
+    "objectwidgetui": "oiv_repressief_object_widget.ui",
+    "bgtviewerurl": "https://verbeterdekaart.kadaster.nl/#?",
+
+}

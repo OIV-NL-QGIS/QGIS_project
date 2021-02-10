@@ -17,9 +17,10 @@ import oiv.repressief_object.oiv_create_grid as GW
 import oiv.plugin_helpers.qt_helper as QH
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.drawing_helper as DH
+import oiv.plugin_helpers.plugin_constants as PC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_repressief_object_widget.ui'))
+    os.path.dirname(__file__), PC.OBJECT["objectwidgetui"]))
 
 class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     """interactive UI management"""
@@ -97,7 +98,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         e = self.canvas.extent()
         gemx = (e.xMaximum() + e.xMinimum())/2
         gemy = (e.yMaximum() + e.yMinimum())/2
-        url2 = 'https://verbeterdekaart.kadaster.nl/#?geometry.x=' + str(gemx) + '&geometry.y=' + str(gemy) + '&zoomlevel=12'
+        url2 = PC.OBJECT["bgtviewerurl"] + 'geometry.x=' + str(gemx) + '&geometry.y=' + str(gemy) + '&zoomlevel=12'
         webbrowser.open(url2)
 
     def run_delete_object(self):
@@ -145,17 +146,15 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identify.clicked.connect(self.edit_feature)
 
     def edit_feature(self):
-        self.selectTool.whichConfig = 'config_object'
+        self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
     def run_create_grid(self):
-        self.gridWidget = GW.oivGridWidget()
+        self.gridWidget = GW.oivGridWidget(self)
         self.gridWidget.object_id.setText(self.object_id.text())
         self.gridWidget.canvas = self.canvas
         self.gridWidget.iface = self.iface
-        self.gridWidget.identifyTool = self.identifyTool
-        self.gridWidget.objectWidget = self
         self.iface.addDockWidget(QH.getWidgetType(), self.gridWidget)
         self.gridWidget.show()
         self.close()
@@ -173,7 +172,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas.setMapTool(self.drawTool)
 
     def run_delete_terrein(self):
-        self.selectTool.whichConfig = 'config_object'
+        self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
 
@@ -190,7 +189,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         if points:
             parentId, childFeature = UC.construct_feature('Polygon', 'Objecten', points, self.object_id.text(), self.iface)
         if parentId is not None:
-            buttonCheck = UC.get_attributes(parentId, childFeature, None, None, layer, 'config_object')
+            buttonCheck = UC.get_attributes(parentId, childFeature, None, None, layer, PC.OBJECT["configtable"])
             if buttonCheck != 'Cancel':
                 UC.write_layer(layer, childFeature)
         layer.commitChanges()

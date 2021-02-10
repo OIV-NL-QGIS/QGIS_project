@@ -12,13 +12,13 @@ import oiv.tools.editFeature as EF
 import oiv.plugin_helpers.drawing_helper as DH
 import oiv.plugin_helpers.qt_helper as QH
 import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.plugin_constants as PC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_object_tekenen_widget.ui'))
+    os.path.dirname(__file__), PC.OBJECT["tekenwidgetui"]))
 
 class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
-    config = 'config_object'
     repressiefobjectwidget = None
     iface = None
     canvas = None
@@ -50,7 +50,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.delete_f.clicked.connect(self.run_delete_tool)
         self.pan.clicked.connect(self.activatePan)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
-        actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(self.config)
+        actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.OBJECT["configtable"])
         self.initActions(actionList)
 
     def initActions(self, actionList):
@@ -94,7 +94,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.actionPan().trigger()
 
     def run_edit_tool(self):
-        self.selectTool.whichConfig = self.config
+        self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
@@ -111,7 +111,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.disconnect(self.select_feature)
 
     def run_delete_tool(self):
-        self.selectTool.whichConfig = self.config
+        self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
 
@@ -187,7 +187,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         if points:
             parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, self.object_id.text(), self.iface)
         if parentId is not None:
-            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, self.config)
+            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.OBJECT["configtable"])
             if buttonCheck != 'Cancel':
                 UC.write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)

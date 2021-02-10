@@ -1,7 +1,5 @@
 """edit specific feature"""
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
-
 import oiv.plugin_helpers.messages as MSG
 
 def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
@@ -20,11 +18,10 @@ def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
         return "Done"
     else:
         reply = MSG.showMsgBox('noselectedtodelete')
-        if reply == PQtW.QMessageBox.No:
+        if reply:
             ilayer.selectByIds([])
             return "Done"
-        else:
-            return "Retry"
+        return "Retry"
 
 def getfeature_geometry(featGeom, layerType):
     """get geometry type of a feature"""

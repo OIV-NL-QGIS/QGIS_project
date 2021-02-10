@@ -7,6 +7,7 @@ import qgis.core as QC #pylint: disable=import-error
 import oiv.tools.filter_object as FO
 import oiv.plugin_helpers.qt_helper as QT
 import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.plugin_constants as PC
 import oiv.tools.utils_core as UC
 import oiv.bag_pand.oiv_pandgegevens as OPG
 import oiv.repressief_object.oiv_repressief_object as ORO
@@ -64,10 +65,10 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         """Return of identified layer and feature and get related object"""
         #the identified layer must be "Bouwlagen" or "BAG panden"
         if isinstance(ilayer, QC.QgsVectorLayer):
-            if ilayer.name() == "Bouwlagen":
+            if ilayer.name() == PC.PAND["bouwlaaglayername"]:
                 objectId = str(ifeature["pand_id"])
                 self.run_bouwlagen(objectId)
-            elif ilayer.name() == "BAG panden":
+            elif ilayer.name() == PC.PAND["bagpandlayername"]:
                 objectId = str(ifeature["identificatie"])
                 self.run_bouwlagen(objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
@@ -81,15 +82,15 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.drawLayer = UC.getlayer_byname("Objecten")
         if ilayer is None:
             self.run_new_object('wordt gekoppeld in de database', 'BGT', 'wordt gekoppeld in de database')
-        elif ilayer.name() == "BAG panden":
+        elif ilayer.name() == PC.PAND["bagpandlayername"]:
             objectId = str(ifeature["identificatie"])
             bron = ifeature["bron"]
             bron_tabel = ifeature["bron_tbl"]
             self.run_new_object(objectId, bron, bron_tabel)
-        elif ilayer.name() == "Objecten":
+        elif ilayer.name() == PC.OBJECT["objectlayername"]:
             objectId = ifeature["id"]
             self.run_object(ifeature, objectId)
-        elif ilayer.name() == "Object terrein":
+        elif ilayer.name() == PC.OBJECT["terreinlayername"]:
             objectId = ifeature["object_id"]
             request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
             ifeature = next(self.drawLayer.getFeatures(request))
