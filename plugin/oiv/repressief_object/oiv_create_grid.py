@@ -117,7 +117,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         gridUUID = uuid.uuid4()
         geom = self.rubberBand.asGeometry()
         geom.convertToMultiType()
-        layerName = 'Grid'
+        layerName = PC.OBJECT["gridlayername"]
         layer = UC.getlayer_byname(layerName)
         targetFeature = QC.QgsFeature()
         targetFields = layer.fields()
@@ -170,7 +170,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         if not dist and not extent:
             extent = self.canvas.extent()
             dist = self.distance.value()
-        layerName = 'Grid'
+        layerName = PC.OBJECT["gridlayername"]
         layer = UC.getlayer_byname(layerName)
         targetFeature = QC.QgsFeature()
         targetFields = layer.fields()
@@ -238,7 +238,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def delete(self, ilayer, ifeature):
         """delete a feature"""
-        if ilayer.name() == 'Grid':
+        if ilayer.name() == PC.OBJECT["gridlayername"]:
             gridUUID = ifeature["uuid"]
             self.delete_existing_grid(gridUUID, ilayer)
         else:

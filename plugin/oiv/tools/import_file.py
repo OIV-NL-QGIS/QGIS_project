@@ -19,9 +19,8 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     """the actions class for the import"""
 
-    parentWidget = None
+    parent = None
     canvas = None
-    selectTool = None
     importLayer = None
     layerImportType = None
     mappingDict = {}
@@ -32,6 +31,10 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         super(oivImportFileWidget, self).__init__(parent)
         self.iface = QU.iface
         self.setupUi(self)
+        self.parent = parent
+        self.object_id.setText(parent.object_id.text())
+        self.object.setText(parent.formelenaam.text())
+        self.canvas = parent.canvas
         self.select_file.clicked.connect(self.selectfile)
         self.terug.clicked.connect(self.close_import)
         self.mapping.clicked.connect(self.run_mapping)

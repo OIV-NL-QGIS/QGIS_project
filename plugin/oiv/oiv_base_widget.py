@@ -28,7 +28,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     selectTool = None
     drawTool = None
     moveTool = None
-    objectwidget = None
+    pandwidget = None
     repressiefobjectwidget = None
     objectnieuwwidget = None
 
@@ -102,13 +102,13 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_bouwlagen(self, objectId):
         """start objectgegevens widget"""
-        self.init_object_widget(objectId)
-        self.iface.addDockWidget(QT.getWidgetType(), self.objectwidget)
+        self.init_pandwidget(objectId)
+        self.iface.addDockWidget(QT.getWidgetType(), self.pandwidget)
         self.iface.actionPan().trigger()
-        self.objectwidget.show()
+        self.pandwidget.show()
         self.close()
-        self.objectwidget.initUI()
-        self.objectwidget.initActions()
+        self.pandwidget.initUI()
+        self.pandwidget.initActions()
 
     def run_object(self, ifeature, objectId):
         """start repressief object widget"""
@@ -119,19 +119,19 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.close()
         self.repressiefobjectwidget.initActions()
 
-    def init_object_widget(self, objectId):
-        """pass on the tools to objectgegevens widget, intitializing the tools in the sub widget, draws an error"""
+    def init_pandwidget(self, objectId):
+        """pass on the tools to pandgegevens widget, intitializing the tools in the sub widget, draws an error"""
         #Load configuration file
-        self.objectwidget = OPG.oivPandWidget(self)
-        self.objectwidget.pand_id.setText(str(objectId))
-        self.objectwidget.iface = self.iface
-        self.objectwidget.canvas = self.canvas
-        self.objectwidget.selectTool = self.selectTool
-        self.objectwidget.basewidget = self
-        self.objectwidget.pointTool = self.pointTool
-        self.objectwidget.drawTool = self.drawTool
-        self.objectwidget.moveTool = self.moveTool
-        self.objectwidget.identifyTool = self.identifyTool
+        self.pandwidget = OPG.oivPandWidget(self)
+        self.pandwidget.pand_id.setText(str(objectId))
+        self.pandwidget.iface = self.iface
+        self.pandwidget.canvas = self.canvas
+        self.pandwidget.selectTool = self.selectTool
+        self.pandwidget.basewidget = self
+        self.pandwidget.pointTool = self.pointTool
+        self.pandwidget.drawTool = self.drawTool
+        self.pandwidget.moveTool = self.moveTool
+        self.pandwidget.identifyTool = self.identifyTool
 
     def init_repressief_object_widget(self, ifeature, objectId):
         """pass on the tools to objectgegevens widget, intitializing the tools in the sub widget, draws an error"""
@@ -167,7 +167,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     def close_basewidget(self):
         """close plugin and re-activate toolbar combobox"""
         try:
-            del self.objectwidget
+            del self.pandwidget
         except: # pylint: disable=bare-except
             pass
         try:

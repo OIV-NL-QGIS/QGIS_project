@@ -45,7 +45,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         super(oivRepressiefObjectWidget, self).__init__(parent)
         self.setupUi(self)
         self.iface = QU.iface
-        self.tekensymbolenwidget = OTW.oivObjectTekenWidget()
         self.object_id.setVisible(False)
         UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
 
@@ -151,19 +150,19 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
     def run_create_grid(self):
-        self.gridWidget = GW.oivGridWidget(self)
-        self.gridWidget.object_id.setText(self.object_id.text())
-        self.gridWidget.canvas = self.canvas
-        self.gridWidget.iface = self.iface
-        self.iface.addDockWidget(QH.getWidgetType(), self.gridWidget)
-        self.gridWidget.show()
+        gridWidget = GW.oivGridWidget(self)
+        gridWidget.object_id.setText(self.object_id.text())
+        gridWidget.canvas = self.canvas
+        gridWidget.iface = self.iface
+        self.iface.addDockWidget(QH.getWidgetType(), gridWidget)
+        gridWidget.show()
         self.close()
 
     def run_terrein_toevoegen(self):
         objectId = self.object_id.text()
         possibleSnapFeatures = UC.get_possible_snapFeatures_object(self.snapLayerNames, objectId)
         self.drawTool.parent = self
-        self.drawTool.layer = UC.getlayer_byname("Object terrein")
+        self.drawTool.layer = UC.getlayer_byname(PC.OBJECT["terreinlayername"])
         UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
         self.drawTool.possibleSnapFeatures = possibleSnapFeatures
         self.drawTool.canvas = self.canvas
@@ -177,7 +176,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.connect(self.delete)
 
     def delete(self, ilayer, ifeature):
-        deleteLayerNames = ['Objecten', 'Object terrein']
+        deleteLayerNames = [PC.OBJECT["objectlayername"], PC.OBJECT["terreinlayername"]]
         reply = EF.delete_feature(ilayer, ifeature, deleteLayerNames, self.iface)
         if reply == 'Retry':
             self.run_delete_terrein()
@@ -185,9 +184,9 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def place_object_terrein(self, points, _dummy):
         """save drawn terrain"""
-        layer = UC.getlayer_byname("Object terrein")
+        layer = UC.getlayer_byname(PC.OBJECT["terreinlayername"])
         if points:
-            parentId, childFeature = UC.construct_feature('Polygon', 'Objecten', points, self.object_id.text(), self.iface)
+            parentId, childFeature = UC.construct_feature('Polygon', PC.OBJECT["objectlayername"], points, self.object_id.text(), self.iface)
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, None, None, layer, PC.OBJECT["configtable"])
             if buttonCheck != 'Cancel':
@@ -197,27 +196,15 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.activatePan()
 
     def run_object_symbolen_tekenen(self):
-        self.tekensymbolenwidget.canvas = self.canvas
-        self.tekensymbolenwidget.selectTool = self.selectTool
-        self.tekensymbolenwidget.pointTool = self.pointTool
-        self.tekensymbolenwidget.drawTool = self.drawTool
-        self.tekensymbolenwidget.moveTool = self.moveTool
-        self.tekensymbolenwidget.repressiefobjectwidget = self
-        self.tekensymbolenwidget.formelenaam.setText(self.formelenaam.text())
-        self.tekensymbolenwidget.object_id.setText(self.object_id.text())
-        self.tekensymbolenwidget.initUI()
-        self.iface.addDockWidget(QH.getWidgetType(), self.tekensymbolenwidget)
-        self.tekensymbolenwidget.show()
+        tekenWidget = OTW.oivObjectTekenWidget(self)
+        self.iface.addDockWidget(QH.getWidgetType(), tekenWidget)
+        tekenWidget.show()
         self.close()
 
     def run_import(self):
         """initiate import widget"""
-        self.importwidget = IFW.oivImportFileWidget()
-        self.importwidget.parentWidget = self
-        self.importwidget.object_id.setText(self.object_id.text())
-        self.importwidget.object.setText(self.formelenaam.text())
-        self.importwidget.canvas = self.canvas
-        self.iface.addDockWidget(QH.getWidgetType(), self.importwidget)
+        importwidget = IFW.oivImportFileWidget(self)
+        self.iface.addDockWidget(QH.getWidgetType(), importwidget)
         self.close()
-        self.importwidget.show()
+        importwidget.show()
  

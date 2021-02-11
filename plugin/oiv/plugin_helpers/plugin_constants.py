@@ -24,6 +24,7 @@ OBJECT = {
     "objectlayername": "Objecten",
     "terreinlayername": "Object terrein",
     "objectbgtlayername": "Objecten BGT",
+    "gridlayername": "Grid",
     "configtable": "config_object",
     "gridwidgetui": "oiv_create_grid_widget.ui",
     "objectnieuwwidgetui": "oiv_objectnieuw_widget.ui",

@@ -20,25 +20,24 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     repressiefobjectwidget = None
-    iface = None
-    canvas = None
-    selectTool = None
-    pointTool = None
+    parent = None
     drawLayer = None
     identifier = None
     parentLayerName = None
     drawLayerType = None
     editableLayerNames = []
-    drawTool = None
-    moveTool = None
-    snapPicto = DH.ROSNAPSYMBOLS
     moveLayerNames = []
-    snapLayerNames = DH.ROSNAPLAYERS
 
     def __init__(self, parent=None):
         super(oivObjectTekenWidget, self).__init__(parent)
         self.setupUi(self)
-        self.iface = QU.iface
+        self.parent = parent
+        self.selectTool = parent.selectTool
+        self.iface = parent.iface
+        self.canvas = parent.canvas
+        self.object_id.setText(parent.object_id.text())
+        self.formelenaam.setText(parent.formelenaam.text())
+        self.initUI()
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
@@ -75,7 +74,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.pan.clicked.disconnect()
         self.terug.clicked.disconnect()
         self.close()
-        self.repressiefobjectwidget.show()
+        self.parent.show()
         del self
 
     def ini_action(self, actionList, run_layer):
@@ -137,8 +136,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         for lyrName in self.moveLayerNames:
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.startEditing()
-        self.moveTool.onMoved = self.stop_moveTool
-        self.canvas.setMapTool(self.moveTool)
+        self.parent.moveTool.onMoved = self.stop_moveTool
+        self.canvas.setMapTool(self.parent.moveTool)
 
     #na de actie verschuiven/bewerken moeten de betreffende lagen opgeslagen worden en bewerken moet worden uitgezet.
     def stop_moveTool(self):
@@ -148,38 +147,40 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             moveLayer.reload()
         self.activatePan()
 
-    def run_tekenen(self, _dummy, runLayer, feature_id):
+    def run_tekenen(self, _dummy, runLayer, featureId):
         #welke pictogram is aangeklikt en wat is de bijbehorende tekenlaag
-        self.identifier = feature_id
+        self.identifier = featureId
         self.drawLayer = UC.getlayer_byname(runLayer)
         self.drawLayerType = UC.check_layer_type(self.drawLayer)
         self.parentLayerName = CH.get_parentlayer_ob(runLayer)
         objectId = self.object_id.text()
-        possibleSnapFeatures = UC.get_possible_snapFeatures_object(self.snapLayerNames, objectId)
+        possibleSnapFeatures = UC.get_possible_snapFeatures_object(DH.ROSNAPLAYERS, objectId)
         if self.drawLayerType == "Point":
-            self.pointTool.snapPt = None
-            self.pointTool.snapping = False
-            self.pointTool.startRotate = False
-            self.pointTool.possibleSnapFeatures = possibleSnapFeatures
-            if self.identifier in self.snapPicto:
-                self.pointTool.snapping = True
-            self.pointTool.layer = self.drawLayer
-            self.canvas.setMapTool(self.pointTool)
+            pointTool = self.parent.pointTool
+            pointTool.snapPt = None
+            pointTool.snapping = False
+            pointTool.startRotate = False
+            pointTool.possibleSnapFeatures = possibleSnapFeatures
+            if self.identifier in DH.ROSNAPSYMBOLS:
+                pointTool.snapping = True
+            pointTool.layer = self.drawLayer
+            self.canvas.setMapTool(pointTool)
             UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
-            self.pointTool.onGeometryAdded = self.place_feature
+            pointTool.onGeometryAdded = self.place_feature
         else:
+            drawTool = self.parent.drawTool
             if self.drawLayerType == "LineString":
-                self.drawTool.captureMode = 1
+                drawTool.captureMode = 1
                 UG.set_lengte_oppervlakte_visibility(self, True, True, False, True)
             else:
-                self.drawTool.captureMode = 2
+                drawTool.captureMode = 2
                 UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
-            self.drawTool.layer = self.drawLayer
-            self.drawTool.possibleSnapFeatures = possibleSnapFeatures
-            self.drawTool.canvas = self.canvas
-            self.drawTool.onGeometryAdded = self.place_feature
-            self.canvas.setMapTool(self.drawTool)
-            self.drawTool.parent = self
+            drawTool.layer = self.drawLayer
+            drawTool.possibleSnapFeatures = possibleSnapFeatures
+            drawTool.canvas = self.canvas
+            drawTool.onGeometryAdded = self.place_feature
+            self.canvas.setMapTool(drawTool)
+            drawTool.parent = self
 
     def place_feature(self, points, snapAngle):
         parentId = None
