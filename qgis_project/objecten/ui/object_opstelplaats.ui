@@ -105,6 +105,16 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Label</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="label"/>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -124,6 +134,8 @@
       <zorder>object_id</zorder>
       <zorder>label_5</zorder>
       <zorder>soort</zorder>
+      <zorder>label</zorder>
+      <zorder>label_6</zorder>
      </widget>
     </widget>
    </item>
