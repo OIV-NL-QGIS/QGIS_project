@@ -92,7 +92,7 @@
             </se:Font>
             <se:LabelPlacement>
               <se:LinePlacement>
-                <se:Repeat>true</se:Repeat>
+                <se:IsRepeated>true</se:IsRepeated>
                 <se:Gap>100</se:Gap>
                 <se:GeneralizeLine>true</se:GeneralizeLine>
               </se:LinePlacement>

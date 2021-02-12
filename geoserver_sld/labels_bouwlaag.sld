@@ -18,7 +18,7 @@
 ]]></ogc:Literal><ogc:Literal>true</ogc:Literal></ogc:Function></Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">7</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -42,6 +42,7 @@
             </Fill> 
             <VendorOption name="graphic-resize">stretch</VendorOption>                        
             <VendorOption name="graphic-margin">0.7</VendorOption> 
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
         </Rule>-->
         <Rule>
@@ -57,7 +58,7 @@
 ]]></ogc:Literal><ogc:Literal>true</ogc:Literal></ogc:Function></Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -76,13 +77,14 @@
               <CssParameter name="fill-opacity">1</CssParameter> 
             </Fill> 
             <VendorOption name="conflictResolution">false</VendorOption>
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
           <TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Label><ogc:Function name="strReplace"><ogc:PropertyName>omschrijving</ogc:PropertyName><ogc:Literal>\\</ogc:Literal><ogc:Literal><![CDATA[
       ]]></ogc:Literal><ogc:Literal>true</ogc:Literal></ogc:Function><![CDATA[      ]]></Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">bold</CssParameter>
             </Font>
             <LabelPlacement>
@@ -117,6 +119,7 @@
             </Graphic>
             <VendorOption name="graphic-resize">stretch</VendorOption>                        
             <VendorOption name="graphic-margin">0.7</VendorOption> 
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
         </Rule>
         <Rule>
@@ -132,7 +135,7 @@
 ]]></ogc:Literal><ogc:Literal>true</ogc:Literal></ogc:Function></Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -155,13 +158,14 @@
               <CssParameter name="fill-opacity">1</CssParameter> 
             </Fill> 
             <VendorOption name="conflictResolution">false</VendorOption>
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
           <TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Label><ogc:Function name="strReplace"><ogc:PropertyName>omschrijving</ogc:PropertyName><ogc:Literal>\\</ogc:Literal><ogc:Literal><![CDATA[
       ]]></ogc:Literal><ogc:Literal>true</ogc:Literal></ogc:Function><![CDATA[      ]]></Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -200,6 +204,7 @@
             </Graphic>
             <VendorOption name="graphic-resize">stretch</VendorOption>                        
             <VendorOption name="graphic-margin">0.7</VendorOption> 
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
         </Rule>
         <Rule>
@@ -215,7 +220,7 @@
 ]]></ogc:Literal><ogc:Literal>true</ogc:Literal></ogc:Function></Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -238,13 +243,14 @@
               <CssParameter name="fill-opacity">1</CssParameter>
             </Fill> 
             <VendorOption name="conflictResolution">false</VendorOption>
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
           <TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Label><ogc:Function name="strReplace"><ogc:PropertyName>omschrijving</ogc:PropertyName><ogc:Literal>\\</ogc:Literal><ogc:Literal><![CDATA[
       ]]></ogc:Literal><ogc:Literal>true</ogc:Literal></ogc:Function><![CDATA[      ]]></Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -283,6 +289,7 @@
             </Graphic>
             <VendorOption name="graphic-resize">stretch</VendorOption>                         
             <VendorOption name="graphic-margin">0.7</VendorOption> 
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
         </Rule>
         <Rule>
@@ -303,7 +310,7 @@
             </Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -326,6 +333,7 @@
               <CssParameter name="fill-opacity">1</CssParameter> 
             </Fill> 
             <VendorOption name="conflictResolution">false</VendorOption>
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
           <TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Label>
@@ -337,7 +345,7 @@
             </Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -376,6 +384,7 @@
             </Graphic>
             <VendorOption name="graphic-resize">stretch</VendorOption>                        
             <VendorOption name="graphic-margin">0.7</VendorOption> 
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
         </Rule> 
         <Rule>
@@ -396,7 +405,7 @@
             </Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -419,6 +428,7 @@
               <CssParameter name="fill-opacity">1</CssParameter> 
             </Fill> 
             <VendorOption name="conflictResolution">false</VendorOption>
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
           <TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Label>
@@ -430,7 +440,7 @@
             </Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
-              <CssParameter name="font-size">3</CssParameter>
+              <CssParameter name="font-size">2</CssParameter>
               <CssParameter name="font-style">normal</CssParameter>
             </Font>
             <LabelPlacement>
@@ -469,6 +479,7 @@
             </Graphic>
             <VendorOption name="graphic-resize">stretch</VendorOption>                        
             <VendorOption name="graphic-margin">0.7</VendorOption> 
+            <VendorOption name="partials">true</VendorOption>
           </TextSymbolizer>
         </Rule>              
       </FeatureTypeStyle>
