@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>490</width>
-    <height>699</height>
+    <width>295</width>
+    <height>505</height>
    </rect>
   </property>
   <property name="features">
@@ -37,15 +37,24 @@
       <item>
        <widget class="QLabel" name="label1_2">
         <property name="text">
-         <string>Alles wat u importeert wordt gekoppeld aan bouwlaag:</string>
+         <string>Alles wat u importeert wordt gekoppeld aan:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="bouwlaag">
+       <widget class="QLineEdit" name="object">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(208, 208, 208);
 border-color: rgba(255, 255, 255, 0);</string>
+        </property>
+        <property name="frame">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -53,6 +62,9 @@ border-color: rgba(255, 255, 255, 0);</string>
        <widget class="QLabel" name="label1">
         <property name="text">
          <string>1. Selecteer het Shape of DXF bestand welke geimporteerd moet worden.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -65,30 +77,25 @@ border-color: rgba(255, 255, 255, 0);</string>
       </item>
       <item>
        <widget class="QLineEdit" name="bestandsnaam">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(208, 208, 208);
 border-color: rgba(255, 255, 255, 0);</string>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label2">
-        <property name="text">
-         <string>2. Selecteer de bouwlaag waaraan gekoppeld moet worden.</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="selectId">
-        <property name="text">
-         <string>Selecteer bouwlaag</string>
+        <property name="frame">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="label3">
         <property name="text">
-         <string>3. Selecteer het veld welke de waarde voor het type bevat:</string>
+         <string>2. Selecteer het veld welke de waarde voor het type bevat:</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -96,40 +103,9 @@ border-color: rgba(255, 255, 255, 0);</string>
        <widget class="QComboBox" name="type"/>
       </item>
       <item>
-       <widget class="QLabel" name="label4">
-        <property name="text">
-         <string>4. Selecteer de laag waarin geimporteerd moet worden.</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="import_laag"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label5a">
-        <property name="text">
-         <string>5. De plugin controleerd op:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label5b">
-        <property name="text">
-         <string>   Geometrie:  RD stelsel en juistheid type (polygoon of lijn)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="check">
-        <property name="text">
-         <string>Check import bestand</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="label6">
         <property name="text">
-         <string>6. Maak een mapping aan voor de types:</string>
+         <string>4. Maak een mapping aan voor de types:</string>
         </property>
        </widget>
       </item>
@@ -143,7 +119,7 @@ border-color: rgba(255, 255, 255, 0);</string>
       <item>
        <widget class="QLabel" name="label7">
         <property name="text">
-         <string>7. Alle controles zijn goed u kunt importeren.</string>
+         <string>5. Alle controles zijn goed u kunt importeren.</string>
         </property>
        </widget>
       </item>
@@ -161,8 +137,8 @@ border-color: rgba(255, 255, 255, 0);</string>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>20</width>
-          <height>40</height>
+          <width>0</width>
+          <height>0</height>
          </size>
         </property>
        </spacer>

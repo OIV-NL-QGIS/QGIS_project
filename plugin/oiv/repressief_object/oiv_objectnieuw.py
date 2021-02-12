@@ -1,53 +1,34 @@
-"""
-/***************************************************************************
- oiv
-                                 A QGIS plugin
- place oiv objects
-                              -------------------
-        begin                : 2019-08-15
-        git sha              : $Format:%H$
-        copyright            : (C) 2019 by Joost Deen
-        email                : j.deen@safetyct.com
-        versie               : 2.9.93
- ***************************************************************************/
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
-
+"""create new repressief object"""
 import os
 
-from qgis.PyQt import uic
-from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtWidgets import QDockWidget, QMessageBox
+import qgis.PyQt as PQt #pylint: disable=import-error
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
+import qgis.utils as QU #pylint: disable=import-error
 
-from qgis.core import QgsFeatureRequest, QgsFeature, QgsGeometry
-from qgis.utils import iface
+import oiv.tools.utils_core as UC
+import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.qt_helper as QH
+import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.plugin_constants as PC
 
-from ..tools.utils_core import user_input_label, getlayer_byname, write_layer, read_settings
+FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), PC.OBJECT["objectnieuwwidgetui"]))
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_objectnieuw_widget.ui'))
-
-class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
+class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
 
     canvas = None
     newObject = None
     drawLayer = None
     basewidget = None
     objectwidget = None
-    mapTool = None
+    pointTool = None
 
     def __init__(self, parent=None):
         """Constructor."""
         super(oivObjectNieuwWidget, self).__init__(parent)
         self.setupUi(self)
-        self.iface = iface
+        self.iface = QU.iface
         self.opslaan.clicked.connect(self.run_tekenen)
         self.terug.clicked.connect(self.close_objectnieuw_show_base)
 
@@ -63,31 +44,31 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
     #place new object (i-tje)
     def run_tekenen(self):
         if self.bron.text() == 'BAG':
-            runLayer = "Objecten"
+            runLayer = PC.OBJECT["objectlayername"]
         else:
-            runLayer = "Objecten BGT"
-        self.drawLayer = getlayer_byname(runLayer)
-        self.canvas.setMapTool(self.mapTool)
-        self.mapTool.canvasClicked.connect(self.place_feature)
+            runLayer = PC.OBJECT["objectbgtlayername"]
+        self.drawLayer = UC.getlayer_byname(runLayer)
+        self.canvas.setMapTool(self.pointTool)
+        self.pointTool.canvasClicked.connect(self.place_feature)
 
     #construct the feature and save
     def place_feature(self, point):
-        childFeature = QgsFeature()
+        childFeature = QC.QgsFeature()
         newFeatureId = None
         self.iface.setActiveLayer(self.drawLayer)
-        objectLayer = getlayer_byname('Objecten')
+        objectLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         #set geometry from the point clicked on the canvas
-        childFeature.setGeometry(QgsGeometry.fromPointXY(point))
+        childFeature.setGeometry(QC.QgsGeometry.fromPointXY(point))
         foreignKey = self.identificatienummer.text()
         buttonCheck, formeleNaam = self.get_attributes(foreignKey, childFeature)
         #return of new created feature id
         if buttonCheck != 'Cancel':
-            newFeatureId = write_layer(self.drawLayer, childFeature)
+            newFeatureId = UC.write_layer(self.drawLayer, childFeature)
             objectLayer.reload()
             if not newFeatureId:
                 idx = objectLayer.fields().indexFromName('id')
                 maxObjectId = objectLayer.maximumValue(idx)
-                request = QgsFeatureRequest().setFilterExpression('"id" > {}'.format(maxObjectId))
+                request = QC.QgsFeatureRequest().setFilterExpression('"id" > {}'.format(maxObjectId))
                 self.drawLayer.reload()
                 tempFeatureIt = objectLayer.getFeatures(request)
                 for feat in tempFeatureIt:
@@ -97,18 +78,14 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
             if newFeatureId:
                 self.run_objectgegevens(formeleNaam, newFeatureId)
             else:
-                QMessageBox.warning(None, "GeoServer antwoord te traag",
-                                    'Geoserver antwoord te traag. Object is wel geplaatst.\n'
-                                    'Open het object door terug te gaan en hem te selecteren.')
+                MSG.showMsgBox('newobjectslowanswer')
         else:
             self.iface.actionPan().trigger()
 
     #get the right attributes from user
     def get_attributes(self, foreignKey, childFeature):
-        query = "SELECT foreign_key, input_label, question, label_required\
-             FROM config_object WHERE child_layer = '{}'".format(self.drawLayer.name())
-        attrs = read_settings(query, False)
-        labelTekst = user_input_label(attrs[3], attrs[2])
+        attrs = CH.get_allkeys_ob(self.drawLayer.name())
+        labelTekst = UC.user_input_label(attrs[3], attrs[2])
         if labelTekst != 'Cancel':
             fields = self.drawLayer.fields()
             childFeature.initAttributes(fields.count())
@@ -125,10 +102,10 @@ class oivObjectNieuwWidget(QDockWidget, FORM_CLASS):
 
     def run_objectgegevens(self, formeleNaam, objectId):
         """continue to existing object woth the newly created feature and already searched address"""
-        self.objectwidget.drawLayer = getlayer_byname('Objecten')
+        self.objectwidget.drawLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         self.objectwidget.object_id.setText(str(objectId))
         self.objectwidget.formelenaam.setText(formeleNaam)
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, self.objectwidget)
+        self.iface.addDockWidget(QH.getWidgetType(), self.objectwidget)
         self.objectwidget.initActions()
         self.objectwidget.show()
         self.iface.actionPan().trigger()

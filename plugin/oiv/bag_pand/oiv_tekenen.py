@@ -1,72 +1,46 @@
-"""
-/***************************************************************************
- oiv
-                                 A QGIS plugin
- place oiv objects
-                              -------------------
-        begin                : 2019-08-15
-        git sha              : $Format:%H$
-        copyright            : (C) 2019 by Joost Deen
-        email                : jdeen@safetyct.com
- ***************************************************************************/
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
+"""draw items on pand"""
 import os
 
-from qgis.PyQt import uic
-from qgis.PyQt.QtWidgets import QDockWidget, QPushButton, QMessageBox
-from qgis.PyQt.QtCore import Qt
+import qgis.PyQt as PQt #pylint: disable=import-error
+import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 
-from qgis.core import QgsFeature, QgsGeometry, QgsFeatureRequest
-from qgis.utils import iface
+import oiv.tools.utils_core as UC
+import oiv.tools.utils_gui as UG
+import oiv.tools.stackwidget as SW
+import oiv.tools.editFeature as EF
+import oiv.plugin_helpers.drawing_helper as DW
+import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.plugin_constants as PC
 
-from ..tools.utils_core import check_layer_type, getlayer_byname, write_layer, get_attributes
-from ..tools.utils_core import get_possible_snapFeatures_bouwlaag, construct_feature, read_settings
-from ..tools.utils_gui import get_actions, set_lengte_oppervlakte_visibility
-from ..tools.oiv_stackwidget import oivStackWidget
-from ..tools.editFeature import delete_feature
+FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+    os.path.dirname(__file__), PC.PAND["tekenwidgetui"]))
 
-FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_tekenen_widget.ui'))
-
-class oivTekenWidget(QDockWidget, FORM_CLASS):
+class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     """Organize all draw features on the map"""
 
-    iface = None
-    canvas = None
-    pointTool = None
     identifier = None
     parentLayerName = None
     drawLayerType = None
     drawLayer = None
     editableLayerNames = []
-    objectwidget = None
-    drawTool = None
-    moveTool = None
-    selectTool = None
-    #id van pictogram
-    snapPicto = ['1', '10', '32', '47', '148', '149', '150', '151', '152',\
-                 '1011', 'Algemeen', 'Voorzichtig', 'Waarschuwing', 'Gevaar']
     moveLayerNames = []
-    snapLayerNames = ["BAG panden", "Bouwlagen", \
-                        "Bouwkundige veiligheidsvoorzieningen", "Ruimten"]
 
     def __init__(self, parent=None):
         """Constructor."""
         super(oivTekenWidget, self).__init__(parent)
         self.setupUi(self)
-        self.iface = iface
+        self.parent = parent
+        self.iface = parent.iface
+        self.canvas = parent.canvas
+        self.selectTool = parent.selectTool
+        self.bouwlaag.setText(str(parent.comboBox.currentText()))
+        self.pand_id.setText(parent.pand_id.text())
+        self.initUI()
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
-        set_lengte_oppervlakte_visibility(self, False, False, False, False)
+        UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
         self.pand_id.setVisible(False)
         #connect buttons to the action
         self.move.clicked.connect(self.run_move_point)
@@ -75,7 +49,7 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
         self.delete_f.clicked.connect(self.run_delete_tool)
         self.pan.clicked.connect(self.activatePan)
         self.terug.clicked.connect(self.close_teken_show_object)
-        actionList, self.editableLayerNames, self.moveLayerNames = get_actions('config_bouwlaag')
+        actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.PAND["configtable"])
         self.initActions(actionList)
 
     def initActions(self, actionList):
@@ -85,7 +59,7 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
                 runLayerName = action[0]
                 buttonNr = action[1]
                 buttonName = str(action[2].lower())
-                strButton = self.findChild(QPushButton, buttonName)
+                strButton = self.findChild(PQtW.QPushButton, buttonName)
                 if strButton:
                     #set tooltip per buttonn
                     strButton.setToolTip(buttonName)
@@ -102,7 +76,7 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except: # pylint: disable=bare-except
             pass
-        self.selectTool.whichConfig = 'config_bouwlaag'
+        self.selectTool.whichConfig = PC.PAND["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
@@ -130,21 +104,21 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except: # pylint: disable=bare-except
             pass
-        self.selectTool.whichConfig = 'config_bouwlaag'
+        self.selectTool.whichConfig = PC.PAND["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
 
     def delete(self, ilayer, ifeature):
         """delete a feature"""
-        reply = delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
+        reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
         if reply == 'Retry':
             self.run_run_delete_tool()
         self.selectTool.geomSelected.disconnect(self.delete)
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
-        stackWidget = oivStackWidget()
-        self.iface.addDockWidget(Qt.RightDockWidgetArea, stackWidget)
+        stackWidget = SW.oivStackWidget()
+        self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, stackWidget)
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
@@ -155,65 +129,66 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
     def run_move_point(self):
         """om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet"""
         for lyrName in self.moveLayerNames:
-            moveLayer = getlayer_byname(lyrName)
+            moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.startEditing()
-        self.moveTool.onMoved = self.stop_moveTool
-        self.canvas.setMapTool(self.moveTool)
+        self.parent.moveTool.onMoved = self.stop_moveTool
+        self.canvas.setMapTool(self.parent.moveTool)
 
     def stop_moveTool(self):
         """na de actie verschuiven/bewerken moeten de betreffende lagen opgeslagen worden en bewerken moet worden uitgezet"""
         for lyrName in self.moveLayerNames:
-            moveLayer = getlayer_byname(lyrName)
+            moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.commitChanges()
             moveLayer.reload()
         self.activatePan()
 
-    def run_tekenen(self, dummy, runLayer, feature_id):
+    def run_tekenen(self, _dummy, runLayer, feature_id):
         """activate the right draw action"""
         #welke pictogram is aangeklikt en wat is de bijbehorende tekenlaag
         self.identifier = feature_id
-        self.drawLayer = getlayer_byname(runLayer)
-        self.drawLayerType = check_layer_type(self.drawLayer)
-        query = "SELECT parent_layer FROM config_bouwlaag WHERE child_layer = '{}'".format(runLayer)
-        self.parentLayerName = read_settings(query, False)[0]
+        self.drawLayer = UC.getlayer_byname(runLayer)
+        self.drawLayerType = UC.check_layer_type(self.drawLayer)
+        self.parentLayerName = CH.get_parentlayer_bl(runLayer)
         objectId = self.pand_id.text()
         #aan welke lagen kan worden gesnapt?
-        possibleSnapFeatures = get_possible_snapFeatures_bouwlaag(self.snapLayerNames, objectId)
+        possibleSnapFeatures = UC.get_possible_snapFeatures_bouwlaag(DW.BLSNAPLAYERS, objectId)
         if self.drawLayerType == "Point":
-            self.pointTool.snapPt = None
-            self.pointTool.snapping = False
-            self.pointTool.startRotate = False
-            self.pointTool.possibleSnapFeatures = possibleSnapFeatures
-            if self.identifier in self.snapPicto:
-                self.pointTool.snapping = True
-            self.pointTool.layer = self.drawLayer
-            self.canvas.setMapTool(self.pointTool)
-            set_lengte_oppervlakte_visibility(self, False, False, False, False)
-            self.pointTool.onGeometryAdded = self.place_feature
+            pointTool = self.parent.pointTool
+            pointTool.snapPt = None
+            pointTool.snapping = False
+            pointTool.startRotate = False
+            pointTool.possibleSnapFeatures = possibleSnapFeatures
+            if self.identifier in DW.BLSNAPSYMBOLS:
+                pointTool.snapping = True
+            pointTool.layer = self.drawLayer
+            self.canvas.setMapTool(pointTool)
+            UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
+            pointTool.onGeometryAdded = self.place_feature
         else:
+            drawTool = self.parent.drawTool
             if self.drawLayerType == "LineString":
-                self.drawTool.captureMode = 1
-                set_lengte_oppervlakte_visibility(self, True, True, False, True)
+                drawTool.captureMode = 1
+                UG.set_lengte_oppervlakte_visibility(self, True, True, False, True)
             else:
-                self.drawTool.captureMode = 2
-                set_lengte_oppervlakte_visibility(self, True, True, True, True)
-            self.drawTool.layer = self.drawLayer
-            self.drawTool.possibleSnapFeatures = possibleSnapFeatures
-            self.drawTool.canvas = self.canvas
-            self.drawTool.onGeometryAdded = self.place_feature
-            self.canvas.setMapTool(self.drawTool)
-            self.drawTool.parent = self
+                drawTool.captureMode = 2
+                UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
+            drawTool.layer = self.drawLayer
+            drawTool.possibleSnapFeatures = possibleSnapFeatures
+            drawTool.canvas = self.canvas
+            drawTool.onGeometryAdded = self.place_feature
+            self.canvas.setMapTool(drawTool)
+            drawTool.parent = self
 
     def place_feature(self, points, snapAngle):
         """Save and place feature on the canvas"""
         parentId = None
         self.iface.setActiveLayer(self.drawLayer)
         if points:
-            parentId, childFeature = construct_feature(self.drawLayerType, self.parentLayerName, points, None, self.iface)
+            parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, None, self.iface)
         if parentId is not None:
-            buttonCheck = get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, 'config_bouwlaag')
+            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.PAND["configtable"])
             if buttonCheck != 'Cancel':
-                write_layer(self.drawLayer, childFeature)
+                UC.write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
 
     def close_teken_show_object(self):
@@ -225,11 +200,11 @@ class oivTekenWidget(QDockWidget, FORM_CLASS):
         self.pan.clicked.disconnect()
         self.terug.clicked.disconnect()
         for widget in self.children():
-            if isinstance(widget, QPushButton):
+            if isinstance(widget, PQtW.QPushButton):
                 try:
                     widget.clicked.disconnect()
                 except: # pylint: disable=bare-except
                     pass
         self.close()
-        self.objectwidget.show()
+        self.parent.show()
         del self

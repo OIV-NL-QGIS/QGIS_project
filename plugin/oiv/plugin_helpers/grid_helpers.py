@@ -1,6 +1,8 @@
 """predifened constant for Kaartblad and Grid"""
 DEFAULTSCALE = 25000
 
+PROJECTCRS = 'EPSG:28992'
+
 SINGLEGRIDSIZE = 1000
 
 PAPERSIZES = ['A4', 'A3', 'A2', 'A1', 'A0']

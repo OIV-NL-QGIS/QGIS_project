@@ -18,15 +18,6 @@ def formOpen(dialog, layer, feature):
                 okButton.setEnabled(False)
             else:
                 nameValidate[0] = 1				
-            if (feature['object_id'] == NULL):
-                geom = feature.geometry().asPoint()
-                extent = iface.mapCanvas().extent()
-                objectenLayer = getVectorLayerByName("Objecten")
-                index = QgsSpatialIndex(objectenLayer.getFeatures(QgsFeatureRequest(extent)))
-                features = index.nearestNeighbor(geom, 2)
-                feature = objectenLayer.getFeatures(QgsFeatureRequest(features[0]))
-                featureId = feature.next().id()
-                myDialog.changeAttribute("object_id", featureId)
             nameField[0].currentIndexChanged.connect(lambda: validate(nameField, nameValidate, okButton))
             bnOk = okButton.button(QDialogButtonBox.Ok)
             bnOk.clicked.connect(lambda: applySave(featureGeometry, myLayer, myDialog))

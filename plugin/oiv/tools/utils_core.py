@@ -1,8 +1,11 @@
 """utils that are requested from the core plugin"""
 import os
 import sqlite3
-from qgis.core import QgsProject, QgsWkbTypes, QgsSpatialIndex, QgsFeatureRequest, QgsGeometry, QgsFeature
-from qgis.PyQt.QtWidgets import QInputDialog, QLineEdit, QMessageBox
+
+import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
+import qgis.core as QC #pylint: disable=import-error
+
+import oiv.plugin_helpers.messages as MSG
 
 def read_settings(query, allResult):
     conn = None
@@ -26,17 +29,17 @@ def read_settings(query, allResult):
 def getlayer_byname(layername):
     """get QgsLayer by name"""
     layer = None
-    layers = QgsProject.instance().mapLayersByName(layername)
+    layers = QC.QgsProject.instance().mapLayersByName(layername)
     layer = layers[0]
     return layer
 
 def user_input_label(label_req, question):
     """communiceer met de gebruiker voor input, waarbij question de vraag is die wordt gesteld"""
     label = ''
-    qid = QInputDialog()
+    qid = PQtW.QInputDialog()
     if label_req == '1':
         while True:
-            label, ok = QInputDialog.getText(qid, "Label:", question, QLineEdit.Normal,)
+            label, ok = PQtW.QInputDialog.getText(qid, "Label:", question, PQtW.QLineEdit.Normal,)
             if ok:
                 if label != '' or label_req == '0':
                     return label
@@ -49,11 +52,11 @@ def user_input_label(label_req, question):
 def check_layer_type(layer):
     """derivation of layer type"""
     layerType = None
-    if layer.geometryType() == QgsWkbTypes.PointGeometry:
+    if layer.geometryType() == QC.QgsWkbTypes.PointGeometry:
         layerType = "Point"
-    elif layer.geometryType() == QgsWkbTypes.LineGeometry:
+    elif layer.geometryType() == QC.QgsWkbTypes.LineGeometry:
         layerType = "LineString"
-    elif layer.geometryType() == QgsWkbTypes.PolygonGeometry:
+    elif layer.geometryType() == QC.QgsWkbTypes.PolygonGeometry:
         layerType = "Polygon"
     else:
         layerType = "undefined"
@@ -71,10 +74,7 @@ def write_layer(layer, childFeature, count=False):
         return newFeatures[0].id()
     else:
         layer.commitChanges()
-        QMessageBox.warning(None, 'Let op: Ongeldige geometrie!',
-                            "Vermoedelijk heeft u 2x op hetzelfde punt geklikt of doorkruist de geometrie zichzelf.\n\n"
-                            "De geometrie wordt niet opgeslagen.",
-                            QMessageBox.Ok)
+        MSG.showMsgBox('invalidgeometry')
         if count:
             return 'invalid'
 
@@ -85,10 +85,10 @@ def nearest_neighbor(iface, layer, point):
     parentFeature = None
     extent = iface.mapCanvas().extent()
     #veroorzaakt foutmelding als er niets in het kaartvenster staat, daarom in try/except statement
-    index = QgsSpatialIndex(layer.getFeatures(QgsFeatureRequest(extent)))
+    index = QC.QgsSpatialIndex(layer.getFeatures(QC.QgsFeatureRequest(extent)))
     try:
         parentId = index.nearestNeighbor(point, 1)[0]
-        parentFeature = next(layer.getFeatures(QgsFeatureRequest(parentId)))
+        parentFeature = next(layer.getFeatures(QC.QgsFeatureRequest(parentId)))
         parentId = parentFeature["id"]
     except: # pylint: disable=bare-except
         pass
@@ -97,7 +97,7 @@ def nearest_neighbor(iface, layer, point):
 def request_feature(ifeature, layer_feature_id, layer_name):
     """get feature from specific id"""
     objectId = ifeature[layer_feature_id]
-    request = QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
+    request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
     tempLayer = getlayer_byname(layer_name)
     tempFeature = next(tempLayer.getFeatures(request))
     return tempFeature, objectId
@@ -122,18 +122,18 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
     for name in layerNamesList:
         lyr = getlayer_byname(name)
         if name == 'BAG panden':
-            request = QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
+            request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
             tempFeature = next(lyr.getFeatures(request))
             possibleSnapFeatures.append(tempFeature.geometry())
         elif name == 'Bouwlagen':
-            request = QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
+            request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
             featureIt = lyr.getFeatures(request)
             for feat in featureIt:
                 bouwlaagIds.append(feat["id"])
                 possibleSnapFeatures.append(feat.geometry())
         elif bouwlaagIds:
             for bid in bouwlaagIds:
-                request = QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + str(bid))
+                request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + str(bid))
                 featureIt = lyr.getFeatures(request)
                 for feat in featureIt:
                     possibleSnapFeatures.append(feat.geometry())
@@ -143,7 +143,7 @@ def get_possible_snapFeatures_object(layerNamesList, objectId):
     possibleSnapFeatures = []
     for name in layerNamesList:
         lyr = getlayer_byname(name)
-        request = QgsFeatureRequest().setFilterExpression('"object_id" = ' + str(objectId))
+        request = QC.QgsFeatureRequest().setFilterExpression('"object_id" = ' + str(objectId))
         featureIt = lyr.getFeatures(request)
         for feat in featureIt:
             if feat.hasGeometry():
@@ -151,17 +151,17 @@ def get_possible_snapFeatures_object(layerNamesList, objectId):
     return possibleSnapFeatures
 
 def construct_feature(layerType, parentLayerName, points, objectId, iface):
-    tempFeature = QgsFeature()
+    tempFeature = QC.QgsFeature()
     parentId = None
     #converteer lijst van punten naar QgsGeometry, afhankelijk van soort geometrie
     if layerType == "Point":
-        tempFeature.setGeometry(QgsGeometry.fromPointXY(points))
+        tempFeature.setGeometry(QC.QgsGeometry.fromPointXY(points))
         geom = points
     elif layerType == "LineString":
-        tempFeature.setGeometry(QgsGeometry.fromPolylineXY(points))
+        tempFeature.setGeometry(QC.QgsGeometry.fromPolylineXY(points))
         geom = points[0]
     elif layerType == "Polygon":
-        tempFeature.setGeometry(QgsGeometry.fromPolygonXY([points]))
+        tempFeature.setGeometry(QC.QgsGeometry.fromPolygonXY([points]))
         geom = points[0]
     if parentLayerName != '' and parentLayerName == 'Objecten':
         parentlayer = getlayer_byname(parentLayerName)
@@ -175,7 +175,7 @@ def construct_feature(layerType, parentLayerName, points, objectId, iface):
         parentId = None
     #foutafhandeling ivm als er geen parentId is
     if parentId is None and parentLayerName != '':
-        QMessageBox.information(None, "Oeps:", "Geen object gevonden om aan te koppelen.")
+        MSG.showMsgBox('noparentfeature')
         return None, None
     else:
         return parentId, tempFeature

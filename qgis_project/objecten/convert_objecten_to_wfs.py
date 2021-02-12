@@ -77,4 +77,4 @@ for elem in root.iter('Variables'):
     for var in elem.findall('variableValues'):
         var[index].text = 'WFS'
 
-tree.write('./OIV_Objecten.qgs')
+tree.write('./OIV_Objecten_WFS.qgs')
