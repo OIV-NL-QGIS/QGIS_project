@@ -17,9 +17,6 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     """the actions class for the import"""
 
-    iface = None
-    parentWidget = None
-    canvas = None
     selectTool = None
     importLayer = None
     importTypeFile = None
@@ -32,6 +29,12 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         """Constructor."""
         super(oivImportFileWidget, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
+        self.iface = parent.iface
+        self.canvas = parent.canvas
+        self.object_id.setText(parent.pand_id.text())
+        self.bouwlaag.setText(parent.comboBox.currentText())
+        self.selectTool = parent.selectTool
         self.selectId.clicked.connect(self.run_select_bouwlaag)
         self.select_file.clicked.connect(self.selectfile)
         self.terug.clicked.connect(self.close_import)
@@ -275,10 +278,10 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         """close feature form and save changes"""
         self.hide_all()
         self.close()
-        self.parentWidget.bouwlagen_to_combobox(str(self.object_id.text()), int(self.bouwlaag.text()))
+        self.parent.bouwlagen_to_combobox(str(self.object_id.text()), int(self.bouwlaag.text()))
         try:
-            self.parentWidget.show()
-            del self.parentWidget
+            self.parent.show()
+            del self.parent
         except: # pylint: disable=bare-except
             pass
         try:

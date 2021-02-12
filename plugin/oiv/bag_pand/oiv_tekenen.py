@@ -19,24 +19,23 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     """Organize all draw features on the map"""
 
-    iface = None
-    canvas = None
-    parent = None
     identifier = None
     parentLayerName = None
     drawLayerType = None
     drawLayer = None
     editableLayerNames = []
-    snapPicto = DW.BLSNAPSYMBOLS
     moveLayerNames = []
-    snapLayerNames = DW.BLSNAPLAYERS
 
     def __init__(self, parent=None):
         """Constructor."""
         super(oivTekenWidget, self).__init__(parent)
         self.setupUi(self)
         self.parent = parent
+        self.iface = parent.iface
+        self.canvas = parent.canvas
         self.selectTool = parent.selectTool
+        self.bouwlaag.setText(str(parent.comboBox.currentText()))
+        self.pand_id.setText(parent.pand_id.text())
         self.initUI()
 
     def initUI(self):
@@ -152,14 +151,14 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parentLayerName = CH.get_parentlayer_bl(runLayer)
         objectId = self.pand_id.text()
         #aan welke lagen kan worden gesnapt?
-        possibleSnapFeatures = UC.get_possible_snapFeatures_bouwlaag(self.snapLayerNames, objectId)
+        possibleSnapFeatures = UC.get_possible_snapFeatures_bouwlaag(DW.BLSNAPLAYERS, objectId)
         if self.drawLayerType == "Point":
             pointTool = self.parent.pointTool
             pointTool.snapPt = None
             pointTool.snapping = False
             pointTool.startRotate = False
             pointTool.possibleSnapFeatures = possibleSnapFeatures
-            if self.identifier in self.snapPicto:
+            if self.identifier in DW.BLSNAPSYMBOLS:
                 pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)

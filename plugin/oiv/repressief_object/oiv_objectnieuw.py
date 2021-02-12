@@ -22,7 +22,7 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
     drawLayer = None
     basewidget = None
     objectwidget = None
-    mapTool = None
+    pointTool = None
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -48,8 +48,8 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             runLayer = PC.OBJECT["objectbgtlayername"]
         self.drawLayer = UC.getlayer_byname(runLayer)
-        self.canvas.setMapTool(self.mapTool)
-        self.mapTool.canvasClicked.connect(self.place_feature)
+        self.canvas.setMapTool(self.pointTool)
+        self.pointTool.canvasClicked.connect(self.place_feature)
 
     #construct the feature and save
     def place_feature(self, point):

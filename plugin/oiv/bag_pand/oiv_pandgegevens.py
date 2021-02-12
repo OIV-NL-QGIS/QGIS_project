@@ -42,7 +42,6 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def __init__(self, parent=None):
         super(oivPandWidget, self).__init__(parent)
         self.setupUi(self)
-        self.importwidget = oivImportFileWidget()
 
     def initUI(self):
         """fill the lineedits with values"""
@@ -158,12 +157,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_tekenen(self):
         """init teken widget"""
         tekenwidget = oivTekenWidget(self)
-        tekenwidget.canvas = self.canvas
-        tekenwidget.iface = self.iface
         subString = "bouwlaag = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)
-        tekenwidget.bouwlaag.setText(str(self.comboBox.currentText()))
-        tekenwidget.pand_id.setText(self.pand_id.text())
         self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, tekenwidget)
         self.close()
         tekenwidget.show()
@@ -197,15 +192,10 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_import(self):
         """initiate import widget"""
-        self.importwidget.parentWidget = self
-        self.importwidget.object_id.setText(self.pand_id.text())
-        self.importwidget.bouwlaag.setText(self.comboBox.currentText())
-        self.importwidget.selectTool = self.selectTool
-        self.importwidget.canvas = self.canvas
-        self.importwidget.iface = self.iface
-        self.iface.addDockWidget(QH.getWidgetType(), self.importwidget)
+        importwidget = oivImportFileWidget(self)
+        self.iface.addDockWidget(QH.getWidgetType(), importwidget)
         self.close()
-        self.importwidget.show()
+        importwidget.show()
 
     def close_object_show_base(self):
         subString = "bouwlaag = 1"

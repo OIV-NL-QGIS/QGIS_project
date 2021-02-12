@@ -156,7 +156,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.objectnieuwwidget.objectwidget = self.repressiefobjectwidget
         self.iface.addDockWidget(QT.getWidgetType(), self.objectnieuwwidget)
         self.objectnieuwwidget.canvas = self.canvas
-        self.objectnieuwwidget.mapTool = self.pinTool
+        self.objectnieuwwidget.pointTool = self.pinTool
         self.objectnieuwwidget.identificatienummer.setText(str(objectId))
         self.objectnieuwwidget.bron.setText(str(bron))
         self.objectnieuwwidget.bron_table.setText(str(bron_tbl))
