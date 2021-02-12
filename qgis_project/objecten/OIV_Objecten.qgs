@@ -631,10 +631,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>61308.77613946000928991</xmin>
-      <ymin>421495.6404726862674579</ymin>
-      <xmax>61527.2043925850011874</xmax>
-      <ymax>421671.62480432691518217</ymax>
+      <xmin>61138.64237018505809829</xmin>
+      <ymin>422444.45587297074962407</ymin>
+      <xmax>61575.49887643504189327</xmax>
+      <ymax>422796.42453625157941133</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -17210,6 +17210,11 @@ def my_form_open(dialog, layer, feature):
                       <Option type="QString" name="expression" value="0.75*&quot;size&quot;"/>
                       <Option type="int" name="type" value="3"/>
                     </Option>
+                    <Option type="Map" name="vAnchor">
+                      <Option type="bool" name="active" value="true"/>
+                      <Option type="QString" name="expression" value="CASE&#xd;&#xa;&#x9;WHEN  &quot;ingang_type_id&quot;  IN (32, 47, 301, 1011) THEN 'top'&#xd;&#xa;&#x9;ELSE 'center'&#xd;&#xa;END"/>
+                      <Option type="int" name="type" value="3"/>
+                    </Option>
                   </Option>
                   <Option type="QString" name="type" value="collection"/>
                 </Option>
@@ -17292,6 +17297,11 @@ def my_form_open(dialog, layer, feature):
                       <Option type="QString" name="expression" value="&quot;size&quot; * 2"/>
                       <Option type="int" name="type" value="3"/>
                     </Option>
+                    <Option type="Map" name="vAnchor">
+                      <Option type="bool" name="active" value="true"/>
+                      <Option type="QString" name="expression" value="CASE&#xd;&#xa;&#x9;WHEN  &quot;ingang_type_id&quot;  IN (32, 47, 301, 1011) THEN 'top'&#xd;&#xa;&#x9;ELSE 'center'&#xd;&#xa;END"/>
+                      <Option type="int" name="type" value="3"/>
+                    </Option>
                   </Option>
                   <Option type="QString" name="type" value="collection"/>
                 </Option>
@@ -17339,8 +17349,8 @@ def my_form_open(dialog, layer, feature):
         </symbols>
       </renderer-v2>
       <labeling type="rule-based">
-        <rules key="{857886a5-5f6b-4c71-ab85-d869937a3015}">
-          <rule filter=" &quot;ingang_type_id&quot; != 301 " key="{f3f537c9-543a-464d-9011-18f22e164ac1}">
+        <rules key="{443c4703-68b2-43c9-99c2-17fe94be3880}">
+          <rule filter=" &quot;ingang_type_id&quot; != 301 " key="{13a2d10f-9811-4e33-9869-53a7a20b505f}">
             <settings calloutType="simple">
               <text-style fontSizeUnit="MapUnit" fontSizeMapUnitScale="3x:0,0,0,0,0,0" textOpacity="1" useSubstitutions="0" namedStyle="Standaard" fontLetterSpacing="0" textColor="0,0,0,255" fontUnderline="0" textOrientation="horizontal" fontSize="3" previewBkgrdColor="0,0,0,255" fontWeight="50" fieldName="label" fontWordSpacing="0" isExpression="0" fontFamily="MS Shell Dlg 2" multilineHeight="1" blendMode="0" fontStrikeout="0" fontKerning="1" fontCapitals="0" fontItalic="0">
                 <text-buffer bufferSizeUnits="MapUnit" bufferJoinStyle="64" bufferSize="0.2" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferDraw="1" bufferNoFill="0" bufferOpacity="1" bufferBlendMode="0" bufferColor="255,255,255,255"/>
@@ -17430,7 +17440,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule filter=" &quot;ingang_type_id&quot; = 301" description="Inrijpunt" key="{e7b7e089-587f-4fcd-b09d-d344de6ad269}" scalemaxdenom="100000" scalemindenom="10000">
+          <rule filter=" &quot;ingang_type_id&quot; = 301" description="Inrijpunt" key="{2753024d-1073-41a0-add8-3d6b99b472b8}" scalemaxdenom="100000" scalemindenom="10000">
             <settings calloutType="simple">
               <text-style fontSizeUnit="MapUnit" fontSizeMapUnitScale="3x:0,0,0,0,0,0" textOpacity="1" useSubstitutions="0" namedStyle="Vet" fontLetterSpacing="0" textColor="0,0,0,255" fontUnderline="0" textOrientation="horizontal" fontSize="40" previewBkgrdColor="0,0,0,255" fontWeight="75" fieldName="label" fontWordSpacing="0" isExpression="0" fontFamily="MS Shell Dlg 2" multilineHeight="1" blendMode="0" fontStrikeout="0" fontKerning="1" fontCapitals="0" fontItalic="0">
                 <text-buffer bufferSizeUnits="MapUnit" bufferJoinStyle="64" bufferSize="2" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferDraw="1" bufferNoFill="0" bufferOpacity="1" bufferBlendMode="0" bufferColor="255,255,255,255"/>
@@ -17520,7 +17530,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule filter=" &quot;ingang_type_id&quot; = 301" description="Inrijpunt" key="{c5e5102a-a85b-4a14-8663-ccb2ad7d35b9}" scalemaxdenom="10000" scalemindenom="1">
+          <rule filter=" &quot;ingang_type_id&quot; = 301" description="Inrijpunt" key="{8b2191bf-eee9-433d-967a-93e72328e81c}" scalemaxdenom="10000" scalemindenom="1">
             <settings calloutType="simple">
               <text-style fontSizeUnit="MapUnit" fontSizeMapUnitScale="3x:0,0,0,0,0,0" textOpacity="1" useSubstitutions="0" namedStyle="Vet" fontLetterSpacing="0" textColor="0,0,0,255" fontUnderline="0" textOrientation="horizontal" fontSize="20" previewBkgrdColor="0,0,0,255" fontWeight="75" fieldName="label" fontWordSpacing="0" isExpression="0" fontFamily="MS Shell Dlg 2" multilineHeight="1" blendMode="0" fontStrikeout="0" fontKerning="1" fontCapitals="0" fontItalic="0">
                 <text-buffer bufferSizeUnits="MapUnit" bufferJoinStyle="64" bufferSize="2" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferDraw="1" bufferNoFill="0" bufferOpacity="1" bufferBlendMode="0" bufferColor="255,255,255,255"/>
@@ -18009,7 +18019,7 @@ def my_form_open(dialog, layer, feature):
           </config>
         </widget>
       </widgets>
-      <previewExpression>id</previewExpression>
+      <previewExpression>"id"</previewExpression>
       <mapTip>ogr_fid</mapTip>
     </maplayer>
     <maplayer refreshOnNotifyEnabled="0" autoRefreshEnabled="0" simplifyDrawingHints="1" labelsEnabled="1" styleCategories="AllStyleCategories" minScale="30000" wkbType="LineString" simplifyAlgorithm="0" maxScale="0" refreshOnNotifyMessage="" simplifyDrawingTol="1" autoRefreshTime="0" simplifyMaxScale="1" readOnly="0" type="vector" hasScaleBasedVisibilityFlag="1" simplifyLocal="1" geometry="Line">
