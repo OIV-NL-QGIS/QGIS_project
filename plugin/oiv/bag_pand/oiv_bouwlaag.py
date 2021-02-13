@@ -19,20 +19,24 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
     """create bouwlaag from BAG, copy or draw"""
 
-    canvas = None
-    iface = None
-    layer = None
-    objectId = None
     bouwlaagList = []
     snapLayerNames = DW.BLSNAPLAYERS
-    parent = None
 
-    def __init__(self, parent):
+    def __init__(self, parent=None, bouwlaag=None, bouwlaagMax=None):
         """initialize dockwidget and connect slots and signals"""
         super(oivBouwlaagWidget, self).__init__(parent)
         self.setupUi(self)
         self.parent = parent
+        self.canvas = parent.canvas
+        self.iface = parent.iface
         self.objectId = self.parent.pand_id.text()
+        self.sortedList = self.parent.sortedList
+        self.teken_bouwlaag.setText(str(bouwlaag) + ' t/m ' + str(bouwlaagMax))
+        self.bouwlaag_min.setText(str(bouwlaag))
+        self.bouwlaag_max.setText(str(bouwlaagMax))
+        self.initUI()
+
+    def initUI(self):
         self.bouwlaag_bag.clicked.connect(self.run_bag_overnemen)
         self.bouwlaag_tekenen.clicked.connect(self.run_bouwlaag_tekenen)
         self.bouwlaag_overnemen.clicked.connect(self.run_bouwlaag_overnemen)
@@ -41,6 +45,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.label1.setVisible(False)
         self.label2.setVisible(False)
         self.label3.setVisible(False)
+        self.teken_bouwlaag.setEnabled(False)
         UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
         self.bouwlaag_max.setVisible(False)
         self.bouwlaag.setVisible(False)

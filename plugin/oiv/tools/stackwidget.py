@@ -7,6 +7,8 @@ import qgis.core as QC #pylint: disable=import-error
 import qgis.gui as QG #pylint: disable=import-error
 import qgis.utils as QU #pylint: disable=import-error
 
+import oiv.plugin_helpers.plugin_constants as PC
+
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'stackwidget.ui'))
 
@@ -40,7 +42,7 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
         self.attributeForm.close()
         del self.attributeForm
         self.attributeForm = None
-        if ilayer.name() == "Objecten":
+        if ilayer.name() == PC.OBJECT["objectlayername"]:
             request = QC.QgsFeatureRequest().setFilterExpression("id = " \
                              + str(ifeature["id"]))
             objectFeature = next(ilayer.getFeatures(request))

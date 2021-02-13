@@ -4,41 +4,37 @@ import os
 import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
-import qgis.utils as QU #pylint: disable=import-error
 
 import oiv.tools.utils_core as UC
+import oiv.plugin_helpers.qt_helper as QT
 import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.qt_helper as QH
 import oiv.plugin_helpers.configdb_helper as CH
 import oiv.plugin_helpers.plugin_constants as PC
+import oiv.repressief_object.oiv_repressief_object as ORO
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectnieuwwidgetui"]))
 
 class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
 
-    canvas = None
-    newObject = None
     drawLayer = None
-    basewidget = None
-    objectwidget = None
-    pointTool = None
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, objectId=None, bron=None, bronTbl=None):
         """Constructor."""
         super(oivObjectNieuwWidget, self).__init__(parent)
         self.setupUi(self)
-        self.iface = QU.iface
+        self.parent = parent
+        self.iface = parent.iface
+        self.canvas = parent.canvas
+        self.identificatienummer.setText(str(objectId))
+        self.bron.setText(str(bron))
+        self.bron_table.setText(str(bronTbl))
         self.opslaan.clicked.connect(self.run_tekenen)
         self.terug.clicked.connect(self.close_objectnieuw_show_base)
 
     def close_objectnieuw_show_base(self):
         self.close()
-        try:
-            del self.objectwidget
-        except: # pylint: disable=bare-except
-            pass
-        self.basewidget.show()
+        self.parent.show()
         del self
 
     #place new object (i-tje)
@@ -48,14 +44,13 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             runLayer = PC.OBJECT["objectbgtlayername"]
         self.drawLayer = UC.getlayer_byname(runLayer)
-        self.canvas.setMapTool(self.pointTool)
-        self.pointTool.canvasClicked.connect(self.place_feature)
+        self.canvas.setMapTool(self.parent.pinTool)
+        self.parent.pinTool.canvasClicked.connect(self.place_feature)
 
     #construct the feature and save
     def place_feature(self, point):
         childFeature = QC.QgsFeature()
         newFeatureId = None
-        self.iface.setActiveLayer(self.drawLayer)
         objectLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         #set geometry from the point clicked on the canvas
         childFeature.setGeometry(QC.QgsGeometry.fromPointXY(point))
@@ -102,13 +97,7 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_objectgegevens(self, formeleNaam, objectId):
         """continue to existing object woth the newly created feature and already searched address"""
-        self.objectwidget.drawLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
-        self.objectwidget.object_id.setText(str(objectId))
-        self.objectwidget.formelenaam.setText(formeleNaam)
-        self.iface.addDockWidget(QH.getWidgetType(), self.objectwidget)
-        self.objectwidget.initActions()
-        self.objectwidget.show()
+        self.parent.run_object(formeleNaam, objectId)
         self.iface.actionPan().trigger()
         self.close()
-        del self.objectwidget
         del self

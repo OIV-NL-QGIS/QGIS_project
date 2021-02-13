@@ -5,7 +5,6 @@ import webbrowser
 import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
-import qgis.utils as QU #pylint: disable=import-error
 
 import oiv.tools.utils_core as UC
 import oiv.tools.utils_gui as UG
@@ -25,28 +24,29 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     """interactive UI management"""
 
-    iface = None
-    canvas = None
-    basewidget = None
-    selectTool = None
-    identifyTool = None
-    pointTool = None
     attributeform = None
-    drawLayer = None
     identifier = None
-    drawTool = None
-    moveTool = None
     snapLayerNames = DH.ROSNAPLAYERS
     tekensymbolenwidget = None
     importwidget = None
     gridWidget = None
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, objectId=None, formeleNaam=None):
         super(oivRepressiefObjectWidget, self).__init__(parent)
         self.setupUi(self)
-        self.iface = QU.iface
+        self.parent = parent
+        self.iface = parent.iface
+        self.canvas = parent.canvas
         self.object_id.setVisible(False)
+        self.selectTool = parent.selectTool
+        self.pointTool = parent.pointTool
+        self.drawTool = parent.drawTool
+        self.moveTool = parent.moveTool
+        self.identifyTool = parent.identifyTool
+        self.object_id.setText(str(objectId))
+        self.formelenaam.setText(formeleNaam)
         UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
+        self.initActions()
 
     def initActions(self):
         """connect the buttons to their actions"""
@@ -77,7 +77,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         except: # pylint: disable=bare-except
             pass
         self.close()
-        self.basewidget.show()
+        self.parent.show()
         del self
 
     def activatePan(self):
@@ -88,7 +88,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         """select bouwlaag on canvas to edit the atrribute form"""
         objectId = self.object_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
-        tempLayer = self.drawLayer
+        tempLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         objectFeature = next(tempLayer.getFeatures(request))
         self.edit_attribute(tempLayer, objectFeature)
 
@@ -102,7 +102,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_delete_object(self):
         """delete repressief object"""
-        ilayer = self.drawLayer
+        ilayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         objectId = self.object_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
         ifeature = next(ilayer.getFeatures(request))
