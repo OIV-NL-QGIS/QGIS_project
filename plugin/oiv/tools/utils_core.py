@@ -122,7 +122,7 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
     bouwlaagIds = []
     for name in layerNamesList:
         lyr = getlayer_byname(name)
-        if name == PC.PAND["bagpandlayername"]:
+        if name == PC.bagpand_layername():
             request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
             tempFeature = next(lyr.getFeatures(request))
             possibleSnapFeatures.append(tempFeature.geometry())

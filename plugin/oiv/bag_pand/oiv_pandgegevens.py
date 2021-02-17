@@ -45,7 +45,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def initUI(self):
         """fill the lineedits with values"""
         #Get the related BAG attributes from BAG API
-        ilayer = UC.getlayer_byname(PC.PAND["bagpandlayername"])
+        ilayer = UC.getlayer_byname(PC.bagpand_layername())
         foreignKey = 'identificatie'
         objectId = self.pand_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + objectId + "'")

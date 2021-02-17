@@ -13,6 +13,7 @@ import oiv.plugin_helpers.configdb_helper as CH
 import oiv.plugin_helpers.plugin_constants as PC
 import oiv.tools.utils_gui as UG
 import oiv.oiv_base_widget as OB
+import oiv.oiv_config as OC
 import oiv.tools.identifyTool as IT
 import oiv.tools.snappointTool as ST
 import oiv.tools.movepointTool as MT
@@ -21,7 +22,7 @@ import oiv.tools.mapTool as CT
 #initialize Qt resources from file resources.py
 from .resources import qInitResources #pylint: disable=unused-import
 
-class oiv:
+class oiv(PQtW.QWidget):
     """initialize class attributes"""
 
     action = None
@@ -34,6 +35,7 @@ class oiv:
 
     # Save reference to the QGIS interface
     def __init__(self, iface):
+        super(oiv, self).__init__()
         self.iface = iface
         self.canvas = self.iface.mapCanvas()
         self.identifyTool = IT.IdentifyGeometryTool(self.canvas)
@@ -50,6 +52,9 @@ class oiv:
         self.action.triggered.connect(self.run)
         self.toolbar.addAction(self.action)
         self.iface.addPluginToMenu(PC.PLUGIN["menulocation"], self.action)
+        self.settings = PQtW.QAction(PQtG.QIcon(PC.PLUGIN["settingsicon"]), PC.PLUGIN["settingsname"], self.iface.mainWindow())
+        self.settings.triggered.connect(self.run_config)
+        self.iface.addPluginToMenu(PC.PLUGIN["menusettingslocation"], self.settings)
         #add label to toolbar
         label = PQtW.QLabel()
         self.toolbar.addWidget(label)
@@ -80,8 +85,10 @@ class oiv:
         except: # pylint: disable=bare-except
             pass
         self.iface.removePluginMenu(PC.PLUGIN["menulocation"], self.action)
+        self.iface.removePluginMenu(PC.PLUGIN["menusettingslocation"], self.settings)
         self.projCombo.currentIndexChanged.disconnect()
         self.action.triggered.disconnect()
+        self.settings.triggered.disconnect()
         del self.toolbar
         self.checkVisibility = None
         self.iface.removeToolBarIcon(self.action)
@@ -92,6 +99,11 @@ class oiv:
         UG.set_layer_substring(subString)
         project = QC.QgsProject.instance()
         QC.QgsExpressionContextUtils.setProjectVariable(project, 'actieve_bouwlaag', int(self.projCombo.currentText()))
+
+    def run_config(self):
+        configWidget = OC.oivConfigWidget(self)
+        self.iface.addDockWidget(QT.getWidgetType(), configWidget)
+        configWidget.show()
 
     def run(self):
         """run the plugin, if project is not OIV object, deactivate plugin when clicked on icon"""
@@ -107,18 +119,9 @@ class oiv:
             self.action.setEnabled(False)
         else:
             #always start from floor 1
-            self.basewidget = OB.oivBaseWidget()
+            self.basewidget = OB.oivBaseWidget(self)
             subString = "bouwlaag = 1"
             UG.set_layer_substring(subString)
-            self.basewidget.oiv = self
-            self.basewidget.iface = self.iface
-            self.basewidget.canvas = self.canvas
-            self.basewidget.pinTool = self.pinTool
-            self.basewidget.pointTool = self.pointTool
-            self.basewidget.selectTool = self.selectTool
-            self.basewidget.identifyTool = self.identifyTool
-            self.basewidget.drawTool = self.drawTool
-            self.basewidget.moveTool = self.moveTool
             index = self.projCombo.findText('1', PQtC.Qt.MatchFixedString)
             if index >= 0:
                 self.projCombo.setCurrentIndex(index)

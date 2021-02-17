@@ -19,19 +19,19 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     """create dockwidget as base of the oiv plugin"""
 
-    oiv = None
-    iface = None
-    canvas = None
-    pinTool = None
-    pointTool = None
-    selectTool = None
-    drawTool = None
-    moveTool = None
-
     def __init__(self, parent=None):
         """Constructor."""
         super(oivBaseWidget, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
+        self.iface = parent.iface
+        self.canvas = parent.canvas
+        self.pinTool = parent.pinTool
+        self.pointTool = parent.pointTool
+        self.selectTool = parent.selectTool
+        self.identifyTool = parent.identifyTool
+        self.drawTool = parent.drawTool
+        self.moveTool = parent.moveTool
         self.identify_pand.clicked.connect(self.run_identify_pand)
         self.identify_gebouw.clicked.connect(self.run_identify_terrein)
         self.filter_objecten.clicked.connect(lambda: FO.init_filter_section(self))
@@ -64,7 +64,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             if ilayer.name() == PC.PAND["bouwlaaglayername"]:
                 objectId = str(ifeature["pand_id"])
                 self.run_bouwlagen(objectId)
-            elif ilayer.name() == PC.PAND["bagpandlayername"]:
+            elif ilayer.name() == PC.bagpand_layername():
                 objectId = str(ifeature["identificatie"])
                 self.run_bouwlagen(objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
@@ -75,10 +75,15 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     def get_identified_terrein(self, ilayer, ifeature):
         """Return of identified layer and feature and get related object"""
         #the identified layer must be "Object" or "Object terrein"
-        drawLayer = UC.getlayer_byname("Objecten")
+        drawLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         if ilayer is None:
             self.run_new_object('wordt gekoppeld in de database', 'BGT', 'wordt gekoppeld in de database')
-        elif ilayer.name() == PC.PAND["bagpandlayername"]:
+        elif ilayer.name() == PC.bagpand_layername() and "PDOK" in ilayer.name():
+            objectId = str(ifeature["identificatie"])
+            bron = "BAG"
+            bron_tabel = "Pand"
+            self.run_new_object(objectId, bron, bron_tabel)
+        elif ilayer.name() == PC.bagpand_layername():
             objectId = str(ifeature["identificatie"])
             bron = ifeature["bron"]
             bron_tabel = ifeature["bron_tbl"]
@@ -125,6 +130,6 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     def close_basewidget(self):
         """close plugin and re-activate toolbar combobox"""
         self.close()
-        self.oiv.toolbar.setEnabled(True)
-        self.oiv.projCombo.setEnabled(True)
-        self.oiv.checkVisibility = False
+        self.parent.toolbar.setEnabled(True)
+        self.parent.projCombo.setEnabled(True)
+        self.parent.checkVisibility = False

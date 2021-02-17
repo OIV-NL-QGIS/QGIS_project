@@ -58,7 +58,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_bag_overnemen(self):
         """copy polygon of bag feature"""
         UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
-        layerName = PC.PAND["bagpandlayername"]
+        layerName = PC.bagpand_layername()
         ilayer = UC.getlayer_byname(layerName)
         request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(self.objectId))
         ifeature = next(ilayer.getFeatures(request))
@@ -176,7 +176,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def copy_bag_bouwlaag(self, ilayer, ifeature):
         """copy the floor drom the BAG features"""
-        if ilayer.name() == PC.PAND["bouwlaaglayername"] or ilayer.name() == PC.PAND["bagpandlayername"]:
+        if ilayer.name() == PC.PAND["bouwlaaglayername"] or ilayer.name() == PC.bagpand_layername():
             childFeature = QC.QgsFeature()
             layerName = PC.PAND["bouwlaaglayername"]
             #get active floor from dockwidget
