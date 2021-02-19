@@ -10,9 +10,11 @@ import qgis.gui as QG #pylint: disable=import-error
 import oiv.plugin_helpers.qt_helper as QT
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.plugin_constants as PC
+from .plugin_helpers.plugin_constants import PLUGIN, PAND
 import oiv.tools.utils_gui as UG
+import oiv.tools.utils_core as UC
 import oiv.oiv_base_widget as OB
+import oiv.oiv_config as OC
 import oiv.tools.identifyTool as IT
 import oiv.tools.snappointTool as ST
 import oiv.tools.movepointTool as MT
@@ -21,7 +23,7 @@ import oiv.tools.mapTool as CT
 #initialize Qt resources from file resources.py
 from .resources import qInitResources #pylint: disable=unused-import
 
-class oiv:
+class oiv(PQtW.QWidget):
     """initialize class attributes"""
 
     action = None
@@ -29,11 +31,13 @@ class oiv:
     projCombo = None
     basewidget = None
     drawLayer = None
+    bagNode = None
     projComboAction = None
     checkVisibility = False
 
     # Save reference to the QGIS interface
     def __init__(self, iface):
+        super(oiv, self).__init__()
         self.iface = iface
         self.canvas = self.iface.mapCanvas()
         self.identifyTool = IT.IdentifyGeometryTool(self.canvas)
@@ -45,19 +49,23 @@ class oiv:
 
     def initGui(self):
         """init actions plugin"""
-        self.toolbar = self.iface.addToolBar(PC.PLUGIN["name"])
-        self.action = PQtW.QAction(PQtG.QIcon(PC.PLUGIN["icon"]), PC.PLUGIN["name"], self.iface.mainWindow())
+        self.toolbar = self.iface.addToolBar(PLUGIN["name"])
+        self.action = PQtW.QAction(PQtG.QIcon(PLUGIN["icon"]), PLUGIN["name"], self.iface.mainWindow())
         self.action.triggered.connect(self.run)
         self.toolbar.addAction(self.action)
-        self.iface.addPluginToMenu(PC.PLUGIN["menulocation"], self.action)
+        self.iface.addPluginToMenu(PLUGIN["menulocation"], self.action)
+        self.configAction = PQtW.QAction(PQtG.QIcon(PLUGIN["settingsicon"]), PLUGIN["settingsname"], self.iface.mainWindow())
+        self.configAction.triggered.connect(self.run_config)
+        self.iface.addPluginToMenu(PLUGIN["menusettingslocation"], self.configAction)
         #add label to toolbar
         label = PQtW.QLabel()
         self.toolbar.addWidget(label)
-        label.setText(PC.PLUGIN["toolbartext"])
+        label.setText(PLUGIN["toolbartext"])
         #init dropdown to switch floors
         self.projCombo = PQtW.QComboBox(self.iface.mainWindow())
-        minBouwlaag = PC.PAND["minbouwlaag"]
-        maxBouwlaag = PC.PAND["maxbouwlaag"]
+        bouwlagen = PAND["bouwlagen"]
+        minBouwlaag = bouwlagen["min"]
+        maxBouwlaag = bouwlagen["max"]
         for i in range(maxBouwlaag - minBouwlaag + 1):
             if maxBouwlaag - i != 0:
                 if maxBouwlaag - i == 1:
@@ -79,9 +87,11 @@ class oiv:
             del self.basewidget
         except: # pylint: disable=bare-except
             pass
-        self.iface.removePluginMenu(PC.PLUGIN["menulocation"], self.action)
+        self.iface.removePluginMenu(PLUGIN["menulocation"], self.action)
+        self.iface.removePluginMenu(PLUGIN["menusettingslocation"], self.configAction)
         self.projCombo.currentIndexChanged.disconnect()
         self.action.triggered.disconnect()
+        self.configAction.triggered.disconnect()
         del self.toolbar
         self.checkVisibility = None
         self.iface.removeToolBarIcon(self.action)
@@ -93,6 +103,11 @@ class oiv:
         project = QC.QgsProject.instance()
         QC.QgsExpressionContextUtils.setProjectVariable(project, 'actieve_bouwlaag', int(self.projCombo.currentText()))
 
+    def run_config(self):
+        configWidget = OC.oivConfigWidget(self)
+        self.iface.addDockWidget(QT.getWidgetType(), configWidget)
+        configWidget.show()
+
     def run(self):
         """run the plugin, if project is not OIV object, deactivate plugin when clicked on icon"""
         project = QC.QgsProject.instance()
@@ -101,24 +116,15 @@ class oiv:
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
-        elif PC.PLUGIN["compatibleDbVersion"][1] > dbVersion < PC.PLUGIN["compatibleDbVersion"][0]:
+        elif PLUGIN["compatibleDbVersion"]["max"] > dbVersion < PLUGIN["compatibleDbVersion"]["min"]:
             MSG.showMsgBox('invaliddatabaseversion')
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
         else:
             #always start from floor 1
-            self.basewidget = OB.oivBaseWidget()
+            self.basewidget = OB.oivBaseWidget(self)
             subString = "bouwlaag = 1"
             UG.set_layer_substring(subString)
-            self.basewidget.oiv = self
-            self.basewidget.iface = self.iface
-            self.basewidget.canvas = self.canvas
-            self.basewidget.pinTool = self.pinTool
-            self.basewidget.pointTool = self.pointTool
-            self.basewidget.selectTool = self.selectTool
-            self.basewidget.identifyTool = self.identifyTool
-            self.basewidget.drawTool = self.drawTool
-            self.basewidget.moveTool = self.moveTool
             index = self.projCombo.findText('1', PQtC.Qt.MatchFixedString)
             if index >= 0:
                 self.projCombo.setCurrentIndex(index)

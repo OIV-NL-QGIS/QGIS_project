@@ -25,6 +25,8 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
     rubberBand = None
     xWidth = 0
     yWidth = 0
+    parent = None
+    objectId = None
 
     def __init__(self, parent=None):
         """Constructor."""

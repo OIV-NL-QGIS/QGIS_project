@@ -6,6 +6,7 @@ import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
 import oiv.plugin_helpers.messages as MSG
+import oiv.plugin_helpers.plugin_constants as PC
 
 def read_settings(query, allResult):
     conn = None
@@ -121,11 +122,11 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
     bouwlaagIds = []
     for name in layerNamesList:
         lyr = getlayer_byname(name)
-        if name == 'BAG panden':
+        if name == PC.bagpand_layername():
             request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
             tempFeature = next(lyr.getFeatures(request))
             possibleSnapFeatures.append(tempFeature.geometry())
-        elif name == 'Bouwlagen':
+        elif name == PC.PAND["bouwlaaglayername"]:
             request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
             featureIt = lyr.getFeatures(request)
             for feat in featureIt:
@@ -163,7 +164,7 @@ def construct_feature(layerType, parentLayerName, points, objectId, iface):
     elif layerType == "Polygon":
         tempFeature.setGeometry(QC.QgsGeometry.fromPolygonXY([points]))
         geom = points[0]
-    if parentLayerName != '' and parentLayerName == 'Objecten':
+    if parentLayerName != '' and parentLayerName == PC.OBJECT["objectlayername"]:
         parentlayer = getlayer_byname(parentLayerName)
         parentId = int(objectId)
     elif parentLayerName != '' and parentLayerName is not None:

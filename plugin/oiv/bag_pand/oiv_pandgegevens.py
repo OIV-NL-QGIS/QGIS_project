@@ -25,28 +25,27 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 
 class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
-    iface = None
-    canvas = None
-    basewidget = None
-    selectTool = None
-    pointTool = None
     sortedList = []
-    attributeform = None
-    objectFeature = None
-    drawTool = None
-    moveTool = None
-    identifyTool = None
-    minBouwlaag = 0
-    maxBouwlaag = 0
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, objectId=None):
         super(oivPandWidget, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
+        self.iface = parent.iface
+        self.canvas = parent.canvas
+        self.selectTool = parent.selectTool
+        self.pointTool = parent.pointTool
+        self.drawTool = parent.drawTool
+        self.moveTool = parent.moveTool
+        self.identifyTool = parent.identifyTool
+        self.pand_id.setText(str(objectId))
+        self.initUI()
+        self.initActions()
 
     def initUI(self):
         """fill the lineedits with values"""
         #Get the related BAG attributes from BAG API
-        ilayer = UC.getlayer_byname('BAG panden')
+        ilayer = UC.getlayer_byname(PC.bagpand_layername())
         foreignKey = 'identificatie'
         objectId = self.pand_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + objectId + "'")
@@ -135,19 +134,12 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         while True:
             bouwlaag, bouwlaagMax, ok = BouwlaagDialog.getBouwlagen()
             if (bouwlaag != 0 and bouwlaagMax >= bouwlaag and ok is True):
-                self.close()
-                bouwlaagwidget = oivBouwlaagWidget(self)
+                bouwlaagwidget = oivBouwlaagWidget(self, bouwlaag, bouwlaagMax)
                 self.iface.addDockWidget(QH.getWidgetType(), bouwlaagwidget)
-                bouwlaagwidget.canvas = self.canvas
-                bouwlaagwidget.iface = self.iface
-                bouwlaagwidget.bouwlaagList = self.sortedList
-                bouwlaagwidget.teken_bouwlaag.setText(str(bouwlaag) + ' t/m ' + str(bouwlaagMax))
-                bouwlaagwidget.bouwlaag_min.setText(str(bouwlaag))
-                bouwlaagwidget.bouwlaag_max.setText(str(bouwlaagMax))
-                bouwlaagwidget.teken_bouwlaag.setEnabled(False)
                 subString = "bouwlaag = " + str(bouwlaag)
                 UG.set_layer_substring(subString)
                 bouwlaagwidget.show()
+                self.close()
                 break
             elif bouwlaagMax < bouwlaag:
                 MSG.showMsgBox('bouwlaagvolgorde')
@@ -171,18 +163,17 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_delete(self):
         layerName = PC.PAND["bouwlaaglayername"]
         ilayer = UC.getlayer_byname(layerName)
-        self.iface.setActiveLayer(ilayer)
         objectId = self.pand_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
         ifeature = next(ilayer.getFeatures(request))
-        ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
         reply = MSG.showMsgBox('deleteobject')
         if not reply:
             #als "nee" deselecteer alle geselecteerde features
-            ilayer.setSelectedFeatures([])
+            ilayer.deselect(ifeature.id())
         elif reply:
             #als "ja" -> verwijder de feature op basis van het unieke feature id
+            ilayer.startEditing()
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
             reply = MSG.showMsgBox('deletedobject')
@@ -207,15 +198,15 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
                 except: # pylint: disable=bare-except
                     pass
         self.close()
-        self.basewidget.show()
+        self.parent.show()
         self.iface.actionPan().trigger()
         del self
 
 class BouwlaagDialog(PQtW.QDialog):
     def __init__(self, parent = None):
         super(BouwlaagDialog, self).__init__(parent)
-        maxBouwlaag = 30
-        minBouwlaag = -10
+        maxBouwlaag = PC.PAND["maxbouwlaag"]
+        minBouwlaag = PC.PAND["minbouwlaag"]
         self.setWindowTitle("Bouwlagen toevoegen")
         qlayout = PQtW.QVBoxLayout(self)
         self.qlineA = PQtW.QLabel(self)
@@ -232,12 +223,12 @@ class BouwlaagDialog(PQtW.QDialog):
                 self.qComboB.addItem(str(maxBouwlaag - i))
                 if maxBouwlaag - i == 1:
                     init_index = i
-        self.qComboA.setCurrentIndex(init_index) 
-        self.qComboB.setCurrentIndex(init_index)  
+        self.qComboA.setCurrentIndex(init_index)
+        self.qComboB.setCurrentIndex(init_index)
         self.qComboA.setFixedWidth(100)
         self.qComboA.setMaxVisibleItems(30)
         self.qComboB.setFixedWidth(100)
-        self.qComboB.setMaxVisibleItems(30) 
+        self.qComboB.setMaxVisibleItems(30)
         self.qComboA.currentIndexChanged.connect(self.set_comboboxB)
         qlayout.addWidget(self.qlineA)
         qlayout.addWidget(self.qlineB)
