@@ -62,10 +62,15 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
         sortList = []
         for feat in allFeatures:
             if len(attrs) > 1:
-                request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(feat[attrs[0]]))
-                type_layer = UC.getlayer_byname(attrs[1])
-                tempFeature = next(type_layer.getFeatures(request))
-                sortList.append([feat["id"], tempFeature["naam"]])
+                typeValue = feat[attrs[0]]
+                if isinstance(typeValue, (int, float)):
+                    req = '"id" = {}'.format(typeValue)
+                    request = QC.QgsFeatureRequest().setFilterExpression(req)
+                    type_layer = UC.getlayer_byname(attrs[1])
+                    tempFeature = next(type_layer.getFeatures(request))
+                    sortList.append([feat["id"], tempFeature["naam"]])
+                else:
+                    sortList.append([feat["id"], typeValue])
             elif attrs:
                 sortList.append([feat["id"], feat[attrs[0]]])
             else:

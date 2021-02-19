@@ -205,8 +205,9 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 class BouwlaagDialog(PQtW.QDialog):
     def __init__(self, parent = None):
         super(BouwlaagDialog, self).__init__(parent)
-        maxBouwlaag = PC.PAND["maxbouwlaag"]
-        minBouwlaag = PC.PAND["minbouwlaag"]
+        bouwlagen = PC.PAND["bouwlagen"]
+        minBouwlaag = bouwlagen["min"]
+        maxBouwlaag = bouwlagen["max"]
         self.setWindowTitle("Bouwlagen toevoegen")
         qlayout = PQtW.QVBoxLayout(self)
         self.qlineA = PQtW.QLabel(self)
