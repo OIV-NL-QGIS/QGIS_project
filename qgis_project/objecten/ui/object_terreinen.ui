@@ -83,12 +83,12 @@
        <item>
         <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Vaknummer</string>
+          <string>Omschrijving</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="vaknummer">
+        <widget class="QLineEdit" name="omschrijving">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -99,26 +99,6 @@
           <number>254</number>
          </property>
         </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>X-as label</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="top_label"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Y-as label</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="left_label"/>
        </item>
        <item>
         <spacer name="verticalSpacer">
@@ -136,13 +116,9 @@
       </layout>
       <zorder>verticalSpacer</zorder>
       <zorder>object_id</zorder>
-      <zorder>vaknummer</zorder>
+      <zorder>omschrijving</zorder>
       <zorder>label_7</zorder>
       <zorder>label_3</zorder>
-      <zorder>label</zorder>
-      <zorder>label_2</zorder>
-      <zorder>top_label</zorder>
-      <zorder>left_label</zorder>
      </widget>
     </widget>
    </item>
