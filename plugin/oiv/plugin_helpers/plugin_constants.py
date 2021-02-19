@@ -21,10 +21,12 @@ def write_plugin_settings(key1, newData):
 def bagpand_layername():
     baglayerName = PAND["bagpandlayername"] + plugin_settings("BAGCONNECTION")["active"]
     layer = getlayer_byname(baglayerName)
-    bagNode = QC.QgsProject.instance().layerTreeRoot().findLayer(layer.id())
-    if bagNode.isVisible():
-        return baglayerName
-    return PAND["bagpandlayername"] + plugin_settings("BAGCONNECTION")["inactive"]
+    if layer:
+        bagNode = QC.QgsProject.instance().layerTreeRoot().findLayer(layer.id())
+        if bagNode.isVisible():
+            return baglayerName
+        return PAND["bagpandlayername"] + plugin_settings("BAGCONNECTION")["inactive"]
+    return None
 
 OIV_VERSION = '3.3.0'
 

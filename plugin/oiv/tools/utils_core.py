@@ -31,7 +31,8 @@ def getlayer_byname(layername):
     """get QgsLayer by name"""
     layer = None
     layers = QC.QgsProject.instance().mapLayersByName(layername)
-    layer = layers[0]
+    if layers:
+        layer = layers[0]
     return layer
 
 def user_input_label(label_req, question):
