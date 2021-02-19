@@ -1,7 +1,7 @@
 # NL
 # OIV_project
 
-Voor het maken van operationele informatie is in 2014 gestart in NW3 (Noord West 3 is de samen werking van de 3 noordhollandse veiligheids regios Noord Holland Noord, Zaanstreek Waterland en Kennemerland) verband met een werkgroep met ales werkgroep leden Joost Deen VRNHN, Bob Hulst VRZW en Mike Vink VRK. 
+Voor het maken van operationele informatie is in 2014 gestart in NW3 (Noord West 3 is de samen werking van de 3 noordhollandse veiligheids regios Noord Holland Noord, Zaanstreek Waterland en Kennemerland) verband met een werkgroep met als werkgroep leden Joost Deen VRNHN, Bob Hulst VRZW en Mike Vink VRK. 
 Van hieruit is een opens source OIV-QGIS oplossing ontstaan.
 OIV staat voor Operationele Informatie Voorziening.
 OIV-QGIS is een oplossing om operationele informatie in QGIS te maken.
