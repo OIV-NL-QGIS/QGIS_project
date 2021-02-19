@@ -1,1 +1,5 @@
-{"BAGCONNECTION": "PDOK"}
+{
+    "BAGCONNECTION": { 
+        "active": "Database", "inactive": "PDOK" 
+    }
+}

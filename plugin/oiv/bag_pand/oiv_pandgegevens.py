@@ -163,18 +163,17 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_delete(self):
         layerName = PC.PAND["bouwlaaglayername"]
         ilayer = UC.getlayer_byname(layerName)
-        self.iface.setActiveLayer(ilayer)
         objectId = self.pand_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
         ifeature = next(ilayer.getFeatures(request))
-        ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
         reply = MSG.showMsgBox('deleteobject')
         if not reply:
             #als "nee" deselecteer alle geselecteerde features
-            ilayer.setSelectedFeatures([])
+            ilayer.deselect(ifeature.id())
         elif reply:
             #als "ja" -> verwijder de feature op basis van het unieke feature id
+            ilayer.startEditing()
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
             reply = MSG.showMsgBox('deletedobject')

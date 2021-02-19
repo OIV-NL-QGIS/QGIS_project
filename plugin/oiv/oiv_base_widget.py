@@ -7,14 +7,14 @@ import qgis.core as QC #pylint: disable=import-error
 import oiv.tools.filter_object as FO
 import oiv.plugin_helpers.qt_helper as QT
 import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.plugin_constants as PC
+from .plugin_helpers.plugin_constants import PLUGIN, PAND, OBJECT, bagpand_layername
 import oiv.tools.utils_core as UC
 import oiv.bag_pand.oiv_pandgegevens as OPG
 import oiv.repressief_object.oiv_repressief_object as ORO
 import oiv.repressief_object.oiv_objectnieuw as OON
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oiv_base_widget.ui'))
+    os.path.dirname(__file__), PLUGIN["basewidget"]))
 
 class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     """create dockwidget as base of the oiv plugin"""
@@ -61,10 +61,10 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         """Return of identified layer and feature and get related object"""
         #the identified layer must be "Bouwlagen" or "BAG panden"
         if isinstance(ilayer, QC.QgsVectorLayer):
-            if ilayer.name() == PC.PAND["bouwlaaglayername"]:
+            if ilayer.name() == PAND["bouwlaaglayername"]:
                 objectId = str(ifeature["pand_id"])
                 self.run_bouwlagen(objectId)
-            elif ilayer.name() == PC.bagpand_layername():
+            elif ilayer.name() == bagpand_layername():
                 objectId = str(ifeature["identificatie"])
                 self.run_bouwlagen(objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
@@ -75,24 +75,24 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     def get_identified_terrein(self, ilayer, ifeature):
         """Return of identified layer and feature and get related object"""
         #the identified layer must be "Object" or "Object terrein"
-        drawLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
+        drawLayer = UC.getlayer_byname(OBJECT["objectlayername"])
         if ilayer is None:
             self.run_new_object('wordt gekoppeld in de database', 'BGT', 'wordt gekoppeld in de database')
-        elif ilayer.name() == PC.bagpand_layername() and "PDOK" in ilayer.name():
+        elif ilayer.name() == bagpand_layername() and "PDOK" in ilayer.name():
             objectId = str(ifeature["identificatie"])
             bron = "BAG"
             bron_tabel = "Pand"
             self.run_new_object(objectId, bron, bron_tabel)
-        elif ilayer.name() == PC.bagpand_layername():
+        elif ilayer.name() == bagpand_layername():
             objectId = str(ifeature["identificatie"])
             bron = ifeature["bron"]
             bron_tabel = ifeature["bron_tbl"]
             self.run_new_object(objectId, bron, bron_tabel)
-        elif ilayer.name() == PC.OBJECT["objectlayername"]:
+        elif ilayer.name() == OBJECT["objectlayername"]:
             objectId = ifeature["id"]
             formeleNaam = ifeature["formelenaam"]
             self.run_object(formeleNaam, objectId)
-        elif ilayer.name() == PC.OBJECT["terreinlayername"]:
+        elif ilayer.name() == OBJECT["terreinlayername"]:
             objectId = ifeature["object_id"]
             request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
             ifeature = next(drawLayer.getFeatures(request))
@@ -124,7 +124,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         objectNieuwWidget = OON.oivObjectNieuwWidget(self, objectId, bron, bron_tbl)
         self.iface.addDockWidget(QT.getWidgetType(), objectNieuwWidget)
         self.iface.actionPan().trigger()
-        self.objectNieuwWidget.show()
+        objectNieuwWidget.show()
         self.close()
 
     def close_basewidget(self):

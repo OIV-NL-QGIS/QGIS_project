@@ -10,8 +10,9 @@ import qgis.gui as QG #pylint: disable=import-error
 import oiv.plugin_helpers.qt_helper as QT
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.plugin_constants as PC
+from .plugin_helpers.plugin_constants import PLUGIN, PAND
 import oiv.tools.utils_gui as UG
+import oiv.tools.utils_core as UC
 import oiv.oiv_base_widget as OB
 import oiv.oiv_config as OC
 import oiv.tools.identifyTool as IT
@@ -30,6 +31,7 @@ class oiv(PQtW.QWidget):
     projCombo = None
     basewidget = None
     drawLayer = None
+    bagNode = None
     projComboAction = None
     checkVisibility = False
 
@@ -47,22 +49,23 @@ class oiv(PQtW.QWidget):
 
     def initGui(self):
         """init actions plugin"""
-        self.toolbar = self.iface.addToolBar(PC.PLUGIN["name"])
-        self.action = PQtW.QAction(PQtG.QIcon(PC.PLUGIN["icon"]), PC.PLUGIN["name"], self.iface.mainWindow())
+        self.toolbar = self.iface.addToolBar(PLUGIN["name"])
+        self.action = PQtW.QAction(PQtG.QIcon(PLUGIN["icon"]), PLUGIN["name"], self.iface.mainWindow())
         self.action.triggered.connect(self.run)
         self.toolbar.addAction(self.action)
-        self.iface.addPluginToMenu(PC.PLUGIN["menulocation"], self.action)
-        self.settings = PQtW.QAction(PQtG.QIcon(PC.PLUGIN["settingsicon"]), PC.PLUGIN["settingsname"], self.iface.mainWindow())
-        self.settings.triggered.connect(self.run_config)
-        self.iface.addPluginToMenu(PC.PLUGIN["menusettingslocation"], self.settings)
+        self.iface.addPluginToMenu(PLUGIN["menulocation"], self.action)
+        self.configAction = PQtW.QAction(PQtG.QIcon(PLUGIN["settingsicon"]), PLUGIN["settingsname"], self.iface.mainWindow())
+        self.configAction.triggered.connect(self.run_config)
+        self.iface.addPluginToMenu(PLUGIN["menusettingslocation"], self.configAction)
         #add label to toolbar
         label = PQtW.QLabel()
         self.toolbar.addWidget(label)
-        label.setText(PC.PLUGIN["toolbartext"])
+        label.setText(PLUGIN["toolbartext"])
         #init dropdown to switch floors
         self.projCombo = PQtW.QComboBox(self.iface.mainWindow())
-        minBouwlaag = PC.PAND["minbouwlaag"]
-        maxBouwlaag = PC.PAND["maxbouwlaag"]
+        bouwlagen = PAND["bouwlagen"]
+        minBouwlaag = bouwlagen["min"]
+        maxBouwlaag = bouwlagen["max"]
         for i in range(maxBouwlaag - minBouwlaag + 1):
             if maxBouwlaag - i != 0:
                 if maxBouwlaag - i == 1:
@@ -84,11 +87,11 @@ class oiv(PQtW.QWidget):
             del self.basewidget
         except: # pylint: disable=bare-except
             pass
-        self.iface.removePluginMenu(PC.PLUGIN["menulocation"], self.action)
-        self.iface.removePluginMenu(PC.PLUGIN["menusettingslocation"], self.settings)
+        self.iface.removePluginMenu(PLUGIN["menulocation"], self.action)
+        self.iface.removePluginMenu(PLUGIN["menusettingslocation"], self.configAction)
         self.projCombo.currentIndexChanged.disconnect()
         self.action.triggered.disconnect()
-        self.settings.triggered.disconnect()
+        self.configAction.triggered.disconnect()
         del self.toolbar
         self.checkVisibility = None
         self.iface.removeToolBarIcon(self.action)
@@ -113,7 +116,7 @@ class oiv(PQtW.QWidget):
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
-        elif PC.PLUGIN["compatibleDbVersion"][1] > dbVersion < PC.PLUGIN["compatibleDbVersion"][0]:
+        elif PLUGIN["compatibleDbVersion"]["max"] > dbVersion < PLUGIN["compatibleDbVersion"]["min"]:
             MSG.showMsgBox('invaliddatabaseversion')
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
