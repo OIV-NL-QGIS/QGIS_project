@@ -12,6 +12,8 @@
         <file>config_files/png/pan.png</file>
         <file>config_files/png/save.png</file>
         <file>config_files/png/settings.png</file>
+        <file>config_files/png/maximize.png</file>
+        <file>config_files/png/help.png</file>
         <file>config_files/png/oiv_plugin.png</file>
         <file>config_files/png/oiv_update.png</file>
         <file>config_files/png/filter.png</file>

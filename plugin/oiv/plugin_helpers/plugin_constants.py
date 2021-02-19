@@ -32,7 +32,6 @@ OIV_VERSION = '3.3.0'
 
 PLUGIN = {
         "name": "OIV Objecten",
-        "icon": ":/plugins/oiv/config_files/png/oiv_plugin.png",
         "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
         "compatibleDbVersion" : {
             "min" : 324,
@@ -42,7 +41,10 @@ PLUGIN = {
         "settingsname": "Configure",
         "settingsicon": ":/plugins/oiv/config_files/png/settings.png",
         "menusettingslocation": "&OIV Objecten",
-        "basewidget" : "oiv_base_widget.ui"
+        "basewidget" : "oiv_base_widget.ui",
+        "icon": ":/plugins/oiv/config_files/png/oiv_plugin.png",
+        "floatIcon" : "/plugins/oiv/config_files/png/maximize.png",
+        "helpIcon" : ":/plugins/oiv/config_files/png/help.png",
     }
 
 PAND = {
@@ -70,4 +72,8 @@ OBJECT = {
     "tekenwidgetui": "oiv_object_tekenen_widget.ui",
     "objectwidgetui": "oiv_repressief_object_widget.ui",
     "bgtviewerurl": "https://verbeterdekaart.kadaster.nl/#?"
+}
+
+HELPURL = {
+    "basewidgethelp": "https://github.com/OIV-NL-QGIS/OIV_project/wiki"
 }
