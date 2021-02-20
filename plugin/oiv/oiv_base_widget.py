@@ -1,6 +1,6 @@
 """init the oiv base widget"""
 import os
-import webbrowser
+
 import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
@@ -34,6 +34,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identifyTool = parent.identifyTool
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
+        self.initUI()
 
     def initUI(self):
         self.identify_pand.clicked.connect(self.run_identify_pand)
@@ -44,18 +45,16 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.filterframe.setVisible(False)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: webbrowser.open(HELPURL["basewidgethelp"]))
+        self.helpBtn.clicked.connect(lambda: UC.open_url(HELPURL["basewidgethelp"]))
         self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def run_identify_pand(self):
         """get the identification of a building from the user"""
-        print(self.titleBarWidget())
         self.canvas.setMapTool(self.identifyTool)
         try:
             self.identifyTool.geomIdentified.disconnect()
         except: # pylint: disable=bare-except
             pass
-        print(self.whatsThis())
         self.identifyTool.geomIdentified.connect(self.get_identified_pand)
 
     def run_identify_terrein(self):

@@ -1,12 +1,16 @@
 """utils that are requested from the core plugin"""
 import os
 import sqlite3
+import webbrowser
 
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.plugin_constants as PC
+
+def open_url(url):
+    webbrowser.open(url)
 
 def read_settings(query, allResult):
     conn = None

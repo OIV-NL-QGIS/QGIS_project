@@ -10,6 +10,8 @@ import qgis.core as QC #pylint: disable=import-error
 import oiv.tools.utils_core as UC
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.configdb_helper as CH
+import oiv.plugin_helpers.plugin_constants as PC
+import oiv.plugin_helpers.qt_helper as QT
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_import_file_widget.ui'))
@@ -35,6 +37,9 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.object_id.setText(parent.pand_id.text())
         self.bouwlaag.setText(parent.comboBox.currentText())
         self.selectTool = parent.selectTool
+        self.initUI()
+
+    def initUI(self):
         self.selectId.clicked.connect(self.run_select_bouwlaag)
         self.select_file.clicked.connect(self.selectfile)
         self.terug.clicked.connect(self.close_import)
@@ -43,6 +48,10 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.import_laag.currentIndexChanged.connect(self.hide_import)
         self.type.currentIndexChanged.connect(self.hide_import)
         self.import_file.clicked.connect(self.inlezen)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["bouwlaagimporthelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
         for laag in self.importlagen:
             self.import_laag.addItem(laag)
         self.hide_all()
@@ -276,6 +285,8 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def close_import(self):
         """close feature form and save changes"""
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         self.hide_all()
         self.close()
         self.parent.bouwlagen_to_combobox(str(self.object_id.text()), int(self.bouwlaag.text()))

@@ -13,10 +13,10 @@ import oiv.tools.stackwidget as SW
 import oiv.tools.import_file as IFW
 import oiv.repressief_object.oiv_object_tekenen as OTW
 import oiv.repressief_object.oiv_create_grid as GW
-import oiv.plugin_helpers.qt_helper as QH
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.drawing_helper as DH
 import oiv.plugin_helpers.plugin_constants as PC
+import oiv.plugin_helpers.qt_helper as QT
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectwidgetui"]))
@@ -62,6 +62,10 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.object_symbolen.clicked.connect(self.run_object_symbolen_tekenen)
         self.create_grid.clicked.connect(self.run_create_grid)
         self.import_drawing.clicked.connect(self.run_import)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["repressiefobjecthelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def close_repressief_object_show_base(self):
         """close this gui and return to the main page"""
@@ -70,6 +74,8 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.objectgegevens.clicked.disconnect()
         self.terugmelden.clicked.disconnect()
         self.terrein_bewerken.clicked.disconnect()
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         try:
             self.terrein_tekenen.clicked.disconnect()
             self.delete_f.clicked.disconnect()
@@ -123,7 +129,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
         stackWidget = SW.oivStackWidget()
-        self.iface.addDockWidget(QH.getWidgetType(), stackWidget)
+        self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
@@ -152,9 +158,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_create_grid(self):
         gridWidget = GW.oivGridWidget(self)
         gridWidget.object_id.setText(self.object_id.text())
-        gridWidget.canvas = self.canvas
-        gridWidget.iface = self.iface
-        self.iface.addDockWidget(QH.getWidgetType(), gridWidget)
+        self.iface.addDockWidget(QT.getWidgetType(), gridWidget)
         gridWidget.show()
         self.close()
 
@@ -197,14 +201,14 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_object_symbolen_tekenen(self):
         tekenWidget = OTW.oivObjectTekenWidget(self)
-        self.iface.addDockWidget(QH.getWidgetType(), tekenWidget)
+        self.iface.addDockWidget(QT.getWidgetType(), tekenWidget)
         tekenWidget.show()
         self.close()
 
     def run_import(self):
         """initiate import widget"""
         importwidget = IFW.oivImportFileWidget(self)
-        self.iface.addDockWidget(QH.getWidgetType(), importwidget)
+        self.iface.addDockWidget(QT.getWidgetType(), importwidget)
         self.close()
         importwidget.show()
  

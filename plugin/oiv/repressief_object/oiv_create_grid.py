@@ -12,6 +12,7 @@ import oiv.plugin_helpers.rubberband_helper as RH
 import oiv.plugin_helpers.messages as MSG
 import oiv.plugin_helpers.configdb_helper as CH
 import oiv.plugin_helpers.plugin_constants as PC
+import oiv.plugin_helpers.qt_helper as QT
 import oiv.tools.utils_core as UC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
@@ -20,8 +21,6 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
     """create dockwidget for creating grid and/or kaartblad"""
 
-    iface = None
-    canvas = None
     rubberBand = None
     xWidth = 0
     yWidth = 0
@@ -33,6 +32,8 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         super(oivGridWidget, self).__init__(parent)
         self.setupUi(self)
         self.parent = parent
+        self.canvas = parent.canvas
+        self.iface = parent.iface
         self.objectId = self.parent.object_id.text()
         self.initUI()
 
@@ -46,6 +47,10 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         self.delete_grid.clicked.connect(self.run_delete_tool)
         self.scale_25000.toggled.connect(self.adjust_kaartblad_settings)
         self.scale_diff.toggled.connect(self.adjust_kaartblad_settings)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objectgridhelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def run_grid(self):
         """after choosing single grid or kaartblad set things in motion"""
@@ -273,6 +278,8 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         if self.rubberBand:
             self.canvas.scene().removeItem(self.rubberBand)
             self.rubberBand = None
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         self.close()
         self.parent.show()
         del self

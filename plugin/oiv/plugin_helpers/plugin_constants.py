@@ -43,8 +43,8 @@ PLUGIN = {
         "menusettingslocation": "&OIV Objecten",
         "basewidget" : "oiv_base_widget.ui",
         "icon": ":/plugins/oiv/config_files/png/oiv_plugin.png",
-        "floatIcon" : "/plugins/oiv/config_files/png/maximize.png",
-        "helpIcon" : ":/plugins/oiv/config_files/png/help.png",
+        "floaticon" : ":/plugins/oiv/config_files/png/maximize.png",
+        "helpicon" : ":/plugins/oiv/config_files/png/help.png",
     }
 
 PAND = {
@@ -75,5 +75,14 @@ OBJECT = {
 }
 
 HELPURL = {
-    "basewidgethelp": "https://github.com/OIV-NL-QGIS/OIV_project/wiki"
+    "basewidgethelp": "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "objectnieuwhelp": "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "repressiefobjecthelp" : "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "objecttekenenhelp" : "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "objectgridhelp" : "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "objectimporthelp" : "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "pandhelp": "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "bouwlaaghelp" : "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "bouwlaagtekenenhelp" : "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
+    "bouwlaagimporthelp" : "https://github.com/OIV-NL-QGIS/OIV_project/wiki"
 }
