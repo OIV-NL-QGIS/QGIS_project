@@ -5,17 +5,17 @@ import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.tools.utils_gui as UG
+import oiv.helpers.utils_core as UC
+import oiv.helpers.utils_gui as UG
 import oiv.tools.editFeature as EF
 import oiv.tools.stackwidget as SW
 import oiv.tools.import_file as IFW
 import oiv.repressief_object.oiv_object_tekenen as OTW
 import oiv.repressief_object.oiv_create_grid as GW
-import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.drawing_helper as DH
-import oiv.plugin_helpers.plugin_constants as PC
-import oiv.plugin_helpers.qt_helper as QT
+import oiv.helpers.messages as MSG
+import oiv.helpers.drawing_helper as DH
+import oiv.helpers.constants as PC
+import oiv.helpers.qt_helper as QT
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectwidgetui"]))

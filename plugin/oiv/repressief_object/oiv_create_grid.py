@@ -7,13 +7,13 @@ import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
-import oiv.plugin_helpers.grid_helpers as GH
-import oiv.plugin_helpers.rubberband_helper as RH
-import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.plugin_constants as PC
-import oiv.plugin_helpers.qt_helper as QT
-import oiv.tools.utils_core as UC
+import oiv.helpers.grid_helpers as GH
+import oiv.helpers.rubberband_helper as RH
+import oiv.helpers.messages as MSG
+import oiv.helpers.configdb_helper as CH
+import oiv.helpers.constants as PC
+import oiv.helpers.qt_helper as QT
+import oiv.helpers.utils_core as UC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["gridwidgetui"]))

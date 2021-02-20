@@ -3,8 +3,8 @@ import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 import qgis.gui as QG #pylint: disable=import-error
 
-import oiv.plugin_helpers.rubberband_helper as RH
-import oiv.tools.utils_core as UC
+import oiv.helpers.rubberband_helper as RH
+import oiv.helpers.utils_core as UC
 
 class MovePointTool(QG.QgsMapToolIdentify):
     """identify the clicked point from the user and proces"""

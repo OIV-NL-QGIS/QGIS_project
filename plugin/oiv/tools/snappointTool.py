@@ -3,7 +3,7 @@ import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 import qgis.gui as QG #pylint: disable=import-error
 
-import oiv.plugin_helpers.rubberband_helper as RH
+import oiv.helpers.rubberband_helper as RH
 
 class SnapPointTool(QG.QgsMapTool):
     """snap and place a point feature on the map"""

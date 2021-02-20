@@ -1,5 +1,5 @@
 """Constants settings for bouwlaag and repressief object drawing"""
-import oiv.plugin_helpers.plugin_constants as PC
+import oiv.helpers.constants as PC
 #repressief object constants
 
 ROSNAPSYMBOLS = ['32', '47', '148', '150', '152', '301', 'Algemeen', 'Voorzichtig', 'Waarschuwing', 'Gevaar']

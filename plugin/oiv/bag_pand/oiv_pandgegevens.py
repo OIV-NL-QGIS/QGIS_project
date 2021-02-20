@@ -6,14 +6,14 @@ import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.tools.utils_gui as UG
+import oiv.helpers.utils_core as UC
+import oiv.helpers.utils_gui as UG
 import oiv.tools.query_bag as QB
 import oiv.tools.stackwidget as SW
-import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.qt_helper as QT
-import oiv.plugin_helpers.plugin_constants as PC
+import oiv.helpers.messages as MSG
+import oiv.helpers.configdb_helper as CH
+import oiv.helpers.qt_helper as QT
+import oiv.helpers.constants as PC
 
 from .oiv_bouwlaag import oivBouwlaagWidget
 from .oiv_tekenen import oivTekenWidget

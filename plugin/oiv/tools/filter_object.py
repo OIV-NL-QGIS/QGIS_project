@@ -1,9 +1,9 @@
 """filter on type of repressief object"""
 import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.plugin_helpers.drawing_helper as DH
-import oiv.plugin_helpers.configdb_helper as CH
+import oiv.helpers.utils_core as UC
+import oiv.helpers.drawing_helper as DH
+import oiv.helpers.configdb_helper as CH
 
 def init_filter_section(wdgt):
     wdgt.filterframe.setVisible(True)

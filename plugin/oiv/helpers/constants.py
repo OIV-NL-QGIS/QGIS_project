@@ -1,7 +1,7 @@
 import os
 import json
 import qgis.core as QC #pylint: disable=import-error
-from ..tools.utils_core import getlayer_byname
+from ..helpers.utils_core import getlayer_byname
 
 def plugin_settings(key1, key2=None):
     filename = os.path.join(os.path.dirname(__file__), '../config_files/plugin_settings.json')

@@ -7,10 +7,10 @@ import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
 import oiv.tools.filter_object as FO
-import oiv.plugin_helpers.qt_helper as QT
-import oiv.plugin_helpers.messages as MSG
-from .plugin_helpers.plugin_constants import PLUGIN, PAND, OBJECT, HELPURL, bagpand_layername
-import oiv.tools.utils_core as UC
+import oiv.helpers.qt_helper as QT
+import oiv.helpers.messages as MSG
+from .helpers.constants import PLUGIN, PAND, OBJECT, HELPURL, bagpand_layername
+import oiv.helpers.utils_core as UC
 import oiv.bag_pand.oiv_pandgegevens as OPG
 import oiv.repressief_object.oiv_repressief_object as ORO
 import oiv.repressief_object.oiv_objectnieuw as OON

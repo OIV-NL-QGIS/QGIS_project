@@ -2,7 +2,7 @@ from qgis.PyQt.QtCore import Qt, QSize #pylint: disable=import-error
 from qgis.PyQt.QtGui import QIcon, QFont #pylint: disable=import-error
 from qgis.core import QgsWkbTypes #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-from .plugin_constants import PLUGIN
+from .constants import PLUGIN
 
 def getQtLineStyle(style):
     """translate to Qt linestyle"""

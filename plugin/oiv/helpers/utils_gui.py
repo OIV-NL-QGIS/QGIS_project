@@ -1,7 +1,7 @@
 """utilities to adjust the UI of the widgets"""
-import oiv.tools.utils_core as UC
-import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.messages as MSG
+import oiv.helpers.utils_core as UC
+import oiv.helpers.configdb_helper as CH
+import oiv.helpers.messages as MSG
 
 def set_layer_substring(subString):
     """set layer subset according (you can check the subset under properties of the layer)"""
