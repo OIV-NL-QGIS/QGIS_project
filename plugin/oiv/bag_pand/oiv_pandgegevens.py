@@ -1,6 +1,5 @@
 """control pand to draw upon"""
 import os
-import webbrowser
 
 import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
@@ -162,7 +161,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def openBagviewer(self):
         """open url based on BAG pand_id, i.v.m. terugmelden"""
         url = PC.PAND["bagviewerurl"] + str(self.pand_id.text())
-        webbrowser.open(url)
+        UC.open_url(url)
 
     def run_delete(self):
         layerName = PC.PAND["bouwlaaglayername"]

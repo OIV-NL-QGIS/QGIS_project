@@ -1,6 +1,5 @@
 """initialize al action for repressief object"""
 import os
-import webbrowser
 
 import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
@@ -103,8 +102,8 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         e = self.canvas.extent()
         gemx = (e.xMaximum() + e.xMinimum())/2
         gemy = (e.yMaximum() + e.yMinimum())/2
-        url2 = PC.OBJECT["bgtviewerurl"] + 'geometry.x=' + str(gemx) + '&geometry.y=' + str(gemy) + '&zoomlevel=12'
-        webbrowser.open(url2)
+        url = PC.OBJECT["bgtviewerurl"] + 'geometry.x=' + str(gemx) + '&geometry.y=' + str(gemy) + '&zoomlevel=12'
+        UC.open_url(url)
 
     def run_delete_object(self):
         """delete repressief object"""
