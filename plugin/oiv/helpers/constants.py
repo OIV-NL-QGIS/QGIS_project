@@ -13,8 +13,9 @@ def plugin_settings(key1, key2=None):
 
 def write_plugin_settings(key1, newData):
     filename = os.path.join(os.path.dirname(__file__), '../config_files/plugin_settings.json')
-    with open(filename, 'w') as f:
+    with open(filename, 'r') as f:
         data = json.load(f)
+    with open(filename, 'w') as f:
         data[key1] = newData
         json.dump(data, f)
 
