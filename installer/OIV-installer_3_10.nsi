@@ -374,6 +374,7 @@ Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	WriteRegStr HKLM "${REG_APPSETTINGS}" "PluginDir" "$R1\oiv"
 
   AccessControl::GrantOnFile "$R1\oiv\config_files" "(S-1-5-32-545)" "GenericRead + GenericWrite"
+  AccessControl::GrantOnFile "$R1\oiv\config_files\plugin_settings.json" "(S-1-5-32-545)" "GenericRead + GenericWrite"
 SectionEnd
 
 ; Set the web server host
