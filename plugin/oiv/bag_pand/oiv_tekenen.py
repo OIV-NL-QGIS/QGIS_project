@@ -5,13 +5,14 @@ import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.tools.utils_gui as UG
+import oiv.helpers.utils_core as UC
+import oiv.helpers.utils_gui as UG
 import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
-import oiv.plugin_helpers.drawing_helper as DW
-import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.plugin_constants as PC
+import oiv.helpers.drawing_helper as DW
+import oiv.helpers.configdb_helper as CH
+import oiv.helpers.constants as PC
+import oiv.helpers.qt_helper as QT
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.PAND["tekenwidgetui"]))
@@ -51,6 +52,10 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug.clicked.connect(self.close_teken_show_object)
         actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.PAND["configtable"])
         self.initActions(actionList)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["bouwlaagtekenenhelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def initActions(self, actionList):
         """connect all the buttons to the action"""
@@ -199,6 +204,8 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.delete_f.clicked.disconnect()
         self.pan.clicked.disconnect()
         self.terug.clicked.disconnect()
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         for widget in self.children():
             if isinstance(widget, PQtW.QPushButton):
                 try:

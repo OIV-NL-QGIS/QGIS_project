@@ -8,10 +8,12 @@ import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 import qgis.utils as QU #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.tools.utils_gui as UG
+import oiv.helpers.utils_core as UC
+import oiv.helpers.utils_gui as UG
 import oiv.tools.editFeature as EF
-import oiv.plugin_helpers.messages as MSG
+import oiv.helpers.messages as MSG
+import oiv.helpers.constants as PC
+import oiv.helpers.qt_helper as QT
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'import_filewidget.ui'))
@@ -19,8 +21,6 @@ FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
 class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     """the actions class for the import"""
 
-    parent = None
-    canvas = None
     importLayer = None
     layerImportType = None
     mappingDict = {}
@@ -35,10 +35,17 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.object_id.setText(parent.object_id.text())
         self.object.setText(parent.formelenaam.text())
         self.canvas = parent.canvas
+        self.initUI()
+
+    def initUI(self):
         self.select_file.clicked.connect(self.selectfile)
         self.terug.clicked.connect(self.close_import)
         self.mapping.clicked.connect(self.run_mapping)
         self.import_file.clicked.connect(self.inlezen)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objectimporthelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
         self.hide_all()
 
     def selectfile(self):
@@ -185,6 +192,8 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             QC.QgsProject.instance().removeMapLayers([self.importLayer.id()])
         except: # pylint: disable=bare-except
             pass
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         self.hide_all()
         self.close()
         try:

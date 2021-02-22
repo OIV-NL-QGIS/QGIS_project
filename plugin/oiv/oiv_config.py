@@ -6,8 +6,8 @@ import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
-from .plugin_helpers.plugin_constants import plugin_settings, write_plugin_settings, bagpand_layername
-import oiv.tools.utils_core as UC
+from .helpers.constants import plugin_settings, write_plugin_settings, bagpand_layername
+import oiv.helpers.utils_core as UC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_config_widget.ui'))

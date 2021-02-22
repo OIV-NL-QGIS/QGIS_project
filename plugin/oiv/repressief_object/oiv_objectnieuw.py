@@ -5,11 +5,11 @@ import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.plugin_helpers.qt_helper as QT
-import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.plugin_constants as PC
+import oiv.helpers.utils_core as UC
+import oiv.helpers.qt_helper as QT
+import oiv.helpers.messages as MSG
+import oiv.helpers.configdb_helper as CH
+import oiv.helpers.constants as PC
 import oiv.repressief_object.oiv_repressief_object as ORO
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
@@ -29,10 +29,21 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identificatienummer.setText(str(objectId))
         self.bron.setText(str(bron))
         self.bron_table.setText(str(bronTbl))
+        self.initUI()
+
+    def initUI(self):
         self.opslaan.clicked.connect(self.run_tekenen)
         self.terug.clicked.connect(self.close_objectnieuw_show_base)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objectnieuwhelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def close_objectnieuw_show_base(self):
+        self.opslaan.clicked.disconnect()
+        self.terug.clicked.disconnect()
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         self.close()
         self.parent.show()
         del self

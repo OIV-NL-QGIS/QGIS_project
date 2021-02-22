@@ -1,14 +1,16 @@
 """init the oiv base widget"""
 import os
+
 import qgis.PyQt as PQt #pylint: disable=import-error
+import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
 import oiv.tools.filter_object as FO
-import oiv.plugin_helpers.qt_helper as QT
-import oiv.plugin_helpers.messages as MSG
-from .plugin_helpers.plugin_constants import PLUGIN, PAND, OBJECT, bagpand_layername
-import oiv.tools.utils_core as UC
+import oiv.helpers.qt_helper as QT
+import oiv.helpers.messages as MSG
+from .helpers.constants import PLUGIN, PAND, OBJECT, HELPURL, bagpand_layername
+import oiv.helpers.utils_core as UC
 import oiv.bag_pand.oiv_pandgegevens as OPG
 import oiv.repressief_object.oiv_repressief_object as ORO
 import oiv.repressief_object.oiv_objectnieuw as OON
@@ -32,12 +34,19 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identifyTool = parent.identifyTool
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
+        self.initUI()
+
+    def initUI(self):
         self.identify_pand.clicked.connect(self.run_identify_pand)
         self.identify_gebouw.clicked.connect(self.run_identify_terrein)
         self.filter_objecten.clicked.connect(lambda: FO.init_filter_section(self))
         self.filterBtn.clicked.connect(lambda: FO.set_object_filter(self))
         self.closewidget.clicked.connect(self.close_basewidget)
         self.filterframe.setVisible(False)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(HELPURL["basewidgethelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def run_identify_pand(self):
         """get the identification of a building from the user"""

@@ -7,7 +7,7 @@ import qgis.core as QC #pylint: disable=import-error
 import qgis.gui as QG #pylint: disable=import-error
 import qgis.utils as QU #pylint: disable=import-error
 
-import oiv.plugin_helpers.plugin_constants as PC
+import oiv.helpers.constants as PC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'stackwidget.ui'))

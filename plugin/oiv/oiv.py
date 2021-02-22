@@ -7,12 +7,12 @@ import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 import qgis.gui as QG #pylint: disable=import-error
 
-import oiv.plugin_helpers.qt_helper as QT
-import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.configdb_helper as CH
-from .plugin_helpers.plugin_constants import PLUGIN, PAND
-import oiv.tools.utils_gui as UG
-import oiv.tools.utils_core as UC
+import oiv.helpers.qt_helper as QT
+import oiv.helpers.messages as MSG
+import oiv.helpers.configdb_helper as CH
+from .helpers.constants import PLUGIN, PAND
+import oiv.helpers.utils_gui as UG
+import oiv.helpers.utils_core as UC
 import oiv.oiv_base_widget as OB
 import oiv.oiv_config as OC
 import oiv.tools.identifyTool as IT

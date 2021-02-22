@@ -4,8 +4,8 @@ import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 import qgis.gui as QG #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.plugin_helpers.messages as MSG
+import oiv.helpers.utils_core as UC
+import oiv.helpers.messages as MSG
 
 class IdentifyGeometryTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     """identify geometry on the map"""

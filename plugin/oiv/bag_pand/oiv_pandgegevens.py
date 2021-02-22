@@ -1,20 +1,19 @@
 """control pand to draw upon"""
 import os
-import webbrowser
 
 import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.tools.utils_gui as UG
+import oiv.helpers.utils_core as UC
+import oiv.helpers.utils_gui as UG
 import oiv.tools.query_bag as QB
 import oiv.tools.stackwidget as SW
-import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.qt_helper as QH
-import oiv.plugin_helpers.plugin_constants as PC
+import oiv.helpers.messages as MSG
+import oiv.helpers.configdb_helper as CH
+import oiv.helpers.qt_helper as QT
+import oiv.helpers.constants as PC
 
 from .oiv_bouwlaag import oivBouwlaagWidget
 from .oiv_tekenen import oivTekenWidget
@@ -68,11 +67,15 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug.clicked.connect(self.close_object_show_base)
         self.terugmelden.clicked.connect(self.openBagviewer)
         self.delete_f.clicked.connect(self.run_delete)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["pandhelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def run_edit_bouwlagen(self, ilayer, ifeature):
         """edit attribute form of floor feature"""
         stackWidget = SW.oivStackWidget()
-        self.iface.addDockWidget(QH.getWidgetType(), stackWidget)
+        self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
         stackWidget.update()
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
@@ -135,7 +138,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             bouwlaag, bouwlaagMax, ok = BouwlaagDialog.getBouwlagen()
             if (bouwlaag != 0 and bouwlaagMax >= bouwlaag and ok is True):
                 bouwlaagwidget = oivBouwlaagWidget(self, bouwlaag, bouwlaagMax)
-                self.iface.addDockWidget(QH.getWidgetType(), bouwlaagwidget)
+                self.iface.addDockWidget(QT.getWidgetType(), bouwlaagwidget)
                 subString = "bouwlaag = " + str(bouwlaag)
                 UG.set_layer_substring(subString)
                 bouwlaagwidget.show()
@@ -158,7 +161,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def openBagviewer(self):
         """open url based on BAG pand_id, i.v.m. terugmelden"""
         url = PC.PAND["bagviewerurl"] + str(self.pand_id.text())
-        webbrowser.open(url)
+        UC.open_url(url)
 
     def run_delete(self):
         layerName = PC.PAND["bouwlaaglayername"]
@@ -184,13 +187,15 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_import(self):
         """initiate import widget"""
         importwidget = oivImportFileWidget(self)
-        self.iface.addDockWidget(QH.getWidgetType(), importwidget)
+        self.iface.addDockWidget(QT.getWidgetType(), importwidget)
         self.close()
         importwidget.show()
 
     def close_object_show_base(self):
         subString = "bouwlaag = 1"
         UG.set_layer_substring(subString)
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         for widget in self.children():
             if isinstance(widget, PQtW.QPushButton):
                 try:

@@ -6,12 +6,13 @@ import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.core as QC #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.tools.utils_gui as UG
-import oiv.plugin_helpers.drawing_helper as DW
-import oiv.plugin_helpers.messages as MSG
-import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.plugin_constants as PC
+import oiv.helpers.utils_core as UC
+import oiv.helpers.utils_gui as UG
+import oiv.helpers.drawing_helper as DW
+import oiv.helpers.messages as MSG
+import oiv.helpers.configdb_helper as CH
+import oiv.helpers.constants as PC
+import oiv.helpers.qt_helper as QT
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.PAND["bouwlaagui"]))
@@ -50,6 +51,10 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlaag_max.setVisible(False)
         self.bouwlaag.setVisible(False)
         self.copy.setVisible(False)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["bouwlaaghelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
         for var in vars(self):
             typeVar = type(vars(self)[var])
             if typeVar == PQtW.QCheckBox:
@@ -251,6 +256,8 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             typeVar = type(vars(self)[var])
             if typeVar == PQtW.QCheckBox:
                 vars(self)[var].setVisible(False)
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         self.parent.sortedList = self.bouwlaagList
         self.parent.bouwlagen_to_combobox(self.objectId, int(self.bouwlaag_min.text()))
         self.parent.show()

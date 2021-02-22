@@ -1,6 +1,6 @@
 """edit specific feature"""
 import qgis.core as QC #pylint: disable=import-error
-import oiv.plugin_helpers.messages as MSG
+import oiv.helpers.messages as MSG
 
 def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
     """delete a feature"""

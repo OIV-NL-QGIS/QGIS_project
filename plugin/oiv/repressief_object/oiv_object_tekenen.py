@@ -5,14 +5,14 @@ import qgis.PyQt as PQt #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 import qgis.utils as QU #pylint: disable=import-error
 
-import oiv.tools.utils_core as UC
-import oiv.tools.utils_gui as UG
+import oiv.helpers.utils_core as UC
+import oiv.helpers.utils_gui as UG
 import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
-import oiv.plugin_helpers.drawing_helper as DH
-import oiv.plugin_helpers.qt_helper as QH
-import oiv.plugin_helpers.configdb_helper as CH
-import oiv.plugin_helpers.plugin_constants as PC
+import oiv.helpers.drawing_helper as DH
+import oiv.helpers.qt_helper as QT
+import oiv.helpers.configdb_helper as CH
+import oiv.helpers.constants as PC
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["tekenwidgetui"]))
@@ -51,6 +51,10 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
         actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.OBJECT["configtable"])
         self.initActions(actionList)
+        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        self.setTitleBarWidget(titleBar)
+        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objecttekenenhelp"]))
+        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def initActions(self, actionList):
         """connect all the buttons to the action"""
@@ -72,6 +76,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.select.clicked.disconnect()
         self.delete_f.clicked.disconnect()
         self.pan.clicked.disconnect()
+        self.helpBtn.clicked.disconnect()
+        self.floatBtn.clicked.disconnect()
         self.terug.clicked.disconnect()
         self.close()
         self.parent.show()
@@ -124,7 +130,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt
     def edit_attribute(self, ilayer, ifeature):
         stackWidget = SW.oivStackWidget()
-        self.iface.addDockWidget(QH.getWidgetType(), stackWidget)
+        self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
