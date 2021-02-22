@@ -5,8 +5,10 @@ import json
 import time
 import requests
 import psycopg2
+from configparser import ConfigParser
 from qgis.core import QgsProject, QgsGeometry, QgsVectorLayer
 from psycopg2.extras import RealDictCursor
+
 
 def get_geoserver_conf(confPath):
     """get geoserver connection parametres"""
@@ -20,9 +22,10 @@ def get_geoserver_conf(confPath):
         geoserverURL = "{}".format(x[0])
         auth = (x[2], x[3])
         geoserverBron = x[1]
-    except: # pylint: disable=bare-except
+    except:  # pylint: disable=bare-except
         print('Configfile not found or not complete!')
     return geoserverURL, geoserverBron, auth
+
 
 def setup_sqlitedb_connection(dbrelPath, isProject):
     """setup the sqlite database connection"""
@@ -43,6 +46,7 @@ def setup_sqlitedb_connection(dbrelPath, isProject):
         print("Failed to connect to the dimension database", error)
     return conn, cursor, allTables
 
+
 def close_db_connection(cursor, conn):
     """when ready, close the sqlite database connection"""
     if cursor:
@@ -50,11 +54,12 @@ def close_db_connection(cursor, conn):
     if conn:
         conn.close()
 
+
 def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth, conn):
     """update all the tables, insert extra rows and delete not existing"""
     for table in allTables:
         layerName = table[0]
-        params = {'request' : 'GetFeature', 'outputFormat' : 'json', 'typename': '{}:{}'.format(geoserverBron, layerName)}
+        params = {'request': 'GetFeature', 'outputFormat': 'json', 'typename': '{}:{}'.format(geoserverBron, layerName)}
         try:
             r = requests.get(geoserverURL, params=params, auth=auth)
         except requests.exceptions.RequestException as e:
@@ -87,7 +92,7 @@ def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth, 
                             columnNames = ', '.join(columns)
                             valuesProp = ', '.join(map(str, values))
                             query = "INSERT INTO {} ({}) VALUES ({})".format(layerName, columnNames, valuesProp)
-                            result = cursor.execute(query)
+                            cursor.execute(query)
                             conn.commit()
                     else:
                         print("Let op {} is niet ingelezen!".format(layerName))
@@ -98,16 +103,27 @@ def execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth, 
                 print("The {} table is corrupt!".format(layerName), e)
     return 'ok'
 
+
 def setup_postgisdb_connection(service):
     """setup the postgis database connection"""
     conn = None
     cursor = None
     try:
-        conn = psycopg2.connect(service)
+        config = ConfigParser()
+        fileName = os.path.join(os.path.dirname(__file__), 'pg_service.conf')
+        config.read_file(open(fileName))
+        dbName = config.get('oiv', 'dbname')
+        user = config.get('oiv', 'user')
+        passw = config.get('oiv', 'password')
+        host = config.get('oiv', 'host')
+        port = config.get('oiv', 'port')
+        connString = "dbname={} user={} password={} host={} port={}".format(dbName, user, passw, host, port)
+        conn = psycopg2.connect(connString)
         cursor = conn.cursor(cursor_factory=RealDictCursor)
-    except: # pylint: disable=bare-except
+    except:  # pylint: disable=bare-except
         print("Failed to connect to the oiv database")
     return conn, cursor
+
 
 def execute_update_by_db(cursorOIV, cursor, allTables, conn):
     """update all the tables, insert extra rows and delete not existing"""
@@ -161,15 +177,18 @@ def execute_update_by_db(cursorOIV, cursor, allTables, conn):
                 for remainingId in ids:
                     query = "DELETE FROM {} WHERE id = {}".format(layerName, remainingId)
                     cursor.execute(query)
-            except: # pylint: disable=bare-except
-                print("The {} table is corrupt!".format(layerName))
+            except:  # pylint: disable=bare-except
+                if layerName != 'veiligheidsregio_huidig':
+                    print("The {} table is corrupt!".format(layerName))
     return 'ok'
+
 
 def getlayer_byname(layername):
     layer = None
     layers = QgsProject.instance().mapLayersByName(layername)
     layer = layers[0]
     return (layer)
+
 
 def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
     """execute all the update work"""
@@ -183,10 +202,11 @@ def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
         result = execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth, conn)
         close_db_connection(cursor, conn)
         layerName = 'Veiligheidsregio'
-        params = {'request' : 'GetFeature', 'outputFormat' : 'json', 'typename': '{}:{}'.format(geoserverBron, 'veiligheidsregio_huidig')}
+        params = {'request': 'GetFeature', 'outputFormat': 'json', 'typename': '{}:{}'
+                  .format(geoserverBron, 'veiligheidsregio_huidig')}
         r = requests.get(geoserverURL, params=params, auth=auth)
         geojson = json.dumps(r.json()["features"][0]["geometry"])
-        vlayer = QgsVectorLayer(geojson,"tempLayer", "ogr")
+        vlayer = QgsVectorLayer(geojson, "tempLayer", "ogr")
         for feature in vlayer.getFeatures():
             geom = feature.geometry()
         layer = getlayer_byname(layerName)
@@ -199,13 +219,13 @@ def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
             result = execute_update_by_db(cursorOIV, cursor, allTables, conn)
             layerName = 'Veiligheidsregio'
             query = "SELECT ST_AsText(geom) as geom FROM {}.{}".format('algemeen', 'veiligheidsregio_huidig')
-            cursorOIV.execute(query)          
+            cursorOIV.execute(query)
             geom = QgsGeometry.fromWkt(cursorOIV.fetchone()["geom"])
             layer = getlayer_byname(layerName)
             layer.startEditing()
             layer.changeGeometry(1, geom)
             layer.commitChanges()
-            close_db_connection(cursorOIV, connOIV)              
+            close_db_connection(cursorOIV, connOIV)
     if result == 'ok':
         print('Dimension tables are correct updatet!')
     print('Stop : ', time.ctime())
