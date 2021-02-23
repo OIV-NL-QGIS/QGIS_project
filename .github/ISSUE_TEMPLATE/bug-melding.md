@@ -12,9 +12,8 @@ assignees: ''
 **Hoe te reproduceren**
 Beschrijf de stappen hoe de bug te reproduceren is:
 1. '...'
-2. '....'
-3. Scroll down to '....'
-4. See error
+2. '...'
+3. 
 
 **Stapelspoor**
 Maak waar mogelijk een screenshot van het stapelspoor
