@@ -6,7 +6,7 @@ import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 
 import oiv.helpers.utils_core as UC
-import oiv.helpers.utils_gui as UG
+from ..helpers.utils_gui import UtilsGui as UG
 import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
 import oiv.helpers.drawing_helper as DW
@@ -150,13 +150,18 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_tekenen(self, _dummy, runLayer, feature_id):
         """activate the right draw action"""
         #welke pictogram is aangeklikt en wat is de bijbehorende tekenlaag
+        snapLayerNames = []
         self.identifier = feature_id
         self.drawLayer = UC.getlayer_byname(runLayer)
         self.drawLayerType = UC.check_layer_type(self.drawLayer)
         self.parentLayerName = CH.get_parentlayer_bl(runLayer)
         objectId = self.pand_id.text()
         #aan welke lagen kan worden gesnapt?
-        possibleSnapFeatures = UC.get_possible_snapFeatures_bouwlaag(DW.BLSNAPLAYERS, objectId)
+        baglayerName = PC.bagpand_layername()
+        snapLayerNames = DW.BLSNAPLAYERS
+        if baglayerName not in snapLayerNames:
+            snapLayerNames.append(baglayerName)
+        possibleSnapFeatures = UC.get_possible_snapFeatures_bouwlaag(snapLayerNames, objectId)
         if self.drawLayerType == "Point":
             pointTool = self.parent.pointTool
             pointTool.snapPt = None
