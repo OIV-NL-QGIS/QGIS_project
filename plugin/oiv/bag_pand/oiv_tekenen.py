@@ -6,7 +6,7 @@ import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
 import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
 
 import oiv.helpers.utils_core as UC
-from ..helpers.utils_gui import UtilsGui as UG
+import oiv.helpers.utils_gui as UG
 import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
 import oiv.helpers.drawing_helper as DW
