@@ -7,6 +7,6 @@ ROSNAPLAYERS = ["Object terrein", "Isolijnen", "Bereikbaarheid", "Sectoren"]
 OBJECTTYPES = ['Evenement', 'Gebouw', 'Natuur', 'Waterongeval']
 
 #bouwlaag constants
-BLSNAPLAYERS = [PC.PAND["bouwlaaglayername"], PC.bagpand_layername(), "Bouwkundige veiligheidsvoorzieningen", "Ruimten"]
-BLSNAPSYMBOLS = ['1', '10', '32', '47', '148', '149', '150', '151', '152',\
+BLSNAPLAYERS = [PC.PAND["bouwlaaglayername"], "Bouwkundige veiligheidsvoorzieningen", "Ruimten"]
+BLSNAPSYMBOLS = ['1', '10', '32', '47', '148', '149', '150', '151', '152',
                  '1011', 'Algemeen', 'Voorzichtig', 'Waarschuwing', 'Gevaar']
