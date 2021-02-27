@@ -1,19 +1,19 @@
 """create new repressief object"""
 import os
 
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
+import qgis.PyQt as PQt
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.qt_helper as QT
 import oiv.helpers.messages as MSG
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
-import oiv.repressief_object.oiv_repressief_object as ORO
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectnieuwwidgetui"]))
+
 
 class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
 
@@ -48,8 +48,8 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parent.show()
         del self
 
-    #place new object (i-tje)
     def run_tekenen(self):
+        '''place new object (i-tje)'''
         if self.bron.text() == 'BAG':
             runLayer = PC.OBJECT["objectlayername"]
         else:
@@ -58,16 +58,16 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas.setMapTool(self.parent.pinTool)
         self.parent.pinTool.canvasClicked.connect(self.place_feature)
 
-    #construct the feature and save
+    # construct the feature and save
     def place_feature(self, point):
         childFeature = QC.QgsFeature()
         newFeatureId = None
         objectLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
-        #set geometry from the point clicked on the canvas
+        # set geometry from the point clicked on the canvas
         childFeature.setGeometry(QC.QgsGeometry.fromPointXY(point))
         foreignKey = self.identificatienummer.text()
         buttonCheck, formeleNaam = self.get_attributes(foreignKey, childFeature)
-        #return of new created feature id
+        # return of new created feature id
         if buttonCheck != 'Cancel':
             newFeatureId = UC.write_layer(self.drawLayer, childFeature)
             objectLayer.reload()
@@ -80,16 +80,20 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
                 for feat in tempFeatureIt:
                     if feat["formelenaam"] == formeleNaam:
                         newFeatureId = feat["id"]
-            #with new created feature run existing object widget
+            # with new created feature run existing object widget
             if newFeatureId:
                 self.run_objectgegevens(formeleNaam, newFeatureId)
             else:
                 MSG.showMsgBox('newobjectslowanswer')
         else:
             self.iface.actionPan().trigger()
+        try:
+            self.parent.pinTool.canvasClicked.disconnect()
+        except:
+            pass
 
-    #get the right attributes from user
     def get_attributes(self, foreignKey, childFeature):
+        '''get the right attributes from user'''
         attrs = CH.get_allkeys_ob(self.drawLayer.name())
         labelTekst = UC.user_input_label(attrs[3], attrs[2])
         if labelTekst != 'Cancel':
@@ -104,7 +108,7 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
             childFeature["bron_tabel"] = self.bron_table.text()
             return childFeature, labelTekst
         else:
-            return 'Cancel'
+            return 'Cancel', None
 
     def run_objectgegevens(self, formeleNaam, objectId):
         """continue to existing object woth the newly created feature and already searched address"""
