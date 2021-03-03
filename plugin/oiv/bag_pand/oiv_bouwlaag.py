@@ -1,10 +1,10 @@
 """oiv bouwlaag control widget"""
 import os
 
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
+import qgis.PyQt as PQt
+import qgis.PyQt.QtCore as PQtC
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
@@ -16,6 +16,7 @@ import oiv.helpers.qt_helper as QT
 
 FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.PAND["bouwlaagui"]))
+
 
 class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
     """create bouwlaag from BAG, copy or draw"""
@@ -31,7 +32,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas = parent.canvas
         self.iface = parent.iface
         self.objectId = self.parent.pand_id.text()
-        self.sortedList = self.parent.sortedList
+        self.bouwlaagList = self.parent.sortedList
         self.teken_bouwlaag.setText(str(bouwlaag) + ' t/m ' + str(bouwlaagMax))
         self.bouwlaag_min.setText(str(bouwlaag))
         self.bouwlaag_max.setText(str(bouwlaagMax))
@@ -80,10 +81,10 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             typeVar = type(vars(self)[var])
             if typeVar == PQtW.QCheckBox:
                 vars(self)[var].setVisible(True)
-        #append combobox with unique existing floors
+        # append combobox with unique existing floors
         self.bouwlagen_to_combobox()
         self.copy.setVisible(True)
-        #connect signal to slot
+        # connect signal to slot
         self.bouwlaag.currentIndexChanged.connect(self.set_layer_subset_bouwlaag)
         self.parent.selectTool.geomSelected.connect(self.copy_bag_bouwlaag)
 
@@ -119,7 +120,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         newFeature.initAttributes(fields.count())
         newFeature.setFields(fields)
         attrs = CH.get_allkeys_bl(layer.name())
-        #get features by bouwlaag ID
+        # get features by bouwlaag ID
         it = layer.getFeatures(QC.QgsFeatureRequest().setFilterExpression(attrs[0] + '=' + str(parentID)))
         for feat in it:
             newFeature.setGeometry(feat.geometry())
@@ -144,7 +145,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             if typeVar == PQtW.QCheckBox:
                 if vars(self)[var].isChecked():
                     copyLayer = UC.getlayer_byname(vars(self)[var].text())
-                    self.copy_layers(bouwlaagID, newFeatureId, copyLayer, bouwlaag) 
+                    self.copy_layers(bouwlaagID, newFeatureId, copyLayer, bouwlaag)
 
     def draw_feature(self, points, _dummy):
         """create the floor feature and save to the floors layer"""
@@ -154,7 +155,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         layerName = PC.PAND["bouwlaaglayername"]
         layer = UC.getlayer_byname(layerName)
         foreignKey = CH.get_foreign_key_bl(layerName)
-        #construct QgsFeature to save
+        # construct QgsFeature to save
         for i in range(minBouwlaag, maxBouwlaag + 1):
             if i != 0:
                 childFeature.setGeometry(QC.QgsGeometry.fromPolygonXY([points]))
@@ -164,7 +165,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
                 childFeature[foreignKey] = self.objectId
                 childFeature["bouwlaag"] = i
                 UC.write_layer(layer, childFeature)
-                #block the signals of changing the comboBox to add the new floor
+                # block the signals of changing the comboBox to add the new floor
                 self.bouwlaag.blockSignals(True)
                 self.bouwlaag.clear()
                 if i not in self.bouwlaagList:
@@ -173,7 +174,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlagen_to_combobox()
         self.bouwlaag.blockSignals(False)
         self.iface.actionPan().trigger()
-        #set all layers substring to the right floor
+        # set all layers substring to the right floor
         sub_string = "bouwlaag = " + str(minBouwlaag)
         UG.set_layer_substring(sub_string)
         if maxBouwlaag != minBouwlaag:
@@ -184,13 +185,13 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         if ilayer.name() == PC.PAND["bouwlaaglayername"] or ilayer.name() == PC.bagpand_layername():
             childFeature = QC.QgsFeature()
             layerName = PC.PAND["bouwlaaglayername"]
-            #get active floor from dockwidget
+            # get active floor from dockwidget
             minBouwlaag = int(self.bouwlaag_min.text())
             maxBouwlaag = int(self.bouwlaag_max.text())
             layer = UC.getlayer_byname(layerName)
-            #get necessary attributes from config file
+            # get necessary attributes from config file
             foreignKey = CH.get_foreign_key_bl(layerName)
-            #construct QgsFeature to save
+            # construct QgsFeature to save
             for i in range(minBouwlaag, maxBouwlaag + 1):
                 if i != 0:
                     childFeature.setGeometry(ifeature.geometry())
@@ -200,10 +201,10 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
                     childFeature[foreignKey] = self.objectId
                     childFeature["bouwlaag"] = i
                     newFeatureId = UC.write_layer(layer, childFeature)
-                    #copy also the selected layers
+                    # copy also the selected layers
                     if ilayer.name() == PC.PAND["bouwlaaglayername"]:
                         self.copy_selected_layers(ifeature, newFeatureId, i)
-                    #block the signals of changing the comboBox to add the new floor
+                    # block the signals of changing the comboBox to add the new floor
                     self.bouwlaag.blockSignals(True)
                     self.bouwlaag.clear()
                     if i not in self.bouwlaagList:
@@ -212,7 +213,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             self.bouwlagen_to_combobox()
             self.bouwlaag.blockSignals(False)
             self.iface.actionPan().trigger()
-            #set all layers substring to the right floor
+            # set all layers substring to the right floor
             sub_string = "bouwlaag = " + str(minBouwlaag)
             UG.set_layer_substring(sub_string)
             try:
