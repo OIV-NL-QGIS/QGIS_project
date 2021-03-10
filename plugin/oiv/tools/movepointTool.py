@@ -88,9 +88,9 @@ class MovePointTool(QG.QgsMapToolIdentify):
             tempGeometry = self.tempRubberBand.asGeometry().asPolyline()
             drawPoint = self.toLayerCoordinates(self.layer, tempGeometry[0])
             field = self.idlayer.fields().indexOf("rotatie")
-            rotation = drawPoint.azimuth(clickedPt)
-            attrs = {field : rotation}
-            self.idlayer.dataProvider().changeAttributeValues({self.fid : attrs})
+            rotation = int(drawPoint.azimuth(clickedPt))
+            attrs = {field: rotation}
+            self.idlayer.dataProvider().changeAttributeValues({self.fid: attrs})
             self.idlayer.commitChanges()
             self.idlayer.triggerRepaint()
             self.stop_moveTool()
