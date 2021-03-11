@@ -127,33 +127,35 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
     bouwlaagIds = []
     for name in layerNamesList:
         lyr = getlayer_byname(name)
-        if name == PC.bagpand_layername():
-            request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
-            tempFeature = next(lyr.getFeatures(request))
-            possibleSnapFeatures.append(tempFeature.geometry())
-        elif name == PC.PAND["bouwlaaglayername"]:
-            request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
-            featureIt = lyr.getFeatures(request)
-            for feat in featureIt:
-                bouwlaagIds.append(feat["id"])
-                possibleSnapFeatures.append(feat.geometry())
-        elif bouwlaagIds:
-            for bid in bouwlaagIds:
-                request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + str(bid))
+        if lyr:
+            if name == PC.bagpand_layername():
+                request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
+                tempFeature = next(lyr.getFeatures(request))
+                possibleSnapFeatures.append(tempFeature.geometry())
+            elif name == PC.PAND["bouwlaaglayername"]:
+                request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
                 featureIt = lyr.getFeatures(request)
                 for feat in featureIt:
+                    bouwlaagIds.append(feat["id"])
                     possibleSnapFeatures.append(feat.geometry())
+            elif bouwlaagIds:
+                for bid in bouwlaagIds:
+                    request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + str(bid))
+                    featureIt = lyr.getFeatures(request)
+                    for feat in featureIt:
+                        possibleSnapFeatures.append(feat.geometry())
     return possibleSnapFeatures
 
 def get_possible_snapFeatures_object(layerNamesList, objectId):
     possibleSnapFeatures = []
     for name in layerNamesList:
         lyr = getlayer_byname(name)
-        request = QC.QgsFeatureRequest().setFilterExpression('"object_id" = ' + str(objectId))
-        featureIt = lyr.getFeatures(request)
-        for feat in featureIt:
-            if feat.hasGeometry():
-                possibleSnapFeatures.append(feat.geometry())
+        if lyr:
+            request = QC.QgsFeatureRequest().setFilterExpression('"object_id" = ' + str(objectId))
+            featureIt = lyr.getFeatures(request)
+            for feat in featureIt:
+                if feat.hasGeometry():
+                    possibleSnapFeatures.append(feat.geometry())
     return possibleSnapFeatures
 
 def construct_feature(layerType, parentLayerName, points, objectId, iface):

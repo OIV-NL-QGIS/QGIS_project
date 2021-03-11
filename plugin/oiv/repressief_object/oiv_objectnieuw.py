@@ -85,6 +85,7 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
                 self.run_objectgegevens(formeleNaam, newFeatureId)
             else:
                 MSG.showMsgBox('newobjectslowanswer')
+                self.close_objectnieuw_show_base()
         else:
             self.iface.actionPan().trigger()
         try:

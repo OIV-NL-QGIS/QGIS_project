@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>468</width>
-    <height>808</height>
+    <width>606</width>
+    <height>803</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
     <widget class="QTabWidget" name="gebruiksfuncties_2">
      <property name="sizePolicy">
@@ -75,117 +75,20 @@
       <attribute name="title">
        <string>Objectgegevens</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="3" column="1">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="1">
-        <layout class="QGridLayout" name="gridLayout" columnstretch="0,0">
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_8">
          <property name="sizeConstraint">
           <enum>QLayout::SetFixedSize</enum>
          </property>
-         <item row="10" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Waarvan niet-zelfredzaam</string>
-           </property>
-          </widget>
-         </item>
-         <item row="14" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Datum geldig tot en met:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="0">
-          <widget class="QgsDateTimeEdit" name="datum_geldig_vanaf">
-           <property name="displayFormat">
-            <string>dd-MM-yyyy HH:mm</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Formele naam*</string>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="0">
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Datum geldig vanaf:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0" colspan="2">
-          <widget class="QLineEdit" name="formelenaam">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>26</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
+         <item>
           <widget class="QLabel" name="label_8">
            <property name="text">
             <string>Repressief object identificatie*</string>
            </property>
           </widget>
          </item>
-         <item row="18" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Bijzonderheden</string>
-           </property>
-          </widget>
-         </item>
-         <item row="11" column="0">
-          <widget class="QSpinBox" name="pers_nietz_max"/>
-         </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Max aanwezige personen</string>
-           </property>
-          </widget>
-         </item>
-         <item row="15" column="0">
-          <widget class="QgsDateTimeEdit" name="datum_geldig_tot">
-           <property name="displayFormat">
-            <string>dd-MM-yyyy HH:mm</string>
-           </property>
-          </widget>
-         </item>
-         <item row="20" column="0">
-          <widget class="QTextEdit" name="bijzonderheden">
-           <property name="font">
-            <font>
-             <pointsize>10</pointsize>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
+         <item>
           <widget class="QLineEdit" name="basisreg_identifier">
            <property name="minimumSize">
             <size>
@@ -201,17 +104,85 @@
            </property>
           </widget>
          </item>
-         <item row="9" column="0">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Formele naam*</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="formelenaam">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>26</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Max aanwezige personen</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QSpinBox" name="pers_max"/>
          </item>
-         <item row="16" column="0">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Waarvan niet-zelfredzaam</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="pers_nietz_max"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Datum geldig vanaf:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QgsDateTimeEdit" name="datum_geldig_vanaf">
+           <property name="displayFormat">
+            <string>dd-MM-yyyy HH:mm</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Datum geldig tot en met:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QgsDateTimeEdit" name="datum_geldig_tot">
+           <property name="displayFormat">
+            <string>dd-MM-yyyy HH:mm</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QLabel" name="label_7">
            <property name="text">
             <string>Bodemgesteldheid</string>
            </property>
           </widget>
          </item>
-         <item row="17" column="0">
+         <item>
           <widget class="QComboBox" name="bodemgesteldheid_type_id">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -221,7 +192,36 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Bijzonderheden</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextEdit" name="bijzonderheden">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -254,29 +254,34 @@
         </layout>
        </item>
       </layout>
-      <zorder>gridLayoutWidget</zorder>
-      <zorder>gebruiksfunctie_object</zorder>
      </widget>
      <widget class="QWidget" name="Bedrijfshulpverlening">
       <attribute name="title">
        <string>Bedrijfshulpverlening</string>
       </attribute>
-      <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0">
-        <layout class="QGridLayout" name="gridLayout_7"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QgsRelationEditorWidget" name="mRelationEditor_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QGridLayout" name="gridLayout_7">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetNoConstraint</enum>
          </property>
-         <property name="qgisRelation" stdset="0">
-          <string notr="true">bhv_object_rel</string>
-         </property>
-        </widget>
+         <item row="0" column="0">
+          <widget class="QgsRelationEditorWidget" name="bedrijfshulpverlening">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="qgisRelation" stdset="0">
+            <string notr="true">bhv_object_rel</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -284,8 +289,8 @@
       <attribute name="title">
        <string>Contactpersonen</string>
       </attribute>
-      <layout class="QFormLayout" name="formLayout_2">
-       <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
         <layout class="QGridLayout" name="gridLayout_5">
          <item row="0" column="0">
           <widget class="QgsRelationEditorWidget" name="mRelationEditor">
@@ -308,9 +313,12 @@
       <attribute name="title">
        <string>Organisatorisch</string>
       </attribute>
-      <layout class="QFormLayout" name="formLayout_3">
-       <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
         <layout class="QGridLayout" name="gridLayout_8">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetNoConstraint</enum>
+         </property>
          <item row="0" column="0">
           <widget class="QgsRelationEditorWidget" name="mRelationEditor_3">
            <property name="sizePolicy">
@@ -335,12 +343,9 @@
       <attribute name="title">
        <string>Scenario</string>
       </attribute>
-      <layout class="QFormLayout" name="formLayout_4">
-       <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
         <layout class="QGridLayout" name="gridLayout_4">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetDefaultConstraint</enum>
-         </property>
          <item row="0" column="0">
           <widget class="QgsRelationEditorWidget" name="scenario">
            <property name="enabled">
