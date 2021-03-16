@@ -61,7 +61,6 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
     # construct the feature and save
     def place_feature(self, point):
         childFeature = QC.QgsFeature()
-        newFeatureId = None
         objectLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         # set geometry from the point clicked on the canvas
         childFeature.setGeometry(QC.QgsGeometry.fromPointXY(point))
@@ -69,23 +68,9 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
         buttonCheck, formeleNaam = self.get_attributes(foreignKey, childFeature)
         # return of new created feature id
         if buttonCheck != 'Cancel':
-            newFeatureId = UC.write_layer(self.drawLayer, childFeature)
+            UC.write_layer(self.drawLayer, childFeature)
             objectLayer.reload()
-            if not newFeatureId:
-                idx = objectLayer.fields().indexFromName('id')
-                maxObjectId = objectLayer.maximumValue(idx)
-                request = QC.QgsFeatureRequest().setFilterExpression('"id" > {}'.format(maxObjectId))
-                self.drawLayer.reload()
-                tempFeatureIt = objectLayer.getFeatures(request)
-                for feat in tempFeatureIt:
-                    if feat["formelenaam"] == formeleNaam:
-                        newFeatureId = feat["id"]
-            # with new created feature run existing object widget
-            if newFeatureId:
-                self.run_objectgegevens(formeleNaam, newFeatureId)
-            else:
-                MSG.showMsgBox('newobjectslowanswer')
-                self.close_objectnieuw_show_base()
+            self.close_objectnieuw_show_base()
         else:
             self.iface.actionPan().trigger()
         try:
