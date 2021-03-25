@@ -80,9 +80,10 @@ def write_layer(layer, childFeature, count=False):
         return newFeatures[0].id()
     else:
         layer.commitChanges()
-        MSG.showMsgBox('invalidgeometry')
         if count:
             return 'invalid'
+        else:
+            MSG.showMsgBox('invalidgeometry')
 
 def nearest_neighbor(iface, layer, point):
     """search the nearest parent feature id"""

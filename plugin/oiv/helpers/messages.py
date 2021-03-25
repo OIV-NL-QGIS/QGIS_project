@@ -1,5 +1,6 @@
 """all string messages in the plugin"""
-from qgis.PyQt.QtWidgets import QMessageBox #pylint: disable=import-error
+from qgis.PyQt.QtWidgets import QMessageBox  # pylint: disable=import-error
+
 
 def showMsgBox(msgName, extraBody=''):
     msgSettings = MESSAGES[msgName]
@@ -98,7 +99,7 @@ MESSAGES = {
         "type": 'information',
         "header": 'Gereed!',
         "body": 'Features zijn geimporteerd.\n'
-                'Aantal features dat niet is geïmporteerd vanwege ongeldige geometrie:<br><br>'
+                'Aantal features dat niet is geïmporteerd vanwege ongeldige geometrie: '
     },
     'bouwlaagvolgorde': {
         "type": 'warning',
@@ -133,5 +134,10 @@ MESSAGES = {
         "type": 'question_save',
         "header": 'Niet opgeslagen wijzigingen!',
         "body": 'Om van bouwlaag te veranderen moet u eerst de bewerkingen opslaan!\n\nIn de volgende laag zijn nog niet opgeslagen wijzigingen: '
+    },
+    'no_objectid': {
+        "type": 'critical',
+        "header": 'Geen object ID!',
+        "body": 'Er is geen object ID gevonden. Ga terug naar het beginscherm van de plugin en selecteer het object opnieuw!'
     },
 }
