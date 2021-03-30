@@ -1,10 +1,11 @@
 """Move or rotate a point feature on the map canvas"""
-import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
-import qgis.gui as QG #pylint: disable=import-error
+import qgis.PyQt.QtCore as PQtC
+import qgis.core as QC
+import qgis.gui as QG
 
 import oiv.helpers.rubberband_helper as RH
 import oiv.helpers.utils_core as UC
+
 
 class MovePointTool(QG.QgsMapToolIdentify):
     """identify the clicked point from the user and proces"""

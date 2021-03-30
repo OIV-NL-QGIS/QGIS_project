@@ -2,15 +2,16 @@
 """configure settings of plugin"""
 import os
 
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
+from qgis.PyQt import uic
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
 
 from .helpers.constants import plugin_settings, write_plugin_settings, bagpand_layername
-import oiv.helpers.utils_core as UC
+from .helpers.utils_core import getlayer_byname
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_config_widget.ui'))
+
 
 class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
 
@@ -42,7 +43,7 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def set_bag_layer(self, visibility):
         layerName = bagpand_layername()
-        layer = UC.getlayer_byname(layerName)
+        layer = getlayer_byname(layerName)
         ltv = self.iface.layerTreeView()
         ltv.setLayerVisible(layer, visibility)
 

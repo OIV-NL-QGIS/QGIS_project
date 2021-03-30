@@ -1,7 +1,7 @@
 """oiv bouwlaag control widget"""
 import os
 
-import qgis.PyQt as PQt
+from qgis.PyQt import uic
 import qgis.PyQt.QtCore as PQtC
 import qgis.PyQt.QtWidgets as PQtW
 import qgis.core as QC
@@ -14,7 +14,7 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.PAND["bouwlaagui"]))
 
 
@@ -85,6 +85,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlagen_to_combobox()
         self.copy.setVisible(True)
         # connect signal to slot
+        self.parent.selectTool.expectedLayerName = PC.PAND["bouwlaaglayername"]
         self.bouwlaag.currentIndexChanged.connect(self.set_layer_subset_bouwlaag)
         self.parent.selectTool.geomSelected.connect(self.copy_bag_bouwlaag)
 

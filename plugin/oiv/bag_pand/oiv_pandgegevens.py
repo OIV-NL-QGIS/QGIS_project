@@ -1,10 +1,10 @@
 """control pand to draw upon"""
 import os
 
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
+from qgis.PyQt import uic
+import qgis.PyQt.QtCore as PQtC
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
@@ -19,8 +19,9 @@ from .oiv_bouwlaag import oivBouwlaagWidget
 from .oiv_tekenen import oivTekenWidget
 from .oiv_import_file import oivImportFileWidget
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.PAND["pandui"]))
+
 
 class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
@@ -208,7 +209,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         del self
 
 class BouwlaagDialog(PQtW.QDialog):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(BouwlaagDialog, self).__init__(parent)
         bouwlagen = PC.PAND["bouwlagen"]
         minBouwlaag = bouwlagen["min"]

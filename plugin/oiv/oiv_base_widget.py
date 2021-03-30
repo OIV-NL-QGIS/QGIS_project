@@ -1,10 +1,10 @@
 """init the oiv base widget"""
 import os
 
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
+from qgis.PyQt import uic
+import qgis.PyQt.QtCore as PQtC
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
 
 import oiv.tools.filter_object as FO
 import oiv.helpers.qt_helper as QT
@@ -15,8 +15,9 @@ import oiv.bag_pand.oiv_pandgegevens as OPG
 import oiv.repressief_object.oiv_repressief_object as ORO
 import oiv.repressief_object.oiv_objectnieuw as OON
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PLUGIN["basewidget"]))
+
 
 class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     """create dockwidget as base of the oiv plugin"""
