@@ -33,6 +33,7 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     """select geometry on the map"""
 
     whichConfig = ''
+    expectedLayerName = None
 
     def __init__(self, canvas):
         self.canvas = canvas
@@ -45,14 +46,17 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
         results = self.identify(mouseEvent.x(), mouseEvent.y(), self.TopDownStopAtFirst, self.VectorLayer)
         if not results == []:
             idlayer = results[0].mLayer
-            allFeatures = []
-            if len(results) > 1:
-                for result in results:
-                    allFeatures.append(result.mFeature)
-                tempfeature = self.ask_user_for_feature(idlayer, allFeatures)
+            if self.expectedLayerName and idlayer.name() != self.expectedLayerName:
+                MSG.showMsgBox('wronglayeridentified')
             else:
-                tempfeature = results[0].mFeature
-            self.geomSelected.emit(idlayer, tempfeature)
+                allFeatures = []
+                if len(results) > 1:
+                    for result in results:
+                        allFeatures.append(result.mFeature)
+                    tempfeature = self.ask_user_for_feature(idlayer, allFeatures)
+                else:
+                    tempfeature = results[0].mFeature
+                self.geomSelected.emit(idlayer, tempfeature)
         else:
             MSG.showMsgBox('noidentifiedobject')
 

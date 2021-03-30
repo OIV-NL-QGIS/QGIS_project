@@ -20,10 +20,6 @@ def read_settings(query, allResult):
         if conn:
             conn.close()
 
-def get_app_version():
-    query = "SELECT db_versie FROM applicatie;"
-    return read_settings(query, False)[0]
-
 def get_foreign_key_bl(layerName):
     query = "SELECT foreign_key FROM 'config_bouwlaag' WHERE child_layer = '{}'".format(layerName)
     return read_settings(query, False)[0]

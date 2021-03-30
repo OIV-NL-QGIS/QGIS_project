@@ -140,4 +140,9 @@ MESSAGES = {
         "header": 'Geen object ID!',
         "body": 'Er is geen object ID gevonden. Ga terug naar het beginscherm van de plugin en selecteer het object opnieuw!'
     },
+    'wronglayeridentified': {
+        "type": 'information',
+        "header": 'Verkeerde laag!',
+        "body": 'U heeft op de verkeerde laag geklikt!\n\nKlik a.u.b. op de juiste locatie.'
+    },
 }

@@ -85,6 +85,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlagen_to_combobox()
         self.copy.setVisible(True)
         # connect signal to slot
+        self.parent.selectTool.expectedLayerName = PC.PAND["bouwlaaglayername"]
         self.bouwlaag.currentIndexChanged.connect(self.set_layer_subset_bouwlaag)
         self.parent.selectTool.geomSelected.connect(self.copy_bag_bouwlaag)
 
