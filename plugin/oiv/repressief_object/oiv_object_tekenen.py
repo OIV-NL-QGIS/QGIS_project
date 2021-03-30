@@ -1,9 +1,8 @@
 """drawing class for repressief object"""
 import os
 
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.utils as QU #pylint: disable=import-error
+from qgis.PyQt import uic
+import qgis.PyQt.QtWidgets as PQtW
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
@@ -14,8 +13,9 @@ import oiv.helpers.qt_helper as QT
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["tekenwidgetui"]))
+
 
 class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 

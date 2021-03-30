@@ -1,7 +1,7 @@
 """create new repressief object"""
 import os
 
-import qgis.PyQt as PQt
+from qgis.PyQt import uic
 import qgis.PyQt.QtWidgets as PQtW
 import qgis.core as QC
 
@@ -11,7 +11,7 @@ import oiv.helpers.messages as MSG
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectnieuwwidgetui"]))
 
 

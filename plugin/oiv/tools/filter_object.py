@@ -1,5 +1,5 @@
 """filter on type of repressief object"""
-import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
+import qgis.PyQt.QtCore as PQtC
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.drawing_helper as DH

@@ -1,12 +1,12 @@
 """extension to plugin to import AutoCad or Shape files"""
 import os
 
-import osgeo as OG #pylint: disable=import-error
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
-import qgis.utils as QU #pylint: disable=import-error
+import osgeo as OG
+from qgis.PyQt import uic
+import qgis.PyQt.QtCore as PQtC
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
+import qgis.utils as QU
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
@@ -15,8 +15,9 @@ import oiv.helpers.messages as MSG
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'import_filewidget.ui'))
+
 
 class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     """the actions class for the import"""
@@ -101,9 +102,9 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 tempList.append(action[1])
             tempList.append("niet importeren")
             if layerType in types:
-                types[layerType].update({layerName : tempList})
+                types[layerType].update({layerName: tempList})
             else:
-                types.update({layerType : {layerName : tempList}})
+                types.update({layerType: {layerName: tempList}})
         return types
 
     def inlezen(self):

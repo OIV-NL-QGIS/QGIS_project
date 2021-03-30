@@ -14,10 +14,10 @@ version=0.1
 author=Joost Deen
 email=j.deen@safetyct.com
 
-about=place objects acoording tot the oiv database model
+about=place objects according tot the oiv database model and IMROI (Dutch information model)
 
-tracker=bitbucket
-repository=bitbucket
+tracker=https://github.com/OIV-NL-QGIS/OIV_project/issues
+repository=https://github.com/OIV-NL-QGIS/OIV_project
 # End of mandatory metadata
 
 # Recommended items:

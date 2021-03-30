@@ -1,9 +1,9 @@
 """initialize al action for repressief object"""
 import os
 
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
+from qgis.PyQt import uic
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
@@ -17,8 +17,9 @@ import oiv.helpers.drawing_helper as DH
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectwidgetui"]))
+
 
 class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     """interactive UI management"""
@@ -79,7 +80,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             self.terrein_tekenen.clicked.disconnect()
             self.delete_f.clicked.disconnect()
             self.pan.clicked.disconnect()
-        except: # pylint: disable=bare-except
+        except:  # pylint: disable=bare-except
             pass
         self.close()
         self.parent.show()
@@ -94,8 +95,12 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         objectId = self.object_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
         tempLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
-        objectFeature = next(tempLayer.getFeatures(request))
-        self.edit_attribute(tempLayer, objectFeature)
+        objectFeatIt = tempLayer.getFeatures(request)
+        try:
+            objectFeature = next(objectFeatIt)
+            self.edit_attribute(tempLayer, objectFeature)
+        except StopIteration:
+            MSG.showMsgBox('no_objectid')
 
     def open_bgt_viewer(self):
         """open url based on BGT location, i.v.m. terugmelden"""

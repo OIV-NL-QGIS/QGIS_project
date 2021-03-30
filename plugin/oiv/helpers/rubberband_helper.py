@@ -1,11 +1,11 @@
 """RubberBand style helpers"""
 from math import sin, cos, radians
-from qgis.gui import QgsRubberBand, QgsVertexMarker #pylint: disable=import-error
-from qgis.core import QgsPointXY #pylint: disable=import-error
-from qgis.PyQt.QtGui import QColor #pylint: disable=import-error
+from qgis.gui import QgsRubberBand, QgsVertexMarker
+from qgis.core import QgsPointXY
+from qgis.PyQt.QtGui import QColor
 from .qt_helper import getQtLineStyle, getWKBType
 
-#RubberBand styles
+# RubberBand styles
 RBSTYLES = {
     "grid": {
         'strokecolor': QColor('red'),
@@ -14,7 +14,7 @@ RBSTYLES = {
         'alphaF': 10,
         'strokewidth': 1,
     },
-    #maptool rubberband styles
+    # maptool rubberband styles
     "drawn": {
         'strokecolor': QColor('red'),
         'fillcolor': QColor('red'),
@@ -36,7 +36,7 @@ RBSTYLES = {
         'alphaF': 255,
         'strokewidth': 1,
     },
-    #move and rotate points rubberband styles
+    # move and rotate points rubberband styles
     "moveandrotatepoint": {
         'strokecolor': QColor('black'),
         'fillcolor': QColor('black'),

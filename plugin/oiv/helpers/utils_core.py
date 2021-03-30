@@ -3,8 +3,8 @@ import os
 import sqlite3
 import webbrowser
 
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
 
 import oiv.helpers.messages as MSG
 import oiv.helpers.constants as PC

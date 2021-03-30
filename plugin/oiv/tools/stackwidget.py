@@ -1,16 +1,17 @@
 """StackWidget for feature info and feature editing"""
 import os
 
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
-import qgis.gui as QG #pylint: disable=import-error
-import qgis.utils as QU #pylint: disable=import-error
+from qgis.PyQt import uic
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
+import qgis.gui as QG
+import qgis.utils as QU
 
 import oiv.helpers.constants as PC
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'stackwidget.ui'))
+
 
 class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
     """open any feature form as stackwidget in OOIV pluging"""

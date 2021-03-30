@@ -1,11 +1,12 @@
 """multiple classes to identify object on the map"""
-import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
-import qgis.gui as QG #pylint: disable=import-error
+import qgis.PyQt.QtCore as PQtC
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
+import qgis.gui as QG
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.messages as MSG
+
 
 class IdentifyGeometryTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     """identify geometry on the map"""
@@ -26,6 +27,7 @@ class IdentifyGeometryTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
             self.geomIdentified.emit(idlayer, tempfeature)
         else:
             self.geomIdentified.emit(None, tempfeature)
+
 
 class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     """select geometry on the map"""
@@ -83,11 +85,12 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
                 targetFeature = feat
         return targetFeature
 
+
 class AskFeatureDialog(PQtW.QDialog):
     """if more features are identified ask user which one to choose"""
     askList = []
 
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(AskFeatureDialog, self).__init__(parent)
         self.setWindowTitle("Selecteer feature")
         qlayout = PQtW.QVBoxLayout(self)

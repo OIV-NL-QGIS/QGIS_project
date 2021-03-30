@@ -1,11 +1,10 @@
 """extension to plugin to import AutoCad or Shape files"""
 import os
-from osgeo import ogr #pylint: disable=import-error
-
-import qgis.PyQt as PQt #pylint: disable=import-error
-import qgis.PyQt.QtCore as PQtC #pylint: disable=import-error
-import qgis.PyQt.QtWidgets as PQtW #pylint: disable=import-error
-import qgis.core as QC #pylint: disable=import-error
+from osgeo import ogr
+from qgis.PyQt import uic
+import qgis.PyQt.QtCore as PQtC
+import qgis.PyQt.QtWidgets as PQtW
+import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.messages as MSG
@@ -13,8 +12,9 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
 
-FORM_CLASS, _ = PQt.uic.loadUiType(os.path.join(
+FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'oiv_import_file_widget.ui'))
+
 
 class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     """the actions class for the import"""
@@ -25,7 +25,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     importPolygonLayer = None
     mappingDict = {}
     importlagen = ["Bouwkundige veiligheidsvoorzieningen", "Ruimten"]
-    importlagen_types = {"Bouwkundige veiligheidsvoorzieningen": "veiligh_bouwk_type", "Ruimten" : "ruimten_type"}
+    importlagen_types = {"Bouwkundige veiligheidsvoorzieningen": "veiligh_bouwk_type", "Ruimten": "ruimten_type"}
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -59,7 +59,8 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     def selectfile(self):
         """select the import shap or dxf file"""
         dxfInfo = None
-        importFile = PQtW.QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, "AutoCad (*.dxf);;Shape (*.shp);;GeoPackage (*.gpkg)")[0]
+        importFile = PQtW.QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, 
+                                                      "AutoCad (*.dxf);;Shape (*.shp);;GeoPackage (*.gpkg)")[0]
         self.bestandsnaam.setText(importFile)
         checkBouwlaag = False
         if importFile.endswith('.dxf'):
@@ -70,7 +71,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 layerType = 'Polygon'
             dxfInfo = "|layername=entities|geometrytype=" + layerType
             importFileFeat = importFile + dxfInfo
-            self.importTypeFile = 'DXF' 
+            self.importTypeFile = 'DXF'
             if checkBouwlaag:
                 importFilePolygon = importFile + "|layername=entities|geometrytype=Polygon"
                 self.importPolygonLayer = QC.QgsVectorLayer(importFilePolygon, "import", "ogr")
@@ -79,7 +80,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 self.bouwlaag.setText(str(importBouwlaag))
                 self.import_bouwlaag(bouwlaagFeature)
         elif importFile.endswith('.gpkg'):
-            layerNames = [l.GetName() for l in ogr.Open(importFile)]
+            layerNames = [lyr.GetName() for lyr in ogr.Open(importFile)]
             GpkgDialog.layerNames = layerNames
             layerName, dummy = GpkgDialog.getLayerName()
             gpkgInfo = "|layername={}".format(layerName)
@@ -102,9 +103,9 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         childFeature = QC.QgsFeature()
         layerName = 'Bouwlagen'
         layer = UC.getlayer_byname(layerName)
-        #get necessary attributes from config file
+        # get necessary attributes from config file
         foreignKey = CH.get_foreign_key_bl(layerName)
-        #construct QgsFeature to save
+        # construct QgsFeature to save
         childFeature.setGeometry(bouwlaagFeature.geometry())
         fields = layer.fields()
         childFeature.initAttributes(fields.count())
@@ -207,7 +208,8 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 targetFeature.setGeometry(geom)
                 targetFeature["bouwlaag_id"] = int(self.bouwlaag_id.text())
                 if targetLayerName == "Ruimten":
-                    request = QC.QgsFeatureRequest().setFilterExpression('"naam" = ' + "'" + self.mappingDict[feature[self.type.currentText()]] + "'")
+                    req = '"naam" = ' + "'" + self.mappingDict[feature[self.type.currentText()]] + "'"
+                    request = QC.QgsFeatureRequest().setFilterExpression(req)
                     tempFeature = next(typeLayer.getFeatures(request))
                     targetFeature[identifier] = tempFeature["id"]
                 else:
@@ -215,7 +217,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                     invalidCheck = UC.write_layer(targetLayer, targetFeature, True)
                     if invalidCheck == 'invalid':
                         invalidCount += 1
-            progress = (float(count)/float(cntFeat)) * 100
+            progress = (float(count) / float(cntFeat)) * 100
             progressBar.setValue(progress)
         if invalidCount > 0:
             MSG.showMsgBox('importpartiallysuccesfull', '{}'.format(invalidCount))
@@ -227,7 +229,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         """activate the selection tool"""
         try:
             self.selectTool.geomSelected.disconnect()
-        except: # pylint: disable=bare-except
+        except:  # pylint: disable=bare-except
             pass
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.set_parent_id)
@@ -293,13 +295,14 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         try:
             self.parent.show()
             del self.parent
-        except: # pylint: disable=bare-except
+        except:  # pylint: disable=bare-except
             pass
         try:
             QC.QgsProject.instance().removeMapLayers([self.importLayer.id()])
-        except: # pylint: disable=bare-except
+        except:  # pylint: disable=bare-except
             pass
         del self
+
 
 class MappingDialog(PQtW.QDialog):
     """construct the mapping GUI"""
@@ -346,6 +349,7 @@ class MappingDialog(PQtW.QDialog):
             mapping.update({dialog.labels[i].text(): dialog.comboBoxes[i].currentText()})
         return (mapping, result == PQtW.QDialog.Accepted)
 
+
 class DxfDialog(PQtW.QDialog):
     """construct the import GUI"""
 
@@ -373,7 +377,7 @@ class DxfDialog(PQtW.QDialog):
                 self.qComboA.addItem(str(max_bouwlaag - i))
                 if max_bouwlaag - i == 1:
                     init_index = i
-        self.qComboA.setCurrentIndex(init_index) 
+        self.qComboA.setCurrentIndex(init_index)
         self.qComboA.setFixedWidth(100)
         self.qComboA.setMaxVisibleItems(30)
         self.label3 = PQtW.QLabel(self)
@@ -399,11 +403,13 @@ class DxfDialog(PQtW.QDialog):
             self.label3.setVisible(True)
 
     @staticmethod
-    def getGeometryType(parent = None):
+    def getGeometryType(parent=None):
         """Contains DXF line or polygon geometrie"""
         dialog = DxfDialog(parent)
         result = dialog.exec_()
-        return (dialog.checkBouwlaag.isChecked(), dialog.inputGeometry.currentText(), dialog.qComboA.currentText(), result == PQtW.QDialog.Accepted)
+        return (dialog.checkBouwlaag.isChecked(), dialog.inputGeometry.currentText(), dialog.qComboA.currentText(),
+                result == PQtW.QDialog.Accepted)
+
 
 class GpkgDialog(PQtW.QDialog):
     """construct the import GUI"""
