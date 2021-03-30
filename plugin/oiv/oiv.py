@@ -111,11 +111,16 @@ class oiv(PQtW.QWidget):
         """run the plugin, if project is not OIV object, deactivate plugin when clicked on icon"""
         project = QC.QgsProject.instance()
         projectTest = str(QC.QgsExpressionContextUtils.projectScope(project).variable('project_title'))
-        dbVersion = CH.get_app_version()
+        try:
+            layer = UC.getlayer_byname('applicatie')
+            request = QC.QgsFeatureRequest().setFilterExpression('"id" = 1')
+            dbVersion = next(layer.getFeatures(request))["db_versie"]
+        except:
+            dbVersion = 0
         if 'Objecten' not in projectTest:
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
-        elif PLUGIN["compatibleDbVersion"]["max"] > dbVersion < PLUGIN["compatibleDbVersion"]["min"]:
+        elif PLUGIN["compatibleDbVersion"]["max"] < dbVersion < PLUGIN["compatibleDbVersion"]["min"]:
             MSG.showMsgBox('invaliddatabaseversion')
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
