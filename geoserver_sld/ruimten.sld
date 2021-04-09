@@ -12,7 +12,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:PropertyName>ruimten_type_id</ogc:PropertyName>
               <ogc:Literal>bijzondere ruimte</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -55,7 +55,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:PropertyName>ruimten_type_id</ogc:PropertyName>
               <ogc:Literal>tijdelijke BAG</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -98,7 +98,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:PropertyName>ruimten_type_id</ogc:PropertyName>
               <ogc:Literal>verkeersruimte</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -122,7 +122,7 @@
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:PropertyName>ruimten_type_id</ogc:PropertyName>
               <ogc:Literal>overige ruimte</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
