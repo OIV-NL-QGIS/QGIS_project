@@ -132,7 +132,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="aanduiding">
+        <widget class="QLineEdit" name="aanduiding_locatie">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -166,7 +166,7 @@
       <zorder>sleutelkluis_type_id</zorder>
       <zorder>label_6</zorder>
       <zorder>label</zorder>
-      <zorder>aanduiding</zorder>
+      <zorder>aanduiding_locatie</zorder>
       <zorder>label_7</zorder>
       <zorder>label_2</zorder>
       <zorder>sleuteldoel_type_id</zorder>
