@@ -64,11 +64,14 @@
        <widget class="QLineEdit" name="telefoonnummer"/>
       </item>
       <item>
-       <widget class="QCheckBox" name="ademluchtdragend">
+       <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>ademluchtdragend</string>
+         <string>Ademluchtdragend</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="ademluchtdragend"/>
       </item>
       <item>
        <spacer name="verticalSpacer">
