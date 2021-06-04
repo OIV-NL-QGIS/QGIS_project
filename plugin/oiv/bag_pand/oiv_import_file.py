@@ -47,6 +47,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.mapping.clicked.connect(self.run_mapping)
         self.import_laag.currentIndexChanged.connect(self.hide_import)
         self.type.currentIndexChanged.connect(self.hide_import)
+        self.validatie_import.clicked.connect(self.inlezen_validatie)
         self.import_file.clicked.connect(self.inlezen)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
@@ -59,7 +60,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
     def selectfile(self):
         """select the import shap or dxf file"""
         dxfInfo = None
-        importFile = PQtW.QFileDialog.getOpenFileName(None, "Selecteer bestand:", None, 
+        importFile = PQtW.QFileDialog.getOpenFileName(None, "Selecteer bestand:", None,
                                                       "AutoCad (*.dxf);;Shape (*.shp);;GeoPackage (*.gpkg)")[0]
         self.bestandsnaam.setText(importFile)
         checkBouwlaag = False
@@ -173,36 +174,69 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         pdialog.setBar(pbar)
         pdialog.setMinimumWidth(300)
         pdialog.show()
+        pbar.setValue(0)
+        pbar.setMaximum(100)
         return pdialog, pbar
 
+    def init_layer_fields(self, fields, params):
+        layer = QC.QgsVectorLayer(params[0], params[1], params[2])
+        pr = layer.dataProvider()
+        pr.addAttributes(fields)
+        layer.updateFields()
+        return layer
+
+    def get_centroid(self):
+        tempLayer = UC.getlayer_byname('Bouwlagen')
+        req = '"id" = ' + self.bouwlaag_id.text()
+        request = QC.QgsFeatureRequest().setFilterExpression(req)
+        tempFeature = next(tempLayer.getFeatures(request))
+        return tempFeature.geometry().centroid()
+
     def inlezen(self):
+        targetLayerName = self.import_laag.currentText()
+        targetLayer = UC.getlayer_byname(targetLayerName)
+        sourceLayerName = 'tempImport'
+        sourceLayer = UC.getlayer_byname(sourceLayerName)
+        features = []
+        for feature in sourceLayer.getFeatures():
+            features.append(feature)
+        UC.write_layer(targetLayer, features, False, False)
+        MSG.showMsgBox('importsuccesfull')
+        QC.QgsProject.instance().removeMapLayers([sourceLayer.id()])
+
+    def inlezen_validatie(self):
         """import the file after all settings wehere made"""
         targetLayerName = self.import_laag.currentText()
-        if targetLayerName == "Ruimten":
-            typeLayer = UC.getlayer_byname('ruimten_type')
-        targetFeature = QC.QgsFeature()
         targetLayer = UC.getlayer_byname(targetLayerName)
         targetFields = targetLayer.fields()
-        targetFeature.initAttributes(targetFields.count())
+
+        if targetLayerName == "Ruimten":
+            typeLayer = UC.getlayer_byname('ruimten_type')
+            tempImportLayer = self.init_layer_fields(targetFields, ["MultiPolygon?crs=epsg:28992", "tempImport", "memory"])
+            tempImportLayerInvalid = self.init_layer_fields(targetFields, ["MultiPolygon?crs=epsg:28992", "tempImport_invalid", "memory"])
+        else:
+            tempImportLayer = self.init_layer_fields(targetFields, ["MultiLinestring?crs=epsg:28992", "tempImport", "memory"])
+            tempImportLayerInvalid = self.init_layer_fields(targetFields, ["MultiLinestring?crs=epsg:28992", "tempImport_invalid", "memory"])
+
         identifier = CH.get_identifier_bl(targetLayerName)
-        targetFeature.setFields(targetFields)
-        self.iface.setActiveLayer(self.importLayer)
+
+        bouwlaagGeomCentroid = self.get_centroid()
         dummy, progressBar = self.progressdialog(0)
-        progressBar.setValue(0)
-        progressBar.setMaximum(100)
         count = 0
         cntFeat = self.importLayer.featureCount()
         invalidCount = 0
+        validFeatures = []
+        invalidFeatures = []
+        geomCheck = True
+
         for feature in self.importLayer.getFeatures():
+            targetFeature = QC.QgsFeature()
+            targetFeature.initAttributes(targetFields.count())
+            targetFeature.setFields(targetFields)
             count += 1
             if self.mappingDict[feature[self.type.currentText()]] != 'niet importeren' and feature.geometry():
                 if self.importTypeFile == 'DXF':
-                    if self.importLayer.geometryType() == QC.QgsWkbTypes.PolygonGeometry:
-                        geom = QC.QgsGeometry.fromPolygonXY(feature.geometry().asPolygon())
-                    elif self.importLayer.wkbType() == QC.QgsWkbTypes.MultiLineString:
-                        geom = QC.QgsGeometry.fromMultiPolylineXY(feature.geometry().asMultiPolyline())
-                    else:
-                        geom = QC.QgsGeometry.fromPolylineXY(feature.geometry().asPolyline())
+                    geom, geomCheck = self.check_feature_validity(feature, bouwlaagGeomCentroid)
                 elif self.importTypeFile in ('GPKG', 'SHP'):
                     geom = feature.geometry()
                 targetFeature.setGeometry(geom)
@@ -214,16 +248,52 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                     targetFeature[identifier] = tempFeature["id"]
                 else:
                     targetFeature[identifier] = self.mappingDict[feature[self.type.currentText()]]
-                    invalidCheck = UC.write_layer(targetLayer, targetFeature, True)
-                    if invalidCheck == 'invalid':
+                    if geomCheck:
+                        validFeatures.append(targetFeature)
+                    else:
+                        invalidFeatures.append(targetFeature)
                         invalidCount += 1
             progress = (float(count) / float(cntFeat)) * 100
             progressBar.setValue(progress)
+
+        UC.write_layer(tempImportLayer, validFeatures, False, False)
+        UC.write_layer(tempImportLayerInvalid, invalidFeatures, False, False)
+        QC.QgsProject.instance().addMapLayer(tempImportLayer, True)
+        QC.QgsProject.instance().addMapLayer(tempImportLayerInvalid, True)
         if invalidCount > 0:
             MSG.showMsgBox('importpartiallysuccesfull', '{}'.format(invalidCount))
         else:
             MSG.showMsgBox('importsuccesfull')
         QC.QgsProject.instance().removeMapLayers([self.importLayer.id()])
+        self.label8.setVisible(True)
+        self.import_file.setVisible(True)
+
+    def check_feature_validity(self, feature, bouwlaagGeomCentroid):
+        lenGeomCheck = True
+        if self.importLayer.geometryType() == QC.QgsWkbTypes.PolygonGeometry:
+            polygon = feature.geometry().asPolygon()
+            geom = QC.QgsGeometry.fromPolygonXY(polygon)
+            if len(polygon[0]) < 3:
+                lenGeomCheck = False
+        elif self.importLayer.wkbType() == QC.QgsWkbTypes.MultiLineString:
+            multiLine = feature.geometry().asMultiPolyline()
+            geom = QC.QgsGeometry.fromMultiPolylineXY(multiLine)
+            for line in multiLine:
+                if len(line) < 2:
+                    lenGeomCheck = False
+        else:
+            line = feature.geometry().asPolyline()
+            geom = QC.QgsGeometry.fromPolylineXY(line)
+            if len(line) < 2:
+                lenGeomCheck = False
+        if lenGeomCheck:
+            distanceToObject = QC.QgsGeometry.distance(bouwlaagGeomCentroid, geom)
+            if distanceToObject > 100:
+                lenGeomCheck = False
+            checkGeomValidity = feature.geometry().isGeosValid()
+            if not checkGeomValidity:
+                lenGeomCheck = False
+        return geom, lenGeomCheck
 
     def run_select_bouwlaag(self):
         """activate the selection tool"""
@@ -248,7 +318,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         MappingDialog.importTypes = importTypes
         self.mappingDict, dummy = MappingDialog.getMapping()
         self.label7.setVisible(True)
-        self.import_file.setVisible(True)
+        self.validatie_import.setVisible(True)
 
     def set_parent_id(self, ilayer, ifeature):
         """let user select the floor which to link to"""
@@ -277,12 +347,14 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.label5b.setVisible(False)
         self.label6.setVisible(False)
         self.label7.setVisible(False)
+        self.label8.setVisible(False)
         self.mapping.setVisible(False)
         self.selectId.setVisible(False)
         self.type.setVisible(False)
         self.select_file.setVisible(True)
         self.bestandsnaam.setVisible(True)
         self.import_file.setVisible(False)
+        self.validatie_import.setVisible(False)
         self.import_laag.setVisible(False)
 
     def close_import(self):

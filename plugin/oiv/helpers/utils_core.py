@@ -68,12 +68,16 @@ def check_layer_type(layer):
         layerType = "undefined"
     return layerType
 
-def write_layer(layer, childFeature, count=False):
+def write_layer(layer, features, count=False, check=True):
     """write the attributes to layer"""
-    layer.startEditing()
-    checkGeomValidity = childFeature.geometry().isGeosValid()
+    checkGeomValidity = True
+    if not isinstance(features, list):
+        features = [features]
+    if check:
+        checkGeomValidity = features.geometry().isGeosValid()
     if checkGeomValidity:
-        dummy, newFeatures = layer.dataProvider().addFeatures([childFeature])
+        layer.startEditing()
+        dummy, newFeatures = layer.dataProvider().addFeatures(features)
         layer.commitChanges()
         layer.reload()
         layer.triggerRepaint()
@@ -91,13 +95,13 @@ def nearest_neighbor(iface, layer, point):
     parentId = None
     parentFeature = None
     extent = iface.mapCanvas().extent()
-    #veroorzaakt foutmelding als er niets in het kaartvenster staat, daarom in try/except statement
+    # veroorzaakt foutmelding als er niets in het kaartvenster staat, daarom in try/except statement
     index = QC.QgsSpatialIndex(layer.getFeatures(QC.QgsFeatureRequest(extent)))
     try:
         parentId = index.nearestNeighbor(point, 1)[0]
         parentFeature = next(layer.getFeatures(QC.QgsFeatureRequest(parentId)))
         parentId = parentFeature["id"]
-    except: # pylint: disable=bare-except
+    except:  # pylint: disable=bare-except
         pass
     return parentFeature, parentId
 
