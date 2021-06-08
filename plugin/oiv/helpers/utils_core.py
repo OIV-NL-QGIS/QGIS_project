@@ -71,12 +71,12 @@ def check_layer_type(layer):
 def write_layer(layer, features, count=False, check=True):
     """write the attributes to layer"""
     checkGeomValidity = True
-    if not isinstance(features, list):
-        features = [features]
     if check:
         checkGeomValidity = features.geometry().isGeosValid()
     if checkGeomValidity:
         layer.startEditing()
+        if not isinstance(features, list):
+            features = [features]
         dummy, newFeatures = layer.dataProvider().addFeatures(features)
         layer.commitChanges()
         layer.reload()
