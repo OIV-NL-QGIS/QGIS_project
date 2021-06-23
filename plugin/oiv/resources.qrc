@@ -241,5 +241,8 @@
         <file>config_files/png/natuur/N19L16.png</file>
         <file>config_files/png/copi.png</file>
         <file>config_files/png/ugs.png</file>
+        <file>config_files/png/blusleiding.png</file>
+        <file>config_files/png/contouren.png</file>
+        <file>config_files/png/hulplijn.png</file>
     </qresource>
 </RCC>

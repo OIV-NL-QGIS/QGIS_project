@@ -256,8 +256,10 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             progress = (float(count) / float(cntFeat)) * 100
             progressBar.setValue(progress)
 
-        UC.write_layer(tempImportLayer, validFeatures, False, False)
-        UC.write_layer(tempImportLayerInvalid, invalidFeatures, False, False)
+        if validFeatures:
+            UC.write_layer(tempImportLayer, validFeatures, False, False)
+        if invalidFeatures:
+            UC.write_layer(tempImportLayerInvalid, invalidFeatures, False, False)
         QC.QgsProject.instance().addMapLayer(tempImportLayer, True)
         QC.QgsProject.instance().addMapLayer(tempImportLayerInvalid, True)
         if invalidCount > 0:
