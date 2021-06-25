@@ -244,5 +244,7 @@
         <file>config_files/png/blusleiding.png</file>
         <file>config_files/png/contouren.png</file>
         <file>config_files/png/hulplijn.png</file>
+        <file>config_files/png/zwembad.png</file>
+        <file>config_files/png/openwater.png</file>
     </qresource>
 </RCC>

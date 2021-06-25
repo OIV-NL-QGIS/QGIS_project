@@ -290,7 +290,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 lenGeomCheck = False
         if lenGeomCheck:
             distanceToObject = QC.QgsGeometry.distance(bouwlaagGeomCentroid, geom)
-            if distanceToObject > 100:
+            if distanceToObject > 200:
                 lenGeomCheck = False
             checkGeomValidity = feature.geometry().isGeosValid()
             if not checkGeomValidity:
