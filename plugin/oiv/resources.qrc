@@ -248,7 +248,8 @@
         <file>config_files/png/zwembad.png</file>
         <file>config_files/png/openwater.png</file>
         <file>config_files/png/windvaan.png</file>
-        <file>config_files/png/afsluitpaal_enof_poller.png</file>
+        <file>config_files/png/sleutelpaal_of_ringpaal.png</file>
+        <file>config_files/png/poller.png</file>
         <file>config_files/png/laadpaal_elektrisch_voertuig.png</file>
         <file>config_files/png/deur.png</file>
         <file>config_files/png/schuifdeur_dubbel.png</file>
@@ -258,5 +259,7 @@
         <file>config_files/png/gasdetectiepaneel.png</file>
         <file>config_files/png/afsluiter_svm.png</file>
         <file>config_files/png/slagboom.png</file>
+        <file>config_files/png/brandweerinfokast.png</file>
+        <file>config_files/png/doorrijhoogte.png</file>
     </qresource>
 </RCC>
