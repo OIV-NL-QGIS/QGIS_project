@@ -94,6 +94,7 @@
         <file>config_files/png/opstelplaats_autoladder.png</file>
         <file>config_files/png/opstelplaats_wts.png</file>
         <file>config_files/png/opstelplaats_sb.png</file>
+        <file>config_files/png/opstelplaats_overige_voertuigen.png</file>
         <file>config_files/png/evenementen_cado.png</file>
         <file>config_files/png/evenementen_ingang.png</file>
         <file>config_files/png/evenementen_pers.png</file>
@@ -246,5 +247,19 @@
         <file>config_files/png/hulplijn.png</file>
         <file>config_files/png/zwembad.png</file>
         <file>config_files/png/openwater.png</file>
+        <file>config_files/png/windvaan.png</file>
+        <file>config_files/png/sleutelpaal_of_ringpaal.png</file>
+        <file>config_files/png/poller.png</file>
+        <file>config_files/png/laadpaal_elektrisch_voertuig.png</file>
+        <file>config_files/png/deur.png</file>
+        <file>config_files/png/schuifdeur_dubbel.png</file>
+        <file>config_files/png/schuifdeur_enkel_links.png</file>
+        <file>config_files/png/schuifdeur_enkel_rechts.png</file>
+        <file>config_files/png/flitslicht.png</file>
+        <file>config_files/png/gasdetectiepaneel.png</file>
+        <file>config_files/png/afsluiter_svm.png</file>
+        <file>config_files/png/slagboom.png</file>
+        <file>config_files/png/brandweerinfokast.png</file>
+        <file>config_files/png/doorrijhoogte.png</file>
     </qresource>
 </RCC>
