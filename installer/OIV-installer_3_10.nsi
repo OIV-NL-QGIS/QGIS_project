@@ -20,13 +20,15 @@
 ; Define your application name
 !define APPNAME "OIV"
 !define STAD "Eindhoven"
+!define BUILDTYPE "-beta1"
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.3.3
-!define PLUGINVERSION 3.3.3
+!define VERSION 3.3.4
+!define PLUGINVERSION 3.3.4
+!define QGISVERSION "QGIS310"
 
-!define APPNAMEANDVERSION "${APPNAME} ${VERSION}"
+!define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
 !define WEBSITE "https://www.safetyct.com"
 !define REG_APPSETTINGS "Software\SafetyCT\${APPNAME}"
 !define REG_UNINSTALL "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}"
@@ -47,7 +49,7 @@ Var GeoserverPassword
 Name "${APPNAMEANDVERSION}"
 BrandingText "${WEBSITE}"
 ;InstallDir "$APPDATA\${APPNAME}-${VERSION}"
-OutFile "output\${APPNAME}-${VERSION}-${STAD}.exe"
+OutFile "output\${QGISVERSION}-${APPNAME}-${VERSION}${BUILDTYPE}-${STAD}.exe"
 
 ; Compression options
 CRCCheck on
