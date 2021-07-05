@@ -79,7 +79,8 @@ OBJECT = {
     "objectnieuwwidgetui": "oiv_objectnieuw_widget.ui",
     "tekenwidgetui": "oiv_object_tekenen_widget.ui",
     "objectwidgetui": "oiv_repressief_object_widget.ui",
-    "bgtviewerurl": "https://verbeterdekaart.kadaster.nl/#?"
+    "bgtviewerurl": "https://verbeterdekaart.kadaster.nl/#?",
+    "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"]
 }
 
 HELPURL = {

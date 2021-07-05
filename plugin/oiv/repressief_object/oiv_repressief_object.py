@@ -137,6 +137,10 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget.parentWidget = self
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
+        layerNames = PC.OBJECT["nogeotables"]
+        for name in layerNames:
+            layer = UC.getlayer_byname(name)
+            layer.updateExtents()
         stackWidget.show()
         try:
             self.selectTool.geomSelected.disconnect(self.edit_attribute)
@@ -215,4 +219,3 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.addDockWidget(QT.getWidgetType(), importwidget)
         self.close()
         importwidget.show()
- 
