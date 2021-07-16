@@ -88,7 +88,7 @@
               <Size>
               	<ogc:Mul>
                   <ogc:PropertyName>size</ogc:PropertyName>
-                  <ogc:Literal>2.5</ogc:Literal>
+                  <ogc:Literal>5</ogc:Literal>
                 </ogc:Mul>
               </Size>
               <Rotation>
@@ -111,7 +111,7 @@
                 </AnchorPoint>
                 <Displacement>
                   <DisplacementX>0</DisplacementX>
-                  <DisplacementY>-12</DisplacementY>
+                  <DisplacementY>-20</DisplacementY>
                 </Displacement>
                 <Rotation>
                   <ogc:PropertyName>rotatie</ogc:PropertyName>
