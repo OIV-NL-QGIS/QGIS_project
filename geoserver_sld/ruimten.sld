@@ -28,12 +28,12 @@
               <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
             </se:Stroke>
           </se:PolygonSymbolizer>
-          <se:PolygonSymbolizer>
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:GraphicFill>
                 <se:Graphic>
                   <se:Mark>
-                    <se:WellKnownName>horline</se:WellKnownName>
+                    <se:WellKnownName>shape://horline</se:WellKnownName>
                     <se:Stroke>
                       <se:SvgParameter name="stroke">#ff0000</se:SvgParameter>
                       <se:SvgParameter name="stroke-width">1</se:SvgParameter>
@@ -71,7 +71,7 @@
               <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
             </se:Stroke>
           </se:PolygonSymbolizer>
-          <se:PolygonSymbolizer>
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:GraphicFill>
                 <se:Graphic>
