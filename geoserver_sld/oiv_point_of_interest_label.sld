@@ -40,7 +40,7 @@
               <ogc:PropertyName>label</ogc:PropertyName>
             </Label>
             <Font>
-              <CssParameter name="font-size">1.6</CssParameter>
+              <CssParameter name="font-size">20</CssParameter>
             </Font>
             <LabelPlacement>
               <PointPlacement>
@@ -50,7 +50,7 @@
                 </AnchorPoint>
                 <Displacement>
                   <DisplacementX>0</DisplacementX>
-                  <DisplacementY>-3</DisplacementY>
+                  <DisplacementY>0</DisplacementY>
                 </Displacement>
                 <Rotation>
                   <ogc:PropertyName>rotatie</ogc:PropertyName>
@@ -101,7 +101,7 @@
               <ogc:PropertyName>label</ogc:PropertyName>
             </Label>
             <Font>
-              <CssParameter name="font-size">1.6</CssParameter>
+              <CssParameter name="font-size">15</CssParameter>
             </Font>
             <LabelPlacement>
               <PointPlacement>
@@ -111,7 +111,7 @@
                 </AnchorPoint>
                 <Displacement>
                   <DisplacementX>0</DisplacementX>
-                  <DisplacementY>-3</DisplacementY>
+                  <DisplacementY>-12</DisplacementY>
                 </Displacement>
                 <Rotation>
                   <ogc:PropertyName>rotatie</ogc:PropertyName>
@@ -119,7 +119,7 @@
               </PointPlacement> 
             </LabelPlacement>
             <Halo>
-              <Radius>0.1</Radius>
+              <Radius>1</Radius>
               <Fill>
                 <CssParameter name="fill">#ffffff</CssParameter>
               </Fill>
