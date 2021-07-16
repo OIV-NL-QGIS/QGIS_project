@@ -131,6 +131,36 @@
           </se:LineSymbolizer>
         </se:Rule>
         <se:Rule>
+          <se:Name>evenementenroute</se:Name>
+          <se:Description>
+            <se:Title>evenementenroute</se:Title>
+          </se:Description>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>evenementenroute</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#004f8b</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">2</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#f6630d</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">1.8</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">butt</se:SvgParameter>
+              <se:SvgParameter name="stroke-dasharray">10 10</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>
+        </se:Rule>
+        <se:Rule>
           <se:Name>wegen eigen terrein</se:Name>
           <se:Description>
             <se:Title>wegen eigen terrein</se:Title>
@@ -241,20 +271,6 @@
               <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
             </se:Stroke>
           </se:LineSymbolizer>
-        </se:Rule>
-        <se:Rule>
-          <se:Name>slagboom</se:Name>
-          <se:Description>
-            <se:Title>slagboom</se:Title>
-          </se:Description>
-          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>slagboom</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#ffffff</se:SvgParameter>
@@ -263,20 +279,6 @@
               <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
             </se:Stroke>
           </se:LineSymbolizer>
-        </se:Rule>
-        <se:Rule>
-          <se:Name>slagboom</se:Name>
-          <se:Description>
-            <se:Title>slagboom</se:Title>
-          </se:Description>
-          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>slagboom</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#ff0000</se:SvgParameter>
