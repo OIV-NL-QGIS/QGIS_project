@@ -440,7 +440,7 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>N19L03</ogc:Literal>
+              <ogc:Literal>Afrastering (algemeen)</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <se:MinScaleDenominator>1</se:MinScaleDenominator>
@@ -476,8 +476,8 @@
           <se:Name>Afrastering Defensie en andere risico-objecten</se:Name>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>symbool</ogc:PropertyName>
-              <ogc:Literal>N19L04</ogc:Literal>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Afrastering defensie/risico-objecten</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>                  
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
@@ -511,8 +511,8 @@
 				   <se:Name>Afrastering munitie</se:Name>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>symbool</ogc:PropertyName>
-              <ogc:Literal>N19L05</ogc:Literal>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Afrastering munitie</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>                  
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
