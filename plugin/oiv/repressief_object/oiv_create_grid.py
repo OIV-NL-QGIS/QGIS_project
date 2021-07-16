@@ -152,8 +152,8 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def calculate_extent(self, dist, extent, gridType='Grid'):
         if gridType == 'Grid':
-            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % GH.SINGLEGRIDSIZE + GH.SINGLEGRIDSIZE
-            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % GH.SINGLEGRIDSIZE + GH.SINGLEGRIDSIZE
+            xmin = int(extent.xMinimum()) - int(extent.xMinimum()) % dist + dist
+            ymin = int(extent.yMinimum()) - int(extent.yMinimum()) % dist + dist
             xmax = int(extent.xMaximum()) - int(extent.xMaximum()) % dist
             ymax = int(extent.yMaximum()) - int(extent.yMaximum()) % dist
         else:
@@ -161,8 +161,8 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
             ymin = extent.yMinimum()
             xmax = extent.xMaximum()
             ymax = extent.yMaximum()
-        xIt = int((xmax - xmin)/dist)
-        yIt = int((ymax - ymin)/dist)
+        xIt = int((xmax - xmin) / dist)
+        yIt = int((ymax - ymin) / dist)
         if gridType == 'Kaartblad':
             if xmin + xIt * dist < extent.xMaximum():
                 xIt += 1
@@ -193,7 +193,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
                 if xIt < 26:
                     xLabel = chr(x + 97).upper()
                 elif xIt >= 26:
-                    xLabel = chr(int(math.floor(x/26)) + 97).upper() + chr(x % 26 + 97).upper()
+                    xLabel = chr(int(math.floor(x / 26)) + 97).upper() + chr(x % 26 + 97).upper()
                 geom = self.calculate_geometry(dist, xmin, ymin, x, y, gridType)
                 targetFeature['vaknummer'] = xLabel + yLabel
                 if x != 0:
