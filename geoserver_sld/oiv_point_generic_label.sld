@@ -19,7 +19,10 @@
                 <Format>image/png</Format>
               </ExternalGraphic>
               <Size>
-                <ogc:PropertyName>size</ogc:PropertyName>
+              	<ogc:Mul>
+                  <ogc:PropertyName>size</ogc:PropertyName>
+                  <ogc:Literal>2.5</ogc:Literal>
+                </ogc:Mul>
               </Size>
               <Rotation>
                 <ogc:PropertyName>rotatie</ogc:PropertyName>

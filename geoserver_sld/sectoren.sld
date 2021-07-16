@@ -126,6 +126,148 @@
             <se:VendorOption name="conflictResolution">false</se:VendorOption>
           </se:TextSymbolizer>
         </se:Rule>
+        <se:Rule>
+          <se:Name>Ecologisch kwetsbaar</se:Name>
+          <ogc:Filter>
+          <ogc:PropertyIsEqualTo>
+            <ogc:PropertyName>soort</ogc:PropertyName>
+            <ogc:Literal>Ecologisch kwetsbaar terrein</ogc:Literal>
+          </ogc:PropertyIsEqualTo>
+          </ogc:Filter>          
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Fill>
+              <se:GraphicFill>
+                <se:Graphic>
+                  <se:Mark>
+                    <se:WellKnownName>shape://slash</se:WellKnownName>
+                    <se:Stroke>
+                      <se:SvgParameter name="stroke">#74ac4a</se:SvgParameter>
+                      <se:SvgParameter name="stroke-width">5</se:SvgParameter>
+                    </se:Stroke>
+                  </se:Mark>
+                  <se:Size>50</se:Size>
+                </se:Graphic>
+              </se:GraphicFill>
+            </se:Fill>
+          </se:PolygonSymbolizer>
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#74ac4a</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+            </se:Stroke>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Drassig, niet berijdbaar</se:Name>
+          <ogc:Filter>
+          <ogc:PropertyIsEqualTo>
+            <ogc:PropertyName>soort</ogc:PropertyName>
+            <ogc:Literal>Drassig terrein, niet berijdbaar</ogc:Literal>
+          </ogc:PropertyIsEqualTo>
+          </ogc:Filter>          
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Fill>
+              <se:GraphicFill>
+                <se:Graphic>
+                  <se:Mark>
+                    <se:WellKnownName>shape://slash</se:WellKnownName>
+                    <se:Stroke>
+                      <se:SvgParameter name="stroke">#4fb0dc</se:SvgParameter>
+                      <se:SvgParameter name="stroke-width">5</se:SvgParameter>
+                    </se:Stroke>
+                  </se:Mark>
+                  <se:Size>50</se:Size>
+                </se:Graphic>
+              </se:GraphicFill>
+            </se:Fill>
+          </se:PolygonSymbolizer>
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#4fb0dc</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+            </se:Stroke>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Gevaarlijk, nooit betreden</se:Name>
+          <ogc:Filter>
+          <ogc:PropertyIsEqualTo>
+            <ogc:PropertyName>soort</ogc:PropertyName>
+            <ogc:Literal>Gevaarlijk terrein, nooit te betreden</ogc:Literal>
+          </ogc:PropertyIsEqualTo>
+          </ogc:Filter>          
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Fill>
+              <se:GraphicFill>
+                <se:Graphic>
+                  <se:Mark>
+                    <se:WellKnownName>shape://slash</se:WellKnownName>
+                    <se:Stroke>
+                      <se:SvgParameter name="stroke">#fc1e1c</se:SvgParameter>
+                      <se:SvgParameter name="stroke-width">5</se:SvgParameter>
+                    </se:Stroke>
+                  </se:Mark>
+                  <se:Size>50</se:Size>
+                </se:Graphic>
+              </se:GraphicFill>
+            </se:Fill>
+          </se:PolygonSymbolizer>
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#fc1e1c</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+            </se:Stroke>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Open water</se:Name>
+          <se:Description>
+            <se:Title>Open water</se:Title>
+          </se:Description>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>openwater</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:PolygonSymbolizer>
+            <se:Fill>
+              <se:SvgParameter name="fill">#80bde3</se:SvgParameter>
+            </se:Fill>
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#0095e6</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+            </se:Stroke>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Zwembad</se:Name>
+          <se:Description>
+            <se:Title>Zwembad</se:Title>
+          </se:Description>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>zwembad</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:PolygonSymbolizer>
+            <se:Fill>
+              <se:SvgParameter name="fill">#0072e0</se:SvgParameter>
+            </se:Fill>
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#0033e6</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+            </se:Stroke>
+          </se:PolygonSymbolizer>
+        </se:Rule>     
       </se:FeatureTypeStyle>
     </UserStyle>
   </NamedLayer>
