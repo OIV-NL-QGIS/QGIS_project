@@ -142,58 +142,11 @@
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#505050</se:SvgParameter>
               <se:SvgParameter name="stroke-width">7</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>
-        </se:Rule>
-        <se:Rule>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
-          <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Label>
-              <ogc:PropertyName>label</ogc:PropertyName>
-            </se:Label>
-            <se:Font>
-              <se:SvgParameter name="font-family">Arial</se:SvgParameter>
-              <se:SvgParameter name="font-size">7</se:SvgParameter>
-            </se:Font>
-            <se:LabelPlacement>
-              <se:LinePlacement>
-                <se:IsRepeated>true</se:IsRepeated>
-                <se:Gap>100</se:Gap>
-                <se:GeneralizeLine>true</se:GeneralizeLine>
-              </se:LinePlacement>
-            </se:LabelPlacement>
-            <se:Fill>
-              <se:SvgParameter name="fill">#000000</se:SvgParameter>
-            </se:Fill>
-            <se:VendorOption name="repeat">100</se:VendorOption>
-          </se:TextSymbolizer>
-        </se:Rule>
-      </se:FeatureTypeStyle>
-      <se:FeatureTypeStyle>
-        <se:Rule>
-          <se:Name>wegen eigen terrein</se:Name>
-          <se:Description>
-            <se:Title>wegen eigen terrein</se:Title>
-          </se:Description>
-          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>wegen eigen terrein</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#f8f8f8</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">6.5</se:SvgParameter>
               <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
               <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
             </se:Stroke>
@@ -334,139 +287,6 @@
             </se:Stroke>
           </se:LineSymbolizer>
         </se:Rule>
-        <se:Rule>
-          <se:Name>Weg,berijdbaar voor 4x4 zwaar</se:Name>
-          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>Weg - berijdbaar 4x4 zwaar</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">6</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>  
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#ff9f11</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>        
-        </se:Rule>
-        <se:Rule>
-          <se:Name>Weg, berijdbaar voor alle voertuigen</se:Name>
-          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>Weg - berijdbaar alle voertuigen</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">6</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer> 
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#ffffff</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#ff9f11</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-dasharray">10 20</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>                 
-        </se:Rule>
-        <se:Rule>
-          <se:Name>Weg, berijdbaar voor 4x4 licht</se:Name>
-          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>Weg - berijdbaar 4x4 licht</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">6</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer> 
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#ff9f11</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-dasharray">5 10</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>                 
-        </se:Rule> 
-        <se:Rule>
-          <se:Name>Looproute</se:Name>
-          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>Weg - looproute</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">6</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer> 
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#3adef4</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>
-          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#bf9000</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
-              <se:SvgParameter name="stroke-linecap">bevel</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
-              <se:SvgParameter name="stroke-dasharray">10 20</se:SvgParameter>
-            </se:Stroke>
-          </se:LineSymbolizer>                 
-        </se:Rule>
 				<se:Rule>
           <se:Name>Afrastering (algemeen)</se:Name>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
@@ -573,7 +393,238 @@
               <se:SvgParameter name="stroke-width">1</se:SvgParameter>
             </se:Stroke>
           </se:LineSymbolizer>                  
-				</se:Rule>    
+				</se:Rule>
+        <se:Rule>
+          <se:Name>Weg,berijdbaar voor 4x4 zwaar</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Weg - berijdbaar 4x4 zwaar</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">6</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>  
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Weg, berijdbaar voor alle voertuigen</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Weg - berijdbaar alle voertuigen</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">6</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer> 
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Weg, berijdbaar voor 4x4 licht</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Weg - berijdbaar 4x4 licht</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">6</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer> 
+        </se:Rule> 
+        <se:Rule>
+          <se:Name>Looproute</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Weg - looproute</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">6</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer> 
+        </se:Rule>   
+        <se:Rule>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Label>
+              <ogc:PropertyName>label</ogc:PropertyName>
+            </se:Label>
+            <se:Font>
+              <se:SvgParameter name="font-family">Arial</se:SvgParameter>
+              <se:SvgParameter name="font-size">14</se:SvgParameter>
+              <se:SvgParameter name="font-weight">bold</se:SvgParameter>
+            </se:Font>
+            <se:LabelPlacement>
+              <se:LinePlacement>
+                <se:IsRepeated>true</se:IsRepeated>
+                <se:Gap>100</se:Gap>
+                <se:GeneralizeLine>true</se:GeneralizeLine>
+              </se:LinePlacement>
+            </se:LabelPlacement>
+            <se:Halo>
+              <se:Radius>1</se:Radius>
+              <se:Fill>
+                <se:SvgParameter name="fill">#ffffff</se:SvgParameter>
+              </se:Fill>
+            </se:Halo>
+            <se:Fill>
+              <se:SvgParameter name="fill">#000000</se:SvgParameter>
+            </se:Fill>
+            <se:VendorOption name="repeat">100</se:VendorOption>
+          </se:TextSymbolizer>
+        </se:Rule>
+      </se:FeatureTypeStyle>
+      <se:FeatureTypeStyle>
+        <se:Rule>
+          <se:Name>wegen eigen terrein</se:Name>
+          <se:Description>
+            <se:Title>wegen eigen terrein</se:Title>
+          </se:Description>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>wegen eigen terrein</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#f8f8f8</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">6.5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Weg,berijdbaar voor 4x4 zwaar</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Weg - berijdbaar 4x4 zwaar</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#ff9f11</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>        
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Weg, berijdbaar voor alle voertuigen</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Weg - berijdbaar alle voertuigen</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#ffffff</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#ff9f11</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-dasharray">10 20</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>                 
+        </se:Rule>
+        <se:Rule>
+          <se:Name>Weg, berijdbaar voor 4x4 licht</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Weg - berijdbaar 4x4 licht</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#ff9f11</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-dasharray">5 10</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>                 
+        </se:Rule> 
+        <se:Rule>
+          <se:Name>Looproute</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>Weg - looproute</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:MinScaleDenominator>1</se:MinScaleDenominator>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#3adef4</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>
+          <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#bf9000</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">5.5</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">bevel</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+              <se:SvgParameter name="stroke-dasharray">10 20</se:SvgParameter>
+            </se:Stroke>
+          </se:LineSymbolizer>                 
+        </se:Rule>
       </se:FeatureTypeStyle>
     </UserStyle>
   </NamedLayer>
