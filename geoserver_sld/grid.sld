@@ -17,7 +17,7 @@
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <se:MinScaleDenominator>0</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
+          <se:MaxScaleDenominator>150000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer>
             <se:Fill>
               <se:SvgParameter name="fill">#75649d</se:SvgParameter>
@@ -32,31 +32,6 @@
           </se:PolygonSymbolizer>
         </se:Rule>
         <se:Rule>
-          <se:Name>Kaartblad</se:Name>
-          <se:Description>
-            <se:Title>Kaartblad</se:Title>
-          </se:Description>
-          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-            <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>type</ogc:PropertyName>
-              <ogc:Literal>Kaartblad</ogc:Literal>
-            </ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <se:MinScaleDenominator>0</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
-          <se:PolygonSymbolizer>
-            <se:Fill>
-              <se:SvgParameter name="fill">#75649d</se:SvgParameter>
-              <se:SvgParameter name="fill-opacity">0</se:SvgParameter>
-            </se:Fill>
-            <se:Stroke>
-              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">1</se:SvgParameter>
-              <se:SvgParameter name="stroke-linejoin">bevel</se:SvgParameter>
-            </se:Stroke>
-          </se:PolygonSymbolizer>
-        </se:Rule>
-        <se:Rule>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsNotEqualTo>
               <ogc:PropertyName>y_as_label</ogc:PropertyName>
@@ -64,14 +39,14 @@
             </ogc:PropertyIsNotEqualTo>
           </ogc:Filter>
           <se:MinScaleDenominator>0</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
-          <se:TextSymbolizer>
+          <se:MaxScaleDenominator>150000</se:MaxScaleDenominator>
+          <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Label>
               <ogc:PropertyName>y_as_label</ogc:PropertyName>
             </se:Label>
             <se:Font>
               <se:SvgParameter name="font-family">MS Shell Dlg 2</se:SvgParameter>
-              <se:SvgParameter name="font-size">54</se:SvgParameter>
+              <se:SvgParameter name="font-size">200</se:SvgParameter>
             </se:Font>
             <se:LabelPlacement>
               <se:PointPlacement>
@@ -79,6 +54,10 @@
                   <se:AnchorPointX>0.5</se:AnchorPointX>
                   <se:AnchorPointY>0.5</se:AnchorPointY>
                 </se:AnchorPoint>
+                <se:Displacement>
+                  <se:DisplacementX>-495</se:DisplacementX>
+                  <se:DisplacementY>0</se:DisplacementY>
+                </se:Displacement>     
               </se:PointPlacement>
             </se:LabelPlacement>
             <se:Halo>
@@ -100,14 +79,14 @@
             </ogc:PropertyIsNotEqualTo>
           </ogc:Filter>
           <se:MinScaleDenominator>0</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
-          <se:TextSymbolizer>
+          <se:MaxScaleDenominator>150000</se:MaxScaleDenominator>
+          <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Label>
               <ogc:PropertyName>x_as_label</ogc:PropertyName>
             </se:Label>
             <se:Font>
               <se:SvgParameter name="font-family">MS Shell Dlg 2</se:SvgParameter>
-              <se:SvgParameter name="font-size">5</se:SvgParameter>
+              <se:SvgParameter name="font-size">200</se:SvgParameter>
             </se:Font>
             <se:LabelPlacement>
               <se:PointPlacement>
@@ -115,6 +94,10 @@
                   <se:AnchorPointX>0.5</se:AnchorPointX>
                   <se:AnchorPointY>0.5</se:AnchorPointY>
                 </se:AnchorPoint>
+                <se:Displacement>
+                  <se:DisplacementX>0</se:DisplacementX>
+                  <se:DisplacementY>-495</se:DisplacementY>
+                </se:Displacement> 
               </se:PointPlacement>
             </se:LabelPlacement>
             <se:Halo>
@@ -130,14 +113,19 @@
         </se:Rule>
         <se:Rule>
           <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
-          <se:TextSymbolizer>
+          <se:MaxScaleDenominator>150000</se:MaxScaleDenominator>
+          <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Geometry>
+              <ogc:Function name="centroid">
+                <ogc:PropertyName>the_geom</ogc:PropertyName>
+              </ogc:Function>
+            </se:Geometry>
             <se:Label>
               <ogc:PropertyName>vaknummer</ogc:PropertyName>
             </se:Label>
             <se:Font>
               <se:SvgParameter name="font-family">MS Shell Dlg 2</se:SvgParameter>
-              <se:SvgParameter name="font-size">15</se:SvgParameter>
+              <se:SvgParameter name="font-size">30</se:SvgParameter>
               <se:SvgParameter name="font-weight">bold</se:SvgParameter>
             </se:Font>
             <se:LabelPlacement>
@@ -146,6 +134,10 @@
                   <se:AnchorPointX>0.5</se:AnchorPointX>
                   <se:AnchorPointY>0.5</se:AnchorPointY>
                 </se:AnchorPoint>
+                <se:Displacement>
+                  <se:DisplacementX>-450</se:DisplacementX>
+                  <se:DisplacementY>-450</se:DisplacementY>
+                </se:Displacement> 
               </se:PointPlacement>
             </se:LabelPlacement>
             <se:Halo>
@@ -158,6 +150,7 @@
               <se:SvgParameter name="fill">#000000</se:SvgParameter>
             </se:Fill>
             <se:VendorOption name="conflictResolution">false</se:VendorOption>
+            <se:VendorOption name="partials">true</se:VendorOption>
           </se:TextSymbolizer>
         </se:Rule>
       </se:FeatureTypeStyle>
