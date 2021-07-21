@@ -108,13 +108,6 @@ border-color: rgba(255, 255, 255, 0);</string>
             </property>
            </widget>
           </item>
-          <item row="10" column="0" colspan="6">
-           <widget class="QPushButton" name="terug">
-            <property name="text">
-             <string>Terug</string>
-            </property>
-           </widget>
-          </item>
           <item row="7" column="0">
            <widget class="QPushButton" name="identify">
             <property name="enabled">
@@ -9410,6 +9403,13 @@ border-color: rgba(255, 255, 255, 0);</string>
             </property>
             <property name="buttonSymbols">
              <enum>QAbstractSpinBox::NoButtons</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0" colspan="6">
+           <widget class="QPushButton" name="terug">
+            <property name="text">
+             <string>Terug</string>
             </property>
            </widget>
           </item>
