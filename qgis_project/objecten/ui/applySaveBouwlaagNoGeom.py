@@ -1,8 +1,6 @@
 from qgis.PyQt.QtWidgets import QDialogButtonBox
 
 buttonBoxName = "buttonBox"
-parentLayerName = 'gevaarlijkestof'
-keyAttribute = 'gevaarlijkestof_id'
  
 def formOpen(dialog, layer, feature):
     okButton = dialog.findChild(QDialogButtonBox, buttonBoxName)
