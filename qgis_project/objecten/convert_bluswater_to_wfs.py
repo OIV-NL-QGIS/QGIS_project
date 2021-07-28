@@ -14,7 +14,7 @@ dimensionDbPath = './db/dimension_tables.db'
 
 dropKeyList = ['service', 'sslmode', 'key', 'type', 'checkPrimaryKeyUnicity', '(geom)']
 wfsSettingsDict = {'user': x[2], 'password': x[3], 'pagingEnabled': "'false'", 'restrictToRequestBBOX' : '', 'srsname' : '', 'typename' : '', 'url' : '',\
-                   'version': "'1.0.0'", 'table': '""', 'sql': ''}
+                   'version': "'1.1.0'", 'table': '""', 'sql': ''}
 wfsNoGeoLayers = ['inspectie']
 
 postgresLayers = {}
