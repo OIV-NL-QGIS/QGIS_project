@@ -1,5 +1,5 @@
 from qgis.PyQt.QtWidgets import QComboBox, QDialogButtonBox
-from qgis.core import QgsFeature, QgsSpatialIndex, QgsFeatureRequest
+from qgis.core import QgsFeature, QgsSpatialIndex, QgsFeatureRequest, QgsProject
 from qgis.utils import iface
  
 def formOpen(dialog, layer, feature):
@@ -8,7 +8,7 @@ def formOpen(dialog, layer, feature):
     nameField = []
     nameValidate = []
     try:
-        if (feature.geometry()):
+        if feature.geometry():
             featureGeometry = feature.geometry()
             nameField.append(dialog.findChild(QComboBox, "veiligh_install_type_id"))            
             nameValidate.append(0)
@@ -18,7 +18,7 @@ def formOpen(dialog, layer, feature):
                 okButton.setEnabled(False)
             else:
                 nameValidate[0] = 1				
-            if (feature['bouwlaag_id'] == NULL):
+            if not feature['bouwlaag_id']:
                 geom = feature.geometry().asPoint()
                 extent = iface.mapCanvas().extent()
                 objectenLayer = getVectorLayerByName("Bouwlagen")
@@ -37,7 +37,7 @@ def applySave(featureGeometry, myLayer, myDialog):
     if (featureGeometry):
         myLayer.commitChanges()
         myLayer.startEditing()
-        qgis.utils.iface.actionAddFeature().trigger()
+        iface.actionAddFeature().trigger()
 		
 def validate(nameField, nameValidate, okButton):
     for i in range(len(nameField)):
@@ -49,6 +49,7 @@ def validate(nameField, nameValidate, okButton):
 
 def getVectorLayerByName(layerName):
     layer = None
-    layers = QgsProject.instance().mapLayersByName(layername)
-    layer = layers[0]
-    return (layer)
+    layers = QgsProject.instance().mapLayersByName(layerName)
+    if layers:
+        layer = layers[0]
+    return layer
