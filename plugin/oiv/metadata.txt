@@ -10,7 +10,7 @@
 name=OIV
 qgisMinimumVersion=3.0
 description=place oiv objects
-version=0.1
+version=3.3.4
 author=Joost Deen
 email=j.deen@safetyct.com
 
@@ -28,7 +28,7 @@ repository=https://github.com/OIV-NL-QGIS/OIV_project
 # Tags are comma separated with spaces allowed
 tags=
 
-homepage=
+homepage=https://github.com/OIV-NL-QGIS/QGIS_project
 category=Plugins
 icon=icon.png
 # experimental flag
