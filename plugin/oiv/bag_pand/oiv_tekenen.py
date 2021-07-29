@@ -125,11 +125,11 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget = SW.oivStackWidget()
         self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, stackWidget)
         stackWidget.parentWidget = self
+        stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
         stackWidget.show()
         self.selectTool.geomSelected.disconnect(self.edit_attribute)
-        self.run_edit_tool()
 
     def run_move_point(self):
         """om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet"""
@@ -211,6 +211,10 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug.clicked.disconnect()
         self.helpBtn.clicked.disconnect()
         self.floatBtn.clicked.disconnect()
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
         for widget in self.children():
             if isinstance(widget, PQtW.QPushButton):
                 try:

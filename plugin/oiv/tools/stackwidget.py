@@ -8,6 +8,7 @@ import qgis.gui as QG
 import qgis.utils as QU
 
 import oiv.helpers.constants as PC
+import oiv.helpers.qt_helper as QH
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'stackwidget.ui'))
@@ -17,6 +18,7 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
     """open any feature form as stackwidget in OOIV pluging"""
     attributeForm = None
     parentWidget = None
+    parentWidth = None
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -28,11 +30,11 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
         """"open feature form based on clicked object on the canvas"""
         ilayer.startEditing()
         context = QG.QgsAttributeEditorContext()
-        context.setVectorLayerTools(self.iface.vectorLayerTools())        
+        context.setVectorLayerTools(self.iface.vectorLayerTools())
         self.attributeForm = QG.QgsAttributeForm(ilayer, ifeature, context)
         self.stackedWidget.addWidget(self.attributeForm)
         self.stackedWidget.setCurrentWidget(self.attributeForm)
-        self.iface.setActiveLayer(ilayer)        
+        self.iface.setActiveLayer(ilayer)
         self.terug.clicked.connect(lambda: self.close_stacked(ilayer, ifeature))
 
     def close_stacked(self, ilayer, ifeature):
@@ -44,14 +46,11 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
         del self.attributeForm
         self.attributeForm = None
         if ilayer.name() == PC.OBJECT["objectlayername"]:
-            request = QC.QgsFeatureRequest().setFilterExpression("id = " \
-                             + str(ifeature["id"]))
+            request = QC.QgsFeatureRequest().setFilterExpression("id = " + str(ifeature["id"]))
             objectFeature = next(ilayer.getFeatures(request))
             self.parentWidget.formelenaam.setText(objectFeature["formelenaam"])
+        self.parentWidget.show()
+        self.parentWidget.setFixedWidth(self.parentWidth)
+        self.iface.actionPan().trigger()
         self.close()
-        try:
-            self.parentWidget.show()
-            self.iface.actionPan().trigger()
-        except: # pylint: disable=bare-except
-            pass
         del self

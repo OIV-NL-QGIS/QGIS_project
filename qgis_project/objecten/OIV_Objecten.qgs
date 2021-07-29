@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis projectname="OIV - Objecten v3.3.5 - Eindhoven" version="3.16.4-Hannover" saveUser="joost" saveUserFull="Joost Deen" saveDateTime="2021-07-29T15:54:51">
+<qgis projectname="OIV - Objecten v3.3.5 - Eindhoven" version="3.16.4-Hannover" saveUser="joost" saveUserFull="Joost Deen" saveDateTime="2021-07-29T20:42:29">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.5 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -647,10 +647,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>64105.72704307211824926</xmin>
-      <ymin>421292.46130633552093059</ymin>
-      <xmax>64157.40510015219479101</xmax>
-      <ymax>421331.46549154061358422</ymax>
+      <xmin>64026.09908431498479331</xmin>
+      <ymin>421178.00392961519537494</ymin>
+      <xmax>64439.52354095559712732</xmax>
+      <ymax>421490.03741125593660399</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -1637,7 +1637,9 @@
         </fixedRange>
       </temporal>
       <customproperties>
-        <property key="dualview/previewExpressions" value="COALESCE( &quot;aanwezig_groep_id&quot;, '&lt;NULL>' )"/>
+        <property key="dualview/previewExpressions">
+          <value>COALESCE( "aanwezig_groep_id", '&lt;NULL>' )</value>
+        </property>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -15647,12 +15649,6 @@ def my_form_open(dialog, layer, feature):
         <property key="dualview/previewExpressions">
           <value>COALESCE( "gevaarlijkestof_vnnr_id", '&lt;NULL>' )</value>
           <value>COALESCE( "gevaarlijkestof_vnnr_id", '&lt;NULL>' )</value>
-          <value>COALESCE( "gevaarlijkestof_vnnr_id", '&lt;NULL>' )</value>
-          <value>COALESCE( "gevaarlijkestof_vnnr_id", '&lt;NULL>' )</value>
-          <value>COALESCE( "gevaarlijkestof_vnnr_id", '&lt;NULL>' )</value>
-          <value>COALESCE( "gevaarlijkestof_vnnr_id", '&lt;NULL>' )</value>
-          <value>COALESCE( "gevaarlijkestof_vnnr_id", '&lt;NULL>' )</value>
-          <value>COALESCE( "gevaarlijkestof_vnnr_id", '&lt;NULL>' )</value>
         </property>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
@@ -18040,6 +18036,7 @@ def my_form_open(dialog, layer, feature):
       </temporal>
       <customproperties>
         <property key="dualview/previewExpressions">
+          <value>COALESCE( "datum_aangemaakt", '&lt;NULL>' )</value>
           <value>COALESCE( "datum_aangemaakt", '&lt;NULL>' )</value>
           <value>COALESCE( "datum_aangemaakt", '&lt;NULL>' )</value>
           <value>COALESCE( "datum_aangemaakt", '&lt;NULL>' )</value>
@@ -47741,7 +47738,7 @@ def closeProject():&#xd;    pass</pythonCode>
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent ymax="421333.46062350209103897" xmin="64105.72704307211824926" xmax="64157.40510015219479101" ymin="421290.46617437404347584">
+    <DefaultViewExtent ymax="421490.03741125593660399" xmin="64007.30968130703695351" xmax="64458.31294396354496712" ymin="421178.00392961519537494">
       <spatialrefsys>
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +units=m +no_defs</proj4>

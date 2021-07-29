@@ -79,6 +79,10 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.helpBtn.clicked.disconnect()
         self.floatBtn.clicked.disconnect()
         self.terug.clicked.disconnect()
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
         self.close()
         self.parent.show()
         del self
@@ -132,6 +136,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget = SW.oivStackWidget()
         self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
         stackWidget.parentWidget = self
+        stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
         stackWidget.show()
