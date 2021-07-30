@@ -75,7 +75,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
 
     def canvasReleaseEvent(self, event):
         """als verslepen -> pas de geometry van de betreffende feature aan"""
-        if self.dragging:
+        if self.dragging and self.point:
             self.vertexMarker.hide()
             geom = QC.QgsGeometry.fromPointXY(self.point)
             self.idlayer.dataProvider().changeGeometryValues({self.fid : geom})

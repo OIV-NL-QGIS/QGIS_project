@@ -135,6 +135,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget = SW.oivStackWidget()
         self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
         stackWidget.parentWidget = self
+        stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
         layerNames = PC.OBJECT["nogeotables"]

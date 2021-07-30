@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>223</width>
+    <width>356</width>
     <height>565</height>
    </rect>
   </property>
@@ -30,6 +30,29 @@
     </sizepolicy>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="terug">
+      <property name="text">
+       <string>Gereed</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Expanding</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item row="1" column="0">
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="sizeConstraint">
@@ -38,7 +61,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+         <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -47,20 +70,12 @@
          <enum>QFrame::NoFrame</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page"/>
-        <widget class="QWidget" name="page_2"/>
        </widget>
       </item>
      </layout>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="terug">
-      <property name="text">
-       <string>Gereed</string>
-      </property>
-     </widget>
     </item>
    </layout>
   </widget>

@@ -79,6 +79,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
         stackWidget.update()
         stackWidget.parentWidget = self
+        stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
         stackWidget.show()

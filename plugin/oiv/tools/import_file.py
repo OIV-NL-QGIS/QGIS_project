@@ -197,11 +197,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.floatBtn.clicked.disconnect()
         self.hide_all()
         self.close()
-        try:
-            self.parentWidget.show()
-            del self.parentWidget
-        except: # pylint: disable=bare-except
-            pass
+        self.parent.show()
         del self
 
 class MappingDialog(PQtW.QDialog):
