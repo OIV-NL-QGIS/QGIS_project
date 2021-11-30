@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="joost" projectname="OIV - Objecten v3.3.7 - Eindhoven" version="3.16.4-Hannover" saveUserFull="Joost Deen" saveDateTime="2021-11-30T14:36:39">
+<qgis saveUser="joost" projectname="OIV - Objecten v3.3.7 - Eindhoven" version="3.16.4-Hannover" saveUserFull="Joost Deen" saveDateTime="2021-11-30T14:41:49">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.7 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -251,7 +251,7 @@
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-group name="Tabellen zonder geo" expanded="0" checked="Qt::Unchecked">
+      <layer-tree-group name="Tabellen zonder geo" expanded="1" checked="Qt::Unchecked">
         <customproperties/>
         <layer-tree-layer patch_size="0,0" providerKey="postgres" id="aanwezigepersonen20160318144720364" legend_exp="" legend_split_behavior="0" name="aanwezig" expanded="0" source="service='oiv' key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;aanwezig&quot;" checked="Qt::Checked">
           <customproperties>
@@ -686,10 +686,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>54533.66123964737198548</xmin>
-      <ymin>424371.1690654675476253</ymin>
-      <xmax>54680.70018613174761413</xmax>
-      <ymax>424473.41334671759977937</ymax>
+      <xmin>54450.69348068731778767</xmin>
+      <ymin>424329.19995163171552122</ymin>
+      <xmax>54744.77137365606904496</xmax>
+      <ymax>424533.68851413181982934</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -957,7 +957,7 @@
           <legendlayerfile visible="0" layerid="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" isInOverview="0"/>
         </filegroup>
       </legendlayer>
-      <legendgroup open="false" name="Tabellen zonder geo" checked="Qt::Unchecked">
+      <legendgroup open="true" name="Tabellen zonder geo" checked="Qt::Unchecked">
         <legendlayer open="false" name="aanwezig" drawingOrder="-1" checked="Qt::Checked" showFeatureCount="0">
           <filegroup hidden="false" open="false">
             <legendlayerfile visible="0" layerid="aanwezigepersonen20160318144720364" isInOverview="0"/>
@@ -20622,7 +20622,7 @@ def my_form_open(dialog, layer, feature):
         <default expression="" applyOnUpdate="0" field="matrix_code_id"/>
         <default expression="" applyOnUpdate="0" field="aanpassing"/>
         <default expression="" applyOnUpdate="0" field="status"/>
-        <default expression="" applyOnUpdate="0" field="typeobject"/>
+        <default expression=" 'Gebouw' " applyOnUpdate="0" field="typeobject"/>
       </defaults>
       <constraints>
         <constraint unique_strength="1" exp_strength="0" constraints="3" field="id" notnull_strength="1"/>
@@ -53068,7 +53068,7 @@ def closeProject():&#xd;    pass</pythonCode>
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent xmin="54533.66123964737198548" ymin="424363.14100071298889816" xmax="54680.70018613174761413" ymax="424481.44141147215850651">
+    <DefaultViewExtent xmin="54450.69348068731778767" ymin="424301.58323826442938298" xmax="54744.77137365606904496" ymax="424561.30522749910596758">
       <spatialrefsys>
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +units=m +no_defs</proj4>
