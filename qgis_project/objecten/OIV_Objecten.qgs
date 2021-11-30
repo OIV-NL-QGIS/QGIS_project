@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="Joost Deen" projectname="OIV - Objecten v3.3.7 - Eindhoven" version="3.16.4-Hannover" saveDateTime="2021-11-30T17:03:08" saveUser="joost">
+<qgis saveUserFull="Joost Deen" projectname="OIV - Objecten v3.3.7 - Eindhoven" version="3.16.4-Hannover" saveDateTime="2021-11-30T17:17:05" saveUser="joost">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.7 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -686,10 +686,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>51365.78378372118459083</xmin>
-      <ymin>406497.96098459343193099</ymin>
-      <xmax>185540.63483594011631794</xmax>
-      <ymax>583229.05340587056707591</ymax>
+      <xmin>54514.7076476816291688</xmin>
+      <ymin>424341.06928836944280192</ymin>
+      <xmax>54645.73777566231728997</xmax>
+      <ymax>424513.65824581211199984</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -17385,7 +17385,9 @@ def my_form_open(dialog, layer, feature):
         </fixedRange>
       </temporal>
       <customproperties>
-        <property key="dualview/previewExpressions" value="&quot;gebruiksfunctie_type_id&quot;"/>
+        <property key="dualview/previewExpressions">
+          <value>"gebruiksfunctie_type_id"</value>
+        </property>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -20417,6 +20419,7 @@ def my_form_open(dialog, layer, feature):
       </temporal>
       <customproperties>
         <property key="dualview/previewExpressions">
+          <value>COALESCE( "datum_aangemaakt", '&lt;NULL>' )</value>
           <value>COALESCE( "datum_aangemaakt", '&lt;NULL>' )</value>
           <value>COALESCE( "datum_aangemaakt", '&lt;NULL>' )</value>
           <value>COALESCE( "datum_aangemaakt", '&lt;NULL>' )</value>
@@ -28720,16 +28723,30 @@ def my_form_open(dialog, layer, feature):
           </editWidget>
         </field>
         <field configurationFlags="None" name="min_bouwlaag">
-          <editWidget type="">
+          <editWidget type="Range">
             <config>
-              <Option/>
+              <Option type="Map">
+                <Option name="AllowNull" type="bool" value="true"/>
+                <Option name="Max" type="int" value="50"/>
+                <Option name="Min" type="int" value="-10"/>
+                <Option name="Precision" type="int" value="0"/>
+                <Option name="Step" type="int" value="1"/>
+                <Option name="Style" type="QString" value="SpinBox"/>
+              </Option>
             </config>
           </editWidget>
         </field>
         <field configurationFlags="None" name="max_bouwlaag">
-          <editWidget type="">
+          <editWidget type="Range">
             <config>
-              <Option/>
+              <Option type="Map">
+                <Option name="AllowNull" type="bool" value="true"/>
+                <Option name="Max" type="int" value="50"/>
+                <Option name="Min" type="int" value="-10"/>
+                <Option name="Precision" type="int" value="0"/>
+                <Option name="Step" type="int" value="1"/>
+                <Option name="Style" type="QString" value="SpinBox"/>
+              </Option>
             </config>
           </editWidget>
         </field>
@@ -28756,8 +28773,8 @@ def my_form_open(dialog, layer, feature):
         <alias name="" field="bron_tabel" index="11"/>
         <alias name="" field="fotografie_id" index="12"/>
         <alias name="Bodemgesteldheid" field="bodemgesteldheid_type_id" index="13"/>
-        <alias name="" field="min_bouwlaag" index="14"/>
-        <alias name="" field="max_bouwlaag" index="15"/>
+        <alias name="Bouwlaag (min)" field="min_bouwlaag" index="14"/>
+        <alias name="Bouwlaag (max)" field="max_bouwlaag" index="15"/>
         <alias name="" field="typeobject" index="16"/>
       </aliases>
       <defaults>
@@ -28839,6 +28856,8 @@ def my_form_open(dialog, layer, feature):
           <column hidden="0" name="fotografie_id" type="field" width="-1"/>
           <column hidden="0" name="bodemgesteldheid_type_id" type="field" width="-1"/>
           <column hidden="0" name="typeobject" type="field" width="-1"/>
+          <column hidden="0" name="min_bouwlaag" type="field" width="-1"/>
+          <column hidden="0" name="max_bouwlaag" type="field" width="-1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -28879,6 +28898,8 @@ def my_form_open(dialog, layer, feature):
           <attributeEditorField name="bijzonderheden" showLabel="1" index="5"/>
           <attributeEditorField name="pers_max" showLabel="1" index="6"/>
           <attributeEditorField name="pers_nietz_max" showLabel="1" index="7"/>
+          <attributeEditorField name="min_bouwlaag" showLabel="1" index="14"/>
+          <attributeEditorField name="max_bouwlaag" showLabel="1" index="15"/>
           <attributeEditorField name="datum_geldig_tot" showLabel="1" index="8"/>
           <attributeEditorField name="datum_geldig_vanaf" showLabel="1" index="9"/>
           <attributeEditorField name="bodemgesteldheid_type_id" showLabel="1" index="13"/>
@@ -28908,6 +28929,8 @@ def my_form_open(dialog, layer, feature):
         <field name="fotografie_id" editable="1"/>
         <field name="geovlak" editable="1"/>
         <field name="id" editable="1"/>
+        <field name="max_bouwlaag" editable="1"/>
+        <field name="min_bouwlaag" editable="1"/>
         <field name="pers_max" editable="1"/>
         <field name="pers_nietz_max" editable="1"/>
         <field name="typeobject" editable="1"/>
@@ -28927,6 +28950,8 @@ def my_form_open(dialog, layer, feature):
         <field name="fotografie_id" labelOnTop="0"/>
         <field name="geovlak" labelOnTop="0"/>
         <field name="id" labelOnTop="0"/>
+        <field name="max_bouwlaag" labelOnTop="0"/>
+        <field name="min_bouwlaag" labelOnTop="0"/>
         <field name="pers_max" labelOnTop="0"/>
         <field name="pers_nietz_max" labelOnTop="0"/>
         <field name="typeobject" labelOnTop="0"/>
@@ -53090,7 +53115,7 @@ def closeProject():&#xd;    pass</pythonCode>
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent ymax="583229.05340587056707591" ymin="406497.96098459343193099" xmax="280837.12817661295412108" xmin="-43930.70955695165321231">
+    <DefaultViewExtent ymax="424513.65824581211199984" ymin="424341.06928836944280192" xmax="54738.80075744033092633" xmin="54421.64466590361553244">
       <spatialrefsys>
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +units=m +no_defs</proj4>
