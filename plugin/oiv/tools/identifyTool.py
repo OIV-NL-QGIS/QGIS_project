@@ -63,6 +63,7 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     def ask_user_for_feature(self, idLayer, allFeatures):
         """if more features are identified ask user which one to choose"""
         targetFeature = None
+        tempFeature = None
         query = "SELECT identifier, type_layer_name FROM {} WHERE child_layer = '{}'".format(self.whichConfig, idLayer.name())
         attrs = UC.read_settings(query, False)
         sortList = []
@@ -72,9 +73,10 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
                 if isinstance(typeValue, (int, float)):
                     req = '"id" = {}'.format(typeValue)
                     request = QC.QgsFeatureRequest().setFilterExpression(req)
-                    type_layer = UC.getlayer_byname(attrs[1])
-                    tempFeature = next(type_layer.getFeatures(request))
-                    sortList.append([feat["id"], tempFeature["naam"]])
+                    ilayer = UC.getlayer_byname(attrs[1])
+                    ifeature = UC.featureRequest(ilayer, request)
+                    if ifeature:
+                        sortList.append([feat["id"], ifeature["naam"]])
                 else:
                     sortList.append([feat["id"], typeValue])
             elif attrs:

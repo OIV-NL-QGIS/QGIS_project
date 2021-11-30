@@ -114,7 +114,8 @@ class oiv(PQtW.QWidget):
         try:
             layer = UC.getlayer_byname('applicatie')
             request = QC.QgsFeatureRequest().setFilterExpression('"id" = 1')
-            dbVersion = next(layer.getFeatures(request))["db_versie"]
+            ifeature = UC.featureRequest(layer, request)
+            dbVersion = ifeature["db_versie"]
         except:
             dbVersion = 0
         if 'Objecten' not in projectTest:
