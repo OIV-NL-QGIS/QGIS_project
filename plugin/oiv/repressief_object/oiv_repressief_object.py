@@ -12,6 +12,7 @@ import oiv.tools.stackwidget as SW
 import oiv.tools.import_file as IFW
 import oiv.repressief_object.oiv_object_tekenen as OTW
 import oiv.repressief_object.oiv_create_grid as GW
+import oiv.werkvoorraad.oiv_werkvoorraad as OWW
 import oiv.helpers.messages as MSG
 import oiv.helpers.drawing_helper as DH
 import oiv.helpers.constants as PC
@@ -62,6 +63,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.object_symbolen.clicked.connect(self.run_object_symbolen_tekenen)
         self.create_grid.clicked.connect(self.run_create_grid)
         self.import_drawing.clicked.connect(self.run_import)
+        self.btn_werkvoorraad.clicked.connect(self.run_werkvoorraad)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
         self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["repressiefobjecthelp"]))
@@ -94,13 +96,12 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         """select bouwlaag on canvas to edit the atrribute form"""
         objectId = self.object_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
-        tempLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
-        objectFeatIt = tempLayer.getFeatures(request)
-        try:
-            objectFeature = next(objectFeatIt)
-            self.edit_attribute(tempLayer, objectFeature)
-        except StopIteration:
-            MSG.showMsgBox('no_objectid')
+        ilayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
+        ifeature = UC.featureRequest(ilayer, request)
+        if ifeature:
+            self.edit_attribute(ilayer, ifeature)
+        # except StopIteration:
+        #     MSG.showMsgBox('no_objectid')
 
     def open_bgt_viewer(self):
         """open url based on BGT location, i.v.m. terugmelden"""
@@ -112,10 +113,11 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_delete_object(self):
         """delete repressief object"""
+        ifeature = None
         ilayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         objectId = self.object_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
-        ifeature = next(ilayer.getFeatures(request))
+        ifeature = UC.featureRequest(ilayer, request)
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
         reply = MSG.showMsgBox('deleteobject')
@@ -212,6 +214,12 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         tekenWidget = OTW.oivObjectTekenWidget(self)
         self.iface.addDockWidget(QT.getWidgetType(), tekenWidget)
         tekenWidget.show()
+        self.close()
+
+    def run_werkvoorraad(self):
+        werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
+        self.iface.addDockWidget(QT.getWidgetType(), werkvoorraadWidget)
+        werkvoorraadWidget.show()
         self.close()
 
     def run_import(self):

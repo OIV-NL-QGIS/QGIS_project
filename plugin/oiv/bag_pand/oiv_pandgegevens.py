@@ -49,8 +49,9 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         foreignKey = 'identificatie'
         objectId = self.pand_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + objectId + "'")
-        tempFeature = next(ilayer.getFeatures(request))
-        bagGebruiksdoel = str(tempFeature['gebruiksdoel'])
+        ifeature = UC.featureRequest(ilayer, request)
+        if ifeature:
+            bagGebruiksdoel = str(ifeature['gebruiksdoel'])
         if self.adres_1.text() == "":
             bagAdres1, bagAdres2, bagGebruiksdoel = QB.ask_bag_adress(objectId, bagGebruiksdoel)
             self.adres_1.setText(bagAdres1)
@@ -127,12 +128,13 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     #select bouwlaag on canvas to edit the atrribute form
     def run_bouwlaag_bewerken(self):
         runLayer = PC.PAND["bouwlaaglayername"]
-        ilayer = UC.getlayer_byname(runLayer)
+        iLayer = UC.getlayer_byname(runLayer)
         objectId = self.pand_id.text()
         foreignKey = CH.get_foreign_key_bl(runLayer)
         request = QC.QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + str(objectId) + "'")
-        ifeature = next(ilayer.getFeatures(request))
-        self.run_edit_bouwlagen(ilayer, ifeature)
+        ifeature = UC.featureRequest(iLayer, request)
+        if ifeature:
+            self.run_edit_bouwlagen(iLayer, ifeature)
 
     #add new floor
     def run_bouwlaag(self):
@@ -170,8 +172,9 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         ilayer = UC.getlayer_byname(layerName)
         objectId = self.pand_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
-        ifeature = next(ilayer.getFeatures(request))
-        ilayer.selectByIds([ifeature.id()])
+        ifeature = UC.featureRequest(ilayer, request)
+        if ifeature:
+            ilayer.selectByIds([ifeature.id()])
         reply = MSG.showMsgBox('deleteobject')
         if not reply:
             #als "nee" deselecteer alle geselecteerde features

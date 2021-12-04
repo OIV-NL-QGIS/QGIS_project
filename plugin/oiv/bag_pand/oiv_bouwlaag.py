@@ -65,10 +65,11 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         """copy polygon of bag feature"""
         UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
         layerName = PC.bagpand_layername()
-        ilayer = UC.getlayer_byname(layerName)
+        iLayer = UC.getlayer_byname(layerName)
         request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(self.objectId))
-        ifeature = next(ilayer.getFeatures(request))
-        self.copy_bag_bouwlaag(ilayer, ifeature)
+        ifeature = UC.featureRequest(iLayer, request)
+        if ifeature:
+            self.copy_bag_bouwlaag(iLayer, ifeature)
 
     def run_bouwlaag_overnemen(self):
         """copy floor from another floor"""

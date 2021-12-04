@@ -123,6 +123,12 @@ MESSAGES = {
         "body": 'Geen object gevonden om aan te koppelen.\n\n'
                 'Zorg dat het te koppelen object in het kaartbeeld zichtbaar is.'
     },
+    'nofeature': {
+        "type": 'warning',
+        "header": 'Let op!',
+        "body": 'Geen feature gevonden.\n\n'
+                'Geen feature gevonden in de betreffende kaartlaag.'
+    },
     'invaliddatabaseversion': {
         "type": 'critical',
         "header": 'Let op!',

@@ -9,6 +9,7 @@ import qgis.utils as QU
 
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QH
+import oiv.helpers.utils_core as UC
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'stackwidget.ui'))
@@ -39,6 +40,7 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def close_stacked(self, ilayer, ifeature):
         """close feature form and save changes"""
+        objectFeature = None
         self.attributeForm.save()
         self.terug.clicked.disconnect()
         ilayer.commitChanges()
@@ -47,8 +49,9 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
         self.attributeForm = None
         if ilayer.name() == PC.OBJECT["objectlayername"]:
             request = QC.QgsFeatureRequest().setFilterExpression("id = " + str(ifeature["id"]))
-            objectFeature = next(ilayer.getFeatures(request))
-            self.parentWidget.formelenaam.setText(objectFeature["formelenaam"])
+            ifeature = UC.featureRequest(ilayer, request)
+            if ifeature:
+                self.parentWidget.formelenaam.setText(ifeature["formelenaam"])
         self.parentWidget.show()
         self.parentWidget.setFixedWidth(self.parentWidth)
         self.iface.actionPan().trigger()
