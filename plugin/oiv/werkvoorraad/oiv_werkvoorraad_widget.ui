@@ -18,7 +18,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>153</width>
+    <width>252</width>
     <height>467</height>
    </size>
   </property>
@@ -138,10 +138,13 @@ border-color: rgba(255, 255, 255, 0);</string>
            <property name="text">
             <string>Accepteer</string>
            </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="rb_verwerp">
+          <widget class="QRadioButton" name="rb_deny">
            <property name="text">
             <string>Verwerp</string>
            </property>
@@ -174,14 +177,29 @@ border-color: rgba(255, 255, 255, 0);</string>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Ook wijzigingen op:</string>
+       <widget class="QFrame" name="fr_wijzigingen">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Binnen het terrein zijn er ook wijzigingen op:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
-      </item>
-      <item>
-       <widget class="QTableWidget" name="tbl_other"/>
       </item>
       <item>
        <spacer name="verticalSpacer_2">
