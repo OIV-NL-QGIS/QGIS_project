@@ -94,11 +94,11 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         """select bouwlaag on canvas to edit the atrribute form"""
         objectId = self.object_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
-        tempLayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
-        objectFeatIt = tempLayer.getFeatures(request)
+        ilayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         try:
-            objectFeature = next(objectFeatIt)
-            self.edit_attribute(tempLayer, objectFeature)
+            ifeature = UC.featureRequest(ilayer, request)
+            if ifeature:
+                self.edit_attribute(ilayer, ifeature)
         except StopIteration:
             MSG.showMsgBox('no_objectid')
 
@@ -112,10 +112,11 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_delete_object(self):
         """delete repressief object"""
+        ifeature = None
         ilayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         objectId = self.object_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
-        ifeature = next(ilayer.getFeatures(request))
+        ifeature = UC.featureRequest(ilayer, request)
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
         reply = MSG.showMsgBox('deleteobject')

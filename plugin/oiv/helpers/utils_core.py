@@ -12,6 +12,15 @@ import oiv.helpers.constants as PC
 def open_url(url):
     webbrowser.open(url)
 
+def featureRequest(ilayer, request=None):
+    it = ilayer.getFeatures(request)
+    try:
+        ifeature = next(it)
+        return ifeature
+    except:
+        MSG.showMsgBox('nofeature')
+        return None
+
 def read_settings(query, allResult):
     conn = None
     try:
@@ -93,25 +102,29 @@ def nearest_neighbor(iface, layer, point):
     """search the nearest parent feature id"""
     index = None
     parentId = None
-    parentFeature = None
+    ifeature = None
     extent = iface.mapCanvas().extent()
     # veroorzaakt foutmelding als er niets in het kaartvenster staat, daarom in try/except statement
     index = QC.QgsSpatialIndex(layer.getFeatures(QC.QgsFeatureRequest(extent)))
     try:
         parentId = index.nearestNeighbor(point, 1)[0]
-        parentFeature = next(layer.getFeatures(QC.QgsFeatureRequest(parentId)))
-        parentId = parentFeature["id"]
+        request = QC.QgsFeatureRequest(parentId)
+        ifeature = featureRequest(layer, request)
+        if ifeature:
+            parentId = ifeature["id"]
     except:  # pylint: disable=bare-except
         pass
-    return parentFeature, parentId
+    return ifeature, parentId
 
 def request_feature(ifeature, layer_feature_id, layer_name):
     """get feature from specific id"""
+    ifeature = None
     objectId = ifeature[layer_feature_id]
+    ilayer = getlayer_byname(layer_name)
     request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
-    tempLayer = getlayer_byname(layer_name)
-    tempFeature = next(tempLayer.getFeatures(request))
-    return tempFeature, objectId
+    ifeature = featureRequest(ilayer, request)
+    if ifeature:
+        return ifeature, objectId
 
 def create_unique_sorted_list(sortList):
     """create unique sorted dropdown list"""
@@ -135,8 +148,9 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
         if lyr:
             if name == PC.bagpand_layername():
                 request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
-                tempFeature = next(lyr.getFeatures(request))
-                possibleSnapFeatures.append(tempFeature.geometry())
+                ifeature = featureRequest(lyr, request)
+                if ifeature:
+                    possibleSnapFeatures.append(ifeature.geometry())
             elif name == PC.PAND["bouwlaaglayername"]:
                 request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
                 featureIt = lyr.getFeatures(request)

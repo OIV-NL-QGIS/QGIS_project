@@ -105,9 +105,10 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         elif ilayer.name() == OBJECT["terreinlayername"]:
             objectId = ifeature["object_id"]
             request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
-            ifeature = next(drawLayer.getFeatures(request))
-            formeleNaam = ifeature["formelenaam"]
-            self.run_object(formeleNaam, objectId)
+            ifeature = UC.featureRequest(drawLayer, request)
+            if ifeature:
+                formeleNaam = ifeature["formelenaam"]
+                self.run_object(formeleNaam, objectId)
         #if another layer is identified there is no object that can be determined, so a message is send to the user
         else:
             MSG.showMsgBox('noidentifiedobject')

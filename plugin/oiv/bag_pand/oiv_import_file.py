@@ -76,10 +76,10 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             if checkBouwlaag:
                 importFilePolygon = importFile + "|layername=entities|geometrytype=Polygon"
                 self.importPolygonLayer = QC.QgsVectorLayer(importFilePolygon, "import", "ogr")
-                it = self.importPolygonLayer.getFeatures()
-                bouwlaagFeature = next(it)
-                self.bouwlaag.setText(str(importBouwlaag))
-                self.import_bouwlaag(bouwlaagFeature)
+                bouwlaagFeature = UC.featureRequest(self.importPolygonLayer)
+                if bouwlaagFeature:
+                    self.bouwlaag.setText(str(importBouwlaag))
+                    self.import_bouwlaag(bouwlaagFeature)
         elif importFile.endswith('.gpkg'):
             layerNames = [lyr.GetName() for lyr in ogr.Open(importFile)]
             GpkgDialog.layerNames = layerNames
@@ -189,8 +189,9 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         tempLayer = UC.getlayer_byname('Bouwlagen')
         req = '"id" = ' + self.bouwlaag_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression(req)
-        tempFeature = next(tempLayer.getFeatures(request))
-        return tempFeature.geometry().centroid()
+        ifeature = UC.featureRequest(tempLayer, request)
+        if ifeature:
+            return ifeature.geometry().centroid()
 
     def inlezen(self):
         targetLayerName = self.import_laag.currentText()
@@ -244,8 +245,9 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 if targetLayerName == "Ruimten":
                     req = '"naam" = ' + "'" + self.mappingDict[feature[self.type.currentText()]] + "'"
                     request = QC.QgsFeatureRequest().setFilterExpression(req)
-                    tempFeature = next(typeLayer.getFeatures(request))
-                    targetFeature[identifier] = tempFeature["id"]
+                    tempFeature = UC.featureRequest(typeLayer, request)
+                    if tempFeature:
+                        targetFeature[identifier] = tempFeature["id"]
                 else:
                     targetFeature[identifier] = self.mappingDict[feature[self.type.currentText()]]
                     if geomCheck:
