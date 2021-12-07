@@ -145,7 +145,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.commitChanges()
             moveLayer.reload()
-        self.activatePan()
+        self.run_move_point()
 
     def run_tekenen(self, _dummy, runLayer, feature_id):
         """activate the right draw action"""

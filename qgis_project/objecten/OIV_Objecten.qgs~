@@ -1,7 +1,7 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="joost" saveDateTime="2021-12-07T16:29:25" projectname="OIV - Objecten v3.3.8 - Eindhoven" saveUserFull="Joost Deen" version="3.16.4-Hannover">
+<qgis saveUser="joost" saveDateTime="2021-12-07T14:34:30" projectname="OIV - Objecten v3.3.7 - Eindhoven" saveUserFull="Joost Deen" version="3.16.4-Hannover">
   <homePath path=""/>
-  <title>OIV - Objecten v3.3.8 - Eindhoven</title>
+  <title>OIV - Objecten v3.3.7 - Eindhoven</title>
   <autotransaction active="0"/>
   <evaluateDefaultValues active="0"/>
   <trust active="0"/>
@@ -56,7 +56,7 @@
         </customproperties>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group name="Werkvoorraad" expanded="0" checked="Qt::Checked">
+    <layer-tree-group name="Werkvoorraad" expanded="1" checked="Qt::Checked">
       <customproperties/>
       <layer-tree-layer source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;mobiel&quot;.&quot;werkvoorraad_objecten&quot; (geom)" providerKey="postgres" legend_exp="" legend_split_behavior="0" name="Werkvoorraad objecten" id="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b" expanded="1" checked="Qt::Checked" patch_size="-1,-1">
         <customproperties/>
@@ -83,7 +83,7 @@
         <customproperties/>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group name="Bouwlaag" expanded="0" checked="Qt::Checked">
+    <layer-tree-group name="Bouwlaag" expanded="1" checked="Qt::Checked">
       <customproperties/>
       <layer-tree-layer source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_afw_binnendekking&quot; (geom) sql=bouwlaag = 1" providerKey="postgres" legend_exp="" legend_split_behavior="0" name="Afwijkende binnendekking" id="bouwlaag_afw_binnendekking20180911161155176" expanded="0" checked="Qt::Checked" patch_size="0,0">
         <customproperties>
@@ -94,6 +94,9 @@
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
+      </layer-tree-layer>
+      <layer-tree-layer source="dbname='oiv_acc' host=localhost port=5432 user='postgres' sslmode=disable key='id' checkPrimaryKeyUnicity='1' table=&quot;algemeen&quot;.&quot;styles&quot;" providerKey="postgres" legend_exp="" legend_split_behavior="0" name="styles" id="styles_e952df16_5312_47d2_a430_39e675e6c849" expanded="1" checked="Qt::Checked" patch_size="-1,-1">
+        <customproperties/>
       </layer-tree-layer>
       <layer-tree-layer source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ingang&quot; (geom) sql=bouwlaag = 1" providerKey="postgres" legend_exp="" legend_split_behavior="0" name="Ingang bouwlaag" id="bouwlaag_ingang_bouwlaag20180906201337250" expanded="0" checked="Qt::Checked" patch_size="0,0">
         <customproperties>
@@ -524,56 +527,57 @@
       <item>Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f</item>
       <item>Werkvoorraad_bouwlaag___lijn_b4ab5737_c288_45ad_a319_4ff45f4001dc</item>
       <item>Werkvoorraad_vlak_676cac37_0e3b_49e2_b434_635ddd6bac72</item>
+      <item>styles_e952df16_5312_47d2_a430_39e675e6c849</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings enabled="0" type="1" minScale="0" unit="1" self-snapping="0" tolerance="10" intersection-snapping="1" mode="3" scaleDependencyMode="0" maxScale="0">
     <individual-layer-settings>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="terrein_eff10e61_89d2_4362_801d_84f487d77852" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="stavaza_objecten20190410123510091" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="veiligh_ruimtelijk20180912181737656" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bereikbaarheid20180831134019212" tolerance="2" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="status_objectgegevens20190410123509951" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_hulplijnen_dd5fe981_cb08_47d5_bbef_debf35809452" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_sleutelkluis_bouwlaag20180906202953370" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="object_points_of_interest_c8201bff_1789_4706_b2f1_5fb28f3c2a0c" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_veiligh_bouwk20180905151458681" tolerance="2" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="1" type="1" minScale="0" units="1" id="Werkvoorraad_vlak_676cac37_0e3b_49e2_b434_635ddd6bac72" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="1" type="1" minScale="0" units="1" id="Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="schade_cirkel_calc20170912163056737" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="sectoren20190320103814390" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="ingang_object20180912142318108" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_dreiging20180906174253505" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="label_object20180912203855251" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="veiligheidsregio_huidig_119f3d68_317c_465f_b0c3_945aa8fdc70a" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="stavaza_status_gemeente20190410123509951" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_veiligh_install20180905164515399" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="1" type="1" minScale="0" units="1" id="Werkvoorraad_bouwlaag___lijn_b4ab5737_c288_45ad_a319_4ff45f4001dc" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="stavaza_update_gemeente20190410123510075" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="gevaarlijkestof_opslag_object20180921133701908" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="grid_33a2aa94_9575_44b1_a5be_645450b0209f" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="pand_b8b77da3_8f18_441a_8357_bbd0efcbae6d" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="opstelplaats20180831134019368" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="leidingen_f8765a2a_2685_44e3_9062_a5804129ec78" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="alternatieve20171110074120161" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_ruimten20180905142047305" tolerance="2" maxScale="0"/>
       <layer-setting enabled="0" type="2" minScale="0" units="2" id="objectgegevens20160318144112880" tolerance="10" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_label20171206134310954" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlagen20180226231427375" tolerance="2" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="brandkraan_2017_120170504220758524" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="dreiging_ruimtelijk20180912203007764" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="stavaza_volgende_update20190410123510091" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_vlak_821016ac_ba60_434b_b11b_6b2486e119ed" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="opstelplaats20180831134019368" tolerance="0" maxScale="0"/>
       <layer-setting enabled="1" type="1" minScale="0" units="1" id="object_isolijnen_87f1aee5_d4cb_4f4e_bae8_28383f71d550" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="1" id="object_gebiedsgerichte_aanpak_e08cb0f0_bb98_4c52_b50a_e829ff0ef5ec" tolerance="12" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_afw_binnendekking20180911161155176" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_ingang_bouwlaag20180906201337250" tolerance="0" maxScale="0"/>
-      <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_punt_0d6860d7_17cb_486c_a441_c3fc2cb7b1fc" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="brandkraan_2017_120170504220758524" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="alternatieve20171110074120161" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="1" type="1" minScale="0" units="1" id="Werkvoorraad_bouwlaag___lijn_b4ab5737_c288_45ad_a319_4ff45f4001dc" tolerance="12" maxScale="0"/>
       <layer-setting enabled="0" type="2" minScale="0" units="2" id="bag_extent20180222160304157" tolerance="2" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bereikbaarheid20180831134019212" tolerance="2" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="object_gebiedsgerichte_aanpak_e08cb0f0_bb98_4c52_b50a_e829ff0ef5ec" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="1" type="1" minScale="0" units="1" id="Werkvoorraad_vlak_676cac37_0e3b_49e2_b434_635ddd6bac72" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_veiligh_install20180905164515399" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="1" type="1" minScale="0" units="1" id="Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="stavaza_status_gemeente20190410123509951" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="label_object20180912203855251" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="dreiging_ruimtelijk20180912203007764" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="gevaarlijkestof_opslag_object20180921133701908" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="sectoren20190320103814390" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="veiligheidsregio_huidig_119f3d68_317c_465f_b0c3_945aa8fdc70a" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="stavaza_objecten20190410123510091" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="stavaza_volgende_update20190410123510091" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="pand_b8b77da3_8f18_441a_8357_bbd0efcbae6d" tolerance="12" maxScale="0"/>
       <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_lijn_0c6ded7b_239d_4be8_801c_67405bc2deab" tolerance="12" maxScale="0"/>
       <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_opslag20171206142819813" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="object_points_of_interest_c8201bff_1789_4706_b2f1_5fb28f3c2a0c" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="grid_33a2aa94_9575_44b1_a5be_645450b0209f" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_sleutelkluis_bouwlaag20180906202953370" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="terrein_eff10e61_89d2_4362_801d_84f487d77852" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_ingang_bouwlaag20180906201337250" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_dreiging20180906174253505" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_afw_binnendekking20180911161155176" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="stavaza_update_gemeente20190410123510075" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlagen20180226231427375" tolerance="2" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="veiligh_ruimtelijk20180912181737656" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="status_objectgegevens20190410123509951" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="schade_cirkel_calc20170912163056737" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="leidingen_f8765a2a_2685_44e3_9062_a5804129ec78" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="ingang_object20180912142318108" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_vlak_821016ac_ba60_434b_b11b_6b2486e119ed" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_ruimten20180905142047305" tolerance="2" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_label20171206134310954" tolerance="0" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="2" id="bouwlaag_veiligh_bouwk20180905151458681" tolerance="2" maxScale="0"/>
+      <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_punt_0d6860d7_17cb_486c_a441_c3fc2cb7b1fc" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="0" type="2" minScale="0" units="1" id="ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152" tolerance="12" maxScale="0"/>
+      <layer-setting enabled="1" type="1" minScale="0" units="1" id="werkvoorraad_hulplijnen_dd5fe981_cb08_47d5_bbef_debf35809452" tolerance="12" maxScale="0"/>
     </individual-layer-settings>
   </snapping-settings>
   <relations>
@@ -686,10 +690,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>54505.72316723869880661</xmin>
-      <ymin>424404.23649514256976545</ymin>
-      <xmax>54579.24264048089389689</xmax>
-      <ymax>424455.35863576759584248</ymax>
+      <xmin>54510.55010395185672678</xmin>
+      <ymin>424399.68069440661929548</ymin>
+      <xmax>54547.30984057293972</xmax>
+      <ymax>424425.24176471913233399</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -744,7 +748,7 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup name="Werkvoorraad" checked="Qt::Checked" open="false">
+    <legendgroup name="Werkvoorraad" checked="Qt::Checked" open="true">
       <legendlayer showFeatureCount="0" name="Werkvoorraad objecten" checked="Qt::Checked" open="true" drawingOrder="-1">
         <filegroup hidden="false" open="true">
           <legendlayerfile layerid="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b" isInOverview="0" visible="1"/>
@@ -786,7 +790,7 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup name="Bouwlaag" checked="Qt::Checked" open="false">
+    <legendgroup name="Bouwlaag" checked="Qt::Checked" open="true">
       <legendlayer showFeatureCount="0" name="Afwijkende binnendekking" checked="Qt::Checked" open="false" drawingOrder="-1">
         <filegroup hidden="false" open="false">
           <legendlayerfile layerid="bouwlaag_afw_binnendekking20180911161155176" isInOverview="0" visible="1"/>
@@ -795,6 +799,11 @@
       <legendlayer showFeatureCount="0" name="Installatietechnische veiligheidsvoorzieningen" checked="Qt::Checked" open="false" drawingOrder="-1">
         <filegroup hidden="false" open="false">
           <legendlayerfile layerid="bouwlaag_veiligh_install20180905164515399" isInOverview="0" visible="1"/>
+        </filegroup>
+      </legendlayer>
+      <legendlayer showFeatureCount="0" name="styles" checked="Qt::Checked" open="true" drawingOrder="-1">
+        <filegroup hidden="false" open="true">
+          <legendlayerfile layerid="styles_e952df16_5312_47d2_a430_39e675e6c849" isInOverview="0" visible="1"/>
         </filegroup>
       </legendlayer>
       <legendlayer showFeatureCount="0" name="Ingang bouwlaag" checked="Qt::Checked" open="false" drawingOrder="-1">
@@ -1241,7 +1250,7 @@
         <description></description>
         <projectionacronym></projectionacronym>
         <ellipsoidacronym></ellipsoidacronym>
-        <geographicflag>true</geographicflag>
+        <geographicflag>false</geographicflag>
       </spatialrefsys>
     </srs>
     <resourceMetadata>
@@ -1264,7 +1273,7 @@
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </crs>
       <extent/>
@@ -1319,7 +1328,7 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -1433,7 +1442,7 @@
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -4094,7 +4103,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -4117,7 +4126,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -4244,7 +4253,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -4276,7 +4285,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -4653,7 +4662,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -4676,7 +4685,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -5440,7 +5449,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -5463,7 +5472,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -6233,7 +6242,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -6515,7 +6524,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -6547,7 +6556,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -6784,7 +6793,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -6807,7 +6816,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -8390,7 +8399,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -8413,7 +8422,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -8540,7 +8549,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -8563,7 +8572,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -15663,7 +15672,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -15954,7 +15963,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -15977,7 +15986,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -16848,7 +16857,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -16988,7 +16997,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -17011,7 +17020,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -17162,7 +17171,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -17331,7 +17340,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -17363,7 +17372,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -17571,7 +17580,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -17594,7 +17603,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -17714,7 +17723,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -17737,7 +17746,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -17857,7 +17866,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -17880,7 +17889,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -18033,7 +18042,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -19009,7 +19018,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -19032,7 +19041,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -19175,7 +19184,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -20212,7 +20221,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -20235,7 +20244,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -20394,7 +20403,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -20762,7 +20771,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -20794,7 +20803,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -21010,7 +21019,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -21033,7 +21042,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -21183,7 +21192,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -23474,7 +23483,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -23497,7 +23506,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -25505,7 +25514,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -25528,7 +25537,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -28151,7 +28160,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -28174,7 +28183,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -29154,7 +29163,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -29906,7 +29915,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -29929,7 +29938,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -30118,7 +30127,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -30725,7 +30734,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -30748,7 +30757,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -31671,7 +31680,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -31813,7 +31822,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -32063,7 +32072,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -32222,7 +32231,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -33374,7 +33383,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -33397,7 +33406,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -33540,7 +33549,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -33676,7 +33685,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -33844,7 +33853,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -36003,7 +36012,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>true</geographicflag>
+          <geographicflag>false</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -36026,7 +36035,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -36199,6 +36208,242 @@ def my_form_open(dialog, layer, feature):
           <column type="field" width="-1" name="vulstijl" hidden="0"/>
           <column type="field" width="-1" name="verbindingsstijl" hidden="0"/>
           <column type="field" width="-1" name="eindstijl" hidden="0"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <storedexpressions/>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <dataDefinedFieldProperties/>
+      <widgets/>
+      <previewExpression>"id"</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer refreshOnNotifyEnabled="0" type="vector" minScale="1e+08" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" wkbType="NoGeometry" styleCategories="AllStyleCategories" autoRefreshTime="0" autoRefreshEnabled="0" readOnly="0" geometry="No geometry" maxScale="0">
+      <id>styles_e952df16_5312_47d2_a430_39e675e6c849</id>
+      <datasource>dbname='oiv_acc' host=localhost port=5432 user='postgres' password='postgres' sslmode=disable key='id' checkPrimaryKeyUnicity='1' table="algemeen"."styles"</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>styles</layername>
+      <srs>
+        <spatialrefsys>
+          <wkt></wkt>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type>dataset</type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <wkt></wkt>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="">postgres</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="standaard">
+        <map-layer-style name="standaard"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <temporal enabled="0" endField="" durationUnit="min" endExpression="" mode="0" startExpression="" durationField="" fixedDuration="0" startField="" accumulate="0">
+        <fixedRange>
+          <start></start>
+          <end></end>
+        </fixedRange>
+      </temporal>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"id"</value>
+        </property>
+      </customproperties>
+      <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <legend type="default-vector"/>
+      <referencedLayers/>
+      <fieldConfiguration>
+        <field name="id" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="laagnaam" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="soortnaam" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="lijndikte" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="lijnkleur" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="lijnstijl" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="vulkleur" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="vulstijl" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="verbindingsstijl" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field name="eindstijl" configurationFlags="None">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias name="" field="id" index="0"/>
+        <alias name="" field="laagnaam" index="1"/>
+        <alias name="" field="soortnaam" index="2"/>
+        <alias name="" field="lijndikte" index="3"/>
+        <alias name="" field="lijnkleur" index="4"/>
+        <alias name="" field="lijnstijl" index="5"/>
+        <alias name="" field="vulkleur" index="6"/>
+        <alias name="" field="vulstijl" index="7"/>
+        <alias name="" field="verbindingsstijl" index="8"/>
+        <alias name="" field="eindstijl" index="9"/>
+      </aliases>
+      <defaults>
+        <default applyOnUpdate="0" field="id" expression=""/>
+        <default applyOnUpdate="0" field="laagnaam" expression=""/>
+        <default applyOnUpdate="0" field="soortnaam" expression=""/>
+        <default applyOnUpdate="0" field="lijndikte" expression=""/>
+        <default applyOnUpdate="0" field="lijnkleur" expression=""/>
+        <default applyOnUpdate="0" field="lijnstijl" expression=""/>
+        <default applyOnUpdate="0" field="vulkleur" expression=""/>
+        <default applyOnUpdate="0" field="vulstijl" expression=""/>
+        <default applyOnUpdate="0" field="verbindingsstijl" expression=""/>
+        <default applyOnUpdate="0" field="eindstijl" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint constraints="3" unique_strength="1" exp_strength="0" field="id" notnull_strength="1"/>
+        <constraint constraints="0" unique_strength="0" exp_strength="0" field="laagnaam" notnull_strength="0"/>
+        <constraint constraints="2" unique_strength="1" exp_strength="0" field="soortnaam" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" exp_strength="0" field="lijndikte" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" exp_strength="0" field="lijnkleur" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" exp_strength="0" field="lijnstijl" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" exp_strength="0" field="vulkleur" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" exp_strength="0" field="vulstijl" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" exp_strength="0" field="verbindingsstijl" notnull_strength="0"/>
+        <constraint constraints="0" unique_strength="0" exp_strength="0" field="eindstijl" notnull_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint exp="" desc="" field="id"/>
+        <constraint exp="" desc="" field="laagnaam"/>
+        <constraint exp="" desc="" field="soortnaam"/>
+        <constraint exp="" desc="" field="lijndikte"/>
+        <constraint exp="" desc="" field="lijnkleur"/>
+        <constraint exp="" desc="" field="lijnstijl"/>
+        <constraint exp="" desc="" field="vulkleur"/>
+        <constraint exp="" desc="" field="vulstijl"/>
+        <constraint exp="" desc="" field="verbindingsstijl"/>
+        <constraint exp="" desc="" field="eindstijl"/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortOrder="0" sortExpression="" actionWidgetStyle="dropDown">
+        <columns>
+          <column type="field" width="-1" name="id" hidden="0"/>
+          <column type="field" width="-1" name="laagnaam" hidden="0"/>
+          <column type="field" width="-1" name="soortnaam" hidden="0"/>
+          <column type="field" width="-1" name="lijndikte" hidden="0"/>
+          <column type="field" width="-1" name="lijnkleur" hidden="0"/>
+          <column type="field" width="-1" name="lijnstijl" hidden="0"/>
+          <column type="field" width="-1" name="vulkleur" hidden="0"/>
+          <column type="field" width="-1" name="vulstijl" hidden="0"/>
+          <column type="field" width="-1" name="verbindingsstijl" hidden="0"/>
+          <column type="field" width="-1" name="eindstijl" hidden="0"/>
+          <column type="actions" width="-1" hidden="1"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -36692,7 +36937,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -36786,7 +37031,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -36851,7 +37096,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -36874,7 +37119,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -37001,7 +37246,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -37024,7 +37269,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -37167,7 +37412,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -38040,7 +38285,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -38223,7 +38468,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -38457,7 +38702,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>true</geographicflag>
+            <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
         <extent>
@@ -38684,7 +38929,7 @@ def my_form_open(dialog, layer, feature):
           <description></description>
           <projectionacronym></projectionacronym>
           <ellipsoidacronym></ellipsoidacronym>
-          <geographicflag>false</geographicflag>
+          <geographicflag>true</geographicflag>
         </spatialrefsys>
       </srs>
       <resourceMetadata>
@@ -38707,7 +38952,7 @@ def my_form_open(dialog, layer, feature):
             <description></description>
             <projectionacronym></projectionacronym>
             <ellipsoidacronym></ellipsoidacronym>
-            <geographicflag>false</geographicflag>
+            <geographicflag>true</geographicflag>
           </spatialrefsys>
         </crs>
         <extent/>
@@ -42165,6 +42410,7 @@ def my_form_open(dialog, layer, feature):
     <layer id="Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f"/>
     <layer id="Werkvoorraad_bouwlaag___lijn_b4ab5737_c288_45ad_a319_4ff45f4001dc"/>
     <layer id="Werkvoorraad_vlak_676cac37_0e3b_49e2_b434_635ddd6bac72"/>
+    <layer id="styles_e952df16_5312_47d2_a430_39e675e6c849"/>
   </layerorder>
   <properties>
     <CopyrightLabel>
@@ -42636,7 +42882,7 @@ def closeProject():&#xd;    pass</pythonCode>
     <parentidentifier></parentidentifier>
     <language></language>
     <type></type>
-    <title>OIV - Objecten v3.3.8 - Eindhoven</title>
+    <title>OIV - Objecten v3.3.7 - Eindhoven</title>
     <abstract></abstract>
     <contact>
       <name></name>
@@ -53119,7 +53365,7 @@ def closeProject():&#xd;    pass</pythonCode>
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent ymin="424404.23649514256976545" xmax="54579.91009499958454398" ymax="424455.35863576759584248" xmin="54505.05571272000815952">
+    <DefaultViewExtent ymin="424399.68069440661929548" xmax="54550.51705659542494686" ymax="424425.24176471913233399" xmin="54507.34288792937149992">
       <spatialrefsys>
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +units=m +no_defs</proj4>

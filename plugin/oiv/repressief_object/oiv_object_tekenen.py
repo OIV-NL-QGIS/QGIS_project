@@ -156,7 +156,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.commitChanges()
             moveLayer.reload()
-        self.activatePan()
+        self.run_move_point()
 
     def run_tekenen(self, _dummy, runLayer, featureId):
         #welke pictogram is aangeklikt en wat is de bijbehorende tekenlaag
