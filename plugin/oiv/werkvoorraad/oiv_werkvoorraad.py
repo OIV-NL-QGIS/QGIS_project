@@ -18,6 +18,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
 
+    bouwlaagOfObject = None
     drawLayer = None
     tableColumns = ['id', 'operatie', 'symbol_name', 'brontabel']
 
@@ -28,11 +29,14 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parent = parent
         self.iface = parent.iface
         self.canvas = parent.canvas
-        self.formelenaam.setText(parent.formelenaam.text())
-        self.object_id.setText(parent.object_id.text())
-        self.initUI()
 
     def initUI(self):
+        if self.bouwlaagOfObject == 'Object':
+            self.naam.setText(self.parent.formelenaam.text())
+            self.identifier.setText(self.parent.object_id.text())
+        elif self.bouwlaagOfObject == 'Bouwlaag':
+            self.naam.setText(self.parent.comboBox.currentText())
+            self.identifier.setText(self.parent.pand_id.text())
         self.btn_opslaan.clicked.connect(self.execute_selected_rows)
         self.btn_terug.clicked.connect(self.close_werkvoorraad)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
@@ -45,8 +49,11 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
     def getData(self):
         tableData = []
         layerNames = PC.OBJECT["werkvoorraadlayers"]
-        objectId = self.object_id.text()
-        request = QC.QgsFeatureRequest().setFilterExpression('"object_id" = ' + objectId)
+        objectId = self.identifier.text()
+        if self.bouwlaagOfObject == 'Object':
+            request = QC.QgsFeatureRequest().setFilterExpression('"object_id" = ' + objectId)
+        else:
+            request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + objectId)
         for layerName in layerNames:
             ilayer = UC.getlayer_byname(layerName)
             it = ilayer.getFeatures(request)
@@ -98,6 +105,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
                     item = PQtW.QTableWidgetItem(str(col))
                     self.tbl_werkvoorraad.setItem(i, j, item)
             self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Operatie', 'Type', 'Tabel', 'layerName'])
+        self.tbl_werkvoorraad.setSelectionBehavior(PQtW.QAbstractItemView.SelectRows)
 
     def close_werkvoorraad(self):
         self.btn_opslaan.clicked.disconnect()

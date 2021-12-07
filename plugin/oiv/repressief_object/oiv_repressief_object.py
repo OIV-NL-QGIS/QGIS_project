@@ -68,6 +68,18 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.setTitleBarWidget(titleBar)
         self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["repressiefobjecthelp"]))
         self.floatBtn.clicked.connect(lambda: self.setFloating(True))
+        self.check_werkvoorraad()
+
+    def check_werkvoorraad(self):
+        objectId = self.object_id.text()
+        layerName = 'Werkvoorraad objecten'
+        ilayer = UC.getlayer_byname(layerName)
+        request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
+        it = ilayer.getFeatures(request)
+        if len(list(it)) > 0:
+            self.btn_werkvoorraad.setEnabled(True)
+        else:
+            self.btn_werkvoorraad.setEnabled(False)
 
     def close_repressief_object_show_base(self):
         """close this gui and return to the main page"""
@@ -218,7 +230,9 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_werkvoorraad(self):
         werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
+        werkvoorraadWidget.bouwlaagOfObject = 'Object'
         self.iface.addDockWidget(QT.getWidgetType(), werkvoorraadWidget)
+        werkvoorraadWidget.initUI()
         werkvoorraadWidget.show()
         self.close()
 

@@ -40,8 +40,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>376</width>
-         <height>717</height>
+         <width>380</width>
+         <height>725</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -290,6 +290,13 @@ border-color: rgba(255, 255, 255, 0);</string>
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_werkvoorraad">
+            <property name="text">
+             <string>Werkvoorraad</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="import_2">

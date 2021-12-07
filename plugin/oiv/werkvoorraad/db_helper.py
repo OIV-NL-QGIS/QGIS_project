@@ -4,6 +4,16 @@ from psycopg2.extras import RealDictCursor
 import qgis.core as QC
 import oiv.helpers.constants as PC
 
+layerFields = {
+    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "string"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
+    "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
+    "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
+    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "string"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
+    "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
+    "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]]
+}
+typeIdTable = ["dreiging", "ingang", "points_of_interest", "sleutelkluis", "veiligh_install", "veiligh_ruimtelijk"]
+
 def setup_postgisdb_connection():
     """setup the postgis database connection"""
     conn = None
@@ -47,14 +57,15 @@ def execute_queries(executableFeatures, ilayer, accept):
     for arr in executableFeatures:
         feat = arr[0]
         ilayer = arr[1]
+        layerName = ilayer.name()
         operatie = feat['operatie']
-        update_accepted(ilayer, accept, cursor, conn)
+        update_accepted(layerName, accept, cursor, conn)
         if accept and operatie == 'INSERT':
-            insert_feature(feat, cursor, ilayer, accept)
+            insert_feature(feat, cursor, layerName)
         if accept and operatie == 'UPDATE':
-            update_feature(feat, cursor, ilayer, accept)
+            update_feature(feat, cursor, layerName)
         if accept and operatie == 'DELETE':
-            delete_feature(feat, cursor, ilayer, accept)
+            delete_feature(feat, cursor)
         if operatie == 'UPDATE':
             delete_hulplijn(feat, cursor)
         insert_into_log(feat, cursor, ilayer)
@@ -62,8 +73,8 @@ def execute_queries(executableFeatures, ilayer, accept):
         conn.commit()
     close_db_connection(cursor, conn)
 
-def update_accepted(ilayer, accept, cursor, conn):
-    werkvTableName = PC.OBJECT["tablelayertranslate"][ilayer.name()]
+def update_accepted(layerName, accept, cursor, conn):
+    werkvTableName = PC.OBJECT["tablelayertranslate"][layerName]
     query = "UPDATE mobiel.{} SET accepted = {}".format(werkvTableName, accept)
     cursor.execute(query)
     conn.commit()
@@ -83,17 +94,27 @@ def clean_werkvoorraad(feat, cursor, ilayer):
     query = "DELETE FROM mobiel.{} WHERE id = {};".format(werkvTableName, feat["id"])
     cursor.execute(query)
 
-def update_feature(feat, cursor, ilayer, accept):
-    print('update')
+def update_feature(feat, cursor, layerName):
+    tableName = feat["brontabel"]
+    query = 'UPDATE objecten.{} SET '.format(tableName)
+    query += "geom = ST_GeomFromText('{}', 28992),".format(feat.geometry().asWkt())
+    queryFields = layerFields[layerName]
+    for field in queryFields:
+        if field[1] == "string":
+            query += " {}='{}',".format(field[0], feat[field[0]])
+        elif field[1] == "integer":
+            query += ' {}={},'.format(field[0], feat[field[0]])
+        elif field[1] == "type":
+            if tableName in typeIdTable:
+                query += " {}_type_id=(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}'),".format(tableName, tableName, feat[field[0]])
+    query = query[:-1]
+    query += ' WHERE id = {};'.format(feat["bron_id"])
+    print(query)
 
-def insert_feature(feat, cursor, ilayer, accept):
+def insert_feature(feat, cursor, layerName):
     print('insert')
-    query = 'SELECT bouwlaag FROM mobiel.bouwlagen_binnen_object WHERE object_id = {};'.format(int(feat["object_id"]))
-    cursor.execute(query)
-    test = cursor.fetchall()
-    print(test)
-    #get_bouwlagen(feat["object_id"])
+    get_bouwlagen(feat["object_id"])
 
-def delete_feature(feat, cursor, ilayer, accept):
+def delete_feature(feat, cursor):
     query = "DELETE FROM objecten.{} WHERE id={};".format(feat['brontabel'], feat['bron_id'])
     cursor.execute(query)
