@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>767</height>
+    <width>263</width>
+    <height>608</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -40,13 +40,20 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>376</width>
-         <height>717</height>
+         <width>243</width>
+         <height>566</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QPushButton" name="terug">
+            <property name="text">
+             <string>Terug</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QLabel" name="label_12">
             <property name="sizePolicy">
@@ -310,13 +317,6 @@ border-color: rgba(255, 255, 255, 0);</string>
              </size>
             </property>
            </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="terug">
-            <property name="text">
-             <string>Terug</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </item>
