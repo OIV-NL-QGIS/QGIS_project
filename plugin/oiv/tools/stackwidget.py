@@ -54,6 +54,5 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
                 self.parentWidget.formelenaam.setText(ifeature["formelenaam"])
         self.parentWidget.show()
         self.parentWidget.setFixedWidth(self.parentWidth)
-        self.iface.actionPan().trigger()
         self.close()
         del self

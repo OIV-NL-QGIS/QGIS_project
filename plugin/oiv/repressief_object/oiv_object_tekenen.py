@@ -100,26 +100,44 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 strButton.clicked.connect(lambda dummy='dummyvar', rlayer=run_layer, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
 
     def activatePan(self):
+        """trigger pan function to loose other functions"""
         self.iface.actionPan().trigger()
 
     def run_edit_tool(self):
+        """activate the edit feature tool"""
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
     def run_select_tool(self):
+        """activate the select feature tool"""
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.select_feature)
 
     def select_feature(self, ilayer, ifeature):
+        """catch emitted signal from selecttool"""
         self.iface.setActiveLayer(ilayer)
         ids = []
         ids.append(ifeature.id())
         ilayer.selectByIds(ids)
         ilayer.startEditing()
-        self.selectTool.geomSelected.disconnect(self.select_feature)
+        self.selectTool.geomSelected.disconnect()
+        self.run_select_tool()
 
     def run_delete_tool(self):
+        """activate delete feature tool"""
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
@@ -129,7 +147,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
         if reply == 'Retry':
             self.run_delete_tool()
-        self.selectTool.geomSelected.disconnect(self.delete)
+        self.selectTool.geomSelected.disconnect()
+        self.run_delete_tool()
 
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt
     def edit_attribute(self, ilayer, ifeature):
@@ -140,7 +159,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
         stackWidget.show()
-        self.selectTool.geomSelected.disconnect(self.edit_attribute)
+        self.selectTool.geomSelected.disconnect()
+        self.run_edit_tool()
 
     #om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet
     def run_move_point(self):
