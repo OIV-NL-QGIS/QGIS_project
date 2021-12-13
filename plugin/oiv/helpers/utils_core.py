@@ -221,6 +221,9 @@ def get_attributes(foreignKey, childFeature, snapAngle, input_id, drawLayer, whi
         childFeature.initAttributes(fields.count())
         childFeature.setFields(fields)
         #invullen van label, foreignkey en rotatie op de juiste plaats in childFeature
+        field_index = fields.indexFromName('applicatie')
+        if field_index != -1:
+            childFeature['applicatie'] = 'OIV'
         if attrs[1]:
             if str(input_id).isdigit():
                 childFeature[attrs[1]] = int(input_id)
