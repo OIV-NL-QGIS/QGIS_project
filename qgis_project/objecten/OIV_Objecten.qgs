@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="joost" projectname="OIV - Objecten v3.3.8 - Eindhoven" saveDateTime="2021-12-13T15:29:33" saveUserFull="Joost Deen" version="3.16.4-Hannover">
+<qgis saveUser="joost" projectname="OIV - Objecten v3.3.8 - Eindhoven" saveDateTime="2021-12-13T18:06:20" saveUserFull="Joost Deen" version="3.16.4-Hannover">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.8 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -214,7 +214,7 @@
     </layer-tree-group>
     <layer-tree-group name="Basisregistratie" expanded="0" checked="Qt::Checked">
       <customproperties/>
-      <layer-tree-group mutually-exclusive-child="1" name="BAG" mutually-exclusive="1" expanded="0" checked="Qt::Checked">
+      <layer-tree-group mutually-exclusive-child="1" name="BAG" mutually-exclusive="1" expanded="1" checked="Qt::Checked">
         <customproperties/>
         <layer-tree-layer name="BAG panden - PDOK" source=" pagingEnabled='true' restrictToRequestBBOX='1' srsname='EPSG:28992' typename='bag:pand' url='https://geodata.nationaalgeoregister.nl/bag/wfs/v1_1' version='2.0.0' " legend_exp="" legend_split_behavior="0" id="pand_b8b77da3_8f18_441a_8357_bbd0efcbae6d" patch_size="0,0" checked="Qt::Unchecked" expanded="0" providerKey="WFS">
           <customproperties/>
@@ -686,10 +686,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>54574.30818939873279305</xmin>
-      <ymin>424373.63516584876924753</ymin>
-      <xmax>54721.34713588310842169</xmax>
-      <ymax>424475.8794470988214016</ymax>
+      <xmin>54522.14380579727730947</xmin>
+      <ymin>424389.10564212221652269</ymin>
+      <xmax>54632.42301566056994488</xmax>
+      <ymax>424465.78885305975563824</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -918,7 +918,7 @@
       </legendlayer>
     </legendgroup>
     <legendgroup name="Basisregistratie" open="false" checked="Qt::Checked">
-      <legendgroup name="BAG" open="false" checked="Qt::Checked">
+      <legendgroup name="BAG" open="true" checked="Qt::Checked">
         <legendlayer drawingOrder="-1" name="BAG panden - PDOK" open="false" checked="Qt::Unchecked" showFeatureCount="0">
           <filegroup hidden="false" open="false">
             <legendlayerfile layerid="pand_b8b77da3_8f18_441a_8357_bbd0efcbae6d" visible="0" isInOverview="0"/>
@@ -12115,8 +12115,8 @@ def my_form_open(dialog, layer, feature):
       <extent>
         <xmin>50611.08527083609806141</xmin>
         <ymin>410681.22520000097574666</ymin>
-        <xmax>127509.2878488330024993</xmax>
-        <ymax>503679.82953394297510386</ymax>
+        <xmax>102700.58720000099856406</xmax>
+        <ymax>451444.49639999901410192</ymax>
       </extent>
       <id>bouwlaag_ruimten20180905142047305</id>
       <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_ruimten" (geom) sql=bouwlaag = 1</datasource>
@@ -13290,8 +13290,8 @@ def my_form_open(dialog, layer, feature):
       <extent>
         <xmin>50605.5585709169972688</xmin>
         <ymin>410579.05550000100629404</ymin>
-        <xmax>127518.20101309000165202</xmax>
-        <ymax>503686.84618476300965995</ymax>
+        <xmax>118905.72763007499452215</xmax>
+        <ymax>492908.91772790398681536</ymax>
       </extent>
       <id>bouwlaag_veiligh_bouwk20180905151458681</id>
       <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table="objecten"."bouwlaag_veiligh_bouwk" (geom) sql=bouwlaag = 1</datasource>
@@ -14352,8 +14352,8 @@ def my_form_open(dialog, layer, feature):
       <extent>
         <xmin>50595.51799999999639113</xmin>
         <ymin>410573.53400000202236697</ymin>
-        <xmax>127518.14800000000104774</xmax>
-        <ymax>503686.84700000000884756</ymax>
+        <xmax>118906.71939828500035219</xmax>
+        <ymax>492909.31734003097517416</ymax>
       </extent>
       <id>bouwlagen20180226231427375</id>
       <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table="objecten"."bouwlagen" (geom) sql=bouwlaag = 1</datasource>
@@ -30065,10 +30065,10 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer maxScale="1" hasScaleBasedVisibilityFlag="1" type="vector" wkbType="Polygon" geometry="Polygon" readOnly="0" autoRefreshTime="0" simplifyAlgorithm="0" simplifyLocal="1" minScale="25000" labelsEnabled="0" simplifyDrawingHints="1" refreshOnNotifyEnabled="0" simplifyDrawingTol="1" autoRefreshEnabled="0" refreshOnNotifyMessage="" simplifyMaxScale="1" styleCategories="AllStyleCategories">
       <extent>
-        <xmin>-15138.13021298497915268</xmin>
-        <ymin>247856.99768816394498572</ymin>
-        <xmax>296808.13331797893624753</xmax>
-        <ymax>862522.18415786826517433</ymax>
+        <xmin>31183.57400000000052387</xmin>
+        <ymin>315215.82099999999627471</ymin>
+        <xmax>276502.25300000002607703</xmax>
+        <ymax>604952.56799999997019768</ymax>
       </extent>
       <id>pand_b8b77da3_8f18_441a_8357_bbd0efcbae6d</id>
       <datasource> pagingEnabled='true' restrictToRequestBBOX='1' srsname='EPSG:28992' typename='bag:pand' url='https://geodata.nationaalgeoregister.nl/bag/wfs/v1_1' version='2.0.0' </datasource>
@@ -42578,7 +42578,225 @@ def closeProject():&#xd;    pass</pythonCode>
       <Option value="collection" name="type" type="QString"/>
     </Option>
   </dataDefinedServerProperties>
-  <visibility-presets/>
+  <visibility-presets>
+    <visibility-preset has-expanded-info="1" name="Bouwlagen" has-checked-group-info="1">
+      <layer visible="0" style="standaard" id="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b" expanded="1"/>
+      <expanded-legend-nodes id="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b"/>
+      <layer visible="0" style="standaard" id="werkvoorraad_hulplijnen_dd5fe981_cb08_47d5_bbef_debf35809452" expanded="1"/>
+      <expanded-legend-nodes id="werkvoorraad_hulplijnen_dd5fe981_cb08_47d5_bbef_debf35809452"/>
+      <layer visible="0" style="standaard" id="werkvoorraad_punt_0d6860d7_17cb_486c_a441_c3fc2cb7b1fc" expanded="0"/>
+      <checked-legend-nodes id="werkvoorraad_punt_0d6860d7_17cb_486c_a441_c3fc2cb7b1fc">
+        <checked-legend-node id="{b0a2f4ed-a819-4af1-b604-687956290a7d}"/>
+        <checked-legend-node id="{55e1e2cf-28da-4630-9d05-4f4ee7026b72}"/>
+        <checked-legend-node id="{1362b051-7179-4908-8945-6dc57bc97910}"/>
+        <checked-legend-node id="{c4073de9-1993-4165-aeeb-f40b75c5e68f}"/>
+        <checked-legend-node id="{853bbb96-e5b1-4e5b-9b06-0bc4c21f7177}"/>
+      </checked-legend-nodes>
+      <expanded-legend-nodes id="werkvoorraad_punt_0d6860d7_17cb_486c_a441_c3fc2cb7b1fc"/>
+      <layer visible="0" style="standaard" id="werkvoorraad_lijn_0c6ded7b_239d_4be8_801c_67405bc2deab" expanded="0"/>
+      <expanded-legend-nodes id="werkvoorraad_lijn_0c6ded7b_239d_4be8_801c_67405bc2deab"/>
+      <layer visible="0" style="standaard" id="werkvoorraad_vlak_821016ac_ba60_434b_b11b_6b2486e119ed" expanded="0"/>
+      <expanded-legend-nodes id="werkvoorraad_vlak_821016ac_ba60_434b_b11b_6b2486e119ed"/>
+      <layer visible="0" style="standaard" id="Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f" expanded="0"/>
+      <checked-legend-nodes id="Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f">
+        <checked-legend-node id="{b0a2f4ed-a819-4af1-b604-687956290a7d}"/>
+        <checked-legend-node id="{55e1e2cf-28da-4630-9d05-4f4ee7026b72}"/>
+        <checked-legend-node id="{c4073de9-1993-4165-aeeb-f40b75c5e68f}"/>
+        <checked-legend-node id="{67357019-a11f-4e01-a355-7c930a7b5812}"/>
+      </checked-legend-nodes>
+      <expanded-legend-nodes id="Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f"/>
+      <layer visible="0" style="standaard" id="Werkvoorraad_bouwlaag___lijn_b4ab5737_c288_45ad_a319_4ff45f4001dc" expanded="0"/>
+      <expanded-legend-nodes id="Werkvoorraad_bouwlaag___lijn_b4ab5737_c288_45ad_a319_4ff45f4001dc"/>
+      <layer visible="0" style="standaard" id="Werkvoorraad_vlak_676cac37_0e3b_49e2_b434_635ddd6bac72" expanded="0"/>
+      <expanded-legend-nodes id="Werkvoorraad_vlak_676cac37_0e3b_49e2_b434_635ddd6bac72"/>
+      <layer visible="1" style="standaard" id="bouwlaag_afw_binnendekking20180911161155176" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_afw_binnendekking20180911161155176"/>
+      <layer visible="1" style="standaard" id="bouwlaag_veiligh_install20180905164515399" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_veiligh_install20180905164515399"/>
+      <layer visible="1" style="standaard" id="bouwlaag_ingang_bouwlaag20180906201337250" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_ingang_bouwlaag20180906201337250"/>
+      <layer visible="1" style="standaard" id="bouwlaag_sleutelkluis_bouwlaag20180906202953370" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_sleutelkluis_bouwlaag20180906202953370"/>
+      <layer visible="1" style="standaard" id="bouwlaag_opslag20171206142819813" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_opslag20171206142819813"/>
+      <layer visible="1" style="standaard" id="bouwlaag_dreiging20180906174253505" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_dreiging20180906174253505"/>
+      <layer visible="1" style="standaard" id="bouwlaag_label20171206134310954" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_label20171206134310954"/>
+      <layer visible="1" style="standaard" id="bouwlaag_veiligh_bouwk20180905151458681" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_veiligh_bouwk20180905151458681"/>
+      <layer visible="1" style="standaard" id="bouwlaag_ruimten20180905142047305" expanded="0"/>
+      <expanded-legend-nodes id="bouwlaag_ruimten20180905142047305"/>
+      <layer visible="1" style="standaard" id="bouwlagen20180226231427375" expanded="0"/>
+      <expanded-legend-nodes id="bouwlagen20180226231427375"/>
+      <layer visible="0" style="standaard" id="alternatieve20171110074120161" expanded="0"/>
+      <expanded-legend-nodes id="alternatieve20171110074120161"/>
+      <layer visible="0" style="standaard" id="brandkraan_2017_120170504220758524" expanded="0"/>
+      <checked-legend-nodes id="brandkraan_2017_120170504220758524">
+        <checked-legend-node id="{1ed915dc-fe26-4cb8-afd4-0b2748f8df54}"/>
+        <checked-legend-node id="{7887c401-1b26-48f3-9727-7f6ba126bd29}"/>
+        <checked-legend-node id="{1a57df51-c891-4db4-b172-d6a29965e3df}"/>
+        <checked-legend-node id="{f110b15b-82fd-4ba9-b581-0ad3f6b76ef0}"/>
+        <checked-legend-node id="{5259e623-94e4-48c8-ac03-8880571e7317}"/>
+        <checked-legend-node id="{60529d84-ceb0-40a7-a4b2-64d15a641f98}"/>
+        <checked-legend-node id="{12008753-ac5b-4be6-a045-60a79ff14f65}"/>
+        <checked-legend-node id="{6e122b49-af65-464f-96d5-c3a3830fc36f}"/>
+        <checked-legend-node id="{e6105741-6422-4950-ac22-a29d2a94f537}"/>
+        <checked-legend-node id="{c8e223d7-d7b7-4bbf-a6e3-6c94695778ff}"/>
+      </checked-legend-nodes>
+      <expanded-legend-nodes id="brandkraan_2017_120170504220758524"/>
+      <layer visible="0" style="standaard" id="veiligh_ruimtelijk20180912181737656" expanded="0"/>
+      <expanded-legend-nodes id="veiligh_ruimtelijk20180912181737656"/>
+      <layer visible="0" style="standaard" id="ingang_object20180912142318108" expanded="0"/>
+      <expanded-legend-nodes id="ingang_object20180912142318108"/>
+      <layer visible="0" style="standaard" id="ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152" expanded="0"/>
+      <expanded-legend-nodes id="ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152"/>
+      <layer visible="0" style="standaard" id="object_points_of_interest_c8201bff_1789_4706_b2f1_5fb28f3c2a0c" expanded="0"/>
+      <expanded-legend-nodes id="object_points_of_interest_c8201bff_1789_4706_b2f1_5fb28f3c2a0c"/>
+      <layer visible="0" style="standaard" id="opstelplaats20180831134019368" expanded="0"/>
+      <expanded-legend-nodes id="opstelplaats20180831134019368"/>
+      <layer visible="0" style="standaard" id="gevaarlijkestof_opslag_object20180921133701908" expanded="0"/>
+      <expanded-legend-nodes id="gevaarlijkestof_opslag_object20180921133701908"/>
+      <layer visible="0" style="standaard" id="dreiging_ruimtelijk20180912203007764" expanded="0"/>
+      <expanded-legend-nodes id="dreiging_ruimtelijk20180912203007764"/>
+      <layer visible="0" style="standaard" id="label_object20180912203855251" expanded="0"/>
+      <expanded-legend-nodes id="label_object20180912203855251"/>
+      <layer visible="0" style="standaard" id="bereikbaarheid20180831134019212" expanded="0"/>
+      <expanded-legend-nodes id="bereikbaarheid20180831134019212"/>
+      <layer visible="0" style="standaard" id="object_gebiedsgerichte_aanpak_e08cb0f0_bb98_4c52_b50a_e829ff0ef5ec" expanded="0"/>
+      <expanded-legend-nodes id="object_gebiedsgerichte_aanpak_e08cb0f0_bb98_4c52_b50a_e829ff0ef5ec"/>
+      <layer visible="0" style="standaard" id="sectoren20190320103814390" expanded="0"/>
+      <expanded-legend-nodes id="sectoren20190320103814390"/>
+      <layer visible="0" style="standaard" id="object_isolijnen_87f1aee5_d4cb_4f4e_bae8_28383f71d550" expanded="1"/>
+      <expanded-legend-nodes id="object_isolijnen_87f1aee5_d4cb_4f4e_bae8_28383f71d550"/>
+      <layer visible="0" style="standaard" id="bag_extent20180222160304157" expanded="0"/>
+      <checked-legend-nodes id="bag_extent20180222160304157">
+        <checked-legend-node id="{6acc8ae4-20cd-44b5-bd9d-2b3867fcf940}"/>
+        <checked-legend-node id="{39ae65b0-4c4d-4a2c-9946-cc14687b99b4}"/>
+        <checked-legend-node id="{4b7f5031-8477-4a42-ba88-8cb664a81253}"/>
+        <checked-legend-node id="{6015b2b2-f081-44b0-b27e-24f36fbe2dff}"/>
+        <checked-legend-node id="{b9eab4ec-5b8c-4191-9759-d24b3e43a635}"/>
+        <checked-legend-node id="{f95621b5-ed63-41a0-8d02-de189f3e0ea9}"/>
+      </checked-legend-nodes>
+      <expanded-legend-nodes id="bag_extent20180222160304157"/>
+      <layer visible="0" style="standaard" id="terrein_eff10e61_89d2_4362_801d_84f487d77852" expanded="0"/>
+      <expanded-legend-nodes id="terrein_eff10e61_89d2_4362_801d_84f487d77852"/>
+      <layer visible="0" style="standaard" id="schade_cirkel_calc20170912163056737" expanded="0"/>
+      <expanded-legend-nodes id="schade_cirkel_calc20170912163056737"/>
+      <layer visible="0" style="standaard" id="grid_33a2aa94_9575_44b1_a5be_645450b0209f" expanded="0"/>
+      <expanded-legend-nodes id="grid_33a2aa94_9575_44b1_a5be_645450b0209f"/>
+      <layer visible="0" style="standaard" id="veiligheidsregio_huidig_119f3d68_317c_465f_b0c3_945aa8fdc70a" expanded="1"/>
+      <expanded-legend-nodes id="veiligheidsregio_huidig_119f3d68_317c_465f_b0c3_945aa8fdc70a"/>
+      <layer visible="0" style="standaard" id="aanwezigepersonen20160318144720364" expanded="0"/>
+      <expanded-legend-nodes id="aanwezigepersonen20160318144720364"/>
+      <layer visible="0" style="standaard" id="bedrijfshulpverlening20180831134019090" expanded="0"/>
+      <expanded-legend-nodes id="bedrijfshulpverlening20180831134019090"/>
+      <layer visible="0" style="standaard" id="beheersmaatregelen_48555118_d318_4195_9701_f63c25dc000a" expanded="0"/>
+      <expanded-legend-nodes id="beheersmaatregelen_48555118_d318_4195_9701_f63c25dc000a"/>
+      <layer visible="0" style="standaard" id="contactpersoon20180831134019293" expanded="0"/>
+      <expanded-legend-nodes id="contactpersoon20180831134019293"/>
+      <layer visible="0" style="standaard" id="gebruiksfunctie_57c4ede5_12d4_40c0_8753_a22a92056fb3" expanded="0"/>
+      <expanded-legend-nodes id="gebruiksfunctie_57c4ede5_12d4_40c0_8753_a22a92056fb3"/>
+      <layer visible="0" style="standaard" id="gevaarlijkestof20161202091301168" expanded="0"/>
+      <expanded-legend-nodes id="gevaarlijkestof20161202091301168"/>
+      <layer visible="0" style="standaard" id="schade_cirkel20170912115929499" expanded="0"/>
+      <expanded-legend-nodes id="schade_cirkel20170912115929499"/>
+      <layer visible="0" style="standaard" id="historie_matrix20160318144728721" expanded="0"/>
+      <expanded-legend-nodes id="historie_matrix20160318144728721"/>
+      <layer visible="0" style="standaard" id="scenario20180831134019441" expanded="0"/>
+      <expanded-legend-nodes id="scenario20180831134019441"/>
+      <layer visible="0" style="standaard" id="veilighv_org20180831134019505" expanded="0"/>
+      <expanded-legend-nodes id="veilighv_org20180831134019505"/>
+      <layer visible="0" style="standaard" id="aanwezig_groep20160901131742358" expanded="0"/>
+      <expanded-legend-nodes id="aanwezig_groep20160901131742358"/>
+      <layer visible="0" style="standaard" id="afw_binnendekking_type_2db495a9_2aab_455c_b513_c7e457e05c2b" expanded="1"/>
+      <expanded-legend-nodes id="afw_binnendekking_type_2db495a9_2aab_455c_b513_c7e457e05c2b"/>
+      <layer visible="0" style="standaard" id="alternatieve_type_bfa3175e_2396_479e_bd67_f2c306e9528c" expanded="1"/>
+      <expanded-legend-nodes id="alternatieve_type_bfa3175e_2396_479e_bd67_f2c306e9528c"/>
+      <layer visible="0" style="standaard" id="beheersmaatregelen_inzetfase_0a48da0c_c20d_4a98_8fa7_bfb8dfeadeb6" expanded="1"/>
+      <expanded-legend-nodes id="beheersmaatregelen_inzetfase_0a48da0c_c20d_4a98_8fa7_bfb8dfeadeb6"/>
+      <layer visible="0" style="standaard" id="bereikbaarheid_type_f0052b16_3bed_4f4f_87d5_1265b67a1f00" expanded="1"/>
+      <expanded-legend-nodes id="bereikbaarheid_type_f0052b16_3bed_4f4f_87d5_1265b67a1f00"/>
+      <layer visible="0" style="standaard" id="bodemgesteldheid_type_65aa16b7_5582_4cce_bebc_bfc4c96db00b" expanded="0"/>
+      <expanded-legend-nodes id="bodemgesteldheid_type_65aa16b7_5582_4cce_bebc_bfc4c96db00b"/>
+      <layer visible="0" style="standaard" id="contactpersoon_type_7b38d7ec_8db0_44da_bde8_d233c186dd54" expanded="1"/>
+      <expanded-legend-nodes id="contactpersoon_type_7b38d7ec_8db0_44da_bde8_d233c186dd54"/>
+      <layer visible="0" style="standaard" id="dreiging_type20180906174253598" expanded="0"/>
+      <expanded-legend-nodes id="dreiging_type20180906174253598"/>
+      <layer visible="0" style="standaard" id="gebiedsgerichte_aanpak_type_52931393_613d_4581_a517_c1bd4697ab5d" expanded="1"/>
+      <expanded-legend-nodes id="gebiedsgerichte_aanpak_type_52931393_613d_4581_a517_c1bd4697ab5d"/>
+      <layer visible="0" style="standaard" id="gebruiksfunctie_type_1c8634c1_c27a_435c_a216_8d05fe821657" expanded="0"/>
+      <expanded-legend-nodes id="gebruiksfunctie_type_1c8634c1_c27a_435c_a216_8d05fe821657"/>
+      <layer visible="0" style="standaard" id="gevaarlijke_stof_eenheid_type_b07ce370_7c72_4dcb_9dbe_88ec4ef0fbc4" expanded="1"/>
+      <expanded-legend-nodes id="gevaarlijke_stof_eenheid_type_b07ce370_7c72_4dcb_9dbe_88ec4ef0fbc4"/>
+      <layer visible="0" style="standaard" id="gevaarlijke_stof_toestand_type_07bb3a1f_7c25_4ce1_95bf_d8e26cbad12c" expanded="1"/>
+      <expanded-legend-nodes id="gevaarlijke_stof_toestand_type_07bb3a1f_7c25_4ce1_95bf_d8e26cbad12c"/>
+      <layer visible="0" style="standaard" id="gevaarlijkestof_schade_cirkel_type_cfd4c287_1bd3_422b_89d5_afa008370409" expanded="1"/>
+      <expanded-legend-nodes id="gevaarlijkestof_schade_cirkel_type_cfd4c287_1bd3_422b_89d5_afa008370409"/>
+      <layer visible="0" style="standaard" id="gevaarlijkestof_vnnr20170418094727593" expanded="0"/>
+      <expanded-legend-nodes id="gevaarlijkestof_vnnr20170418094727593"/>
+      <layer visible="0" style="standaard" id="historie_aanpassing_type_cbdb3f61_69ec_4e6f_a98e_74d69fafe7e0" expanded="1"/>
+      <expanded-legend-nodes id="historie_aanpassing_type_cbdb3f61_69ec_4e6f_a98e_74d69fafe7e0"/>
+      <layer visible="0" style="standaard" id="historie_status_type_32b67d2b_e3ea_4150_97be_e6a1df8dab8b" expanded="1"/>
+      <expanded-legend-nodes id="historie_status_type_32b67d2b_e3ea_4150_97be_e6a1df8dab8b"/>
+      <layer visible="0" style="standaard" id="ingang_bouwlaag_type20180905175306442" expanded="0"/>
+      <expanded-legend-nodes id="ingang_bouwlaag_type20180905175306442"/>
+      <layer visible="0" style="standaard" id="label_type_a3bc848f_23fe_455b_aa54_bee76a645d1b" expanded="1"/>
+      <expanded-legend-nodes id="label_type_a3bc848f_23fe_455b_aa54_bee76a645d1b"/>
+      <layer visible="0" style="standaard" id="maatregel_type_b49f44dd_4b90_4223_9ad2_9dde89589637" expanded="0"/>
+      <expanded-legend-nodes id="maatregel_type_b49f44dd_4b90_4223_9ad2_9dde89589637"/>
+      <layer visible="0" style="standaard" id="historie_matrix_code_97cd78bc_a0e2_4d0a_b391_1d64f3dca086" expanded="1"/>
+      <expanded-legend-nodes id="historie_matrix_code_97cd78bc_a0e2_4d0a_b391_1d64f3dca086"/>
+      <layer visible="0" style="standaard" id="object_type_0ae4a246_361b_43bb_b99b_a7b8ace884ac" expanded="1"/>
+      <expanded-legend-nodes id="object_type_0ae4a246_361b_43bb_b99b_a7b8ace884ac"/>
+      <layer visible="0" style="standaard" id="veiligh_bouwk_type_9054db62_50ef_4cdb_a29d_f5d2f5ba0b50" expanded="1"/>
+      <expanded-legend-nodes id="veiligh_bouwk_type_9054db62_50ef_4cdb_a29d_f5d2f5ba0b50"/>
+      <layer visible="0" style="standaard" id="opstelplaats_type_f1566015_27bc_4385_a07e_57746e95147d" expanded="1"/>
+      <expanded-legend-nodes id="opstelplaats_type_f1566015_27bc_4385_a07e_57746e95147d"/>
+      <layer visible="0" style="standaard" id="points_of_interest_type_80da9793_76ba_4b5a_8ceb_526e5a524e82" expanded="1"/>
+      <expanded-legend-nodes id="points_of_interest_type_80da9793_76ba_4b5a_8ceb_526e5a524e82"/>
+      <layer visible="0" style="standaard" id="ruimten_type20180905140945630" expanded="0"/>
+      <expanded-legend-nodes id="ruimten_type20180905140945630"/>
+      <layer visible="0" style="standaard" id="scenario_type20180831134019473" expanded="0"/>
+      <expanded-legend-nodes id="scenario_type20180831134019473"/>
+      <layer visible="0" style="standaard" id="sectoren_type_c5c9981b_e995_49f1_8b71_0402bce9e8c8" expanded="1"/>
+      <expanded-legend-nodes id="sectoren_type_c5c9981b_e995_49f1_8b71_0402bce9e8c8"/>
+      <layer visible="0" style="standaard" id="sleuteldoel_type20180906201338797" expanded="0"/>
+      <expanded-legend-nodes id="sleuteldoel_type20180906201338797"/>
+      <layer visible="0" style="standaard" id="sleutelkluis_type20180906201339140" expanded="0"/>
+      <expanded-legend-nodes id="sleutelkluis_type20180906201339140"/>
+      <layer visible="0" style="standaard" id="styles_ba4f38cf_3554_4388_932d_2489c12d91c4" expanded="0"/>
+      <expanded-legend-nodes id="styles_ba4f38cf_3554_4388_932d_2489c12d91c4"/>
+      <layer visible="0" style="standaard" id="gebruiker20160826152743464" expanded="0"/>
+      <expanded-legend-nodes id="gebruiker20160826152743464"/>
+      <layer visible="0" style="standaard" id="veiligh_bouwk_type_221983db_7bf2_4b8f_9f81_5eb9f1aa4a8d" expanded="1"/>
+      <expanded-legend-nodes id="veiligh_bouwk_type_221983db_7bf2_4b8f_9f81_5eb9f1aa4a8d"/>
+      <layer visible="0" style="standaard" id="veiligh_install_type20180905155257378" expanded="0"/>
+      <expanded-legend-nodes id="veiligh_install_type20180905155257378"/>
+      <layer visible="0" style="standaard" id="veiligh_ruimtelijk_type20180912181737562" expanded="0"/>
+      <expanded-legend-nodes id="veiligh_ruimtelijk_type20180912181737562"/>
+      <layer visible="0" style="standaard" id="veilighv_org_type_b64382c0_0b3b_41a6_8303_9689d5a60e5c" expanded="1"/>
+      <expanded-legend-nodes id="veilighv_org_type_b64382c0_0b3b_41a6_8303_9689d5a60e5c"/>
+      <layer visible="1" style="standaard" id="opentopo_6d564ab7_6295_45ed_8b83_3042f6702823" expanded="0"/>
+      <expanded-legend-nodes id="opentopo_6d564ab7_6295_45ed_8b83_3042f6702823"/>
+      <layer visible="0" style="standaard" id="top25raster_446e3d45_daad_4d1d_b422_9bbba536782c" expanded="1"/>
+      <expanded-legend-nodes id="top25raster_446e3d45_daad_4d1d_b422_9bbba536782c"/>
+      <layer visible="0" style="standaard" id="top10nlv2_c1b0ecdc_59a5_430c_8c5f_055007e3c4b3" expanded="1"/>
+      <expanded-legend-nodes id="top10nlv2_c1b0ecdc_59a5_430c_8c5f_055007e3c4b3"/>
+      <checked-group-nodes>
+        <checked-group-node id="Management lagen/Stand van zaken"/>
+        <checked-group-node id="Basisregistratie/BAG"/>
+        <checked-group-node id="Achtergrondkaarten"/>
+        <checked-group-node id="Bouwlaag"/>
+      </checked-group-nodes>
+      <expanded-group-nodes>
+        <expanded-group-node id="Management lagen/Stand van zaken"/>
+        <expanded-group-node id="Basisregistratie/BAG"/>
+        <expanded-group-node id="Achtergrondkaarten"/>
+        <expanded-group-node id="Bouwlaag"/>
+      </expanded-group-nodes>
+    </visibility-preset>
+  </visibility-presets>
   <transformContext>
     <srcDest coordinateOp="+proj=pipeline +step +inv +proj=webmerc +lat_0=0 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +step +proj=push +v_3 +step +proj=cart +ellps=WGS84 +step +inv +proj=helmert +x=565.2369 +y=50.0087 +z=465.658 +rx=0.406857330322398 +ry=-0.350732676542563 +rz=1.8703473836068 +s=4.0812 +convention=coordinate_frame +step +inv +proj=cart +ellps=bessel +step +proj=pop +v_3 +step +proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel" allowFallback="1">
       <src>
@@ -53186,7 +53404,7 @@ def closeProject():&#xd;    pass</pythonCode>
         </LayoutItem>
         <GuideCollection visible="1"/>
       </PageCollection>
-      <LayoutItem type="65646" segmentMillimeters="17.856" zValue="4" labelBarSpace="3" referencePoint="0" position="7.2428,196.7,mm" itemRotation="0" opacity="1" groupUuid="" numSegmentsLeft="0" labelHorizontalPlacement="0" unitLabel="m" excludeFromExports="0" positionOnPage="7.2428,196.7,mm" minBarWidth="50" numSegments="5" lineCapStyle="square" frame="false" positionLock="false" size="103.426,12.3,mm" frameJoinStyle="miter" alignment="0" blendMode="0" outlineWidth="0.3" numUnitsPerSegment="20" maxBarWidth="150" numMapUnitsPerScaleBarUnit="1" uuid="{06c476d2-2435-493a-b125-aa3e0bc18527}" background="false" segmentSizeMode="0" subdivisionsHeight="1.5" mapUuid="{86cf9c9c-406f-42d4-8b2d-6ad5acaa0753}" id="" visibility="1" lineJoinStyle="miter" outlineWidthM="0.3,mm" numSubdivisions="1" templateUuid="{06c476d2-2435-493a-b125-aa3e0bc18527}" height="2" unitType="meters" style="Single Box" labelVerticalPlacement="0" boxContentSpace="1">
+      <LayoutItem type="65646" segmentMillimeters="27.2352" zValue="4" labelBarSpace="3" referencePoint="0" position="7.2428,196.7,mm" itemRotation="0" opacity="1" groupUuid="" numSegmentsLeft="0" labelHorizontalPlacement="0" unitLabel="m" excludeFromExports="0" positionOnPage="7.2428,196.7,mm" minBarWidth="50" numSegments="5" lineCapStyle="square" frame="false" positionLock="false" size="148.878,12.3,mm" frameJoinStyle="miter" alignment="0" blendMode="0" outlineWidth="0.3" numUnitsPerSegment="10" maxBarWidth="150" numMapUnitsPerScaleBarUnit="1" uuid="{06c476d2-2435-493a-b125-aa3e0bc18527}" background="false" segmentSizeMode="0" subdivisionsHeight="1.5" mapUuid="{86cf9c9c-406f-42d4-8b2d-6ad5acaa0753}" id="" visibility="1" lineJoinStyle="miter" outlineWidthM="0.3,mm" numSubdivisions="1" templateUuid="{06c476d2-2435-493a-b125-aa3e0bc18527}" height="2" unitType="meters" style="Single Box" labelVerticalPlacement="0" boxContentSpace="1">
         <FrameColor red="0" alpha="255" green="0" blue="0"/>
         <BackgroundColor red="255" alpha="255" green="255" blue="255"/>
         <LayoutObject>
@@ -53377,7 +53595,7 @@ def closeProject():&#xd;    pass</pythonCode>
           </symbol>
         </fillSymbol2>
       </LayoutItem>
-      <LayoutItem labelText="[% &quot;formelenaam&quot;%]" groupUuid="" referencePoint="0" type="65641" templateUuid="{d451f0c3-7be5-4ca4-8a7a-c30cdc6f5a88}" htmlState="0" marginX="0" itemRotation="0" id="" positionOnPage="3.86898,2.84431,mm" position="3.86898,2.84431,mm" marginY="0" visibility="1" uuid="{d451f0c3-7be5-4ca4-8a7a-c30cdc6f5a88}" size="290.31,11.4009,mm" outlineWidthM="0.3,mm" frameJoinStyle="miter" zValue="3" excludeFromExports="0" background="false" blendMode="0" opacity="1" frame="false" positionLock="false" halign="8" valign="32">
+      <LayoutItem labelText="[%'Bouwlaag: ' ||  &quot;bouwlaag&quot; %]" groupUuid="" referencePoint="0" type="65641" templateUuid="{d451f0c3-7be5-4ca4-8a7a-c30cdc6f5a88}" htmlState="0" marginX="0" itemRotation="0" id="" positionOnPage="3.86898,2.84431,mm" position="3.86898,2.84431,mm" marginY="0" visibility="1" uuid="{d451f0c3-7be5-4ca4-8a7a-c30cdc6f5a88}" size="290.31,11.4009,mm" outlineWidthM="0.3,mm" frameJoinStyle="miter" zValue="3" excludeFromExports="0" background="false" blendMode="0" opacity="1" frame="false" positionLock="false" halign="8" valign="32">
         <FrameColor red="0" alpha="255" green="0" blue="0"/>
         <BackgroundColor red="255" alpha="255" green="255" blue="255"/>
         <LayoutObject>
@@ -53407,7 +53625,7 @@ def closeProject():&#xd;    pass</pythonCode>
           <customproperties/>
         </LayoutObject>
       </LayoutItem>
-      <LayoutItem groupUuid="" referencePoint="0" followPresetName="" type="65639" templateUuid="{86cf9c9c-406f-42d4-8b2d-6ad5acaa0753}" mapRotation="0" itemRotation="0" keepLayerSet="true" id="" positionOnPage="0,0,mm" position="0,0,mm" visibility="1" uuid="{86cf9c9c-406f-42d4-8b2d-6ad5acaa0753}" size="297,210,mm" outlineWidthM="0.3,mm" frameJoinStyle="miter" zValue="1" labelMargin="0,mm" excludeFromExports="0" followPreset="false" background="true" blendMode="0" opacity="1" mapFlags="0" isTemporal="0" frame="false" positionLock="false" drawCanvasItems="true">
+      <LayoutItem groupUuid="" referencePoint="0" followPresetName="Bouwlagen" type="65639" templateUuid="{86cf9c9c-406f-42d4-8b2d-6ad5acaa0753}" mapRotation="0" itemRotation="0" keepLayerSet="false" id="" positionOnPage="0,0,mm" position="0,0,mm" visibility="1" uuid="{86cf9c9c-406f-42d4-8b2d-6ad5acaa0753}" size="297,210,mm" outlineWidthM="0.3,mm" frameJoinStyle="miter" zValue="1" labelMargin="0,mm" excludeFromExports="0" followPreset="true" background="true" blendMode="0" opacity="1" mapFlags="0" isTemporal="0" frame="false" positionLock="false" drawCanvasItems="true">
         <FrameColor red="0" alpha="255" green="0" blue="0"/>
         <BackgroundColor red="255" alpha="255" green="255" blue="255"/>
         <LayoutObject>
@@ -53420,36 +53638,9 @@ def closeProject():&#xd;    pass</pythonCode>
           </dataDefinedProperties>
           <customproperties/>
         </LayoutObject>
-        <Extent ymin="434997.98138473636936396" ymax="435233.19581526436377317" xmax="81472.85055444469617214" xmin="81140.19014555508329067"/>
-        <LayerSet>
-          <Layer provider="postgres" name="Objecten" source="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom)">objectgegevens20160318144112880</Layer>
-          <Layer provider="postgres" name="Afwijkende binnendekking" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_afw_binnendekking&quot; (geom) sql=bouwlaag = 1">bouwlaag_afw_binnendekking20180911161155176</Layer>
-          <Layer provider="postgres" name="Installatietechnische veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_install&quot; (geom) sql=bouwlaag = 1">bouwlaag_veiligh_install20180905164515399</Layer>
-          <Layer provider="postgres" name="Ingang bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ingang&quot; (geom) sql=bouwlaag = 1">bouwlaag_ingang_bouwlaag20180906201337250</Layer>
-          <Layer provider="postgres" name="Sleutelkluis bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_sleutelkluis&quot; (geom) sql=bouwlaag = 1">bouwlaag_sleutelkluis_bouwlaag20180906202953370</Layer>
-          <Layer provider="postgres" name="Opslag stoffen bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_opslag&quot; (geom) sql=bouwlaag = 1">bouwlaag_opslag20171206142819813</Layer>
-          <Layer provider="postgres" name="Dreiging bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_dreiging&quot; (geom) sql=bouwlaag = 1">bouwlaag_dreiging20180906174253505</Layer>
-          <Layer provider="postgres" name="Labels bouwlaag" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_label&quot; (geom) sql=bouwlaag = 1">bouwlaag_label20171206134310954</Layer>
-          <Layer provider="postgres" name="Bouwkundige veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_veiligh_bouwk&quot; (geom) sql=bouwlaag = 1">bouwlaag_veiligh_bouwk20180905151458681</Layer>
-          <Layer provider="postgres" name="Ruimten" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_ruimten&quot; (geom) sql=bouwlaag = 1">bouwlaag_ruimten20180905142047305</Layer>
-          <Layer provider="postgres" name="Bouwlagen" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlagen&quot; (geom) sql=bouwlaag = 1">bouwlagen20180226231427375</Layer>
-          <Layer provider="postgres" name="Alternatief bluswater" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;alternatieve&quot; (geom)">alternatieve20171110074120161</Layer>
-          <Layer provider="postgres" name="Brandkranen (alleen-lezen)" source="service='oiv' sslmode=allow key='nummer' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;brandkranen&quot; (geom)">brandkraan_2017_120170504220758524</Layer>
-          <Layer provider="postgres" name="Leidingen (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;bluswater&quot;.&quot;leidingen&quot; (geom)">leidingen_f8765a2a_2685_44e3_9062_a5804129ec78</Layer>
-          <Layer provider="postgres" name="Ruimtelijke veiligheidsvoorzieningen" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_veiligh_ruimtelijk&quot; (geom)">veiligh_ruimtelijk20180912181737656</Layer>
-          <Layer provider="postgres" name="Ingang ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_ingang&quot; (geom)">ingang_object20180912142318108</Layer>
-          <Layer provider="postgres" name="Sleutelkluis ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sleutelkluis&quot; (geom)">ruimtelijk_sleutelkluis_25946475_cb16_4349_b2ac_0ae3953cf152</Layer>
-          <Layer provider="postgres" name="Opstelplaats" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opstelplaats&quot; (geom)">opstelplaats20180831134019368</Layer>
-          <Layer provider="postgres" name="Opslag stoffen ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_opslag&quot; (geom)">gevaarlijkestof_opslag_object20180921133701908</Layer>
-          <Layer provider="postgres" name="Dreiging ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_dreiging&quot; (geom)">dreiging_ruimtelijk20180912203007764</Layer>
-          <Layer provider="postgres" name="Labels ruimtelijk" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_label&quot; (geom)">label_object20180912203855251</Layer>
-          <Layer provider="postgres" name="Bereikbaarheid" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bereikbaarheid&quot; (geom)">bereikbaarheid20180831134019212</Layer>
-          <Layer provider="postgres" name="Sectoren" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sectoren&quot; (geom)">sectoren20190320103814390</Layer>
-          <Layer provider="postgres" name="Schade cirkel (alleen lezen)" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;schade_cirkel_calc&quot; (geom_cirkel)">schade_cirkel_calc20170912163056737</Layer>
-          <Layer provider="postgres" name="Grid" source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_grid&quot; (geom)">grid_33a2aa94_9575_44b1_a5be_645450b0209f</Layer>
-          <Layer provider="wms" name="OpenTopo" source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=opentopo&amp;styles=default&amp;format=image/jpeg&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities">opentopo_6d564ab7_6295_45ed_8b83_3042f6702823</Layer>
-        </LayerSet>
-        <AtlasMap scalingMode="2" atlasDriven="1" margin="0.04"/>
+        <Extent ymin="424384.79999999998835847" ymax="424461.90599999995902181" xmax="54604.49300000000221189" xmin="54495.44299999999930151"/>
+        <LayerSet/>
+        <AtlasMap scalingMode="2" atlasDriven="1" margin="0.5"/>
         <labelBlockingItems/>
         <atlasClippingSettings clippingType="0" enabled="0" restrictLayers="0" forceLabelsInside="0">
           <layersToClip/>
@@ -53460,13 +53651,13 @@ def closeProject():&#xd;    pass</pythonCode>
         <property value="png" key="atlasRasterFormat"/>
         <property value="false" key="singleFile"/>
       </customproperties>
-      <Atlas pageNameExpression="&quot;bouwlaag&quot;" coverageLayerName="Bouwlagen" hideCoverage="0" coverageLayerSource="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlagen&quot; (geom) sql=bouwlaag = 1" enabled="1" sortFeatures="0" coverageLayerProvider="postgres" coverageLayer="bouwlagen20180226231427375" filterFeatures="1" filenamePattern=" &quot;pand_id&quot; || '_bouwlaag_' || &quot;bouwlaag&quot;" featureFilter=" &quot;bouwlaag&quot; = 1 and  &quot;pand_id&quot; =  '0482100001255002' "/>
+      <Atlas pageNameExpression="&quot;bouwlaag&quot;" coverageLayerName="Bouwlagen" hideCoverage="0" coverageLayerSource="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlagen&quot; (geom) sql=bouwlaag = 1" enabled="1" sortFeatures="0" coverageLayerProvider="postgres" coverageLayer="bouwlagen20180226231427375" filterFeatures="1" filenamePattern=" &quot;pand_id&quot; || '_bouwlaag_' || &quot;bouwlaag&quot;" featureFilter="&quot;pand_id&quot;=0511100001944373 and &quot;bouwlaag&quot; = 1"/>
     </Layout>
   </Layouts>
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent ymin="424373.63516584876924753" ymax="424475.8794470988214016" xmax="54820.50511255773744779" xmin="54475.15021272410376696">
+    <DefaultViewExtent ymin="424389.10564212221652269" ymax="424465.78885305975563824" xmax="54675.64788666368258419" xmin="54478.91893479416467017">
       <spatialrefsys>
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +units=m +no_defs</proj4>

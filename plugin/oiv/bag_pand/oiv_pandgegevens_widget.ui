@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>263</width>
-    <height>608</height>
+    <width>583</width>
+    <height>682</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -40,8 +40,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>243</width>
-         <height>566</height>
+         <width>563</width>
+         <height>640</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -297,6 +297,13 @@ border-color: rgba(255, 255, 255, 0);</string>
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="printen">
+            <property name="text">
+             <string>Bouwlagen printen</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="import_2">
