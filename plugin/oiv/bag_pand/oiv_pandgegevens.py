@@ -199,8 +199,9 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         for bouwlaag in arrBouwlagen:
             subString = "bouwlaag = {}".format(bouwlaag)
             UG.set_layer_substring(subString)
-            filterString = '"pand_id"={} and "bouwlaag" = {}'.format(self.pand_id.text(), bouwlaag)
-            PR.load_composer(directory, layoutName, filterString)
+            fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
+            filterString = '"identificatie"={}'.format(self.pand_id.text())
+            PR.load_composer(directory, layoutName, filterString, fileName)
         subString = "bouwlaag = {}".format(bouwlaagOrg)
         UG.set_layer_substring(subString)      
 
