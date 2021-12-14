@@ -98,23 +98,24 @@ def write_layer(layer, features, count=False, check=True):
         else:
             MSG.showMsgBox('invalidgeometry')
 
-def nearest_neighbor(iface, layer, point):
+def nearest_neighbor(layer, geom, geomType, objectId):
     """search the nearest parent feature id"""
-    index = None
     parentId = None
     ifeature = None
-    extent = iface.mapCanvas().extent()
-    # veroorzaakt foutmelding als er niets in het kaartvenster staat, daarom in try/except statement
-    index = QC.QgsSpatialIndex(layer.getFeatures(QC.QgsFeatureRequest(extent)))
-    try:
-        parentId = index.nearestNeighbor(point, 1)[0]
-        request = QC.QgsFeatureRequest(parentId)
-        ifeature = featureRequest(layer, request)
-        if ifeature:
+    dist = 9999
+    if geomType in ("LineString", "Polygon"):
+        geomCtr = geom.centroid()
+    else:
+        geomCtr = geom
+    request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + str(objectId))
+    it = layer.getFeatures(request)
+    for feat in it:
+        parentCtr = feat.geometry().centroid()
+        distance = geomCtr.distance(parentCtr)
+        if distance < dist:
+            dist = distance
             parentId = ifeature["id"]
-    except:  # pylint: disable=bare-except
-        pass
-    return ifeature, parentId
+    return parentId
 
 def request_feature(ifeature, layer_feature_id, layer_name):
     """get feature from specific id"""
@@ -182,20 +183,20 @@ def construct_feature(layerType, parentLayerName, points, objectId, iface):
     parentId = None
     #converteer lijst van punten naar QgsGeometry, afhankelijk van soort geometrie
     if layerType == "Point":
-        tempFeature.setGeometry(QC.QgsGeometry.fromPointXY(points))
-        geom = points
+        geom = QC.QgsGeometry.fromPointXY(points)
+        tempFeature.setGeometry(geom)
     elif layerType == "LineString":
-        tempFeature.setGeometry(QC.QgsGeometry.fromPolylineXY(points))
-        geom = points[0]
+        geom = QC.QgsGeometry.fromPolylineXY(points)
+        tempFeature.setGeometry(geom)
     elif layerType == "Polygon":
-        tempFeature.setGeometry(QC.QgsGeometry.fromPolygonXY([points]))
-        geom = points[0]
+        geom = QC.QgsGeometry.fromPolygonXY([points])
+        tempFeature.setGeometry(geom)
     if parentLayerName != '' and parentLayerName == PC.OBJECT["objectlayername"]:
         parentlayer = getlayer_byname(parentLayerName)
         parentId = int(objectId)
     elif parentLayerName != '' and parentLayerName is not None:
         parentlayer = getlayer_byname(parentLayerName)
-        dummy, parentId = nearest_neighbor(iface, parentlayer, geom)
+        parentId = nearest_neighbor(parentlayer, geom, layerType, objectId)
     elif parentLayerName is None:
         parentId = ''
     else:
