@@ -1,5 +1,3 @@
-import qgis.PyQt.QtWidgets as PQtW
-import qgis.PyQt.QtCore as PQtC
 import qgis.core as QC
 
 def load_composer(output_folder, layout_name, filterString, fileName):
