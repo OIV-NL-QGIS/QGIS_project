@@ -80,7 +80,15 @@ OBJECT = {
     "tekenwidgetui": "oiv_object_tekenen_widget.ui",
     "objectwidgetui": "oiv_repressief_object_widget.ui",
     "bgtviewerurl": "https://verbeterdekaart.kadaster.nl/#?",
-    "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"]
+    "werkvoorraadlayers": ['Werkvoorraad object - punt', 'Werkvoorraad object - lijn', 'Werkvoorraad object - vlak'],
+    "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"],
+    "tablelayertranslate": {
+        "opstelplaats": "Opstelplaats",
+        "dreiging" : "Dreiging ruimtelijk",
+        "Werkvoorraad object - punt": "werkvoorraad_punt",
+        "Werkvoorraad object - lijn": "werkvoorraad_lijn",
+        "Werkvoorraad object - vlak": "werkvoorraad_vlak"
+    }
 }
 
 HELPURL = {

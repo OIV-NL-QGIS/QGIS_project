@@ -299,6 +299,13 @@ border-color: rgba(255, 255, 255, 0);</string>
            </spacer>
           </item>
           <item>
+           <widget class="QPushButton" name="btn_werkvoorraad">
+            <property name="text">
+             <string>Werkvoorraad</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="printen">
             <property name="text">
              <string>Bouwlagen printen</string>

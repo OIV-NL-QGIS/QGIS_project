@@ -15,6 +15,7 @@ import oiv.helpers.messages as MSG
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.qt_helper as QT
 import oiv.helpers.constants as PC
+import oiv.werkvoorraad.oiv_werkvoorraad as OWW
 
 from .oiv_bouwlaag import oivBouwlaagWidget
 from .oiv_tekenen import oivTekenWidget
@@ -70,6 +71,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug.clicked.connect(self.close_object_show_base)
         self.terugmelden.clicked.connect(self.openBagviewer)
         self.delete_f.clicked.connect(self.run_delete)
+        self.btn_werkvoorraad.clicked.connect(self.run_werkvoorraad)
         self.printen.clicked.connect(self.run_print)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
@@ -205,6 +207,13 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         MSG.showMsgBox('print_finished', directory)
         subString = "bouwlaag = {}".format(bouwlaagOrg)
         UG.set_layer_substring(subString)      
+
+    def run_werkvoorraad(self):
+        werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
+        self.iface.addDockWidget(QT.getWidgetType(), werkvoorraadWidget)
+        werkvoorraadWidget.bouwlaagOfObject = 'Bouwlaag'
+        werkvoorraadWidget.show()
+        self.close()
 
     def run_import(self):
         """initiate import widget"""
