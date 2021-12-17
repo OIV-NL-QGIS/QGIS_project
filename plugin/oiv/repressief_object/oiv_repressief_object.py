@@ -109,11 +109,12 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         objectId = self.object_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
         ilayer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
-        ifeature = UC.featureRequest(ilayer, request)
-        if ifeature:
-            self.edit_attribute(ilayer, ifeature)
-        # except StopIteration:
-        #     MSG.showMsgBox('no_objectid')
+        try:
+            ifeature = UC.featureRequest(ilayer, request)
+            if ifeature:
+                self.edit_attribute(ilayer, ifeature)
+        except StopIteration:
+            MSG.showMsgBox('no_objectid')
 
     def open_bgt_viewer(self):
         """open url based on BGT location, i.v.m. terugmelden"""

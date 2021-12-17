@@ -10,6 +10,7 @@ import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
 import oiv.tools.query_bag as QB
 import oiv.tools.stackwidget as SW
+import oiv.tools.print as PR
 import oiv.helpers.messages as MSG
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.qt_helper as QT
@@ -71,6 +72,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terugmelden.clicked.connect(self.openBagviewer)
         self.delete_f.clicked.connect(self.run_delete)
         self.btn_werkvoorraad.clicked.connect(self.run_werkvoorraad)
+        self.printen.clicked.connect(self.run_print)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
         self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["pandhelp"]))
@@ -190,6 +192,21 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             UC.refresh_layers(self.iface)
             #set actieve bouwlaag to 1 and fill combobox
             self.bouwlagen_to_combobox(ifeature.id(), 1)
+            
+    def run_print(self):
+        layoutName = 'print_bouwlagen_pdf_A4'
+        arrBouwlagen = [self.comboBox.itemText(i) for i in range(self.comboBox.count())]
+        directory = PQtW.QFileDialog().getExistingDirectory()
+        bouwlaagOrg = self.comboBox.currentText()
+        for bouwlaag in arrBouwlagen:
+            subString = "bouwlaag = {}".format(bouwlaag)
+            UG.set_layer_substring(subString)
+            fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
+            filterString = '"identificatie"={}'.format(self.pand_id.text())
+            PR.load_composer(directory, layoutName, filterString, fileName)
+        MSG.showMsgBox('print_finished', directory)
+        subString = "bouwlaag = {}".format(bouwlaagOrg)
+        UG.set_layer_substring(subString)      
 
     def run_werkvoorraad(self):
         werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
