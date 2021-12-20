@@ -59,3 +59,11 @@ def get_allkeys_ob(layerName):
 def get_chidlayers_ob():
     query = "SELECT child_layer FROM config_object;"
     return read_settings(query, True)
+
+def get_tablename_ob(layerName):
+    query = "SELECT tablename FROM config_object WHERE child_layer = '{}';".format(layerName)
+    return read_settings(query, False)
+
+def get_tablename_bl(layerName):
+    query = "SELECT tablename FROM config_object WHERE child_layer = '{}';".format(layerName)
+    return read_settings(query, False)

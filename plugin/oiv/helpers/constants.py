@@ -66,7 +66,12 @@ PAND = {
     "tekenwidgetui": "oiv_tekenen_widget.ui",
     "bouwlaagui": "oiv_bouwlaag_widget.ui",
     "pandui": "oiv_pandgegevens_widget.ui",
-    "bagviewerurl": "https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery="
+    "bagviewerurl": "https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery=",
+    "werkvoorraadlayers": [
+        "Hulplijnen bouwlaag",
+        "Werkvoorraad bouwlaag - punt",
+        "Werkvoorraad bouwlaag - lijn",
+        "Werkvoorraad bouwlaag - vlak"]
 }
 
 OBJECT = {

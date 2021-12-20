@@ -196,8 +196,9 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         """Save and place feature on the canvas"""
         parentId = None
         self.iface.setActiveLayer(self.drawLayer)
+        objectId = self.pand_id.text()
         if points:
-            parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, None, self.iface)
+            parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, objectId, self.iface)
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.PAND["configtable"])
             if buttonCheck != 'Cancel':
