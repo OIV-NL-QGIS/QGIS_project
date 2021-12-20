@@ -33,6 +33,13 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
+       <widget class="QPushButton" name="btn_terug">
+        <property name="text">
+         <string>Terug</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -79,9 +86,13 @@ border-color: rgba(255, 255, 255, 0);</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_terug">
+       <widget class="QPushButton" name="select_by_polygon">
         <property name="text">
-         <string>Terug</string>
+         <string>Selecteer via polygoon</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/plugins/oiv/config_files/png/polygonselect.png</normaloff>:/plugins/oiv/config_files/png/polygonselect.png</iconset>
         </property>
        </widget>
       </item>
@@ -219,6 +230,5 @@ border-color: rgba(255, 255, 255, 0);</string>
    </layout>
   </widget>
  </widget>
- <resources/>
  <connections/>
 </ui>

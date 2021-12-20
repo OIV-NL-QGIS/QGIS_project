@@ -71,7 +71,12 @@ PAND = {
         "Hulplijnen bouwlaag",
         "Werkvoorraad bouwlaag - punt",
         "Werkvoorraad bouwlaag - lijn",
-        "Werkvoorraad bouwlaag - vlak"]
+        "Werkvoorraad bouwlaag - vlak"],
+    "tablelayertranslate": {
+        "Werkvoorraad bouwlaag - punt": "werkvoorraad_punt",
+        "Werkvoorraad bouwlaag - lijn": "werkvoorraad_lijn",
+        "Werkvoorraad bouwlaag - vlak": "werkvoorraad_vlak"
+    }
 }
 
 OBJECT = {
@@ -88,8 +93,6 @@ OBJECT = {
     "werkvoorraadlayers": ['Werkvoorraad object - punt', 'Werkvoorraad object - lijn', 'Werkvoorraad object - vlak'],
     "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"],
     "tablelayertranslate": {
-        "opstelplaats": "Opstelplaats",
-        "dreiging" : "Dreiging ruimtelijk",
         "Werkvoorraad object - punt": "werkvoorraad_punt",
         "Werkvoorraad object - lijn": "werkvoorraad_lijn",
         "Werkvoorraad object - vlak": "werkvoorraad_vlak"

@@ -36,6 +36,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface = parent.iface
         self.canvas = parent.canvas
         self.selectTool = parent.selectTool
+        self.polygonSelectTool = parent.polygonSelectTool
         self.pointTool = parent.pointTool
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
@@ -212,9 +213,10 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
         self.iface.addDockWidget(QT.getWidgetType(), werkvoorraadWidget)
         werkvoorraadWidget.bouwlaagOfObject = 'Bouwlaag'
+        werkvoorraadWidget.initUI()
         werkvoorraadWidget.show()
         self.close()
-
+        
     def run_import(self):
         """initiate import widget"""
         importwidget = oivImportFileWidget(self)

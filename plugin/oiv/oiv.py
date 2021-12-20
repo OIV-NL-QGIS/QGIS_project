@@ -17,6 +17,7 @@ import oiv.oiv_config as OC
 import oiv.tools.identifyTool as IT
 import oiv.tools.snappointTool as ST
 import oiv.tools.movepointTool as MT
+import oiv.tools.selectTool as PS
 import oiv.tools.mapTool as CT
 
 # initialize Qt resources from file resources.py
@@ -43,6 +44,7 @@ class oiv(PQtW.QWidget):
         self.pinTool = QG.QgsMapToolEmitPoint(self.canvas)
         self.pointTool = ST.SnapPointTool(self.canvas)
         self.selectTool = IT.SelectTool(self.canvas)
+        self.polygonSelectTool = PS.PolygonSelectTool(self.canvas)
         self.drawTool = CT.CaptureTool(self.canvas)
         self.moveTool = MT.MovePointTool(self.canvas, self.drawLayer)
 

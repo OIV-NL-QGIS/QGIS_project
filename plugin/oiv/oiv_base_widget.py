@@ -32,6 +32,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.pinTool = parent.pinTool
         self.pointTool = parent.pointTool
         self.selectTool = parent.selectTool
+        self.polygonSelectTool = parent.polygonSelectTool
         self.identifyTool = parent.identifyTool
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
