@@ -72,11 +72,17 @@ PAND = {
         "Werkvoorraad bouwlaag - punt",
         "Werkvoorraad bouwlaag - lijn",
         "Werkvoorraad bouwlaag - vlak"],
+}
+
+WERKVOORRAAD = {
     "tablelayertranslate": {
         "Werkvoorraad bouwlaag - punt": "werkvoorraad_punt",
         "Werkvoorraad bouwlaag - lijn": "werkvoorraad_lijn",
-        "Werkvoorraad bouwlaag - vlak": "werkvoorraad_vlak"
-    }
+        "Werkvoorraad bouwlaag - vlak": "werkvoorraad_vlak",
+        "Werkvoorraad object - punt": "werkvoorraad_punt",
+        "Werkvoorraad object - lijn": "werkvoorraad_lijn",
+        "Werkvoorraad object - vlak": "werkvoorraad_vlak"
+    }    
 }
 
 OBJECT = {
@@ -92,11 +98,11 @@ OBJECT = {
     "bgtviewerurl": "https://verbeterdekaart.kadaster.nl/#?",
     "werkvoorraadlayers": ['Werkvoorraad object - punt', 'Werkvoorraad object - lijn', 'Werkvoorraad object - vlak'],
     "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"],
-    "tablelayertranslate": {
-        "Werkvoorraad object - punt": "werkvoorraad_punt",
-        "Werkvoorraad object - lijn": "werkvoorraad_lijn",
-        "Werkvoorraad object - vlak": "werkvoorraad_vlak"
-    }
+}
+
+INFO_INTEREST = {
+    "configtable": "config_info_of_interest",
+    "tekenwidgetui": "oiv_info_of_interest_tekenen_widget.ui"
 }
 
 HELPURL = {

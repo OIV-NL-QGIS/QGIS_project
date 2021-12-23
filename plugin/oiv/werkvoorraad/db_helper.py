@@ -5,10 +5,10 @@ import qgis.core as QC
 import oiv.helpers.constants as PC
 
 layerFields = {
-    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "string"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
+    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
     "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
     "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
-    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "string"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
+    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
     "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
     "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]]
 }
@@ -52,7 +52,7 @@ def get_bouwlagen(objectId):
     close_db_connection(cursor, conn)
     return bouwlagen
 
-def execute_queries(executableFeatures, ilayer, accept):
+def execute_queries(executableFeatures, bouwlaagOfObject, accept):
     conn, cursor = setup_postgisdb_connection()
     for arr in executableFeatures:
         feat = arr[0]
@@ -60,41 +60,52 @@ def execute_queries(executableFeatures, ilayer, accept):
         layerName = ilayer.name()
         operatie = feat['operatie']
         update_accepted(layerName, accept, cursor, conn)
-        if accept and operatie == 'INSERT':
-            insert_feature(feat, cursor, layerName)
+        #if accept and operatie == 'INSERT':
+        #    insert_feature(feat, cursor, layerName)
+        #    conn.commit()
         if accept and operatie == 'UPDATE':
-            update_feature(feat, cursor, layerName)
+            result = update_feature(feat, cursor, conn, layerName)
+            print(result)
         if accept and operatie == 'DELETE':
-            delete_feature(feat, cursor)
+            delete_feature(feat, cursor, conn)
+            print(result)            
         if operatie == 'UPDATE':
-            delete_hulplijn(feat, cursor)
-        insert_into_log(feat, cursor, ilayer)
-        clean_werkvoorraad(feat, cursor, ilayer)
-        conn.commit()
+            result = delete_hulplijn(feat, cursor, conn)
+        result = insert_into_log(feat, cursor, conn, layerName)
+        print(result)
+        result = clean_werkvoorraad(feat, cursor, conn, layerName)
+        print(result)
     close_db_connection(cursor, conn)
 
 def update_accepted(layerName, accept, cursor, conn):
-    werkvTableName = PC.OBJECT["tablelayertranslate"][layerName]
+    werkvTableName = PC.WERKVOORRAAD["tablelayertranslate"][layerName]
     query = "UPDATE mobiel.{} SET accepted = {}".format(werkvTableName, accept)
     cursor.execute(query)
-    conn.commit()
 
-def insert_into_log(feat, cursor, ilayer):
+def insert_into_log(feat, cursor, conn, layerName):
+    werkvTableName = PC.WERKVOORRAAD["tablelayertranslate"][layerName]
     query = 'INSERT INTO mobiel.log_werkvoorraad (geom, record) \
-                SELECT geom, row_to_json(w.*) FROM mobiel.werkvoorraad_punt w \
-                WHERE id = {};'.format(feat["id"])
+                SELECT geom, row_to_json(w.*) FROM mobiel.{} w \
+                WHERE id = {};'.format(werkvTableName, feat["id"])
     cursor.execute(query)
+    conn.commit()
+    return 'succes'
 
-def delete_hulplijn(feat, cursor):
-    query = "DELETE FROM mobiel.werkvoorraad_hulplijnen WHERE bron_id = {} AND brontabel = '{}';".format(feat['bron_id'], feat['brontabel'])
+def delete_hulplijn(feat, cursor, conn):
+    query = "DELETE FROM mobiel.werkvoorraad_hulplijnen \
+             WHERE bron_id = {} AND brontabel = '{}';".format(feat['bron_id'], feat['brontabel'])
     cursor.execute(query)
+    conn.commit()
+    return 'succes'
 
-def clean_werkvoorraad(feat, cursor, ilayer):
-    werkvTableName = PC.OBJECT["tablelayertranslate"][ilayer.name()]
+def clean_werkvoorraad(feat, cursor, conn, layerName):
+    werkvTableName = PC.WERKVOORRAAD["tablelayertranslate"][layerName]
     query = "DELETE FROM mobiel.{} WHERE id = {};".format(werkvTableName, feat["id"])
     cursor.execute(query)
+    conn.commit()
+    return 'succes'
 
-def update_feature(feat, cursor, layerName):
+def update_feature(feat, cursor, conn, layerName):
     tableName = feat["brontabel"]
     query = 'UPDATE objecten.{} SET '.format(tableName)
     query += "geom = ST_GeomFromText('{}', 28992),".format(feat.geometry().asWkt())
@@ -109,12 +120,29 @@ def update_feature(feat, cursor, layerName):
                 query += " {}_type_id=(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}'),".format(tableName, tableName, feat[field[0]])
     query = query[:-1]
     query += ' WHERE id = {};'.format(feat["bron_id"])
-    print(query)
+    cursor.execute(query)
+    conn.commit()
+    return 'succes'
 
 def insert_feature(feat, cursor, layerName):
+    tableName = feat["brontabel"]
+    query = 'INSERT INTO objecten.{} (geom, '.format(tableName)
+    queryFields = layerFields[layerName]
+    
+    for field in queryFields:
+        if field[1] == "string":
+            query += " {}='{}',".format(field[0], feat[field[0]])
+        elif field[1] == "integer":
+            query += ' {}={},'.format(field[0], feat[field[0]])
+        elif field[1] == "type":
+            if tableName in typeIdTable:
+                query += " {}_type_id=(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}'),".format(tableName, tableName, feat[field[0]])
+    # tTODO JSON opnemen in de insert
     print('insert')
-    get_bouwlagen(feat["object_id"])
+    # get_bouwlagen(feat["object_id"])
 
-def delete_feature(feat, cursor):
+def delete_feature(feat, cursor, conn):
     query = "DELETE FROM objecten.{} WHERE id={};".format(feat['brontabel'], feat['bron_id'])
     cursor.execute(query)
+    conn.commit()
+    return 'succes'

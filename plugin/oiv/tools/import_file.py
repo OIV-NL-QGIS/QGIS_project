@@ -129,7 +129,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 if self.mappingDict[importType]["convType"] != self.layerImportType:
                     checkConv = True
                 query = "SELECT foreign_key, identifier, input_label FROM config_object WHERE child_layer = '{}'".format(targetLayerName)
-                attrs = UC.read_settings(query, False)[0]
+                attrs = UC.read_settings(query, False)
                 targetFeature[attrs[1]] = self.mappingDict[importType]["targetType"]
                 targetFeature[attrs[0]] = self.object_id.text()
                 targetLayer.startEditing()

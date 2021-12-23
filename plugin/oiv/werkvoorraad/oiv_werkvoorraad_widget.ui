@@ -31,14 +31,14 @@
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
+     <widget class="QPushButton" name="btn_terug">
+      <property name="text">
+       <string>Terug</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QPushButton" name="btn_terug">
-        <property name="text">
-         <string>Terug</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QLabel" name="label">
         <property name="sizePolicy">
@@ -62,6 +62,9 @@
       </item>
       <item>
        <widget class="QLineEdit" name="naam">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(208, 208, 208);
 border-color: rgba(255, 255, 255, 0);</string>
@@ -70,6 +73,9 @@ border-color: rgba(255, 255, 255, 0);</string>
       </item>
       <item>
        <widget class="QLineEdit" name="identifier">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -91,7 +97,7 @@ border-color: rgba(255, 255, 255, 0);</string>
          <string>Selecteer via polygoon</string>
         </property>
         <property name="icon">
-         <iconset resource="../resources.qrc">
+         <iconset>
           <normaloff>:/plugins/oiv/config_files/png/polygonselect.png</normaloff>:/plugins/oiv/config_files/png/polygonselect.png</iconset>
         </property>
        </widget>
@@ -205,7 +211,7 @@ border-color: rgba(255, 255, 255, 0);</string>
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>Binnen het terrein zijn er ook wijzigingen op:</string>
+            <string>Er zijn ook wijzigingen op:</string>
            </property>
           </widget>
          </item>
@@ -230,5 +236,6 @@ border-color: rgba(255, 255, 255, 0);</string>
    </layout>
   </widget>
  </widget>
+ <resources/>
  <connections/>
 </ui>

@@ -216,7 +216,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         werkvoorraadWidget.initUI()
         werkvoorraadWidget.show()
         self.close()
-
+        
     def run_import(self):
         """initiate import widget"""
         importwidget = oivImportFileWidget(self)

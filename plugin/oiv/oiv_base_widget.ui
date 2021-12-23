@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>326</width>
-    <height>670</height>
+    <width>363</width>
+    <height>680</height>
    </rect>
   </property>
   <property name="features">
@@ -28,8 +28,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>306</width>
-         <height>628</height>
+         <width>343</width>
+         <height>638</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -248,6 +248,41 @@
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="info_of_interest">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Info of interest</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>200</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item>

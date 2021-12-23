@@ -4,7 +4,6 @@ import os
 from qgis.PyQt import uic
 import qgis.PyQt.QtWidgets as PQtW
 import qgis.PyQt.QtCore as PQtC
-
 import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
@@ -32,7 +31,6 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parent = parent
         self.iface = parent.iface
         self.canvas = parent.canvas
-
         self.polygonSelectTool = parent.polygonSelectTool
 
     def initUI(self):
@@ -49,6 +47,9 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.select_by_polygon.clicked.connect(self.run_select)
         self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objectnieuwhelp"]))
         self.floatBtn.clicked.connect(lambda: self.setFloating(True))
+        self.tbl_werkvoorraad.cellClicked.connect(self.select_on_canvas)
+        self.identifier.setVisible(False)
+        self.naam.setVisible(False)
         self.fr_verwerk.setVisible(True)
         self.getData()
 
@@ -79,6 +80,12 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.polygonSelectTool.onGeometryAdded = self.select_features
         self.polygonSelectTool.parent = self
         self.canvas.setMapTool(self.polygonSelectTool)
+        
+    def select_on_canvas(self, row, col):
+        recordId = self.tbl_werkvoorraad.item(row, 0).text()
+        layerName = self.tbl_werkvoorraad.item(row, 4).text()
+        layer = UC.getlayer_byname(layerName)
+        layer.selectByExpression('"id" = {}'.format(recordId))
         
     def select_features(self, points):
         index = []
@@ -127,15 +134,21 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
             ids.append(str(feat["id"]))
         return ','.join(ids)
         
-    def get_other_mods(self, objectId): 
-        bouwlagen = WDH.get_bouwlagen(objectId)
+    def get_other_mods(self, objectId):
         layout = self.fr_wijzigingen.layout()
-        if bouwlagen:
-            for bouwlaag in bouwlagen:
-                labelText = 'Bouwlaag: {}'.format(str(bouwlaag))
-                label = PQtW.QLabel()
-                label.setText(labelText)
-                layout.addWidget(label)
+        if self.bouwlaagOfObject == 'Object':
+            bouwlagen = WDH.get_bouwlagen(objectId)
+            if bouwlagen:
+                for bouwlaag in bouwlagen:
+                    labelText = 'Bouwlaag: {}'.format(str(bouwlaag))
+                    label = PQtW.QLabel()
+                    label.setText(labelText)
+                    layout.addWidget(label)
+        else:
+            labelText = 'Het terrein / repressief object'
+            label = PQtW.QLabel()
+            label.setText(labelText)
+            layout.addWidget(label) 
 
     def execute_selected_rows(self):
         executableFeatures = []
@@ -148,9 +161,9 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
             ifeature = UC.featureRequest(ilayer, request)
             executableFeatures.append([ifeature, ilayer])
         if self.rb_accept.isChecked():
-            WDH.execute_queries(executableFeatures, ilayer, True)
+            WDH.execute_queries(executableFeatures, self.bouwlaagOfObject, True)
         else:
-            WDH.execute_queries(executableFeatures, ilayer, False)
+            WDH.execute_queries(executableFeatures, self.bouwlaagOfObject, False)
         self.remove_from_table(indexes)
 
     def remove_from_table(self, indexes):
@@ -167,6 +180,8 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
                     self.tbl_werkvoorraad.setItem(i, j, item)
             self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Operatie', 'Type', 'Tabel', 'layerName'])
         self.tbl_werkvoorraad.setSelectionBehavior(PQtW.QAbstractItemView.SelectRows)
+        self.tbl_werkvoorraad.setColumnHidden(0, True);
+        self.tbl_werkvoorraad.setColumnHidden(4, True);
 
     def close_werkvoorraad(self):
         self.btn_opslaan.clicked.disconnect()
