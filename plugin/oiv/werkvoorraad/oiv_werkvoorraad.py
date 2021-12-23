@@ -4,6 +4,7 @@ import os
 from qgis.PyQt import uic
 import qgis.PyQt.QtWidgets as PQtW
 import qgis.PyQt.QtCore as PQtC
+
 import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
@@ -31,6 +32,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parent = parent
         self.iface = parent.iface
         self.canvas = parent.canvas
+
         self.polygonSelectTool = parent.polygonSelectTool
 
     def initUI(self):
