@@ -40,6 +40,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas = parent.canvas
         self.object_id.setVisible(False)
         self.selectTool = parent.selectTool
+        self.polygonSelectTool = parent.polygonSelectTool
         self.pointTool = parent.pointTool
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
