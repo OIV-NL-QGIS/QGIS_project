@@ -101,7 +101,6 @@ def write_layer(layer, features, count=False, check=True):
 def nearest_neighbor(layer, geom, geomType, objectId):
     """search the nearest parent feature id"""
     parentId = None
-    ifeature = None
     dist = 9999
     if geomType in ("LineString", "Polygon"):
         geomCtr = geom.centroid()
@@ -114,7 +113,7 @@ def nearest_neighbor(layer, geom, geomType, objectId):
         distance = geomCtr.distance(parentCtr)
         if distance < dist:
             dist = distance
-            parentId = ifeature["id"]
+            parentId = feat["id"]
     return parentId
 
 def request_feature(ifeature, layer_feature_id, layer_name):
