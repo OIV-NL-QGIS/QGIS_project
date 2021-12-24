@@ -3,14 +3,15 @@ from configparser import ConfigParser
 from psycopg2.extras import RealDictCursor
 import qgis.core as QC
 import oiv.helpers.constants as PC
+import oiv.helpers.configdb_helper as CH
 
 layerFields = {
-    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
-    "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
-    "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
-    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
-    "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]],
-    "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "integer"]]
+    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]]
 }
 typeIdTable = ["dreiging", "ingang", "points_of_interest", "sleutelkluis", "veiligh_install", "veiligh_ruimtelijk"]
 
@@ -60,9 +61,9 @@ def execute_queries(executableFeatures, bouwlaagOfObject, accept):
         layerName = ilayer.name()
         operatie = feat['operatie']
         update_accepted(layerName, accept, cursor, conn)
-        #if accept and operatie == 'INSERT':
-        #    insert_feature(feat, cursor, layerName)
-        #    conn.commit()
+        if accept and operatie == 'INSERT':
+            insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject)
+            conn.commit()
         if accept and operatie == 'UPDATE':
             result = update_feature(feat, cursor, conn, layerName)
             print(result)
@@ -113,7 +114,7 @@ def update_feature(feat, cursor, conn, layerName):
     for field in queryFields:
         if field[1] == "string":
             query += " {}='{}',".format(field[0], feat[field[0]])
-        elif field[1] == "integer":
+        elif field[1] == "int":
             query += ' {}={},'.format(field[0], feat[field[0]])
         elif field[1] == "type":
             if tableName in typeIdTable:
@@ -122,24 +123,45 @@ def update_feature(feat, cursor, conn, layerName):
     query += ' WHERE id = {};'.format(feat["bron_id"])
     cursor.execute(query)
     conn.commit()
+    # tTODO JSON opnemen in de insert
     return 'succes'
 
-def insert_feature(feat, cursor, layerName):
+def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
     tableName = feat["brontabel"]
-    query = 'INSERT INTO objecten.{} (geom, '.format(tableName)
-    queryFields = layerFields[layerName]
-    
-    for field in queryFields:
-        if field[1] == "string":
-            query += " {}='{}',".format(field[0], feat[field[0]])
-        elif field[1] == "integer":
-            query += ' {}={},'.format(field[0], feat[field[0]])
-        elif field[1] == "type":
-            if tableName in typeIdTable:
-                query += " {}_type_id=(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}'),".format(tableName, tableName, feat[field[0]])
-    # tTODO JSON opnemen in de insert
-    print('insert')
-    # get_bouwlagen(feat["object_id"])
+    attrQuery = []
+    valueQuery = []
+    attrQuery.append("geom")
+    valueQuery.append("ST_GeomFromText('{}', 28992)".format(feat.geometry().asWkt()))
+    for field in layerFields[layerName]:
+        attr = field[0]
+        attrType = field[1]
+        if field[1] == "type":
+            if bouwlaagOfObject == 'Object':
+                identifier = CH.get_identifier_by_tablename_ob(tableName)
+            else:
+                identifier = CH.get_identifier_by_tablename_bl(tableName)
+            attrQuery.append('{}'.format(identifier))
+            if identifier == 'soort':
+                valueQuery.append("(SELECT naam FROM objecten.{}_type t WHERE t.symbol_name = '{}')".format(tableName, feat[attr]))
+            else:
+                valueQuery.append("(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}')".format(tableName, feat[attr]))
+        else:
+            attrQuery.append('{}'.format(attr))
+            if attrType == "string":
+                valueQuery.append("'{}'".format(feat[attr]))
+            elif attrType == "int":
+                valueQuery.append('{}'.format(feat[attr]))
+    if feat["waarden_new"] != None:
+        for key, value in feat["waarden_new"].items():
+            attrQuery.append('{}'.format(key))
+            if value:
+                valueQuery.append("'{}'".format(value))
+            else:
+                valueQuery.append("''")
+    query = 'INSERT INTO objecten.{} ('.format(tableName) + ', '.join(attrQuery) + ') VALUES (' + ', '.join(valueQuery) + ');'
+    cursor.execute(query)
+    conn.commit()
+    return 'succes'
 
 def delete_feature(feat, cursor, conn):
     query = "DELETE FROM objecten.{} WHERE id={};".format(feat['brontabel'], feat['bron_id'])
