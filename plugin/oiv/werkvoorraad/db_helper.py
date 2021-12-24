@@ -19,20 +19,21 @@ def setup_postgisdb_connection():
     """setup the postgis database connection"""
     conn = None
     cursor = None
-    config = ConfigParser()
-    filePath = QC.QgsProject.instance().readPath("./")
-    fileName = filePath + '/pg_service.conf'
-    config.read_file(open(fileName))
-    dbName = config.get('oiv', 'dbname')
-    user = config.get('oiv', 'user')
-    passw = config.get('oiv', 'password')
-    host = config.get('oiv', 'host')
-    port = config.get('oiv', 'port')
-    connString = "dbname={} user={} password={} host={} port={}".format(dbName, user, passw, host, port)
-    conn = psycopg2.connect(connString)
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
-    #except:  # pylint: disable=bare-except
-        #print("Failed to connect to the oiv database")
+    try:
+        config = ConfigParser()
+        filePath = QC.QgsProject.instance().readPath("./")
+        fileName = filePath + '/pg_service.conf'
+        config.read_file(open(fileName))
+        dbName = config.get('oiv', 'dbname')
+        user = config.get('oiv', 'user')
+        passw = config.get('oiv', 'password')
+        host = config.get('oiv', 'host')
+        port = config.get('oiv', 'port')
+        connString = "dbname={} user={} password={} host={} port={}".format(dbName, user, passw, host, port)
+        conn = psycopg2.connect(connString)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+    except:  # pylint: disable=bare-except
+        print("Failed to connect to the oiv database")
     return conn, cursor
 
 def close_db_connection(cursor, conn):
@@ -65,7 +66,7 @@ def execute_queries(executableFeatures, bouwlaagOfObject, accept):
             insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject)
             conn.commit()
         if accept and operatie == 'UPDATE':
-            result = update_feature(feat, cursor, conn, layerName)
+            result = update_feature(feat, cursor, conn, layerName, bouwlaagOfObject)
             print(result)
         if accept and operatie == 'DELETE':
             delete_feature(feat, cursor, conn)
@@ -106,24 +107,34 @@ def clean_werkvoorraad(feat, cursor, conn, layerName):
     conn.commit()
     return 'succes'
 
-def update_feature(feat, cursor, conn, layerName):
+def update_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
     tableName = feat["brontabel"]
     query = 'UPDATE objecten.{} SET '.format(tableName)
     query += "geom = ST_GeomFromText('{}', 28992),".format(feat.geometry().asWkt())
     queryFields = layerFields[layerName]
     for field in queryFields:
-        if field[1] == "string":
-            query += " {}='{}',".format(field[0], feat[field[0]])
-        elif field[1] == "int":
-            query += ' {}={},'.format(field[0], feat[field[0]])
-        elif field[1] == "type":
-            if tableName in typeIdTable:
-                query += " {}_type_id=(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}'),".format(tableName, tableName, feat[field[0]])
-    query = query[:-1]
-    query += ' WHERE id = {};'.format(feat["bron_id"])
+        attr = field[0]
+        attrType = field[1]
+        if attrType == "type":
+            if bouwlaagOfObject == 'Object':
+                identifier = CH.get_identifier_by_tablename_ob(tableName)
+            else:
+                identifier = CH.get_identifier_by_tablename_bl(tableName)
+            if identifier == 'soort':
+                query += " {}=(SELECT naam FROM objecten.{}_type t WHERE t.symbol_name = '{}'),".format(identifier, tableName, feat[attr])
+            else:
+                query += " {}=(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}'),".format(identifier, tableName, tableName, feat[attr])
+        elif attrType == "string":
+            query += " {}='{}',".format(attr, feat[attr])
+        elif attrType == "int":
+            query += ' {}={},'.format(attr, feat[attr])
+    if feat["waarden_new"] != None:
+        for key, value in feat["waarden_new"].items():
+            if value:
+                query += " {}='{}',".format(key, value)
+    query = query[:-1] + ' WHERE id = {};'.format(feat["bron_id"])
     cursor.execute(query)
     conn.commit()
-    # tTODO JSON opnemen in de insert
     return 'succes'
 
 def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
@@ -135,7 +146,7 @@ def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
     for field in layerFields[layerName]:
         attr = field[0]
         attrType = field[1]
-        if field[1] == "type":
+        if attrType == "type":
             if bouwlaagOfObject == 'Object':
                 identifier = CH.get_identifier_by_tablename_ob(tableName)
             else:
