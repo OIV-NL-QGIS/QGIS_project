@@ -4,6 +4,7 @@ from psycopg2.extras import RealDictCursor
 import qgis.core as QC
 import oiv.helpers.constants as PC
 import oiv.helpers.configdb_helper as CH
+import oiv.helpers.messages as MSG
 
 layerFields = {
     "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
@@ -63,26 +64,23 @@ def execute_queries(executableFeatures, bouwlaagOfObject, accept):
         operatie = feat['operatie']
         update_accepted(layerName, accept, cursor, conn)
         if accept and operatie == 'INSERT':
-            insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject)
-            conn.commit()
+            result = insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject)
         if accept and operatie == 'UPDATE':
             result = update_feature(feat, cursor, conn, layerName, bouwlaagOfObject)
-            print(result)
         if accept and operatie == 'DELETE':
-            delete_feature(feat, cursor, conn)
-            print(result)            
+            result = delete_feature(feat, cursor, conn)
         if operatie == 'UPDATE':
             result = delete_hulplijn(feat, cursor, conn)
         result = insert_into_log(feat, cursor, conn, layerName)
-        print(result)
         result = clean_werkvoorraad(feat, cursor, conn, layerName)
-        print(result)
     close_db_connection(cursor, conn)
 
 def update_accepted(layerName, accept, cursor, conn):
     werkvTableName = PC.WERKVOORRAAD["tablelayertranslate"][layerName]
     query = "UPDATE mobiel.{} SET accepted = {}".format(werkvTableName, accept)
     cursor.execute(query)
+    conn.commit()
+    return 'succes'
 
 def insert_into_log(feat, cursor, conn, layerName):
     werkvTableName = PC.WERKVOORRAAD["tablelayertranslate"][layerName]
@@ -179,3 +177,31 @@ def delete_feature(feat, cursor, conn):
     cursor.execute(query)
     conn.commit()
     return 'succes'
+
+def temp_delete_feature(ilayer, ifeature, bouwlaagOfObject, rightLayerNames):
+    if ilayer.name() in rightLayerNames:
+        ids = []
+        ids.append(ifeature.id())
+        ilayer.selectByIds(ids)
+        ilayer.startEditing()
+        reply = MSG.showMsgBox('deleteobject')
+        if not reply:
+            ilayer.selectByIds([])
+        elif reply:
+            conn, cursor = setup_postgisdb_connection()
+            if bouwlaagOfObject == 'Object':
+                tableName = CH.get_tablename_ob(ilayer.name())
+            else:
+                tableName = CH.get_tablename_bl(ilayer.name())
+            query = "DELETE FROM objecten.{} WHERE id={};".format(tableName, ifeature['id'])
+            cursor.execute(query)
+            conn.commit()
+            close_db_connection(cursor, conn)
+            ilayer.triggerRepaint()
+        return "Done"
+    else:
+        reply = MSG.showMsgBox('noselectedtodelete')
+        if reply:
+            ilayer.selectByIds([])
+            return "Done"
+        return "Retry"

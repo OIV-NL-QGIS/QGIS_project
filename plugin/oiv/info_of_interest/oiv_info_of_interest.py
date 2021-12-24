@@ -171,8 +171,6 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             pointTool.snapPt = None
             pointTool.snapping = False
             pointTool.startRotate = False
-            if self.identifier in DH.ROSNAPSYMBOLS:
-                pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)
             UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)

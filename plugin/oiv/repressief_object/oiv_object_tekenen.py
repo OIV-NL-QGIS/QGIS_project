@@ -12,6 +12,7 @@ import oiv.helpers.drawing_helper as DH
 import oiv.helpers.qt_helper as QT
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
+import oiv.werkvoorraad.db_helper as DH
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["tekenwidgetui"]))
@@ -144,7 +145,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def delete(self, ilayer, ifeature):
         """delete a feature"""
-        reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
+        reply = DH.temp_delete_feature(ilayer, ifeature, 'Object', self.editableLayerNames)
+        #reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
         if reply == 'Retry':
             self.run_delete_tool()
         self.selectTool.geomSelected.disconnect()
