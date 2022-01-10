@@ -8,7 +8,7 @@ import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
 import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
-import oiv.helpers.drawing_helper as DH
+import oiv.helpers.drawing_helper as DW
 import oiv.helpers.qt_helper as QT
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
@@ -187,14 +187,14 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.drawLayerType = UC.check_layer_type(self.drawLayer)
         self.parentLayerName = CH.get_parentlayer_ob(runLayer)
         objectId = self.object_id.text()
-        possibleSnapFeatures = UC.get_possible_snapFeatures_object(DH.ROSNAPLAYERS, objectId)
+        possibleSnapFeatures = UC.get_possible_snapFeatures_object(DW.ROSNAPLAYERS, objectId)
         if self.drawLayerType == "Point":
             pointTool = self.parent.pointTool
             pointTool.snapPt = None
             pointTool.snapping = False
             pointTool.startRotate = False
             pointTool.possibleSnapFeatures = possibleSnapFeatures
-            if self.identifier in DH.ROSNAPSYMBOLS:
+            if self.identifier in DW.ROSNAPSYMBOLS:
                 pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)
