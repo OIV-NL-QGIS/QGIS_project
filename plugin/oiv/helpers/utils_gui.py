@@ -13,20 +13,22 @@ def set_layer_substring(subString):
     layerNames = layerNames + werkvLayerNames
     for layerName in layerNames:
         layer = UC.getlayer_byname(layerName)
-        if layer.isModified():
-            saveChanges = MSG.showMsgBox('unsavedchanges', layerName)
-            if saveChanges:
+        if layer:
+            if layer.isModified():
+                saveChanges = MSG.showMsgBox('unsavedchanges', layerName)
+                if saveChanges:
+                    layer.commitChanges()
+                else:
+                    layer.rollBack()
+            elif layer.isEditable():
+                layersInEditMode.append(layer)
                 layer.commitChanges()
-            else:
-                layer.rollBack()
-        elif layer.isEditable():
-            layersInEditMode.append(layer)
-            layer.commitChanges()
     for layerName in layerNames:
         lyr = UC.getlayer_byname(layerName)
-        lyr.setSubsetString(subString)
-        if lyr in layersInEditMode:
-            lyr.startEditing()
+        if lyr:
+            lyr.setSubsetString(subString)
+            if lyr in layersInEditMode:
+                lyr.startEditing()
     return "succes"
 
 def set_lengte_oppervlakte_visibility(widget, lengteTF, straalTF, oppTF, offsetTF):
