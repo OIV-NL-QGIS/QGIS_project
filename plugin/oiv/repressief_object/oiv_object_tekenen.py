@@ -8,10 +8,11 @@ import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
 import oiv.tools.stackwidget as SW
 import oiv.tools.editFeature as EF
-import oiv.helpers.drawing_helper as DH
+import oiv.helpers.drawing_helper as DW
 import oiv.helpers.qt_helper as QT
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
+import oiv.werkvoorraad.db_helper as DH
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["tekenwidgetui"]))
@@ -100,36 +101,56 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 strButton.clicked.connect(lambda dummy='dummyvar', rlayer=run_layer, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
 
     def activatePan(self):
+        """trigger pan function to loose other functions"""
         self.iface.actionPan().trigger()
 
     def run_edit_tool(self):
+        """activate the edit feature tool"""
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
     def run_select_tool(self):
+        """activate the select feature tool"""
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.select_feature)
 
     def select_feature(self, ilayer, ifeature):
+        """catch emitted signal from selecttool"""
         self.iface.setActiveLayer(ilayer)
         ids = []
         ids.append(ifeature.id())
         ilayer.selectByIds(ids)
         ilayer.startEditing()
-        self.selectTool.geomSelected.disconnect(self.select_feature)
+        self.selectTool.geomSelected.disconnect()
+        self.run_select_tool()
 
     def run_delete_tool(self):
+        """activate delete feature tool"""
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
 
     def delete(self, ilayer, ifeature):
         """delete a feature"""
-        reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
+        reply = DH.temp_delete_feature(ilayer, ifeature, 'Object', self.editableLayerNames)
+        #reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
         if reply == 'Retry':
             self.run_delete_tool()
-        self.selectTool.geomSelected.disconnect(self.delete)
+        self.selectTool.geomSelected.disconnect()
+        self.run_delete_tool()
 
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt
     def edit_attribute(self, ilayer, ifeature):
@@ -140,7 +161,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
         stackWidget.show()
-        self.selectTool.geomSelected.disconnect(self.edit_attribute)
+        self.selectTool.geomSelected.disconnect()
+        self.run_edit_tool()
 
     #om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet
     def run_move_point(self):
@@ -156,7 +178,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.commitChanges()
             moveLayer.reload()
-        self.activatePan()
+        self.run_move_point()
 
     def run_tekenen(self, _dummy, runLayer, featureId):
         #welke pictogram is aangeklikt en wat is de bijbehorende tekenlaag
@@ -165,14 +187,14 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.drawLayerType = UC.check_layer_type(self.drawLayer)
         self.parentLayerName = CH.get_parentlayer_ob(runLayer)
         objectId = self.object_id.text()
-        possibleSnapFeatures = UC.get_possible_snapFeatures_object(DH.ROSNAPLAYERS, objectId)
+        possibleSnapFeatures = UC.get_possible_snapFeatures_object(DW.ROSNAPLAYERS, objectId)
         if self.drawLayerType == "Point":
             pointTool = self.parent.pointTool
             pointTool.snapPt = None
             pointTool.snapping = False
             pointTool.startRotate = False
             pointTool.possibleSnapFeatures = possibleSnapFeatures
-            if self.identifier in DH.ROSNAPSYMBOLS:
+            if self.identifier in DW.ROSNAPSYMBOLS:
                 pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)

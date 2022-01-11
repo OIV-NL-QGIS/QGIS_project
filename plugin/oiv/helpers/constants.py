@@ -35,14 +35,14 @@ def bagpand_layername():
     return None
 
 
-OIV_VERSION = '3.3.7'
+OIV_VERSION = '3.3.8'
 
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
         "min": 330,
-        "max": 337
+        "max": 338
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
@@ -66,7 +66,23 @@ PAND = {
     "tekenwidgetui": "oiv_tekenen_widget.ui",
     "bouwlaagui": "oiv_bouwlaag_widget.ui",
     "pandui": "oiv_pandgegevens_widget.ui",
-    "bagviewerurl": "https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery="
+    "bagviewerurl": "https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery=",
+    "werkvoorraadlayers": [
+        "Hulplijnen bouwlaag",
+        "Werkvoorraad bouwlaag - punt",
+        "Werkvoorraad bouwlaag - lijn",
+        "Werkvoorraad bouwlaag - vlak"],
+}
+
+WERKVOORRAAD = {
+    "tablelayertranslate": {
+        "Werkvoorraad bouwlaag - punt": "werkvoorraad_punt",
+        "Werkvoorraad bouwlaag - lijn": "werkvoorraad_lijn",
+        "Werkvoorraad bouwlaag - vlak": "werkvoorraad_vlak",
+        "Werkvoorraad object - punt": "werkvoorraad_punt",
+        "Werkvoorraad object - lijn": "werkvoorraad_lijn",
+        "Werkvoorraad object - vlak": "werkvoorraad_vlak"
+    }    
 }
 
 OBJECT = {
@@ -80,7 +96,13 @@ OBJECT = {
     "tekenwidgetui": "oiv_object_tekenen_widget.ui",
     "objectwidgetui": "oiv_repressief_object_widget.ui",
     "bgtviewerurl": "https://verbeterdekaart.kadaster.nl/#?",
-    "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"]
+    "werkvoorraadlayers": ['Werkvoorraad object - punt', 'Werkvoorraad object - lijn', 'Werkvoorraad object - vlak'],
+    "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"],
+}
+
+INFO_INTEREST = {
+    "configtable": "config_info_of_interest",
+    "tekenwidgetui": "oiv_info_of_interest_tekenen_widget.ui"
 }
 
 HELPURL = {

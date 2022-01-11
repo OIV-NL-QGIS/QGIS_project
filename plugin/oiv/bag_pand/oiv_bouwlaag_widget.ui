@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>357</width>
+    <width>301</width>
     <height>754</height>
    </rect>
   </property>
@@ -28,13 +28,20 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>337</width>
+         <width>281</width>
          <height>712</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QPushButton" name="terug">
+            <property name="text">
+             <string>Terug</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QLabel" name="label_13">
             <property name="sizePolicy">
@@ -101,29 +108,6 @@ border-color: rgba(255, 255, 255, 0);</string>
               <property name="icon">
                <iconset>
                 <normaloff>:/plugins/oiv/config_files/png/hulpcirkel.png</normaloff>:/plugins/oiv/config_files/png/hulpcirkel.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QDoubleSpinBox" name="straal">
-              <property name="decimals">
-               <number>1</number>
-              </property>
-              <property name="maximum">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QDoubleSpinBox" name="offset">
-              <property name="decimals">
-               <number>1</number>
-              </property>
-              <property name="minimum">
-               <double>-1000.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>1000.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -197,6 +181,29 @@ border-color: rgba(255, 255, 255, 0);</string>
               </property>
               <property name="buttonSymbols">
                <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" colspan="2">
+             <widget class="QDoubleSpinBox" name="straal">
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="4" colspan="2">
+             <widget class="QDoubleSpinBox" name="offset">
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="minimum">
+               <double>-1000.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>1000.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -366,13 +373,6 @@ border-color: rgba(255, 255, 255, 0);</string>
              </size>
             </property>
            </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="terug">
-            <property name="text">
-             <string>Gereed</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </item>

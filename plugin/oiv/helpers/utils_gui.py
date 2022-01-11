@@ -1,16 +1,20 @@
 """utilities to adjust the UI of the widgets"""
 import oiv.helpers.utils_core as UC
 import oiv.helpers.configdb_helper as CH
+import oiv.helpers.constants as PC
 import oiv.helpers.messages as MSG
 
 def set_layer_substring(subString):
     """set layer subset according (you can check the subset under properties of the layer)"""
     layersInEditMode = []
-    layerNames = CH.get_chidlayers_bl()
+    layerNamesTup = CH.get_chidlayers_bl()
+    layerNames = [i[0] for i in layerNamesTup]
+    werkvLayerNames = PC.PAND["werkvoorraadlayers"]
+    layerNames = layerNames + werkvLayerNames
     for layerName in layerNames:
-        layer = UC.getlayer_byname(layerName[0])
+        layer = UC.getlayer_byname(layerName)
         if layer.isModified():
-            saveChanges = MSG.showMsgBox('unsavedchanges', layerName[0])
+            saveChanges = MSG.showMsgBox('unsavedchanges', layerName)
             if saveChanges:
                 layer.commitChanges()
             else:
@@ -19,7 +23,7 @@ def set_layer_substring(subString):
             layersInEditMode.append(layer)
             layer.commitChanges()
     for layerName in layerNames:
-        lyr = UC.getlayer_byname(layerName[0])
+        lyr = UC.getlayer_byname(layerName)
         lyr.setSubsetString(subString)
         if lyr in layersInEditMode:
             lyr.startEditing()

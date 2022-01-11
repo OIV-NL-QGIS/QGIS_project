@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>767</height>
+    <width>583</width>
+    <height>682</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -40,13 +40,20 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>376</width>
-         <height>717</height>
+         <width>563</width>
+         <height>640</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QPushButton" name="terug">
+            <property name="text">
+             <string>Terug</string>
+            </property>
+           </widget>
+          </item>
           <item>
            <widget class="QLabel" name="label_12">
             <property name="sizePolicy">
@@ -292,6 +299,20 @@ border-color: rgba(255, 255, 255, 0);</string>
            </spacer>
           </item>
           <item>
+           <widget class="QPushButton" name="btn_werkvoorraad">
+            <property name="text">
+             <string>Werkvoorraad</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="printen">
+            <property name="text">
+             <string>Bouwlagen printen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="import_2">
             <property name="text">
              <string>Importeer externe tekening</string>
@@ -310,13 +331,6 @@ border-color: rgba(255, 255, 255, 0);</string>
              </size>
             </property>
            </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="terug">
-            <property name="text">
-             <string>Terug</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </item>

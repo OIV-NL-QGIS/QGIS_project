@@ -12,6 +12,7 @@ import oiv.tools.stackwidget as SW
 import oiv.tools.import_file as IFW
 import oiv.repressief_object.oiv_object_tekenen as OTW
 import oiv.repressief_object.oiv_create_grid as GW
+import oiv.werkvoorraad.oiv_werkvoorraad as OWW
 import oiv.helpers.messages as MSG
 import oiv.helpers.drawing_helper as DH
 import oiv.helpers.constants as PC
@@ -39,6 +40,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas = parent.canvas
         self.object_id.setVisible(False)
         self.selectTool = parent.selectTool
+        self.polygonSelectTool = parent.polygonSelectTool
         self.pointTool = parent.pointTool
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
@@ -62,10 +64,23 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.object_symbolen.clicked.connect(self.run_object_symbolen_tekenen)
         self.create_grid.clicked.connect(self.run_create_grid)
         self.import_drawing.clicked.connect(self.run_import)
+        self.btn_werkvoorraad.clicked.connect(self.run_werkvoorraad)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
         self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["repressiefobjecthelp"]))
         self.floatBtn.clicked.connect(lambda: self.setFloating(True))
+        self.check_werkvoorraad()
+
+    def check_werkvoorraad(self):
+        objectId = self.object_id.text()
+        layerName = 'Werkvoorraad objecten'
+        ilayer = UC.getlayer_byname(layerName)
+        request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
+        it = ilayer.getFeatures(request)
+        if len(list(it)) > 0:
+            self.btn_werkvoorraad.setEnabled(True)
+        else:
+            self.btn_werkvoorraad.setEnabled(False)
 
     def close_repressief_object_show_base(self):
         """close this gui and return to the main page"""
@@ -213,6 +228,14 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         tekenWidget = OTW.oivObjectTekenWidget(self)
         self.iface.addDockWidget(QT.getWidgetType(), tekenWidget)
         tekenWidget.show()
+        self.close()
+
+    def run_werkvoorraad(self):
+        werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
+        werkvoorraadWidget.bouwlaagOfObject = 'Object'
+        self.iface.addDockWidget(QT.getWidgetType(), werkvoorraadWidget)
+        werkvoorraadWidget.initUI()
+        werkvoorraadWidget.show()
         self.close()
 
     def run_import(self):

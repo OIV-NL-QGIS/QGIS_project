@@ -2,6 +2,7 @@
     <qresource prefix="/plugins/oiv/" >
         <file>config_files/png/info.png</file>
         <file>config_files/png/select.png</file>
+        <file>config_files/png/polygonselect.png</file>
         <file>config_files/png/identify.png</file>
         <file>config_files/png/terrein.png</file>
         <file>config_files/png/move.png</file>

@@ -14,6 +14,7 @@ import oiv.helpers.utils_core as UC
 import oiv.bag_pand.oiv_pandgegevens as OPG
 import oiv.repressief_object.oiv_repressief_object as ORO
 import oiv.repressief_object.oiv_objectnieuw as OON
+import oiv.info_of_interest.oiv_info_of_interest as IOI
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PLUGIN["basewidget"]))
@@ -32,6 +33,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.pinTool = parent.pinTool
         self.pointTool = parent.pointTool
         self.selectTool = parent.selectTool
+        self.polygonSelectTool = parent.polygonSelectTool
         self.identifyTool = parent.identifyTool
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
@@ -42,6 +44,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identify_gebouw.clicked.connect(self.run_identify_terrein)
         self.filter_objecten.clicked.connect(lambda: FO.init_filter_section(self))
         self.filterBtn.clicked.connect(lambda: FO.set_object_filter(self))
+        self.info_of_interest.clicked.connect(self.run_info_of_interest)
         self.closewidget.clicked.connect(self.close_basewidget)
         self.filterframe.setVisible(False)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
@@ -136,6 +139,14 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.addDockWidget(QT.getWidgetType(), objectNieuwWidget)
         self.iface.actionPan().trigger()
         objectNieuwWidget.show()
+        self.close()
+        
+    def run_info_of_interest(self):
+        """start objectgegevens widget"""
+        interestWidget = IOI.oivInfoOfInterestTekenWidget(self)
+        self.iface.addDockWidget(QT.getWidgetType(), interestWidget)
+        self.iface.actionPan().trigger()
+        interestWidget.show()
         self.close()
 
     def close_basewidget(self):

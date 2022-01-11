@@ -13,6 +13,7 @@ import oiv.helpers.drawing_helper as DW
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
+import oiv.werkvoorraad.db_helper as DH
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.PAND["tekenwidgetui"]))
@@ -79,7 +80,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         """activate the edit feature tool"""
         try:
             self.selectTool.geomSelected.disconnect()
-        except: # pylint: disable=bare-except
+        except:
             pass
         self.selectTool.whichConfig = PC.PAND["configtable"]
         self.canvas.setMapTool(self.selectTool)
@@ -89,7 +90,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         """activate the select feature tool"""
         try:
             self.selectTool.geomSelected.disconnect()
-        except: # pylint: disable=bare-except
+        except:
             pass
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.select_feature)
@@ -101,13 +102,14 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         ids.append(ifeature.id())
         ilayer.selectByIds(ids)
         ilayer.startEditing()
-        self.selectTool.geomSelected.disconnect(self.select_feature)
+        self.selectTool.geomSelected.disconnect()
+        self.run_select_tool()
 
     def run_delete_tool(self):
         """activate delete feature tool"""
         try:
             self.selectTool.geomSelected.disconnect()
-        except: # pylint: disable=bare-except
+        except:
             pass
         self.selectTool.whichConfig = PC.PAND["configtable"]
         self.canvas.setMapTool(self.selectTool)
@@ -115,10 +117,12 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def delete(self, ilayer, ifeature):
         """delete a feature"""
-        reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
+        reply = DH.temp_delete_feature(ilayer, ifeature, 'Bouwlaag', self.editableLayerNames)
+        #reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
         if reply == 'Retry':
-            self.run_run_delete_tool()
-        self.selectTool.geomSelected.disconnect(self.delete)
+            self.run_delete_tool()
+        self.selectTool.geomSelected.disconnect()
+        self.run_delete_tool()
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
@@ -129,7 +133,8 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget.open_feature_form(ilayer, ifeature)
         self.close()
         stackWidget.show()
-        self.selectTool.geomSelected.disconnect(self.edit_attribute)
+        self.selectTool.geomSelected.disconnect()
+        self.run_edit_tool()
 
     def run_move_point(self):
         """om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet"""
@@ -145,7 +150,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.commitChanges()
             moveLayer.reload()
-        self.activatePan()
+        self.run_move_point()
 
     def run_tekenen(self, _dummy, runLayer, feature_id):
         """activate the right draw action"""
@@ -193,8 +198,9 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         """Save and place feature on the canvas"""
         parentId = None
         self.iface.setActiveLayer(self.drawLayer)
+        objectId = self.pand_id.text()
         if points:
-            parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, None, self.iface)
+            parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, objectId, self.iface)
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.PAND["configtable"])
             if buttonCheck != 'Cancel':

@@ -78,7 +78,10 @@ class MovePointTool(QG.QgsMapToolIdentify):
         if self.dragging and self.point:
             self.vertexMarker.hide()
             geom = QC.QgsGeometry.fromPointXY(self.point)
-            self.idlayer.dataProvider().changeGeometryValues({self.fid : geom})
+            self.idlayer.changeGeometry(self.fid, geom)
+            field_idx = self.idlayer.fields().indexOf('applicatie')
+            if field_idx != -1:
+                self.idlayer.changeAttributeValue(self.fid, field_idx, 'OIV')
             self.idlayer.commitChanges()
             self.idlayer.triggerRepaint()
             self.stop_moveTool()
@@ -88,10 +91,13 @@ class MovePointTool(QG.QgsMapToolIdentify):
             clickedPt = self.toMapCoordinates(event.pos())
             tempGeometry = self.tempRubberBand.asGeometry().asPolyline()
             drawPoint = self.toLayerCoordinates(self.layer, tempGeometry[0])
-            field = self.idlayer.fields().indexOf("rotatie")
+            field_idx = self.idlayer.fields().indexOf("rotatie")
             rotation = int(drawPoint.azimuth(clickedPt))
-            attrs = {field: rotation}
-            self.idlayer.dataProvider().changeAttributeValues({self.fid: attrs})
+            if field_idx != -1:
+                self.idlayer.changeAttributeValue(self.fid, field_idx, rotation)
+            field_idx = self.idlayer.fields().indexOf('applicatie')
+            if field_idx != -1:
+                self.idlayer.changeAttributeValue(self.fid, field_idx, 'OIV')
             self.idlayer.commitChanges()
             self.idlayer.triggerRepaint()
             self.stop_moveTool()
