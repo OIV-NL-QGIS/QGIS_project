@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>346</width>
-    <height>966</height>
+    <width>480</width>
+    <height>1016</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,8 +34,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>326</width>
-         <height>924</height>
+         <width>460</width>
+         <height>974</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -425,45 +425,7 @@ border-color: rgba(255, 255, 255, 0);</string>
               <string>Algemeen</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_3">
-              <item row="8" column="3">
-               <widget class="QPushButton" name="afsluiter_rwa">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_rwa.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_rwa.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="14" column="1">
+              <item row="15" column="1">
                <widget class="QPushButton" name="label_gevaar">
                 <property name="enabled">
                  <bool>true</bool>
@@ -480,44 +442,6 @@ border-color: rgba(255, 255, 255, 0);</string>
                 <property name="icon">
                  <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/label_gevaar.png</normaloff>:/plugins/oiv/config_files/png/label_gevaar.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="1">
-               <widget class="QPushButton" name="stijgleiding_ld_afnamepunt">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_afnamepunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_afnamepunt.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -630,21 +554,6 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="3" column="0" colspan="6">
-               <widget class="QLabel" name="label_10">
-                <property name="font">
-                 <font>
-                  <family>Arial</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                  <underline>true</underline>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Afwijkende binnendekking</string>
-                </property>
-               </widget>
-              </item>
               <item row="7" column="1">
                <widget class="QPushButton" name="afsluiter_water">
                 <property name="enabled">
@@ -683,7 +592,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="16" column="2">
+              <item row="17" column="2">
                <widget class="QPushButton" name="_120_min_brandwerende_scheiding">
                 <property name="enabled">
                  <bool>true</bool>
@@ -721,7 +630,83 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="13" column="0" colspan="6">
+              <item row="8" column="3">
+               <widget class="QPushButton" name="afsluiter_rwa">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_rwa.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_rwa.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="1">
+               <widget class="QPushButton" name="stijgleiding_ld_afnamepunt">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_afnamepunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_afnamepunt.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="14" column="0" colspan="6">
                <widget class="QLabel" name="label_2">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -744,8 +729,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="14" column="2">
-               <widget class="QPushButton" name="label_voorzichtig">
+              <item row="8" column="1">
+               <widget class="QPushButton" name="afsluiter_elektra">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -760,7 +745,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/label_voorzichtig.png</normaloff>:/plugins/oiv/config_files/png/label_voorzichtig.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_elektra.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_elektra.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -782,8 +767,23 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="8" column="1">
-               <widget class="QPushButton" name="afsluiter_elektra">
+              <item row="3" column="0" colspan="6">
+               <widget class="QLabel" name="label_10">
+                <property name="font">
+                 <font>
+                  <family>Arial</family>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <underline>true</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Afwijkende binnendekking</string>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="2">
+               <widget class="QPushButton" name="label_voorzichtig">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -798,7 +798,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_elektra.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_elektra.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/label_voorzichtig.png</normaloff>:/plugins/oiv/config_files/png/label_voorzichtig.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -858,531 +858,6 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="0">
-               <widget class="QPushButton" name="brandweeringang">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/brandweeringang.png</normaloff>:/plugins/oiv/config_files/png/brandweeringang.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QPushButton" name="dekkingsprobleem_tmo">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/dekkingsprobleem_tmo.png</normaloff>:/plugins/oiv/config_files/png/dekkingsprobleem_tmo.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QPushButton" name="deur">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/deur.png</normaloff>:/plugins/oiv/config_files/png/deur.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QPushButton" name="dekkingsprobleem_dmo">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/dekkingsprobleem_dmo.png</normaloff>:/plugins/oiv/config_files/png/dekkingsprobleem_dmo.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QPushButton" name="sleutelkluis">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/sleutelkluis.png</normaloff>:/plugins/oiv/config_files/png/sleutelkluis.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="16" column="4">
-               <widget class="QPushButton" name="_60_min_brandwerende_scheiding">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/_60_min_brandwerende_scheiding.png</normaloff>:/plugins/oiv/config_files/png/_60_min_brandwerende_scheiding.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QPushButton" name="schuifdeur_enkel_links">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/schuifdeur_enkel_links.png</normaloff>:/plugins/oiv/config_files/png/schuifdeur_enkel_links.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="17" column="0" colspan="6">
-               <widget class="QLabel" name="label_5">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Arial</family>
-                  <pointsize>8</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                  <underline>true</underline>
-                  <strikeout>false</strikeout>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Ruimten</string>
-                </property>
-               </widget>
-              </item>
-              <item row="15" column="0" colspan="6">
-               <widget class="QLabel" name="label_4">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Arial</family>
-                  <pointsize>8</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                  <underline>true</underline>
-                  <strikeout>false</strikeout>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Bouwkundige veiligheidsvoorzieningen</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="4">
-               <widget class="QPushButton" name="afsluiter_luchtbehandeling">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_luchtbehandeling.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_luchtbehandeling.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0" colspan="6">
-               <widget class="QLabel" name="label_11">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Arial</family>
-                  <pointsize>8</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                  <underline>true</underline>
-                  <strikeout>false</strikeout>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Installatietechnische veiligheidsvoorzieningen</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QPushButton" name="afsluiter_sprinkler">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_sprinkler.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_sprinkler.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="12" column="0">
-               <widget class="QPushButton" name="schacht_kanaal">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/schacht_kanaal.png</normaloff>:/plugins/oiv/config_files/png/schacht_kanaal.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="0">
-               <widget class="QPushButton" name="stijgleiding_ld_vulpunt">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_vulpunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_vulpunt.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="18" column="3">
-               <widget class="QPushButton" name="bijzondere_ruimte">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/bijzondere_ruimte.png</normaloff>:/plugins/oiv/config_files/png/bijzondere_ruimte.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="2">
                <widget class="QPushButton" name="neveningang">
                 <property name="enabled">
@@ -1421,159 +896,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="3">
-               <widget class="QPushButton" name="afsluiter_omloop">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_omloop.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_omloop.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="4">
-               <widget class="QPushButton" name="lift">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/lift.png</normaloff>:/plugins/oiv/config_files/png/lift.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="14" column="0">
-               <widget class="QPushButton" name="label_algemeen">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/label_algemeen.png</normaloff>:/plugins/oiv/config_files/png/label_algemeen.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="18" column="2">
-               <widget class="QPushButton" name="verkeersruimte">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/verkeersruimte.png</normaloff>:/plugins/oiv/config_files/png/verkeersruimte.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="18" column="1">
+              <item row="19" column="1">
                <widget class="QPushButton" name="tijdelijk_object">
                 <property name="enabled">
                  <bool>true</bool>
@@ -1611,8 +934,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="2">
-               <widget class="QPushButton" name="afsluiter_gas">
+              <item row="17" column="4">
+               <widget class="QPushButton" name="_60_min_brandwerende_scheiding">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -1627,83 +950,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_gas.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_gas.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="16" column="0">
-               <widget class="QPushButton" name="_30_min_brandwerende_scheiding">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/_30_min_brandwerende_scheiding.png</normaloff>:/plugins/oiv/config_files/png/_30_min_brandwerende_scheiding.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QPushButton" name="ontruimingspaneel">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/ontruimingspaneel.png</normaloff>:/plugins/oiv/config_files/png/ontruimingspaneel.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/_60_min_brandwerende_scheiding.png</normaloff>:/plugins/oiv/config_files/png/_60_min_brandwerende_scheiding.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -1763,82 +1010,6 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="16" column="3">
-               <widget class="QPushButton" name="rookwerende_scheiding">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/rookwerende_scheiding.png</normaloff>:/plugins/oiv/config_files/png/rookwerende_scheiding.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="18" column="0">
-               <widget class="QPushButton" name="overige_ruimte">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/overige_ruimte.png</normaloff>:/plugins/oiv/config_files/png/overige_ruimte.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="5">
                <widget class="QPushButton" name="trap_bordes">
                 <property name="enabled">
@@ -1877,8 +1048,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="3">
-               <widget class="QPushButton" name="nevenpaneel">
+              <item row="6" column="0">
+               <widget class="QPushButton" name="brandmeldcentrale">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -1893,7 +1064,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/nevenpaneel.png</normaloff>:/plugins/oiv/config_files/png/nevenpaneel.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/brandmeldcentrale.png</normaloff>:/plugins/oiv/config_files/png/brandmeldcentrale.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -1915,8 +1086,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
-               <widget class="QPushButton" name="brandmeldcentrale">
+              <item row="1" column="0">
+               <widget class="QPushButton" name="brandweeringang">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -1931,7 +1102,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/brandmeldcentrale.png</normaloff>:/plugins/oiv/config_files/png/brandmeldcentrale.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/brandweeringang.png</normaloff>:/plugins/oiv/config_files/png/brandweeringang.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2029,8 +1200,31 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="3">
-               <widget class="QPushButton" name="blussysteem_hifog">
+              <item row="18" column="0" colspan="6">
+               <widget class="QLabel" name="label_5">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Arial</family>
+                  <pointsize>8</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <underline>true</underline>
+                  <strikeout>false</strikeout>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Ruimten</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="sleutelkluis">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2045,7 +1239,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/blussysteem_hifog.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_hifog.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/sleutelkluis.png</normaloff>:/plugins/oiv/config_files/png/sleutelkluis.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2067,8 +1261,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="5">
-               <widget class="QPushButton" name="meterkast_e_w">
+              <item row="19" column="3">
+               <widget class="QPushButton" name="bijzondere_ruimte">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2083,7 +1277,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/meterkast_e_w.png</normaloff>:/plugins/oiv/config_files/png/meterkast_e_w.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/bijzondere_ruimte.png</normaloff>:/plugins/oiv/config_files/png/bijzondere_ruimte.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2105,8 +1299,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="4">
-               <widget class="QPushButton" name="afsluiter_svm">
+              <item row="4" column="1">
+               <widget class="QPushButton" name="dekkingsprobleem_tmo">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2121,7 +1315,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_svm.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_svm.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/dekkingsprobleem_tmo.png</normaloff>:/plugins/oiv/config_files/png/dekkingsprobleem_tmo.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2143,8 +1337,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="5">
-               <widget class="QPushButton" name="trap_recht">
+              <item row="11" column="0">
+               <widget class="QPushButton" name="stijgleiding_ld_vulpunt">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2159,7 +1353,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/trap_recht.png</normaloff>:/plugins/oiv/config_files/png/trap_recht.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_vulpunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_vulpunt.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2181,8 +1375,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="2">
-               <widget class="QPushButton" name="brandmeldpaneel">
+              <item row="7" column="3">
+               <widget class="QPushButton" name="afsluiter_omloop">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2197,7 +1391,623 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/brandmeldpaneel.png</normaloff>:/plugins/oiv/config_files/png/brandmeldpaneel.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_omloop.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_omloop.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="19" column="2">
+               <widget class="QPushButton" name="verkeersruimte">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/verkeersruimte.png</normaloff>:/plugins/oiv/config_files/png/verkeersruimte.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QPushButton" name="ontruimingspaneel">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/ontruimingspaneel.png</normaloff>:/plugins/oiv/config_files/png/ontruimingspaneel.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="19" column="0">
+               <widget class="QPushButton" name="overige_ruimte">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/overige_ruimte.png</normaloff>:/plugins/oiv/config_files/png/overige_ruimte.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="4">
+               <widget class="QPushButton" name="afsluiter_luchtbehandeling">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_luchtbehandeling.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_luchtbehandeling.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="3">
+               <widget class="QPushButton" name="nevenpaneel">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/nevenpaneel.png</normaloff>:/plugins/oiv/config_files/png/nevenpaneel.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="2">
+               <widget class="QPushButton" name="afsluiter_gas">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_gas.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_gas.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="4">
+               <widget class="QPushButton" name="lift">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/lift.png</normaloff>:/plugins/oiv/config_files/png/lift.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="0">
+               <widget class="QPushButton" name="schacht_kanaal">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/schacht_kanaal.png</normaloff>:/plugins/oiv/config_files/png/schacht_kanaal.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="0">
+               <widget class="QPushButton" name="label_algemeen">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/label_algemeen.png</normaloff>:/plugins/oiv/config_files/png/label_algemeen.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="17" column="0">
+               <widget class="QPushButton" name="_30_min_brandwerende_scheiding">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/_30_min_brandwerende_scheiding.png</normaloff>:/plugins/oiv/config_files/png/_30_min_brandwerende_scheiding.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QPushButton" name="afsluiter_sprinkler">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_sprinkler.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_sprinkler.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0" colspan="6">
+               <widget class="QLabel" name="label_11">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Arial</family>
+                  <pointsize>8</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <underline>true</underline>
+                  <strikeout>false</strikeout>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Installatietechnische veiligheidsvoorzieningen</string>
+                </property>
+               </widget>
+              </item>
+              <item row="17" column="3">
+               <widget class="QPushButton" name="rookwerende_scheiding">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/rookwerende_scheiding.png</normaloff>:/plugins/oiv/config_files/png/rookwerende_scheiding.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="schuifdeur_enkel_links">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/schuifdeur_enkel_links.png</normaloff>:/plugins/oiv/config_files/png/schuifdeur_enkel_links.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="16" column="0" colspan="6">
+               <widget class="QLabel" name="label_4">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Arial</family>
+                  <pointsize>8</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <underline>true</underline>
+                  <strikeout>false</strikeout>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Bouwkundige veiligheidsvoorzieningen</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QPushButton" name="deur">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/deur.png</normaloff>:/plugins/oiv/config_files/png/deur.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QPushButton" name="dekkingsprobleem_dmo">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/dekkingsprobleem_dmo.png</normaloff>:/plugins/oiv/config_files/png/dekkingsprobleem_dmo.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2257,8 +2067,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="5">
-               <widget class="QPushButton" name="flitslicht">
+              <item row="2" column="5">
+               <widget class="QPushButton" name="trap_recht">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2273,7 +2083,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/flitslicht.png</normaloff>:/plugins/oiv/config_files/png/flitslicht.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/trap_recht.png</normaloff>:/plugins/oiv/config_files/png/trap_recht.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2295,8 +2105,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="5">
-               <widget class="QPushButton" name="meterkast_e_g_w">
+              <item row="12" column="2">
+               <widget class="QPushButton" name="overdruk_ventilatie">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2311,7 +2121,45 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/meterkast_e_g_w.png</normaloff>:/plugins/oiv/config_files/png/meterkast_e_g_w.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/overdruk_ventilatie.png</normaloff>:/plugins/oiv/config_files/png/overdruk_ventilatie.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="5">
+               <widget class="QPushButton" name="meterkast_g_w">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/meterkast_g_w.png</normaloff>:/plugins/oiv/config_files/png/meterkast_g_w.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2371,8 +2219,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="12" column="2">
-               <widget class="QPushButton" name="overdruk_ventilatie">
+              <item row="6" column="4">
+               <widget class="QPushButton" name="gasdetectiepaneel">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2387,7 +2235,463 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/overdruk_ventilatie.png</normaloff>:/plugins/oiv/config_files/png/overdruk_ventilatie.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/gasdetectiepaneel.png</normaloff>:/plugins/oiv/config_files/png/gasdetectiepaneel.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="5">
+               <widget class="QPushButton" name="meterkast_e_g">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/meterkast_e_g.png</normaloff>:/plugins/oiv/config_files/png/meterkast_e_g.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QPushButton" name="schuifdeur_dubbel">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/schuifdeur_dubbel.png</normaloff>:/plugins/oiv/config_files/png/schuifdeur_dubbel.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="3">
+               <widget class="QPushButton" name="blussysteem_hifog">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/blussysteem_hifog.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_hifog.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="5">
+               <widget class="QPushButton" name="meterkast_e_g_w">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/meterkast_e_g_w.png</normaloff>:/plugins/oiv/config_files/png/meterkast_e_g_w.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="3">
+               <widget class="QPushButton" name="label_waarschuwing">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/label_waarschuwing.png</normaloff>:/plugins/oiv/config_files/png/label_waarschuwing.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QPushButton" name="blussysteem_water">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/blussysteem_water.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_water.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="4">
+               <widget class="QPushButton" name="afsluiter_svm">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/afsluiter_svm.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_svm.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="2">
+               <widget class="QPushButton" name="brandmeldpaneel">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/brandmeldpaneel.png</normaloff>:/plugins/oiv/config_files/png/brandmeldpaneel.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="5">
+               <widget class="QPushButton" name="flitslicht">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/flitslicht.png</normaloff>:/plugins/oiv/config_files/png/flitslicht.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="4">
+               <widget class="QPushButton" name="brandweerinfokast">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/brandweerinfokast.png</normaloff>:/plugins/oiv/config_files/png/brandweerinfokast.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="5">
+               <widget class="QPushButton" name="meterkast_e_w">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/meterkast_e_w.png</normaloff>:/plugins/oiv/config_files/png/meterkast_e_w.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="3">
+               <widget class="QPushButton" name="stijgleiding_hd_afnamepunt">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/stijgleiding_hd_afnamepunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_hd_afnamepunt.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2485,45 +2789,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
-               <widget class="QPushButton" name="schuifdeur_dubbel">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/schuifdeur_dubbel.png</normaloff>:/plugins/oiv/config_files/png/schuifdeur_dubbel.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="16" column="1">
+              <item row="17" column="1">
                <widget class="QPushButton" name="bouwdeel_scheiding">
                 <property name="enabled">
                  <bool>true</bool>
@@ -2561,46 +2827,21 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="14" column="3">
-               <widget class="QPushButton" name="label_waarschuwing">
-                <property name="enabled">
-                 <bool>true</bool>
+              <item row="20" column="1">
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
                 </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/label_waarschuwing.png</normaloff>:/plugins/oiv/config_files/png/label_waarschuwing.png</iconset>
-                </property>
-                <property name="iconSize">
+                <property name="sizeHint" stdset="0">
                  <size>
-                  <width>28</width>
-                  <height>28</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
+               </spacer>
               </item>
-              <item row="11" column="3">
-               <widget class="QPushButton" name="stijgleiding_hd_afnamepunt">
+              <item row="10" column="4">
+               <widget class="QPushButton" name="blussysteem_afff">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2615,83 +2856,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/stijgleiding_hd_afnamepunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_hd_afnamepunt.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="12" column="4">
-               <widget class="QPushButton" name="brandweerinfokast">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/brandweerinfokast.png</normaloff>:/plugins/oiv/config_files/png/brandweerinfokast.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="4">
-               <widget class="QPushButton" name="gasdetectiepaneel">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/gasdetectiepaneel.png</normaloff>:/plugins/oiv/config_files/png/gasdetectiepaneel.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/blussysteem_afff.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_afff.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2751,8 +2916,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="4">
-               <widget class="QPushButton" name="blussysteem_afff">
+              <item row="13" column="0">
+               <widget class="QPushButton" name="hulplijn">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2767,7 +2932,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/blussysteem_afff.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_afff.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/hulplijn.png</normaloff>:/plugins/oiv/config_files/png/hulplijn.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2789,8 +2954,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="11" column="5">
-               <widget class="QPushButton" name="meterkast_e_g">
+              <item row="13" column="1">
+               <widget class="QPushButton" name="contouren">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2805,7 +2970,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/meterkast_e_g.png</normaloff>:/plugins/oiv/config_files/png/meterkast_e_g.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/contouren.png</normaloff>:/plugins/oiv/config_files/png/contouren.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2827,8 +2992,8 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="10" column="0">
-               <widget class="QPushButton" name="blussysteem_water">
+              <item row="19" column="4">
+               <widget class="QPushButton" name="afbrand_scenario">
                 <property name="enabled">
                  <bool>true</bool>
                 </property>
@@ -2843,7 +3008,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                 <property name="icon">
                  <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/blussysteem_water.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_water.png</iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/natuur/N19V03.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19V03.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -2864,57 +3029,6 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <bool>false</bool>
                 </property>
                </widget>
-              </item>
-              <item row="8" column="5">
-               <widget class="QPushButton" name="meterkast_g_w">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/meterkast_g_w.png</normaloff>:/plugins/oiv/config_files/png/meterkast_g_w.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="19" column="1">
-               <spacer name="verticalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
              </layout>
             </widget>
@@ -4528,19 +4642,6 @@ border-color: rgba(255, 255, 255, 0);</string>
               <string>Overig</string>
              </attribute>
              <layout class="QGridLayout" name="gridLayout_7">
-              <item row="12" column="0">
-               <spacer name="verticalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item row="7" column="4">
                <widget class="QLabel" name="label_12">
                 <property name="font">
@@ -4573,6 +4674,213 @@ border-color: rgba(255, 255, 255, 0);</string>
                 <property name="icon">
                  <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/antidote_tegengif.png</normaloff>:/plugins/oiv/config_files/png/antidote_tegengif.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="0">
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="blusleiding">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/blusleiding.png</normaloff>:/plugins/oiv/config_files/png/blusleiding.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="6">
+               <widget class="QLabel" name="label_13">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Arial</family>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <underline>true</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>BHV</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QPushButton" name="brandblusser">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/brandblusser.png</normaloff>:/plugins/oiv/config_files/png/brandblusser.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="6">
+               <widget class="QLabel" name="label_15">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Arial</family>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                  <underline>true</underline>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Overige lijnen</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QPushButton" name="brandslanghaspel">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/brandslanghaspel.png</normaloff>:/plugins/oiv/config_files/png/brandslanghaspel.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>28</width>
+                  <height>28</height>
+                 </size>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="autoDefault">
+                 <bool>false</bool>
+                </property>
+                <property name="default">
+                 <bool>false</bool>
+                </property>
+                <property name="flat">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="4">
+               <widget class="QPushButton" name="nooduitgang">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset>
+                  <normaloff>:/plugins/oiv/config_files/png/nooduitgang.png</normaloff>:/plugins/oiv/config_files/png/nooduitgang.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
@@ -4670,82 +4978,6 @@ border-color: rgba(255, 255, 255, 0);</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="0">
-               <widget class="QPushButton" name="brandblusser">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/brandblusser.png</normaloff>:/plugins/oiv/config_files/png/brandblusser.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="4">
-               <widget class="QPushButton" name="nooduitgang">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/nooduitgang.png</normaloff>:/plugins/oiv/config_files/png/nooduitgang.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
               <item row="6" column="3">
                <widget class="QPushButton" name="nooddouche">
                 <property name="enabled">
@@ -4763,200 +4995,6 @@ border-color: rgba(255, 255, 255, 0);</string>
                 <property name="icon">
                  <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/nooddouche.png</normaloff>:/plugins/oiv/config_files/png/nooddouche.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0" colspan="6">
-               <widget class="QLabel" name="label_15">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Arial</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                  <underline>true</underline>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Overige lijnen</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
-               <widget class="QPushButton" name="brandslanghaspel">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/brandslanghaspel.png</normaloff>:/plugins/oiv/config_files/png/brandslanghaspel.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0" colspan="6">
-               <widget class="QLabel" name="label_13">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Arial</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                  <underline>true</underline>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>BHV</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QPushButton" name="hulplijn">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/hulplijn.png</normaloff>:/plugins/oiv/config_files/png/hulplijn.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QPushButton" name="contouren">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/contouren.png</normaloff>:/plugins/oiv/config_files/png/contouren.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>28</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="checkable">
-                 <bool>false</bool>
-                </property>
-                <property name="autoDefault">
-                 <bool>false</bool>
-                </property>
-                <property name="default">
-                 <bool>false</bool>
-                </property>
-                <property name="flat">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QPushButton" name="blusleiding">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset>
-                  <normaloff>:/plugins/oiv/config_files/png/blusleiding.png</normaloff>:/plugins/oiv/config_files/png/blusleiding.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>
