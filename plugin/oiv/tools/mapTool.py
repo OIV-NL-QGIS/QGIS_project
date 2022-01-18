@@ -118,7 +118,7 @@ class CaptureTool(QG.QgsMapTool):
                 minDist = distSquared
                 snapPoints = []
                 snapPoints.extend([vertexCoord, vertex, prevVertex, counter, geom])
-            elif closestSegm[0] < minDist:
+            elif closestSegm[0] < minDist - 1/2 * tolerance:
                 minDist = closestSegm[0]
                 snapPoints = []
                 snapPoints.extend([closestSegm[1], None, None, counter, geom])
@@ -143,7 +143,7 @@ class CaptureTool(QG.QgsMapTool):
     def calcTolerance(self, pos):
         """calculate the tolerance of snapping"""
         pt1 = PQtC.QPoint(pos.x(), pos.y())
-        pt2 = PQtC.QPoint(pos.x() + 10, pos.y())
+        pt2 = PQtC.QPoint(pos.x() + 20, pos.y())
         layerPt1 = self.toMapCoordinates(pt1)
         layerPt2 = self.toMapCoordinates(pt2)
         tolerance = layerPt2.x() - layerPt1.x()
@@ -205,25 +205,25 @@ class CaptureTool(QG.QgsMapTool):
     def stopCapturing(self):
         """remove rubberbands als er gestopt wordt met tekenen"""
         if self.rubberBand:
-            self.canvas.scene().removeItem(self.rubberBand)
+            RH.resetRB(self.rubberBand, self.bandType())
             self.rubberBand = None
         if self.tempRubberBand:
-            self.canvas.scene().removeItem(self.tempRubberBand)
+            RH.resetRB(self.tempRubberBand, self.bandType())
             self.tempRubberBand = None
         if self.tempRubberBandExt:
-            self.canvas.scene().removeItem(self.tempRubberBandExt)
+            RH.resetRB(self.tempRubberBandExt, QC.QgsWkbTypes.LineGeometry)
             self.tempRubberBandExt = None
         if self.roundRubberBand:
-            self.canvas.scene().removeItem(self.roundRubberBand)
+            RH.resetRB(self.roundRubberBand, QC.QgsWkbTypes.LineGeometry)
             self.roundRubberBand = None
         if self.perpRubberBand:
-            self.canvas.scene().removeItem(self.perpRubberBand)
+            RH.resetRB(self.perpRubberBand, QC.QgsWkbTypes.LineGeometry)
             self.perpRubberBand = None
         if self.perpRubberBand2:
-            self.canvas.scene().removeItem(self.perpRubberBand2)
+            RH.resetRB(self.perpRubberBand2, QC.QgsWkbTypes.LineGeometry)
             self.perpRubberBand2 = None
         if self.parallelRubberBand:
-            self.canvas.scene().removeItem(self.parallelRubberBand)
+            RH.resetRB(self.parallelRubberBand, QC.QgsWkbTypes.LineGeometry)
             self.parallelRubberBand = None
         self.vertexmarker.hide()
         self.capturing = False

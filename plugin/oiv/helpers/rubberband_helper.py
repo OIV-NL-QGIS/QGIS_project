@@ -1,7 +1,7 @@
 """RubberBand style helpers"""
 from math import sin, cos, radians
 from qgis.gui import QgsRubberBand, QgsVertexMarker
-from qgis.core import QgsPointXY
+import qgis.core as QC
 from qgis.PyQt.QtGui import QColor
 from .qt_helper import getQtLineStyle, getWKBType
 
@@ -54,12 +54,15 @@ VERTEXMARKERSTYLES = {
         'penwidth': 3,
     },
     "snappoint": {
-        'color': QColor('255, 0, 255'),
+        'color': QColor('magenta'),
         'iconsize': 8,
         'icontype': QgsVertexMarker.ICON_X,
         'penwidth': 5,
     },
 }
+
+def resetRB(rubberBand, WKBtype):
+    rubberBand.reset(WKBtype)
 
 def init_rubberband(styleName, canvas, rbType):
     """initiate the rubberbands"""
@@ -93,4 +96,4 @@ def calculate_perpendicularbands(point, angle):
     y3 = point.y() + length * cos(radians(angle + 90))
     x4 = point.x() + length * sin(radians(angle + 270))
     y4 = point.y() + length * cos(radians(angle + 270))
-    return QgsPointXY(x1, y1), QgsPointXY(x2, y2), QgsPointXY(x3, y3), QgsPointXY(x4, y4)
+    return QC.QgsPointXY(x1, y1), QC.QgsPointXY(x2, y2), QC.QgsPointXY(x3, y3), QC.QgsPointXY(x4, y4)
