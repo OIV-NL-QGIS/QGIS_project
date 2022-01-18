@@ -17,6 +17,7 @@ import oiv.helpers.messages as MSG
 import oiv.helpers.drawing_helper as DH
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
+import oiv.tools.print as PR
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectwidgetui"]))
@@ -62,6 +63,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.delete_object.clicked.connect(self.run_delete_object)
         self.terrein_bewerken.clicked.connect(self.object_terrein_bewerken)
         self.object_symbolen.clicked.connect(self.run_object_symbolen_tekenen)
+        self.object_print.clicked.connect(self.run_print)
         self.create_grid.clicked.connect(self.run_create_grid)
         self.import_drawing.clicked.connect(self.run_import)
         self.btn_werkvoorraad.clicked.connect(self.run_werkvoorraad)
@@ -89,6 +91,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.objectgegevens.clicked.disconnect()
         self.terugmelden.clicked.disconnect()
         self.terrein_bewerken.clicked.disconnect()
+        self.object_print.clicked.disconnect()
         self.helpBtn.clicked.disconnect()
         self.floatBtn.clicked.disconnect()
         try:
@@ -237,6 +240,13 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         werkvoorraadWidget.initUI()
         werkvoorraadWidget.show()
         self.close()
+
+    def run_print(self):
+        directory = PQtW.QFileDialog().getExistingDirectory()
+        fileName = self.object_id.text() + '_' + self.formelenaam.text()
+        filterString = '"object_id"={}'.format(self.object_id.text())
+        PR.load_composer(directory, 'object', filterString, fileName)
+        MSG.showMsgBox('print_finished', directory)
 
     def run_import(self):
         """initiate import widget"""

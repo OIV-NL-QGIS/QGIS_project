@@ -151,4 +151,9 @@ MESSAGES = {
         "header": 'Verkeerde laag!',
         "body": 'U heeft op de verkeerde laag geklikt!\n\nKlik a.u.b. op de juiste locatie.'
     },
+    'print_finished': {
+        "type": 'information',
+        "header": 'Printen afgerond!',
+        "body": 'Het printen is gereed.\n\nU kunt de bestanden vinden in:\n'
+    },
 }
