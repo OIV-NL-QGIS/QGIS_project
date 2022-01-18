@@ -1,16 +1,18 @@
 import qgis.core as QC
 
-def load_composer(output_folder, layout_name, filterString, fileName):
+def load_composer(output_folder, objectOfBouwlaag, filterString, fileName):
     project = QC.QgsProject.instance()
-    
-    layout = project.layoutManager().layoutByName(layout_name)
-    layout.itemById('title').setText("Bouwlaag: {}".format(fileName.split('_')[2]))
-    
+    if objectOfBouwlaag == 'object':
+        layoutName = 'print_object_pdf_A4'
+        layout = project.layoutManager().layoutByName(layoutName)
+    else:
+        layoutName = 'print_bouwlagen_pdf_A4'
+        layout = project.layoutManager().layoutByName(layoutName)
+        layout.itemById('title').setText("Bouwlaag: {}".format(fileName.split('_')[2]))
     atlas = layout.atlas()
     atlas.setFilterExpression(filterString)
     atlas.filterFeatures()
     atlas.updateFeatures()
-
     print_atlas(layout, atlas, output_folder, fileName)
 
 def print_atlas(layout, atlas, output_folder, fileName):

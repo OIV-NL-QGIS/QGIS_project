@@ -195,7 +195,6 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             self.bouwlagen_to_combobox(ifeature.id(), 1)
             
     def run_print(self):
-        layoutName = 'print_bouwlagen_pdf_A4'
         arrBouwlagen = [self.comboBox.itemText(i) for i in range(self.comboBox.count())]
         directory = PQtW.QFileDialog().getExistingDirectory()
         bouwlaagOrg = self.comboBox.currentText()
@@ -204,7 +203,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             UG.set_layer_substring(subString)
             fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
             filterString = '"identificatie"={}'.format(self.pand_id.text())
-            PR.load_composer(directory, layoutName, filterString, fileName)
+            PR.load_composer(directory, 'bouwlaag', filterString, fileName)
         MSG.showMsgBox('print_finished', directory)
         subString = "bouwlaag = {}".format(bouwlaagOrg)
         UG.set_layer_substring(subString)      

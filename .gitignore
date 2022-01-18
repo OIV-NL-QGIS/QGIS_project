@@ -1,7 +1,7 @@
 
 installer/oud/
 installer/output/
-qgis_project/objecten/pg_service.conf
-plugin/oiv/.vscode/
 installer/nircmd.exe
 installer/dos2unix.exe
+qgis_project/objecten/pg_service.conf
+plugin/oiv/.vscode/

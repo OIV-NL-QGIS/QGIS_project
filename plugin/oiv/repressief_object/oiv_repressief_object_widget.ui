@@ -161,23 +161,23 @@ border-color: rgba(255, 255, 255, 0);</string>
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="terrein_bewerken">
+            <property name="text">
+             <string>Object terrein bewerken</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="object_print">
+            <property name="text">
+             <string>Object printen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="create_grid">
             <property name="text">
              <string>Maak een Kaartblad en/of Grid aan</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="import_drawing">
-            <property name="text">
-             <string>Importeer externe tekening</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btn_werkvoorraad">
-            <property name="text">
-             <string>Werkvoorraad</string>
             </property>
            </widget>
           </item>
@@ -195,9 +195,16 @@ border-color: rgba(255, 255, 255, 0);</string>
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="terrein_bewerken">
+           <widget class="QPushButton" name="import_drawing">
             <property name="text">
-             <string>Object terrein bewerken</string>
+             <string>Importeer externe tekening</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_werkvoorraad">
+            <property name="text">
+             <string>Werkvoorraad</string>
             </property>
            </widget>
           </item>
