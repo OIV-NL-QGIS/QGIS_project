@@ -292,7 +292,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 lenGeomCheck = False
         if lenGeomCheck:
             distanceToObject = QC.QgsGeometry.distance(bouwlaagGeomCentroid, geom)
-            if distanceToObject > 200:
+            if distanceToObject > 20000000:
                 lenGeomCheck = False
             checkGeomValidity = feature.geometry().isGeosValid()
             if not checkGeomValidity:
@@ -321,6 +321,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         MappingDialog.targetTypes = targetTypes
         MappingDialog.importTypes = importTypes
         self.mappingDict, dummy = MappingDialog.getMapping()
+        print(self.mappingDict)
         self.label7.setVisible(True)
         self.validatie_import.setVisible(True)
 
@@ -387,6 +388,7 @@ class MappingDialog(PQtW.QDialog):
     importTypes = []
     labels = {}
     comboBoxes = {}
+    checkBoxes = {}
 
     def __init__(self, parent=None):
         super(MappingDialog, self).__init__(parent)
@@ -397,13 +399,16 @@ class MappingDialog(PQtW.QDialog):
         scrollArea = PQtW.QScrollArea()
         widget.setLayout(qlayout)
         i = 0
+        self.add_headers(qlayout)
         for importType in self.importTypes:
             self.labels[i] = PQtW.QLabel(self)
             self.labels[i].setText(str(importType))
             self.comboBoxes[i] = PQtW.QComboBox(self)
             self.comboBoxes[i].addItems(self.targetTypes)
-            qlayout.addWidget(self.labels[i], i, 0)
-            qlayout.addWidget(self.comboBoxes[i], i, 1)
+            self.checkBoxes[i] = PQtW.QCheckBox(self)
+            qlayout.addWidget(self.labels[i], i + 1, 0)
+            qlayout.addWidget(self.comboBoxes[i], i + 1, 1)
+            qlayout.addWidget(self.checkBoxes[i], i + 1, 2)
             i += 1
         buttons = PQtW.QDialogButtonBox(
             PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
@@ -415,6 +420,15 @@ class MappingDialog(PQtW.QDialog):
         mainLayout.addWidget(scrollArea)
         self.setLayout(mainLayout)
 
+    def add_headers(self, layout):
+        j = 0
+        headers = ['import type', 'target type', 'deur']
+        for header in headers:
+            label = PQtW.QLabel(self)
+            label.setText(header)
+            layout.addWidget(label, 0, j)
+            j += 1
+
     @staticmethod
     def getMapping(parent=None):
         """initiate the GUI and redirect the input"""
@@ -422,7 +436,7 @@ class MappingDialog(PQtW.QDialog):
         dialog = MappingDialog(parent)
         result = dialog.exec_()
         for i in range(len(dialog.importTypes)):
-            mapping.update({dialog.labels[i].text(): dialog.comboBoxes[i].currentText()})
+            mapping.update({dialog.labels[i].text(): {'soort': dialog.comboBoxes[i].currentText(), 'deur': dialog.checkBoxes[i].isChecked()}})
         return (mapping, result == PQtW.QDialog.Accepted)
 
 
