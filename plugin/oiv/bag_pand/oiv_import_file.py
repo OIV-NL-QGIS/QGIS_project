@@ -199,28 +199,43 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         sourceLayerName = 'tempImport'
         sourceLayer = UC.getlayer_byname(sourceLayerName)
         features = []
+        targetIngangLayerName = "Ingang bouwlaag"
+        targetIngangLayer = UC.getlayer_byname(targetIngangLayerName)
+        sourceIngangLayerName = 'tempImportIngang'
+        sourceIngangLayer = UC.getlayer_byname(sourceIngangLayerName)
+        ingangFeatures = []
         for feature in sourceLayer.getFeatures():
             features.append(feature)
+        for feature in sourceIngangLayer.getFeatures():
+            ingangFeatures.append(feature)
         UC.write_layer(targetLayer, features, False, False)
+        UC.write_layer(targetIngangLayer, ingangFeatures, False, False)
         MSG.showMsgBox('importsuccesfull')
         QC.QgsProject.instance().removeMapLayers([sourceLayer.id()])
+        QC.QgsProject.instance().removeMapLayers([sourceIngangLayer.id()])
 
-    def inlezen_validatie(self):
-        """import the file after all settings wehere made"""
-        targetLayerName = self.import_laag.currentText()
-        targetLayer = UC.getlayer_byname(targetLayerName)
+    def init_templayers(self, targetLayer):
+        typeLayer = None
         targetFields = targetLayer.fields()
-
-        if targetLayerName == "Ruimten":
+        if targetLayer.name() == "Ruimten":
             typeLayer = UC.getlayer_byname('ruimten_type')
             tempImportLayer = self.init_layer_fields(targetFields, ["MultiPolygon?crs=epsg:28992", "tempImport", "memory"])
             tempImportLayerInvalid = self.init_layer_fields(targetFields, ["MultiPolygon?crs=epsg:28992", "tempImport_invalid", "memory"])
         else:
             tempImportLayer = self.init_layer_fields(targetFields, ["MultiLinestring?crs=epsg:28992", "tempImport", "memory"])
             tempImportLayerInvalid = self.init_layer_fields(targetFields, ["MultiLinestring?crs=epsg:28992", "tempImport_invalid", "memory"])
+        ingangLayer = UC.getlayer_byname('Ingang bouwlaag')
+        ingangFields = ingangLayer.fields()
+        tempIngangLayer = self.init_layer_fields(ingangFields, ["Point?crs=epsg:28992", "tempImportIngang", "memory"])
+        return tempImportLayer, tempImportLayerInvalid, typeLayer, tempIngangLayer, ingangFields
 
-        identifier = CH.get_identifier_bl(targetLayerName)
+    def get_ingang_type(self):
+        typeLayer = UC.getlayer_byname('ingang_type')
+        request = QC.QgsFeatureRequest().setFilterExpression('"naam" = ' + "'Deur'")
+        ifeature = UC.featureRequest(typeLayer, request)
+        return ifeature["id"]
 
+    def construct_features(self, targetFields, targetLayerName, identifier, typeLayer, ingangFields):
         bouwlaagGeomCentroid = self.get_centroid()
         dummy, progressBar = self.progressdialog(0)
         count = 0
@@ -228,28 +243,36 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         invalidCount = 0
         validFeatures = []
         invalidFeatures = []
+        ingangFeatures = []
         geomCheck = True
-
+        attributeField = self.type.currentText()
+        bouwlaagId = int(self.bouwlaag_id.text())
+        ingangTypeId = self.get_ingang_type()
         for feature in self.importLayer.getFeatures():
             targetFeature = QC.QgsFeature()
             targetFeature.initAttributes(targetFields.count())
             targetFeature.setFields(targetFields)
             count += 1
-            if self.mappingDict[feature[self.type.currentText()]] != 'niet importeren' and feature.geometry():
+            if self.mappingDict[feature[attributeField]]["deur"] and feature.geometry():
+                ingangFeature = self.convert_to_ingang(feature, ingangFields, bouwlaagId, ingangTypeId)
+                if ingangFeature:
+                    ingangFeatures.append(ingangFeature)
+            elif self.mappingDict[feature[attributeField]]["soort"] != 'niet importeren' and feature.geometry():
                 if self.importTypeFile == 'DXF':
                     geom, geomCheck = self.check_feature_validity(feature, bouwlaagGeomCentroid)
                 elif self.importTypeFile in ('GPKG', 'SHP'):
                     geom = feature.geometry()
                 targetFeature.setGeometry(geom)
-                targetFeature["bouwlaag_id"] = int(self.bouwlaag_id.text())
+                targetFeature["bouwlaag_id"] = bouwlaagId
+                targetFeature["applicatie"] = 'OIV'
                 if targetLayerName == "Ruimten":
-                    req = '"naam" = ' + "'" + self.mappingDict[feature[self.type.currentText()]] + "'"
+                    req = '"naam" = ' + "'" + self.mappingDict[feature[attributeField]]["soort"] + "'"
                     request = QC.QgsFeatureRequest().setFilterExpression(req)
                     tempFeature = UC.featureRequest(typeLayer, request)
                     if tempFeature:
                         targetFeature[identifier] = tempFeature["id"]
                 else:
-                    targetFeature[identifier] = self.mappingDict[feature[self.type.currentText()]]
+                    targetFeature[identifier] = self.mappingDict[feature[attributeField]]["soort"]
                     if geomCheck:
                         validFeatures.append(targetFeature)
                     else:
@@ -257,13 +280,43 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                         invalidCount += 1
             progress = (float(count) / float(cntFeat)) * 100
             progressBar.setValue(progress)
+        return validFeatures, invalidFeatures, invalidCount, ingangFeatures
 
+    def convert_to_ingang(self, feature, ingangFields, bouwlaagId, typeId):
+        geom = feature.geometry()
+        ingangFeature = QC.QgsFeature()
+        ingangFeature.initAttributes(ingangFields.count())
+        ingangFeature.setFields(ingangFields)
+        points = feature.geometry().asPolyline()
+        startPt = QC.QgsPoint(points[0])
+        endPt = QC.QgsPoint(points[-1])
+        angle = startPt.azimuth(endPt)
+        length = geom.length()
+        featureGeom = geom.interpolate(length / 2.0).asPoint()
+        ingangFeature.setGeometry(QC.QgsGeometry().fromPointXY(featureGeom))
+        ingangFeature["ingang_type_id"] = typeId
+        ingangFeature["bouwlaag_id"] = bouwlaagId
+        ingangFeature["applicatie"] = 'OIV'
+        ingangFeature["rotatie"] = angle
+        return ingangFeature
+
+    def inlezen_validatie(self):
+        """import the file after all settings wehere made"""
+        targetLayerName = self.import_laag.currentText()
+        targetLayer = UC.getlayer_byname(targetLayerName)
+        targetFields = targetLayer.fields()
+        tempImportLayer, tempImportLayerInvalid, typeLayer, tempIngangLayer, ingangFields = self.init_templayers(targetLayer)
+        identifier = CH.get_identifier_bl(targetLayerName)
+        validFeatures, invalidFeatures, invalidCount, ingangFeatures = self.construct_features(targetFields, targetLayerName, identifier, typeLayer, ingangFields)
         if validFeatures:
             UC.write_layer(tempImportLayer, validFeatures, False, False)
+            QC.QgsProject.instance().addMapLayer(tempImportLayer, True)
         if invalidFeatures:
             UC.write_layer(tempImportLayerInvalid, invalidFeatures, False, False)
-        QC.QgsProject.instance().addMapLayer(tempImportLayer, True)
-        QC.QgsProject.instance().addMapLayer(tempImportLayerInvalid, True)
+            QC.QgsProject.instance().addMapLayer(tempImportLayerInvalid, True)
+        if ingangFeatures:
+            UC.write_layer(tempIngangLayer, ingangFeatures, False, False)
+            QC.QgsProject.instance().addMapLayer(tempIngangLayer, True)
         if invalidCount > 0:
             MSG.showMsgBox('importpartiallysuccesfull', '{}'.format(invalidCount))
         else:
@@ -292,7 +345,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 lenGeomCheck = False
         if lenGeomCheck:
             distanceToObject = QC.QgsGeometry.distance(bouwlaagGeomCentroid, geom)
-            if distanceToObject > 200:
+            if distanceToObject > 20000000:
                 lenGeomCheck = False
             checkGeomValidity = feature.geometry().isGeosValid()
             if not checkGeomValidity:
@@ -387,6 +440,7 @@ class MappingDialog(PQtW.QDialog):
     importTypes = []
     labels = {}
     comboBoxes = {}
+    checkBoxes = {}
 
     def __init__(self, parent=None):
         super(MappingDialog, self).__init__(parent)
@@ -397,13 +451,16 @@ class MappingDialog(PQtW.QDialog):
         scrollArea = PQtW.QScrollArea()
         widget.setLayout(qlayout)
         i = 0
+        self.add_headers(qlayout)
         for importType in self.importTypes:
             self.labels[i] = PQtW.QLabel(self)
             self.labels[i].setText(str(importType))
             self.comboBoxes[i] = PQtW.QComboBox(self)
             self.comboBoxes[i].addItems(self.targetTypes)
-            qlayout.addWidget(self.labels[i], i, 0)
-            qlayout.addWidget(self.comboBoxes[i], i, 1)
+            self.checkBoxes[i] = PQtW.QCheckBox(self)
+            qlayout.addWidget(self.labels[i], i + 1, 0)
+            qlayout.addWidget(self.comboBoxes[i], i + 1, 1)
+            qlayout.addWidget(self.checkBoxes[i], i + 1, 2)
             i += 1
         buttons = PQtW.QDialogButtonBox(
             PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
@@ -415,6 +472,15 @@ class MappingDialog(PQtW.QDialog):
         mainLayout.addWidget(scrollArea)
         self.setLayout(mainLayout)
 
+    def add_headers(self, layout):
+        j = 0
+        headers = ['import type', 'target type', 'deur']
+        for header in headers:
+            label = PQtW.QLabel(self)
+            label.setText(header)
+            layout.addWidget(label, 0, j)
+            j += 1
+
     @staticmethod
     def getMapping(parent=None):
         """initiate the GUI and redirect the input"""
@@ -422,7 +488,7 @@ class MappingDialog(PQtW.QDialog):
         dialog = MappingDialog(parent)
         result = dialog.exec_()
         for i in range(len(dialog.importTypes)):
-            mapping.update({dialog.labels[i].text(): dialog.comboBoxes[i].currentText()})
+            mapping.update({dialog.labels[i].text(): {'soort': dialog.comboBoxes[i].currentText(), 'deur': dialog.checkBoxes[i].isChecked()}})
         return (mapping, result == PQtW.QDialog.Accepted)
 
 
