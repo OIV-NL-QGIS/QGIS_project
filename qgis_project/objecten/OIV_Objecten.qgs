@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="Joost Deen" version="3.16.15-Hannover" saveUser="JoostDeen" saveDateTime="2022-01-26T09:38:51" projectname="OIV - Objecten v3.3.9 - Eindhoven">
+<qgis saveUserFull="Joost Deen" version="3.16.15-Hannover" saveUser="JoostDeen" saveDateTime="2022-01-26T11:33:14" projectname="OIV - Objecten v3.3.9 - Eindhoven">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.9 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -240,7 +240,7 @@
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer legend_exp="" legend_split_behavior="0" name="Scenario locatie" providerKey="postgres" patch_size="-1,-1" checked="Qt::Checked" id="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" source="dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" expanded="1">
+      <layer-tree-layer legend_exp="" legend_split_behavior="0" name="Scenario locatie ruimtelijk" providerKey="postgres" patch_size="-1,-1" checked="Qt::Checked" id="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" source="dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" expanded="0">
         <customproperties/>
       </layer-tree-layer>
       <layer-tree-layer legend_exp="" legend_split_behavior="0" name="Bereikbaarheid" providerKey="postgres" patch_size="0,0" checked="Qt::Checked" id="bereikbaarheid20180831134019212" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bereikbaarheid&quot; (geom)" expanded="0">
@@ -311,14 +311,14 @@
         <customproperties/>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group name="Tabellen" checked="Qt::Unchecked" expanded="0">
+    <layer-tree-group name="Tabellen" checked="Qt::Checked" expanded="1">
       <customproperties/>
       <layer-tree-layer legend_exp="" legend_split_behavior="0" name="Objecten BGT" providerKey="postgres" patch_size="0,0" checked="Qt::Unchecked" id="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bgt&quot; (geom)" expanded="0">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-group name="Tabellen zonder geo" checked="Qt::Unchecked" expanded="0">
+      <layer-tree-group name="Tabellen zonder geo" checked="Qt::Unchecked" expanded="1">
         <customproperties/>
         <layer-tree-layer legend_exp="" legend_split_behavior="0" name="aanwezig" providerKey="postgres" patch_size="0,0" checked="Qt::Checked" id="aanwezigepersonen20160318144720364" source="service='oiv' key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;aanwezig&quot;" expanded="0">
           <customproperties>
@@ -680,6 +680,7 @@
       <item>lines_of_interest_4ca948b9_603c_4520_89c0_74e714835890</item>
       <item>labels_of_interest_35459f2d_bbdd_461b_9d06_8a5331794f27</item>
       <item>object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6</item>
+      <item>scenario20180831134019441</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings tolerance="10" intersection-snapping="1" unit="1" scaleDependencyMode="0" enabled="0" mode="3" self-snapping="0" maxScale="0" minScale="0" type="1">
@@ -853,10 +854,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>72106.78239999999641441</xmin>
-      <ymin>374384.89800000004470348</ymin>
-      <xmax>147390.72299999999813735</xmax>
-      <ymax>426733.96999999997206032</ymax>
+      <xmin>54542.43316795059945434</xmin>
+      <ymin>424379.43720494356239215</ymin>
+      <xmax>54689.47211443497508299</xmax>
+      <ymax>424481.68148619361454621</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -1072,8 +1073,8 @@
           <legendlayerfile isInOverview="0" layerid="label_object20180912203855251" visible="1"/>
         </filegroup>
       </legendlayer>
-      <legendlayer open="true" showFeatureCount="0" name="Scenario locatie" checked="Qt::Checked" drawingOrder="-1">
-        <filegroup open="true" hidden="false">
+      <legendlayer open="false" showFeatureCount="0" name="Scenario locatie ruimtelijk" checked="Qt::Checked" drawingOrder="-1">
+        <filegroup open="false" hidden="false">
           <legendlayerfile isInOverview="0" layerid="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" visible="1"/>
         </filegroup>
       </legendlayer>
@@ -1149,13 +1150,13 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup open="false" name="Tabellen" checked="Qt::Unchecked">
+    <legendgroup open="true" name="Tabellen" checked="Qt::Checked">
       <legendlayer open="false" showFeatureCount="0" name="Objecten BGT" checked="Qt::Unchecked" drawingOrder="-1">
         <filegroup open="false" hidden="false">
           <legendlayerfile isInOverview="0" layerid="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" visible="0"/>
         </filegroup>
       </legendlayer>
-      <legendgroup open="false" name="Tabellen zonder geo" checked="Qt::Unchecked">
+      <legendgroup open="true" name="Tabellen zonder geo" checked="Qt::Unchecked">
         <legendlayer open="false" showFeatureCount="0" name="aanwezig" checked="Qt::Checked" drawingOrder="-1">
           <filegroup open="false" hidden="false">
             <legendlayerfile isInOverview="0" layerid="aanwezigepersonen20160318144720364" visible="0"/>
@@ -20208,21 +20209,21 @@ def my_form_open(dialog, layer, feature):
           </editWidget>
         </field>
         <field name="datum_geldig_vanaf" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="datum_geldig_tot" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="typeobject" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
               <Option/>
             </config>
@@ -20330,6 +20331,9 @@ def my_form_open(dialog, layer, feature):
           <column name="datum_aangemaakt" width="-1" hidden="0" type="field"/>
           <column name="datum_gewijzigd" width="-1" hidden="0" type="field"/>
           <column name="fotografie_id" width="-1" hidden="0" type="field"/>
+          <column name="datum_geldig_vanaf" width="-1" hidden="0" type="field"/>
+          <column name="datum_geldig_tot" width="-1" hidden="0" type="field"/>
+          <column name="typeobject" width="-1" hidden="0" type="field"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -32671,13 +32675,13 @@ def my_form_open(dialog, layer, feature):
       <previewExpression>COALESCE("ogr_fid", '&lt;NULL>')</previewExpression>
       <mapTip>ogr_fid</mapTip>
     </maplayer>
-    <maplayer autoRefreshTime="0" wkbType="Point" simplifyDrawingHints="1" simplifyLocal="1" autoRefreshEnabled="0" readOnly="0" simplifyDrawingTol="1" minScale="100000000" type="vector" simplifyAlgorithm="0" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" maxScale="0" geometry="Point" simplifyMaxScale="1" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" labelsEnabled="0">
+    <maplayer autoRefreshTime="0" wkbType="Point" simplifyDrawingHints="0" simplifyLocal="1" autoRefreshEnabled="0" readOnly="0" simplifyDrawingTol="1" minScale="10000" type="vector" simplifyAlgorithm="0" refreshOnNotifyEnabled="0" styleCategories="AllStyleCategories" maxScale="0" geometry="Point" simplifyMaxScale="1" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="1" labelsEnabled="0">
       <id>object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6</id>
       <datasource>dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."object_scenario_locatie" (geom)</datasource>
       <keywordList>
         <value></value>
       </keywordList>
-      <layername>Scenario locatie</layername>
+      <layername>Scenario locatie ruimtelijk</layername>
       <srs>
         <spatialrefsys>
           <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
@@ -32698,6 +32702,15 @@ def my_form_open(dialog, layer, feature):
         <type>dataset</type>
         <title></title>
         <abstract></abstract>
+        <contact>
+          <name></name>
+          <organization></organization>
+          <position></position>
+          <voice></voice>
+          <fax></fax>
+          <email></email>
+          <role></role>
+        </contact>
         <links/>
         <fees></fees>
         <encoding></encoding>
@@ -32714,7 +32727,15 @@ def my_form_open(dialog, layer, feature):
             <geographicflag>false</geographicflag>
           </spatialrefsys>
         </crs>
-        <extent/>
+        <extent>
+          <spatial maxz="0" maxx="0" minz="0" dimensions="2" miny="0" crs="EPSG:28992" maxy="0" minx="0"/>
+          <temporal>
+            <period>
+              <start></start>
+              <end></end>
+            </period>
+          </temporal>
+        </extent>
       </resourceMetadata>
       <provider encoding="">postgres</provider>
       <vectorjoins/>
@@ -32736,49 +32757,239 @@ def my_form_open(dialog, layer, feature):
           <end></end>
         </fixedRange>
       </temporal>
-      <renderer-v2 forceraster="0" symbollevels="0" enableorderby="0" type="singleSymbol">
+      <renderer-v2 forceraster="0" symbollevels="0" enableorderby="0" type="RuleRenderer">
+        <rules key="{d9abbd6a-8218-4d26-9fe4-53ba6df3aab7}">
+          <rule key="{1a379bf2-570e-4d5c-ab40-1b722f5a749b}" scalemindenom="2500" scalemaxdenom="50000" label="high scale" symbol="0"/>
+          <rule key="{55e1e2cf-28da-4630-9d05-4f4ee7026b72}" scalemindenom="1" scalemaxdenom="2500" label="low scale" symbol="1"/>
+        </rules>
         <symbols>
           <symbol clip_to_extent="1" name="0" alpha="1" force_rhr="0" type="marker">
-            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
+            <layer pass="0" class="SvgMarker" enabled="1" locked="0">
               <prop v="0" k="angle"/>
-              <prop v="213,180,60,255" k="color"/>
+              <prop v="0,0,0,255" k="color"/>
+              <prop v="0" k="fixedAspectRatio"/>
               <prop v="1" k="horizontal_anchor_point"/>
-              <prop v="bevel" k="joinstyle"/>
-              <prop v="circle" k="name"/>
+              <prop v="backgrounds/background_circle.svg" k="name"/>
               <prop v="0,0" k="offset"/>
               <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
               <prop v="MM" k="offset_unit"/>
-              <prop v="35,35,35,255" k="outline_color"/>
-              <prop v="solid" k="outline_style"/>
+              <prop v="255,255,255,255" k="outline_color"/>
               <prop v="0" k="outline_width"/>
               <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
               <prop v="MM" k="outline_width_unit"/>
               <prop v="diameter" k="scale_method"/>
-              <prop v="2" k="size"/>
+              <prop v="12" k="size"/>
               <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
               <prop v="MM" k="size_unit"/>
               <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
                   <Option name="name" value="" type="QString"/>
-                  <Option name="properties"/>
+                  <Option name="properties" type="Map">
+                    <Option name="angle" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="field" value="rotatie" type="QString"/>
+                      <Option name="type" value="2" type="int"/>
+                    </Option>
+                    <Option name="name" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="expression" value="CONCAT('/svg/',  &quot;symbol_name&quot;, '.svg')" type="QString"/>
+                      <Option name="type" value="3" type="int"/>
+                    </Option>
+                    <Option name="size" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="expression" value="0.35 * &quot;size&quot;" type="QString"/>
+                      <Option name="type" value="3" type="int"/>
+                    </Option>
+                  </Option>
+                  <Option name="type" value="collection" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
+              <prop v="0" k="angle"/>
+              <prop v="255,0,213,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="star" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MM" k="offset_unit"/>
+              <prop v="0,0,0,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MM" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="1" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MM" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" value="" type="QString"/>
+                  <Option name="properties" type="Map">
+                    <Option name="angle" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="field" value="rotatie" type="QString"/>
+                      <Option name="type" value="2" type="int"/>
+                    </Option>
+                    <Option name="size" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="expression" value="0.0833333*(0.35 * &quot;size&quot;)" type="QString"/>
+                      <Option name="type" value="3" type="int"/>
+                    </Option>
+                  </Option>
+                  <Option name="type" value="collection" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol clip_to_extent="1" name="1" alpha="1" force_rhr="0" type="marker">
+            <layer pass="0" class="SvgMarker" enabled="1" locked="0">
+              <prop v="0" k="angle"/>
+              <prop v="0,0,0,255" k="color"/>
+              <prop v="0" k="fixedAspectRatio"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="backgrounds/background_circle.svg" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MapUnit" k="offset_unit"/>
+              <prop v="255,255,255,255" k="outline_color"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MapUnit" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="12" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MapUnit" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" value="" type="QString"/>
+                  <Option name="properties" type="Map">
+                    <Option name="angle" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="field" value="rotatie" type="QString"/>
+                      <Option name="type" value="2" type="int"/>
+                    </Option>
+                    <Option name="name" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="expression" value="CONCAT('/svg/',  &quot;symbol_name&quot;, '.svg')" type="QString"/>
+                      <Option name="type" value="3" type="int"/>
+                    </Option>
+                    <Option name="size" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="expression" value="&quot;size&quot;" type="QString"/>
+                      <Option name="type" value="3" type="int"/>
+                    </Option>
+                  </Option>
+                  <Option name="type" value="collection" type="QString"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
+              <prop v="0" k="angle"/>
+              <prop v="255,0,213,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="star" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MapUnit" k="offset_unit"/>
+              <prop v="0,0,0,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MapUnit" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="1" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MapUnit" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option name="name" value="" type="QString"/>
+                  <Option name="properties" type="Map">
+                    <Option name="angle" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="field" value="rotatie" type="QString"/>
+                      <Option name="type" value="2" type="int"/>
+                    </Option>
+                    <Option name="size" type="Map">
+                      <Option name="active" value="true" type="bool"/>
+                      <Option name="expression" value="0.0833333*(&quot;size&quot;)" type="QString"/>
+                      <Option name="type" value="3" type="int"/>
+                    </Option>
+                  </Option>
                   <Option name="type" value="collection" type="QString"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
         </symbols>
-        <rotation/>
-        <sizescale/>
       </renderer-v2>
-      <customproperties/>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"symbol_name"</value>
+        </property>
+        <property key="embeddedWidgets/count" value="0"/>
+        <property key="variableNames"/>
+        <property key="variableValues"/>
+      </customproperties>
       <blendMode>0</blendMode>
       <featureBlendMode>0</featureBlendMode>
       <layerOpacity>1</layerOpacity>
+      <SingleCategoryDiagramRenderer diagramType="Histogram" attributeLegend="1">
+        <DiagramCategory backgroundColor="#ffffff" sizeScale="3x:0,0,0,0,0,0" penColor="#000000" height="15" penWidth="0" scaleBasedVisibility="1" barWidth="5" lineSizeType="MM" scaleDependency="Area" spacing="5" minScaleDenominator="0" spacingUnit="MM" diagramOrientation="Up" penAlpha="255" spacingUnitScale="3x:0,0,0,0,0,0" lineSizeScale="3x:0,0,0,0,0,0" opacity="1" rotationOffset="270" backgroundAlpha="255" enabled="0" minimumSize="0" sizeType="MM" width="15" showAxis="1" direction="0" maxScaleDenominator="10000" labelPlacementMethod="XHeight">
+          <fontProperties description="MS Shell Dlg 2,8.25,-1,5,50,0,0,0,0,0" style=""/>
+          <axisSymbol>
+            <symbol clip_to_extent="1" name="" alpha="1" force_rhr="0" type="line">
+              <layer pass="0" class="SimpleLine" enabled="1" locked="0">
+                <prop v="0" k="align_dash_pattern"/>
+                <prop v="square" k="capstyle"/>
+                <prop v="5;2" k="customdash"/>
+                <prop v="3x:0,0,0,0,0,0" k="customdash_map_unit_scale"/>
+                <prop v="MM" k="customdash_unit"/>
+                <prop v="0" k="dash_pattern_offset"/>
+                <prop v="3x:0,0,0,0,0,0" k="dash_pattern_offset_map_unit_scale"/>
+                <prop v="MM" k="dash_pattern_offset_unit"/>
+                <prop v="0" k="draw_inside_polygon"/>
+                <prop v="bevel" k="joinstyle"/>
+                <prop v="35,35,35,255" k="line_color"/>
+                <prop v="solid" k="line_style"/>
+                <prop v="0.26" k="line_width"/>
+                <prop v="MM" k="line_width_unit"/>
+                <prop v="0" k="offset"/>
+                <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+                <prop v="MM" k="offset_unit"/>
+                <prop v="0" k="ring_filter"/>
+                <prop v="0" k="tweak_dash_pattern_on_corners"/>
+                <prop v="0" k="use_custom_dash"/>
+                <prop v="3x:0,0,0,0,0,0" k="width_map_unit_scale"/>
+                <data_defined_properties>
+                  <Option type="Map">
+                    <Option name="name" value="" type="QString"/>
+                    <Option name="properties"/>
+                    <Option name="type" value="collection" type="QString"/>
+                  </Option>
+                </data_defined_properties>
+              </layer>
+            </symbol>
+          </axisSymbol>
+        </DiagramCategory>
+      </SingleCategoryDiagramRenderer>
+      <DiagramLayerSettings linePlacementFlags="18" dist="0" placement="0" priority="0" zIndex="0" showAll="1" obstacle="0">
+        <properties>
+          <Option type="Map">
+            <Option name="name" value="" type="QString"/>
+            <Option name="properties"/>
+            <Option name="type" value="collection" type="QString"/>
+          </Option>
+        </properties>
+      </DiagramLayerSettings>
       <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
-        <activeChecks type="StringList">
-          <Option value="" type="QString"/>
-        </activeChecks>
+        <activeChecks/>
         <checkConfiguration/>
       </geometryOptions>
       <legend type="default-vector"/>
@@ -32789,100 +33000,126 @@ def my_form_open(dialog, layer, feature):
       </referencedLayers>
       <fieldConfiguration>
         <field name="id" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="Range">
             <config>
-              <Option/>
+              <Option type="Map">
+                <Option name="AllowNull" value="true" type="bool"/>
+                <Option name="Max" value="2147483647" type="int"/>
+                <Option name="Min" value="-2147483648" type="int"/>
+                <Option name="Precision" value="0" type="int"/>
+                <Option name="Step" value="1" type="int"/>
+                <Option name="Style" value="SpinBox" type="QString"/>
+              </Option>
             </config>
           </editWidget>
         </field>
         <field name="datum_aangemaakt" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="datum_gewijzigd" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="locatie" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
-              <Option/>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
             </config>
           </editWidget>
         </field>
         <field name="bouwlaag_id" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="Range">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="object_id" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="RelationReference">
             <config>
-              <Option/>
+              <Option type="Map">
+                <Option name="AllowAddFeatures" value="false" type="bool"/>
+                <Option name="AllowNULL" value="false" type="bool"/>
+                <Option name="MapIdentification" value="true" type="bool"/>
+                <Option name="OrderByValue" value="false" type="bool"/>
+                <Option name="ReadOnly" value="false" type="bool"/>
+                <Option name="ReferencedLayerDataSource" value="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom)" type="QString"/>
+                <Option name="ReferencedLayerId" value="objectgegevens20160318144112880" type="QString"/>
+                <Option name="ReferencedLayerName" value="Objecten" type="QString"/>
+                <Option name="ReferencedLayerProviderKey" value="postgres" type="QString"/>
+                <Option name="Relation" value="scenario_object_rel_1" type="QString"/>
+                <Option name="ShowForm" value="false" type="bool"/>
+                <Option name="ShowOpenFormButton" value="true" type="bool"/>
+              </Option>
             </config>
           </editWidget>
         </field>
         <field name="fotografie_id" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="Range">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="rotatie" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="Range">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="size" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="Range">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="symbol_name" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="applicatie" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="datum_geldig_vanaf" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="datum_geldig_tot" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="typeobject" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
-              <Option/>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
             </config>
           </editWidget>
         </field>
@@ -32891,9 +33128,9 @@ def my_form_open(dialog, layer, feature):
         <alias name="" index="0" field="id"/>
         <alias name="" index="1" field="datum_aangemaakt"/>
         <alias name="" index="2" field="datum_gewijzigd"/>
-        <alias name="" index="3" field="locatie"/>
+        <alias name="Locatienaam" index="3" field="locatie"/>
         <alias name="" index="4" field="bouwlaag_id"/>
-        <alias name="" index="5" field="object_id"/>
+        <alias name="Object identificatie*" index="5" field="object_id"/>
         <alias name="" index="6" field="fotografie_id"/>
         <alias name="" index="7" field="rotatie"/>
         <alias name="" index="8" field="size"/>
@@ -32956,7 +33193,23 @@ def my_form_open(dialog, layer, feature):
         <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
       </attributeactions>
       <attributetableconfig actionWidgetStyle="dropDown" sortOrder="0" sortExpression="">
-        <columns/>
+        <columns>
+          <column name="id" width="-1" hidden="0" type="field"/>
+          <column name="datum_aangemaakt" width="-1" hidden="0" type="field"/>
+          <column name="datum_gewijzigd" width="-1" hidden="0" type="field"/>
+          <column name="locatie" width="-1" hidden="0" type="field"/>
+          <column name="bouwlaag_id" width="-1" hidden="0" type="field"/>
+          <column name="object_id" width="-1" hidden="0" type="field"/>
+          <column name="fotografie_id" width="-1" hidden="0" type="field"/>
+          <column name="rotatie" width="-1" hidden="0" type="field"/>
+          <column name="size" width="-1" hidden="0" type="field"/>
+          <column name="symbol_name" width="-1" hidden="0" type="field"/>
+          <column name="applicatie" width="-1" hidden="0" type="field"/>
+          <column name="datum_geldig_vanaf" width="-1" hidden="0" type="field"/>
+          <column name="datum_geldig_tot" width="-1" hidden="0" type="field"/>
+          <column name="typeobject" width="-1" hidden="0" type="field"/>
+          <column width="-1" hidden="1" type="actions"/>
+        </columns>
       </attributetableconfig>
       <conditionalstyles>
         <rowstyles/>
@@ -32967,14 +33220,71 @@ def my_form_open(dialog, layer, feature):
       <editforminit/>
       <editforminitcodesource>0</editforminitcodesource>
       <editforminitfilepath></editforminitfilepath>
-      <editforminitcode><![CDATA[]]></editforminitcode>
+      <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Formulieren van QGIS kunnen een functie voor Python hebben die wordt aangeroepen wanneer het formulier wordt geopend.
+
+Gebruik deze functie om extra logica aan uw formulieren toe te voegen.
+
+Voer de naam van de functie in in het veld "Python Init function".
+
+Een voorbeeld volgt hieronder:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+	geom = feature.geometry()
+	control = dialog.findChild(QWidget, "MyLineEdit")
+]]></editforminitcode>
       <featformsuppress>0</featformsuppress>
-      <editorlayout>generatedlayout</editorlayout>
-      <editable/>
-      <labelOnTop/>
+      <editorlayout>tablayout</editorlayout>
+      <attributeEditorForm>
+        <attributeEditorField name="object_id" index="5" showLabel="1"/>
+        <attributeEditorField name="locatie" index="3" showLabel="1"/>
+        <attributeEditorRelation name="scenario_locatie_rel" buttons="AllButtons" label="" relation="scenario_locatie_rel" nmRelationId="" showLabel="1" forceSuppressFormPopup="0"/>
+      </attributeEditorForm>
+      <editable>
+        <field name="applicatie" editable="1"/>
+        <field name="bouwlaag_id" editable="1"/>
+        <field name="datum_aangemaakt" editable="1"/>
+        <field name="datum_geldig_tot" editable="1"/>
+        <field name="datum_geldig_vanaf" editable="1"/>
+        <field name="datum_gewijzigd" editable="1"/>
+        <field name="fotografie_id" editable="1"/>
+        <field name="id" editable="1"/>
+        <field name="locatie" editable="1"/>
+        <field name="object_id" editable="1"/>
+        <field name="rotatie" editable="1"/>
+        <field name="size" editable="1"/>
+        <field name="symbol_name" editable="1"/>
+        <field name="typeobject" editable="1"/>
+      </editable>
+      <labelOnTop>
+        <field labelOnTop="0" name="applicatie"/>
+        <field labelOnTop="0" name="bouwlaag_id"/>
+        <field labelOnTop="0" name="datum_aangemaakt"/>
+        <field labelOnTop="0" name="datum_geldig_tot"/>
+        <field labelOnTop="0" name="datum_geldig_vanaf"/>
+        <field labelOnTop="0" name="datum_gewijzigd"/>
+        <field labelOnTop="0" name="fotografie_id"/>
+        <field labelOnTop="0" name="id"/>
+        <field labelOnTop="0" name="locatie"/>
+        <field labelOnTop="0" name="object_id"/>
+        <field labelOnTop="0" name="rotatie"/>
+        <field labelOnTop="0" name="size"/>
+        <field labelOnTop="0" name="symbol_name"/>
+        <field labelOnTop="0" name="typeobject"/>
+      </labelOnTop>
       <dataDefinedFieldProperties/>
-      <widgets/>
-      <previewExpression></previewExpression>
+      <widgets>
+        <widget name="scenario_locatie_rel">
+          <config type="Map">
+            <Option name="force-suppress-popup" value="false" type="bool"/>
+            <Option name="nm-rel" type="invalid"/>
+          </config>
+        </widget>
+      </widgets>
+      <previewExpression>"symbol_name"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer styleCategories="AllStyleCategories" refreshOnNotifyMessage="" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshTime="0" maxScale="0" geometry="No geometry" wkbType="NoGeometry" minScale="1e+08" type="vector" readOnly="0">
@@ -33934,7 +34244,7 @@ def my_form_open(dialog, layer, feature):
           <config/>
         </widget>
       </widgets>
-      <previewExpression>"formelenaam"</previewExpression>
+      <previewExpression>formelenaam</previewExpression>
       <mapTip>ogr_fid</mapTip>
     </maplayer>
     <maplayer styleCategories="AllStyleCategories" refreshOnNotifyMessage="" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshTime="0" maxScale="0" minScale="1e+08" type="raster">
@@ -37654,7 +37964,9 @@ def my_form_open(dialog, layer, feature):
         </fixedRange>
       </temporal>
       <customproperties>
-        <property key="dualview/previewExpressions" value="COALESCE(&quot;id&quot;, '&lt;NULL>')"/>
+        <property key="dualview/previewExpressions">
+          <value>COALESCE("id", '&lt;NULL>')</value>
+        </property>
         <property key="embeddedWidgets/count" value="0"/>
         <property key="variableNames"/>
         <property key="variableValues"/>
@@ -37665,7 +37977,7 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"/>
       <referencedLayers>
-        <relation referencingLayer="scenario20180831134019441" layerName="Scenario locatie" name="scenario_locatie" layerId="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" dataSource="dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" providerKey="postgres" id="scenario_locatie_rel" referencedLayer="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" strength="Association">
+        <relation referencingLayer="scenario20180831134019441" layerName="Scenario locatie ruimtelijk" name="scenario_locatie" layerId="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" dataSource="dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" providerKey="postgres" id="scenario_locatie_rel" referencedLayer="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" strength="Association">
           <fieldRef referencedField="id" referencingField="scenario_locatie_id"/>
         </relation>
         <relation referencingLayer="scenario20180831134019441" layerName="Objecten" name="scenario_object" layerId="objectgegevens20160318144112880" dataSource="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom)" providerKey="postgres" id="scenario_object_rel" referencedLayer="objectgegevens20160318144112880" strength="Association">
@@ -37733,23 +38045,26 @@ def my_form_open(dialog, layer, feature):
           </editWidget>
         </field>
         <field name="datum_deleted" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="DateTime">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="scenario_locatie_id" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="RelationReference">
             <config>
               <Option/>
             </config>
           </editWidget>
         </field>
         <field name="file_name" configurationFlags="None">
-          <editWidget type="">
+          <editWidget type="TextEdit">
             <config>
-              <Option/>
+              <Option type="Map">
+                <Option name="IsMultiline" value="false" type="bool"/>
+                <Option name="UseHtml" value="false" type="bool"/>
+              </Option>
             </config>
           </editWidget>
         </field>
@@ -37763,7 +38078,7 @@ def my_form_open(dialog, layer, feature):
         <alias name="" index="5" field="object_id"/>
         <alias name="" index="6" field="datum_deleted"/>
         <alias name="" index="7" field="scenario_locatie_id"/>
-        <alias name="" index="8" field="file_name"/>
+        <alias name="Bestandsnaam" index="8" field="file_name"/>
       </aliases>
       <defaults>
         <default applyOnUpdate="0" expression="" field="id"/>
@@ -37811,6 +38126,9 @@ def my_form_open(dialog, layer, feature):
           <column name="scenario_type_id" width="-1" hidden="0" type="field"/>
           <column name="object_id" width="-1" hidden="0" type="field"/>
           <column width="-1" hidden="1" type="actions"/>
+          <column name="datum_deleted" width="-1" hidden="0" type="field"/>
+          <column name="scenario_locatie_id" width="-1" hidden="0" type="field"/>
+          <column name="file_name" width="-1" hidden="0" type="field"/>
         </columns>
       </attributetableconfig>
       <conditionalstyles>
@@ -37844,21 +38162,28 @@ def my_form_open(dialog, layer, feature):
       <attributeEditorForm>
         <attributeEditorField name="scenario_type_id" index="4" showLabel="1"/>
         <attributeEditorField name="omschrijving" index="3" showLabel="1"/>
+        <attributeEditorField name="file_name" index="8" showLabel="1"/>
       </attributeEditorForm>
       <editable>
         <field name="datum_aangemaakt" editable="1"/>
+        <field name="datum_deleted" editable="1"/>
         <field name="datum_gewijzigd" editable="1"/>
+        <field name="file_name" editable="1"/>
         <field name="id" editable="1"/>
         <field name="object_id" editable="1"/>
         <field name="omschrijving" editable="1"/>
+        <field name="scenario_locatie_id" editable="1"/>
         <field name="scenario_type_id" editable="1"/>
       </editable>
       <labelOnTop>
         <field labelOnTop="0" name="datum_aangemaakt"/>
+        <field labelOnTop="0" name="datum_deleted"/>
         <field labelOnTop="0" name="datum_gewijzigd"/>
+        <field labelOnTop="0" name="file_name"/>
         <field labelOnTop="0" name="id"/>
         <field labelOnTop="0" name="object_id"/>
         <field labelOnTop="0" name="omschrijving"/>
+        <field labelOnTop="0" name="scenario_locatie_id"/>
         <field labelOnTop="0" name="scenario_type_id"/>
       </labelOnTop>
       <dataDefinedFieldProperties/>
@@ -48121,6 +48446,7 @@ def my_form_open(dialog, layer, feature):
     <layer id="lines_of_interest_4ca948b9_603c_4520_89c0_74e714835890"/>
     <layer id="labels_of_interest_35459f2d_bbdd_461b_9d06_8a5331794f27"/>
     <layer id="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6"/>
+    <layer id="scenario20180831134019441"/>
   </layerorder>
   <properties>
     <CopyrightLabel>
@@ -60985,7 +61311,7 @@ def closeProject():&#xd;    pass</pythonCode>
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent ymax="426733.96999999997206032" ymin="374384.89800000004470348" xmin="39898.17978788608161267" xmax="179599.32561211392749101">
+    <DefaultViewExtent ymax="424481.68148619361454621" ymin="424379.43720494356239215" xmin="54479.5257409737459966" xmax="54752.37954141182854073">
       <spatialrefsys>
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +units=m +no_defs</proj4>
