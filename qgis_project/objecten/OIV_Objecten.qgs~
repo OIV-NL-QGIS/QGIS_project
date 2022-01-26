@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="Joost Deen" version="3.16.15-Hannover" saveUser="JoostDeen" saveDateTime="2022-01-26T09:38:51" projectname="OIV - Objecten v3.3.9 - Eindhoven">
+<qgis saveUserFull="Joost Deen" version="3.16.15-Hannover" saveUser="JoostDeen" saveDateTime="2022-01-26T09:38:35" projectname="OIV - Objecten v3.3.9 - Eindhoven">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.9 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -192,7 +192,7 @@
         </customproperties>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group name="Repressief object" checked="Qt::Checked" expanded="0">
+    <layer-tree-group name="Repressief object" checked="Qt::Checked" expanded="1">
       <customproperties/>
       <layer-tree-layer legend_exp="" legend_split_behavior="0" name="Ruimtelijke veiligheidsvoorzieningen" providerKey="postgres" patch_size="0,0" checked="Qt::Checked" id="veiligh_ruimtelijk20180912181737656" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_veiligh_ruimtelijk&quot; (geom)" expanded="0">
         <customproperties>
@@ -1031,7 +1031,7 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup open="false" name="Repressief object" checked="Qt::Checked">
+    <legendgroup open="true" name="Repressief object" checked="Qt::Checked">
       <legendlayer open="false" showFeatureCount="0" name="Ruimtelijke veiligheidsvoorzieningen" checked="Qt::Checked" drawingOrder="-1">
         <filegroup open="false" hidden="false">
           <legendlayerfile isInOverview="0" layerid="veiligh_ruimtelijk20180912181737656" visible="1"/>
