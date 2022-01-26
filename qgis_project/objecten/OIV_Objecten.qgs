@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="JoostDeen" saveUserFull="Joost Deen" saveDateTime="2022-01-26T14:27:50" projectname="OIV - Objecten v3.3.9 - Eindhoven" version="3.16.15-Hannover">
+<qgis saveUser="JoostDeen" saveUserFull="Joost Deen" saveDateTime="2022-01-26T14:51:38" projectname="OIV - Objecten v3.3.9 - Eindhoven" version="3.16.15-Hannover">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.9 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -20,7 +20,7 @@
   </projectCrs>
   <layer-tree-group>
     <customproperties/>
-    <layer-tree-layer source="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom)" name="Objecten" legend_split_behavior="0" providerKey="postgres" checked="Qt::Checked" patch_size="0,0" expanded="0" legend_exp="" id="objectgegevens20160318144112880">
+    <layer-tree-layer source="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom)" name="Objecten" legend_split_behavior="0" providerKey="postgres" checked="Qt::Unchecked" patch_size="0,0" expanded="0" legend_exp="" id="objectgegevens20160318144112880">
       <customproperties>
         <property key="cached_name" value="Objecten"/>
         <property key="expandedLegendNodes"/>
@@ -59,7 +59,7 @@
         </customproperties>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group name="Werkvoorraad" checked="Qt::Checked" expanded="0">
+    <layer-tree-group name="Werkvoorraad" checked="Qt::Unchecked" expanded="0">
       <customproperties/>
       <layer-tree-layer source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;mobiel&quot;.&quot;werkvoorraad_objecten&quot; (geom)" name="Werkvoorraad objecten" legend_split_behavior="0" providerKey="postgres" checked="Qt::Checked" patch_size="-1,-1" expanded="1" legend_exp="" id="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b">
         <customproperties/>
@@ -361,6 +361,9 @@
             <property key="cached_name" value="gevaarlijkestof_schade_cirkel"/>
             <property key="expandedLegendNodes"/>
           </customproperties>
+        </layer-tree-layer>
+        <layer-tree-layer source="dbname='C:/Users/JoostDeen/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/oiv/config_files/configDB.db' table=&quot;scenario_locatie&quot;" name="scenario_locatie" legend_split_behavior="0" providerKey="spatialite" checked="Qt::Checked" patch_size="-1,-1" expanded="1" legend_exp="" id="scenario_locatie_2b657cba_0531_4cd2_9eeb_fd54356db88b">
+          <customproperties/>
         </layer-tree-layer>
         <layer-tree-layer source="service='oiv' key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;historie&quot;" name="historie" legend_split_behavior="0" providerKey="postgres" checked="Qt::Checked" patch_size="0,0" expanded="0" legend_exp="" id="historie_matrix20160318144728721">
           <customproperties>
@@ -683,6 +686,7 @@
       <item>lines_of_interest_4ca948b9_603c_4520_89c0_74e714835890</item>
       <item>labels_of_interest_35459f2d_bbdd_461b_9d06_8a5331794f27</item>
       <item>object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6</item>
+      <item>scenario_locatie_2b657cba_0531_4cd2_9eeb_fd54356db88b</item>
     </custom-order>
   </layer-tree-group>
   <snapping-settings scaleDependencyMode="0" maxScale="0" type="1" tolerance="10" intersection-snapping="1" enabled="0" unit="1" minScale="0" self-snapping="0" mode="3">
@@ -853,10 +857,10 @@
   <mapcanvas name="theMapCanvas" annotationsVisible="1">
     <units>meters</units>
     <extent>
-      <xmin>54593.99836925143608823</xmin>
-      <ymin>424368.10371375188697129</ymin>
-      <xmax>54692.02433357434347272</xmax>
-      <ymax>424436.26656791858840734</ymax>
+      <xmin>54598.28890520255663432</xmin>
+      <ymin>424365.83701551356352866</ymin>
+      <xmax>54696.31486952546401881</xmax>
+      <ymax>424433.9998696802649647</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -877,9 +881,9 @@
   </mapcanvas>
   <projectModels/>
   <legend updateDrawingOrder="true">
-    <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="Objecten" checked="Qt::Checked">
+    <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="Objecten" checked="Qt::Unchecked">
       <filegroup open="false" hidden="false">
-        <legendlayerfile layerid="objectgegevens20160318144112880" isInOverview="0" visible="1"/>
+        <legendlayerfile layerid="objectgegevens20160318144112880" isInOverview="0" visible="0"/>
       </filegroup>
     </legendlayer>
     <legendgroup open="false" name="Management lagen" checked="Qt::Unchecked">
@@ -911,53 +915,53 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup open="false" name="Werkvoorraad" checked="Qt::Checked">
+    <legendgroup open="false" name="Werkvoorraad" checked="Qt::Unchecked">
       <legendlayer drawingOrder="-1" showFeatureCount="0" open="true" name="Werkvoorraad objecten" checked="Qt::Checked">
         <filegroup open="true" hidden="false">
-          <legendlayerfile layerid="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b" isInOverview="0" visible="1"/>
+          <legendlayerfile layerid="werkvoorraad_objecten_5f615814_6b41_42eb_8159_c9713145422b" isInOverview="0" visible="0"/>
         </filegroup>
       </legendlayer>
       <legendgroup open="false" name="Bouwlaag" checked="Qt::Checked">
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="true" name="Hulplijnen bouwlaag" checked="Qt::Checked">
           <filegroup open="true" hidden="false">
-            <legendlayerfile layerid="werkvoorraad_hulplijnen_dd5fe981_cb08_47d5_bbef_debf35809452" isInOverview="0" visible="1"/>
+            <legendlayerfile layerid="werkvoorraad_hulplijnen_dd5fe981_cb08_47d5_bbef_debf35809452" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="Werkvoorraad bouwlaag - punt" checked="Qt::Checked">
           <filegroup open="false" hidden="false">
-            <legendlayerfile layerid="werkvoorraad_punt_0d6860d7_17cb_486c_a441_c3fc2cb7b1fc" isInOverview="0" visible="1"/>
+            <legendlayerfile layerid="werkvoorraad_punt_0d6860d7_17cb_486c_a441_c3fc2cb7b1fc" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="Werkvoorraad bouwlaag - lijn" checked="Qt::Checked">
           <filegroup open="false" hidden="false">
-            <legendlayerfile layerid="werkvoorraad_lijn_0c6ded7b_239d_4be8_801c_67405bc2deab" isInOverview="0" visible="1"/>
+            <legendlayerfile layerid="werkvoorraad_lijn_0c6ded7b_239d_4be8_801c_67405bc2deab" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="Werkvoorraad bouwlaag - vlak" checked="Qt::Checked">
           <filegroup open="false" hidden="false">
-            <legendlayerfile layerid="werkvoorraad_vlak_821016ac_ba60_434b_b11b_6b2486e119ed" isInOverview="0" visible="1"/>
+            <legendlayerfile layerid="werkvoorraad_vlak_821016ac_ba60_434b_b11b_6b2486e119ed" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
       </legendgroup>
       <legendgroup open="true" name="Object" checked="Qt::Checked">
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="true" name="Hulplijnen object" checked="Qt::Checked">
           <filegroup open="true" hidden="false">
-            <legendlayerfile layerid="Hulplijnen_45aaafff_cf73_45aa_a254_35365fc851c3" isInOverview="0" visible="1"/>
+            <legendlayerfile layerid="Hulplijnen_45aaafff_cf73_45aa_a254_35365fc851c3" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="Werkvoorraad object - punt" checked="Qt::Checked">
           <filegroup open="false" hidden="false">
-            <legendlayerfile layerid="Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f" isInOverview="0" visible="1"/>
+            <legendlayerfile layerid="Werkvoorraad_punt_6a615949_d9bd_46a7_9c41_e81605af6a8f" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="Werkvoorraad object - lijn" checked="Qt::Checked">
           <filegroup open="false" hidden="false">
-            <legendlayerfile layerid="Werkvoorraad_bouwlaag___lijn_b4ab5737_c288_45ad_a319_4ff45f4001dc" isInOverview="0" visible="1"/>
+            <legendlayerfile layerid="Werkvoorraad_bouwlaag___lijn_b4ab5737_c288_45ad_a319_4ff45f4001dc" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="Werkvoorraad object - vlak" checked="Qt::Checked">
           <filegroup open="false" hidden="false">
-            <legendlayerfile layerid="Werkvoorraad_vlak_676cac37_0e3b_49e2_b434_635ddd6bac72" isInOverview="0" visible="1"/>
+            <legendlayerfile layerid="Werkvoorraad_vlak_676cac37_0e3b_49e2_b434_635ddd6bac72" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
       </legendgroup>
@@ -1189,6 +1193,11 @@
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="gevaarlijkestof_schade_cirkel" checked="Qt::Checked">
           <filegroup open="false" hidden="false">
             <legendlayerfile layerid="schade_cirkel20170912115929499" isInOverview="0" visible="0"/>
+          </filegroup>
+        </legendlayer>
+        <legendlayer drawingOrder="-1" showFeatureCount="0" open="true" name="scenario_locatie" checked="Qt::Checked">
+          <filegroup open="true" hidden="false">
+            <legendlayerfile layerid="scenario_locatie_2b657cba_0531_4cd2_9eeb_fd54356db88b" isInOverview="0" visible="0"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="-1" showFeatureCount="0" open="false" name="historie" checked="Qt::Checked">
@@ -32683,8 +32692,8 @@ def my_form_open(dialog, layer, feature):
       <extent>
         <xmin>54607.02751687938871328</xmin>
         <ymin>424412.04123049648478627</ymin>
-        <xmax>54607.02751687938871328</xmax>
-        <ymax>424412.04123049648478627</ymax>
+        <xmax>54607.35693538722989615</xmax>
+        <ymax>424424.86239808687241748</ymax>
       </extent>
       <id>object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6</id>
       <datasource>dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."object_scenario_locatie" (geom)</datasource>
@@ -38223,6 +38232,170 @@ def my_form_open(dialog, layer, feature):
       <dataDefinedFieldProperties/>
       <widgets/>
       <previewExpression>COALESCE("id", '&lt;NULL>')</previewExpression>
+      <mapTip></mapTip>
+    </maplayer>
+    <maplayer geometry="No geometry" maxScale="0" type="vector" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" styleCategories="AllStyleCategories" minScale="1e+08" wkbType="NoGeometry" autoRefreshEnabled="0" refreshOnNotifyEnabled="0" readOnly="0">
+      <id>scenario_locatie_2b657cba_0531_4cd2_9eeb_fd54356db88b</id>
+      <datasource>dbname='C:/Users/JoostDeen/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/oiv/config_files/configDB.db' table="scenario_locatie"</datasource>
+      <keywordList>
+        <value></value>
+      </keywordList>
+      <layername>scenario_locatie</layername>
+      <srs>
+        <spatialrefsys>
+          <wkt></wkt>
+          <proj4></proj4>
+          <srsid>0</srsid>
+          <srid>0</srid>
+          <authid></authid>
+          <description></description>
+          <projectionacronym></projectionacronym>
+          <ellipsoidacronym></ellipsoidacronym>
+          <geographicflag>false</geographicflag>
+        </spatialrefsys>
+      </srs>
+      <resourceMetadata>
+        <identifier></identifier>
+        <parentidentifier></parentidentifier>
+        <language></language>
+        <type></type>
+        <title></title>
+        <abstract></abstract>
+        <links/>
+        <fees></fees>
+        <encoding></encoding>
+        <crs>
+          <spatialrefsys>
+            <wkt></wkt>
+            <proj4></proj4>
+            <srsid>0</srsid>
+            <srid>0</srid>
+            <authid></authid>
+            <description></description>
+            <projectionacronym></projectionacronym>
+            <ellipsoidacronym></ellipsoidacronym>
+            <geographicflag>false</geographicflag>
+          </spatialrefsys>
+        </crs>
+        <extent/>
+      </resourceMetadata>
+      <provider encoding="">spatialite</provider>
+      <vectorjoins/>
+      <layerDependencies/>
+      <dataDependencies/>
+      <expressionfields/>
+      <map-layer-style-manager current="standaard">
+        <map-layer-style name="standaard"/>
+      </map-layer-style-manager>
+      <auxiliaryLayer/>
+      <flags>
+        <Identifiable>1</Identifiable>
+        <Removable>1</Removable>
+        <Searchable>1</Searchable>
+      </flags>
+      <temporal durationField="" endExpression="" durationUnit="min" accumulate="0" enabled="0" fixedDuration="0" startExpression="" startField="" endField="" mode="0">
+        <fixedRange>
+          <start></start>
+          <end></end>
+        </fixedRange>
+      </temporal>
+      <customproperties>
+        <property key="dualview/previewExpressions">
+          <value>"button_name"</value>
+        </property>
+      </customproperties>
+      <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+        <activeChecks type="StringList">
+          <Option type="QString" value=""/>
+        </activeChecks>
+        <checkConfiguration/>
+      </geometryOptions>
+      <legend type="default-vector"/>
+      <referencedLayers/>
+      <fieldConfiguration>
+        <field configurationFlags="None" name="pk_0">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="None" name="pk">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="None" name="type_id">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+        <field configurationFlags="None" name="button_name">
+          <editWidget type="">
+            <config>
+              <Option/>
+            </config>
+          </editWidget>
+        </field>
+      </fieldConfiguration>
+      <aliases>
+        <alias name="" field="pk_0" index="0"/>
+        <alias name="" field="pk" index="1"/>
+        <alias name="" field="type_id" index="2"/>
+        <alias name="" field="button_name" index="3"/>
+      </aliases>
+      <defaults>
+        <default applyOnUpdate="0" field="pk_0" expression=""/>
+        <default applyOnUpdate="0" field="pk" expression=""/>
+        <default applyOnUpdate="0" field="type_id" expression=""/>
+        <default applyOnUpdate="0" field="button_name" expression=""/>
+      </defaults>
+      <constraints>
+        <constraint notnull_strength="1" unique_strength="1" field="pk_0" constraints="3" exp_strength="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="pk" constraints="0" exp_strength="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="type_id" constraints="0" exp_strength="0"/>
+        <constraint notnull_strength="0" unique_strength="0" field="button_name" constraints="0" exp_strength="0"/>
+      </constraints>
+      <constraintExpressions>
+        <constraint field="pk_0" desc="" exp=""/>
+        <constraint field="pk" desc="" exp=""/>
+        <constraint field="type_id" desc="" exp=""/>
+        <constraint field="button_name" desc="" exp=""/>
+      </constraintExpressions>
+      <expressionfields/>
+      <attributeactions>
+        <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
+      </attributeactions>
+      <attributetableconfig sortExpression="" actionWidgetStyle="dropDown" sortOrder="0">
+        <columns>
+          <column width="-1" type="field" name="pk_0" hidden="0"/>
+          <column width="-1" type="field" name="pk" hidden="0"/>
+          <column width="-1" type="field" name="type_id" hidden="0"/>
+          <column width="197" type="field" name="button_name" hidden="0"/>
+          <column width="-1" type="actions" hidden="1"/>
+        </columns>
+      </attributetableconfig>
+      <conditionalstyles>
+        <rowstyles/>
+        <fieldstyles/>
+      </conditionalstyles>
+      <storedexpressions/>
+      <editform tolerant="1"></editform>
+      <editforminit/>
+      <editforminitcodesource>0</editforminitcodesource>
+      <editforminitfilepath></editforminitfilepath>
+      <editforminitcode><![CDATA[]]></editforminitcode>
+      <featformsuppress>0</featformsuppress>
+      <editorlayout>generatedlayout</editorlayout>
+      <editable/>
+      <labelOnTop/>
+      <dataDefinedFieldProperties/>
+      <widgets/>
+      <previewExpression>"button_name"</previewExpression>
       <mapTip></mapTip>
     </maplayer>
     <maplayer geometry="No geometry" maxScale="0" type="vector" refreshOnNotifyMessage="" hasScaleBasedVisibilityFlag="0" autoRefreshTime="0" styleCategories="AllStyleCategories" minScale="1e+08" wkbType="NoGeometry" autoRefreshEnabled="0" refreshOnNotifyEnabled="0" readOnly="0">
@@ -48631,6 +48804,7 @@ def my_form_open(dialog, layer, feature):
     <layer id="lines_of_interest_4ca948b9_603c_4520_89c0_74e714835890"/>
     <layer id="labels_of_interest_35459f2d_bbdd_461b_9d06_8a5331794f27"/>
     <layer id="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6"/>
+    <layer id="scenario_locatie_2b657cba_0531_4cd2_9eeb_fd54356db88b"/>
   </layerorder>
   <properties>
     <CopyrightLabel>
@@ -61495,7 +61669,7 @@ def closeProject():&#xd;    pass</pythonCode>
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent xmin="54580.83905687604419654" ymin="424368.10371375188697129" ymax="424436.26656791858840734" xmax="54705.18364594973536441">
+    <DefaultViewExtent xmin="54572.33893848233856261" ymin="424365.83701551356352866" ymax="424433.9998696802649647" xmax="54722.26483624568209052">
       <spatialrefsys>
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +units=m +no_defs</proj4>
