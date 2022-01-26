@@ -137,6 +137,9 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
                 newFeature[attrs[3]] = feat[attrs[3]]
             newFeature[attrs[0]] = int(newID)
             newFeature["bouwlaag"] = bouwlaag
+            field_index = fields.indexFromName('applicatie')
+            if field_index != -1:
+                newFeature['applicatie'] = 'OIV'
             UC.write_layer(layer, newFeature)
 
     def copy_selected_layers(self, ifeature, newFeatureId, bouwlaag):

@@ -262,5 +262,6 @@
         <file>config_files/png/slagboom.png</file>
         <file>config_files/png/brandweerinfokast.png</file>
         <file>config_files/png/doorrijhoogte.png</file>
+        <file>config_files/png/scenario_locatie.png</file>
     </qresource>
 </RCC>
