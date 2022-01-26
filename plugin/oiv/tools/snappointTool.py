@@ -94,7 +94,7 @@ class SnapPointTool(QG.QgsMapTool):
             self.vertexmarker = RH.init_vertexmarker("snappoint", self.canvas)
         for geom in self.possibleSnapFeatures:
             closestSegm = geom.closestSegmentWithContext(layerPt)
-            if closestSegm[0] < minDist and closestSegm[0] > 0:
+            if closestSegm[0] < minDist and closestSegm[0] >= 0:
                 minDist = closestSegm[0]
                 snapPoint = closestSegm[1]
         if snapPoint and snapPoint != QC.QgsPointXY(0, 0):

@@ -118,7 +118,7 @@ class CaptureTool(QG.QgsMapTool):
                 minDist = distSquared
                 snapPoints = []
                 snapPoints.extend([vertexCoord, vertex, prevVertex, counter, geom])
-            elif closestSegm[0] < minDist - 1/2 * tolerance and closestSegm[0] > 0:
+            elif closestSegm[0] < minDist - 1/2 * tolerance and closestSegm[0] >= 0:
                 minDist = closestSegm[0]
                 snapPoints = []
                 snapPoints.extend([closestSegm[1], None, None, counter, geom])
