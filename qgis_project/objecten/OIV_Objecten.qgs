@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="Joost Deen" version="3.16.15-Hannover" saveUser="JoostDeen" saveDateTime="2022-01-26T11:33:14" projectname="OIV - Objecten v3.3.9 - Eindhoven">
+<qgis saveUserFull="Joost Deen" version="3.16.15-Hannover" saveUser="JoostDeen" saveDateTime="2022-01-26T11:36:02" projectname="OIV - Objecten v3.3.9 - Eindhoven">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.9 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -311,14 +311,14 @@
         <customproperties/>
       </layer-tree-layer>
     </layer-tree-group>
-    <layer-tree-group name="Tabellen" checked="Qt::Checked" expanded="1">
+    <layer-tree-group name="Tabellen" checked="Qt::Checked" expanded="0">
       <customproperties/>
       <layer-tree-layer legend_exp="" legend_split_behavior="0" name="Objecten BGT" providerKey="postgres" patch_size="0,0" checked="Qt::Unchecked" id="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bgt&quot; (geom)" expanded="0">
         <customproperties>
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-group name="Tabellen zonder geo" checked="Qt::Unchecked" expanded="1">
+      <layer-tree-group name="Tabellen zonder geo" checked="Qt::Unchecked" expanded="0">
         <customproperties/>
         <layer-tree-layer legend_exp="" legend_split_behavior="0" name="aanwezig" providerKey="postgres" patch_size="0,0" checked="Qt::Checked" id="aanwezigepersonen20160318144720364" source="service='oiv' key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;aanwezig&quot;" expanded="0">
           <customproperties>
@@ -1150,13 +1150,13 @@
         </filegroup>
       </legendlayer>
     </legendgroup>
-    <legendgroup open="true" name="Tabellen" checked="Qt::Checked">
+    <legendgroup open="false" name="Tabellen" checked="Qt::Checked">
       <legendlayer open="false" showFeatureCount="0" name="Objecten BGT" checked="Qt::Unchecked" drawingOrder="-1">
         <filegroup open="false" hidden="false">
           <legendlayerfile isInOverview="0" layerid="object_bgt_geom_1ec6bdea_6ff5_4645_a85c_b2306da8ef57" visible="0"/>
         </filegroup>
       </legendlayer>
-      <legendgroup open="true" name="Tabellen zonder geo" checked="Qt::Unchecked">
+      <legendgroup open="false" name="Tabellen zonder geo" checked="Qt::Unchecked">
         <legendlayer open="false" showFeatureCount="0" name="aanwezig" checked="Qt::Checked" drawingOrder="-1">
           <filegroup open="false" hidden="false">
             <legendlayerfile isInOverview="0" layerid="aanwezigepersonen20160318144720364" visible="0"/>
@@ -34058,8 +34058,7 @@ def my_form_open(dialog, layer, feature):
           <attributeEditorRelation name="bhv_object_rel" buttons="SaveChildEdits|AddChildFeature|DeleteChildFeature" label="" relation="bhv_object_rel" nmRelationId="" showLabel="1" forceSuppressFormPopup="0"/>
           <attributeEditorRelation name="contactp_object_rel" buttons="SaveChildEdits|AddChildFeature|DeleteChildFeature" label="" relation="contactp_object_rel" nmRelationId="" showLabel="1" forceSuppressFormPopup="0"/>
         </attributeEditorContainer>
-        <attributeEditorContainer name="Scenario en organisatorische voorzieningen" visibilityExpressionEnabled="0" groupBox="0" showLabel="1" columnCount="1" visibilityExpression="">
-          <attributeEditorRelation name="scenario_object_rel" buttons="SaveChildEdits|AddChildFeature|DeleteChildFeature" label="" relation="scenario_object_rel" nmRelationId="" showLabel="1" forceSuppressFormPopup="0"/>
+        <attributeEditorContainer name="Organisatorische voorzieningen" visibilityExpressionEnabled="0" groupBox="0" showLabel="1" columnCount="1" visibilityExpression="">
           <attributeEditorRelation name="veilighv_org_object_rel" buttons="SaveChildEdits|AddChildFeature|DeleteChildFeature" label="" relation="veilighv_org_object_rel" nmRelationId="" showLabel="1" forceSuppressFormPopup="0"/>
         </attributeEditorContainer>
       </attributeEditorForm>
@@ -34244,7 +34243,7 @@ def my_form_open(dialog, layer, feature):
           <config/>
         </widget>
       </widgets>
-      <previewExpression>formelenaam</previewExpression>
+      <previewExpression>"formelenaam"</previewExpression>
       <mapTip>ogr_fid</mapTip>
     </maplayer>
     <maplayer styleCategories="AllStyleCategories" refreshOnNotifyMessage="" autoRefreshEnabled="0" hasScaleBasedVisibilityFlag="0" refreshOnNotifyEnabled="0" autoRefreshTime="0" maxScale="0" minScale="1e+08" type="raster">
