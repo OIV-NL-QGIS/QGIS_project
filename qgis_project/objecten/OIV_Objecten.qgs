@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="Joost Deen" version="3.16.15-Hannover" saveUser="JoostDeen" saveDateTime="2022-01-26T11:36:02" projectname="OIV - Objecten v3.3.9 - Eindhoven">
+<qgis saveUserFull="Joost Deen" version="3.16.15-Hannover" saveUser="JoostDeen" saveDateTime="2022-01-26T11:37:15" projectname="OIV - Objecten v3.3.9 - Eindhoven">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.9 - Eindhoven</title>
   <autotransaction active="0"/>
@@ -825,9 +825,6 @@
     </relation>
     <relation referencingLayer="scenario20180831134019441" name="scenario_locatie" id="scenario_locatie_rel" referencedLayer="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" strength="Association">
       <fieldRef referencedField="id" referencingField="scenario_locatie_id"/>
-    </relation>
-    <relation referencingLayer="scenario20180831134019441" name="scenario_object" id="scenario_object_rel" referencedLayer="objectgegevens20160318144112880" strength="Association">
-      <fieldRef referencedField="id" referencingField="object_id"/>
     </relation>
     <relation referencingLayer="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" name="scenario_object" id="scenario_object_rel_1" referencedLayer="objectgegevens20160318144112880" strength="Association">
       <fieldRef referencedField="id" referencingField="object_id"/>
@@ -37978,9 +37975,6 @@ def my_form_open(dialog, layer, feature):
       <referencedLayers>
         <relation referencingLayer="scenario20180831134019441" layerName="Scenario locatie ruimtelijk" name="scenario_locatie" layerId="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" dataSource="dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" providerKey="postgres" id="scenario_locatie_rel" referencedLayer="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" strength="Association">
           <fieldRef referencedField="id" referencingField="scenario_locatie_id"/>
-        </relation>
-        <relation referencingLayer="scenario20180831134019441" layerName="Objecten" name="scenario_object" layerId="objectgegevens20160318144112880" dataSource="service='oiv' key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_objecten&quot; (geom)" providerKey="postgres" id="scenario_object_rel" referencedLayer="objectgegevens20160318144112880" strength="Association">
-          <fieldRef referencedField="id" referencingField="object_id"/>
         </relation>
       </referencedLayers>
       <fieldConfiguration>
