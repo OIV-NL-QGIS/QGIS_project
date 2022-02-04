@@ -192,7 +192,7 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def place_feature(self, points, snapAngle):
         self.iface.setActiveLayer(self.drawLayer)
         if points:
-            parentId, childFeature = UC.construct_feature(self.drawLayerType, None, points, None, self.iface)
+            parentId, childFeature = UC.construct_feature(self.drawLayerType, None, points, None)
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.INFO_INTEREST["configtable"])
             if buttonCheck != 'Cancel':

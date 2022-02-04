@@ -8,6 +8,7 @@ import qgis.core as QC
 
 import oiv.helpers.messages as MSG
 import oiv.helpers.constants as PC
+import oiv.helpers.configdb_helper as CH
 
 def open_url(url):
     webbrowser.open(url)
@@ -106,14 +107,28 @@ def nearest_neighbor(layer, geom, geomType, objectId):
         geomCtr = geom.centroid()
     else:
         geomCtr = geom
-    request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + str(objectId))
-    it = layer.getFeatures(request)
-    for feat in it:
-        parentCtr = feat.geometry().centroid()
-        distance = geomCtr.distance(parentCtr)
-        if distance < dist:
-            dist = distance
-            parentId = feat["id"]
+    if layer.name() == PC.PAND["bouwlaaglayername"]:
+        request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + str(objectId))
+        it = layer.getFeatures(request)
+        for feat in it:
+            parentCtr = feat.geometry().centroid()
+            distance = geomCtr.distance(parentCtr)
+            if distance < dist:
+                dist = distance
+                parentId = feat["id"]
+    else:
+        parentId = nearest_neighbor_point(layer, geom)
+    return parentId
+
+def nearest_neighbor_point(layer, point):
+    index = None
+    parentId = None
+    extent = layer.extent()
+    index = QC.QgsSpatialIndex(layer.getFeatures(QC.QgsFeatureRequest(extent)))
+    try:
+        parentId = index.nearestNeighbor(point, 1)[0]
+    except: # pylint: disable=bare-except
+        pass
     return parentId
 
 def request_feature(ifeature, layer_feature_id, layer_name):
@@ -177,7 +192,7 @@ def get_possible_snapFeatures_object(layerNamesList, objectId):
                     possibleSnapFeatures.append(feat.geometry())
     return possibleSnapFeatures
 
-def construct_feature(layerType, parentLayerName, points, objectId, iface):
+def construct_feature(layerType, parentLayerName, points, objectId):
     tempFeature = QC.QgsFeature()
     parentId = None
     #converteer lijst van punten naar QgsGeometry, afhankelijk van soort geometrie

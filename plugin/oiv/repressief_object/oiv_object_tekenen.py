@@ -219,7 +219,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         parentId = None
         self.iface.setActiveLayer(self.drawLayer)
         if points:
-            parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, self.object_id.text(), self.iface)
+            parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, self.object_id.text())
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.OBJECT["configtable"])
             if buttonCheck != 'Cancel':
