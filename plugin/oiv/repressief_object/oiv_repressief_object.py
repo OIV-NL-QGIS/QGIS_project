@@ -218,7 +218,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         """save drawn terrain"""
         layer = UC.getlayer_byname(PC.OBJECT["terreinlayername"])
         if points:
-            parentId, childFeature = UC.construct_feature('Polygon', PC.OBJECT["objectlayername"], points, self.object_id.text(), self.iface)
+            parentId, childFeature = UC.construct_feature('Polygon', PC.OBJECT["objectlayername"], points, self.object_id.text())
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, None, None, layer, PC.OBJECT["configtable"])
             if buttonCheck != 'Cancel':
