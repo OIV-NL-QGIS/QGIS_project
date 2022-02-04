@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveDateTime="2022-02-04T15:23:11" saveUserFull="Joost Deen" projectname="OIV - Objecten v3.3.9 - Zaandam" version="3.16.15-Hannover" saveUser="JoostDeen">
+<qgis saveDateTime="2022-02-04T15:53:30" saveUserFull="Joost Deen" projectname="OIV - Objecten v3.3.9 - Zaandam" version="3.16.15-Hannover" saveUser="JoostDeen">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.9 - Zaandam</title>
   <autotransaction active="0"/>
@@ -85,7 +85,7 @@
           </customproperties>
         </layer-tree-layer>
       </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::Checked" name="Object">
+      <layer-tree-group expanded="0" checked="Qt::Checked" name="Object">
         <customproperties/>
         <layer-tree-layer providerKey="postgres" patch_size="-1,-1" id="Hulplijnen_45aaafff_cf73_45aa_a254_35365fc851c3" expanded="1" source="service='oiv' sslmode=allow key='id' srid=28992 type=LineString checkPrimaryKeyUnicity='1' table=&quot;mobiel&quot;.&quot;werkvoorraad_hulplijnen&quot; (geom) sql=&quot;bouwlaag&quot; IS NULL" checked="Qt::Checked" legend_split_behavior="0" name="Hulplijnen object" legend_exp="">
           <customproperties/>
@@ -856,10 +856,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>54540.2248655725561548</xmin>
-      <ymin>424423.00950402999296784</ymin>
-      <xmax>54576.98460219363914803</xmax>
-      <ymax>424448.57057434250600636</ymax>
+      <xmin>54515.99548752163536847</xmin>
+      <ymin>424390.23245740728452802</ymin>
+      <xmax>54663.03443400596734136</xmax>
+      <ymax>424492.47673865733668208</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -942,7 +942,7 @@
           </filegroup>
         </legendlayer>
       </legendgroup>
-      <legendgroup open="true" checked="Qt::Checked" name="Object">
+      <legendgroup open="false" checked="Qt::Checked" name="Object">
         <legendlayer showFeatureCount="0" open="true" checked="Qt::Checked" drawingOrder="-1" name="Hulplijnen object">
           <filegroup open="true" hidden="false">
             <legendlayerfile layerid="Hulplijnen_45aaafff_cf73_45aa_a254_35365fc851c3" isInOverview="0" visible="1"/>
@@ -2867,13 +2867,14 @@ def my_form_open(dialog, layer, feature):
           <end></end>
         </fixedRange>
       </temporal>
-      <renderer-v2 forceraster="0" type="RuleRenderer" enableorderby="0" symbollevels="1">
+      <renderer-v2 forceraster="0" type="RuleRenderer" enableorderby="0" symbollevels="0">
         <rules key="{d9abbd6a-8218-4d26-9fe4-53ba6df3aab7}">
           <rule scalemaxdenom="50000" key="{1a379bf2-570e-4d5c-ab40-1b722f5a749b}" symbol="0" filter=" &quot;bouwlaag_id&quot; IS NULL" checkstate="0" label="high scale" scalemindenom="2500"/>
-          <rule scalemaxdenom="2500" key="{b0a2f4ed-a819-4af1-b604-687956290a7d}" symbol="1" label="low scale" scalemindenom="1"/>
-          <rule scalemaxdenom="2500" key="{c4073de9-1993-4165-aeeb-f40b75c5e68f}" symbol="2" filter=" &quot;operatie&quot; = 'DELETE'" label="low scale" scalemindenom="1"/>
-          <rule scalemaxdenom="2500" key="{67357019-a11f-4e01-a355-7c930a7b5812}" symbol="3" filter=" &quot;operatie&quot; = 'INSERT'" label="low scale" scalemindenom="1"/>
-          <rule scalemaxdenom="2500" key="{55e1e2cf-28da-4630-9d05-4f4ee7026b72}" symbol="4" filter=" &quot;operatie&quot; = 'UPDATE'" label="low scale" scalemindenom="1"/>
+          <rule scalemaxdenom="2500" key="{1362b051-7179-4908-8945-6dc57bc97910}" symbol="1" filter=" &quot;brontabel&quot; = 'label'" label="low scale" scalemindenom="1"/>
+          <rule scalemaxdenom="2500" key="{b0a2f4ed-a819-4af1-b604-687956290a7d}" symbol="2" filter=" &quot;brontabel&quot; != 'label'" label="low scale" scalemindenom="1"/>
+          <rule scalemaxdenom="2500" key="{c4073de9-1993-4165-aeeb-f40b75c5e68f}" symbol="3" filter=" &quot;operatie&quot; = 'DELETE'" label="low scale" scalemindenom="1"/>
+          <rule scalemaxdenom="2500" key="{55e1e2cf-28da-4630-9d05-4f4ee7026b72}" symbol="4" filter=" &quot;operatie&quot; = 'INSERT'" label="low scale" scalemindenom="1"/>
+          <rule scalemaxdenom="2500" key="{853bbb96-e5b1-4e5b-9b06-0bc4c21f7177}" symbol="5" filter=" &quot;operatie&quot; = 'UPDATE'" label="low scale" scalemindenom="1"/>
         </rules>
         <symbols>
           <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="0">
@@ -2911,8 +2912,8 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 0.75&#xd;&#xa;END" name="expression"/>
-                      <Option type="int" value="3" name="type"/>
+                      <Option type="QString" value="size" name="field"/>
+                      <Option type="int" value="2" name="type"/>
                     </Option>
                   </Option>
                   <Option type="QString" value="collection" name="type"/>
@@ -2949,7 +2950,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="0.0833333*(CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 0.75&#xd;&#xa;END)" name="expression"/>
+                      <Option type="QString" value="0.0833333*(&quot;size&quot;)" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -2959,6 +2960,46 @@ def my_form_open(dialog, layer, feature):
             </layer>
           </symbol>
           <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="1">
+            <layer class="SimpleMarker" locked="0" enabled="1" pass="0">
+              <prop v="0" k="angle"/>
+              <prop v="255,0,213,255" k="color"/>
+              <prop v="1" k="horizontal_anchor_point"/>
+              <prop v="bevel" k="joinstyle"/>
+              <prop v="star" k="name"/>
+              <prop v="0,0" k="offset"/>
+              <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+              <prop v="MapUnit" k="offset_unit"/>
+              <prop v="0,0,0,255" k="outline_color"/>
+              <prop v="solid" k="outline_style"/>
+              <prop v="0" k="outline_width"/>
+              <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
+              <prop v="MapUnit" k="outline_width_unit"/>
+              <prop v="diameter" k="scale_method"/>
+              <prop v="1" k="size"/>
+              <prop v="3x:0,0,0,0,0,0" k="size_map_unit_scale"/>
+              <prop v="MapUnit" k="size_unit"/>
+              <prop v="1" k="vertical_anchor_point"/>
+              <data_defined_properties>
+                <Option type="Map">
+                  <Option type="QString" value="" name="name"/>
+                  <Option type="Map" name="properties">
+                    <Option type="Map" name="angle">
+                      <Option type="bool" value="true" name="active"/>
+                      <Option type="QString" value="rotatie" name="field"/>
+                      <Option type="int" value="2" name="type"/>
+                    </Option>
+                    <Option type="Map" name="size">
+                      <Option type="bool" value="true" name="active"/>
+                      <Option type="QString" value="0.0833333*&quot;size&quot;" name="expression"/>
+                      <Option type="int" value="3" name="type"/>
+                    </Option>
+                  </Option>
+                  <Option type="QString" value="collection" name="type"/>
+                </Option>
+              </data_defined_properties>
+            </layer>
+          </symbol>
+          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="2">
             <layer class="SvgMarker" locked="0" enabled="1" pass="0">
               <prop v="0" k="angle"/>
               <prop v="0,0,0,255" k="color"/>
@@ -2993,8 +3034,8 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 2&#xd;&#xa;END" name="expression"/>
-                      <Option type="int" value="3" name="type"/>
+                      <Option type="QString" value="size" name="field"/>
+                      <Option type="int" value="2" name="type"/>
                     </Option>
                   </Option>
                   <Option type="QString" value="collection" name="type"/>
@@ -3031,7 +3072,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="0.0833333*(CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 2&#xd;&#xa;END)" name="expression"/>
+                      <Option type="QString" value="0.0833333*(&quot;size&quot;)" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -3040,8 +3081,8 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="2">
-            <layer class="SimpleMarker" locked="0" enabled="1" pass="1">
+          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="3">
+            <layer class="SimpleMarker" locked="0" enabled="1" pass="0">
               <prop v="0" k="angle"/>
               <prop v="255,0,0,255" k="color"/>
               <prop v="1" k="horizontal_anchor_point"/>
@@ -3052,7 +3093,7 @@ def my_form_open(dialog, layer, feature):
               <prop v="MapUnit" k="offset_unit"/>
               <prop v="255,1,1,255" k="outline_color"/>
               <prop v="solid" k="outline_style"/>
-              <prop v="1" k="outline_width"/>
+              <prop v="0.4" k="outline_width"/>
               <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
               <prop v="MapUnit" k="outline_width_unit"/>
               <prop v="diameter" k="scale_method"/>
@@ -3071,7 +3112,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="0.4*&quot;size&quot;" name="expression"/>
+                      <Option type="QString" value="0.25*&quot;size&quot;" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -3080,19 +3121,19 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="3">
-            <layer class="SimpleMarker" locked="0" enabled="1" pass="1">
+          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="4">
+            <layer class="SimpleMarker" locked="0" enabled="1" pass="0">
               <prop v="0" k="angle"/>
               <prop v="5,255,1,255" k="color"/>
               <prop v="1" k="horizontal_anchor_point"/>
               <prop v="bevel" k="joinstyle"/>
-              <prop v="cross_fill" k="name"/>
+              <prop v="cross" k="name"/>
               <prop v="0,0" k="offset"/>
               <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
               <prop v="MapUnit" k="offset_unit"/>
-              <prop v="0,0,0,255" k="outline_color"/>
+              <prop v="1,255,9,255" k="outline_color"/>
               <prop v="solid" k="outline_style"/>
-              <prop v="0" k="outline_width"/>
+              <prop v="0.4" k="outline_width"/>
               <prop v="3x:0,0,0,0,0,0" k="outline_width_map_unit_scale"/>
               <prop v="MapUnit" k="outline_width_unit"/>
               <prop v="diameter" k="scale_method"/>
@@ -3111,7 +3152,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="&quot;size&quot;*0.5" name="expression"/>
+                      <Option type="QString" value="&quot;size&quot;*0.25" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -3120,8 +3161,8 @@ def my_form_open(dialog, layer, feature):
               </data_defined_properties>
             </layer>
           </symbol>
-          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="4">
-            <layer class="SimpleMarker" locked="0" enabled="1" pass="1">
+          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="5">
+            <layer class="SimpleMarker" locked="0" enabled="1" pass="0">
               <prop v="0" k="angle"/>
               <prop v="5,255,1,0" k="color"/>
               <prop v="1" k="horizontal_anchor_point"/>
@@ -3151,7 +3192,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="&quot;size&quot;*0.5" name="expression"/>
+                      <Option type="QString" value="&quot;size&quot;*0.25" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -3163,8 +3204,8 @@ def my_form_open(dialog, layer, feature):
         </symbols>
       </renderer-v2>
       <labeling type="rule-based">
-        <rules key="{b1bc733b-0c30-48ff-9d11-ee7240adc0d1}">
-          <rule key="{87c61f7d-daf1-4995-80e8-c4f27c849c9b}" description="Algemeen" filter=" &quot;symbol_name&quot;  = 'Algemeen' AND  &quot;brontabel&quot; = 'label'">
+        <rules key="{c9d65872-c86e-4473-8c4b-fa701a1dc7e7}">
+          <rule key="{db186400-aa61-421f-bd04-25a48bda20f2}" description="Algemeen" filter=" &quot;symbol_name&quot;  = 'Algemeen' AND  &quot;brontabel&quot; = 'label'">
             <settings calloutType="simple">
               <text-style fontSize="2" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="0,0,0,255" fontStrikeout="0" fontSizeUnit="MapUnit" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName="omschrijving" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="64" bufferSizeUnits="MapUnit" bufferNoFill="0" bufferBlendMode="0"/>
@@ -3256,7 +3297,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{117504fe-0288-4b7b-90e7-5b11fb5ae963}" description="Gevaar" filter="&quot;symbol_name&quot;  = 'Gevaar' AND  &quot;brontabel&quot; = 'label'">
+          <rule key="{b1eb92b8-740b-454a-8227-d5d0d7c79f69}" description="Gevaar" filter="&quot;symbol_name&quot;  = 'Gevaar' AND  &quot;brontabel&quot; = 'label'">
             <settings calloutType="simple">
               <text-style fontSize="2" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="255,255,255,255" fontStrikeout="0" fontSizeUnit="MapUnit" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName=" map_get(&quot;waarden_new&quot;, 'omschrijving')" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="64" bufferSizeUnits="MapUnit" bufferNoFill="0" bufferBlendMode="0"/>
@@ -3348,7 +3389,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{f93cbf22-00d3-4b20-86d6-32eb920d965f}" description="Voorzichtig" filter="&quot;symbol_name&quot;  = 'Voorzichtig' AND  &quot;brontabel&quot; = 'label'">
+          <rule key="{734bb1f2-8ee1-419c-91a8-634d8d608ce6}" description="Voorzichtig" filter="&quot;symbol_name&quot;  = 'Voorzichtig' AND  &quot;brontabel&quot; = 'label'">
             <settings calloutType="simple">
               <text-style fontSize="2" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="0,0,0,255" fontStrikeout="0" fontSizeUnit="MapUnit" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName="omschrijving" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="64" bufferSizeUnits="MapUnit" bufferNoFill="0" bufferBlendMode="0"/>
@@ -3440,7 +3481,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{afa5c45b-0ca8-41ca-a129-c97a8e3b554a}" description="Waarschuwing" filter=" &quot;symbol_name&quot;  = 'Waarschuwing' AND  &quot;brontabel&quot; = 'label'  ">
+          <rule key="{23dbb591-3986-48ff-a633-601968adae16}" description="Waarschuwing" filter=" &quot;symbol_name&quot;  = 'Waarschuwing' AND  &quot;brontabel&quot; = 'label'  ">
             <settings calloutType="simple">
               <text-style fontSize="2" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="0,0,0,255" fontStrikeout="0" fontSizeUnit="MapUnit" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName="omschrijving" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="64" bufferSizeUnits="MapUnit" bufferNoFill="0" bufferBlendMode="0"/>
@@ -3532,7 +3573,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{2b8ad7a3-c5e0-4a66-a0d0-16e5d1b55c18}">
+          <rule key="{b31f073c-56b3-4d8e-8de6-7a68a74c6a5e}">
             <settings calloutType="simple">
               <text-style fontSize="25" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="255,0,213,255" fontStrikeout="0" fontSizeUnit="Point" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName="'.'" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="128" bufferSizeUnits="MM" bufferNoFill="0" bufferBlendMode="0"/>
@@ -36990,7 +37031,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer styleCategories="AllStyleCategories" simplifyLocal="1" labelsEnabled="1" refreshOnNotifyMessage="" maxScale="1" minScale="30000" simplifyMaxScale="1" refreshOnNotifyEnabled="0" geometry="Point" simplifyAlgorithm="0" simplifyDrawingTol="1" readOnly="0" simplifyDrawingHints="0" autoRefreshEnabled="0" type="vector" wkbType="Point" hasScaleBasedVisibilityFlag="1" autoRefreshTime="0">
       <extent>
-        <xmin>54610.2590430668569752</xmin>
+        <xmin>54596.33603289778693579</xmin>
         <ymin>421109.4407220155117102</ymin>
         <xmax>82175.54900276650732849</xmax>
         <ymax>429570.67498272855300456</ymax>
@@ -46904,8 +46945,8 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 0.75&#xd;&#xa;END" name="expression"/>
-                      <Option type="int" value="3" name="type"/>
+                      <Option type="QString" value="size" name="field"/>
+                      <Option type="int" value="2" name="type"/>
                     </Option>
                   </Option>
                   <Option type="QString" value="collection" name="type"/>
@@ -46942,7 +46983,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="0.0833333*(CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 0.75&#xd;&#xa;END)" name="expression"/>
+                      <Option type="QString" value="0.0833333*(&quot;size&quot;)" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -46982,7 +47023,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="0.0833333*(CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 2&#xd;&#xa;END)" name="expression"/>
+                      <Option type="QString" value="0.0833333*&quot;size&quot;" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -47026,8 +47067,8 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 2&#xd;&#xa;END" name="expression"/>
-                      <Option type="int" value="3" name="type"/>
+                      <Option type="QString" value="size" name="field"/>
+                      <Option type="int" value="2" name="type"/>
                     </Option>
                   </Option>
                   <Option type="QString" value="collection" name="type"/>
@@ -47064,7 +47105,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="0.0833333*(CASE&#xd;&#xa;  WHEN  &quot;bouwlaag_id&quot; IS NOT NULL THEN &quot;size&quot;&#xd;&#xa;  ELSE &quot;size&quot; * 2&#xd;&#xa;END)" name="expression"/>
+                      <Option type="QString" value="0.0833333*(&quot;size&quot;)" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -47104,7 +47145,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="0.4*&quot;size&quot;" name="expression"/>
+                      <Option type="QString" value="0.25*&quot;size&quot;" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -47144,7 +47185,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="&quot;size&quot;*0.5" name="expression"/>
+                      <Option type="QString" value="&quot;size&quot;*0.25" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -47184,7 +47225,7 @@ def my_form_open(dialog, layer, feature):
                     </Option>
                     <Option type="Map" name="size">
                       <Option type="bool" value="true" name="active"/>
-                      <Option type="QString" value="&quot;size&quot;*0.4" name="expression"/>
+                      <Option type="QString" value="&quot;size&quot;*0.25" name="expression"/>
                       <Option type="int" value="3" name="type"/>
                     </Option>
                   </Option>
@@ -47196,8 +47237,8 @@ def my_form_open(dialog, layer, feature):
         </symbols>
       </renderer-v2>
       <labeling type="rule-based">
-        <rules key="{800f4f98-41e7-45ff-b202-601de20cb747}">
-          <rule key="{d3939372-39f6-4852-80f5-ed161fc03fc0}" description="Algemeen" filter=" &quot;symbol_name&quot;  = 'Algemeen' AND  &quot;brontabel&quot; = 'label'">
+        <rules key="{7b5a1309-90ad-44e7-8502-62cd23b8e317}">
+          <rule key="{e1ef675a-ffd5-42cd-83b6-3477ee67d8bb}" description="Algemeen" filter=" &quot;symbol_name&quot;  = 'Algemeen' AND  &quot;brontabel&quot; = 'label'">
             <settings calloutType="simple">
               <text-style fontSize="2" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="0,0,0,255" fontStrikeout="0" fontSizeUnit="MapUnit" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName="omschrijving" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="64" bufferSizeUnits="MapUnit" bufferNoFill="0" bufferBlendMode="0"/>
@@ -47289,7 +47330,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{81d49683-ef6a-496e-9a06-0d7cf2671849}" description="Gevaar" filter="&quot;symbol_name&quot;  = 'Gevaar' AND  &quot;brontabel&quot; = 'label'">
+          <rule key="{20b39ea5-8529-4026-a79d-9328192dd143}" description="Gevaar" filter="&quot;symbol_name&quot;  = 'Gevaar' AND  &quot;brontabel&quot; = 'label'">
             <settings calloutType="simple">
               <text-style fontSize="2" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="255,255,255,255" fontStrikeout="0" fontSizeUnit="MapUnit" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName=" map_get(&quot;waarden_new&quot;, 'omschrijving')" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="64" bufferSizeUnits="MapUnit" bufferNoFill="0" bufferBlendMode="0"/>
@@ -47381,7 +47422,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{4b144e8b-546a-40cf-bdf8-bc950566fb5c}" description="Voorzichtig" filter="&quot;symbol_name&quot;  = 'Voorzichtig' AND  &quot;brontabel&quot; = 'label'">
+          <rule key="{e78b68f7-cde5-4b49-82be-4177ab93c354}" description="Voorzichtig" filter="&quot;symbol_name&quot;  = 'Voorzichtig' AND  &quot;brontabel&quot; = 'label'">
             <settings calloutType="simple">
               <text-style fontSize="2" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="0,0,0,255" fontStrikeout="0" fontSizeUnit="MapUnit" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName="omschrijving" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="64" bufferSizeUnits="MapUnit" bufferNoFill="0" bufferBlendMode="0"/>
@@ -47473,7 +47514,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{8d03eede-0ec5-458c-a4c6-fcf2c4d00ebb}" description="Waarschuwing" filter=" &quot;symbol_name&quot;  = 'Waarschuwing' AND  &quot;brontabel&quot; = 'label'  ">
+          <rule key="{5f1f67c1-d896-40a9-8168-b0e83e86244c}" description="Waarschuwing" filter=" &quot;symbol_name&quot;  = 'Waarschuwing' AND  &quot;brontabel&quot; = 'label'  ">
             <settings calloutType="simple">
               <text-style fontSize="2" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="0,0,0,255" fontStrikeout="0" fontSizeUnit="MapUnit" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName="omschrijving" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="64" bufferSizeUnits="MapUnit" bufferNoFill="0" bufferBlendMode="0"/>
@@ -47565,7 +47606,7 @@ def my_form_open(dialog, layer, feature):
               </callout>
             </settings>
           </rule>
-          <rule key="{0bac6104-0c31-44f2-a98d-0ebe7933faa5}">
+          <rule key="{43fa00a3-957c-48e5-9da2-dd774322c940}">
             <settings calloutType="simple">
               <text-style fontSize="25" fontSizeMapUnitScale="3x:0,0,0,0,0,0" allowHtml="0" textColor="255,0,213,255" fontStrikeout="0" fontSizeUnit="Point" fontKerning="1" fontItalic="0" multilineHeight="1" textOrientation="horizontal" useSubstitutions="0" blendMode="0" fontFamily="MS Shell Dlg 2" fontUnderline="0" isExpression="1" fieldName="'.'" fontLetterSpacing="0" capitalization="0" fontWordSpacing="0" previewBkgrdColor="0,0,0,255" namedStyle="Standaard" textOpacity="1" fontWeight="50">
                 <text-buffer bufferSize="1" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferColor="255,255,255,255" bufferOpacity="1" bufferDraw="0" bufferJoinStyle="128" bufferSizeUnits="MM" bufferNoFill="0" bufferBlendMode="0"/>
@@ -61669,7 +61710,7 @@ def closeProject():&#xd;    pass</pythonCode>
   <Bookmarks/>
   <ProjectViewSettings UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent xmax="54583.37898256369226146" ymax="424448.57057434250600636" ymin="424423.00950402999296784" xmin="54533.83048520250304136">
+    <DefaultViewExtent xmax="54673.16284535390877863" ymax="424492.47673865733668208" ymin="424390.23245740728452802" xmin="54505.8670761736939312">
       <spatialrefsys>
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["unknown"],AREA["Netherlands - onshore"],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +units=m +no_defs</proj4>
