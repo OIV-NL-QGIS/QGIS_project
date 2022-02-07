@@ -19,14 +19,14 @@
  
 ; Define your application name
 !define APPNAME "OIV"
-!define STAD "Eindhoven"
-!define BUILDTYPE ""
+!define STAD "Zaandam"
+!define BUILDTYPE "beta2"
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.3.7
-!define PLUGINVERSION 3.3.7
-!define QGISVERSION "QGIS310"
+!define VERSION 3.3.9
+!define PLUGINVERSION 3.3.9
+!define QGISVERSION "QGIS322"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
 !define WEBSITE "https://www.safetyct.com"
@@ -98,9 +98,9 @@ VIAddVersionKey Comments "${WEBSITE}"
 !insertmacro MUI_PAGE_WELCOME                                 ; Hello
 Page custom CheckUserType                                     ; Die if not admin
 !insertmacro MUI_PAGE_LICENSE "license.txt"                   ; Show license
-!insertmacro MUI_PAGE_COMPONENTS							                ; Components page
-Page custom nsDialogHost nsDialogHostLeave					          ; Set db server connection
-Page custom nsDialogWFS nsDialogWFSLeave					            ; Set wfs server connection
+!insertmacro MUI_PAGE_COMPONENTS							  ; Components page
+Page custom nsDialogHost nsDialogHostLeave					  ; Set db server connection
+Page custom nsDialogWFS nsDialogWFSLeave					  ; Set wfs server connection
 Page custom Ready                                             ; Summary page
 !insertmacro MUI_PAGE_INSTFILES                               ; Actually do the install
 !insertmacro MUI_PAGE_FINISH                                  ; Done
@@ -316,7 +316,7 @@ Section "Objecten" SectionObjecten
   ${If} ${SectionIsSelected} ${SectionWFS}
     ;Convert standard PostGres project to geoserver WFS project
     SetRegView 64
-    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.10" "InstallPath"
+    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
     File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_objecten_to_wfs.py"
     ${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten_WFS.qgs"
@@ -350,7 +350,7 @@ Section "Bluswater" SectionBluswater
 
   ${If} ${SectionIsSelected} ${SectionWFS}
     SetRegView 64
-    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.10" "InstallPath"
+    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
     File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
     ${StrRep} $R1 $R0 "%1" "$INSTDIR\Bluswater_Beheer_WFS.qgs"
@@ -364,8 +364,8 @@ SectionEnd
 Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	; Get install path
 	SetRegView 64 
-	ReadRegStr $R0 HKLM "SOFTWARE\QGIS 3.10" "InstallPath"
-	StrCpy $R1 "$R0\apps\qgis-ltr\python\plugins"
+	ReadRegStr $R0 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
+	StrCpy $R1 "$R0\apps\qgis\python\plugins"
 	
 	; Section Files
 	CreateDirectory "$R1"
