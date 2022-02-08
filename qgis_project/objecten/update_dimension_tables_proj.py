@@ -111,7 +111,8 @@ def setup_postgisdb_connection(service):
     try:
         config = ConfigParser()
         fileName = os.path.join(os.path.dirname(__file__), 'pg_service.conf')
-        config.read_file(open(fileName))
+        with open(fileName, 'rb') as f:
+            config.read_file(f)
         dbName = config.get('oiv', 'dbname')
         user = config.get('oiv', 'user')
         passw = config.get('oiv', 'password')
