@@ -240,7 +240,7 @@
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer name="Scenario locatie ruimtelijk" providerKey="postgres" checked="Qt::Checked" legend_split_behavior="0" expanded="0" id="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" source="dbname='oiv_prod' service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" patch_size="-1,-1" legend_exp="">
+      <layer-tree-layer name="Scenario locatie ruimtelijk" providerKey="postgres" checked="Qt::Checked" legend_split_behavior="0" expanded="0" id="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" source="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" patch_size="-1,-1" legend_exp="">
         <customproperties/>
       </layer-tree-layer>
       <layer-tree-layer name="Bereikbaarheid" providerKey="postgres" checked="Qt::Checked" legend_split_behavior="0" expanded="0" id="bereikbaarheid20180831134019212" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiLineString checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_bereikbaarheid&quot; (geom)" patch_size="0,0" legend_exp="">
@@ -536,7 +536,7 @@
             <property value="sectoren_type" key="cached_name"/>
           </customproperties>
         </layer-tree-layer>
-        <layer-tree-layer name="settings" providerKey="postgres" checked="Qt::Checked" legend_split_behavior="0" expanded="1" id="settings_492aefd3_aa3e_480d_90b9_f2d7b92c38b2" source="dbname='oiv_prod' service='oiv' sslmode=allow key='id' checkPrimaryKeyUnicity='1' table=&quot;algemeen&quot;.&quot;settings&quot;" patch_size="-1,-1" legend_exp="">
+        <layer-tree-layer name="settings" providerKey="postgres" checked="Qt::Checked" legend_split_behavior="0" expanded="1" id="settings_492aefd3_aa3e_480d_90b9_f2d7b92c38b2" source="service='oiv' sslmode=allow key='id' checkPrimaryKeyUnicity='1' table=&quot;algemeen&quot;.&quot;settings&quot;" patch_size="-1,-1" legend_exp="">
           <customproperties/>
         </layer-tree-layer>
         <layer-tree-layer name="sleuteldoel_type" providerKey="postgres" checked="Qt::Checked" legend_split_behavior="0" expanded="0" id="sleuteldoel_type20180906201338797" source="service='oiv' sslmode=allow key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;sleuteldoel_type&quot;" patch_size="0,0" legend_exp="">
@@ -32715,7 +32715,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>424461.7652764538070187</ymax>
       </extent>
       <id>object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6</id>
-      <datasource>dbname='oiv_prod' service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."object_scenario_locatie" (geom)</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table="objecten"."object_scenario_locatie" (geom)</datasource>
       <keywordList>
         <value></value>
       </keywordList>
@@ -38019,7 +38019,7 @@ def my_form_open(dialog, layer, feature):
       </geometryOptions>
       <legend type="default-vector"/>
       <referencedLayers>
-        <relation dataSource="dbname='oiv_prod' service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" strength="Association" name="scenario_locatie" referencingLayer="scenario20180831134019441" providerKey="postgres" layerId="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" id="scenario_locatie_rel" layerName="Scenario locatie ruimtelijk" referencedLayer="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6">
+        <relation dataSource="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" strength="Association" name="scenario_locatie" referencingLayer="scenario20180831134019441" providerKey="postgres" layerId="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" id="scenario_locatie_rel" layerName="Scenario locatie ruimtelijk" referencedLayer="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6">
           <fieldRef referencingField="scenario_locatie_id" referencedField="id"/>
         </relation>
       </referencedLayers>
@@ -38092,7 +38092,7 @@ def my_form_open(dialog, layer, feature):
                 <Option name="MapIdentification" value="false" type="bool"/>
                 <Option name="OrderByValue" value="false" type="bool"/>
                 <Option name="ReadOnly" value="false" type="bool"/>
-                <Option name="ReferencedLayerDataSource" value="dbname='oiv_prod' service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" type="QString"/>
+                <Option name="ReferencedLayerDataSource" value="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_scenario_locatie&quot; (geom)" type="QString"/>
                 <Option name="ReferencedLayerId" value="object_scenario_locatie_38491309_b943_48a0_975a_e9d42f512dd6" type="QString"/>
                 <Option name="ReferencedLayerName" value="Scenario locatie ruimtelijk" type="QString"/>
                 <Option name="ReferencedLayerProviderKey" value="postgres" type="QString"/>
@@ -39797,7 +39797,7 @@ def my_form_open(dialog, layer, feature):
     </maplayer>
     <maplayer minScale="1e+08" readOnly="0" refreshOnNotifyEnabled="0" hasScaleBasedVisibilityFlag="0" autoRefreshEnabled="0" autoRefreshTime="0" wkbType="NoGeometry" maxScale="0" type="vector" styleCategories="AllStyleCategories" refreshOnNotifyMessage="" geometry="No geometry">
       <id>settings_492aefd3_aa3e_480d_90b9_f2d7b92c38b2</id>
-      <datasource>dbname='oiv_prod' service='oiv' sslmode=allow key='id' checkPrimaryKeyUnicity='1' table="algemeen"."settings"</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' checkPrimaryKeyUnicity='1' table="algemeen"."settings"</datasource>
       <keywordList>
         <value></value>
       </keywordList>
