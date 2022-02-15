@@ -364,9 +364,8 @@ SectionEnd
 Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	; Get install path
 	SetRegView 64 
-	ReadRegStr $R0 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
-	StrCpy $R1 "$R0\apps\qgis\python\plugins"
-	
+
+	StrCpy $R1 "$PROFILE\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins"
 	; Section Files
 	CreateDirectory "$R1"
 	SetOutPath "$R1"
