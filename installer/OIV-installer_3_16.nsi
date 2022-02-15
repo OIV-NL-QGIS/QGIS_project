@@ -20,7 +20,7 @@
 ; Define your application name
 !define APPNAME "OIV"
 !define STAD "Zaandam"
-!define BUILDTYPE "beta2"
+!define BUILDTYPE "beta3"
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
