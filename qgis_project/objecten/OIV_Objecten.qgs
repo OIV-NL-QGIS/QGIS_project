@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveDateTime="2022-02-16T19:40:07" projectname="OIV - Objecten v3.3.9 - Zaandam" saveUserFull="Joost Deen" saveUser="JoostDeen" version="3.16.15-Hannover">
+<qgis saveDateTime="2022-02-16T19:41:46" projectname="OIV - Objecten v3.3.9 - Zaandam" saveUserFull="Joost Deen" saveUser="JoostDeen" version="3.16.15-Hannover">
   <homePath path=""/>
   <title>OIV - Objecten v3.3.9 - Zaandam</title>
   <autotransaction active="0"/>
@@ -307,7 +307,7 @@
           <property key="expandedLegendNodes"/>
         </customproperties>
       </layer-tree-layer>
-      <layer-tree-layer providerKey="postgres" legend_exp="" expanded="1" source="dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;algemeen&quot;.&quot;veiligheidsregio_huidig&quot; (geom)" patch_size="-1,-1" legend_split_behavior="0" name="Veiligheidsregio" checked="Qt::Checked" id="veiligheidsregio_huidig_fe61a4ae_49ce_45a6_94da_be661b5aa9b5">
+      <layer-tree-layer providerKey="postgres" legend_exp="" expanded="1" source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;algemeen&quot;.&quot;veiligheidsregio_huidig&quot; (geom)" patch_size="-1,-1" legend_split_behavior="0" name="Veiligheidsregio" checked="Qt::Checked" id="veiligheidsregio_huidig_fe61a4ae_49ce_45a6_94da_be661b5aa9b5">
         <customproperties/>
       </layer-tree-layer>
     </layer-tree-group>
@@ -44668,7 +44668,7 @@ def my_form_open(dialog, layer, feature):
         <ymax>452929.65500000002793968</ymax>
       </extent>
       <id>veiligheidsregio_huidig_fe61a4ae_49ce_45a6_94da_be661b5aa9b5</id>
-      <datasource>dbname='oiv_prod' service='oiv' sslmode=disable key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table="algemeen"."veiligheidsregio_huidig" (geom)</datasource>
+      <datasource>service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table="algemeen"."veiligheidsregio_huidig" (geom)</datasource>
       <keywordList>
         <value></value>
       </keywordList>
