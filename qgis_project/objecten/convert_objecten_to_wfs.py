@@ -53,8 +53,6 @@ for layer in root.iter('layer-tree-layer'):
             layer.attrib["providerKey"] = 'spatialite'
             sourceList.append("dbname='{}'".format(dimensionDbPath))
             sourceList.append('table="{}"'.format(tableName))
-            if tableName == 'veiligheidsregio_huidig':
-                sourceList.append('(geom)')
             sourceList.append('sql=')
             layer.attrib["source"] = ' '.join(sourceList)
             sqliteLayers.update({layer.attrib["name"] : layer.attrib["source"]})
