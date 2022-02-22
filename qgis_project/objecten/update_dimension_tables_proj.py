@@ -179,8 +179,7 @@ def execute_update_by_db(cursorOIV, cursor, allTables, conn):
                     query = "DELETE FROM {} WHERE id = {}".format(layerName, remainingId)
                     cursor.execute(query)
             except:  # pylint: disable=bare-except
-                if layerName != 'veiligheidsregio_huidig':
-                    print("The {} table is corrupt!".format(layerName))
+                print("The {} table is corrupt!".format(layerName))
     return 'ok'
 
 
@@ -202,30 +201,10 @@ def run_update_dimension_tables(confFile, dbFile, isProjectDb, connectType):
         geoserverURL, geoserverBron, auth = get_geoserver_conf(confFile)
         result = execute_update_by_wfs(geoserverURL, geoserverBron, cursor, allTables, auth, conn)
         close_db_connection(cursor, conn)
-        layerName = 'Veiligheidsregio'
-        params = {'request': 'GetFeature', 'outputFormat': 'json', 'typename': '{}:{}'
-                  .format(geoserverBron, 'veiligheidsregio_huidig')}
-        r = requests.get(geoserverURL, params=params, auth=auth)
-        geojson = json.dumps(r.json()["features"][0]["geometry"])
-        vlayer = QgsVectorLayer(geojson, "tempLayer", "ogr")
-        for feature in vlayer.getFeatures():
-            geom = feature.geometry()
-        layer = getlayer_byname(layerName)
-        layer.startEditing()
-        layer.changeGeometry(1, geom)
-        layer.commitChanges()
     else:
         connOIV, cursorOIV = setup_postgisdb_connection("service='oiv'")
         if cursorOIV:
             result = execute_update_by_db(cursorOIV, cursor, allTables, conn)
-            layerName = 'Veiligheidsregio'
-            query = "SELECT ST_AsText(geom) as geom FROM {}.{}".format('algemeen', 'veiligheidsregio_huidig')
-            cursorOIV.execute(query)
-            geom = QgsGeometry.fromWkt(cursorOIV.fetchone()["geom"])
-            layer = getlayer_byname(layerName)
-            layer.startEditing()
-            layer.changeGeometry(1, geom)
-            layer.commitChanges()
             close_db_connection(cursorOIV, connOIV)
     if result == 'ok':
         print('Dimension tables are correct updatet!')
