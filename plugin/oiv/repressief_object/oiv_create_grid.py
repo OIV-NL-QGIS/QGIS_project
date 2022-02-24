@@ -55,6 +55,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_grid(self):
         """after choosing single grid or kaartblad set things in motion"""
+        self.next.setEnabled(False)
         if self.type_single_grid.isChecked():
             self.kaartblad_frame.setVisible(False)
             self.grid_frame.setVisible(True)
@@ -244,12 +245,13 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def delete(self, ilayer, ifeature):
         """delete a feature"""
-        if ilayer.name() == PC.OBJECT["gridlayername"]:
-            gridUUID = ifeature["uuid"]
-            self.delete_existing_grid(gridUUID, ilayer)
-        else:
-            MSG.showMsgBox('nogridselected')
-            self.run_delete_tool()
+        if ilayer:
+            if ilayer.name() == PC.OBJECT["gridlayername"]:
+                gridUUID = ifeature["uuid"]
+                self.delete_existing_grid(gridUUID, ilayer)
+            else:
+                MSG.showMsgBox('nogridselected')
+                self.run_delete_tool()
         self.parent.identifyTool.geomIdentified.disconnect(self.delete)
         self.iface.actionPan().trigger()
 
