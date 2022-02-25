@@ -20,12 +20,12 @@
 ; Define your application name
 !define APPNAME "OIV"
 !define STAD "Zaandam"
-!define BUILDTYPE "beta3"
+!define BUILDTYPE "beta1"
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.3.9
-!define PLUGINVERSION 3.3.9
+!define VERSION 3.4.0
+!define PLUGINVERSION 3.4.0
 !define QGISVERSION "QGIS322"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
@@ -363,9 +363,12 @@ SectionEnd
 
 Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	; Get install path
-	SetRegView 64 
+	SetRegView 64
 
-	StrCpy $R1 "$PROFILE\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins"
+	;ReadRegStr $R0 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
+	;StrCpy $R1 "$R0\apps\qgis-ltr\python\plugins"
+	
+  StrCpy $R1 "$PROFILE\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins"
 	; Section Files
 	CreateDirectory "$R1"
 	SetOutPath "$R1"
