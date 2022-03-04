@@ -194,25 +194,27 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             return ifeature.geometry().centroid()
 
     def inlezen(self):
+        features = []
         targetLayerName = self.import_laag.currentText()
         targetLayer = UC.getlayer_byname(targetLayerName)
         sourceLayerName = 'tempImport'
         sourceLayer = UC.getlayer_byname(sourceLayerName)
-        features = []
+        if sourceLayer:
+            for feature in sourceLayer.getFeatures():
+                features.append(feature)
+            UC.write_layer(targetLayer, features, False, False)
+            QC.QgsProject.instance().removeMapLayers([sourceLayer.id()])
+        ingangFeatures = []
         targetIngangLayerName = "Ingang bouwlaag"
         targetIngangLayer = UC.getlayer_byname(targetIngangLayerName)
         sourceIngangLayerName = 'tempImportIngang'
         sourceIngangLayer = UC.getlayer_byname(sourceIngangLayerName)
-        ingangFeatures = []
-        for feature in sourceLayer.getFeatures():
-            features.append(feature)
-        for feature in sourceIngangLayer.getFeatures():
-            ingangFeatures.append(feature)
-        UC.write_layer(targetLayer, features, False, False)
-        UC.write_layer(targetIngangLayer, ingangFeatures, False, False)
+        if sourceIngangLayer:
+            for feature in sourceIngangLayer.getFeatures():
+                ingangFeatures.append(feature)
+            UC.write_layer(targetIngangLayer, ingangFeatures, False, False)
+            QC.QgsProject.instance().removeMapLayers([sourceIngangLayer.id()])
         MSG.showMsgBox('importsuccesfull')
-        QC.QgsProject.instance().removeMapLayers([sourceLayer.id()])
-        QC.QgsProject.instance().removeMapLayers([sourceIngangLayer.id()])
 
     def init_templayers(self, targetLayer):
         typeLayer = None
