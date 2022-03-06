@@ -68,20 +68,24 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
         attrs = UC.read_settings(query, False)
         sortList = []
         for feat in allFeatures:
-            if len(attrs) > 1:
-                typeValue = feat[attrs[0]]
-                if isinstance(typeValue, (int, float)):
-                    req = '"id" = {}'.format(typeValue)
-                    request = QC.QgsFeatureRequest().setFilterExpression(req)
-                    ilayer = UC.getlayer_byname(attrs[1])
-                    ifeature = UC.featureRequest(ilayer, request)
-                    if ifeature:
-                        sortList.append([feat["id"], ifeature["naam"]])
+            if attrs:
+                if len(attrs) > 1:
+                    typeValue = feat[attrs[0]]
+                    if isinstance(typeValue, (int, float)):
+                        req = '"id" = {}'.format(typeValue)
+                        request = QC.QgsFeatureRequest().setFilterExpression(req)
+                        ilayer = UC.getlayer_byname(attrs[1])
+                        ifeature = UC.featureRequest(ilayer, request)
+                        if ifeature:
+                            sortList.append([feat["id"], ifeature["naam"]])
+                    else:
+                        sortList.append([feat["id"], typeValue])
+                elif attrs:
+                    sortList.append([feat["id"], feat[attrs[0]]])
                 else:
-                    sortList.append([feat["id"], typeValue])
-            elif attrs:
-                sortList.append([feat["id"], feat[attrs[0]]])
-            else:
+                    sortList = None
+            elif allFeatures:
+                MSG.showMsgBox('multipleBouwlagenidentified')
                 sortList = None
         if sortList:
             AskFeatureDialog.askList = sortList
