@@ -381,7 +381,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def set_parent_id(self, ilayer, ifeature):
         """let user select the floor which to link to"""
-        if ilayer.name() == 'Bouwlagen':
+        if ilayer.name() == 'Bouwlagen' and ifeature:
             self.bouwlaag_id.setText(str(ifeature["id"]))
             self.selectTool.geomSelected.disconnect(self.set_parent_id)
             self.label3.setVisible(True)
@@ -391,7 +391,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             self.import_laag.setVisible(True)
             self.check.setVisible(True)
             self.type.setVisible(True)
-        else:
+        elif ifeature:
             self.run_select_bouwlaag()
 
     def hide_all(self):

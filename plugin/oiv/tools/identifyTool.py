@@ -43,6 +43,7 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
 
     def canvasReleaseEvent(self, mouseEvent):
         """handle mouse release event and return indetified feature"""
+        tempfeature = None
         results = self.identify(mouseEvent.x(), mouseEvent.y(), self.TopDownStopAtFirst, self.VectorLayer)
         if not results == []:
             idlayer = results[0].mLayer
@@ -56,14 +57,15 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
                     tempfeature = self.ask_user_for_feature(idlayer, allFeatures)
                 else:
                     tempfeature = results[0].mFeature
-                self.geomSelected.emit(idlayer, tempfeature)
+                if idlayer and tempfeature:
+                    self.geomSelected.emit(idlayer, tempfeature)
         else:
             MSG.showMsgBox('noidentifiedobject')
 
     def ask_user_for_feature(self, idLayer, allFeatures):
         """if more features are identified ask user which one to choose"""
         targetFeature = None
-        tempFeature = None
+        messageShown = False
         query = "SELECT identifier, type_layer_name FROM {} WHERE child_layer = '{}'".format(self.whichConfig, idLayer.name())
         attrs = UC.read_settings(query, False)
         sortList = []
@@ -84,15 +86,16 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
                     sortList.append([feat["id"], feat[attrs[0]]])
                 else:
                     sortList = None
-            elif allFeatures:
+            elif allFeatures and messageShown == False:
+                messageShown = True
                 MSG.showMsgBox('multipleBouwlagenidentified')
                 sortList = None
         if sortList:
             AskFeatureDialog.askList = sortList
             chosen, dummy = AskFeatureDialog.askFeature()
-        for feat in allFeatures:
-            if feat["id"] == int(chosen):
-                targetFeature = feat
+            for feat in allFeatures:
+                if feat["id"] == int(chosen):
+                    targetFeature = feat
         return targetFeature
 
 
