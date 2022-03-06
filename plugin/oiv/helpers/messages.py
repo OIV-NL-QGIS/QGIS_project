@@ -156,4 +156,9 @@ MESSAGES = {
         "header": 'Printen afgerond!',
         "body": 'Het printen is gereed.\n\nU kunt de bestanden vinden in:\n'
     },
+    'multipleBouwlagenidentified': {
+        "type": 'warning',
+        "header": 'Meerdere bouwlagen',
+        "body": 'Er zijn meerdere bouwlagen die elkaar overlapppen.\nDus het is onduidelijk waaraan u wilt koppelen.\nHerstel dit eerst.'
+    },
 }
