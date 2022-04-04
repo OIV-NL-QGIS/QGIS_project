@@ -49,6 +49,8 @@ Var DbnameTest
 Var PortTest
 Var DbUserTest
 Var DbPasswordTest
+Var PluginInstallDir
+Var PluginDir
 
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"
@@ -107,6 +109,7 @@ Page custom CheckUserType                                     ; Die if not admin
 Page custom nsDialogHost nsDialogHostLeave					          ; Set db prod server connection
 Page custom nsDialogHostTest nsDialogHostTestLeave					  ; Set db test server connection
 Page custom nsDialogWFS nsDialogWFSLeave					            ; Set wfs server connection
+Page custom nsDialogPluginDir nsDialogPluginDirLeave					; Set plugin install directory
 Page custom Ready                                             ; Summary page
 !insertmacro MUI_PAGE_INSTFILES                               ; Actually do the install
 !insertmacro MUI_PAGE_FINISH                                  ; Done
@@ -202,6 +205,9 @@ FunctionEnd
   ${EndIf}  
   ${If} $DbUserTest == ""
 	StrCpy $DbUserTest "username"
+  ${EndIf}
+  ${If} $PluginDir == ""
+	StrCpy $PluginDir ""
   ${EndIf}
 
 !macroend
@@ -432,13 +438,9 @@ Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	; Get install path
 	SetRegView 64
 
-	;ReadRegStr $R0 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
-	;StrCpy $R1 "$R0\apps\qgis-ltr\python\plugins"
-	
-  StrCpy $R1 "$PROFILE\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins"
 	; Section Files
-	CreateDirectory "$R1"
-	SetOutPath "$R1"
+	CreateDirectory "$PluginDir"
+	SetOutPath "$PluginDir"
 	File /r ..\plugin\oiv
 	
 	SetRegView 32
@@ -591,6 +593,46 @@ Function nsDialogWFSLeave
   ${NSD_GetText} $5 $GeoServerPassword
 FunctionEnd
 
+Function OnDirBrowse
+  ${NSD_GetText} $PluginInstallDir $0
+  nsDialogs::SelectFolderDialog "Selecteer directory" "$0"
+  Pop $0
+  ${If} $0 != error
+      ${NSD_SetText} $PluginInstallDir "$0"
+      StrCpy $PluginDir "$0"
+  ${EndIf}
+FunctionEnd
+
+Function nsDialogPluginDir
+  ${If} ${SectionIsSelected} ${SectionPlugin}
+    
+    !insertmacro MUI_HEADER_TEXT "$(TEXT_HOST_TITLE)" "$(TEXT_HOST_SUBTITLE)"
+    nsDialogs::Create 1018
+ 
+    StrCpy $R1 "$PROFILE\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins"
+    ;Syntax: ${NSD_*} x y width height text
+    ${NSD_CreateLabel} 0 0 100% 14u "Standaard installatie-pad voor de plugin:"
+    ${NSD_CreateLabel} 0 18u 100% 14u "$R1" 
+    StrCpy $PluginDir "$R1"
+    
+    ${NSD_CreateGroupBox} 0 86u 100% 34u "Plugin Install Path"
+    Pop $0
+
+        ${NSD_CreateDirRequest} 5% 100u 80% 12u "$R1"
+        Pop $PluginInstallDir
+
+        ${NSD_CreateBrowseButton} 85% 100u 10% 12u "..."
+        Pop $0
+        ${NSD_OnClick} $0 OnDirBrowse
+
+    nsDialogs::Show
+
+  ${EndIf}
+FunctionEnd
+
+Function nsDialogPluginDirLeave
+FunctionEnd
+
 ; Summary page before install
 Function Ready
 
@@ -636,6 +678,10 @@ Function Ready
     ; Port
     ${NSD_CreateLabel} 10u 85u 35% 24u "Port:"
     ${NSD_CreateLabel} 40% 85u 60% 24u $Port
+
+    ; Plugin directory
+    ${NSD_CreateLabel} 10u 85u 35% 24u "PluginDir:"
+    ${NSD_CreateLabel} 40% 85u 60% 24u $PluginDir
   ${EndIf}
 
   nsDialogs::Show
