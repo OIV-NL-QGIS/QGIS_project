@@ -30,8 +30,9 @@ def bagpand_layername():
         bagNode = ltr.findLayer(layer.id())
         if bagNode.isVisible():
             return baglayerName
-        return PAND["bagpandlayername"] +\
-            plugin_settings("BAGCONNECTION")["inactive"]
+        else:
+            return PAND["bagpandlayername"] +\
+                plugin_settings("BAGCONNECTION")["inactive"]
     return None
 
 

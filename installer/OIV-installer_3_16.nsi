@@ -24,8 +24,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.4.0
-!define PLUGINVERSION 3.4.0
+!define VERSION 3.4.1
+!define PLUGINVERSION 3.4.1
 !define QGISVERSION "QGIS316"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
@@ -44,6 +44,11 @@ Var DbUser
 Var DbPassword
 Var GeoserverUser
 Var GeoserverPassword
+Var HostTest
+Var DbnameTest
+Var PortTest
+Var DbUserTest
+Var DbPasswordTest
 
 ; Main Install settings
 Name "${APPNAMEANDVERSION}"
@@ -98,9 +103,10 @@ VIAddVersionKey Comments "${WEBSITE}"
 !insertmacro MUI_PAGE_WELCOME                                 ; Hello
 Page custom CheckUserType                                     ; Die if not admin
 !insertmacro MUI_PAGE_LICENSE "license.txt"                   ; Show license
-!insertmacro MUI_PAGE_COMPONENTS							  ; Components page
-Page custom nsDialogHost nsDialogHostLeave					  ; Set db server connection
-Page custom nsDialogWFS nsDialogWFSLeave					  ; Set wfs server connection
+!insertmacro MUI_PAGE_COMPONENTS							                ; Components page
+Page custom nsDialogHost nsDialogHostLeave					          ; Set db prod server connection
+Page custom nsDialogHostTest nsDialogHostTestLeave					  ; Set db test server connection
+Page custom nsDialogWFS nsDialogWFSLeave					            ; Set wfs server connection
 Page custom Ready                                             ; Summary page
 !insertmacro MUI_PAGE_INSTFILES                               ; Actually do the install
 !insertmacro MUI_PAGE_FINISH                                  ; Done
@@ -155,7 +161,13 @@ FunctionEnd
   ReadRegStr $DbUser HKLM "${REG_APPSETTINGS}" "DbUser"
   ReadRegStr $DbPassword HKLM "${REG_APPSETTINGS}" "DbPassword" 
   ReadRegStr $GeoServerUser HKLM "${REG_APPSETTINGS}" "User"
-  ReadRegStr $GeoServerPassword HKLM "${REG_APPSETTINGS}" "Password"  
+  ReadRegStr $GeoServerPassword HKLM "${REG_APPSETTINGS}" "Password"
+
+  ReadRegStr $Host HKLM "${REG_APPSETTINGS}" "HostTest"
+  ReadRegStr $Dbname HKLM "${REG_APPSETTINGS}" "DbnameTest"
+  ReadRegStr $Port HKLM "${REG_APPSETTINGS}" "PortTest"
+  ReadRegStr $DbUser HKLM "${REG_APPSETTINGS}" "DbUserTest"
+  ReadRegStr $DbPassword HKLM "${REG_APPSETTINGS}" "DbPasswordTest" 
 
   ; Populates defaults on first display, and resets to default user blanked any of the values
   ${If} $Host == ""
@@ -178,7 +190,19 @@ FunctionEnd
   ${EndIf}
   ${If} $GeoServerUser == ""
 	StrCpy $GeoServerUser "username"
+  ${EndIf}
+  ${If} $HostTest == ""
+	StrCpy $HostTest "localhost"
+  ${EndIf}
+  ${If} $DbnameTest == ""
+	StrCpy $DbnameTest "oiv_test"
+  ${EndIf}
+  ${If} $Port == ""
+	StrCpy $Port "5432"
   ${EndIf}  
+  ${If} $DbUserTest == ""
+	StrCpy $DbUserTest "username"
+  ${EndIf}
 
 !macroend
 
@@ -205,9 +229,7 @@ Section "${APPNAME} (required)" SectionMain
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
 	File /a license.txt
-	File /a nircmd.exe
 	File /a dos2unix.exe
-	File /r ..\qgis_project\objecten\ini
 
 	; Registry
 	DetailPrint "Write ${APPNAME} settings to registry"
@@ -221,6 +243,9 @@ Section "${APPNAME} (required)" SectionMain
   WriteRegStr HKLM "${REG_APPSETTINGS}" "Port" "$Port"
   WriteRegStr HKLM "${REG_APPSETTINGS}" "GeoserverUrl" "$GeoserverUrl"
   WriteRegStr HKLM "${REG_APPSETTINGS}" "GeoserverBron" "$GeoserverBron"
+	WriteRegStr HKLM "${REG_APPSETTINGS}" "HostTest" "$HostTest"
+	WriteRegStr HKLM "${REG_APPSETTINGS}" "DbnameTest" "$DbnameTest"
+  WriteRegStr HKLM "${REG_APPSETTINGS}" "PortTest" "$PortTest"
 
 	; User settings
 	WriteRegStr HKCU "Software\QGIS\QGIS3\Qgis" "askToSaveProjectChanges" "false"
@@ -283,6 +308,63 @@ Section "Database" SectionDB
     FileClose $4
   ${EndIf}
 
+  File /a ..\qgis_project\objecten\pg_service_prod.conf
+
+  ;Create db-connection service file prod
+  ${IfNot} $Dbname == ""
+    FileOpen $4 "$INSTDIR\pg_service_prod.conf" a
+    FileSeek $4 0 END
+    FileWrite $4 "$\r$\n"
+    FileWrite $4 "[oiv]"
+    FileWrite $4 "$\r$\n"
+    FileWrite $4 "host=$Host"
+    FileWrite $4 "$\r$\n"
+    FileWrite $4 "port=$Port"
+    FileWrite $4 "$\r$\n"
+    FileWrite $4 "dbname=$Dbname"
+    FileWrite $4 "$\r$\n"  
+    FileWrite $4 "user=$DbUser"
+    FileWrite $4 "$\r$\n"
+    FileWrite $4 "password=$DbPassword"
+    FileWrite $4 "$\r$\n"
+    FileWrite $4 "application_name=oiv"
+    FileClose $4
+  ${EndIf}
+
+  AccessControl::GrantOnFile "$INSTDIR\pg_service_prod.conf" "(S-1-5-32-545)" "FullAccess"
+  AccessControl::GrantOnFile "$INSTDIR\pg_service.conf" "(S-1-5-32-545)" "FullAccess"
+
+  SetRegView 64
+SectionEnd
+
+Section "DatabaseTest" SectionDBTest
+  File /a ..\qgis_project\objecten\pg_service_test.conf
+  
+  ${If} ${SectionIsSelected} ${SectionDBTest}
+    ;Create db-connection service file test
+    ${IfNot} $DbnameTest == ""
+      FileOpen $4 "$INSTDIR\pg_service_test.conf" a
+      FileSeek $4 0 END
+      FileWrite $4 "$\r$\n"
+      FileWrite $4 "[oiv]"
+      FileWrite $4 "$\r$\n"
+      FileWrite $4 "host=$HostTest"
+      FileWrite $4 "$\r$\n"
+      FileWrite $4 "port=$PortTest"
+      FileWrite $4 "$\r$\n"
+      FileWrite $4 "dbname=$DbnameTest"
+      FileWrite $4 "$\r$\n"  
+      FileWrite $4 "user=$DbUserTest"
+      FileWrite $4 "$\r$\n"
+      FileWrite $4 "password=$DbPasswordTest"
+      FileWrite $4 "$\r$\n"
+      FileWrite $4 "application_name=oiv"
+      FileClose $4
+    ${EndIf}
+  ${EndIf}
+
+  AccessControl::GrantOnFile "$INSTDIR\pg_service_test.conf" "(S-1-5-32-545)" "FullAccess"
+  
   SetRegView 64
 SectionEnd
 
@@ -306,11 +388,7 @@ Section "Objecten" SectionObjecten
   AccessControl::GrantOnFile "$INSTDIR\db" "(S-1-5-32-545)" "GenericRead + GenericWrite"
 
   ${If} ${SectionIsSelected} ${SectionDB}
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten.qgs"  
-    CreateShortCut "$desktop\${APPNAME} Objecten-DB.lnk" \
-            "$INSTDIR\nircmd.exe"  \
-            'exec hide $R1 --customizationfile "$INSTDIR\ini\oiv.ini"' \
-            "$INSTDIR\objecten.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Objecten-DB.lnk" "$INSTDIR\OIV_Objecten.qgs" "" "$INSTDIR\objecten.ico" 0
   ${EndIf}
 
   ${If} ${SectionIsSelected} ${SectionWFS}
@@ -319,11 +397,7 @@ Section "Objecten" SectionObjecten
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.16" "InstallPath"
     File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_objecten_to_wfs.py"
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten_WFS.qgs"
-    CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" \
-            "$INSTDIR\nircmd.exe"  \
-            'exec hide $R1 --customizationfile "$INSTDIR\ini\oiv.ini"' \
-            "$INSTDIR\objecten.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" "$INSTDIR\OIV_Objecten_WFS.qgs" "" "$INSTDIR\objecten.ico" 0
   ${EndIf}
 SectionEnd
  
@@ -342,10 +416,7 @@ Section "Bluswater" SectionBluswater
 
   ${If} ${SectionIsSelected} ${SectionDB}
     ${StrRep} $R1 $R0 "%1" "$INSTDIR\Bluswater_Beheer.qgs"
-    CreateShortCut "$desktop\${APPNAME} Bluswater-DB.lnk" \
-            "$INSTDIR\nircmd.exe"  \
-            'exec hide $R1 --customizationfile "$INSTDIR\ini\oiv.ini"' \
-            "$INSTDIR\bluswater.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Bluswater-DB.lnk" "$INSTDIR\Bluswater_Beheer.qgs" "" "$INSTDIR\bluswater.ico" 0
   ${EndIf}
 
   ${If} ${SectionIsSelected} ${SectionWFS}
@@ -353,11 +424,7 @@ Section "Bluswater" SectionBluswater
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.16" "InstallPath"
     File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\Bluswater_Beheer_WFS.qgs"
-    CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" \
-            "$INSTDIR\nircmd.exe"  \
-            'exec hide $R1 --customizationfile "$INSTDIR\ini\oiv.ini"' \
-            "$INSTDIR\bluswater.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" "$INSTDIR\Bluswater_Beheer_WFS.qgs" "" "$INSTDIR\bluswater.ico" 0
   ${EndIf}
 SectionEnd
 
@@ -388,7 +455,7 @@ Function nsDialogHost
     nsDialogs::Create 1018
 
     ;Syntax: ${NSD_*} x y width height text
-    ${NSD_CreateLabel} 0 0 100% 36u "Set the database host and name that ${APPNAME} will respond on."
+    ${NSD_CreateLabel} 0 0 100% 36u "Set the database production host and name that ${APPNAME} will respond on."
 
     ${NSD_CreateLabel} 20u 40u 60u 14u "Host database:"  
     ${NSD_CreateText} 80u 38u 160u 14u $0
@@ -428,6 +495,56 @@ Function nsDialogHostLeave
   ${NSD_GetText} $4 $DbUser
   ${NSD_GetText} $5 $DbPassword
   ${NSD_GetText} $6 $Port
+FunctionEnd
+
+; Set the web server host
+Function nsDialogHostTest
+  ${If} ${SectionIsSelected} ${SectionDBTest}
+    
+    !insertmacro MUI_HEADER_TEXT "$(TEXT_HOST_TITLE)" "$(TEXT_HOST_SUBTITLE)"
+    nsDialogs::Create 1018
+
+    ;Syntax: ${NSD_*} x y width height text
+    ${NSD_CreateLabel} 0 0 100% 36u "Set the database test host and name that ${APPNAME} will respond on."
+
+    ${NSD_CreateLabel} 20u 40u 60u 14u "Host database:"  
+    ${NSD_CreateText} 80u 38u 160u 14u $0
+    Pop $0
+    ${NSD_SetText} $0 $Host
+    
+    ${NSD_CreateLabel} 20u 60u 60u 14u "Database name:"  
+    ${NSD_CreateText} 80u 58u 160u 14u $1
+    Pop $1
+    ${NSD_SetText} $1 $Dbname
+
+    ${NSD_CreateLabel} 20u 80u 60u 14u "Port:"  
+    ${NSD_CreateText} 80u 78u 160u 14u $1
+    Pop $6
+    ${NSD_SetText} $6 $Port
+
+    ${NSD_CreateLabel} 20u 100u 60u 14u "Username:"  
+    ${NSD_CreateText} 80u 98u 160u 14u $4
+    Pop $4
+    ${NSD_SetText} $4 $DbUser
+
+    ${NSD_CreateLabel} 20u 120u 60u 14u "Password:"  
+    ${NSD_CreatePassword} 80u 118u 160u 14u $5
+    Pop $5
+
+    ${NSD_CreateLabel} 20u 140u 100% 14u "Example valid database hosts are: localhost, demo.safetymaps.nl"
+
+    nsDialogs::Show  
+
+  ${EndIf}
+FunctionEnd
+
+Function nsDialogHostTestLeave
+	# Read form
+	${NSD_GetText} $0 $HostTest
+	${NSD_GetText} $1 $DbnameTest
+  ${NSD_GetText} $4 $DbUserTest
+  ${NSD_GetText} $5 $DbPasswordTest
+  ${NSD_GetText} $6 $PortTest
 FunctionEnd
 
 Function nsDialogWFS
