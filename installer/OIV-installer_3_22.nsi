@@ -388,7 +388,6 @@ Section "Objecten" SectionObjecten
   AccessControl::GrantOnFile "$INSTDIR\db" "(S-1-5-32-545)" "GenericRead + GenericWrite"
 
   ${If} ${SectionIsSelected} ${SectionDB}
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten.qgs"  
     CreateShortCut "$desktop\${APPNAME} Objecten-DB.lnk" "$INSTDIR\OIV_Objecten.qgs" "" "$INSTDIR\objecten.ico" 0
   ${EndIf}
 
@@ -398,8 +397,7 @@ Section "Objecten" SectionObjecten
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
     File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_objecten_to_wfs.py"
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten_WFS.qgs"
-    CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" "$R1" "$INSTDIR\objecten.ico"
+    CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" "$INSTDIR\OIV_Objecten_WFS.qgs" "" "$INSTDIR\objecten.ico" 0
   ${EndIf}
 SectionEnd
  
@@ -418,9 +416,7 @@ Section "Bluswater" SectionBluswater
 
   ${If} ${SectionIsSelected} ${SectionDB}
     ${StrRep} $R1 $R0 "%1" "$INSTDIR\Bluswater_Beheer.qgs"
-    CreateShortCut "$desktop\${APPNAME} Bluswater-DB.lnk" \
-            '$R1 ' \
-            "$INSTDIR\objecten.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Bluswater-DB.lnk" "$INSTDIR\Bluswater_Beheer.qgs" "" "$INSTDIR\bluswater.ico" 0
   ${EndIf}
 
   ${If} ${SectionIsSelected} ${SectionWFS}
@@ -428,10 +424,7 @@ Section "Bluswater" SectionBluswater
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
     File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\Bluswater_Beheer_WFS.qgs"
-    CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" \
-            '$R1 ' \
-            "$INSTDIR\objecten.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" "$INSTDIR\Bluswater_Beheer_WFS.qgs" "" "$INSTDIR\bluswater.ico" 0
   ${EndIf}
 SectionEnd
 
@@ -554,7 +547,6 @@ Function nsDialogHostTestLeave
   ${NSD_GetText} $5 $DbPasswordTest
   ${NSD_GetText} $6 $PortTest
 FunctionEnd
-
 
 Function nsDialogWFS
   ${If} ${SectionIsSelected} ${SectionWFS}

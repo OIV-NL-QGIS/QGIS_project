@@ -24,8 +24,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.4.0
-!define PLUGINVERSION 3.4.0
+!define VERSION 3.4.1
+!define PLUGINVERSION 3.4.1
 !define QGISVERSION "QGIS316"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
@@ -104,7 +104,7 @@ VIAddVersionKey Comments "${WEBSITE}"
 Page custom CheckUserType                                     ; Die if not admin
 !insertmacro MUI_PAGE_LICENSE "license.txt"                   ; Show license
 !insertmacro MUI_PAGE_COMPONENTS							                ; Components page
-Page custom nsDialogHost nsDialogHostLeave					          ; Set db server connection
+Page custom nsDialogHost nsDialogHostLeave					          ; Set db prod server connection
 Page custom nsDialogHostTest nsDialogHostTestLeave					  ; Set db test server connection
 Page custom nsDialogWFS nsDialogWFSLeave					            ; Set wfs server connection
 Page custom Ready                                             ; Summary page
@@ -229,9 +229,7 @@ Section "${APPNAME} (required)" SectionMain
 	CreateDirectory "$INSTDIR"
 	SetOutPath "$INSTDIR"
 	File /a license.txt
-	File /a nircmd.exe
 	File /a dos2unix.exe
-	File /r ..\qgis_project\objecten\ini
 
 	; Registry
 	DetailPrint "Write ${APPNAME} settings to registry"
@@ -390,8 +388,6 @@ Section "Objecten" SectionObjecten
   AccessControl::GrantOnFile "$INSTDIR\db" "(S-1-5-32-545)" "GenericRead + GenericWrite"
 
   ${If} ${SectionIsSelected} ${SectionDB}
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten.qgs"
-    DetailPrint $R1
     CreateShortCut "$desktop\${APPNAME} Objecten-DB.lnk" "$INSTDIR\OIV_Objecten.qgs" "" "$INSTDIR\objecten.ico" 0
   ${EndIf}
 
@@ -401,8 +397,7 @@ Section "Objecten" SectionObjecten
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.16" "InstallPath"
     File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_objecten_to_wfs.py"
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\OIV_Objecten_WFS.qgs"
-    CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" "$INSTDIR\nircmd.exe" 'exec hide $R1 --customizationfile "$INSTDIR\ini\oiv.ini"' "$INSTDIR\objecten.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" "$INSTDIR\OIV_Objecten_WFS.qgs" "" "$INSTDIR\objecten.ico" 0
   ${EndIf}
 SectionEnd
  
@@ -421,10 +416,7 @@ Section "Bluswater" SectionBluswater
 
   ${If} ${SectionIsSelected} ${SectionDB}
     ${StrRep} $R1 $R0 "%1" "$INSTDIR\Bluswater_Beheer.qgs"
-    CreateShortCut "$desktop\${APPNAME} Bluswater-DB.lnk" \
-            "$INSTDIR\nircmd.exe"  \
-            'exec hide $R1 --customizationfile "$INSTDIR\ini\oiv.ini"' \
-            "$INSTDIR\bluswater.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Bluswater-DB.lnk" "$INSTDIR\Bluswater_Beheer.qgs" "" "$INSTDIR\bluswater.ico" 0
   ${EndIf}
 
   ${If} ${SectionIsSelected} ${SectionWFS}
@@ -432,11 +424,7 @@ Section "Bluswater" SectionBluswater
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.16" "InstallPath"
     File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
     ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
-    ${StrRep} $R1 $R0 "%1" "$INSTDIR\Bluswater_Beheer_WFS.qgs"
-    CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" \
-            "$INSTDIR\nircmd.exe"  \
-            'exec hide $R1 --customizationfile "$INSTDIR\ini\oiv.ini"' \
-            "$INSTDIR\bluswater.ico" 0
+    CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" "$INSTDIR\Bluswater_Beheer_WFS.qgs" "" "$INSTDIR\bluswater.ico" 0
   ${EndIf}
 SectionEnd
 
@@ -467,7 +455,7 @@ Function nsDialogHost
     nsDialogs::Create 1018
 
     ;Syntax: ${NSD_*} x y width height text
-    ${NSD_CreateLabel} 0 0 100% 36u "Set the database host and name that ${APPNAME} will respond on."
+    ${NSD_CreateLabel} 0 0 100% 36u "Set the database production host and name that ${APPNAME} will respond on."
 
     ${NSD_CreateLabel} 20u 40u 60u 14u "Host database:"  
     ${NSD_CreateText} 80u 38u 160u 14u $0
