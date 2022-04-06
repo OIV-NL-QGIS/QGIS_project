@@ -173,7 +173,10 @@ def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
     return 'succes'
 
 def delete_feature(feat, cursor, conn):
-    query = "DELETE FROM objecten.{} WHERE id={};".format(feat['brontabel'], feat['bron_id'])
+    if feat['brontabel'] == 'alternatieve':
+        query = "DELETE FROM bluswater.{} WHERE id={};".format(feat['brontabel'], feat['bron_id'])
+    else:
+        query = "DELETE FROM objecten.{} WHERE id={};".format(feat['brontabel'], feat['bron_id'])
     cursor.execute(query)
     conn.commit()
     return 'succes'
@@ -193,7 +196,10 @@ def temp_delete_feature(ilayer, ifeature, bouwlaagOfObject, rightLayerNames):
                 tableName = CH.get_tablename_ob(ilayer.name())
             else:
                 tableName = CH.get_tablename_bl(ilayer.name())
-            query = "DELETE FROM objecten.{} WHERE id={};".format(tableName, ifeature['id'])
+            if tableName == 'alternatieve':
+                query = "DELETE FROM bluswater.{} WHERE id={};".format(tableName, ifeature['id'])
+            else:
+                query = "DELETE FROM objecten.{} WHERE id={};".format(tableName, ifeature['id'])
             cursor.execute(query)
             conn.commit()
             close_db_connection(cursor, conn)
