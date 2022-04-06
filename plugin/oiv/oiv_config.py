@@ -65,11 +65,8 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         path = QC.QgsProject.instance().readPath("./")
         pgServiceFile = path + '/' + self.dataConn["filename"]
         os.remove(pgServiceFile)
-        fileName = path + '/' + self.dataConn["filename"].split('.')[0] + '_' + self.dataConn["active"] + '.' + self.dataConn["filename"].split('.')[1]
-        tempFile = path + '/temp.conf'
-        shutil.copy(fileName, tempFile)
-        os.rename(fileName, pgServiceFile)
-        os.rename(tempFile, fileName)
+        activeFileName = path + '/' + self.dataConn["filename"].split('.')[0] + '_' + self.dataConn["active"] + '.' + self.dataConn["filename"].split('.')[1]
+        shutil.copy(activeFileName, pgServiceFile)
 
     def close_config(self, _dummy, saveConfig):
         if saveConfig:
