@@ -106,6 +106,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Klik op (gele) Bouwlaag</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="identify_pand">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -186,13 +193,6 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0" colspan="2">
-              <widget class="QLabel" name="label_2">
-               <property name="text">
-                <string>Filter op datum</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QCheckBox" name="checkTot">
                <property name="text">
@@ -244,6 +244,13 @@
               <widget class="QCheckBox" name="checkSoort">
                <property name="text">
                 <string>Soort:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" colspan="3">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Filter op datum</string>
                </property>
               </widget>
              </item>

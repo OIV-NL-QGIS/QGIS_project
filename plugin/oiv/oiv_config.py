@@ -40,6 +40,13 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
             self.dbprod.setChecked(True)
         else:
             self.dbtest.setChecked(True)
+        self.bkgrLayer = plugin_settings("BACKGROUNDLAYER")
+        if self.bkgrLayer["active"] == 'Opentopo':
+            self.opentopo.setChecked(True)
+        elif self.bkgrLayer["active"] == 'Openstreetmap':
+            self.openstreetmap.setChecked(True)
+        else:
+            self.brt.setChecked(True)
 
     def check_bag_layer_setting(self):
         if self.bagwfs.isChecked():
@@ -48,11 +55,24 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         QC.QgsExpressionContextUtils.setGlobalVariable('OIV_bag_connection', 'Database')
         return "Database"
 
+    def set_background_layer(self, visibility):
+        layer = getlayer_byname(self.bkgrLayer["active"])
+        ltv = self.iface.layerTreeView()
+        ltv.setLayerVisible(layer, visibility)
+
     def set_bag_layer(self, visibility):
         layerName = bagpand_layername()
         layer = getlayer_byname(layerName)
         ltv = self.iface.layerTreeView()
         ltv.setLayerVisible(layer, visibility)
+
+    def get_checked_background_layer(self):
+        if self.opentopo.isChecked():
+            self.bkgrLayer["active"] = 'Opentopo'
+        elif self.openstreetmap.isChecked():
+            self.bkgrLayer["active"] = 'Openstreetmap'
+        else:
+            self.bkgrLayer["active"] = 'BRT'
 
     def set_db_connection(self):
         if self.dbprod.isChecked():
@@ -61,7 +81,7 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             self.dataConn["active"] = 'test'
             self.dataConn["inactive"] = 'prod'
-        write_plugin_settings("DBCONNECTION", self.dataConn)         
+        write_plugin_settings("DBCONNECTION", self.dataConn)
         path = QC.QgsProject.instance().readPath("./")
         pgServiceFile = path + '/' + self.dataConn["filename"]
         os.remove(pgServiceFile)
@@ -72,6 +92,7 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         if saveConfig:
             self.set_db_connection()
             self.set_bag_layer(False)
+            self.set_background_layer(False)
             bagConSetting = self.check_bag_layer_setting()
             QC.QgsExpressionContextUtils.setGlobalVariable('OIV_bag_connection', bagConSetting)
             oldBagSetting = self.dataBag["active"]
@@ -79,7 +100,11 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
                 self.dataBag["active"] = bagConSetting
                 self.dataBag["inactive"] = oldBagSetting
             write_plugin_settings("BAGCONNECTION", self.dataBag)
+            self.get_checked_background_layer()
+            QC.QgsExpressionContextUtils.setGlobalVariable('OIV_backgroundlayer', self.bkgrLayer["active"])
+            write_plugin_settings("BACKGROUNDLAYER", self.bkgrLayer["active"]) 
             self.set_bag_layer(True)
+            self.set_background_layer(True)
         else:
             print("changes canceled")
         self.close()
