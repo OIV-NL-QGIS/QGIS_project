@@ -41,9 +41,9 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             self.dbtest.setChecked(True)
         self.bkgrLayer = plugin_settings("BACKGROUNDLAYER")
-        if self.bkgrLayer["active"] == 'Opentopo':
+        if self.bkgrLayer == 'Opentopo':
             self.opentopo.setChecked(True)
-        elif self.bkgrLayer["active"] == 'Openstreetmap':
+        elif self.bkgrLayer == 'Openstreetmap':
             self.openstreetmap.setChecked(True)
         else:
             self.brt.setChecked(True)
@@ -56,7 +56,7 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         return "Database"
 
     def set_background_layer(self, visibility):
-        layer = getlayer_byname(self.bkgrLayer["active"])
+        layer = getlayer_byname(self.bkgrLayer)
         ltv = self.iface.layerTreeView()
         ltv.setLayerVisible(layer, visibility)
 
@@ -68,11 +68,11 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def get_checked_background_layer(self):
         if self.opentopo.isChecked():
-            self.bkgrLayer["active"] = 'Opentopo'
+            self.bkgrLayer = 'Opentopo'
         elif self.openstreetmap.isChecked():
-            self.bkgrLayer["active"] = 'Openstreetmap'
+            self.bkgrLayer = 'Openstreetmap'
         else:
-            self.bkgrLayer["active"] = 'BRT'
+            self.bkgrLayer = 'BRT'
 
     def set_db_connection(self):
         if self.dbprod.isChecked():
@@ -101,8 +101,8 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
                 self.dataBag["inactive"] = oldBagSetting
             write_plugin_settings("BAGCONNECTION", self.dataBag)
             self.get_checked_background_layer()
-            QC.QgsExpressionContextUtils.setGlobalVariable('OIV_backgroundlayer', self.bkgrLayer["active"])
-            write_plugin_settings("BACKGROUNDLAYER", self.bkgrLayer["active"]) 
+            QC.QgsExpressionContextUtils.setGlobalVariable('OIV_backgroundlayer', self.bkgrLayer)
+            write_plugin_settings("BACKGROUNDLAYER", self.bkgrLayer) 
             self.set_bag_layer(True)
             self.set_background_layer(True)
         else:
