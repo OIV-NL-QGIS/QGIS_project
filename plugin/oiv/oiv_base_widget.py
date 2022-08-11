@@ -58,6 +58,9 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         """get the identification of a building from the user"""
         self.label_bouwlaag.setVisible(True)
         self.label_object.setVisible(False)
+        self.identify_pand.setCheckable(True)
+        self.identify_gebouw.setCheckable(False)
+        self.identify_pand.toggle()
         self.canvas.setMapTool(self.identifyTool)
         try:
             self.identifyTool.geomIdentified.disconnect()
@@ -69,6 +72,9 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         """get the identification of a building from the user"""
         self.label_object.setVisible(True)
         self.label_bouwlaag.setVisible(False)
+        self.identify_gebouw.setCheckable(True)
+        self.identify_pand.setCheckable(False)
+        self.identify_gebouw.toggle()
         self.canvas.setMapTool(self.identifyTool)
         try:
             self.identifyTool.geomIdentified.disconnect()
