@@ -108,7 +108,7 @@ def nearest_neighbor(layer, geom, geomType, objectId):
     else:
         geomCtr = geom
     if layer.name() == PC.PAND["bouwlaaglayername"]:
-        request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + str(objectId))
+        request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
         it = layer.getFeatures(request)
         for feat in it:
             parentCtr = feat.geometry().centroid()

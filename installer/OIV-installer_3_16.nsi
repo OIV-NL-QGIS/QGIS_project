@@ -683,7 +683,6 @@ Function Ready
     ${NSD_CreateLabel} 10u 85u 35% 24u "PluginDir:"
     ${NSD_CreateLabel} 40% 85u 60% 24u $PluginDir
   ${EndIf}
-  ${EndIf}
 
   nsDialogs::Show
 
