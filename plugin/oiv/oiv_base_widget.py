@@ -51,9 +51,16 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.setTitleBarWidget(titleBar)
         self.helpBtn.clicked.connect(lambda: UC.open_url(HELPURL["basewidgethelp"]))
         self.floatBtn.clicked.connect(lambda: self.setFloating(True))
+        self.label_bouwlaag.setVisible(False)
+        self.label_object.setVisible(False)
 
     def run_identify_pand(self):
         """get the identification of a building from the user"""
+        self.label_bouwlaag.setVisible(True)
+        self.label_object.setVisible(False)
+        self.identify_pand.setCheckable(True)
+        self.identify_gebouw.setCheckable(False)
+        self.identify_pand.toggle()
         self.canvas.setMapTool(self.identifyTool)
         try:
             self.identifyTool.geomIdentified.disconnect()
@@ -63,6 +70,11 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_identify_terrein(self):
         """get the identification of a building from the user"""
+        self.label_object.setVisible(True)
+        self.label_bouwlaag.setVisible(False)
+        self.identify_gebouw.setCheckable(True)
+        self.identify_pand.setCheckable(False)
+        self.identify_gebouw.toggle()
         self.canvas.setMapTool(self.identifyTool)
         try:
             self.identifyTool.geomIdentified.disconnect()
@@ -116,6 +128,8 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             MSG.showMsgBox('noidentifiedobject')
         self.identifyTool.geomIdentified.disconnect()
+        self.label_bouwlaag.setVisible(False)
+        self.label_object.setVisible(False)
 
     def run_bouwlagen(self, objectId):
         """start objectgegevens widget"""
@@ -123,6 +137,8 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.addDockWidget(QT.getWidgetType(), pandwidget)
         self.iface.actionPan().trigger()
         pandwidget.show()
+        self.label_bouwlaag.setVisible(False)
+        self.label_object.setVisible(False)
         self.close()
 
     def run_object(self, formeleNaam, objectId):
