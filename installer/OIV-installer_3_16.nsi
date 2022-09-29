@@ -439,6 +439,7 @@ Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	SetRegView 64 
 
 	; Section Files
+  RMDir /r "$PluginDir\oiv"
 	CreateDirectory "$PluginDir"
 	SetOutPath "$PluginDir"
 	File /r ..\plugin\oiv
