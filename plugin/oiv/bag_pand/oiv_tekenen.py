@@ -83,6 +83,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         except:
             pass
         self.selectTool.whichConfig = PC.PAND["configtable"]
+        self.selectTool.expectedLayerName = None
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
@@ -93,6 +94,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         except:
             pass
         self.canvas.setMapTool(self.selectTool)
+        self.selectTool.expectedLayerName = None
         self.selectTool.geomSelected.connect(self.select_feature)
 
     def select_feature(self, ilayer, ifeature):
@@ -113,6 +115,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             pass
         self.selectTool.whichConfig = PC.PAND["configtable"]
         self.canvas.setMapTool(self.selectTool)
+        self.selectTool.expectedLayerName = None
         self.selectTool.geomSelected.connect(self.delete)
 
     def delete(self, ilayer, ifeature):
