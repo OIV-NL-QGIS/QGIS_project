@@ -71,6 +71,7 @@ PAND = {
     "werkvoorraadlayers": [
         "Hulplijnen bouwlaag",
         "Werkvoorraad bouwlaag - punt",
+        "Werkvoorraad bouwlaag - label",
         "Werkvoorraad bouwlaag - lijn",
         "Werkvoorraad bouwlaag - vlak"],
 }
@@ -78,9 +79,11 @@ PAND = {
 WERKVOORRAAD = {
     "tablelayertranslate": {
         "Werkvoorraad bouwlaag - punt": "werkvoorraad_punt",
+        "Werkvoorraad bouwlaag - label": "werkvoorraad_label",
         "Werkvoorraad bouwlaag - lijn": "werkvoorraad_lijn",
         "Werkvoorraad bouwlaag - vlak": "werkvoorraad_vlak",
         "Werkvoorraad object - punt": "werkvoorraad_punt",
+        "Werkvoorraad object - label": "werkvoorraad_label",
         "Werkvoorraad object - lijn": "werkvoorraad_lijn",
         "Werkvoorraad object - vlak": "werkvoorraad_vlak"
     }    
@@ -97,7 +100,11 @@ OBJECT = {
     "tekenwidgetui": "oiv_object_tekenen_widget.ui",
     "objectwidgetui": "oiv_repressief_object_widget.ui",
     "bgtviewerurl": "https://verbeterdekaart.kadaster.nl/#?",
-    "werkvoorraadlayers": ['Werkvoorraad object - punt', 'Werkvoorraad object - lijn', 'Werkvoorraad object - vlak'],
+    "werkvoorraadlayers": [
+            'Werkvoorraad object - punt', 
+            'Werkvoorraad object - label', 
+            'Werkvoorraad object - lijn', 
+            'Werkvoorraad object - vlak'],
     "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"],
 }
 

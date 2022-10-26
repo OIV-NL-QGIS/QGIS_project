@@ -63,9 +63,8 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         importFile = PQtW.QFileDialog.getOpenFileName(None, "Selecteer bestand:", None,
                                                       "AutoCad (*.dxf);;Shape (*.shp);;GeoPackage (*.gpkg)")[0]
         self.bestandsnaam.setText(importFile)
-        checkBouwlaag = False
         if importFile.endswith('.dxf'):
-            checkBouwlaag, layerImportType, importBouwlaag, dummy = DxfDialog.getGeometryType()
+            layerImportType, dummy = DxfDialog.getGeometryType()
             if layerImportType == 'lijn':
                 layerType = 'LineString'
             else:
@@ -73,13 +72,6 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             dxfInfo = "|layername=entities|geometrytype=" + layerType
             importFileFeat = importFile + dxfInfo
             self.importTypeFile = 'DXF'
-            if checkBouwlaag:
-                importFilePolygon = importFile + "|layername=entities|geometrytype=Polygon"
-                self.importPolygonLayer = QC.QgsVectorLayer(importFilePolygon, "import", "ogr")
-                bouwlaagFeature = UC.featureRequest(self.importPolygonLayer)
-                if bouwlaagFeature:
-                    self.bouwlaag.setText(str(importBouwlaag))
-                    self.import_bouwlaag(bouwlaagFeature)
         elif importFile.endswith('.gpkg'):
             layerNames = [lyr.GetName() for lyr in ogr.Open(importFile)]
             GpkgDialog.layerNames = layerNames
@@ -95,36 +87,8 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         fields = self.importLayer.fields()
         for field in fields:
             self.type.addItem(field.name())
-        if not checkBouwlaag:
-            self.label2.setVisible(True)
-            self.selectId.setVisible(True)
-
-    def import_bouwlaag(self, bouwlaagFeature):
-        """after the checks the import of the floor can start"""
-        childFeature = QC.QgsFeature()
-        layerName = 'Bouwlagen'
-        layer = UC.getlayer_byname(layerName)
-        # get necessary attributes from config file
-        foreignKey = CH.get_foreign_key_bl(layerName)
-        # construct QgsFeature to save
-        childFeature.setGeometry(bouwlaagFeature.geometry())
-        fields = layer.fields()
-        childFeature.initAttributes(fields.count())
-        childFeature.setFields(fields)
-        childFeature[foreignKey] = str(self.object_id.text())
-        childFeature["bouwlaag"] = int(self.bouwlaag.text())
-        newFeatureId = UC.write_layer(layer, childFeature)
-        self.bouwlaag_id.setText(str(newFeatureId))
-        self.iface.actionPan().trigger()
-        self.label2.setVisible(False)
-        self.selectId.setVisible(False)
-        self.label3.setVisible(True)
-        self.label4.setVisible(True)
-        self.label5a.setVisible(True)
-        self.label5b.setVisible(True)
-        self.import_laag.setVisible(True)
-        self.check.setVisible(True)
-        self.type.setVisible(True)
+        self.label2.setVisible(True)
+        self.selectId.setVisible(True)
 
     def hide_import(self):
         """hide import button"""
@@ -509,6 +473,7 @@ class DxfDialog(PQtW.QDialog):
         self.inputGeometry = PQtW.QComboBox(self)
         self.inputGeometry.addItems(['lijn', 'vlak'])
         qlayout.addWidget(self.inputGeometry)
+        """
         self.label2 = PQtW.QLabel(self)
         self.label2.setText("Wilt u de polygoon importeren als Bouwlaag?")
         qlayout.addWidget(self.label2)
@@ -530,6 +495,7 @@ class DxfDialog(PQtW.QDialog):
         self.label3.setVisible(False)
         qlayout.addWidget(self.label3)
         qlayout.addWidget(self.qComboA)
+        """
         buttons = PQtW.QDialogButtonBox(
             PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
             PQtC.Qt.Horizontal, self)
@@ -551,8 +517,7 @@ class DxfDialog(PQtW.QDialog):
         """Contains DXF line or polygon geometrie"""
         dialog = DxfDialog(parent)
         result = dialog.exec_()
-        return (dialog.checkBouwlaag.isChecked(), dialog.inputGeometry.currentText(), dialog.qComboA.currentText(),
-                result == PQtW.QDialog.Accepted)
+        return (dialog.inputGeometry.currentText(), result == PQtW.QDialog.Accepted)
 
 
 class GpkgDialog(PQtW.QDialog):
