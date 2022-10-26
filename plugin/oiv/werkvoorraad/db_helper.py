@@ -8,9 +8,11 @@ import oiv.helpers.messages as MSG
 
 layerFields = {
     "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad object - label": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad bouwlaag - label": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]]
 }
@@ -38,7 +40,7 @@ def setup_postgisdb_connection():
     return conn, cursor
 
 def close_db_connection(cursor, conn):
-    """when ready, close the sqlite database connection"""
+    """when ready, close the database connection"""
     if cursor:
         cursor.close()
     if conn:
