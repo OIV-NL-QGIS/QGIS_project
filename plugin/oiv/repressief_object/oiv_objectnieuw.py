@@ -69,7 +69,7 @@ class oivObjectNieuwWidget(PQtW.QDockWidget, FORM_CLASS):
         # return of new created feature id
         if buttonCheck != 'Cancel':
             UC.write_layer(self.drawLayer, childFeature)
-            objectLayer.reload()
+            objectLayer.updateExtents()
             self.close_objectnieuw_show_base()
         else:
             self.iface.actionPan().trigger()
