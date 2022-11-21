@@ -197,16 +197,17 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_print(self):
         arrBouwlagen = [self.comboBox.itemText(i) for i in range(self.comboBox.count())]
         directory = PQtW.QFileDialog().getExistingDirectory()
-        bouwlaagOrg = self.comboBox.currentText()
-        for bouwlaag in arrBouwlagen:
-            subString = "bouwlaag = {}".format(bouwlaag)
+        if directory != '':
+            bouwlaagOrg = self.comboBox.currentText()
+            for bouwlaag in arrBouwlagen:
+                subString = "bouwlaag = {}".format(bouwlaag)
+                UG.set_layer_substring(subString)
+                fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
+                filterString = '"identificatie"={}'.format(self.pand_id.text())
+                PR.load_composer(directory, 'bouwlaag', filterString, fileName)
+            MSG.showMsgBox('print_finished', directory)
+            subString = "bouwlaag = {}".format(bouwlaagOrg)
             UG.set_layer_substring(subString)
-            fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
-            filterString = '"identificatie"={}'.format(self.pand_id.text())
-            PR.load_composer(directory, 'bouwlaag', filterString, fileName)
-        MSG.showMsgBox('print_finished', directory)
-        subString = "bouwlaag = {}".format(bouwlaagOrg)
-        UG.set_layer_substring(subString)      
 
     def run_werkvoorraad(self):
         werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
