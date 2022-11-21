@@ -243,10 +243,11 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_print(self):
         directory = PQtW.QFileDialog().getExistingDirectory()
-        fileName = self.object_id.text() + '_' + self.formelenaam.text()
-        filterString = '"object_id"={}'.format(self.object_id.text())
-        PR.load_composer(directory, 'object', filterString, fileName)
-        MSG.showMsgBox('print_finished', directory)
+        if directory != '':
+            fileName = self.object_id.text() + '_' + self.formelenaam.text()
+            filterString = '"object_id"={}'.format(self.object_id.text())
+            PR.load_composer(directory, 'object', filterString, fileName)
+            MSG.showMsgBox('print_finished', directory)
 
     def run_import(self):
         """initiate import widget"""

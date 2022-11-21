@@ -6,11 +6,11 @@ def load_composer(output_folder, objectOfBouwlaag, filterString, fileName):
     project = QC.QgsProject.instance()
     if objectOfBouwlaag == 'object':
         layoutName = 'print_object_pdf_A4'
-        #layout = project.layoutManager().layoutByName(layoutName)
+        layout, atlas = load_layout(layoutName, project, filterString)
     else:
         layoutName = 'print_bouwlagen_pdf_A4'
-        #layout = project.layoutManager().layoutByName(layoutName)
-        #layout.itemById('title').setText("Bouwlaag: {}".format(fileName.split('_')[2]))
+        layout, atlas = load_layout(layoutName, project, filterString)
+        layout.itemById('title').setText("Bouwlaag: {}".format(fileName.split('_')[2]))
     layout, atlas = load_layout(layoutName, project, filterString)
     print_atlas(layout, atlas, output_folder, fileName)
 
