@@ -24,8 +24,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.4.2
-!define PLUGINVERSION 3.4.2
+!define VERSION 3.4.3
+!define PLUGINVERSION 3.4.3
 !define QGISVERSION "QGIS316"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
@@ -383,6 +383,7 @@ Section "Objecten" SectionObjecten
 	File /a ..\qgis_project\objecten\objecten.ico
 	File /r ..\qgis_project\objecten\ui
 	File /r ..\qgis_project\objecten\svg
+  File /r ..\qgis_project\objecten\qpt
   File /r ..\qgis_project\objecten\db
  
 	; Create desktop shortcuts
@@ -765,6 +766,7 @@ Section Uninstall
   RMDir /r "$INSTDIR\db"  
   RMDir /r "$INSTDIR\ini"
   RMDir /r "$INSTDIR\svg"
+  RMDir /r "$INSTDIR\qpt"
   RMDir /r "$INSTDIR\__pycache__"
   Delete "$INSTDIR\*.*"
 
