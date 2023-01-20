@@ -263,5 +263,16 @@
         <file>config_files/png/brandweerinfokast.png</file>
         <file>config_files/png/doorrijhoogte.png</file>
         <file>config_files/png/scenario_locatie.png</file>
+        <file>config_files/png/interface/add.png</file>
+        <file>config_files/png/interface/close.png</file>
+        <file>config_files/png/interface/draw.png</file>
+        <file>config_files/png/interface/edit.png</file>
+        <file>config_files/png/interface/filter.png</file>
+        <file>config_files/png/interface/filter_off.png</file>
+        <file>config_files/png/interface/info_of_interest.png</file>
+        <file>config_files/png/interface/inventory.png</file>
+        <file>config_files/png/interface/mode_off_on.png</file>
+        <file>config_files/png/interface/print.png</file>
+        <file>config_files/png/interface/touch.png</file>
     </qresource>
 </RCC>

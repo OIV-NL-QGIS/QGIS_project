@@ -41,8 +41,8 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             self.dbtest.setChecked(True)
         self.bkgrLayer = plugin_settings("BACKGROUNDLAYER")
-        if self.bkgrLayer == 'Opentopo':
-            self.opentopo.setChecked(True)
+        if self.bkgrLayer == 'Openbasiskaart':
+            self.openbasiskaart.setChecked(True)
         elif self.bkgrLayer == 'Openstreetmap':
             self.openstreetmap.setChecked(True)
         else:
@@ -67,8 +67,8 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         ltv.setLayerVisible(layer, visibility)
 
     def get_checked_background_layer(self):
-        if self.opentopo.isChecked():
-            self.bkgrLayer = 'Opentopo'
+        if self.openbasiskaart.isChecked():
+            self.bkgrLayer = 'Openbasiskaart'
         elif self.openstreetmap.isChecked():
             self.bkgrLayer = 'Openstreetmap'
         else:

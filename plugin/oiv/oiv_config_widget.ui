@@ -166,9 +166,9 @@
                 </property>
                 <layout class="QGridLayout" name="gridLayout_5">
                  <item row="1" column="1">
-                  <widget class="QRadioButton" name="opentopo">
+                  <widget class="QRadioButton" name="openbasiskaart">
                    <property name="text">
-                    <string>Opentopo</string>
+                    <string>Openbasiskaart</string>
                    </property>
                   </widget>
                  </item>
