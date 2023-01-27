@@ -24,8 +24,8 @@
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.4.3
-!define PLUGINVERSION 3.4.3
+!define VERSION 3.4.03
+!define PLUGINVERSION 3.4.03
 !define QGISVERSION "QGIS322"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
