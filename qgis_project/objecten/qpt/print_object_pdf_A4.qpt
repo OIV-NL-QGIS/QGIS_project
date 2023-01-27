@@ -1045,7 +1045,7 @@
    <Layer source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_sectoren&quot; (geom)" name="Sectoren" provider="postgres">sectoren20190320103814390</Layer>
    <Layer source="service='oiv' sslmode=allow key='id' srid=28992 type=Polygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;schade_cirkel_calc&quot; (geom_cirkel)" name="Schade cirkel (alleen lezen)" provider="postgres">schade_cirkel_calc20170912163056737</Layer>
    <Layer source="service='oiv' sslmode=allow key='id' srid=28992 type=MultiPolygon checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;object_grid&quot; (geom)" name="Grid" provider="postgres">grid_33a2aa94_9575_44b1_a5be_645450b0209f</Layer>
-   <Layer source="tileMatrixSet=EPSG:28992&amp;crs=EPSG:28992&amp;layers=opentopo&amp;styles=default&amp;format=image/jpeg&amp;url=https://geodata.nationaalgeoregister.nl/wmts?VERSION%3D1.0.0%26request%3DGetCapabilities" name="Opentopo" provider="wms">opentopo_6d564ab7_6295_45ed_8b83_3042f6702823</Layer>
+   <Layer source="SmoothPixmapTransform=1&amp;crs=EPSG:28992&amp;dpiMode=7&amp;format=image/png&amp;layers=osm&amp;styles&amp;tileMatrixSet=osm-wmsc-2&amp;url=http://openbasiskaart.nl/mapcache" name="Openbasiskaart" provider="wms">openbasiskaart_nl__OpenStreetMap_ondergrondkaart_4b04eca0_4979_4d2d_b49b_cfc5ebe74821</Layer>
   </LayerSet>
   <AtlasMap scalingMode="2" atlasDriven="1" margin="0.04"/>
   <labelBlockingItems/>
