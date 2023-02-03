@@ -10,7 +10,7 @@
 name=OIV
 qgisMinimumVersion=3.0
 description=place oiv objects
-version=3.4.3
+version=3.4.04
 author=Joost Deen
 email=j.deen@safetyct.com
 

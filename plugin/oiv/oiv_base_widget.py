@@ -40,24 +40,64 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.initUI()
 
     def initUI(self):
+        self.tabWidget.tabBarClicked.connect(self.handle_tabbar_clicked)
+        self.tabWidget.setTabVisible(2, False)
+        self.tabWidget.setCurrentIndex(2)
         self.identify_pand.clicked.connect(self.run_identify_pand)
         self.identify_gebouw.clicked.connect(self.run_identify_terrein)
         self.filter_objecten.clicked.connect(lambda: FO.init_filter_section(self))
         self.filterBtn.clicked.connect(lambda: FO.set_object_filter(self))
         self.info_of_interest.clicked.connect(self.run_info_of_interest)
-        self.closewidget.clicked.connect(self.close_basewidget)
+        self.close_btn.clicked.connect(self.close_basewidget)
+        self.done.setVisible(False)
+        self.done_png.setVisible(False)
         self.filterframe.setVisible(False)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
         self.helpBtn.clicked.connect(lambda: UC.open_url(HELPURL["basewidgethelp"]))
         self.floatBtn.clicked.connect(lambda: self.setFloating(True))
-        self.label_bouwlaag.setVisible(False)
-        self.label_object.setVisible(False)
+
+    def initTabObject(self):
+        self.object_add.clicked.connect(self.testFunction)
+        self.object_bgt.clicked.connect(self.testFunction)
+        self.object_delete.clicked.connect(self.testFunction)
+        self.object_draw.clicked.connect(self.testFunction)
+        self.object_info.clicked.connect(self.testFunction)
+        self.object_inventory.clicked.connect(self.testFunction)
+        self.object_print.clicked.connect(self.testFunction)
+        self.status_object.setText('Klik voor bewerken in de kaart op object of terrein of klik op toevoegen')
+        self.info_of_interest.setEnabled(False)
+        self.done.setVisible(True)
+        self.done_png.setVisible(True)
+        self.close_btn.setVisible(False)
+        self.close_png.setVisible(False)
+
+    def initTabBouwlaag(self):
+        self.bouwlaag_add.clicked.connect(self.testFunction)
+        self.bouwlaag_bag.clicked.connect(self.testFunction)
+        self.bouwlaag_delete.clicked.connect(self.testFunction)
+        self.bouwlaag_draw.clicked.connect(self.testFunction)
+        self.bouwlaag_info.clicked.connect(self.testFunction)
+        self.bouwlaag_inventory.clicked.connect(self.testFunction)
+        self.bouwlaag_print.clicked.connect(self.testFunction)
+        self.status_object.setText('Klik voor bewerken in de kaart op bouwlaag of klik op toevoegen')
+        self.info_of_interest.setEnabled(False)
+        self.done.setVisible(True)
+        self.done_png.setVisible(True)
+        self.close_btn.setVisible(False)
+        self.close_png.setVisible(False)
+
+    def testFunction(self):
+        print('test geslaagd!')
+
+    def handle_tabbar_clicked(self, index):
+        if index == 0:
+            self.initTabObject()
+        else:
+            self.initTabBouwlaag()
 
     def run_identify_pand(self):
         """get the identification of a building from the user"""
-        self.label_bouwlaag.setVisible(True)
-        self.label_object.setVisible(False)
         self.identify_pand.setCheckable(True)
         self.identify_gebouw.setCheckable(False)
         self.identify_pand.toggle()
@@ -70,8 +110,6 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_identify_terrein(self):
         """get the identification of a building from the user"""
-        self.label_object.setVisible(True)
-        self.label_bouwlaag.setVisible(False)
         self.identify_gebouw.setCheckable(True)
         self.identify_pand.setCheckable(False)
         self.identify_gebouw.toggle()
@@ -128,8 +166,6 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             MSG.showMsgBox('noidentifiedobject')
         self.identifyTool.geomIdentified.disconnect()
-        self.label_bouwlaag.setVisible(False)
-        self.label_object.setVisible(False)
 
     def run_bouwlagen(self, objectId):
         """start objectgegevens widget"""
@@ -137,8 +173,6 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.addDockWidget(QT.getWidgetType(), pandwidget)
         self.iface.actionPan().trigger()
         pandwidget.show()
-        self.label_bouwlaag.setVisible(False)
-        self.label_object.setVisible(False)
         self.close()
 
     def run_object(self, formeleNaam, objectId):
