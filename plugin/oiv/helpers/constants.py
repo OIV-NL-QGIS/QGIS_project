@@ -43,7 +43,7 @@ PLUGIN = {
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
         "min": 339,
-        "max": 343
+        "max": 344
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
@@ -124,4 +124,16 @@ HELPURL = {
     "bouwlaaghelp": "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
     "bouwlaagtekenenhelp": "https://github.com/OIV-NL-QGIS/OIV_project/wiki",
     "bouwlaagimporthelp": "https://github.com/OIV-NL-QGIS/OIV_project/wiki"
+}
+
+STATUSRGL = {
+    "start" : "Selecteer tab Terrein of Bouwlaag",
+    "object": {
+        "toggletab": "Klik op (blauwe) Object-stip of op een terrein",
+
+    },
+    "bouwlaag": {
+        "toggletab": "Klik op (gele) Bouwlaag-vlak of op (roze) bag-pand",
+  
+    }
 }

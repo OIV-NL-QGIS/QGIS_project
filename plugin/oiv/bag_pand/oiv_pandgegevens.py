@@ -47,37 +47,31 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def initUI(self):
         """fill the lineedits with values"""
-        #Get the related BAG attributes from BAG API
-        ilayer = UC.getlayer_byname(PC.bagpand_layername())
-        foreignKey = 'identificatie'
         objectId = self.pand_id.text()
-        request = QC.QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + objectId + "'")
-        ifeature = UC.featureRequest(ilayer, request)
-        if ifeature:
-            bagGebruiksdoel = str(ifeature['gebruiksdoel'])
-        if self.adres_1.text() == "":
-            bagAdres1, bagAdres2, bagGebruiksdoel = QB.ask_bag_adress(objectId, bagGebruiksdoel)
-            self.adres_1.setText(bagAdres1)
-            self.adres_2.setText(bagAdres2)
-            self.gebruiksdoel.setText(bagGebruiksdoel)
         self.bouwlagen_to_combobox(objectId, None)
+
+    def initTabBouwlaag(self):
+        self.bouwlaag_add.clicked.connect(self.testFunction)
+        self.bouwlaag_bag.clicked.connect(self.testFunction)
+        self.bouwlaag_delete.clicked.connect(self.testFunction)
+        self.bouwlaag_draw.clicked.connect(self.testFunction)
+        self.bouwlaag_info.clicked.connect(self.testFunction)
+        self.bouwlaag_inventory.clicked.connect(self.testFunction)
+        self.bouwlaag_print.clicked.connect(self.testFunction)
+        self.status_bouwlaag.setText('Klik voor bewerken in de kaart op bouwlaag of klik op toevoegen')
+        self.parent.handleDoneBtn(True)
 
     def initActions(self):
         """connect the buttons to their actions"""
-        self.bouwlaag_toevoegen.clicked.connect(self.run_bouwlaag)
-        self.tekenen.clicked.connect(self.run_tekenen)
+        self.bouwlaag_add.clicked.connect(self.run_bouwlaag)
+        self.bouwlaag_draw.clicked.connect(self.run_tekenen)
         self.comboBox.currentIndexChanged.connect(self.set_layer_subset_bouwlaag)
-        self.bouwlaag_bewerken.clicked.connect(self.run_bouwlaag_bewerken)
+        self.bouwlaag_info.clicked.connect(self.run_bouwlaag_bewerken)
         self.import_2.clicked.connect(self.run_import)
-        self.terug.clicked.connect(self.close_object_show_base)
-        self.terugmelden.clicked.connect(self.openBagviewer)
-        self.delete_f.clicked.connect(self.run_delete)
-        self.btn_werkvoorraad.clicked.connect(self.run_werkvoorraad)
-        self.printen.clicked.connect(self.run_print)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
-        self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["pandhelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
+        self.bouwlaag_bag.clicked.connect(self.openBagviewer)
+        self.bouwlaag_delete.clicked.connect(self.run_delete)
+        self.bouwlaag_inventory.clicked.connect(self.run_werkvoorraad)
+        self.bouwlaag_print.clicked.connect(self.run_print)
 
     def run_edit_bouwlagen(self, ilayer, ifeature):
         """edit attribute form of floor feature"""
@@ -110,11 +104,11 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             self.comboBox.addItem(str(bouwlaag))
         #if there are existing floors "tekenen" can be enabled
         if self.sortedList:
-            self.tekenen.setEnabled(True)
+            self.existing_bouwlagen(True)
             if actieveBouwlaag is None:
                 actieveBouwlaag = min(reversed(self.sortedList), key=abs)
         else:
-            self.tekenen.setEnabled(False)
+            self.existing_bouwlagen(False)
             actieveBouwlaag = 1
         self.comboBox.blockSignals(False)
         #set substring of childlayers
@@ -124,6 +118,13 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         if index >= 0:
             self.comboBox.setCurrentIndex(index)
         self.iface.actionPan().trigger()
+
+    def existing_bouwlagen(self, existing):
+        self.bouwlaag_info.setEnabled(existing)
+        self.bouwlaag_delete.setEnabled(existing)
+        self.bouwlaag_draw.setEnabled(existing)
+        self.bouwlaag_inventory.setEnabled(existing)
+        self.bouwlaag_print.setEnabled(existing)
 
     def set_layer_subset_bouwlaag(self):
         """if index of combobox has changed set cql filter of childlayers"""
@@ -223,22 +224,6 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.addDockWidget(QT.getWidgetType(), importwidget)
         self.close()
         importwidget.show()
-
-    def close_object_show_base(self):
-        subString = "bouwlaag = 1"
-        UG.set_layer_substring(subString)
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
-        for widget in self.children():
-            if isinstance(widget, PQtW.QPushButton):
-                try:
-                    widget.clicked.disconnect()
-                except: # pylint: disable=bare-except
-                    pass
-        self.close()
-        self.parent.show()
-        self.iface.actionPan().trigger()
-        del self
 
 class BouwlaagDialog(PQtW.QDialog):
     def __init__(self, parent=None):

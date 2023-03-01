@@ -275,5 +275,11 @@
         <file>config_files/png/interface/mode_off_on.png</file>
         <file>config_files/png/interface/print.png</file>
         <file>config_files/png/interface/touch.png</file>
+        <file>config_files/png/interface/terrein.png</file>
+        <file>config_files/png/interface/bouwlaag.png</file>
+        <file>config_files/png/interface/kaartblad_grid.png</file>
+        <file>config_files/png/interface/back.png</file>
+        <file>config_files/png/interface/georeference.png</file>
+        <file>config_files/png/interface/import_drawing.png</file>
     </qresource>
 </RCC>

@@ -48,29 +48,23 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identifyTool = parent.identifyTool
         self.object_id.setText(str(objectId))
         self.formelenaam.setText(formeleNaam)
-        UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
         self.initActions()
 
     def initActions(self):
         """connect the buttons to their actions"""
-        self.identify.setVisible(False)
-        self.delete_f.setVisible(False)
-        self.pan.setVisible(False)
-        self.terrein_tekenen.setVisible(False)
-        self.terug.clicked.connect(self.close_repressief_object_show_base)
-        self.objectgegevens.clicked.connect(self.run_objectgegevens_bewerken)
-        self.terugmelden.clicked.connect(self.open_bgt_viewer)
-        self.delete_object.clicked.connect(self.run_delete_object)
+        self.baseobjectFrame.setVisible(True)
+        self.addobjectFrame.setVisible(False)
+        self.terreinFrame.setVisible(False)
+        self.object_add.clicked.connect(self.object_toevoegen)
+        self.object_info.clicked.connect(self.run_objectgegevens_bewerken)
+        self.object_bgt.clicked.connect(self.open_bgt_viewer)
+        self.object_delete.clicked.connect(self.run_delete_object)
         self.terrein_bewerken.clicked.connect(self.object_terrein_bewerken)
-        self.object_symbolen.clicked.connect(self.run_object_symbolen_tekenen)
+        self.object_draw.clicked.connect(self.run_object_symbolen_tekenen)
         self.object_print.clicked.connect(self.run_print)
         self.create_grid.clicked.connect(self.run_create_grid)
         self.import_drawing.clicked.connect(self.run_import)
-        self.btn_werkvoorraad.clicked.connect(self.run_werkvoorraad)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
-        self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["repressiefobjecthelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
+        self.object_inventory.clicked.connect(self.run_werkvoorraad)
         self.check_werkvoorraad()
 
     def check_werkvoorraad(self):
@@ -80,29 +74,9 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
         it = ilayer.getFeatures(request)
         if len(list(it)) > 0:
-            self.btn_werkvoorraad.setEnabled(True)
+            self.object_inventory.setEnabled(True)
         else:
-            self.btn_werkvoorraad.setEnabled(False)
-
-    def close_repressief_object_show_base(self):
-        """close this gui and return to the main page"""
-        self.delete_object.clicked.disconnect()
-        self.terug.clicked.disconnect()
-        self.objectgegevens.clicked.disconnect()
-        self.terugmelden.clicked.disconnect()
-        self.terrein_bewerken.clicked.disconnect()
-        self.object_print.clicked.disconnect()
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
-        try:
-            self.terrein_tekenen.clicked.disconnect()
-            self.delete_f.clicked.disconnect()
-            self.pan.clicked.disconnect()
-        except:  # pylint: disable=bare-except
-            pass
-        self.close()
-        self.parent.show()
-        del self
+            self.object_inventory.setEnabled(False)
 
     def activatePan(self):
         """activate pan to lose other draw features"""
@@ -167,12 +141,18 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         except: # pylint: disable=bare-except
             pass
 
+    def object_toevoegen(self):
+        self.baseobjectFrame.setVisible(False)
+        self.addobjectFrame.setVisible(True)
+        self.terug_add.clicked.connect(self.object_toevoegen_sluiten)
+
+    def object_toevoegen_sluiten(self):
+        self.baseobjectFrame.setVisible(True)
+        self.addobjectFrame.setVisible(False)
+        self.terug_add.clicked.disconnect(self.object_toevoegen_sluiten)
+
     def object_terrein_bewerken(self):
-        """draw repressief object terrain"""
-        self.identify.setVisible(True)
-        self.delete_f.setVisible(True)
-        self.pan.setVisible(True)
-        self.terrein_tekenen.setVisible(True)
+        self.terreinFrame.setVisible(True)
         self.terrein_tekenen.clicked.connect(self.run_terrein_toevoegen)
         self.delete_f.clicked.connect(self.run_delete_terrein)
         self.pan.clicked.connect(self.activatePan)
