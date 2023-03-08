@@ -284,5 +284,6 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         self.helpBtn.clicked.disconnect()
         self.floatBtn.clicked.disconnect()
         self.close()
+        self.parent.show_subwidget(False)
         self.parent.show()
         del self

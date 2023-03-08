@@ -42,6 +42,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     def initUI(self):
         self.tabWidget.tabBarClicked.connect(self.handle_tabbar_clicked)
         self.tabWidget.setTabVisible(2, False)
+        self.tabWidget.setTabVisible(3, False)
         self.tabWidget.setCurrentIndex(2)
         self.filter_objecten.clicked.connect(lambda: FO.init_filter_section(self))
         self.filterBtn.clicked.connect(lambda: FO.set_object_filter(self))
@@ -68,6 +69,8 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             self.label_filter.setEnabled(False)
         if not Status:
             self.tabWidget.setTabVisible(2, False)
+            self.tabWidget.setTabVisible(0, True)
+            self.tabWidget.setTabVisible(1, True)
             self.tabWidget.setCurrentIndex(2)
             self.bouwlaagFrame.setVisible(False)
             self.objectFrame.setVisible(False)
@@ -107,16 +110,20 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def handle_tabbar_clicked(self, index):
         if index == 0:
+            self.tabWidget.setCurrentIndex(0)
             self.run_identify_terrein()
             self.statusregelObject.setText(STATUSRGL["object"]["toggletab"])
             self.handleDoneBtn(True)
             self.done.clicked.connect(lambda: self.handleDoneBtn(False))
+            self.tabWidget.setTabVisible(1, False)
             self.disconnectTabBouwlaag()
         elif index == 1:
+            self.tabWidget.setCurrentIndex(1)
             self.run_identify_pand()
             self.statusregelBouwlaag.setText(STATUSRGL["bouwlaag"]["toggletab"])
             self.handleDoneBtn(True)
             self.done.clicked.connect(lambda: self.handleDoneBtn(False))
+            self.tabWidget.setTabVisible(0, False)
             self.disconnectTabObject()
         else:
             self.tabWidget.setTabVisible(2, False)

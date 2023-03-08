@@ -73,15 +73,23 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlaag_inventory.clicked.connect(self.run_werkvoorraad)
         self.bouwlaag_print.clicked.connect(self.run_print)
 
+    def show_subwidget(self, show, widget=None):
+        if show:
+            self.parent.tabWidget.setTabVisible(0, False)
+            self.parent.tabWidget.addTab(widget, '')
+            self.parent.tabWidget.setCurrentIndex(3)
+        else:
+            self.parent.tabWidget.setTabVisible(0, True)
+            self.parent.tabWidget.setCurrentIndex(0)
+            self.parent.tabWidget.removeTab(3)
+
     def run_edit_bouwlagen(self, ilayer, ifeature):
         """edit attribute form of floor feature"""
         stackWidget = SW.oivStackWidget()
-        self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
-        stackWidget.update()
+        self.show_subwidget(True, stackWidget)
         stackWidget.parentWidget = self
         stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
-        self.close()
         stackWidget.show()
 
     def bouwlagen_to_combobox(self, objectId, actieveBouwlaag):
@@ -161,12 +169,10 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_tekenen(self):
         """init teken widget"""
-        tekenwidget = oivTekenWidget(self)
+        tekenWidget = oivTekenWidget(self)
         subString = "bouwlaag = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)
-        self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, tekenwidget)
-        self.close()
-        tekenwidget.show()
+        self.show_subwidget(True, tekenWidget)
 
     def openBagviewer(self):
         """open url based on BAG pand_id, i.v.m. terugmelden"""

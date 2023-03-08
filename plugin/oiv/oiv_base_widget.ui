@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>386</width>
-    <height>876</height>
+    <width>444</width>
+    <height>865</height>
    </rect>
   </property>
   <property name="font">
@@ -35,8 +35,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>366</width>
-         <height>834</height>
+         <width>424</width>
+         <height>823</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -288,7 +288,7 @@
              <string>Gereed</string>
             </property>
             <property name="checkable">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -303,7 +303,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>20</height>
              </size>
             </property>
            </spacer>
@@ -331,7 +331,7 @@
              <string>Sluit OIV</string>
             </property>
             <property name="checkable">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -355,6 +355,12 @@
               <height>48</height>
              </size>
             </property>
+            <property name="elideMode">
+             <enum>Qt::ElideNone</enum>
+            </property>
+            <property name="usesScrollButtons">
+             <bool>false</bool>
+            </property>
             <property name="tabBarAutoHide">
              <bool>false</bool>
             </property>
@@ -370,6 +376,18 @@
               <string>Klik voor planvorming Object / terrein / gebied</string>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_3">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QLabel" name="statusregelObject">
                 <property name="sizePolicy">
@@ -383,6 +401,12 @@
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
+                </property>
+                <property name="margin">
+                 <number>4</number>
+                </property>
+                <property name="indent">
+                 <number>4</number>
                 </property>
                </widget>
               </item>
@@ -405,6 +429,19 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="bouwlaag">
@@ -419,6 +456,18 @@
               <string>Klik voor planvorming Bouwlaag / pand</string>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QLabel" name="statusregelBouwlaag">
                 <property name="sizePolicy">
@@ -432,6 +481,12 @@
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
+                </property>
+                <property name="margin">
+                 <number>4</number>
+                </property>
+                <property name="indent">
+                 <number>4</number>
                 </property>
                </widget>
               </item>
@@ -454,6 +509,19 @@
                 </property>
                </widget>
               </item>
+              <item>
+               <spacer name="verticalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </widget>
             <widget class="QWidget" name="fakeTab">
@@ -461,6 +529,18 @@
               <string/>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_4">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QLabel" name="statusregel">
                 <property name="sizePolicy">
@@ -474,6 +554,12 @@
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
+                </property>
+                <property name="margin">
+                 <number>4</number>
+                </property>
+                <property name="indent">
+                 <number>4</number>
                 </property>
                </widget>
               </item>

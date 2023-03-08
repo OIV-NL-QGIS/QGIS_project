@@ -85,7 +85,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         except:
             pass
         self.close()
-        self.parent.show()
+        self.parent.show_subwidget(False)
         del self
 
     def ini_action(self, actionList, run_layer):

@@ -32,6 +32,8 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     tekensymbolenwidget = None
     importwidget = None
     gridWidget = None
+    workWidget = None
+    workLayout = None
 
     def __init__(self, parent=None, objectId=None, formeleNaam=None):
         super(oivRepressiefObjectWidget, self).__init__(parent)
@@ -121,16 +123,15 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             ilayer.commitChanges()
             reply = MSG.showMsgBox('deletedobject')
         UC.refresh_layers(self.iface)
-        self.close_repressief_object_show_base()
+        self.parent.handleDoneBtn(False)
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
         stackWidget = SW.oivStackWidget()
-        self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
+        self.show_subwidget(True, stackWidget)
         stackWidget.parentWidget = self
         stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
-        self.close()
         layerNames = PC.OBJECT["nogeotables"]
         for name in layerNames:
             layer = UC.getlayer_byname(name)
@@ -142,11 +143,15 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             pass
 
     def object_toevoegen(self):
+        self.parent.done.setEnabled(False)
+        self.parent.done_png.setEnabled(False)
         self.baseobjectFrame.setVisible(False)
         self.addobjectFrame.setVisible(True)
         self.terug_add.clicked.connect(self.object_toevoegen_sluiten)
 
     def object_toevoegen_sluiten(self):
+        self.parent.done.setEnabled(True)
+        self.parent.done_png.setEnabled(True)
         self.baseobjectFrame.setVisible(True)
         self.addobjectFrame.setVisible(False)
         self.terug_add.clicked.disconnect(self.object_toevoegen_sluiten)
@@ -166,9 +171,17 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_create_grid(self):
         gridWidget = GW.oivGridWidget(self)
         gridWidget.object_id.setText(self.object_id.text())
-        self.iface.addDockWidget(QT.getWidgetType(), gridWidget)
-        gridWidget.show()
-        self.close()
+        self.show_subwidget(True, gridWidget)
+
+    def show_subwidget(self, show, widget=None):
+        if show:
+            self.parent.tabWidget.setTabVisible(0, False)
+            self.parent.tabWidget.addTab(widget, '')
+            self.parent.tabWidget.setCurrentIndex(3)
+        else:
+            self.parent.tabWidget.setTabVisible(0, True)
+            self.parent.tabWidget.setCurrentIndex(0)
+            self.parent.tabWidget.removeTab(3)
 
     def run_terrein_toevoegen(self):
         objectId = self.object_id.text()
@@ -209,17 +222,14 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_object_symbolen_tekenen(self):
         tekenWidget = OTW.oivObjectTekenWidget(self)
-        self.iface.addDockWidget(QT.getWidgetType(), tekenWidget)
-        tekenWidget.show()
-        self.close()
+        tekenWidget.object_id.setText(self.object_id.text())
+        self.show_subwidget(True, tekenWidget)
 
     def run_werkvoorraad(self):
         werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
         werkvoorraadWidget.bouwlaagOfObject = 'Object'
-        self.iface.addDockWidget(QT.getWidgetType(), werkvoorraadWidget)
         werkvoorraadWidget.initUI()
-        werkvoorraadWidget.show()
-        self.close()
+        self.show_subwidget(True, werkvoorraadWidget)
 
     def run_print(self):
         directory = PQtW.QFileDialog().getExistingDirectory()
@@ -232,6 +242,4 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_import(self):
         """initiate import widget"""
         importwidget = IFW.oivImportFileWidget(self)
-        self.iface.addDockWidget(QT.getWidgetType(), importwidget)
-        self.close()
-        importwidget.show()
+        self.show_subwidget(True, importwidget)
