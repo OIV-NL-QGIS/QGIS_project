@@ -44,6 +44,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.tabWidget.setTabVisible(2, False)
         self.tabWidget.setTabVisible(3, False)
         self.tabWidget.setCurrentIndex(2)
+        self.pan.clicked.connect(self.activatePan)
         self.filter_objecten.clicked.connect(lambda: FO.init_filter_section(self))
         self.filterBtn.clicked.connect(lambda: FO.set_object_filter(self))
         self.info_of_interest.clicked.connect(self.run_info_of_interest)
@@ -51,6 +52,8 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.done.setVisible(False)
         self.done_png.setVisible(False)
         self.filterframe.setVisible(False)
+        self.drawbuttonframe.setVisible(False)
+        self.cadframe.setVisible(False)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
         self.helpBtn.clicked.connect(lambda: UC.open_url(HELPURL["basewidgethelp"]))
@@ -62,6 +65,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.done_png.setVisible(Status)
         self.close_btn.setVisible(not Status)
         self.close_png.setVisible(not Status)
+        print(Status)
         if Status:
             self.info_of_interest.setEnabled(False)
             self.filter_objecten.setEnabled(False)
@@ -83,6 +87,10 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             self.done.clicked.disconnect()
         except: # pylint: disable=bare-except
             pass
+
+    def activatePan(self):
+        """trigger pan function to loose other functions"""
+        self.iface.actionPan().trigger()
 
     def disconnectTabBouwlaag(self):
         try:
@@ -232,6 +240,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         """close plugin and re-activate toolbar combobox"""
         self.close()
         self.close_btn.clicked.disconnect()
+        self.pan.clicked.disconnect(self.activatePan)
         self.parent.toolbar.setEnabled(True)
         self.parent.projCombo.setEnabled(True)
         self.parent.checkVisibility = False

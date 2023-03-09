@@ -38,7 +38,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     def __init__(self, parent=None, objectId=None, formeleNaam=None):
         super(oivRepressiefObjectWidget, self).__init__(parent)
         self.setupUi(self)
-        self.parent = parent
+        self.baseWidget = parent
         self.iface = parent.iface
         self.canvas = parent.canvas
         self.object_id.setVisible(False)
@@ -80,10 +80,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             self.object_inventory.setEnabled(False)
 
-    def activatePan(self):
-        """activate pan to lose other draw features"""
-        self.iface.actionPan().trigger()
-
     def run_objectgegevens_bewerken(self):
         """select bouwlaag on canvas to edit the atrribute form"""
         objectId = self.object_id.text()
@@ -123,7 +119,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             ilayer.commitChanges()
             reply = MSG.showMsgBox('deletedobject')
         UC.refresh_layers(self.iface)
-        self.parent.handleDoneBtn(False)
+        self.baseWidget.handleDoneBtn(False)
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
@@ -137,21 +133,21 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             layer = UC.getlayer_byname(name)
             layer.updateExtents()
         stackWidget.show()
-        try:
+        try: 
             self.selectTool.geomSelected.disconnect(self.edit_attribute)
         except: # pylint: disable=bare-except
             pass
 
     def object_toevoegen(self):
-        self.parent.done.setEnabled(False)
-        self.parent.done_png.setEnabled(False)
+        self.baseWidget.done.setEnabled(False)
+        self.baseWidget.done_png.setEnabled(False)
         self.baseobjectFrame.setVisible(False)
         self.addobjectFrame.setVisible(True)
         self.terug_add.clicked.connect(self.object_toevoegen_sluiten)
 
     def object_toevoegen_sluiten(self):
-        self.parent.done.setEnabled(True)
-        self.parent.done_png.setEnabled(True)
+        self.baseWidget.done.setEnabled(True)
+        self.baseWidget.done_png.setEnabled(True)
         self.baseobjectFrame.setVisible(True)
         self.addobjectFrame.setVisible(False)
         self.terug_add.clicked.disconnect(self.object_toevoegen_sluiten)
@@ -160,7 +156,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terreinFrame.setVisible(True)
         self.terrein_tekenen.clicked.connect(self.run_terrein_toevoegen)
         self.delete_f.clicked.connect(self.run_delete_terrein)
-        self.pan.clicked.connect(self.activatePan)
         self.identify.clicked.connect(self.edit_feature)
 
     def edit_feature(self):
@@ -175,20 +170,20 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def show_subwidget(self, show, widget=None):
         if show:
-            self.parent.tabWidget.setTabVisible(0, False)
-            self.parent.tabWidget.addTab(widget, '')
-            self.parent.tabWidget.setCurrentIndex(3)
+            self.baseWidget.tabWidget.setTabVisible(0, False)
+            self.baseWidget.tabWidget.addTab(widget, '')
+            self.baseWidget.tabWidget.setCurrentIndex(3)
         else:
-            self.parent.tabWidget.setTabVisible(0, True)
-            self.parent.tabWidget.setCurrentIndex(0)
-            self.parent.tabWidget.removeTab(3)
+            self.baseWidget.tabWidget.setTabVisible(0, True)
+            self.baseWidget.tabWidget.setCurrentIndex(0)
+            self.baseWidget.tabWidget.removeTab(3)
 
     def run_terrein_toevoegen(self):
         objectId = self.object_id.text()
         possibleSnapFeatures = UC.get_possible_snapFeatures_object(self.snapLayerNames, objectId)
         self.drawTool.parent = self
         self.drawTool.layer = UC.getlayer_byname(PC.OBJECT["terreinlayername"])
-        UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, True, True)
         self.drawTool.possibleSnapFeatures = possibleSnapFeatures
         self.drawTool.canvas = self.canvas
         self.drawTool.onGeometryAdded = self.place_object_terrein

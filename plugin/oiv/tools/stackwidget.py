@@ -55,4 +55,5 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parentWidget.show()
         self.parentWidget.setFixedWidth(self.parentWidth)
         self.close()
+        self.parentWidget.show_subwidget(False)
         del self

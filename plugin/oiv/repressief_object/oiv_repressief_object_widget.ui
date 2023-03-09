@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>406</width>
-    <height>812</height>
+    <width>350</width>
+    <height>806</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -27,6 +27,21 @@
   </property>
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QGridLayout" name="gridLayout_2">
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>0</number>
+    </property>
     <item row="0" column="0">
      <widget class="QScrollArea" name="scrollArea">
       <property name="styleSheet">
@@ -49,11 +64,23 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>388</width>
-         <height>772</height>
+         <width>340</width>
+         <height>784</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item row="3" column="0" colspan="2">
          <widget class="QFrame" name="baseobjectFrame">
           <property name="sizePolicy">
@@ -90,38 +117,8 @@
            <property name="spacing">
             <number>6</number>
            </property>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="object_info">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(240, 240, 240);</string>
-             </property>
-             <property name="text">
-              <string>Info</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_draw">
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_print">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -138,117 +135,7 @@
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/draw.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_info">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/edit.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="object_draw">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(240, 240, 240);</string>
-             </property>
-             <property name="text">
-              <string>Tekenen</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QPushButton" name="object_delete">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(240, 240, 240);</string>
-             </property>
-             <property name="text">
-              <string>Verwijderen</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_delete">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/close.png</pixmap>
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/print.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -285,8 +172,33 @@
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
-            <widget class="QPushButton" name="object_bgt">
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_inventory">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/inventory.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="object_info">
              <property name="enabled">
               <bool>true</bool>
              </property>
@@ -308,55 +220,14 @@
               <string notr="true">background-color: rgb(240, 240, 240);</string>
              </property>
              <property name="text">
-              <string>Info BGT</string>
+              <string>Info</string>
              </property>
              <property name="checkable">
               <bool>false</bool>
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_add">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/add.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
            <item row="4" column="1">
-            <spacer name="verticalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>0</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="5" column="1">
             <widget class="QPushButton" name="object_print">
              <property name="enabled">
               <bool>true</bool>
@@ -380,6 +251,61 @@
              </property>
              <property name="text">
               <string>Printen</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_info">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/edit.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="object_delete">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(240, 240, 240);</string>
+             </property>
+             <property name="text">
+              <string>Verwijderen</string>
              </property>
              <property name="checkable">
               <bool>false</bool>
@@ -417,31 +343,6 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QLabel" name="label_print">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/print.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
             <widget class="QLabel" name="label_bgt">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -466,8 +367,38 @@
              </property>
             </widget>
            </item>
-           <item row="7" column="0">
-            <widget class="QLabel" name="label_inventory">
+           <item row="1" column="1">
+            <widget class="QPushButton" name="object_draw">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(240, 240, 240);</string>
+             </property>
+             <property name="text">
+              <string>Tekenen</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_delete">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -484,12 +415,105 @@
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/inventory.png</pixmap>
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/close.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
              </property>
             </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_add">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/add.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_draw">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/draw.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="object_bgt">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(240, 240, 240);</string>
+             </property>
+             <property name="text">
+              <string>Info BGT</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>0</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -585,130 +609,7 @@ border-color: rgba(255, 255, 255, 0);</string>
            <property name="bottomMargin">
             <number>0</number>
            </property>
-           <item row="7" column="1">
-            <spacer name="verticalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>17</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_inventory_4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/georeference.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QPushButton" name="georeferencer">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(240, 240, 240);</string>
-             </property>
-             <property name="text">
-              <string>Georeferencer</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1" rowspan="2">
-            <widget class="QPushButton" name="terrein_bewerken">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(240, 240, 240);</string>
-             </property>
-             <property name="text">
-              <string>Terrein</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_inventory_5">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/import_drawing.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="9" column="1">
+           <item row="10" column="1">
             <widget class="QPushButton" name="terug_add">
              <property name="enabled">
               <bool>true</bool>
@@ -738,32 +639,7 @@ border-color: rgba(255, 255, 255, 0);</string>
              </property>
             </widget>
            </item>
-           <item row="9" column="0">
-            <widget class="QLabel" name="label_inventory_6">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/back.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
+           <item row="5" column="1">
             <widget class="QPushButton" name="create_grid">
              <property name="enabled">
               <bool>true</bool>
@@ -793,87 +669,20 @@ border-color: rgba(255, 255, 255, 0);</string>
              </property>
             </widget>
            </item>
+           <item row="8" column="1">
+            <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
            <item row="3" column="1">
-            <widget class="QPushButton" name="import_drawing">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(240, 240, 240);</string>
-             </property>
-             <property name="text">
-              <string>Importeer tekening</string>
-             </property>
-             <property name="checkable">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_inventory_3">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/terrein.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_inventory_2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/kaartblad_grid.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
             <widget class="QFrame" name="terreinFrame">
              <property name="lineWidth">
               <number>0</number>
@@ -1160,6 +969,221 @@ border-color: rgba(255, 255, 255, 0);</string>
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_inventory_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/import_drawing.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="label_inventory_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/georeference.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" rowspan="2">
+            <widget class="QPushButton" name="terrein_bewerken">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(240, 240, 240);</string>
+             </property>
+             <property name="text">
+              <string>Terrein</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_inventory_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/kaartblad_grid.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_inventory_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/terrein.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QLabel" name="label_inventory_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/back.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QPushButton" name="georeferencer">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(240, 240, 240);</string>
+             </property>
+             <property name="text">
+              <string>Georeferencer</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="import_drawing">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(240, 240, 240);</string>
+             </property>
+             <property name="text">
+              <string>Importeer tekening</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
             </widget>
            </item>
           </layout>

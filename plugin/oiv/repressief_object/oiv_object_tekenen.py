@@ -33,6 +33,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         super(oivObjectTekenWidget, self).__init__(parent)
         self.setupUi(self)
         self.parent = parent
+        self.baseWidget = parent.baseWidget
         self.selectTool = parent.selectTool
         self.iface = parent.iface
         self.canvas = parent.canvas
@@ -42,13 +43,12 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
-        UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.object_id.setVisible(False)
         self.move.clicked.connect(self.run_move_point)
         self.identify.clicked.connect(self.run_edit_tool)
         self.select.clicked.connect(self.run_select_tool)
         self.delete_f.clicked.connect(self.run_delete_tool)
-        self.pan.clicked.connect(self.activatePan)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
         actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.OBJECT["configtable"])
         self.initActions(actionList)
@@ -76,7 +76,6 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identify.clicked.disconnect()
         self.select.clicked.disconnect()
         self.delete_f.clicked.disconnect()
-        self.pan.clicked.disconnect()
         self.helpBtn.clicked.disconnect()
         self.floatBtn.clicked.disconnect()
         self.terug.clicked.disconnect()
@@ -99,10 +98,6 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 strButton.setToolTip(buttonName)
                 #geef met de signal ook mee welke knop er is geklikt -> nr
                 strButton.clicked.connect(lambda dummy='dummyvar', rlayer=run_layer, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
-
-    def activatePan(self):
-        """trigger pan function to loose other functions"""
-        self.iface.actionPan().trigger()
 
     def run_edit_tool(self):
         """activate the edit feature tool"""
@@ -155,14 +150,23 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt
     def edit_attribute(self, ilayer, ifeature):
         stackWidget = SW.oivStackWidget()
-        self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
+        self.show_subwidget(True, stackWidget)
         stackWidget.parentWidget = self
         stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
-        self.close()
         stackWidget.show()
         self.selectTool.geomSelected.disconnect()
         self.run_edit_tool()
+
+    def show_subwidget(self, show, widget=None):
+        if show:
+            self.baseWidget.tabWidget.setTabVisible(3, False)
+            self.baseWidget.tabWidget.addTab(widget, '')
+            self.baseWidget.tabWidget.setCurrentIndex(4)
+        else:
+            self.baseWidget.tabWidget.setTabVisible(3, True)
+            self.baseWidget.tabWidget.setCurrentIndex(3)
+            self.baseWidget.tabWidget.removeTab(4)
 
     #om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet
     def run_move_point(self):
@@ -198,22 +202,22 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)
-            UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
+            UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
             pointTool.onGeometryAdded = self.place_feature
         else:
             drawTool = self.parent.drawTool
             if self.drawLayerType == "LineString":
                 drawTool.captureMode = 1
-                UG.set_lengte_oppervlakte_visibility(self, True, True, False, True)
+                UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, False, True)
             else:
                 drawTool.captureMode = 2
-                UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
+                UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, True, True)
             drawTool.layer = self.drawLayer
             drawTool.possibleSnapFeatures = possibleSnapFeatures
             drawTool.canvas = self.canvas
             drawTool.onGeometryAdded = self.place_feature
             self.canvas.setMapTool(drawTool)
-            drawTool.parent = self
+            drawTool.baseWidget = self.baseWidget
 
     def place_feature(self, points, snapAngle):
         parentId = None

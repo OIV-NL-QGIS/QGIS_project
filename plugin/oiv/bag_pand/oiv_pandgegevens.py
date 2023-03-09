@@ -32,7 +32,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def __init__(self, parent=None, objectId=None):
         super(oivPandWidget, self).__init__(parent)
         self.setupUi(self)
-        self.parent = parent
+        self.baseWidget = parent
         self.iface = parent.iface
         self.canvas = parent.canvas
         self.selectTool = parent.selectTool
@@ -48,40 +48,53 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def initUI(self):
         """fill the lineedits with values"""
         objectId = self.pand_id.text()
+        self.baseobjectFrame.setVisible(True)
+        self.addobjectFrame.setVisible(False)  
         self.bouwlagen_to_combobox(objectId, None)
 
-    def initTabBouwlaag(self):
-        self.bouwlaag_add.clicked.connect(self.testFunction)
-        self.bouwlaag_bag.clicked.connect(self.testFunction)
-        self.bouwlaag_delete.clicked.connect(self.testFunction)
-        self.bouwlaag_draw.clicked.connect(self.testFunction)
-        self.bouwlaag_info.clicked.connect(self.testFunction)
-        self.bouwlaag_inventory.clicked.connect(self.testFunction)
-        self.bouwlaag_print.clicked.connect(self.testFunction)
-        self.status_bouwlaag.setText('Klik voor bewerken in de kaart op bouwlaag of klik op toevoegen')
-        self.parent.handleDoneBtn(True)
-
     def initActions(self):
-        """connect the buttons to their actions"""
-        self.bouwlaag_add.clicked.connect(self.run_bouwlaag)
+        """connect the buttons to their actions"""     
         self.bouwlaag_draw.clicked.connect(self.run_tekenen)
+        self.addbutton.clicked.connect(self.bouwlaag_toevoegen)
         self.comboBox.currentIndexChanged.connect(self.set_layer_subset_bouwlaag)
         self.bouwlaag_info.clicked.connect(self.run_bouwlaag_bewerken)
-        self.import_2.clicked.connect(self.run_import)
         self.bouwlaag_bag.clicked.connect(self.openBagviewer)
         self.bouwlaag_delete.clicked.connect(self.run_delete)
         self.bouwlaag_inventory.clicked.connect(self.run_werkvoorraad)
         self.bouwlaag_print.clicked.connect(self.run_print)
 
+    def bouwlaag_toevoegen(self):
+        self.baseWidget.done.setEnabled(False)
+        self.baseWidget.done_png.setEnabled(False)
+        self.baseobjectFrame.setVisible(False)
+        self.addobjectFrame.setVisible(True)
+        self.bouwlaag_add.clicked.connect(self.run_bouwlaag)
+        self.import_drawing.clicked.connect(self.run_import)
+        self.georeferencer.clicked.connect(self.open_georeferencer)
+        self.terug_add.clicked.connect(self.bouwlaag_toevoegen_sluiten)
+
+    def bouwlaag_toevoegen_sluiten(self):
+        self.baseWidget.done.setEnabled(True)
+        self.baseWidget.done_png.setEnabled(True)
+        self.baseobjectFrame.setVisible(True)
+        self.addobjectFrame.setVisible(False)
+        self.bouwlaag_add.clicked.disconnect(self.run_bouwlaag)
+        self.import_drawing.clicked.disconnect(self.run_import)
+        self.georeferencer.clicked.disconnect(self.open_georeferencer)
+        self.terug_add.clicked.disconnect(self.bouwlaag_toevoegen_sluiten)
+
+    def open_georeferencer(self):
+        self.iface.mainWindow().findChildren(PQtW.QAction, 'mActionShowGeoreferencer')[0].trigger()
+
     def show_subwidget(self, show, widget=None):
         if show:
-            self.parent.tabWidget.setTabVisible(0, False)
-            self.parent.tabWidget.addTab(widget, '')
-            self.parent.tabWidget.setCurrentIndex(3)
+            self.baseWidget.tabWidget.setTabVisible(1, False)
+            self.baseWidget.tabWidget.addTab(widget, '')
+            self.baseWidget.tabWidget.setCurrentIndex(3)
         else:
-            self.parent.tabWidget.setTabVisible(0, True)
-            self.parent.tabWidget.setCurrentIndex(0)
-            self.parent.tabWidget.removeTab(3)
+            self.baseWidget.tabWidget.setTabVisible(1, True)
+            self.baseWidget.tabWidget.setCurrentIndex(1)
+            self.baseWidget.tabWidget.removeTab(3)
 
     def run_edit_bouwlagen(self, ilayer, ifeature):
         """edit attribute form of floor feature"""
@@ -156,11 +169,9 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             bouwlaag, bouwlaagMax, ok = BouwlaagDialog.getBouwlagen()
             if (bouwlaag != 0 and bouwlaagMax >= bouwlaag and ok is True):
                 bouwlaagwidget = oivBouwlaagWidget(self, bouwlaag, bouwlaagMax)
-                self.iface.addDockWidget(QT.getWidgetType(), bouwlaagwidget)
                 subString = "bouwlaag = " + str(bouwlaag)
                 UG.set_layer_substring(subString)
-                bouwlaagwidget.show()
-                self.close()
+                self.show_subwidget(True, bouwlaagwidget)
                 break
             elif bouwlaagMax < bouwlaag:
                 MSG.showMsgBox('bouwlaagvolgorde')
@@ -218,18 +229,14 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_werkvoorraad(self):
         werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
-        self.iface.addDockWidget(QT.getWidgetType(), werkvoorraadWidget)
         werkvoorraadWidget.bouwlaagOfObject = 'Bouwlaag'
         werkvoorraadWidget.initUI()
-        werkvoorraadWidget.show()
-        self.close()
+        self.show_subwidget(True, werkvoorraadWidget)
         
     def run_import(self):
         """initiate import widget"""
         importwidget = oivImportFileWidget(self)
-        self.iface.addDockWidget(QT.getWidgetType(), importwidget)
-        self.close()
-        importwidget.show()
+        self.show_subwidget(True, importwidget)
 
 class BouwlaagDialog(PQtW.QDialog):
     def __init__(self, parent=None):

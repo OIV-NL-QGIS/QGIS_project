@@ -22,6 +22,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     """Organize all draw features on the map"""
 
     identifier = None
+    baseWidget = None
     parentLayerName = None
     drawLayerType = None
     drawLayer = None
@@ -33,6 +34,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         super(oivTekenWidget, self).__init__(parent)
         self.setupUi(self)
         self.parent = parent
+        self.baseWidget = parent.baseWidget
         self.iface = parent.iface
         self.canvas = parent.canvas
         self.selectTool = parent.selectTool
@@ -42,21 +44,16 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
-        UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.pand_id.setVisible(False)
+        self.baseWidget.drawbuttonframe.setVisible(True)
+        self.baseWidget.move.clicked.connect(self.run_move_point)
         #connect buttons to the action
-        self.move.clicked.connect(self.run_move_point)
-        self.identify.clicked.connect(self.run_edit_tool)
-        self.select.clicked.connect(self.run_select_tool)
-        self.delete_f.clicked.connect(self.run_delete_tool)
-        self.pan.clicked.connect(self.activatePan)
-        self.terug.clicked.connect(self.close_teken_show_object)
+        self.baseWidget.identify.clicked.connect(self.run_edit_tool)
+        self.baseWidget.select.clicked.connect(self.run_select_tool)
+        self.baseWidget.delete_f.clicked.connect(self.run_delete_tool)
         actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.PAND["configtable"])
         self.initActions(actionList)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
-        self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["bouwlaagtekenenhelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def initActions(self, actionList):
         """connect all the buttons to the action"""
@@ -71,10 +68,6 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                     strButton.setToolTip(buttonName)
                     #geef met de signal ook mee welke knop er is geklikt -> nr
                     strButton.clicked.connect(lambda dummy='dummyvar', rlayer=runLayerName, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
-
-    def activatePan(self):
-        """trigger pan function to loose other functions"""
-        self.iface.actionPan().trigger()
 
     def run_edit_tool(self):
         """activate the edit feature tool"""
@@ -130,14 +123,23 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
         stackWidget = SW.oivStackWidget()
-        self.iface.addDockWidget(PQtC.Qt.RightDockWidgetArea, stackWidget)
+        self.show_subwidget(True, stackWidget)
         stackWidget.parentWidget = self
         stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
-        self.close()
         stackWidget.show()
         self.selectTool.geomSelected.disconnect()
         self.run_edit_tool()
+
+    def show_subwidget(self, show, widget=None):
+        if show:
+            self.baseWidget.tabWidget.setTabVisible(3, False)
+            self.baseWidget.tabWidget.addTab(widget, '')
+            self.baseWidget.tabWidget.setCurrentIndex(4)
+        else:
+            self.baseWidget.tabWidget.setTabVisible(3, True)
+            self.baseWidget.tabWidget.setCurrentIndex(3)
+            self.baseWidget.tabWidget.removeTab(4)
 
     def run_move_point(self):
         """om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet"""
@@ -180,22 +182,22 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)
-            UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
+            UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
             pointTool.onGeometryAdded = self.place_feature
         else:
             drawTool = self.parent.drawTool
             if self.drawLayerType == "LineString":
                 drawTool.captureMode = 1
-                UG.set_lengte_oppervlakte_visibility(self, True, True, False, True)
+                UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, False, True)
             else:
                 drawTool.captureMode = 2
-                UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
+                UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, True, True)
             drawTool.layer = self.drawLayer
             drawTool.possibleSnapFeatures = possibleSnapFeatures
             drawTool.canvas = self.canvas
             drawTool.onGeometryAdded = self.place_feature
             self.canvas.setMapTool(drawTool)
-            drawTool.parent = self
+            drawTool.baseWidget = self.baseWidget
 
     def place_feature(self, points, snapAngle):
         """Save and place feature on the canvas"""
@@ -212,14 +214,10 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def close_teken_show_object(self):
         """destroy and close self"""
-        self.move.clicked.disconnect()
-        self.identify.clicked.disconnect()
-        self.select.clicked.disconnect()
-        self.delete_f.clicked.disconnect()
-        self.pan.clicked.disconnect()
-        self.terug.clicked.disconnect()
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
+        self.baseWidget.move.clicked.disconnect()
+        self.baseWidget.identify.clicked.disconnect()
+        self.baseWidget.select.clicked.disconnect()
+        self.baseWidget.delete_f.clicked.disconnect()
         try:
             self.selectTool.geomSelected.disconnect()
         except:
@@ -231,5 +229,6 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 except: # pylint: disable=bare-except
                     pass
         self.close()
-        self.parent.show()
+        self.parent.show_subwidget(False)
+        self.baseWidget.drawbuttonframe.setVisible(False)
         del self

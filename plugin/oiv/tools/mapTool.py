@@ -30,7 +30,7 @@ class CaptureTool(QG.QgsMapTool):
         self.snapFeature = []
         self.possibleSnapFeatures = []
         self.vertexmarker = None
-        self.parent = None
+        self.baseWidget = None
         self.setCursor(PQtC.Qt.CrossCursor)
 
     def canvasReleaseEvent(self, event):
@@ -49,7 +49,7 @@ class CaptureTool(QG.QgsMapTool):
         if event.button() == PQtC.Qt.LeftButton:
             if not self.capturing:
                 self.startCapturing()
-            if self.parent.offset_button.isChecked():
+            if self.baseWidget.offset_button.isChecked():
                 self.drawParallel(event.pos())
             else:
                 self.addVertex(event.pos())
@@ -74,7 +74,7 @@ class CaptureTool(QG.QgsMapTool):
                     try:
                         distance = QC.QgsDistanceArea()
                         m = distance.measureLine(self.tempRubberBand.getPoint(0, 0), layerPt)
-                        self.parent.lengte.setValue(round(m, 2))
+                        self.baseWidget.lengte.setValue(round(m, 2))
                     except: # pylint: disable=bare-except
                         pass
                 else:
@@ -83,14 +83,14 @@ class CaptureTool(QG.QgsMapTool):
             if self.captureMode == CaptureTool.CAPTURE_POLYGON and len(self.capturedPoints) >= 1 and self.capturing:
                 distance = QC.QgsDistanceArea()
                 m = distance.measureLine(self.tempRubberBand.getPoint(0, tempBandSize - 2), layerPt)
-                self.parent.lengte.setValue(round(m, 2))
+                self.baseWidget.lengte.setValue(round(m, 2))
                 try:
                     polygon = self.rubberBand.asGeometry().asPolygon()[0]
                     temppolygon = self.tempRubberBand.asGeometry().asPolygon()[0]
                     area = QC.QgsDistanceArea()
                     a = area.measurePolygon(polygon)
                     b = area.measurePolygon(temppolygon)
-                    self.parent.oppervlakte.setValue(round(a + b, 2))
+                    self.baseWidget.oppervlakte.setValue(round(a + b, 2))
                 except: # pylint: disable=bare-except
                     pass
         #laat standaard het snappunt niet zien tenzij er gesnapt kan worden
@@ -183,8 +183,8 @@ class CaptureTool(QG.QgsMapTool):
         #round distance rubberband
         self.roundRubberBand = RH.init_rubberband("drawinghelpers", self.canvas, "line")
         self.roundRubberBand.show()
-        self.parent.straal.valueChanged.connect(self.draw_help_circle)
-        self.parent.straal_button.clicked.connect(self.enable_roundrubberband)
+        self.baseWidget.straal.valueChanged.connect(self.draw_help_circle)
+        self.baseWidget.straal_button.clicked.connect(self.enable_roundrubberband)
         self.capturing = True
 
     def bandType(self):
@@ -197,7 +197,7 @@ class CaptureTool(QG.QgsMapTool):
     def enable_roundrubberband(self):
         """hide/show the help circle"""
         if self.roundRubberBand:
-            if self.parent.straal_button.isChecked():
+            if self.baseWidget.straal_button.isChecked():
                 self.roundRubberBand.show()
             else:
                 self.roundRubberBand.hide()
@@ -277,7 +277,7 @@ class CaptureTool(QG.QgsMapTool):
             layerPt = self.snapPt
             #bereken de snaphoek van het geklikte punt ten opzichte van het snappunt
             snapAngle = clickedPt.azimuth(layerPt) + 90
-            offset = self.parent.offset.value()
+            offset = self.baseWidget.offset.value()
             distance = QC.QgsDistanceArea()
             m = distance.measureLine(layerPt, clickedPt)
             geom = QC.QgsGeometry.fromPolylineXY([layerPt, clickedPt])
@@ -294,12 +294,12 @@ class CaptureTool(QG.QgsMapTool):
                 bandSize = self.rubberBand.numberOfVertices()
                 lastPt = self.rubberBand.getPoint(0, bandSize-1)
                 self.draw_helplines(lastPt, snapAngle)
-            self.parent.offset_button.toggle()
+            self.baseWidget.offset_button.toggle()
 
     def draw_help_circle(self):
         """change diameter of circular rubberband"""
-        if self.parent.straal_button.isChecked() and self.capturing:
-            straal = self.parent.straal.value()
+        if self.baseWidget.straal_button.isChecked() and self.capturing:
+            straal = self.baseWidget.straal.value()
             startPt = self.capturedPoints[-1]
             circle = QC.QgsCircle(QC.QgsPoint(startPt), straal)
             cString = circle.toCircularString()
