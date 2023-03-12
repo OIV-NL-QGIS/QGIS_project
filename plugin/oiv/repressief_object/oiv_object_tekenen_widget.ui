@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>410</width>
-    <height>862</height>
+    <width>340</width>
+    <height>856</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,12 +26,30 @@
    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
   </property>
   <property name="windowTitle">
-   <string>OIV Objecten</string>
+   <string/>
   </property>
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QScrollArea" name="scrollArea">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
@@ -39,9 +57,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-81</y>
-         <width>373</width>
-         <height>901</height>
+         <y>0</y>
+         <width>340</width>
+         <height>748</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -51,235 +69,28 @@
         </sizepolicy>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
-         <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0,0,0,0">
-          <item row="3" column="0" colspan="6">
-           <widget class="QLineEdit" name="object_id">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(208, 208, 208);
-border-color: rgba(255, 255, 255, 0);</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0" colspan="6">
-           <widget class="QLabel" name="label_7">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Arial</family>
-              <pointsize>8</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-              <underline>true</underline>
-              <strikeout>false</strikeout>
-             </font>
-            </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QPushButton" name="terug">
             <property name="text">
-             <string>Edit</string>
+             <string>Terug</string>
             </property>
            </widget>
           </item>
-          <item row="8" column="3">
-           <widget class="QPushButton" name="delete_f">
-            <property name="toolTip">
-             <string>delete object...</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/plugins/oiv/config_files/png/delete.png</normaloff>:/plugins/oiv/config_files/png/delete.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>28</width>
-              <height>28</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="1">
-           <widget class="QPushButton" name="select">
-            <property name="toolTip">
-             <string>selecteer een object...</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/plugins/oiv/config_files/png/select.png</normaloff>:/plugins/oiv/config_files/png/select.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>28</width>
-              <height>28</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="2">
-           <widget class="QPushButton" name="move">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="toolTip">
-             <string>verplaats of roteer...</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/plugins/oiv/config_files/png/move.png</normaloff>:/plugins/oiv/config_files/png/move.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>28</width>
-              <height>28</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-            <property name="autoDefault">
-             <bool>false</bool>
-            </property>
-            <property name="default">
-             <bool>false</bool>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="0">
-           <widget class="QPushButton" name="identify">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="toolTip">
-             <string>open formulier van een object...</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/plugins/oiv/config_files/png/identify.png</normaloff>:/plugins/oiv/config_files/png/identify.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>28</width>
-              <height>28</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-            <property name="autoDefault">
-             <bool>false</bool>
-            </property>
-            <property name="default">
-             <bool>false</bool>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="4">
-           <widget class="QPushButton" name="pan">
-            <property name="toolTip">
-             <string>selecteer de functie Pan...</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/plugins/oiv/config_files/png/pan.png</normaloff>:/plugins/oiv/config_files/png/pan.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>28</width>
-              <height>28</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="4" colspan="2">
-           <widget class="QDoubleSpinBox" name="offset">
-            <property name="decimals">
-             <number>1</number>
-            </property>
-            <property name="minimum">
-             <double>-1000.000000000000000</double>
-            </property>
-            <property name="maximum">
-             <double>1000.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="1" colspan="2">
-           <widget class="QDoubleSpinBox" name="straal">
-            <property name="decimals">
-             <number>1</number>
-            </property>
-            <property name="maximum">
-             <double>1000.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="3" colspan="2">
-           <widget class="QLabel" name="oppervlakte_label">
-            <property name="text">
-             <string>Oppervlakte (m2)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="5">
-           <widget class="QDoubleSpinBox" name="oppervlakte">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(240, 240, 240);
-border-color: rgba(255, 255, 255, 0);</string>
-            </property>
-            <property name="frame">
-             <bool>false</bool>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" colspan="6">
+          <item>
            <widget class="QLabel" name="label_6">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -300,35 +111,38 @@ border-color: rgba(255, 255, 255, 0);</string>
             </property>
            </widget>
           </item>
-          <item row="7" column="0">
-           <widget class="QPushButton" name="straal_button">
-            <property name="text">
-             <string/>
+          <item>
+           <widget class="QLineEdit" name="formelenaam">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/plugins/oiv/config_files/png/hulpcirkel.png</normaloff>:/plugins/oiv/config_files/png/hulpcirkel.png</iconset>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="3">
-           <widget class="QPushButton" name="offset_button">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset resource="../resources.qrc">
-              <normaloff>:/plugins/oiv/config_files/png/offset_parallel.png</normaloff>:/plugins/oiv/config_files/png/offset_parallel.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>16</width>
-              <height>16</height>
-             </size>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(208, 208, 208);
+border-color: rgba(255, 255, 255, 0);</string>
             </property>
            </widget>
           </item>
-          <item row="10" column="0" colspan="6">
+          <item>
+           <widget class="QLineEdit" name="object_id">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(208, 208, 208);
+border-color: rgba(255, 255, 255, 0);</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QTabWidget" name="tabWidget">
             <property name="enabled">
              <bool>true</bool>
@@ -377,7 +191,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/sleutelpaal_of_ringpaal.png</normaloff>:/plugins/oiv/config_files/png/sleutelpaal_of_ringpaal.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -415,7 +229,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/natuur/N19V03.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19V03.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -453,7 +267,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/slagboom.png</normaloff>:/plugins/oiv/config_files/png/slagboom.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -491,7 +305,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/doorrijhoogte.png</normaloff>:/plugins/oiv/config_files/png/doorrijhoogte.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -529,7 +343,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/contouren.png</normaloff>:/plugins/oiv/config_files/png/contouren.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -567,7 +381,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/poller.png</normaloff>:/plugins/oiv/config_files/png/poller.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -605,7 +419,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/windvaan.png</normaloff>:/plugins/oiv/config_files/png/windvaan.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -656,7 +470,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/blussysteem_schuim.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_schuim.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -694,7 +508,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/label_waarschuwing.png</normaloff>:/plugins/oiv/config_files/png/label_waarschuwing.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -735,7 +549,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/copi.png</normaloff>:/plugins/oiv/config_files/png/copi.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -761,7 +575,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/blussysteem_koolstofdioxide.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_koolstofdioxide.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -799,7 +613,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_water.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_water.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -837,7 +651,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/label_algemeen.png</normaloff>:/plugins/oiv/config_files/png/label_algemeen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -872,7 +686,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/opstelplaats_redvoertuig.png</normaloff>:/plugins/oiv/config_files/png/opstelplaats_redvoertuig.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -898,7 +712,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/neveningang.png</normaloff>:/plugins/oiv/config_files/png/neveningang.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -936,7 +750,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/blusleiding.png</normaloff>:/plugins/oiv/config_files/png/blusleiding.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -974,7 +788,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/verzamelplaats.png</normaloff>:/plugins/oiv/config_files/png/verzamelplaats.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1012,7 +826,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/activering_blussysteem.png</normaloff>:/plugins/oiv/config_files/png/activering_blussysteem.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1050,7 +864,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_vulpunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_vulpunt.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1088,7 +902,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/blussysteem_afff.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_afff.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1149,7 +963,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/waterkanon.png</normaloff>:/plugins/oiv/config_files/png/waterkanon.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1187,7 +1001,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_svm.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_svm.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1225,7 +1039,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/aanrijdroute.png</normaloff>:/plugins/oiv/config_files/png/aanrijdroute.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1263,7 +1077,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_omloop.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_omloop.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1301,7 +1115,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/wegen_eigen_terrein.png</normaloff>:/plugins/oiv/config_files/png/wegen_eigen_terrein.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1339,7 +1153,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/trap_bordes.png</normaloff>:/plugins/oiv/config_files/png/trap_bordes.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1377,7 +1191,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_neon.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_neon.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1415,7 +1229,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/installatie_defect.png</normaloff>:/plugins/oiv/config_files/png/installatie_defect.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1453,7 +1267,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/reduceer_drukbegrenzer.png</normaloff>:/plugins/oiv/config_files/png/reduceer_drukbegrenzer.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1491,7 +1305,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/waterkanon_schuim.png</normaloff>:/plugins/oiv/config_files/png/waterkanon_schuim.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1529,7 +1343,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/brandweerinfokast.png</normaloff>:/plugins/oiv/config_files/png/brandweerinfokast.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1570,7 +1384,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/ugs.png</normaloff>:/plugins/oiv/config_files/png/ugs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1596,7 +1410,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/trap_rond.png</normaloff>:/plugins/oiv/config_files/png/trap_rond.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1637,7 +1451,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/opstelplaats_wts.png</normaloff>:/plugins/oiv/config_files/png/opstelplaats_wts.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1663,7 +1477,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_rwa.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_rwa.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1698,7 +1512,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/opstelplaats_sb.png</normaloff>:/plugins/oiv/config_files/png/opstelplaats_sb.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1727,7 +1541,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/opstelplaats_overige_voertuigen.png</normaloff>:/plugins/oiv/config_files/png/opstelplaats_overige_voertuigen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1753,7 +1567,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/schacht_kanaal.png</normaloff>:/plugins/oiv/config_files/png/schacht_kanaal.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1791,7 +1605,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_gas.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_gas.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1829,7 +1643,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/label_gevaar.png</normaloff>:/plugins/oiv/config_files/png/label_gevaar.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1867,7 +1681,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/blussysteem_hifog.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_hifog.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1905,7 +1719,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_afnamepunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_ld_afnamepunt.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -1943,7 +1757,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/stijgleiding_hd_vulpunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_hd_vulpunt.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2002,7 +1816,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_sprinkler.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_sprinkler.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2037,7 +1851,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/opstelplaats_tankautospuit.png</normaloff>:/plugins/oiv/config_files/png/opstelplaats_tankautospuit.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2084,7 +1898,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/blussysteem_stikstof.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_stikstof.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2122,7 +1936,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/brandbluspomp.png</normaloff>:/plugins/oiv/config_files/png/brandbluspomp.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2160,7 +1974,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/sleutelkluis.png</normaloff>:/plugins/oiv/config_files/png/sleutelkluis.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2198,7 +2012,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/label_voorzichtig.png</normaloff>:/plugins/oiv/config_files/png/label_voorzichtig.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2236,7 +2050,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_luchtbehandeling.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_luchtbehandeling.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2271,7 +2085,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/opstelplaats_autoladder.png</normaloff>:/plugins/oiv/config_files/png/opstelplaats_autoladder.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2320,7 +2134,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_elektra.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_elektra.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2358,7 +2172,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/hekwerk.png</normaloff>:/plugins/oiv/config_files/png/hekwerk.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2396,7 +2210,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/brandweeringang.png</normaloff>:/plugins/oiv/config_files/png/brandweeringang.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2434,7 +2248,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/stijgleiding_hd_afnamepunt.png</normaloff>:/plugins/oiv/config_files/png/stijgleiding_hd_afnamepunt.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2472,7 +2286,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_noodstop.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_noodstop.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2510,7 +2324,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/hulplijn.png</normaloff>:/plugins/oiv/config_files/png/hulplijn.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2548,7 +2362,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/trap_recht.png</normaloff>:/plugins/oiv/config_files/png/trap_recht.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2586,7 +2400,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/afsluiter_cv.png</normaloff>:/plugins/oiv/config_files/png/afsluiter_cv.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2624,7 +2438,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/blussysteem_water.png</normaloff>:/plugins/oiv/config_files/png/blussysteem_water.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2709,7 +2523,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/scenario_locatie.png</normaloff>:/plugins/oiv/config_files/png/scenario_locatie.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2754,7 +2568,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/giftige_stoffen.png</normaloff>:/plugins/oiv/config_files/png/giftige_stoffen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2792,7 +2606,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/gassen_onder_druk_ghs.png</normaloff>:/plugins/oiv/config_files/png/gassen_onder_druk_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2830,7 +2644,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/corrosieve_stoffen_ghs.png</normaloff>:/plugins/oiv/config_files/png/corrosieve_stoffen_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2868,7 +2682,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/niet_blussen_met_water.png</normaloff>:/plugins/oiv/config_files/png/niet_blussen_met_water.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2906,7 +2720,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/giftige_stoffen_ghs.png</normaloff>:/plugins/oiv/config_files/png/giftige_stoffen_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2944,7 +2758,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/biologische_agentia.png</normaloff>:/plugins/oiv/config_files/png/biologische_agentia.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -2982,7 +2796,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/asbest.png</normaloff>:/plugins/oiv/config_files/png/asbest.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3020,7 +2834,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/opslag_stoffen.png</normaloff>:/plugins/oiv/config_files/png/opslag_stoffen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3058,7 +2872,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/gevaar_aquatisch_milieu_ghs.png</normaloff>:/plugins/oiv/config_files/png/gevaar_aquatisch_milieu_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3096,7 +2910,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/niet_ioniserende_straling.png</normaloff>:/plugins/oiv/config_files/png/niet_ioniserende_straling.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3157,7 +2971,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/explosieve_stoffen.png</normaloff>:/plugins/oiv/config_files/png/explosieve_stoffen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3195,7 +3009,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/accuut_gevaar_ghs.png</normaloff>:/plugins/oiv/config_files/png/accuut_gevaar_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3246,7 +3060,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/radioactief_materiaal.png</normaloff>:/plugins/oiv/config_files/png/radioactief_materiaal.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3307,7 +3121,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/ontplofbare_stoffen_ghs.png</normaloff>:/plugins/oiv/config_files/png/ontplofbare_stoffen_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3345,7 +3159,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/bijtende_stoffen.png</normaloff>:/plugins/oiv/config_files/png/bijtende_stoffen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3383,7 +3197,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/val_gevaar.png</normaloff>:/plugins/oiv/config_files/png/val_gevaar.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3421,7 +3235,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/gevaar_gezondheid_ghs.png</normaloff>:/plugins/oiv/config_files/png/gevaar_gezondheid_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3459,7 +3273,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/ontvlambare_stoffen_ghs.png</normaloff>:/plugins/oiv/config_files/png/ontvlambare_stoffen_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3497,7 +3311,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/oxiderende_stoffen.png</normaloff>:/plugins/oiv/config_files/png/oxiderende_stoffen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3535,7 +3349,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/oxiderende_stoffen_ghs.png</normaloff>:/plugins/oiv/config_files/png/oxiderende_stoffen_ghs.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3573,7 +3387,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/ontvlambare_stoffen.png</normaloff>:/plugins/oiv/config_files/png/ontvlambare_stoffen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3611,7 +3425,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/lage_temperatuur_of_bevriezing.png</normaloff>:/plugins/oiv/config_files/png/lage_temperatuur_of_bevriezing.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3649,7 +3463,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/elektrische_spanning.png</normaloff>:/plugins/oiv/config_files/png/elektrische_spanning.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3687,7 +3501,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/bijt_gevaar.png</normaloff>:/plugins/oiv/config_files/png/bijt_gevaar.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3725,7 +3539,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/laserstralen.png</normaloff>:/plugins/oiv/config_files/png/laserstralen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3763,7 +3577,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/magnetisch_veld.png</normaloff>:/plugins/oiv/config_files/png/magnetisch_veld.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3801,7 +3615,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/klein_chemisch.png</normaloff>:/plugins/oiv/config_files/png/klein_chemisch.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3839,7 +3653,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/glad_oppervlak.png</normaloff>:/plugins/oiv/config_files/png/glad_oppervlak.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3877,7 +3691,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/exotische_dieren.png</normaloff>:/plugins/oiv/config_files/png/exotische_dieren.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3915,7 +3729,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/lithiumhoudende_batterijen.png</normaloff>:/plugins/oiv/config_files/png/lithiumhoudende_batterijen.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3953,7 +3767,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/hangende_lasten.png</normaloff>:/plugins/oiv/config_files/png/hangende_lasten.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -3991,7 +3805,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/schadelijk_voor_milieu.png</normaloff>:/plugins/oiv/config_files/png/schadelijk_voor_milieu.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4029,7 +3843,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/explosieve_atmosfeer.png</normaloff>:/plugins/oiv/config_files/png/explosieve_atmosfeer.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4067,7 +3881,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/heet_oppervlak.png</normaloff>:/plugins/oiv/config_files/png/heet_oppervlak.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4105,7 +3919,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/houder_onder_druk.png</normaloff>:/plugins/oiv/config_files/png/houder_onder_druk.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4143,7 +3957,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/op_afstand_bestuurde_machines.png</normaloff>:/plugins/oiv/config_files/png/op_afstand_bestuurde_machines.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4181,7 +3995,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/helling.png</normaloff>:/plugins/oiv/config_files/png/helling.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4219,7 +4033,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/langetermijn_gezondheidsschade.png</normaloff>:/plugins/oiv/config_files/png/langetermijn_gezondheidsschade.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4257,7 +4071,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/algemeen_gevaar.png</normaloff>:/plugins/oiv/config_files/png/algemeen_gevaar.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4318,7 +4132,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/laadpaal_elektrisch_voertuig.png</normaloff>:/plugins/oiv/config_files/png/laadpaal_elektrisch_voertuig.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4369,7 +4183,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/vluchtroute_publiek.png</normaloff>:/plugins/oiv/config_files/png/vluchtroute_publiek.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4407,7 +4221,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/evenementen_publieke_sector.png</normaloff>:/plugins/oiv/config_files/png/evenementen_publieke_sector.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4468,7 +4282,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/evenementen_cado.png</normaloff>:/plugins/oiv/config_files/png/evenementen_cado.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4575,7 +4389,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/evenementen_tent.png</normaloff>:/plugins/oiv/config_files/png/evenementen_tent.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4613,7 +4427,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/evenementen_podium.png</normaloff>:/plugins/oiv/config_files/png/evenementen_podium.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4651,7 +4465,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/ehbo.png</normaloff>:/plugins/oiv/config_files/png/ehbo.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4689,7 +4503,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/calamiteiten_route.png</normaloff>:/plugins/oiv/config_files/png/calamiteiten_route.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4727,7 +4541,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/evenementen_pers.png</normaloff>:/plugins/oiv/config_files/png/evenementen_pers.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4778,7 +4592,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/aed.png</normaloff>:/plugins/oiv/config_files/png/aed.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4816,7 +4630,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/evenementen_ingang.png</normaloff>:/plugins/oiv/config_files/png/evenementen_ingang.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4854,7 +4668,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/attractie.png</normaloff>:/plugins/oiv/config_files/png/attractie.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4892,7 +4706,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/kraam_elektra.png</normaloff>:/plugins/oiv/config_files/png/kraam_elektra.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4930,7 +4744,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/kraam_gas.png</normaloff>:/plugins/oiv/config_files/png/kraam_gas.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -4968,7 +4782,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/vuurwerkafsteekplaats.png</normaloff>:/plugins/oiv/config_files/png/vuurwerkafsteekplaats.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5006,7 +4820,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/restaurant.png</normaloff>:/plugins/oiv/config_files/png/restaurant.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5044,7 +4858,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/feesttent.png</normaloff>:/plugins/oiv/config_files/png/feesttent.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5082,7 +4896,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/kleedkamer.png</normaloff>:/plugins/oiv/config_files/png/kleedkamer.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5120,7 +4934,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/straattheater.png</normaloff>:/plugins/oiv/config_files/png/straattheater.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5158,7 +4972,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/nooduitgang.png</normaloff>:/plugins/oiv/config_files/png/nooduitgang.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5196,7 +5010,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/brandblusser.png</normaloff>:/plugins/oiv/config_files/png/brandblusser.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5234,7 +5048,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/generator.png</normaloff>:/plugins/oiv/config_files/png/generator.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5272,7 +5086,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/parkeerplaats.png</normaloff>:/plugins/oiv/config_files/png/parkeerplaats.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5310,7 +5124,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/tijdelijke_wegafsluiting.png</normaloff>:/plugins/oiv/config_files/png/tijdelijke_wegafsluiting.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5348,7 +5162,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/evenementenroute.png</normaloff>:/plugins/oiv/config_files/png/evenementenroute.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5386,7 +5200,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/parkeerzone.png</normaloff>:/plugins/oiv/config_files/png/parkeerzone.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5465,7 +5279,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/heli_vmc.png</normaloff>:/plugins/oiv/config_files/png/heli_vmc.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5503,7 +5317,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/opstapplaats_rpa.png</normaloff>:/plugins/oiv/config_files/png/opstapplaats_rpa.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5562,7 +5376,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/oilboom_afzet.png</normaloff>:/plugins/oiv/config_files/png/oilboom_afzet.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5600,7 +5414,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/kade_aansluiting.png</normaloff>:/plugins/oiv/config_files/png/kade_aansluiting.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5638,7 +5452,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/oilboom_opstel.png</normaloff>:/plugins/oiv/config_files/png/oilboom_opstel.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5676,7 +5490,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/schermenponton.png</normaloff>:/plugins/oiv/config_files/png/schermenponton.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5714,7 +5528,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/sleutelkluis_hbr.png</normaloff>:/plugins/oiv/config_files/png/sleutelkluis_hbr.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5752,7 +5566,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/oogdouche.png</normaloff>:/plugins/oiv/config_files/png/oogdouche.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5790,7 +5604,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/nooddouche.png</normaloff>:/plugins/oiv/config_files/png/nooddouche.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5828,7 +5642,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/aed.png</normaloff>:/plugins/oiv/config_files/png/aed.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5866,7 +5680,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/nooduitgang.png</normaloff>:/plugins/oiv/config_files/png/nooduitgang.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5904,7 +5718,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/antidote_tegengif.png</normaloff>:/plugins/oiv/config_files/png/antidote_tegengif.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5942,7 +5756,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/brandblusser.png</normaloff>:/plugins/oiv/config_files/png/brandblusser.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -5980,7 +5794,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/brandslanghaspel.png</normaloff>:/plugins/oiv/config_files/png/brandslanghaspel.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6018,7 +5832,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/voedingspunt_schuim.png</normaloff>:/plugins/oiv/config_files/png/voedingspunt_schuim.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6056,7 +5870,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/brandbestrijdings_materiaal.png</normaloff>:/plugins/oiv/config_files/png/brandbestrijdings_materiaal.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6094,7 +5908,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/calamiteiten_coordinatiecentrum.png</normaloff>:/plugins/oiv/config_files/png/calamiteiten_coordinatiecentrum.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6145,7 +5959,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/bluswater_defect.png</normaloff>:/plugins/oiv/config_files/png/bluswater_defect.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6212,7 +6026,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/geboorde_put.png</normaloff>:/plugins/oiv/config_files/png/geboorde_put.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6256,7 +6070,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/brandkraan_eigen_terrein.png</normaloff>:/plugins/oiv/config_files/png/brandkraan_eigen_terrein.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6300,7 +6114,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/bovengrondse_brandkraan.png</normaloff>:/plugins/oiv/config_files/png/bovengrondse_brandkraan.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6344,7 +6158,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/openwater_winput.png</normaloff>:/plugins/oiv/config_files/png/openwater_winput.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6388,7 +6202,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/open_water.png</normaloff>:/plugins/oiv/config_files/png/open_water.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6432,7 +6246,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/open_water_xxx_zijde.png</normaloff>:/plugins/oiv/config_files/png/open_water_xxx_zijde.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6476,7 +6290,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/bluswater_riool.png</normaloff>:/plugins/oiv/config_files/png/bluswater_riool.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6520,7 +6334,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/geboorde_put_voordruk.png</normaloff>:/plugins/oiv/config_files/png/geboorde_put_voordruk.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6577,7 +6391,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/particuliere_brandkraan.png</normaloff>:/plugins/oiv/config_files/png/particuliere_brandkraan.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6621,7 +6435,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/zwembad.png</normaloff>:/plugins/oiv/config_files/png/zwembad.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6665,7 +6479,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/openwater.png</normaloff>:/plugins/oiv/config_files/png/openwater.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6771,7 +6585,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/boot_te_water_laat_plaats.png</normaloff>:/plugins/oiv/config_files/png/boot_te_water_laat_plaats.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6826,7 +6640,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/diepte_4m.png</normaloff>:/plugins/oiv/config_files/png/diepte_4m.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6870,7 +6684,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/stroming.png</normaloff>:/plugins/oiv/config_files/png/stroming.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6927,7 +6741,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/algemeen_gevaar.png</normaloff>:/plugins/oiv/config_files/png/algemeen_gevaar.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -6971,7 +6785,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/oever_kade.png</normaloff>:/plugins/oiv/config_files/png/oever_kade.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -7038,7 +6852,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/diepte_9m.png</normaloff>:/plugins/oiv/config_files/png/diepte_9m.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -7082,7 +6896,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../resources.qrc">
+                 <iconset>
                   <normaloff>:/plugins/oiv/config_files/png/diepte_15m.png</normaloff>:/plugins/oiv/config_files/png/diepte_15m.png</iconset>
                 </property>
                 <property name="iconSize">
@@ -7141,7 +6955,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>310</width>
+                   <width>308</width>
                    <height>764</height>
                   </rect>
                  </property>
@@ -7161,7 +6975,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19L15.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L15.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7199,7 +7013,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19L14.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L14.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7237,7 +7051,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19V01.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19V01.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7293,7 +7107,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19L16.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L16.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7331,7 +7145,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P27.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P27.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7369,7 +7183,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P32.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P32.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7407,7 +7221,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P21.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P21.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7445,7 +7259,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19V02.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19V02.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7483,7 +7297,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19V03.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19V03.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7521,7 +7335,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P22.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P22.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7559,7 +7373,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P20.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P20.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7597,7 +7411,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P19.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P19.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7653,7 +7467,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19L13.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L13.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7691,7 +7505,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P25.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P25.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7729,7 +7543,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P26.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P26.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7767,7 +7581,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P11.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P11.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7805,7 +7619,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P18.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P18.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7843,7 +7657,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P01.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P01.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7881,7 +7695,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P28.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P28.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7919,7 +7733,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P13.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P13.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7957,7 +7771,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P02.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P02.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -7995,7 +7809,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P14.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P14.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8033,7 +7847,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P16.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P16.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8071,7 +7885,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P06.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P06.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8109,7 +7923,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P15.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P15.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8147,7 +7961,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P23.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P23.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8185,7 +7999,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P29.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P29.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8223,7 +8037,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P05.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P05.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8261,7 +8075,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P30.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P30.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8299,7 +8113,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P24.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P24.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8337,7 +8151,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P31.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P31.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8375,7 +8189,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P17.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P17.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8455,7 +8269,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19L04.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L04.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8517,7 +8331,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19L05.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L05.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8555,7 +8369,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P12.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P12.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8593,7 +8407,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19L03.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L03.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8647,7 +8461,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P08.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P08.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8685,7 +8499,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P07.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P07.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8723,7 +8537,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P09.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P09.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8761,7 +8575,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P04.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P04.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8799,7 +8613,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P03.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P03.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8837,7 +8651,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                      <string/>
                     </property>
                     <property name="icon">
-                     <iconset resource="../resources.qrc">
+                     <iconset>
                       <normaloff>:/plugins/oiv/config_files/png/natuur/N19P10.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19P10.png</iconset>
                     </property>
                     <property name="iconSize">
@@ -8891,7 +8705,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L20.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L20.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -8929,7 +8743,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L31.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L31.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -8967,7 +8781,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L30.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L30.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9041,7 +8855,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L41.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L41.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9079,7 +8893,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L42.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L42.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9117,7 +8931,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L40.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L40.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9155,7 +8969,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L21.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L21.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9193,7 +9007,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L22.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L22.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9231,7 +9045,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L23.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L23.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9317,7 +9131,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L24.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L24.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9368,7 +9182,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L43.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L43.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9406,7 +9220,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L26.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L26.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9451,7 +9265,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                         <string/>
                        </property>
                        <property name="icon">
-                        <iconset resource="../resources.qrc">
+                        <iconset>
                          <normaloff>:/plugins/oiv/config_files/png/natuur/N19L25.png</normaloff>:/plugins/oiv/config_files/png/natuur/N19L25.png</iconset>
                        </property>
                        <property name="iconSize">
@@ -9510,74 +9324,6 @@ border-color: rgba(255, 255, 255, 0);</string>
             </widget>
            </widget>
           </item>
-          <item row="5" column="0" colspan="2">
-           <widget class="QLabel" name="lengte_label">
-            <property name="text">
-             <string>Lengte (m)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="2">
-           <widget class="QDoubleSpinBox" name="lengte">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(240, 240, 240);
-border-color: rgba(255, 255, 255, 0);</string>
-            </property>
-            <property name="frame">
-             <bool>false</bool>
-            </property>
-            <property name="buttonSymbols">
-             <enum>QAbstractSpinBox::NoButtons</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" colspan="6">
-           <widget class="QLineEdit" name="formelenaam">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(208, 208, 208);
-border-color: rgba(255, 255, 255, 0);</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" colspan="6">
-           <widget class="QPushButton" name="terug">
-            <property name="text">
-             <string>Terug</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0" colspan="3">
-           <widget class="QLabel" name="straal_label">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Hulpcirkel (m)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="3" colspan="3">
-           <widget class="QLabel" name="offset_label">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Offset parallel (m)</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
        </layout>
@@ -9587,5 +9333,6 @@ border-color: rgba(255, 255, 255, 0);</string>
    </layout>
   </widget>
  </widget>
+ <resources/>
  <connections/>
 </ui>

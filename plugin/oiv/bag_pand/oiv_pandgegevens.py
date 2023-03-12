@@ -98,12 +98,11 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_edit_bouwlagen(self, ilayer, ifeature):
         """edit attribute form of floor feature"""
-        stackWidget = SW.oivStackWidget()
+        stackWidget = SW.oivStackWidget(self)
         self.show_subwidget(True, stackWidget)
-        stackWidget.parentWidget = self
+        #stackWidget.parentWidget = self
         stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
-        stackWidget.show()
 
     def bouwlagen_to_combobox(self, objectId, actieveBouwlaag):
         """fill combobox with existing floors"""
@@ -138,6 +137,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         index = self.comboBox.findText(str(actieveBouwlaag), PQtC.Qt.MatchFixedString)
         if index >= 0:
             self.comboBox.setCurrentIndex(index)
+        self.baseWidget.statusregelBouwlaag.setText('U tekent op Bouwlaag: ' + self.comboBox.currentText())
         self.iface.actionPan().trigger()
 
     def existing_bouwlagen(self, existing):
@@ -150,6 +150,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def set_layer_subset_bouwlaag(self):
         """if index of combobox has changed set cql filter of childlayers"""
         subString = "bouwlaag = " + str(self.comboBox.currentText())
+        self.baseWidget.statusregelBouwlaag.setText('U tekent op Bouwlaag: ' + str(self.comboBox.currentText()))
         UG.set_layer_substring(subString)
 
     #select bouwlaag on canvas to edit the atrribute form

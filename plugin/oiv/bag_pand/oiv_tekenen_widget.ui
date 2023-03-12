@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>1016</height>
+    <width>321</width>
+    <height>855</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,13 +25,13 @@
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QGridLayout" name="gridLayout_2">
     <property name="leftMargin">
-     <number>5</number>
+     <number>0</number>
     </property>
     <property name="topMargin">
      <number>0</number>
     </property>
     <property name="rightMargin">
-     <number>5</number>
+     <number>0</number>
     </property>
     <property name="bottomMargin">
      <number>0</number>
@@ -52,8 +52,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>310</width>
-         <height>994</height>
+         <width>321</width>
+         <height>833</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_5">
@@ -73,7 +73,7 @@
          <layout class="QGridLayout" name="gridLayout">
           <item row="3" column="1">
            <layout class="QGridLayout" name="gridLayout_6">
-            <item row="2" column="0" colspan="2">
+            <item row="3" column="0" colspan="2">
              <widget class="QLineEdit" name="bouwlaag">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -87,7 +87,7 @@ border-color: rgba(255, 255, 255, 0);</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="0" colspan="2">
+            <item row="1" column="0" colspan="2">
              <widget class="QLabel" name="label_6">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -108,30 +108,7 @@ border-color: rgba(255, 255, 255, 0);</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="0" colspan="2">
-             <widget class="QLabel" name="label_7">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>8</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-                <underline>true</underline>
-                <strikeout>false</strikeout>
-               </font>
-              </property>
-              <property name="text">
-               <string>Edit</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0" colspan="2">
+            <item row="2" column="0" colspan="2">
              <widget class="QLineEdit" name="pand_id">
               <property name="enabled">
                <bool>false</bool>
@@ -145,6 +122,13 @@ border-color: rgba(255, 255, 255, 0);</string>
               <property name="styleSheet">
                <string notr="true">background-color: rgb(208, 208, 208);
 border-color: rgba(255, 255, 255, 0);</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0" colspan="2">
+             <widget class="QPushButton" name="terug">
+              <property name="text">
+               <string>Terug</string>
               </property>
              </widget>
             </item>

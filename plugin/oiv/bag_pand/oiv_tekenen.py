@@ -22,7 +22,6 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     """Organize all draw features on the map"""
 
     identifier = None
-    baseWidget = None
     parentLayerName = None
     drawLayerType = None
     drawLayer = None
@@ -52,6 +51,9 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.identify.clicked.connect(self.run_edit_tool)
         self.baseWidget.select.clicked.connect(self.run_select_tool)
         self.baseWidget.delete_f.clicked.connect(self.run_delete_tool)
+        self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
+        self.baseWidget.done.setEnabled(False)
+        self.baseWidget.done_png.setEnabled(False)
         actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.PAND["configtable"])
         self.initActions(actionList)
 
@@ -125,6 +127,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget = SW.oivStackWidget()
         self.show_subwidget(True, stackWidget)
         stackWidget.parentWidget = self
+        stackWidget.baseWidget = self.baseWidget
         stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
         stackWidget.show()
@@ -212,7 +215,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 UC.write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
 
-    def close_teken_show_object(self):
+    def close_bouwlaag_tekenen_show_base(self):
         """destroy and close self"""
         self.baseWidget.move.clicked.disconnect()
         self.baseWidget.identify.clicked.disconnect()
@@ -231,4 +234,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.close()
         self.parent.show_subwidget(False)
         self.baseWidget.drawbuttonframe.setVisible(False)
+        self.baseWidget.done.setEnabled(True)
+        self.baseWidget.done_png.setEnabled(True)
+        self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
         del self

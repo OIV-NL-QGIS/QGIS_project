@@ -65,7 +65,6 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.done_png.setVisible(Status)
         self.close_btn.setVisible(not Status)
         self.close_png.setVisible(not Status)
-        print(Status)
         if Status:
             self.info_of_interest.setEnabled(False)
             self.filter_objecten.setEnabled(False)
@@ -204,7 +203,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_bouwlagen(self, objectId, new):
         """start objectgegevens widget"""
-        vbox = PQtW.QVBoxLayout()
+        vbox = PQtW.QVBoxLayout() 
         pandwidget = OPG.oivPandWidget(self, objectId)
         vbox.addWidget(pandwidget)
         self.bouwlaagFrame.setLayout(vbox)
@@ -218,7 +217,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         vbox.addWidget(repressiefObjectWidget)
         self.objectFrame.setLayout(vbox)
         self.objectFrame.setVisible(True)
-        self.run_identify_terrein()
+        #self.run_identify_terrein()
 
     def run_new_object(self, objectId, bron, bron_tbl):
         """start new object widget, eventhough passing trough the tools to objectgegevens widget"""

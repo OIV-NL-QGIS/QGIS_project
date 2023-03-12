@@ -281,5 +281,6 @@
         <file>config_files/png/interface/back.png</file>
         <file>config_files/png/interface/georeference.png</file>
         <file>config_files/png/interface/import_drawing.png</file>
+        <file>config_files/png/interface/save_and_close.png</file>
     </qresource>
 </RCC>

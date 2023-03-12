@@ -56,12 +56,11 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         """connect the buttons to their actions"""
         self.baseobjectFrame.setVisible(True)
         self.addobjectFrame.setVisible(False)
-        self.terreinFrame.setVisible(False)
         self.object_add.clicked.connect(self.object_toevoegen)
         self.object_info.clicked.connect(self.run_objectgegevens_bewerken)
         self.object_bgt.clicked.connect(self.open_bgt_viewer)
         self.object_delete.clicked.connect(self.run_delete_object)
-        self.terrein_bewerken.clicked.connect(self.object_terrein_bewerken)
+        self.terrein_tekenen.clicked.connect(self.run_terrein_toevoegen)
         self.object_draw.clicked.connect(self.run_object_symbolen_tekenen)
         self.object_print.clicked.connect(self.run_print)
         self.create_grid.clicked.connect(self.run_create_grid)
@@ -92,6 +91,10 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         except StopIteration:
             MSG.showMsgBox('no_objectid')
 
+    def open_georeferencer(self):
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
+        self.iface.mainWindow().findChildren(PQtW.QAction, 'mActionShowGeoreferencer')[0].trigger()
+
     def open_bgt_viewer(self):
         """open url based on BGT location, i.v.m. terugmelden"""
         e = self.canvas.extent()
@@ -118,14 +121,15 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
             reply = MSG.showMsgBox('deletedobject')
-        UC.refresh_layers(self.iface)
-        self.baseWidget.handleDoneBtn(False)
+            self.baseWidget.handleDoneBtn(False)
+            UC.refresh_layers(self.iface)
+        
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
-        stackWidget = SW.oivStackWidget()
+        stackWidget = SW.oivStackWidget(self)
         self.show_subwidget(True, stackWidget)
-        stackWidget.parentWidget = self
+        #stackWidget.parentWidget = self
         stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
         layerNames = PC.OBJECT["nogeotables"]
@@ -143,6 +147,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.done_png.setEnabled(False)
         self.baseobjectFrame.setVisible(False)
         self.addobjectFrame.setVisible(True)
+        self.georeferencer.clicked.connect(self.open_georeferencer)
         self.terug_add.clicked.connect(self.object_toevoegen_sluiten)
 
     def object_toevoegen_sluiten(self):
@@ -150,13 +155,9 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.done_png.setEnabled(True)
         self.baseobjectFrame.setVisible(True)
         self.addobjectFrame.setVisible(False)
+        self.georeferencer.clicked.disconnect(self.open_georeferencer)
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.terug_add.clicked.disconnect(self.object_toevoegen_sluiten)
-
-    def object_terrein_bewerken(self):
-        self.terreinFrame.setVisible(True)
-        self.terrein_tekenen.clicked.connect(self.run_terrein_toevoegen)
-        self.delete_f.clicked.connect(self.run_delete_terrein)
-        self.identify.clicked.connect(self.edit_feature)
 
     def edit_feature(self):
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
@@ -164,6 +165,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
     def run_create_grid(self):
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         gridWidget = GW.oivGridWidget(self)
         gridWidget.object_id.setText(self.object_id.text())
         self.show_subwidget(True, gridWidget)
@@ -182,6 +184,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         objectId = self.object_id.text()
         possibleSnapFeatures = UC.get_possible_snapFeatures_object(self.snapLayerNames, objectId)
         self.drawTool.parent = self
+        self.drawTool.baseWidget = self.baseWidget
         self.drawTool.layer = UC.getlayer_byname(PC.OBJECT["terreinlayername"])
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, True, True)
         self.drawTool.possibleSnapFeatures = possibleSnapFeatures
@@ -213,6 +216,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
                 UC.write_layer(layer, childFeature)
         layer.commitChanges()
         layer.triggerRepaint()
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.activatePan()
 
     def run_object_symbolen_tekenen(self):
@@ -236,5 +240,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_import(self):
         """initiate import widget"""
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         importwidget = IFW.oivImportFileWidget(self)
         self.show_subwidget(True, importwidget)

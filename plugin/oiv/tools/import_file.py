@@ -43,10 +43,6 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug.clicked.connect(self.close_import)
         self.mapping.clicked.connect(self.run_mapping)
         self.import_file.clicked.connect(self.inlezen)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
-        self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objectimporthelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
         self.hide_all()
 
     def selectfile(self):
@@ -193,11 +189,9 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             QC.QgsProject.instance().removeMapLayers([self.importLayer.id()])
         except: # pylint: disable=bare-except
             pass
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
         self.hide_all()
         self.close()
-        self.parent.show()
+        self.parent.show_subwidget(False)
         del self
 
 class MappingDialog(PQtW.QDialog):

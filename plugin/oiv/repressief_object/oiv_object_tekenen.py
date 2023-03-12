@@ -45,17 +45,16 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         """intitiate the UI elemets on the widget"""
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.object_id.setVisible(False)
-        self.move.clicked.connect(self.run_move_point)
-        self.identify.clicked.connect(self.run_edit_tool)
-        self.select.clicked.connect(self.run_select_tool)
-        self.delete_f.clicked.connect(self.run_delete_tool)
+        self.baseWidget.drawbuttonframe.setVisible(True)
+        self.baseWidget.move.clicked.connect(self.run_move_point)
+        self.baseWidget.identify.clicked.connect(self.run_edit_tool)
+        self.baseWidget.select.clicked.connect(self.run_select_tool)
+        self.baseWidget.delete_f.clicked.connect(self.run_delete_tool)
+        self.baseWidget.done.setEnabled(False)
+        self.baseWidget.done_png.setEnabled(False)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
         actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.OBJECT["configtable"])
         self.initActions(actionList)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
-        self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objecttekenenhelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def initActions(self, actionList):
         """connect all the buttons to the action"""
@@ -72,19 +71,20 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                     strButton.clicked.connect(lambda dummy='dummyvar', rlayer=runLayerName, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
 
     def close_object_tekenen_show_base(self):
-        self.move.clicked.disconnect()
-        self.identify.clicked.disconnect()
-        self.select.clicked.disconnect()
-        self.delete_f.clicked.disconnect()
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
-        self.terug.clicked.disconnect()
+        self.baseWidget.move.clicked.disconnect()
+        self.baseWidget.identify.clicked.disconnect()
+        self.baseWidget.select.clicked.disconnect()
+        self.baseWidget.delete_f.clicked.disconnect()
         try:
             self.selectTool.geomSelected.disconnect()
         except:
             pass
         self.close()
         self.parent.show_subwidget(False)
+        self.baseWidget.drawbuttonframe.setVisible(False)
+        self.baseWidget.done.setEnabled(True)
+        self.baseWidget.done_png.setEnabled(True)
+        self.terug.clicked.disconnect(self.close_object_tekenen_show_base)
         del self
 
     def ini_action(self, actionList, run_layer):
@@ -229,3 +229,4 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             if buttonCheck != 'Cancel':
                 UC.write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
