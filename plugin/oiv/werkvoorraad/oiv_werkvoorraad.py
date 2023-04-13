@@ -186,9 +186,6 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
     def close_werkvoorraad(self):
         self.btn_opslaan.clicked.disconnect()
         self.btn_terug.clicked.disconnect()
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
         self.close()
-        self.parent.show()
+        self.parent.show_subwidget(False)
         del self
-

@@ -25,6 +25,8 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
         """Constructor."""
         super(oivStackWidget, self).__init__(parent)
         self.iface = QU.iface
+        self.parent = parent
+        self.baseWidget = parent.baseWidget
         self.setupUi(self)
 
     def open_feature_form(self, ilayer, ifeature):
@@ -40,9 +42,7 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def close_stacked(self, ilayer, ifeature):
         """close feature form and save changes"""
-        objectFeature = None
         self.attributeForm.save()
-        self.terug.clicked.disconnect()
         ilayer.commitChanges()
         self.attributeForm.close()
         del self.attributeForm
@@ -51,8 +51,9 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
             request = QC.QgsFeatureRequest().setFilterExpression("id = " + str(ifeature["id"]))
             ifeature = UC.featureRequest(ilayer, request)
             if ifeature:
-                self.parentWidget.formelenaam.setText(ifeature["formelenaam"])
-        self.parentWidget.show()
-        self.parentWidget.setFixedWidth(self.parentWidth)
+                self.parent.formelenaam.setText(ifeature["formelenaam"])
+        self.parent.setFixedWidth(self.parentWidth)
+        self.terug.clicked.disconnect()
         self.close()
+        self.parent.show_subwidget(False)
         del self

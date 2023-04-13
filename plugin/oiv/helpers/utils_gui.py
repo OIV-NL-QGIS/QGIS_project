@@ -33,6 +33,10 @@ def set_layer_substring(subString):
 
 def set_lengte_oppervlakte_visibility(widget, lengteTF, straalTF, oppTF, offsetTF):
     """change UI based on drawing lines/polygons"""
+    if True in (lengteTF, straalTF, oppTF, offsetTF):
+        widget.cadframe.setVisible(True)
+    else:
+        widget.cadframe.setVisible(False)
     widget.lengte_label.setVisible(lengteTF)
     widget.lengte.setVisible(lengteTF)
     widget.straal.setVisible(straalTF)

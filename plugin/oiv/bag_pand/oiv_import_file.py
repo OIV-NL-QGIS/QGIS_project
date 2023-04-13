@@ -388,7 +388,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.close()
         self.parent.bouwlagen_to_combobox(str(self.object_id.text()), int(self.bouwlaag.text()))
         try:
-            self.parent.show()
+            self.parent.show_subwidget(False)
             del self.parent
         except:  # pylint: disable=bare-except
             pass

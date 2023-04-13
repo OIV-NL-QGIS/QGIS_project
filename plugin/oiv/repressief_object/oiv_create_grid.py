@@ -48,10 +48,6 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         self.delete_grid.clicked.connect(self.run_delete_tool)
         self.scale_25000.toggled.connect(self.adjust_kaartblad_settings)
         self.scale_diff.toggled.connect(self.adjust_kaartblad_settings)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
-        self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objectgridhelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def run_grid(self):
         """after choosing single grid or kaartblad set things in motion"""
@@ -284,5 +280,5 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         self.helpBtn.clicked.disconnect()
         self.floatBtn.clicked.disconnect()
         self.close()
-        self.parent.show()
+        self.parent.show_subwidget(False)
         del self

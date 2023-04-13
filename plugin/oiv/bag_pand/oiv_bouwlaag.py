@@ -29,6 +29,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         super(oivBouwlaagWidget, self).__init__(parent)
         self.setupUi(self)
         self.parent = parent
+        self.baseWidget = parent.baseWidget
         self.canvas = parent.canvas
         self.iface = parent.iface
         self.objectId = self.parent.pand_id.text()
@@ -48,7 +49,6 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.label2.setVisible(False)
         self.label3.setVisible(False)
         self.teken_bouwlaag.setEnabled(False)
-        UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
         self.bouwlaag_max.setVisible(False)
         self.bouwlaag.setVisible(False)
         self.copy.setVisible(False)
@@ -63,7 +63,6 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_bag_overnemen(self):
         """copy polygon of bag feature"""
-        UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
         layerName = PC.bagpand_layername()
         iLayer = UC.getlayer_byname(layerName)
         request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(self.objectId))
@@ -73,7 +72,6 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_bouwlaag_overnemen(self):
         """copy floor from another floor"""
-        UG.set_lengte_oppervlakte_visibility(self, False, False, False, False)
         self.label1.setVisible(True)
         self.label2.setVisible(True)
         self.label3.setVisible(True)
@@ -101,7 +99,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         drawTool.onGeometryAdded = self.draw_feature
         drawTool.captureMode = 2
         self.canvas.setMapTool(drawTool)
-        UG.set_lengte_oppervlakte_visibility(self, True, True, True, True)
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, True, True)
         drawTool.parent = self
 
     def run_select_bouwlaag(self):
@@ -233,7 +231,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
                 self.parent.selectTool.geomSelected.disconnect()
             except:  # pylint: disable=bare-except
                 pass
-            self.parent.selectTool.geomSelected.connect(self.copy_bag_bouwlaag)
+            self.baseWidget.selectTool.geomSelected.connect(self.copy_bag_bouwlaag)
 
     def bouwlagen_to_combobox(self):
         """add existing floors to the comboBox of the "bouwlaagdockwidget"""
@@ -262,14 +260,8 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             typeVar = type(vars(self)[var])
             if typeVar == PQtW.QCheckBox:
                 vars(self)[var].setVisible(False)
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
         self.parent.sortedList = self.bouwlaagList
         self.parent.bouwlagen_to_combobox(self.objectId, int(self.bouwlaag_min.text()))
-        self.parent.show()
+        self.parent.show_subwidget(False)
         self.close()
-        try:
-            del self.parent
-        except:  # pylint: disable=bare-except
-            pass
         del self

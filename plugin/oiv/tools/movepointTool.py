@@ -64,6 +64,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
     def canvasMoveEvent(self, event):
         """als verslepen -> verplaats de indicatieve marker"""
         layerPt = self.toMapCoordinates(event.pos())
+        self.point = None
         if self.tempRubberBand is None:
             self.tempRubberBand = RH.init_rubberband("moveandrotatepoint", self.canvas, 'line')
         if self.dragging:
@@ -111,6 +112,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
             self.canvas.scene().removeItem(self.vertexMarker)
             self.vertexMarker = None
         self.fid = None
+        self.point = None
         self.startRotate = False
         self.dragging = False
         self.onMoved()
