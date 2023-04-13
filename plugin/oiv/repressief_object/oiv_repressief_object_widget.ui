@@ -368,7 +368,7 @@
               <string notr="true">background-color: rgb(240, 240, 240);</string>
              </property>
              <property name="text">
-              <string>Info BGT</string>
+              <string>Terugmelding BGT</string>
              </property>
              <property name="checkable">
               <bool>false</bool>
@@ -907,5 +907,6 @@ border-color: rgba(255, 255, 255, 0);</string>
    </layout>
   </widget>
  </widget>
+
  <connections/>
 </ui>
