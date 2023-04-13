@@ -142,6 +142,12 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         except: # pylint: disable=bare-except
             pass
 
+    def control_buttons_addobjectframe(self, terrein, importbtn, grid, georeference):
+        self.terrein_tekenen.setEnabled(terrein)
+        self.create_grid.setEnabled(grid)
+        self.import_drawing.setEnabled(importbtn)
+        self.georeferencer.setEnabled(georeference)
+
     def object_toevoegen(self):
         self.baseWidget.done.setEnabled(False)
         self.baseWidget.done_png.setEnabled(False)
@@ -181,6 +187,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             self.baseWidget.tabWidget.removeTab(3)
 
     def run_terrein_toevoegen(self):
+        self.control_buttons_addobjectframe(True, False, False, False)
         objectId = self.object_id.text()
         possibleSnapFeatures = UC.get_possible_snapFeatures_object(self.snapLayerNames, objectId)
         self.drawTool.parent = self
@@ -218,6 +225,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         layer.triggerRepaint()
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.baseWidget.activatePan()
+        self.control_buttons_addobjectframe(True, True, True, True)
 
     def run_object_symbolen_tekenen(self):
         tekenWidget = OTW.oivObjectTekenWidget(self)
