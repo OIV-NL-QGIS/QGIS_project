@@ -651,7 +651,7 @@ border-color: rgba(255, 255, 255, 0);</string>
           <item row="24" column="2" colspan="2">
            <widget class="QPushButton" name="info_of_interest">
             <property name="text">
-             <string>Info of interest</string>
+             <string>Losse symbolen</string>
             </property>
            </widget>
           </item>
