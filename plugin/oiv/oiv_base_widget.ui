@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>358</width>
-    <height>803</height>
+    <width>495</width>
+    <height>858</height>
    </rect>
   </property>
   <property name="font">
@@ -53,8 +53,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>348</width>
-         <height>776</height>
+         <width>485</width>
+         <height>831</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -84,7 +84,7 @@
              <string notr="true">background-color: rgb(255, 255, 255);</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>2</number>
             </property>
             <property name="iconSize">
              <size>
