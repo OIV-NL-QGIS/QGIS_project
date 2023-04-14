@@ -48,8 +48,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
         self.identifyTool = parent.identifyTool
-        self.object_id.setText(str(objectId))
-        self.formelenaam.setText(formeleNaam)
         self.initActions()
 
     def initActions(self):
@@ -165,6 +163,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.addobjectFrame.setVisible(False)
         self.georeferencer.clicked.disconnect(self.open_georeferencer)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
+        self.control_buttons_addobjectframe(True, True, True, True, True)
         self.terug_add.clicked.disconnect(self.object_toevoegen_sluiten)
 
     def edit_feature(self):

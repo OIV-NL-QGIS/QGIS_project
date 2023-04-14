@@ -23,6 +23,9 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     """create dockwidget as base of the oiv plugin"""
 
+    repressiefObjectWidget = None
+    pandwidget = None
+
     def __init__(self, parent=None):
         """Constructor."""
         super(oivBaseWidget, self).__init__(parent)
@@ -203,19 +206,25 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_bouwlagen(self, objectId, new):
         """start objectgegevens widget"""
-        vbox = PQtW.QVBoxLayout() 
-        pandwidget = OPG.oivPandWidget(self, objectId)
-        vbox.addWidget(pandwidget)
-        self.bouwlaagFrame.setLayout(vbox)
+        if not self.pandwidget:
+            vbox = PQtW.QVBoxLayout() 
+            self.pandwidget = OPG.oivPandWidget(self, objectId)
+            vbox.addWidget(self.pandwidget)
+            self.bouwlaagFrame.setLayout(vbox)
+        self.pandwidget.pand_id.setText(str(objectId))
+        self.pandwidget.initUI()
         self.bouwlaagFrame.setVisible(True)
         self.iface.actionPan().trigger()
 
     def run_object(self, formeleNaam, objectId):
         """start repressief object widget"""
-        vbox = PQtW.QVBoxLayout()
-        repressiefObjectWidget = ORO.oivRepressiefObjectWidget(self, objectId, formeleNaam)
-        vbox.addWidget(repressiefObjectWidget)
-        self.objectFrame.setLayout(vbox)
+        if not self.repressiefObjectWidget:
+            vbox = PQtW.QVBoxLayout()
+            self.repressiefObjectWidget = ORO.oivRepressiefObjectWidget(self, objectId, formeleNaam)
+            vbox.addWidget(self.repressiefObjectWidget)
+            self.objectFrame.setLayout(vbox)
+        self.repressiefObjectWidget.object_id.setText(str(objectId))
+        self.repressiefObjectWidget.formelenaam.setText(formeleNaam)
         self.objectFrame.setVisible(True)
         #self.run_identify_terrein()
 

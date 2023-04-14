@@ -41,8 +41,6 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.drawTool = parent.drawTool
         self.moveTool = parent.moveTool
         self.identifyTool = parent.identifyTool
-        self.pand_id.setText(str(objectId))
-        self.initUI()
         self.initActions()
 
     def initUI(self):
