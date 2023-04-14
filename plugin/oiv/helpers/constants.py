@@ -129,11 +129,11 @@ HELPURL = {
 STATUSRGL = {
     "start" : "Selecteer tab Terrein of Bouwlaag",
     "object": {
-        "toggletab": "Klik op (blauwe) Object-stip of op een terrein",
+        "toggletab": "Object: klik voor nieuw op bgt-terrein, voor bestaand op (blauwe) Object-stip.",
 
     },
     "bouwlaag": {
-        "toggletab": "Klik op (gele) Bouwlaag-vlak of op (roze) bag-pand",
+        "toggletab": "Bouwlaag: klik voor nieuw op (roze) bag-pand, voor bestaand op (gele) Bouwlaag.",
   
     }
 }
