@@ -368,7 +368,7 @@
               <string notr="true">background-color: rgb(240, 240, 240);</string>
              </property>
              <property name="text">
-              <string>Info BGT</string>
+              <string>Terugmelding BGT</string>
              </property>
              <property name="checkable">
               <bool>false</bool>
@@ -805,7 +805,7 @@ border-color: rgba(255, 255, 255, 0);</string>
               <string notr="true">background-color: rgb(240, 240, 240);</string>
              </property>
              <property name="text">
-              <string>Terrein</string>
+              <string>Terrein toevoegen</string>
              </property>
              <property name="checkable">
               <bool>false</bool>
@@ -891,6 +891,61 @@ border-color: rgba(255, 255, 255, 0);</string>
              </property>
              <property name="text">
               <string>Terug</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_inventory_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>25</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../resources.qrc">:/plugins/oiv/config_files/png/interface/terrein_del.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="terrein_delete">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>8</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(240, 240, 240);</string>
+             </property>
+             <property name="text">
+              <string>Terrein verwijderen</string>
              </property>
              <property name="checkable">
               <bool>false</bool>

@@ -36,14 +36,14 @@ def bagpand_layername():
     return None
 
 
-OIV_VERSION = '3.4.04'
+OIV_VERSION = '3.4.05'
 
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
         "min": 339,
-        "max": 344
+        "max": 345
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
@@ -129,11 +129,11 @@ HELPURL = {
 STATUSRGL = {
     "start" : "Selecteer tab Terrein of Bouwlaag",
     "object": {
-        "toggletab": "Klik op (blauwe) Object-stip of op een terrein",
+        "toggletab": "Object: klik voor nieuw op bgt-terrein, voor bestaand op (blauwe) Object-stip.",
 
     },
     "bouwlaag": {
-        "toggletab": "Klik op (gele) Bouwlaag-vlak of op (roze) bag-pand",
+        "toggletab": "Bouwlaag: klik voor nieuw op (roze) bag-pand, voor bestaand op (gele) Bouwlaag.",
   
     }
 }

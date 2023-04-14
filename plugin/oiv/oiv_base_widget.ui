@@ -83,8 +83,11 @@
             <property name="styleSheet">
              <string notr="true">background-color: rgb(255, 255, 255);</string>
             </property>
+            <property name="tabPosition">
+             <enum>QTabWidget::North</enum>
+            </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>1</number>
             </property>
             <property name="iconSize">
              <size>
@@ -107,7 +110,7 @@
                <normaloff>:/plugins/oiv/config_files/png/repressief_object.png</normaloff>:/plugins/oiv/config_files/png/repressief_object.png</iconset>
              </attribute>
              <attribute name="title">
-              <string/>
+              <string>Terrein</string>
              </attribute>
              <attribute name="toolTip">
               <string>Klik voor planvorming Object / terrein / gebied</string>
@@ -187,7 +190,7 @@
                <normaloff>:/plugins/oiv/config_files/png/bouwlagen.png</normaloff>:/plugins/oiv/config_files/png/bouwlagen.png</iconset>
              </attribute>
              <attribute name="title">
-              <string/>
+              <string>Bouwlaag</string>
              </attribute>
              <attribute name="toolTip">
               <string>Klik voor planvorming Bouwlaag / pand</string>
@@ -648,7 +651,7 @@ border-color: rgba(255, 255, 255, 0);</string>
           <item row="24" column="2" colspan="2">
            <widget class="QPushButton" name="info_of_interest">
             <property name="text">
-             <string>Info of interest</string>
+             <string>Losse symbolen</string>
             </property>
            </widget>
           </item>

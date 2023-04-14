@@ -722,7 +722,7 @@ border-color: rgba(255, 255, 255, 0);</string>
               <string notr="true">background-color: rgb(240, 240, 240);</string>
              </property>
              <property name="text">
-              <string>Info BAG</string>
+              <string>Terugmelding BAG</string>
              </property>
              <property name="checkable">
               <bool>false</bool>
@@ -869,6 +869,15 @@ border-color: rgba(255, 255, 255, 0);</string>
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">selection-background-color: rgb(199, 199, 199);</string>
              </property>
              <property name="maxVisibleItems">
               <number>30</number>

@@ -276,6 +276,7 @@
         <file>config_files/png/interface/print.png</file>
         <file>config_files/png/interface/touch.png</file>
         <file>config_files/png/interface/terrein.png</file>
+        <file>config_files/png/interface/terrein_del.png</file>
         <file>config_files/png/interface/bouwlaag.png</file>
         <file>config_files/png/interface/kaartblad_grid.png</file>
         <file>config_files/png/interface/back.png</file>
