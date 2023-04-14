@@ -61,6 +61,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.object_bgt.clicked.connect(self.open_bgt_viewer)
         self.object_delete.clicked.connect(self.run_delete_object)
         self.terrein_tekenen.clicked.connect(self.run_terrein_toevoegen)
+        self.terrein_delete.clicked.connect(self.run_delete_terrein)
         self.object_draw.clicked.connect(self.run_object_symbolen_tekenen)
         self.object_print.clicked.connect(self.run_print)
         self.create_grid.clicked.connect(self.run_create_grid)
@@ -142,11 +143,12 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         except: # pylint: disable=bare-except
             pass
 
-    def control_buttons_addobjectframe(self, terrein, importbtn, grid, georeference):
+    def control_buttons_addobjectframe(self, terrein, importbtn, grid, georeference, terrein_del):
         self.terrein_tekenen.setEnabled(terrein)
         self.create_grid.setEnabled(grid)
         self.import_drawing.setEnabled(importbtn)
         self.georeferencer.setEnabled(georeference)
+        self.terrein_delete.setEnabled(terrein_del)
 
     def object_toevoegen(self):
         self.baseWidget.done.setEnabled(False)
@@ -187,7 +189,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             self.baseWidget.tabWidget.removeTab(3)
 
     def run_terrein_toevoegen(self):
-        self.control_buttons_addobjectframe(True, False, False, False)
+        self.control_buttons_addobjectframe(True, False, False, False, False)
         objectId = self.object_id.text()
         possibleSnapFeatures = UC.get_possible_snapFeatures_object(self.snapLayerNames, objectId)
         self.drawTool.parent = self
@@ -201,6 +203,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas.setMapTool(self.drawTool)
 
     def run_delete_terrein(self):
+        self.control_buttons_addobjectframe(False, False, False, False, True)
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
@@ -211,6 +214,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         if reply == 'Retry':
             self.run_delete_terrein()
         self.selectTool.geomSelected.disconnect(self.delete)
+        self.control_buttons_addobjectframe(True, True, True, True, True)
 
     def place_object_terrein(self, points, _dummy):
         """save drawn terrain"""
@@ -225,7 +229,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         layer.triggerRepaint()
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.baseWidget.activatePan()
-        self.control_buttons_addobjectframe(True, True, True, True)
+        self.control_buttons_addobjectframe(True, True, True, True, True)
 
     def run_object_symbolen_tekenen(self):
         tekenWidget = OTW.oivObjectTekenWidget(self)
