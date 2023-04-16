@@ -124,14 +124,15 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
-        stackWidget = SW.oivStackWidget(self)
-        self.show_subwidget(True, stackWidget)
-        stackWidget.parentWidget = self
-        stackWidget.baseWidget = self.baseWidget
-        stackWidget.parentWidth = self.width()
-        stackWidget.open_feature_form(ilayer, ifeature)
-        stackWidget.show()
-        self.selectTool.geomSelected.disconnect()
+        if ilayer.name() != PC.OBJECT["objectlayername"]:
+            stackWidget = SW.oivStackWidget(self)
+            self.show_subwidget(True, stackWidget)
+            stackWidget.parentWidget = self
+            stackWidget.baseWidget = self.baseWidget
+            stackWidget.parentWidth = self.width()
+            stackWidget.open_feature_form(ilayer, ifeature)
+            stackWidget.show()
+            self.selectTool.geomSelected.disconnect()
         self.run_edit_tool()
 
     def show_subwidget(self, show, widget=None):
