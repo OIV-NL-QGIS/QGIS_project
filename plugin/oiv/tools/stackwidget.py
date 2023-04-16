@@ -26,7 +26,7 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
         super(oivStackWidget, self).__init__(parent)
         self.iface = QU.iface
         self.parent = parent
-        self.baseWidget = parent.baseWidget
+        self.baseWidget = self.parent.baseWidget
         self.setupUi(self)
 
     def open_feature_form(self, ilayer, ifeature):

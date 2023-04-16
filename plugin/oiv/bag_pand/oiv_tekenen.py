@@ -124,7 +124,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
-        stackWidget = SW.oivStackWidget()
+        stackWidget = SW.oivStackWidget(self)
         self.show_subwidget(True, stackWidget)
         stackWidget.parentWidget = self
         stackWidget.baseWidget = self.baseWidget
