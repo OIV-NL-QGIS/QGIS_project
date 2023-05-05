@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>301</width>
-    <height>754</height>
+    <height>802</height>
    </rect>
   </property>
   <property name="features">
@@ -29,7 +29,7 @@
          <x>0</x>
          <y>0</y>
          <width>281</width>
-         <height>712</height>
+         <height>760</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -67,9 +67,13 @@
           </item>
           <item>
            <widget class="QLineEdit" name="teken_bouwlaag">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(208, 208, 208);
-border-color: rgba(255, 255, 255, 0);</string>
+border-color: rgba(255, 255, 255, 0);
+color: rgb(0, 0, 0);</string>
             </property>
            </widget>
           </item>
@@ -85,9 +89,13 @@ border-color: rgba(255, 255, 255, 0);</string>
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="toolTipDuration">
+             <number>-1</number>
+            </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(208, 208, 208);
-border-color: rgba(255, 255, 255, 0);</string>
+border-color: rgba(255, 255, 255, 0);
+color: rgb(0, 0, 0);</string>
             </property>
            </widget>
           </item>

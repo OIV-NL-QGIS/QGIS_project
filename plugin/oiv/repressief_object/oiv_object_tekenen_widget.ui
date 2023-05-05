@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>340</width>
+    <width>444</width>
     <height>856</height>
    </rect>
   </property>
@@ -58,7 +58,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>340</width>
+         <width>444</width>
          <height>748</height>
         </rect>
        </property>
@@ -113,6 +113,9 @@
           </item>
           <item>
            <widget class="QLineEdit" name="formelenaam">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -121,7 +124,8 @@
             </property>
             <property name="styleSheet">
              <string notr="true">background-color: rgb(208, 208, 208);
-border-color: rgba(255, 255, 255, 0);</string>
+border-color: rgba(255, 255, 255, 0);
+color: rgb(0, 0, 0);</string>
             </property>
            </widget>
           </item>

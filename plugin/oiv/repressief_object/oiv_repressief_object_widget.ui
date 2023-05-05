@@ -520,18 +520,28 @@
         </item>
         <item row="1" column="0" colspan="2">
          <widget class="QLineEdit" name="formelenaam">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="acceptDrops">
            <bool>false</bool>
           </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(208, 208, 208);
-border-color: rgba(255, 255, 255, 0);</string>
+border-color: rgba(255, 255, 255, 0);
+color: rgb(0, 0, 0);</string>
           </property>
          </widget>
         </item>
