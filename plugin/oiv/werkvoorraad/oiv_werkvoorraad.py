@@ -65,13 +65,14 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
             request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" in ({})'.format(objectIds))
         for layerName in layerNames:
             ilayer = UC.getlayer_byname(layerName)
-            it = ilayer.getFeatures(request)
-            for feat in it:
-                data = []
-                for fieldName in self.tableColumns:
-                    data.append(feat[fieldName])
-                data.append(layerName)
-                self.tableData.append(data)
+            if ilayer:
+                it = ilayer.getFeatures(request)
+                for feat in it:
+                    data = []
+                    for fieldName in self.tableColumns:
+                        data.append(feat[fieldName])
+                    data.append(layerName)
+                    self.tableData.append(data)
         self.populate_table(self.tableData)
         self.get_other_mods(objectId)
 
