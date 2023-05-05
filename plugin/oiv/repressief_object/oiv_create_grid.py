@@ -277,8 +277,6 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         if self.rubberBand:
             self.canvas.scene().removeItem(self.rubberBand)
             self.rubberBand = None
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
         self.close()
         self.parent.show_subwidget(False)
         del self
