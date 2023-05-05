@@ -45,15 +45,19 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         """intitiate the UI elemets on the widget"""
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.pand_id.setVisible(False)
-        self.baseWidget.drawbuttonframe.setVisible(True)
-        self.baseWidget.move.clicked.connect(self.run_move_point)
+        self.drawbuttonframe.setVisible(True)
+        self.move.clicked.connect(self.run_move_point)
         #connect buttons to the action
-        self.baseWidget.identify.clicked.connect(self.run_edit_tool)
-        self.baseWidget.select.clicked.connect(self.run_select_tool)
-        self.baseWidget.delete_f.clicked.connect(self.run_delete_tool)
+        self.identify.clicked.connect(self.run_edit_tool)
+        self.select.clicked.connect(self.run_select_tool)
+        self.delete_f.clicked.connect(self.run_delete_tool)
         self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
-        self.baseWidget.done.setEnabled(False)
-        self.baseWidget.done_png.setEnabled(False)
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
+        self.baseWidget.filter_objecten.setVisible(False)
+        self.baseWidget.label_filter.setVisible(False)
+        self.baseWidget.info_of_interest.setVisible(False)
+        self.baseWidget.label_info_of_interest.setVisible(False)
         actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.PAND["configtable"])
         self.initActions(actionList)
 
@@ -218,10 +222,10 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def close_bouwlaag_tekenen_show_base(self):
         """destroy and close self"""
-        self.baseWidget.move.clicked.disconnect()
-        self.baseWidget.identify.clicked.disconnect()
-        self.baseWidget.select.clicked.disconnect()
-        self.baseWidget.delete_f.clicked.disconnect()
+        self.move.clicked.disconnect()
+        self.identify.clicked.disconnect()
+        self.select.clicked.disconnect()
+        self.delete_f.clicked.disconnect()
         try:
             self.selectTool.geomSelected.disconnect()
         except:
@@ -234,8 +238,13 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                     pass
         self.close()
         self.parent.show_subwidget(False)
-        self.baseWidget.drawbuttonframe.setVisible(False)
-        self.baseWidget.done.setEnabled(True)
-        self.baseWidget.done_png.setEnabled(True)
+        self.drawbuttonframe.setVisible(False)
+        self.baseWidget.done.setVisible(True)
+        self.baseWidget.done_png.setVisible(True)
+        self.baseWidget.filter_objecten.setVisible(True)
+        self.baseWidget.label_filter.setVisible(True)
+        self.baseWidget.info_of_interest.setVisible(True)
+        self.baseWidget.label_info_of_interest.setVisible(True)
+        self.baseWidget.cadframe.setVisible(False)
         self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
         del self
