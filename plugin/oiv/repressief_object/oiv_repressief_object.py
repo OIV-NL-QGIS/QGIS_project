@@ -54,12 +54,12 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         """connect the buttons to their actions"""
         self.baseobjectFrame.setVisible(True)
         self.addobjectFrame.setVisible(False)
+        self.deleteobjectFrame.setVisible(False)
+        self.delete_menu.clicked.connect(self.object_verwijderen)
         self.object_add.clicked.connect(self.object_toevoegen)
         self.object_info.clicked.connect(self.run_objectgegevens_bewerken)
         self.object_bgt.clicked.connect(self.open_bgt_viewer)
-        self.object_delete.clicked.connect(self.run_delete_object)
         self.terrein_tekenen.clicked.connect(self.run_terrein_toevoegen)
-        self.terrein_delete.clicked.connect(self.run_delete_terrein)
         self.object_draw.clicked.connect(self.run_object_symbolen_tekenen)
         self.object_print.clicked.connect(self.run_print)
         self.create_grid.clicked.connect(self.run_create_grid)
@@ -156,6 +156,15 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.georeferencer.clicked.connect(self.open_georeferencer)
         self.terug_add.clicked.connect(self.object_toevoegen_sluiten)
 
+    def object_verwijderen(self):
+        self.baseWidget.done.setEnabled(False)
+        self.baseWidget.done_png.setEnabled(False)
+        self.baseobjectFrame.setVisible(False)
+        self.deleteobjectFrame.setVisible(True)
+        self.terrein_delete.clicked.connect(self.run_delete_terrein)
+        self.object_delete.clicked.connect(self.run_delete_object)
+        self.terug_delete.clicked.connect(self.object_verwijderen_sluiten)
+
     def object_toevoegen_sluiten(self):
         self.baseWidget.done.setEnabled(True)
         self.baseWidget.done_png.setEnabled(True)
@@ -165,6 +174,15 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.control_buttons_addobjectframe(True, True, True, True, True)
         self.terug_add.clicked.disconnect(self.object_toevoegen_sluiten)
+
+    def object_verwijderen_sluiten(self):
+        self.baseWidget.done.setEnabled(True)
+        self.baseWidget.done_png.setEnabled(True)
+        self.baseobjectFrame.setVisible(True)
+        self.deleteobjectFrame.setVisible(False)
+        self.terrein_delete.clicked.disconnect(self.run_delete_terrein)
+        self.object_delete.clicked.disconnect(self.run_delete_object)
+        self.terug_delete.clicked.disconnect(self.object_verwijderen_sluiten)
 
     def edit_feature(self):
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
