@@ -19,13 +19,13 @@
  
 ; Define your application name
 !define APPNAME "OIV"
-!define STAD "Zaandam"
-!define BUILDTYPE ""
+!define STAD "Hoorn"
+!define BUILDTYPE "beta1"
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.4.05
-!define PLUGINVERSION 3.4.05
+!define VERSION 3.5.0
+!define PLUGINVERSION 3.5.0
 !define QGISVERSION "QGIS322"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
