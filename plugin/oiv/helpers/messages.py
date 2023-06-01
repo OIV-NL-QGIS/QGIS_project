@@ -161,4 +161,10 @@ MESSAGES = {
         "header": 'Meerdere bouwlagen',
         "body": 'Er zijn meerdere bouwlagen die elkaar overlapppen.\nDus het is onduidelijk waaraan u wilt koppelen.\nHerstel dit eerst.'
     },
+    'modifyHistory': {
+        "type": 'question',
+        "header": 'OIV',
+        "body": 'Heeft u de historie bijgewerkt?'        
+    },
+
 }

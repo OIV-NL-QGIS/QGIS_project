@@ -25,6 +25,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     repressiefObjectWidget = None
     pandwidget = None
+    activeTab = None
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -116,13 +117,21 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         except: # pylint: disable=bare-except
             pass
 
+    def askHistory(self):
+        if self.activeTab == 'Object':
+            reply = MSG.showMsgBox('modifyHistory')
+            if not reply:
+                self.repressiefObjectWidget.run_objectgegevens_bewerken()
+            else:
+                self.handleDoneBtn(False)
+
     def handle_tabbar_clicked(self, index):
         if index == 0:
             self.tabWidget.setCurrentIndex(0)
             self.run_identify_terrein()
             self.statusregelObject.setText(STATUSRGL["object"]["toggletab"])
             self.handleDoneBtn(True)
-            self.done.clicked.connect(lambda: self.handleDoneBtn(False))
+            self.done.clicked.connect(self.askHistory)
             self.tabWidget.setTabVisible(1, False)
             self.disconnectTabBouwlaag()
         elif index == 1:
@@ -130,7 +139,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             self.run_identify_pand()
             self.statusregelBouwlaag.setText(STATUSRGL["bouwlaag"]["toggletab"])
             self.handleDoneBtn(True)
-            self.done.clicked.connect(lambda: self.handleDoneBtn(False))
+            self.done.clicked.connect(self.askHistory)
             self.tabWidget.setTabVisible(0, False)
             self.disconnectTabObject()
         else:
@@ -162,9 +171,11 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             if ilayer.name() == PAND["bouwlaaglayername"]:
                 objectId = str(ifeature["pand_id"])
                 self.run_bouwlagen(objectId, False)
+                self.activeTab = 'Bouwlaag'
             elif ilayer.name() == bagpand_layername():
                 objectId = str(ifeature["identificatie"])
                 self.run_bouwlagen(objectId, True)
+                self.activeTab = 'Bouwlaag'
         #if another layer is identified there is no object that can be determined, so a message is send to the user
         else:
             MSG.showMsgBox('noidentifiedobject')
@@ -180,20 +191,24 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             objectId = str(ifeature["identificatie"])
             bron = "BAG"
             bron_tabel = "Pand"
+            self.activeTab = 'Object'
             self.run_new_object(objectId, bron, bron_tabel)
         elif ilayer.name() == bagpand_layername():
             objectId = str(ifeature["identificatie"])
             bron = ifeature["bron"]
             bron_tabel = ifeature["bron_tbl"]
+            self.activeTab = 'Object'
             self.run_new_object(objectId, bron, bron_tabel)
         elif ilayer.name() == OBJECT["objectlayername"]:
             objectId = ifeature["id"]
             formeleNaam = ifeature["formelenaam"]
+            self.activeTab = 'Object'
             self.run_object(formeleNaam, objectId)
         elif ilayer.name() == OBJECT["terreinlayername"]:
             objectId = ifeature["object_id"]
             request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
             ifeature = UC.featureRequest(drawLayer, request)
+            self.activeTab = 'Object'
             if ifeature:
                 formeleNaam = ifeature["formelenaam"]
                 self.run_object(formeleNaam, objectId)
