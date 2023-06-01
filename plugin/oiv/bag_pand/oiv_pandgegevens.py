@@ -81,10 +81,6 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.georeferencer.clicked.disconnect(self.open_georeferencer)
         self.terug_add.clicked.disconnect(self.bouwlaag_toevoegen_sluiten)
 
-    def handle_done_btn(self, show):
-        self.baseWidget.done.setVisible(show)
-        self.baseWidget.done_png.setVisible(show)
-
     def open_georeferencer(self):
         self.iface.mainWindow().findChildren(PQtW.QAction, 'mActionShowGeoreferencer')[0].trigger()
 
@@ -184,7 +180,6 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_tekenen(self):
         """init teken widget"""
-        self.handle_done_btn(False)
         tekenWidget = oivTekenWidget(self)
         subString = "bouwlaag = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)

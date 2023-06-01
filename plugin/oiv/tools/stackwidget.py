@@ -20,6 +20,7 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
     attributeForm = None
     parentWidget = None
     parentWidth = None
+    isTekenen = False
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -55,8 +56,9 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
             if ifeature:
                 self.parent.formelenaam.setText(ifeature["formelenaam"])
         self.parent.setFixedWidth(self.parentWidth)
-        self.baseWidget.done.setVisible(True)
-        self.baseWidget.done_png.setVisible(True)
+        if not self.isTekenen:
+            self.baseWidget.done.setVisible(True)
+            self.baseWidget.done_png.setVisible(True)
         self.terug.clicked.disconnect()
         self.close()
         self.parent.show_subwidget(False)
