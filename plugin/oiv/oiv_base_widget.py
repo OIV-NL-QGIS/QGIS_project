@@ -88,9 +88,9 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         except: # pylint: disable=bare-except
             pass
 
-#    def activatePan(self):
-#        """trigger pan function to loose other functions"""
-#        self.iface.actionPan().trigger()
+    def activatePan(self):
+        """trigger pan function to loose other functions"""
+        self.iface.actionPan().trigger()
 
     def disconnectTabBouwlaag(self):
         try:
