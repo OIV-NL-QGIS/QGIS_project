@@ -162,6 +162,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             stackWidget = SW.oivStackWidget(self)
             self.show_subwidget(True, stackWidget)
             stackWidget.parentWidget = self
+            stackWidget.baseWidget = self.baseWidget
+            stackWidget.isTekenen = True
             stackWidget.parentWidth = self.width()
             stackWidget.open_feature_form(ilayer, ifeature)
             stackWidget.show()

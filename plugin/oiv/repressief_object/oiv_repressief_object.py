@@ -149,16 +149,16 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terrein_delete.setEnabled(terrein_del)
 
     def object_toevoegen(self):
-        self.baseWidget.done.setEnabled(False)
-        self.baseWidget.done_png.setEnabled(False)
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
         self.baseobjectFrame.setVisible(False)
         self.addobjectFrame.setVisible(True)
         self.georeferencer.clicked.connect(self.open_georeferencer)
         self.terug_add.clicked.connect(self.object_toevoegen_sluiten)
 
     def object_verwijderen(self):
-        self.baseWidget.done.setEnabled(False)
-        self.baseWidget.done_png.setEnabled(False)
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
         self.baseobjectFrame.setVisible(False)
         self.deleteobjectFrame.setVisible(True)
         self.terrein_delete.clicked.connect(self.run_delete_terrein)
@@ -166,8 +166,8 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug_delete.clicked.connect(self.object_verwijderen_sluiten)
 
     def object_toevoegen_sluiten(self):
-        self.baseWidget.done.setEnabled(True)
-        self.baseWidget.done_png.setEnabled(True)
+        self.baseWidget.done.setVisible(True)
+        self.baseWidget.done_png.setVisible(True)
         self.baseobjectFrame.setVisible(True)
         self.addobjectFrame.setVisible(False)
         self.georeferencer.clicked.disconnect(self.open_georeferencer)
@@ -176,8 +176,8 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug_add.clicked.disconnect(self.object_toevoegen_sluiten)
 
     def object_verwijderen_sluiten(self):
-        self.baseWidget.done.setEnabled(True)
-        self.baseWidget.done_png.setEnabled(True)
+        self.baseWidget.done.setVisible(True)
+        self.baseWidget.done_png.setVisible(True)
         self.baseobjectFrame.setVisible(True)
         self.deleteobjectFrame.setVisible(False)
         self.terrein_delete.clicked.disconnect(self.run_delete_terrein)

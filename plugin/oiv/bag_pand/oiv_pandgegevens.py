@@ -62,8 +62,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlaag_print.clicked.connect(self.run_print)
 
     def bouwlaag_toevoegen(self):
-        self.baseWidget.done.setEnabled(False)
-        self.baseWidget.done_png.setEnabled(False)
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
         self.baseobjectFrame.setVisible(False)
         self.addobjectFrame.setVisible(True)
         self.bouwlaag_add.clicked.connect(self.run_bouwlaag)
@@ -72,8 +72,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.terug_add.clicked.connect(self.bouwlaag_toevoegen_sluiten)
 
     def bouwlaag_toevoegen_sluiten(self):
-        self.baseWidget.done.setEnabled(True)
-        self.baseWidget.done_png.setEnabled(True)
+        self.baseWidget.done.setVisible(True)
+        self.baseWidget.done_png.setVisible(True)
         self.baseobjectFrame.setVisible(True)
         self.addobjectFrame.setVisible(False)
         self.bouwlaag_add.clicked.disconnect(self.run_bouwlaag)
@@ -99,6 +99,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         stackWidget = SW.oivStackWidget(self)
         self.show_subwidget(True, stackWidget)
         #stackWidget.parentWidget = self
+        stackWidget.done_btn = True
         stackWidget.parentWidth = self.width()
         stackWidget.open_feature_form(ilayer, ifeature)
 

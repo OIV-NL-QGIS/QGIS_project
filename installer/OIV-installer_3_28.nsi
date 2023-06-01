@@ -19,14 +19,14 @@
  
 ; Define your application name
 !define APPNAME "OIV"
-!define STAD "Zaandam"
-!define BUILDTYPE ""
+!define STAD "Hoorn"
+!define BUILDTYPE "beta2"
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.4.03
-!define PLUGINVERSION 3.4.03
-!define QGISVERSION "QGIS316"
+!define VERSION 3.5.0
+!define PLUGINVERSION 3.5.0
+!define QGISVERSION "QGIS328"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
 !define WEBSITE "https://www.safetyct.com"
@@ -401,9 +401,9 @@ Section "Objecten" SectionObjecten
   ${If} ${SectionIsSelected} ${SectionWFS}
     ;Convert standard PostGres project to geoserver WFS project
     SetRegView 64
-    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.16" "InstallPath"
+    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.28" "InstallPath"
     File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
-    ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_objecten_to_wfs.py"
+    ExecWait "$R2\apps\Python39\python.exe $INSTDIR\convert_objecten_to_wfs.py"
     CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" "$INSTDIR\OIV_Objecten_WFS.qgs" "" "$INSTDIR\objecten.ico" 0
   ${EndIf}
 SectionEnd
@@ -428,16 +428,16 @@ Section "Bluswater" SectionBluswater
 
   ${If} ${SectionIsSelected} ${SectionWFS}
     SetRegView 64
-    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.16" "InstallPath"
+    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.28" "InstallPath"
     File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
-    ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
+    ExecWait "$R2\apps\Python39\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
     CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" "$INSTDIR\Bluswater_Beheer_WFS.qgs" "" "$INSTDIR\bluswater.ico" 0
   ${EndIf}
 SectionEnd
 
 Section "Plugin ${PLUGINVERSION}" SectionPlugin
 	; Get install path
-	SetRegView 64 
+	SetRegView 64
 
 	; Section Files
   RMDir /r "$PluginDir\oiv"
