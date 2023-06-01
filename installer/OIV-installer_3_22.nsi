@@ -20,7 +20,7 @@
 ; Define your application name
 !define APPNAME "OIV"
 !define STAD "Hoorn"
-!define BUILDTYPE "beta1"
+!define BUILDTYPE "beta2"
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
@@ -403,7 +403,7 @@ Section "Objecten" SectionObjecten
     SetRegView 64
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
     File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
-    ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_objecten_to_wfs.py"
+    ExecWait "$R2\apps\Python39\python.exe $INSTDIR\convert_objecten_to_wfs.py"
     CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" "$INSTDIR\OIV_Objecten_WFS.qgs" "" "$INSTDIR\objecten.ico" 0
   ${EndIf}
 SectionEnd
@@ -430,7 +430,7 @@ Section "Bluswater" SectionBluswater
     SetRegView 64
     ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.22" "InstallPath"
     File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
-    ExecWait "$R2\apps\Python37\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
+    ExecWait "$R2\apps\Python39\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
     CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" "$INSTDIR\Bluswater_Beheer_WFS.qgs" "" "$INSTDIR\bluswater.ico" 0
   ${EndIf}
 SectionEnd
