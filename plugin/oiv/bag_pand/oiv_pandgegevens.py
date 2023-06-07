@@ -221,7 +221,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
                 subString = "bouwlaag = {}".format(bouwlaag)
                 UG.set_layer_substring(subString)
                 fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
-                filterString = '"identificatie"={}'.format(self.pand_id.text())
+                filterString = '"identificatie"=' + "'{}'".format(self.pand_id.text())
                 PR.load_composer(directory, 'bouwlaag', filterString, fileName)
             MSG.showMsgBox('print_finished', directory)
             subString = "bouwlaag = {}".format(bouwlaagOrg)

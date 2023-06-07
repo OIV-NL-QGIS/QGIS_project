@@ -263,7 +263,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         directory = PQtW.QFileDialog().getExistingDirectory()
         if directory != '':
             fileName = self.object_id.text() + '_' + self.formelenaam.text()
-            filterString = '"object_id"={}'.format(self.object_id.text())
+            filterString = '"object_id"='+"'{}'".format(self.object_id.text())
             PR.load_composer(directory, 'object', filterString, fileName)
             MSG.showMsgBox('print_finished', directory)
 
