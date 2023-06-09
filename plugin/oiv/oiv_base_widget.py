@@ -117,13 +117,15 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         except: # pylint: disable=bare-except
             pass
 
-    def askHistory(self):
+    def ask_history(self):
         if self.activeTab == 'Object':
             reply = MSG.showMsgBox('modifyHistory')
             if not reply:
                 self.repressiefObjectWidget.run_objectgegevens_bewerken()
             else:
                 self.handleDoneBtn(False)
+        else:
+            self.handleDoneBtn(False)
 
     def handle_tabbar_clicked(self, index):
         if index == 0:
@@ -131,7 +133,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             self.run_identify_terrein()
             self.statusregelObject.setText(STATUSRGL["object"]["toggletab"])
             self.handleDoneBtn(True)
-            self.done.clicked.connect(self.askHistory)
+            self.done.clicked.connect(self.ask_history)
             self.tabWidget.setTabVisible(1, False)
             self.disconnectTabBouwlaag()
         elif index == 1:
@@ -139,7 +141,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             self.run_identify_pand()
             self.statusregelBouwlaag.setText(STATUSRGL["bouwlaag"]["toggletab"])
             self.handleDoneBtn(True)
-            self.done.clicked.connect(self.askHistory)
+            self.done.clicked.connect(self.ask_history)
             self.tabWidget.setTabVisible(0, False)
             self.disconnectTabObject()
         else:
