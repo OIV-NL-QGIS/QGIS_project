@@ -120,6 +120,8 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
             reply = MSG.showMsgBox('deletedobject')
+            self.baseobjectFrame.setVisible(True)
+            self.deleteobjectFrame.setVisible(False)
             self.baseWidget.handleDoneBtn(False)
             UC.refresh_layers(self.iface)
         
