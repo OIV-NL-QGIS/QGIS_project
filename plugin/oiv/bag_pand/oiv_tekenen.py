@@ -52,6 +52,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.select.clicked.connect(self.run_select_tool)
         self.delete_f.clicked.connect(self.run_delete_tool)
         self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
+        self.pan.clicked.connect(self.activatePan)
         self.baseWidget.done.setVisible(False)
         self.baseWidget.done_png.setVisible(False)
         self.baseWidget.filter_objecten.setVisible(False)
@@ -220,6 +221,10 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             if buttonCheck != 'Cancel':
                 UC.write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
+
+    def activatePan(self):
+        """trigger pan function to loose other functions"""
+        self.iface.actionPan().trigger()
 
     def close_bouwlaag_tekenen_show_base(self):
         """destroy and close self"""
