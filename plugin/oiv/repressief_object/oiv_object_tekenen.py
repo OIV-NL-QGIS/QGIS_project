@@ -50,6 +50,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identify.clicked.connect(self.run_edit_tool)
         self.select.clicked.connect(self.run_select_tool)
         self.delete_f.clicked.connect(self.run_delete_tool)
+        self.pan.clicked.connect(self.activatePan)
         self.baseWidget.done.setVisible(False)
         self.baseWidget.done_png.setVisible(False)
         self.baseWidget.filter_objecten.setVisible(False)
@@ -136,6 +137,10 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         ilayer.startEditing()
         self.selectTool.geomSelected.disconnect()
         self.run_select_tool()
+
+    def activatePan(self):
+        """trigger pan function to loose other functions"""
+        self.iface.actionPan().trigger()
 
     def run_delete_tool(self):
         """activate delete feature tool"""

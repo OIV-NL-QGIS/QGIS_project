@@ -98,6 +98,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         drawTool.canvas = self.canvas
         drawTool.onGeometryAdded = self.draw_feature
         drawTool.captureMode = 2
+        drawTool.baseWidget = self.baseWidget
         self.canvas.setMapTool(drawTool)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, True, True)
         drawTool.parent = self
@@ -262,6 +263,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
                 vars(self)[var].setVisible(False)
         self.parent.sortedList = self.bouwlaagList
         self.parent.bouwlagen_to_combobox(self.objectId, int(self.bouwlaag_min.text()))
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.parent.show_subwidget(False)
         self.close()
         del self

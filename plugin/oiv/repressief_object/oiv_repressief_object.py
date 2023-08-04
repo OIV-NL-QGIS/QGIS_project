@@ -247,7 +247,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         layer.commitChanges()
         layer.triggerRepaint()
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
-        self.baseWidget.activatePan()
         self.control_buttons_addobjectframe(True, True, True, True, True)
 
     def run_object_symbolen_tekenen(self):
