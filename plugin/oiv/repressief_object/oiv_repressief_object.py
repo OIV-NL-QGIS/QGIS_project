@@ -34,11 +34,13 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     gridWidget = None
     workWidget = None
     workLayout = None
+    objectId = None
 
     def __init__(self, parent=None, objectId=None, formeleNaam=None):
         super(oivRepressiefObjectWidget, self).__init__(parent)
         self.setupUi(self)
         self.baseWidget = parent
+        self.objectId = objectId
         self.iface = parent.iface
         self.canvas = parent.canvas
         self.object_id.setVisible(False)
@@ -68,10 +70,9 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.check_werkvoorraad()
 
     def check_werkvoorraad(self):
-        objectId = self.object_id.text()
         layerName = 'Werkvoorraad objecten'
         ilayer = UC.getlayer_byname(layerName)
-        request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
+        request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(self.objectId))
         it = ilayer.getFeatures(request)
         if len(list(it)) > 0:
             self.object_inventory.setEnabled(True)
