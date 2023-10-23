@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="JoostDeen" version="3.28.9-Firenze" projectname="Operationele Informatie Voorziening - Bluswater Beheer v3.5.02" saveUserFull="Joost Deen" saveDateTime="2023-10-19T17:50:23">
+<qgis saveUser="JoostDeen" version="3.28.9-Firenze" projectname="Operationele Informatie Voorziening - Bluswater Beheer v3.5.02" saveUserFull="Joost Deen" saveDateTime="2023-10-19T16:46:06">
   <homePath path=""/>
   <title>Operationele Informatie Voorziening - Bluswater Beheer v3.5.02</title>
   <transaction mode="Disabled"/>
@@ -41,7 +41,7 @@
         <Option/>
       </customproperties>
     </layer-tree-layer>
-    <layer-tree-group expanded="1" checked="Qt::Checked" groupLayer="" name="Referentielagen">
+    <layer-tree-group expanded="0" checked="Qt::Checked" groupLayer="" name="Referentielagen">
       <customproperties>
         <Option/>
       </customproperties>
@@ -196,7 +196,7 @@
         <legendlayerfile visible="1" layerid="brandkraan_inspectie20170621100151003" isInOverview="0"/>
       </filegroup>
     </legendlayer>
-    <legendgroup checked="Qt::Checked" open="true" name="Referentielagen">
+    <legendgroup checked="Qt::Checked" open="false" name="Referentielagen">
       <legendlayer checked="Qt::Unchecked" open="false" name="Afgekeurd binnen 120m" showFeatureCount="0" drawingOrder="-1">
         <filegroup open="false" hidden="false">
           <legendlayerfile visible="0" layerid="afgekeurd_binnen_straal20170705095104986" isInOverview="0"/>
@@ -5052,9 +5052,6 @@ def my_form_open(dialog, layer, feature):
           <Option value="offline" name="QFieldSync/cloud_action" type="QString"/>
           <Option value="{}" name="QFieldSync/photo_naming" type="QString"/>
           <Option value="{}" name="QFieldSync/relationship_maximum_visible" type="QString"/>
-          <Option name="dualview/previewExpressions" type="List">
-            <Option value="&quot;id&quot;" type="QString"/>
-          </Option>
           <Option value="0" name="embeddedWidgets/count" type="QString"/>
           <Option name="variableNames" type="invalid"/>
           <Option name="variableValues" type="invalid"/>
@@ -5430,7 +5427,6 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" name="uit_gezet_bij_gemeente" hidden="0" type="field"/>
           <column width="-1" name="opmerking_beheerder" hidden="0" type="field"/>
           <column width="-1" name="inlognaam" hidden="0" type="field"/>
-          <column width="-1" name="gemeentenaam" hidden="0" type="field"/>
           <column width="-1" hidden="1" type="actions"/>
         </columns>
       </attributetableconfig>
