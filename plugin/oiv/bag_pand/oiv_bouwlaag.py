@@ -192,12 +192,13 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             # get active floor from dockwidget
             minBouwlaag = int(self.bouwlaag_min.text())
             maxBouwlaag = int(self.bouwlaag_max.text())
+            selectedLaag = int(self.bouwlaag.currentText())
             layer = UC.getlayer_byname(layerName)
             # get necessary attributes from config file
             foreignKey = CH.get_foreign_key_bl(layerName)
             # construct QgsFeature to save
             for i in range(minBouwlaag, maxBouwlaag + 1):
-                if i != 0:
+                if i != 0 and i != selectedLaag:
                     childFeature.setGeometry(ifeature.geometry())
                     fields = layer.fields()
                     childFeature.initAttributes(fields.count())
