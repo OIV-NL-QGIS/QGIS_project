@@ -37,6 +37,9 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
+    <property name="verticalSpacing">
+     <number>0</number>
+    </property>
     <item row="0" column="0">
      <widget class="QScrollArea" name="scrollArea">
       <property name="frameShape">
@@ -44,6 +47,9 @@
       </property>
       <property name="frameShadow">
        <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>0</number>
       </property>
       <property name="widgetResizable">
        <bool>true</bool>
@@ -58,6 +64,9 @@
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <property name="leftMargin">
          <number>5</number>
         </property>
@@ -266,6 +275,241 @@
             <property name="checkable">
              <bool>false</bool>
             </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="done_png">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="resources.qrc">:/plugins/oiv/config_files/png/interface/done.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="22" column="1">
+           <widget class="QLabel" name="label_filter">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="resources.qrc">:/plugins/oiv/config_files/png/interface/filter.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" colspan="2">
+           <widget class="QPushButton" name="close_btn">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Sluit OIV</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="3">
+           <widget class="QFrame" name="cadframe">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item row="0" column="0" colspan="2">
+              <widget class="QLabel" name="lengte_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Lengte (m)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QDoubleSpinBox" name="lengte">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(240, 240, 240);
+border-color: rgba(255, 255, 255, 0);</string>
+               </property>
+               <property name="frame">
+                <bool>false</bool>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3" colspan="2">
+              <widget class="QLabel" name="oppervlakte_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Oppervlakte (m2)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QDoubleSpinBox" name="oppervlakte">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(240, 240, 240);
+border-color: rgba(255, 255, 255, 0);</string>
+               </property>
+               <property name="frame">
+                <bool>false</bool>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::NoButtons</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="3">
+              <widget class="QLabel" name="straal_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Hulpcirkel (m)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3" colspan="3">
+              <widget class="QLabel" name="offset_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Offset parallel (m)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QPushButton" name="straal_button">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/plugins/oiv/config_files/png/hulpcirkel.png</normaloff>:/plugins/oiv/config_files/png/hulpcirkel.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" colspan="2">
+              <widget class="QDoubleSpinBox" name="straal">
+               <property name="decimals">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <double>1000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QPushButton" name="offset_button">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/plugins/oiv/config_files/png/offset_parallel.png</normaloff>:/plugins/oiv/config_files/png/offset_parallel.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="4" colspan="2">
+              <widget class="QDoubleSpinBox" name="offset">
+               <property name="decimals">
+                <number>1</number>
+               </property>
+               <property name="minimum">
+                <double>-1000.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>1000.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item row="7" column="1" colspan="3">
@@ -514,235 +758,6 @@
               </item>
              </layout>
             </widget>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="done_png">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="pixmap">
-             <pixmap resource="resources.qrc">:/plugins/oiv/config_files/png/interface/done.png</pixmap>
-            </property>
-            <property name="scaledContents">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="22" column="1">
-           <widget class="QLabel" name="label_filter">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="pixmap">
-             <pixmap resource="resources.qrc">:/plugins/oiv/config_files/png/interface/filter.png</pixmap>
-            </property>
-            <property name="scaledContents">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" colspan="2">
-           <widget class="QPushButton" name="close_btn">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Arial</family>
-              <pointsize>8</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Sluit OIV</string>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1" colspan="3">
-           <widget class="QFrame" name="cadframe">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <item row="0" column="0" colspan="2">
-              <widget class="QLabel" name="lengte_label">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Lengte (m)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QDoubleSpinBox" name="lengte">
-               <property name="styleSheet">
-                <string notr="true">background-color: rgb(240, 240, 240);
-border-color: rgba(255, 255, 255, 0);</string>
-               </property>
-               <property name="frame">
-                <bool>false</bool>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::NoButtons</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3" colspan="2">
-              <widget class="QLabel" name="oppervlakte_label">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Oppervlakte (m2)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="5">
-              <widget class="QDoubleSpinBox" name="oppervlakte">
-               <property name="styleSheet">
-                <string notr="true">background-color: rgb(240, 240, 240);
-border-color: rgba(255, 255, 255, 0);</string>
-               </property>
-               <property name="frame">
-                <bool>false</bool>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::NoButtons</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" colspan="3">
-              <widget class="QLabel" name="straal_label">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Hulpcirkel (m)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3" colspan="3">
-              <widget class="QLabel" name="offset_label">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Offset parallel (m)</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QPushButton" name="straal_button">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/plugins/oiv/config_files/png/hulpcirkel.png</normaloff>:/plugins/oiv/config_files/png/hulpcirkel.png</iconset>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1" colspan="2">
-              <widget class="QDoubleSpinBox" name="straal">
-               <property name="decimals">
-                <number>1</number>
-               </property>
-               <property name="maximum">
-                <double>1000.000000000000000</double>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="3">
-              <widget class="QPushButton" name="offset_button">
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/plugins/oiv/config_files/png/offset_parallel.png</normaloff>:/plugins/oiv/config_files/png/offset_parallel.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>16</width>
-                 <height>16</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="4" colspan="2">
-              <widget class="QDoubleSpinBox" name="offset">
-               <property name="decimals">
-                <number>1</number>
-               </property>
-               <property name="minimum">
-                <double>-1000.000000000000000</double>
-               </property>
-               <property name="maximum">
-                <double>1000.000000000000000</double>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </widget>
           </item>
          </layout>
