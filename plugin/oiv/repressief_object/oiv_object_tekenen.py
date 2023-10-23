@@ -169,7 +169,6 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             stackWidget.parentWidget = self
             stackWidget.baseWidget = self.baseWidget
             stackWidget.isTekenen = True
-            stackWidget.parentWidth = self.width()
             stackWidget.open_feature_form(ilayer, ifeature)
             stackWidget.show()
             self.selectTool.geomSelected.disconnect()

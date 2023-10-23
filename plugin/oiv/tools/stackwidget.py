@@ -55,7 +55,6 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
             ifeature = UC.featureRequest(ilayer, request)
             if ifeature:
                 self.parent.formelenaam.setText(ifeature["formelenaam"])
-        self.parent.setFixedWidth(self.parentWidth)
         if not self.isTekenen:
             self.baseWidget.done.setVisible(True)
             self.baseWidget.done_png.setVisible(True)
