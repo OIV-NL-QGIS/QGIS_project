@@ -36,7 +36,7 @@ def bagpand_layername():
     return None
 
 
-OIV_VERSION = '3.5.1'
+OIV_VERSION = '3.5.2'
 
 PLUGIN = {
     "name": "OIV Objecten",
