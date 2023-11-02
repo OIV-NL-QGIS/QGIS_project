@@ -13,13 +13,14 @@ import oiv.helpers.configdb_helper as CH
 def open_url(url):
     webbrowser.open(url)
 
-def featureRequest(ilayer, request=None):
+def featureRequest(ilayer, request=None, mandatory=True):
     it = ilayer.getFeatures(request)
     try:
         ifeature = next(it)
         return ifeature
     except:
-        MSG.showMsgBox('nofeature')
+        if mandatory:
+            MSG.showMsgBox('nofeature')
         return None
 
 def read_settings(query, allResult):
@@ -163,7 +164,7 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
         if lyr:
             if name == PC.bagpand_layername():
                 request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
-                ifeature = featureRequest(lyr, request)
+                ifeature = featureRequest(lyr, request, False)
                 if ifeature:
                     possibleSnapFeatures.append(ifeature.geometry())
             elif name == PC.PAND["bouwlaaglayername"]:
