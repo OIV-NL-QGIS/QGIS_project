@@ -192,7 +192,10 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             # get active floor from dockwidget
             minBouwlaag = int(self.bouwlaag_min.text())
             maxBouwlaag = int(self.bouwlaag_max.text())
-            selectedLaag = int(self.bouwlaag.currentText())
+            try:
+                selectedLaag = int(self.bouwlaag.currentText())
+            except:
+                selectedLaag = None
             layer = UC.getlayer_byname(layerName)
             # get necessary attributes from config file
             foreignKey = CH.get_foreign_key_bl(layerName)
