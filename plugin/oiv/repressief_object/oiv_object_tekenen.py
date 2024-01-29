@@ -155,6 +155,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def delete(self, ilayer, ifeature):
         """delete a feature"""
         reply = DH.temp_delete_feature(ilayer, ifeature, 'Object', self.editableLayerNames)
+        self.baseWidget.objectModified = True
         #reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
         if reply == 'Retry':
             self.run_delete_tool()
@@ -170,6 +171,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             stackWidget.baseWidget = self.baseWidget
             stackWidget.isTekenen = True
             stackWidget.open_feature_form(ilayer, ifeature)
+            self.baseWidget.objectModified = True
             stackWidget.show()
             self.selectTool.geomSelected.disconnect()
         self.run_edit_tool()
@@ -197,6 +199,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         for lyrName in self.moveLayerNames:
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.commitChanges()
+            self.baseWidget.objectModified = True
             moveLayer.reload()
         self.run_move_point()
 
@@ -244,5 +247,6 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.OBJECT["configtable"])
             if buttonCheck != 'Cancel':
                 UC.write_layer(self.drawLayer, childFeature)
+                self.baseWidget.objectModified = True
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)

@@ -245,6 +245,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             buttonCheck = UC.get_attributes(parentId, childFeature, None, None, layer, PC.OBJECT["configtable"])
             if buttonCheck != 'Cancel':
                 UC.write_layer(layer, childFeature)
+                self.baseWidget.objectModified = True
         layer.commitChanges()
         layer.triggerRepaint()
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
