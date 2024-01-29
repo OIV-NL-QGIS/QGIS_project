@@ -26,6 +26,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     repressiefObjectWidget = None
     pandwidget = None
     activeTab = None
+    objectModified = False
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -114,7 +115,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             pass
 
     def ask_history(self):
-        if self.activeTab == 'Object':
+        if self.activeTab == 'Object' and self.objectModified == True:
             reply = MSG.showMsgBox('modifyHistory')
             if not reply:
                 self.repressiefObjectWidget.run_objectgegevens_bewerken()

@@ -33,6 +33,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         super(oivGridWidget, self).__init__(parent)
         self.setupUi(self)
         self.parent = parent
+        self.baseWidget = parent.baseWidget
         self.canvas = parent.canvas
         self.iface = parent.iface
         self.objectId = self.parent.object_id.text()
@@ -141,6 +142,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
         foreignKey = CH.get_foreign_key_ob(layerName)
         targetFeature[foreignKey] = self.objectId
         UC.write_layer(layer, targetFeature)
+        self.baseWidget.objectModified = True
         bbox = geom.boundingBox()
         dist = self.distance_grid.value()
         if withGrid:
@@ -203,6 +205,7 @@ class oivGridWidget(PQtW.QDockWidget, FORM_CLASS):
                 targetFeature['afstand'] = dist
                 targetFeature["uuid"] = str(gridUUID)
                 UC.write_layer(layer, targetFeature)
+        self.baseWidget.objectModified = True
         MSG.showMsgBox('gridcreated')
 
     def calculate_geometry(self, dist, xmin, ymin, x, y, gridType):
