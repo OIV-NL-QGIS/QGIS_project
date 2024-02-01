@@ -36,14 +36,14 @@ def bagpand_layername():
     return None
 
 
-OIV_VERSION = '3.5.2'
+OIV_VERSION = '3.5.03'
 
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
-        "min": 343,
-        "max": 351
+        "min": 353,
+        "max": 353
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
