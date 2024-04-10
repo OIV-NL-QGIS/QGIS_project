@@ -391,7 +391,7 @@
         <item row="1" column="0" colspan="2">
          <widget class="QLineEdit" name="pand_id">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -676,7 +676,7 @@ color: rgb(0, 0, 0);</string>
            <item row="9" column="1">
             <widget class="QPushButton" name="bouwlaag_inventory">
              <property name="enabled">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">

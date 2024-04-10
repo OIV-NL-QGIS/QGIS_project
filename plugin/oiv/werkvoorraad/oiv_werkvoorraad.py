@@ -146,10 +146,12 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
                     label.setText(labelText)
                     layout.addWidget(label)
         else:
-            labelText = 'Het terrein / repressief object'
-            label = PQtW.QLabel()
-            label.setText(labelText)
-            layout.addWidget(label) 
+            objectMods = WDH.check_object_mods(objectId)
+            if objectMods:
+                labelText = 'Het terrein / repressief object'
+                label = PQtW.QLabel()
+                label.setText(labelText)
+                layout.addWidget(label)
 
     def execute_selected_rows(self):
         executableFeatures = []
@@ -179,7 +181,10 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
                 for j, col in enumerate(row):
                     item = PQtW.QTableWidgetItem(str(col))
                     self.tbl_werkvoorraad.setItem(i, j, item)
-            self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Operatie', 'Type', 'Tabel', 'layerName'])
+            if self.bouwlaagOfObject == 'Object':
+                self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Operatie', 'Type', 'Tabel', 'layerName'])
+            else:
+                self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Operatie', 'Type', 'Tabel', 'layerName', 'bouwlaag'])
         self.tbl_werkvoorraad.setSelectionBehavior(PQtW.QAbstractItemView.SelectRows)
         self.tbl_werkvoorraad.setColumnHidden(0, True);
         self.tbl_werkvoorraad.setColumnHidden(4, True);

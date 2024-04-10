@@ -28,6 +28,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     sortedList = []
+    pandId = ''
 
     def __init__(self, parent=None, objectId=None):
         super(oivPandWidget, self).__init__(parent)
@@ -45,10 +46,11 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def initUI(self):
         """fill the lineedits with values"""
-        objectId = self.pand_id.text()
+        self.pandId = self.pand_id.text()
         self.baseobjectFrame.setVisible(True)
-        self.addobjectFrame.setVisible(False)  
-        self.bouwlagen_to_combobox(objectId, None)
+        self.addobjectFrame.setVisible(False)
+        self.bouwlagen_to_combobox(self.pandId, None)
+        self.check_werkvoorraad()
 
     def initActions(self):
         """connect the buttons to their actions"""     
@@ -226,6 +228,16 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             MSG.showMsgBox('print_finished', directory)
             subString = "bouwlaag = {}".format(bouwlaagOrg)
             UG.set_layer_substring(subString)
+
+    def check_werkvoorraad(self):
+        layerName = 'Werkvoorraad bouwlagen'
+        ilayer = UC.getlayer_byname(layerName)
+        request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + self.pandId)
+        it = ilayer.getFeatures(request)
+        if len(list(it)) > 0:
+            self.bouwlaag_inventory.setEnabled(True)
+        else:
+            self.bouwlaag_inventory.setEnabled(False)
 
     def run_werkvoorraad(self):
         werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)
