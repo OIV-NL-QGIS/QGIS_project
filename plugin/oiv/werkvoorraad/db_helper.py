@@ -8,11 +8,11 @@ import oiv.helpers.messages as MSG
 
 layerFields = {
     "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
-    "Werkvoorraad object - label": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad object - label": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"]],
     "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
-    "Werkvoorraad bouwlaag - label": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
+    "Werkvoorraad bouwlaag - label": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"]],
     "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]]
 }
@@ -56,6 +56,17 @@ def get_bouwlagen(objectId):
         bouwlagen = [tup["bouwlaag"] for tup in bouwlaagTuple]
     close_db_connection(cursor, conn)
     return bouwlagen
+
+def check_object_mods(objectId):
+    answer = False
+    conn, cursor = setup_postgisdb_connection()
+    query = "SELECT object_id FROM mobiel.object_binnen_bouwlaag WHERE pand_id = '{}';".format(objectId)
+    cursor.execute(query)
+    objectTuple = cursor.fetchall()
+    if objectTuple:
+        answer = True
+    close_db_connection(cursor, conn)
+    return answer
 
 def execute_queries(executableFeatures, bouwlaagOfObject, accept):
     conn, cursor = setup_postgisdb_connection()
@@ -152,7 +163,7 @@ def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
             else:
                 identifier = CH.get_identifier_by_tablename_bl(tableName)
             attrQuery.append('{}'.format(identifier))
-            if identifier == 'soort':
+            if identifier == 'soort' or identifier == 'ruimten_type_id':
                 valueQuery.append("(SELECT naam FROM objecten.{}_type t WHERE t.naam = '{}')".format(tableName, feat[attr]))
             else:
                 valueQuery.append("(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}')".format(tableName, feat[attr]))
