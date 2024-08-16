@@ -24,6 +24,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
         self.startRotate = False
         self.tempRubberBand = None
         self.vertexMarker = None
+        self.multi = False
 
     def canvasPressEvent(self, event):
         """op welke feature wordt er geklikt"""
@@ -78,14 +79,16 @@ class MovePointTool(QG.QgsMapToolIdentify):
         """als verslepen -> pas de geometry van de betreffende feature aan"""
         if self.dragging and self.point:
             self.vertexMarker.hide()
-            geom = QC.QgsGeometry.fromPointXY(self.point)
-            self.idlayer.changeGeometry(self.fid, geom)
+            geom_new = QC.QgsGeometry.fromPointXY(self.point)
+            geom_old = self.idlayer.getFeature(self.fid).geometry()
+            if not self.multi:
+                self.idlayer.changeGeometry(self.fid, geom_new)
             field_idx = self.idlayer.fields().indexOf('applicatie')
             if field_idx != -1:
                 self.idlayer.changeAttributeValue(self.fid, field_idx, 'OIV')
             self.idlayer.commitChanges()
             self.idlayer.triggerRepaint()
-            self.stop_moveTool()
+            self.stop_moveTool(None, geom_old, geom_new)
         #als roteren -> pas de rotatie van de betreffende feature aan op basis van de loodrechte lijn tussen muisklik en bestaand punt
         if self.startRotate:
             self.tempRubberBand.hide()
@@ -101,9 +104,9 @@ class MovePointTool(QG.QgsMapToolIdentify):
                 self.idlayer.changeAttributeValue(self.fid, field_idx, 'OIV')
             self.idlayer.commitChanges()
             self.idlayer.triggerRepaint()
-            self.stop_moveTool()
+            self.stop_moveTool(rotation, None, None)
 
-    def stop_moveTool(self):
+    def stop_moveTool(self, rotation, geom_old, geom_new):
         """reset rubberbands"""
         if self.tempRubberBand is not None:
             self.canvas.scene().removeItem(self.tempRubberBand)
@@ -115,5 +118,5 @@ class MovePointTool(QG.QgsMapToolIdentify):
         self.point = None
         self.startRotate = False
         self.dragging = False
-        self.onMoved()
+        self.onMoved(rotation, geom_old, geom_new, self.multi)
         self.canvas.refresh()
