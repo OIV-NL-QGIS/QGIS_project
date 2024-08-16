@@ -260,6 +260,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         """close plugin and re-activate toolbar combobox"""
         self.close()
         self.close_btn.clicked.disconnect()
+        self.parent.set_layer_subset_toolbar()
         self.parent.toolbar.setEnabled(True)
         self.parent.projCombo.setEnabled(True)
         self.parent.checkVisibility = False

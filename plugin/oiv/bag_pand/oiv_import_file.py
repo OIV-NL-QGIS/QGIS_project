@@ -128,20 +128,6 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             types.append(feat["naam"])
         return types
 
-    def progressdialog(self, progress):
-        pdialog = PQtW.QProgressDialog()
-        pdialog.setWindowTitle("Progress")
-        pdialog.setLabelText("Voortgang van importeren:")
-        pbar = PQtW.QProgressBar(pdialog)
-        pbar.setTextVisible(True)
-        pbar.setValue(progress)
-        pdialog.setBar(pbar)
-        pdialog.setMinimumWidth(300)
-        pdialog.show()
-        pbar.setValue(0)
-        pbar.setMaximum(100)
-        return pdialog, pbar
-
     def init_layer_fields(self, fields, params):
         layer = QC.QgsVectorLayer(params[0], params[1], params[2])
         pr = layer.dataProvider()
@@ -203,9 +189,6 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def construct_features(self, targetFields, targetLayerName, identifier, typeLayer, ingangFields):
         bouwlaagGeomCentroid = self.get_centroid()
-        dummy, progressBar = self.progressdialog(0)
-        count = 0
-        cntFeat = self.importLayer.featureCount()
         invalidCount = 0
         validFeatures = []
         invalidFeatures = []
@@ -218,7 +201,6 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
             targetFeature = QC.QgsFeature()
             targetFeature.initAttributes(targetFields.count())
             targetFeature.setFields(targetFields)
-            count += 1
             if self.mappingDict[feature[attributeField]]["deur"] and feature.geometry():
                 ingangFeature = self.convert_to_ingang(feature, ingangFields, bouwlaagId, ingangTypeId)
                 if ingangFeature:
@@ -244,8 +226,6 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                     else:
                         invalidFeatures.append(targetFeature)
                         invalidCount += 1
-            progress = (float(count) / float(cntFeat)) * 100
-            progressBar.setValue(progress)
         return validFeatures, invalidFeatures, invalidCount, ingangFeatures
 
     def convert_to_ingang(self, feature, ingangFields, bouwlaagId, typeId):
