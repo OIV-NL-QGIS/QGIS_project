@@ -283,5 +283,6 @@
         <file>config_files/png/interface/georeference.png</file>
         <file>config_files/png/interface/import_drawing.png</file>
         <file>config_files/png/interface/save_and_close.png</file>
+        <file>config_files/png/interface/move_rotate.png</file>
     </qresource>
 </RCC>

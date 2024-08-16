@@ -224,3 +224,20 @@ def temp_delete_feature(ilayer, ifeature, bouwlaagOfObject, rightLayerNames):
             ilayer.selectByIds([])
             return "Done"
         return "Retry"
+
+def temp_delete_feature_multi(ilayer, bouwlaagOfObject):
+    conn, cursor = setup_postgisdb_connection()
+    if bouwlaagOfObject == 'Object':
+        tableName = CH.get_tablename_ob(ilayer.name())
+    else:
+        tableName = CH.get_tablename_bl(ilayer.name())
+    for feat in ilayer.selectedFeatures():
+        if tableName == 'alternatieve':
+            query = "DELETE FROM bluswater.{} WHERE id={};".format(tableName, feat['id'])
+        else:
+            query = "DELETE FROM objecten.{} WHERE id={};".format(tableName, feat['id'])
+        cursor.execute(query)
+        conn.commit()
+    close_db_connection(cursor, conn)
+    ilayer.triggerRepaint()
+    return "Done"

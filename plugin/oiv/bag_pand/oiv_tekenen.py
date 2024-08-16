@@ -4,6 +4,8 @@ import os
 from qgis.PyQt import uic
 import qgis.PyQt.QtCore as PQtC
 import qgis.PyQt.QtWidgets as PQtW
+from qgis.PyQt.QtGui import QIcon
+import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
@@ -14,6 +16,7 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
 import oiv.werkvoorraad.db_helper as DH
+import oiv.helpers.messages as MSG
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.PAND["tekenwidgetui"]))
@@ -36,7 +39,8 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget = parent.baseWidget
         self.iface = parent.iface
         self.canvas = parent.canvas
-        self.selectTool = parent.selectTool
+        self.selectTool = parent.selectTool 
+        self.polygonSelectTool = parent.polygonSelectTool
         self.bouwlaag.setText(str(parent.comboBox.currentText()))
         self.pand_id.setText(parent.pand_id.text())
         self.initUI()
@@ -88,24 +92,42 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
     def run_select_tool(self):
-        """activate the select feature tool"""
-        try:
-            self.selectTool.geomSelected.disconnect()
-        except:
-            pass
-        self.canvas.setMapTool(self.selectTool)
-        self.selectTool.expectedLayerName = None
-        self.selectTool.geomSelected.connect(self.select_feature)
+        self.polygonSelectTool.canvas = self.canvas
+        self.polygonSelectTool.onGeometryAdded = self.select_features
+        self.polygonSelectTool.parent = self
+        self.canvas.setMapTool(self.polygonSelectTool)
 
-    def select_feature(self, ilayer, ifeature):
-        """catch emitted signal from selecttool"""
-        self.iface.setActiveLayer(ilayer)
-        ids = []
-        ids.append(ifeature.id())
-        ilayer.selectByIds(ids)
-        ilayer.startEditing()
-        self.selectTool.geomSelected.disconnect()
-        self.run_select_tool()
+    def select_features(self, points):
+        geom = QC.QgsGeometry.fromPolygonXY([points])
+        bbox = geom.boundingBox()
+        req = QC.QgsFeatureRequest()
+        filterRect = req.setFilterRect(bbox)
+        layerNamesTup = CH.get_chidlayers_bl()
+        layerNames = [i[0] for i in layerNamesTup]
+        layerNames.remove(PC.PAND["bouwlaaglayername"])
+        for layerName in layerNames:
+            layer = UC.getlayer_byname(layerName)
+            if UC.is_layer_visible(layer):
+                feats = layer.getFeatures(filterRect)
+                for feat in feats:
+                    if feat.geometry().within(geom):
+                        layer.select(feat.id())
+        reply, ok = MultiEditDialog.get_multi_edit_action()
+        if reply == 'delete':
+            self.delete_multi(layerNames)
+        if reply == 'move':
+            self.run_move_point(True)
+        if reply == 'rotate':
+            self.run_move_point(True)
+
+    def delete_multi(self, layerNames):
+        reply = MSG.showMsgBox('deleteobject')
+        for layerName in layerNames:
+            layer = UC.getlayer_byname(layerName)
+            if reply:
+                DH.temp_delete_feature_multi(layer, 'Bouwlaag')
+            else:
+                layer.selectByIds([])
 
     def run_delete_tool(self):
         """activate delete feature tool"""
@@ -150,21 +172,44 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.baseWidget.tabWidget.setCurrentIndex(3)
             self.baseWidget.tabWidget.removeTab(4)
 
-    def run_move_point(self):
+    def run_move_point(self, multi=False):
         """om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet"""
         for lyrName in self.moveLayerNames:
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.startEditing()
         self.parent.moveTool.onMoved = self.stop_moveTool
+        self.parent.moveTool.multi = multi
         self.canvas.setMapTool(self.parent.moveTool)
 
-    def stop_moveTool(self):
+    def stop_moveTool(self, rotation, geom_old, geom_new, multi):
         """na de actie verschuiven/bewerken moeten de betreffende lagen opgeslagen worden en bewerken moet worden uitgezet"""
-        for lyrName in self.moveLayerNames:
-            moveLayer = UC.getlayer_byname(lyrName)
-            moveLayer.commitChanges()
-            moveLayer.reload()
-        self.run_move_point()
+        if multi:
+            layerNamesTup = CH.get_chidlayers_bl()
+            layerNames = [i[0] for i in layerNamesTup]
+            layerNames.remove(PC.PAND["bouwlaaglayername"])
+            for layerName in layerNames:
+                layer = UC.getlayer_byname(layerName)
+                layer.startEditing()
+                if rotation:
+                    field_idx = layer.fields().indexOf("rotatie")
+                    for feat in layer.selectedFeatures():
+                        if field_idx != -1:
+                            layer.changeAttributeValue(feat.id(), field_idx, rotation)
+                if geom_new:
+                    for feat in layer.selectedFeatures():
+                        geom = feat.geometry()
+                        deltaX = geom_new.asPoint().x() - geom_old.asPoint().x()
+                        deltaY = geom_new.asPoint().y() - geom_old.asPoint().y()
+                        geom.translate(deltaX , deltaY)
+                        layer.changeGeometry(feat.id(), geom)
+                layer.commitChanges()
+                layer.reload()
+        else:
+            for lyrName in self.moveLayerNames:
+                moveLayer = UC.getlayer_byname(lyrName)
+                moveLayer.commitChanges()
+                moveLayer.reload()
+            self.run_move_point()
 
     def run_tekenen(self, _dummy, runLayer, feature_id):
         """activate the right draw action"""
@@ -253,3 +298,52 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.cadframe.setVisible(False)
         self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
         del self
+
+class MultiEditDialog(PQtW.QDialog):
+    def __init__(self, parent=None):
+        super(MultiEditDialog, self).__init__(parent)
+        self.setWindowTitle("Multi verwijderen, roteren of verplaatsen")
+        qlayout = PQtW.QVBoxLayout(self)
+        self.qlineA = PQtW.QLabel(self)
+        self.qRadioBtnMove = PQtW.QRadioButton(self)
+        self.qRadioBtnRotate = PQtW.QRadioButton(self)
+        self.qRadioBtnDelete = PQtW.QRadioButton(self)
+        self.qlineA.setText("Selecteer de knop met wat u wilt doen")
+        self.qRadioBtnMove.setToolTip("Verplaatsen")
+        self.qRadioBtnMove.setText("Verplaatsen")
+        self.qRadioBtnRotate.setToolTip("Draaien")
+        self.qRadioBtnRotate.setText("Draaien")
+        self.qRadioBtnDelete.setToolTip("Verwijderen")
+        self.qRadioBtnDelete.setText("Verwijderen")
+        self.qRadioBtnMove.setIcon(QIcon(':/plugins/oiv/config_files/png/move.png'))
+        self.qRadioBtnRotate.setIcon(QIcon(':/plugins/oiv/config_files/png/rotate.png'))
+        self.qRadioBtnDelete.setIcon(QIcon(':/plugins/oiv/config_files/png/delete.png'))
+        self.qRadioBtnMove.setIconSize(PQtC.QSize(32,32))
+        self.qRadioBtnRotate.setIconSize(PQtC.QSize(32,32))
+        self.qRadioBtnDelete.setIconSize(PQtC.QSize(32,32))
+        qlayout.addWidget(self.qlineA)
+        qlayout.addWidget(self.qRadioBtnMove)
+        qlayout.addWidget(self.qRadioBtnRotate)
+        qlayout.addWidget(self.qRadioBtnDelete)
+        buttons = PQtW.QDialogButtonBox(
+            PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
+            PQtC.Qt.Horizontal, self)
+        buttons.accepted.connect(self.accept)
+        buttons.rejected.connect(self.reject)
+        qlayout.addWidget(buttons)
+
+    def get_checked_radiobutton(self):
+        reply = None
+        if self.qRadioBtnMove.isChecked():
+            reply = 'move'
+        if self.qRadioBtnRotate.isChecked():
+            reply = 'rotate'
+        if self.qRadioBtnDelete.isChecked():
+            reply = 'delete'
+        return reply
+
+    @staticmethod
+    def get_multi_edit_action(parent=None):
+        dialog = MultiEditDialog(parent)
+        result = dialog.exec_()
+        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted)

@@ -265,3 +265,10 @@ def get_draw_layer_attr(attrDict, runLayerName, configFile):
                 attrY = headerCsv.index(key)
                 attrDict[key] = line[attrY]
     return attrDict
+
+
+def is_layer_visible(layer):
+    """Checks if the layer is currently set visible in the layer tree."""
+    layer_tree_root = QC.QgsProject.instance().layerTreeRoot()
+    layer_tree_layer = layer_tree_root.findLayer(layer)
+    return layer_tree_layer.isVisible()
