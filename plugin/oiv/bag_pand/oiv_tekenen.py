@@ -16,6 +16,7 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
 import oiv.werkvoorraad.db_helper as DH
+import oiv.helpers.messages as MSG
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.PAND["tekenwidgetui"]))
@@ -38,7 +39,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget = parent.baseWidget
         self.iface = parent.iface
         self.canvas = parent.canvas
-        self.selectTool = parent.selectTool
+        self.selectTool = parent.selectTool 
         self.polygonSelectTool = parent.polygonSelectTool
         self.bouwlaag.setText(str(parent.comboBox.currentText()))
         self.pand_id.setText(parent.pand_id.text())
@@ -103,6 +104,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         filterRect = req.setFilterRect(bbox)
         layerNamesTup = CH.get_chidlayers_bl()
         layerNames = [i[0] for i in layerNamesTup]
+        layerNames.remove(PC.PAND["bouwlaaglayername"])
         for layerName in layerNames:
             layer = UC.getlayer_byname(layerName)
             if UC.is_layer_visible(layer):
@@ -119,9 +121,13 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.run_move_point(True)
 
     def delete_multi(self, layerNames):
+        reply = MSG.showMsgBox('deleteobject')
         for layerName in layerNames:
             layer = UC.getlayer_byname(layerName)
-            DH.temp_delete_feature_multi(layer, 'Bouwlaag')
+            if reply:
+                DH.temp_delete_feature_multi(layer, 'Bouwlaag')
+            else:
+                layer.selectByIds([])
 
     def run_delete_tool(self):
         """activate delete feature tool"""
@@ -180,6 +186,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         if multi:
             layerNamesTup = CH.get_chidlayers_bl()
             layerNames = [i[0] for i in layerNamesTup]
+            layerNames.remove(PC.PAND["bouwlaaglayername"])
             for layerName in layerNames:
                 layer = UC.getlayer_byname(layerName)
                 layer.startEditing()
