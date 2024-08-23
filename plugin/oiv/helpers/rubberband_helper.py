@@ -59,6 +59,12 @@ VERTEXMARKERSTYLES = {
         'icontype': QgsVertexMarker.ICON_X,
         'penwidth': 5,
     },
+    "centroid": {
+        'color': QColor('magenta'),
+        'iconsize': 12,
+        'icontype': QgsVertexMarker.ICON_X,
+        'penwidth': 5,
+    },
 }
 
 def resetRB(rubberBand, WKBtype):
