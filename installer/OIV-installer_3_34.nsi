@@ -216,7 +216,7 @@ Function .onInit
 
 	; This is needed to set programdata dir
 	setShellVarContext all
-	StrCpy $INSTDIR "$APPDATA\${APPNAME}-${VERSION}"
+	StrCpy $INSTDIR "$APPDATA\${APPNAME}"
 	
 	Call VersionCheck
 	!insertmacro setVars
