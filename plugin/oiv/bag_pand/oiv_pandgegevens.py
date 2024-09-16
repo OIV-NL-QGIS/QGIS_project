@@ -5,6 +5,7 @@ from qgis.PyQt import uic
 import qgis.PyQt.QtCore as PQtC
 import qgis.PyQt.QtWidgets as PQtW
 import qgis.core as QC
+from qgis.gui import QgsMessageBar
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
@@ -16,6 +17,7 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.qt_helper as QT
 import oiv.helpers.constants as PC
 import oiv.werkvoorraad.oiv_werkvoorraad as OWW
+import oiv.helpers.rubberband_helper as RH
 
 from .oiv_bouwlaag import oivBouwlaagWidget
 from .oiv_tekenen import oivTekenWidget
@@ -62,6 +64,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlaag_delete.clicked.connect(self.run_delete)
         self.bouwlaag_inventory.clicked.connect(self.run_werkvoorraad)
         self.bouwlaag_print.clicked.connect(self.run_print)
+        self.bouwlaag_move_rotate.clicked.connect(self.run_move_rotate_tool)
 
     def bouwlaag_toevoegen(self):
         self.baseWidget.done.setVisible(False)
@@ -213,6 +216,52 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             UC.refresh_layers(self.iface)
             #set actieve bouwlaag to 1 and fill combobox
             self.bouwlagen_to_combobox(ifeature.id(), 1)
+
+    def run_move_rotate_tool(self):
+        """activate the selecttool"""
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            pass
+        self.selectTool.expectedLayerName = PC.PAND["bouwlaaglayername"]
+        self.canvas.setMapTool(self.selectTool)
+        self.iface.messageBar().pushMessage("Info", "Selecteer een bouwlaag door erop te klikken", level=QC.Qgis.Info)
+        self.selectTool.geomSelected.connect(self.run_move_rotate)
+
+    def run_move_rotate(self, ilayer, ifeature):
+        savedDelta = self.baseWidget.rotate_move_bouwlaag_values
+        centroid = ifeature.geometry().centroid().asPoint()
+        deltaX, deltaY, rotation, reply = MultiEditBouwlaagDialog.get_multi_edit_values(self, ifeature, ilayer, savedDelta)
+        if reply:
+            self.stop_move_rotate(ifeature.id(), centroid, deltaX, deltaY, rotation)
+            ilayer.commitChanges()
+        else:
+            ilayer.rollBack()
+
+    def stop_move_rotate(self, bouwlaagId, centroid, deltaX, deltaY, rotation):
+        """na de actie verschuiven/bewerken moeten de betreffende lagen opgeslagen worden en bewerken moet worden opgeslagen"""
+        layerNamesTup = CH.get_chidlayers_bl()
+        layerNames = [i[0] for i in layerNamesTup]
+        layerNames.remove(PC.PAND["bouwlaaglayername"])
+        for layerName in layerNames:
+            layer = UC.getlayer_byname(layerName)
+            field_idx = layer.fields().indexOf("rotatie")
+            layer.startEditing()
+            request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + "'{}'".format(bouwlaagId))
+            it = layer.getFeatures(request)
+            for feat in it:
+                geom = feat.geometry()
+                geom.rotate(rotation, centroid)
+                geom.translate(deltaX , deltaY)
+                layer.changeGeometry(feat.id(), geom)
+                if field_idx != -1:
+                    if feat["rotatie"]:
+                        rotation_old = int(feat["rotatie"])
+                    else:
+                        rotation_old = 0
+                    layer.changeAttributeValue(feat.id(), field_idx, rotation_old + rotation)                
+            layer.commitChanges()
+            layer.reload()
             
     def run_print(self):
         arrBouwlagen = [self.comboBox.itemText(i) for i in range(self.comboBox.count())]
@@ -300,3 +349,99 @@ class BouwlaagDialog(PQtW.QDialog):
         dialog = BouwlaagDialog(parent)
         result = dialog.exec_()
         return (int(dialog.qComboA.currentText()), int(dialog.qComboB.currentText()), result == PQtW.QDialog.Accepted)
+
+class MultiEditBouwlaagDialog(PQtW.QDialog):
+    def __init__(self, parent=None, ifeature=None, ilayer=None, savedDelta=None):
+        super(MultiEditBouwlaagDialog, self).__init__(parent)
+        self.setWindowTitle("Bouwlaag roteren en verplaatsen")
+        self.savedDelta = savedDelta
+        qlayout = PQtW.QGridLayout(self)
+        self.ilayer = ilayer
+        self.ifeature = ifeature
+        self.qlineMove = PQtW.QLabel(self)
+        self.qlineX = PQtW.QLabel(self)
+        self.qlineY = PQtW.QLabel(self)
+        self.qlineXtot = PQtW.QLabel(self)
+        self.qlineYtot = PQtW.QLabel(self)
+        self.qlineRotate = PQtW.QLabel(self)
+        self.qSpinBoxXmtr = PQtW.QSpinBox(self)
+        self.qSpinBoxXmtr.setRange(-10000, 10000)
+        self.qSpinBoxXmtr.setSuffix(" m")
+        self.qSpinBoxXcm = PQtW.QSpinBox(self)
+        self.qSpinBoxXcm.setRange(-10000, 10000)
+        self.qSpinBoxXcm.setSuffix(" cm")
+        self.qSpinBoxYmtr = PQtW.QSpinBox(self)
+        self.qSpinBoxYmtr.setRange(-100, 100)
+        self.qSpinBoxYmtr.setSuffix(" m")
+        self.qSpinBoxYcm = PQtW.QSpinBox(self)
+        self.qSpinBoxYcm.setRange(-100, 100)
+        self.qSpinBoxYcm.setSuffix(" cm")
+        self.qSpinBoxRotate = PQtW.QSpinBox(self)
+        self.qSpinBoxRotate.setMinimum(-360)
+        self.qSpinBoxRotate.setMaximum(360)
+        self.qlineMove.setText("Verplaatsen")
+        self.qlineRotate.setText("Draaien")
+        self.qlineX.setText("X:")
+        self.qlineY.setText("Y:")
+        self.qlineXtot.setText("0,0 m")
+        self.qlineYtot.setText("0,0 m")
+        self.qbtnLoadValues = PQtW.QPushButton(self)
+        self.qbtnLoadValues.setText("Laad vorige waarden")
+        qlayout.addWidget(self.qbtnLoadValues, 0, 2, 1, 2)
+        qlayout.addWidget(self.qlineMove, 0, 0)
+        qlayout.addWidget(self.qlineX, 1, 0)
+        qlayout.addWidget(self.qSpinBoxXmtr, 1, 1)
+        qlayout.addWidget(self.qSpinBoxXcm, 1, 2)
+        qlayout.addWidget(self.qlineXtot, 1, 3)
+        qlayout.addWidget(self.qlineY, 2, 0)
+        qlayout.addWidget(self.qSpinBoxYmtr, 2, 1)
+        qlayout.addWidget(self.qSpinBoxYcm, 2, 2)
+        qlayout.addWidget(self.qlineYtot, 2, 3)
+        qlayout.addWidget(self.qlineRotate, 3, 0)
+        qlayout.addWidget(self.qSpinBoxRotate, 3, 1)
+        buttons = PQtW.QDialogButtonBox(
+            PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
+            PQtC.Qt.Horizontal, self)
+        buttons.accepted.connect(self.accept)
+        buttons.rejected.connect(self.reject)
+        self.qSpinBoxXmtr.valueChanged.connect(self.move_and_rotate)
+        self.qSpinBoxYmtr.valueChanged.connect(self.move_and_rotate)
+        self.qSpinBoxXcm.valueChanged.connect(self.move_and_rotate)
+        self.qSpinBoxYcm.valueChanged.connect(self.move_and_rotate)
+        self.qSpinBoxRotate.valueChanged.connect(self.move_and_rotate)
+        qlayout.addWidget(buttons, 4, 0, 1, 4)
+        if savedDelta:
+            self.qbtnLoadValues.clicked.connect(self.set_saved_delta)
+
+    def set_saved_delta(self):
+        self.qSpinBoxXmtr.setValue(self.savedDelta["deltaXmtr"])
+        self.qSpinBoxYmtr.setValue(self.savedDelta["deltaYmtr"])
+        self.qSpinBoxXcm.setValue(self.savedDelta["deltaXcm"] / 100)
+        self.qSpinBoxYcm.setValue(self.savedDelta["deltaYcm"] / 100)
+        self.qSpinBoxRotate.setValue(self.savedDelta["deltaRotate"])
+
+    def move_and_rotate(self):
+        geom = self.ifeature.geometry()
+        deltaX = round(self.qSpinBoxXmtr.value() + self.qSpinBoxXcm.value() / 100, 2)
+        deltaY = round(self.qSpinBoxYmtr.value() + self.qSpinBoxYcm.value() / 100, 2)
+        self.qlineXtot.setText(str(deltaX)  + " m")
+        self.qlineYtot.setText(str(deltaY)  + " m")
+        rotation = self.qSpinBoxRotate.value()
+        geom.translate(deltaX, deltaY)
+        geom.rotate(rotation, geom.centroid().asPoint())
+        self.ilayer.startEditing()
+        self.ilayer.changeGeometry(self.ifeature.id(), geom)
+        self.ilayer.reload()
+
+    @staticmethod
+    def get_multi_edit_values(parent=None, ifeature=None, ilayer=None, savedDelta=None):
+        dialog = MultiEditBouwlaagDialog(parent, ifeature, ilayer, savedDelta)
+        result = dialog.exec_()
+        parent.baseWidget.rotate_move_bouwlaag_values["deltaXmtr"] = dialog.qSpinBoxXmtr.value()
+        parent.baseWidget.rotate_move_bouwlaag_values["deltaYmtr"] = dialog.qSpinBoxYmtr.value()
+        parent.baseWidget.rotate_move_bouwlaag_values["deltaXcm"] = dialog.qSpinBoxXcm.value()
+        parent.baseWidget.rotate_move_bouwlaag_values["deltaYcm"] = dialog.qSpinBoxYcm.value()
+        parent.baseWidget.rotate_move_bouwlaag_values["deltaRotate"] = dialog.qSpinBoxRotate.value()
+        deltaX = round(dialog.qSpinBoxXmtr.value() + dialog.qSpinBoxXcm.value() / 100, 2)
+        deltaY = round(dialog.qSpinBoxYmtr.value() + dialog.qSpinBoxYcm.value() / 100, 2)
+        return (deltaX, deltaY, dialog.qSpinBoxRotate.value(), result == PQtW.QDialog.Accepted)

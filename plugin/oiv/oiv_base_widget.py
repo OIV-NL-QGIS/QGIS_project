@@ -27,6 +27,13 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
     pandwidget = None
     activeTab = None
     objectModified = False
+    rotate_move_bouwlaag_values = {
+        "deltaXmtr" : 0,
+        "deltaYmtr" : 0,
+        "deltaXcm" : 0,
+        "deltaYcm" : 0,
+        "deltaRotate" : 0,
+    }
 
     def __init__(self, parent=None):
         """Constructor."""
