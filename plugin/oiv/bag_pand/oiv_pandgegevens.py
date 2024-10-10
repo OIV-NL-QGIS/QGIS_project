@@ -416,8 +416,8 @@ class MultiEditBouwlaagDialog(PQtW.QDialog):
     def set_saved_delta(self):
         self.qSpinBoxXmtr.setValue(self.savedDelta["deltaXmtr"])
         self.qSpinBoxYmtr.setValue(self.savedDelta["deltaYmtr"])
-        self.qSpinBoxXcm.setValue(self.savedDelta["deltaXcm"] / 100)
-        self.qSpinBoxYcm.setValue(self.savedDelta["deltaYcm"] / 100)
+        self.qSpinBoxXcm.setValue(self.savedDelta["deltaXcm"])
+        self.qSpinBoxYcm.setValue(self.savedDelta["deltaYcm"])
         self.qSpinBoxRotate.setValue(self.savedDelta["deltaRotate"])
 
     def move_and_rotate(self):
