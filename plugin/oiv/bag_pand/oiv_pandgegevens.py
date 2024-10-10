@@ -281,7 +281,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def check_werkvoorraad(self):
         layerName = 'Werkvoorraad bouwlagen'
         ilayer = UC.getlayer_byname(layerName)
-        request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + self.pandId)
+        request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(self.pandId))
         it = ilayer.getFeatures(request)
         if len(list(it)) > 0:
             self.bouwlaag_inventory.setEnabled(True)
