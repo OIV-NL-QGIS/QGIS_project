@@ -266,6 +266,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_print(self):
         arrBouwlagen = [self.comboBox.itemText(i) for i in range(self.comboBox.count())]
         directory = PQtW.QFileDialog().getExistingDirectory()
+        PrintDialog.get_print_bouwlagen(arrBouwlagen)
         if directory != '':
             bouwlaagOrg = self.comboBox.currentText()
             for bouwlaag in arrBouwlagen:
@@ -445,3 +446,52 @@ class MultiEditBouwlaagDialog(PQtW.QDialog):
         deltaX = round(dialog.qSpinBoxXmtr.value() + dialog.qSpinBoxXcm.value() / 100, 2)
         deltaY = round(dialog.qSpinBoxYmtr.value() + dialog.qSpinBoxYcm.value() / 100, 2)
         return (deltaX, deltaY, dialog.qSpinBoxRotate.value(), result == PQtW.QDialog.Accepted)
+    
+class PrintDialog(PQtW.QDialog):
+    def __init__(self, parent=None):
+        super(PrintDialog, self).__init__(parent)
+        self.setWindowTitle("Multi verwijderen, roteren of verplaatsen")
+        qlayout = PQtW.QVBoxLayout(self)
+        self.qlineA = PQtW.QLabel(self)
+        self.qRadioBtnMove = PQtW.QRadioButton(self)
+        self.qRadioBtnRotate = PQtW.QRadioButton(self)
+        self.qRadioBtnDelete = PQtW.QRadioButton(self)
+        self.qlineA.setText("Selecteer de knop met wat u wilt doen")
+        self.qRadioBtnMove.setToolTip("Verplaatsen")
+        self.qRadioBtnMove.setText("Verplaatsen")
+        self.qRadioBtnRotate.setToolTip("Draaien")
+        self.qRadioBtnRotate.setText("Draaien")
+        self.qRadioBtnDelete.setToolTip("Verwijderen")
+        self.qRadioBtnDelete.setText("Verwijderen")
+        self.qRadioBtnMove.setIcon(QIcon(':/plugins/oiv/config_files/png/move.png'))
+        self.qRadioBtnRotate.setIcon(QIcon(':/plugins/oiv/config_files/png/rotate.png'))
+        self.qRadioBtnDelete.setIcon(QIcon(':/plugins/oiv/config_files/png/delete.png'))
+        self.qRadioBtnMove.setIconSize(PQtC.QSize(32,32))
+        self.qRadioBtnRotate.setIconSize(PQtC.QSize(32,32))
+        self.qRadioBtnDelete.setIconSize(PQtC.QSize(32,32))
+        qlayout.addWidget(self.qlineA)
+        qlayout.addWidget(self.qRadioBtnMove)
+        qlayout.addWidget(self.qRadioBtnRotate)
+        qlayout.addWidget(self.qRadioBtnDelete)
+        buttons = PQtW.QDialogButtonBox(
+            PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
+            PQtC.Qt.Horizontal, self)
+        buttons.accepted.connect(self.accept)
+        buttons.rejected.connect(self.reject)
+        qlayout.addWidget(buttons)
+
+    def get_checked_radiobutton(self):
+        reply = None
+        if self.qRadioBtnMove.isChecked():
+            reply = 'move'
+        if self.qRadioBtnRotate.isChecked():
+            reply = 'rotate'
+        if self.qRadioBtnDelete.isChecked():
+            reply = 'delete'
+        return reply
+
+    @staticmethod
+    def get_print_bouwlagen(arrBouwlagen, parent=None):
+        dialog = PrintDialog(arrBouwlagen, parent)
+        result = dialog.exec_()
+        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted)
