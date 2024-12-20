@@ -265,8 +265,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             
     def run_print(self):
         arrBouwlagen = list(reversed([self.comboBox.itemText(i) for i in range(self.comboBox.count())]))
-        directory = PQtW.QFileDialog().getExistingDirectory()
         printWhat, reply = PrintDialog.get_print_bouwlagen(arrBouwlagen)
+        directory = PQtW.QFileDialog().getExistingDirectory()
         if printWhat[0] == 'current':
             arrBouwlagen = [self.comboBox.currentText()]
         elif printWhat[0] == 'selection':
