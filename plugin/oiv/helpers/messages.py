@@ -159,7 +159,7 @@ MESSAGES = {
     'print_canceld': {
         "type": 'warning',
         "header": 'Printen',
-        "body": 'Het printen is geannuleerd.\n\nBestand is open of beveiligd en kan niet worden verwijderd!\n\nSluit het eerst en probeer dan opnieuw.'
+        "body": 'Het printen is geannuleerd.\n\nBestand is open of beveiligd en kan niet worden overschreven!\n\nSluit het eerst en probeer dan opnieuw.'
     },
     'multipleBouwlagenidentified': {
         "type": 'warning',

@@ -16,8 +16,10 @@ def load_composer(output_folder, objectOfBouwlaag, filterString, fileName):
             layoutName = 'print_bouwlagen_pdf_A4'
             layout, atlas = load_layout(layoutName, project, filterString)
             layout.itemById('title').setText("Bouwlaag: {}".format(fileName.split('_')[2]))
-        print_atlas(layout, atlas, output_folder, fileName)
-    return 'print_canceld', ''
+        rep = print_atlas(layout, atlas, output_folder, fileName)
+        return rep, output_folder
+    elif reply == 'stop':
+        return 'print_canceld', ''
 
 def print_atlas(layout, atlas, output_folder, fileName):
     if atlas.beginRender():
@@ -28,7 +30,7 @@ def print_atlas(layout, atlas, output_folder, fileName):
             filePath = output_folder + '/' + fileName
             exporter.exportToPdf(filePath, settings)
         atlas.endRender()
-    return "print_finished", output_folder
+    return "print_finished"
 
 def check_if_file_exists(output_folder, fileName):
     fileName = fileName + '.pdf'
