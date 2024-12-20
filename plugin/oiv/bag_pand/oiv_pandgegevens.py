@@ -264,10 +264,14 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             layer.reload()
             
     def run_print(self):
-        arrBouwlagen = [self.comboBox.itemText(i) for i in range(self.comboBox.count())]
+        arrBouwlagen = list(reversed([self.comboBox.itemText(i) for i in range(self.comboBox.count())]))
         directory = PQtW.QFileDialog().getExistingDirectory()
-        PrintDialog.get_print_bouwlagen(arrBouwlagen)
-        if directory != '':
+        printWhat, reply = PrintDialog.get_print_bouwlagen(arrBouwlagen)
+        if printWhat[0] == 'current':
+            arrBouwlagen = [self.comboBox.currentText()]
+        elif printWhat[0] == 'selection':
+            arrBouwlagen = printWhat[1]
+        if directory != '' and reply:
             bouwlaagOrg = self.comboBox.currentText()
             for bouwlaag in arrBouwlagen:
                 subString = "bouwlaag = {}".format(bouwlaag)
@@ -448,46 +452,57 @@ class MultiEditBouwlaagDialog(PQtW.QDialog):
         return (deltaX, deltaY, dialog.qSpinBoxRotate.value(), result == PQtW.QDialog.Accepted)
     
 class PrintDialog(PQtW.QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, arrBouwlagen, parent=None):
         super(PrintDialog, self).__init__(parent)
-        self.setWindowTitle("Multi verwijderen, roteren of verplaatsen")
+        self.setWindowTitle("Bouwlagen printen")
+        self.chkBoxDict = {}
         qlayout = PQtW.QVBoxLayout(self)
         self.qlineA = PQtW.QLabel(self)
-        self.qRadioBtnMove = PQtW.QRadioButton(self)
-        self.qRadioBtnRotate = PQtW.QRadioButton(self)
-        self.qRadioBtnDelete = PQtW.QRadioButton(self)
-        self.qlineA.setText("Selecteer de knop met wat u wilt doen")
-        self.qRadioBtnMove.setToolTip("Verplaatsen")
-        self.qRadioBtnMove.setText("Verplaatsen")
-        self.qRadioBtnRotate.setToolTip("Draaien")
-        self.qRadioBtnRotate.setText("Draaien")
-        self.qRadioBtnDelete.setToolTip("Verwijderen")
-        self.qRadioBtnDelete.setText("Verwijderen")
-        self.qRadioBtnMove.setIcon(QIcon(':/plugins/oiv/config_files/png/move.png'))
-        self.qRadioBtnRotate.setIcon(QIcon(':/plugins/oiv/config_files/png/rotate.png'))
-        self.qRadioBtnDelete.setIcon(QIcon(':/plugins/oiv/config_files/png/delete.png'))
-        self.qRadioBtnMove.setIconSize(PQtC.QSize(32,32))
-        self.qRadioBtnRotate.setIconSize(PQtC.QSize(32,32))
-        self.qRadioBtnDelete.setIconSize(PQtC.QSize(32,32))
+        self.qRadioBtnCurrent = PQtW.QRadioButton(self)
+        self.qRadioBtnAll = PQtW.QRadioButton(self)
+        self.qRadioBtnSelection = PQtW.QRadioButton(self)
+        self.qlineA.setText("Selecteer welke bouwlagen u wilt printen")
+        self.qRadioBtnCurrent.setToolTip("Huidige bouwlaag")
+        self.qRadioBtnCurrent.setText("Huidige bouwlaag")
+        self.qRadioBtnAll.setToolTip("Alle bouwlagen")
+        self.qRadioBtnAll.setText("Alle bouwlagen")
+        self.qRadioBtnSelection.setToolTip("Bouwlagen selecteren")
+        self.qRadioBtnSelection.setText("Bouwlagen selecteren")
         qlayout.addWidget(self.qlineA)
-        qlayout.addWidget(self.qRadioBtnMove)
-        qlayout.addWidget(self.qRadioBtnRotate)
-        qlayout.addWidget(self.qRadioBtnDelete)
+        qlayout.addWidget(self.qRadioBtnCurrent)
+        qlayout.addWidget(self.qRadioBtnAll)
+        qlayout.addWidget(self.qRadioBtnSelection)
+        for bouwlaag in arrBouwlagen:
+            chkBox = PQtW.QCheckBox(self)
+            chkBox.setText(bouwlaag)
+            chkBox.setVisible(False)
+            qlayout.addWidget(chkBox)
+            self.chkBoxDict[bouwlaag] = chkBox
+            chkBox = None
         buttons = PQtW.QDialogButtonBox(
             PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
             PQtC.Qt.Horizontal, self)
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
         qlayout.addWidget(buttons)
+        self.qRadioBtnSelection.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict))
+
+    def set_selection_visible(self, chkBoxDict):
+        for key, value in chkBoxDict.items():
+            value.setVisible(True)
 
     def get_checked_radiobutton(self):
         reply = None
-        if self.qRadioBtnMove.isChecked():
-            reply = 'move'
-        if self.qRadioBtnRotate.isChecked():
-            reply = 'rotate'
-        if self.qRadioBtnDelete.isChecked():
-            reply = 'delete'
+        if self.qRadioBtnCurrent.isChecked():
+            reply = ['current']
+        if self.qRadioBtnAll.isChecked():
+            reply = ['all']
+        if self.qRadioBtnSelection.isChecked():
+            bouwlagenArr = []
+            for key, value in self.chkBoxDict.items():
+                if value.isChecked():
+                    bouwlagenArr.append(key)
+            reply = ['selection', bouwlagenArr]
         return reply
 
     @staticmethod
