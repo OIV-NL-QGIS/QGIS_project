@@ -15,6 +15,7 @@ import oiv.bag_pand.oiv_pandgegevens as OPG
 import oiv.repressief_object.oiv_repressief_object as ORO
 import oiv.repressief_object.oiv_objectnieuw as OON
 import oiv.info_of_interest.oiv_info_of_interest as IOI
+import oiv.helpers.constants as PC
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PLUGIN["basewidget"]))
@@ -159,6 +160,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             self.identifyTool.geomIdentified.disconnect()
         except: # pylint: disable=bare-except
             pass
+        self.identifyTool.layer = UC.getlayer_byname(PC.PAND["bouwlaaglayername"])
         self.identifyTool.geomIdentified.connect(self.get_identified_pand)
 
     def run_identify_terrein(self):

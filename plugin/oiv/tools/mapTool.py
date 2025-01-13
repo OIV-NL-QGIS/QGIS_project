@@ -4,7 +4,7 @@ import qgis.core as QC
 import qgis.gui as QG
 
 import oiv.helpers.rubberband_helper as RH
-
+import oiv.helpers.drawing_helper as DH
 
 class CaptureTool(QG.QgsMapTool):
     """QgsMapTool to draw lines and polygons on the map canvas"""
@@ -101,7 +101,7 @@ class CaptureTool(QG.QgsMapTool):
 
     def snap_to_point(self, pos, layerPt):
         """calculate if there is a point to snap to within the tolerance"""
-        tolerance = pow(self.calcTolerance(pos), 2)
+        tolerance = pow(DH.calcTolerance(self, pos), 2)
         self.snapPt = None
         self.snapFeature = []
         minDist = tolerance
@@ -139,15 +139,6 @@ class CaptureTool(QG.QgsMapTool):
             else:
                 self.snapFeature.extend((None, None, None))
             return snapPoint
-
-    def calcTolerance(self, pos):
-        """calculate the tolerance of snapping"""
-        pt1 = PQtC.QPoint(pos.x(), pos.y())
-        pt2 = PQtC.QPoint(pos.x() + 20, pos.y())
-        layerPt1 = self.toMapCoordinates(pt1)
-        layerPt2 = self.toMapCoordinates(pt2)
-        tolerance = layerPt2.x() - layerPt1.x()
-        return tolerance
 
     def keyPressEvent(self, event):
         """handle keypress events"""

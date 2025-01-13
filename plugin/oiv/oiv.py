@@ -46,7 +46,7 @@ class oiv(PQtW.QWidget):
         self.selectTool = IT.SelectTool(self.canvas)
         self.polygonSelectTool = PS.PolygonSelectTool(self.canvas)
         self.drawTool = CT.CaptureTool(self.canvas)
-        self.moveTool = MT.MovePointTool(self.canvas, self.drawLayer)
+        self.moveTool = MT.MovePointTool(self.canvas)
 
     def initGui(self):
         """init actions plugin"""

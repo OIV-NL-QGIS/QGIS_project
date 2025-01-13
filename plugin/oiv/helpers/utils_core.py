@@ -159,6 +159,11 @@ def refresh_layers(iface):
 def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
     possibleSnapFeatures = []
     bouwlaagIds = []
+    lyr = getlayer_byname(PC.PAND["bouwlaaglayername"])
+    request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
+    featureIt = lyr.getFeatures(request)
+    for feat in featureIt:
+        bouwlaagIds.append(feat["id"])
     for name in layerNamesList:
         lyr = getlayer_byname(name)
         if lyr:
@@ -191,6 +196,15 @@ def get_possible_snapFeatures_object(layerNamesList, objectId):
             for feat in featureIt:
                 if feat.hasGeometry():
                     possibleSnapFeatures.append(feat.geometry())
+    return possibleSnapFeatures
+
+def get_possible_snapFeatures_ioi(layerNamesList):
+    possibleSnapFeatures = []
+    for name in layerNamesList:
+        lyr = getlayer_byname(name)
+        featureIt = lyr.getFeatures()
+        for feat in featureIt:
+            possibleSnapFeatures.append(feat.geometry())
     return possibleSnapFeatures
 
 def construct_feature(layerType, parentLayerName, points, objectId):

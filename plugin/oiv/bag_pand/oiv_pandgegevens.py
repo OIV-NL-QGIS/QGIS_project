@@ -31,6 +31,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     sortedList = []
     pandId = ''
+    printCoverageLayer = None
 
     def __init__(self, parent=None, objectId=None):
         super(oivPandWidget, self).__init__(parent)
@@ -264,24 +265,55 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             layer.reload()
             
     def run_print(self):
+        self.printCoverageLayer = PR.create_temp_print_layer("pand_id")
+        self.draw_print_polygon()
+   
+    def resume_printing(self):
         arrBouwlagen = list(reversed([self.comboBox.itemText(i) for i in range(self.comboBox.count())]))
         printWhat, reply = PrintDialog.get_print_bouwlagen(arrBouwlagen)
-        directory = PQtW.QFileDialog().getExistingDirectory()
         if printWhat[0] == 'current':
             arrBouwlagen = [self.comboBox.currentText()]
         elif printWhat[0] == 'selection':
             arrBouwlagen = printWhat[1]
+        directory = PQtW.QFileDialog().getExistingDirectory()
         if directory != '' and reply:
             bouwlaagOrg = self.comboBox.currentText()
+            columnId = self.printCoverageLayer.dataProvider().fieldNameIndex("pand_id")
             for bouwlaag in arrBouwlagen:
                 subString = "bouwlaag = {}".format(bouwlaag)
                 UG.set_layer_substring(subString)
+                self.printCoverageLayer.startEditing()
+                for feature in self.printCoverageLayer.getFeatures():
+                    self.printCoverageLayer.changeAttributeValue(feature.id(), columnId, self.pand_id.text())
                 fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
-                filterString = '"identificatie"=' + "'{}'".format(self.pand_id.text())
-                reply, directory = PR.load_composer(directory, 'bouwlaag', filterString, fileName)
+                reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon')
                 MSG.showMsgBox(reply, directory)
             subString = "bouwlaag = {}".format(bouwlaagOrg)
             UG.set_layer_substring(subString)
+        qinst = QC.QgsProject.instance()
+        qinst.removeMapLayer(qinst.mapLayersByName("tempPrintCoverage")[0].id())
+
+    def draw_print_polygon(self):
+        drawTool = self.baseWidget.drawTool
+        drawTool.captureMode = 2
+        drawTool.layer = self.printCoverageLayer
+        drawTool.canvas = self.canvas
+        drawTool.onGeometryAdded = self.place_feature
+        self.canvas.setMapTool(drawTool)
+        drawTool.baseWidget = self.baseWidget
+
+    def place_feature(self, points, snapAngle):
+        """Save and place feature on the canvas"""
+        tempFeature = QC.QgsFeature()
+        tempFields = self.printCoverageLayer.fields()
+        tempFeature.initAttributes(tempFields.count())
+        tempFeature.setFields(tempFields)
+        self.iface.setActiveLayer(self.printCoverageLayer)
+        geom = QC.QgsGeometry.fromPolygonXY([points])
+        tempFeature.setGeometry(geom)
+        UC.write_layer(self.printCoverageLayer, tempFeature)    
+        RH.set_printcoverage_style(self.iface, self.printCoverageLayer)
+        self.resume_printing()
 
     def check_werkvoorraad(self):
         layerName = 'Werkvoorraad bouwlagen'
