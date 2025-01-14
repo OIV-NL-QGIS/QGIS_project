@@ -7,7 +7,7 @@ import oiv.helpers.utils_core as UC
 import oiv.helpers.messages as MSG
 import oiv.helpers.constants as PC
 
-def load_composer(output_folder, objectOfBouwlaag, fileName, byWhichLayer):
+def load_composer(output_folder, objectOfBouwlaag, fileName, byWhichLayer, rotation):
     layoutName = None
     reply = check_if_file_exists(output_folder, fileName)
     if reply == 'resume':
@@ -17,7 +17,7 @@ def load_composer(output_folder, objectOfBouwlaag, fileName, byWhichLayer):
             layout, atlas = load_layout(layoutName, project, byWhichLayer)
         else:
             layoutName = 'print_bouwlagen_pdf_A4'
-            layout, atlas = load_layout(layoutName, project, byWhichLayer)
+            layout, atlas = load_layout(layoutName, project, byWhichLayer, rotation)
             layout.itemById('title').setText("Bouwlaag: {}".format(fileName.split('_')[2]))
         rep = print_atlas(layout, atlas, output_folder, fileName)
         return rep, output_folder
@@ -49,10 +49,12 @@ def check_if_file_exists(output_folder, fileName):
                 return 'resume'
             except OSError: 
                 return 'stop'
+        else:
+            return 'stop'
     else:
         return 'resume'
 
-def load_layout(layoutName, project, byWhichLayer):
+def load_layout(layoutName, project, byWhichLayer, rotation):
     layout = QC.QgsPrintLayout(project)
     if byWhichLayer == 'polygon':
         coverageLayer = UC.getlayer_byname('tempPrintCoverage')
@@ -66,6 +68,9 @@ def load_layout(layoutName, project, byWhichLayer):
     doc = QDomDocument()
     doc.setContent(templateContent)
     items, ok = layout.loadFromTemplate(doc, QC.QgsReadWriteContext())
+    for item in layout.items():
+        if isinstance(item, QC.QgsLayoutItemMap):
+            item.setMapRotation(rotation)
     atlas = layout.atlas()
     atlas.setCoverageLayer(coverageLayer)
     atlas.filterFeatures()

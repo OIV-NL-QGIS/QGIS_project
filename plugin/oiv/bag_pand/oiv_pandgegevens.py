@@ -285,11 +285,14 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
                 self.printCoverageLayer.startEditing()
                 for feature in self.printCoverageLayer.getFeatures():
                     self.printCoverageLayer.changeAttributeValue(feature.id(), columnId, self.pand_id.text())
+                self.printCoverageLayer.commitChanges()
                 fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
-                reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon')
+                rotation = self.canvas.rotation()
+                reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon', rotation)
                 MSG.showMsgBox(reply, directory)
             subString = "bouwlaag = {}".format(bouwlaagOrg)
             UG.set_layer_substring(subString)
+        self.iface.actionPan().trigger()
         qinst = QC.QgsProject.instance()
         qinst.removeMapLayer(qinst.mapLayersByName("tempPrintCoverage")[0].id())
 
@@ -311,7 +314,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.setActiveLayer(self.printCoverageLayer)
         geom = QC.QgsGeometry.fromPolygonXY([points])
         tempFeature.setGeometry(geom)
-        UC.write_layer(self.printCoverageLayer, tempFeature)    
+        UC.write_layer(self.printCoverageLayer, tempFeature)
         RH.set_printcoverage_style(self.iface, self.printCoverageLayer)
         self.resume_printing()
 

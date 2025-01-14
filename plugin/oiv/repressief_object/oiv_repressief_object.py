@@ -278,12 +278,14 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             fileName = self.object_id.text() + '_' + self.formelenaam.text()
             filterString = '"object_id"='+"'{}'".format(self.object_id.text())
             UG.set_layer_substring(filterString, 'object')
-            reply, directory = PR.load_composer(directory, 'object', fileName, byWhichLayer)
+            rotation = self.canvas.rotation()
+            reply, directory = PR.load_composer(directory, 'object', fileName, byWhichLayer, rotation)
             MSG.showMsgBox(reply, directory)
             UG.set_layer_substring('', 'object')
         if byWhichLayer == 'polygon':
             qinst = QC.QgsProject.instance()
             qinst.removeMapLayer(qinst.mapLayersByName("tempPrintCoverage")[0].id())
+        self.iface.actionPan().trigger()
 
     def draw_print_polygon(self):
         drawTool = self.baseWidget.drawTool
