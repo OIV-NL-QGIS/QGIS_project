@@ -46,6 +46,14 @@ RBSTYLES = {
     },
 }
 
+PRINTLAYERSTYLE = {
+    'strokecolor': QColor('red'),
+    'fillcolor': QColor('red'),
+    'linestyle': getQtLineStyle('dash'),
+    'alphaF': 0.10,
+    'strokewidth': 1,
+}
+
 VERTEXMARKERSTYLES = {
     "movepoint": {
         'color': QColor('blue'),
@@ -65,10 +73,27 @@ VERTEXMARKERSTYLES = {
         'icontype': QgsVertexMarker.ICON_X,
         'penwidth': 5,
     },
+    "identify": {
+        'color': QColor('black'),
+        'iconsize': 6,
+        'icontype': QgsVertexMarker.ICON_CIRCLE,
+        'penwidth': 5,
+    },
 }
 
 def resetRB(rubberBand, WKBtype):
     rubberBand.reset(WKBtype)
+
+def set_printcoverage_style(iface, layer):
+    single_symbol_renderer = layer.renderer()
+    symbol = single_symbol_renderer.symbol()
+    color = PRINTLAYERSTYLE["fillcolor"]
+    color.setAlpha(10)
+    symbol.setColor(color)
+    symbol.symbolLayer(0).setStrokeColor(PRINTLAYERSTYLE["strokecolor"])
+    symbol.symbolLayer(0).setStrokeWidth(PRINTLAYERSTYLE["strokewidth"])
+    layer.triggerRepaint()
+    iface.layerTreeView().refreshLayerSymbology(layer.id())
 
 def init_rubberband(styleName, canvas, rbType):
     """initiate the rubberbands"""

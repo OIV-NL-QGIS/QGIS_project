@@ -57,7 +57,7 @@ def get_allkeys_ob(layerName):
     return read_settings(query, False)
 
 def get_chidlayers_ob():
-    query = "SELECT child_layer FROM config_object;"
+    query = "SELECT child_layer FROM config_object WHERE foreign_key = 'object_id';"
     return read_settings(query, True)
 
 def get_tablename_ob(layerName):
@@ -75,3 +75,15 @@ def get_identifier_by_tablename_ob(tableName):
 def get_identifier_by_tablename_bl(tableName):
     query = "SELECT identifier FROM config_bouwlaag WHERE tablename = '{}';".format(tableName)
     return read_settings(query, False)[0]
+
+def get_childlayers_ob_point():
+    query = "SELECT child_layer FROM config_object WHERE layertype = 'point';"
+    return read_settings(query, True)
+
+def get_childlayers_bl_point():
+    query = "SELECT child_layer FROM config_bouwlaag WHERE layertype = 'point';"
+    return read_settings(query, True)
+
+def get_childlayers_info_point():
+    query = "SELECT child_layer FROM config_info_of_interest WHERE layertype = 'point';"
+    return read_settings(query, True)

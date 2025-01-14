@@ -85,6 +85,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identify.clicked.disconnect()
         self.select.clicked.disconnect()
         self.delete_f.clicked.disconnect()
+        self.activatePan()
         try:
             self.selectTool.geomSelected.disconnect()
         except:
@@ -120,6 +121,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except:
             pass
+        self.selectTool.possibleSnapFeatures = self.get_snap_features()
+        self.selectTool.layer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
@@ -130,6 +133,13 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.polygonSelectTool.onGeometryAdded = self.select_features
         self.polygonSelectTool.parent = self
         self.canvas.setMapTool(self.polygonSelectTool)
+
+    def get_snap_features(self):
+        layerNamesTup = CH.get_childlayers_ob_point()
+        snapLayerNames = [i[0] for i in layerNamesTup]
+        objectId = self.object_id.text()
+        possibleSnapFeatures = UC.get_possible_snapFeatures_object(snapLayerNames, objectId)
+        return possibleSnapFeatures
 
     def select_features(self, points):
         geom = QC.QgsGeometry.fromPolygonXY([points])
@@ -176,6 +186,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def activatePan(self):
         """trigger pan function to loose other functions"""
         self.iface.actionPan().trigger()
+        self.parent.moveTool.possibleSnapFeatures = []
+        self.selectTool.possibleSnapFeatures = []
 
     def run_delete_tool(self):
         """activate delete feature tool"""
@@ -183,6 +195,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except:
             pass
+        self.selectTool.possibleSnapFeatures = self.get_snap_features()
+        self.selectTool.layer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
@@ -227,6 +241,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         for lyrName in self.moveLayerNames:
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.startEditing()
+        self.parent.moveTool.possibleSnapFeatures = self.get_snap_features()
+        self.parent.moveTool.layer = UC.getlayer_byname(PC.OBJECT["objectlayername"])
         self.parent.moveTool.onMoved = self.stop_moveTool
         self.parent.moveTool.multi = multi
         self.canvas.setMapTool(self.parent.moveTool)

@@ -3,6 +3,7 @@ import os
 
 from qgis.PyQt import uic
 import qgis.PyQt.QtWidgets as PQtW
+import qgis.PyQt.QtCore as PQtC
 import qgis.core as QC
 
 import oiv.helpers.utils_core as UC
@@ -18,6 +19,7 @@ import oiv.helpers.drawing_helper as DH
 import oiv.helpers.constants as PC
 import oiv.helpers.qt_helper as QT
 import oiv.tools.print as PR
+import oiv.helpers.rubberband_helper as RH
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectwidgetui"]))
@@ -35,6 +37,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     workWidget = None
     workLayout = None
     objectId = None
+    printCoverageLayer = None
 
     def __init__(self, parent=None, objectId=None, formeleNaam=None):
         super(oivRepressiefObjectWidget, self).__init__(parent)
@@ -125,7 +128,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             self.deleteobjectFrame.setVisible(False)
             self.baseWidget.handleDoneBtn(False)
             UC.refresh_layers(self.iface)
-        
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
@@ -263,15 +265,96 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.show_subwidget(True, werkvoorraadWidget)
 
     def run_print(self):
+        printWhat, reply, legenda = PrintDialog.get_print_bouwlagen()
+        if printWhat == 'polygon':
+            self.printCoverageLayer = PR.create_temp_print_layer('object_id')
+            self.draw_print_polygon()
+        elif reply:
+            self.resume_printing('terrein', legenda)
+
+    def resume_printing(self, byWhichLayer, legenda):
         directory = PQtW.QFileDialog().getExistingDirectory()
         if directory != '':
             fileName = self.object_id.text() + '_' + self.formelenaam.text()
             filterString = '"object_id"='+"'{}'".format(self.object_id.text())
-            PR.load_composer(directory, 'object', filterString, fileName)
-            MSG.showMsgBox('print_finished', directory)
+            UG.set_layer_substring(filterString, 'object')
+            rotation = self.canvas.rotation()
+            reply, directory = PR.load_composer(directory, 'object', fileName, byWhichLayer, rotation, legenda)
+            MSG.showMsgBox(reply, directory)
+            UG.set_layer_substring('', 'object')
+        if byWhichLayer == 'polygon':
+            qinst = QC.QgsProject.instance()
+            qinst.removeMapLayer(qinst.mapLayersByName("tempPrintCoverage")[0].id())
+        self.iface.actionPan().trigger()
+
+    def draw_print_polygon(self):
+        drawTool = self.baseWidget.drawTool
+        drawTool.captureMode = 2
+        drawTool.layer = self.printCoverageLayer
+        drawTool.canvas = self.canvas
+        drawTool.onGeometryAdded = self.place_feature
+        self.canvas.setMapTool(drawTool)
+        drawTool.baseWidget = self.baseWidget
+
+    def place_feature(self, points, snapAngle):
+        """Save and place feature on the canvas"""
+        tempFeature = QC.QgsFeature()
+        tempFields = self.printCoverageLayer.fields()
+        tempFeature.initAttributes(tempFields.count())
+        tempFeature.setFields(tempFields)
+        geom = QC.QgsGeometry.fromPolygonXY([points])
+        tempFeature.setGeometry(geom)
+        tempFeature["object_id"] = int(self.object_id.text())
+        UC.write_layer(self.printCoverageLayer, tempFeature)
+        RH.set_printcoverage_style(self.iface, self.printCoverageLayer)
+        self.resume_printing('polygon')
 
     def run_import(self):
         """initiate import widget"""
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         importwidget = IFW.oivImportFileWidget(self)
         self.show_subwidget(True, importwidget)
+
+class PrintDialog(PQtW.QDialog):
+    def __init__(self, parent=None):
+        super(PrintDialog, self).__init__(parent)
+        self.setWindowTitle("Bouwlagen printen")
+        self.chkBoxDict = {}
+        qlayout = PQtW.QVBoxLayout(self)
+        self.qlineA = PQtW.QLabel(self)
+        self.qRadioBtnPolygon = PQtW.QRadioButton(self)
+        self.qRadioBtnTerrain = PQtW.QRadioButton(self)
+        self.qlineA.setText("Selecteer hoe u wilt printen")
+        self.qRadioBtnPolygon.setToolTip("Polygoon tekenen")
+        self.qRadioBtnPolygon.setText("Polygoon tekenen")
+        self.qRadioBtnTerrain.setToolTip("Via terrein")
+        self.qRadioBtnTerrain.setText("Via terrein")
+        qlayout.addWidget(self.qlineA)
+        qlayout.addWidget(self.qRadioBtnPolygon)
+        qlayout.addWidget(self.qRadioBtnTerrain)
+        self.qlineB = PQtW.QLabel(self)
+        self.qlineB.setText("Voeg een legenda toe:")
+        qlayout.addWidget(self.qlineB)
+        self.cmbBoxLegenda = PQtW.QComboBox(self)
+        self.cmbBoxLegenda.addItems([''] + PC.OBJECT["objecttypes"])
+        qlayout.addWidget(self.cmbBoxLegenda)
+        buttons = PQtW.QDialogButtonBox(
+            PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
+            PQtC.Qt.Horizontal, self)
+        buttons.accepted.connect(self.accept)
+        buttons.rejected.connect(self.reject)
+        qlayout.addWidget(buttons)
+
+    def get_checked_radiobutton(self):
+        reply = None
+        if self.qRadioBtnPolygon.isChecked():
+            reply = 'polygon'
+        if self.qRadioBtnTerrain.isChecked():
+            reply = 'terrein'
+        return reply
+
+    @staticmethod
+    def get_print_bouwlagen(parent=None):
+        dialog = PrintDialog(parent)
+        result = dialog.exec_()
+        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted, dialog.cmbBoxLegenda.currentText())

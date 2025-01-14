@@ -156,6 +156,11 @@ MESSAGES = {
         "header": 'Printen afgerond!',
         "body": 'Het printen is gereed.\n\nU kunt de bestanden vinden in:\n'
     },
+    'print_canceld': {
+        "type": 'warning',
+        "header": 'Printen',
+        "body": 'Het printen is geannuleerd.\n\nBestand is open of beveiligd en kan niet worden overschreven!\n\nSluit het eerst en probeer dan opnieuw.'
+    },
     'multipleBouwlagenidentified': {
         "type": 'warning',
         "header": 'Meerdere bouwlagen',
@@ -166,5 +171,9 @@ MESSAGES = {
         "header": 'OIV',
         "body": 'Heeft u de historie bijgewerkt?'        
     },
-
+    'fileAlreadyExists': {
+        "type": 'question',
+        "header": 'Let op!',
+        "body": 'Bestand bestaat al, wilt u het bestand overschrijven?'
+    },
 }

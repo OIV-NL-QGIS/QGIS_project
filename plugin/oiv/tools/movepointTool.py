@@ -5,16 +5,17 @@ import qgis.gui as QG
 
 import oiv.helpers.rubberband_helper as RH
 import oiv.helpers.utils_core as UC
+import oiv.helpers.drawing_helper as DH
 
 
 class MovePointTool(QG.QgsMapToolIdentify):
     """identify the clicked point from the user and proces"""
 
-    def __init__(self, canvas, layer):
+    def __init__(self, canvas):
         QG.QgsMapToolIdentify.__init__(self, canvas)
         self.canvas = canvas
         self.setCursor(PQtC.Qt.CrossCursor)
-        self.layer = layer
+        self.layer = None
         self.dragging = False
         self.fields = None
         self.onMoved = None
@@ -24,7 +25,9 @@ class MovePointTool(QG.QgsMapToolIdentify):
         self.startRotate = False
         self.tempRubberBand = None
         self.vertexMarker = None
+        self.vertexmarker = None
         self.multi = False
+        self.possibleSnapFeatures = []
 
     def canvasPressEvent(self, event):
         """op welke feature wordt er geklikt"""
@@ -72,8 +75,16 @@ class MovePointTool(QG.QgsMapToolIdentify):
             self.point = layerPt
             self.vertexMarker.setCenter(layerPt)
         #als roteren -> teken de tempRubberband als lijn
-        if self.startRotate:
+        elif self.startRotate:
             self.tempRubberBand.movePoint(layerPt)
+        else:
+            layerPt = self.toLayerCoordinates(self.layer, event.pos())
+            self.snapPt = DH.snap_to_point(self, event.pos(), layerPt)
+            if self.vertexmarker is not None:
+                self.vertexmarker.hide()
+            if self.snapPt is not None:
+                self.vertexmarker.setCenter(self.snapPt)
+                self.vertexmarker.show()
 
     def canvasReleaseEvent(self, event):
         """als verslepen -> pas de geometry van de betreffende feature aan"""

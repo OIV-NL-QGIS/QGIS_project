@@ -4,13 +4,18 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 import oiv.helpers.messages as MSG
 
-def set_layer_substring(subString):
+def set_layer_substring(subString, bouwlaagOfObject='bouwlaag'):
     """set layer subset according (you can check the subset under properties of the layer)"""
     layersInEditMode = []
-    layerNamesTup = CH.get_chidlayers_bl()
+    if bouwlaagOfObject == 'object':
+        layerNamesTup = CH.get_chidlayers_ob()
+        extraLayerNames = PC.OBJECT["werkvoorraadlayers"]
+        extraLayerNames.append('Objecten')
+    else:
+        layerNamesTup = CH.get_chidlayers_bl()
+        extraLayerNames = PC.PAND["werkvoorraadlayers"]
     layerNames = [i[0] for i in layerNamesTup]
-    werkvLayerNames = PC.PAND["werkvoorraadlayers"]
-    layerNames = layerNames + werkvLayerNames
+    layerNames = layerNames + extraLayerNames
     for layerName in layerNames:
         layer = UC.getlayer_byname(layerName)
         if layer:
@@ -26,7 +31,10 @@ def set_layer_substring(subString):
     for layerName in layerNames:
         lyr = UC.getlayer_byname(layerName)
         if lyr:
-            lyr.setSubsetString(subString)
+            if layerName == 'Objecten':
+                lyr.setSubsetString(subString.replace('object_', ''))
+            else:
+                lyr.setSubsetString(subString)
             if lyr in layersInEditMode:
                 lyr.startEditing()
     return "succes"

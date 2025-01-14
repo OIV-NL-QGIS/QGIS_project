@@ -31,6 +31,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     sortedList = []
     pandId = ''
+    printCoverageLayer = None
 
     def __init__(self, parent=None, objectId=None):
         super(oivPandWidget, self).__init__(parent)
@@ -264,19 +265,60 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             layer.reload()
             
     def run_print(self):
-        arrBouwlagen = [self.comboBox.itemText(i) for i in range(self.comboBox.count())]
-        directory = PQtW.QFileDialog().getExistingDirectory()
-        if directory != '':
+        self.printCoverageLayer = PR.create_temp_print_layer("pand_id")
+        self.draw_print_polygon()
+   
+    def resume_printing(self):
+        directory = ''
+        arrBouwlagen = list(reversed([self.comboBox.itemText(i) for i in range(self.comboBox.count())]))
+        printWhat, reply, legenda = PrintDialog.get_print_bouwlagen(arrBouwlagen)
+        if reply:
+            if printWhat[0] == 'current':
+                arrBouwlagen = [self.comboBox.currentText()]
+            elif printWhat[0] == 'selection':
+                arrBouwlagen = printWhat[1]
+            directory = PQtW.QFileDialog().getExistingDirectory()
+        if directory != '' and reply:
             bouwlaagOrg = self.comboBox.currentText()
+            columnId = self.printCoverageLayer.dataProvider().fieldNameIndex("pand_id")
             for bouwlaag in arrBouwlagen:
                 subString = "bouwlaag = {}".format(bouwlaag)
                 UG.set_layer_substring(subString)
+                self.printCoverageLayer.startEditing()
+                for feature in self.printCoverageLayer.getFeatures():
+                    self.printCoverageLayer.changeAttributeValue(feature.id(), columnId, self.pand_id.text())
+                self.printCoverageLayer.commitChanges()
                 fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
-                filterString = '"identificatie"=' + "'{}'".format(self.pand_id.text())
-                PR.load_composer(directory, 'bouwlaag', filterString, fileName)
-            MSG.showMsgBox('print_finished', directory)
+                rotation = self.canvas.rotation()
+                reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon', rotation, legenda)
+                MSG.showMsgBox(reply, directory)
             subString = "bouwlaag = {}".format(bouwlaagOrg)
             UG.set_layer_substring(subString)
+        self.iface.actionPan().trigger()
+        qinst = QC.QgsProject.instance()
+        qinst.removeMapLayer(qinst.mapLayersByName("tempPrintCoverage")[0].id())
+
+    def draw_print_polygon(self):
+        drawTool = self.baseWidget.drawTool
+        drawTool.captureMode = 2
+        drawTool.layer = self.printCoverageLayer
+        drawTool.canvas = self.canvas
+        drawTool.onGeometryAdded = self.place_feature
+        self.canvas.setMapTool(drawTool)
+        drawTool.baseWidget = self.baseWidget
+
+    def place_feature(self, points, snapAngle):
+        """Save and place feature on the canvas"""
+        tempFeature = QC.QgsFeature()
+        tempFields = self.printCoverageLayer.fields()
+        tempFeature.initAttributes(tempFields.count())
+        tempFeature.setFields(tempFields)
+        self.iface.setActiveLayer(self.printCoverageLayer)
+        geom = QC.QgsGeometry.fromPolygonXY([points])
+        tempFeature.setGeometry(geom)
+        UC.write_layer(self.printCoverageLayer, tempFeature)
+        RH.set_printcoverage_style(self.iface, self.printCoverageLayer)
+        self.resume_printing()
 
     def check_werkvoorraad(self):
         layerName = 'Werkvoorraad bouwlagen'
@@ -445,3 +487,69 @@ class MultiEditBouwlaagDialog(PQtW.QDialog):
         deltaX = round(dialog.qSpinBoxXmtr.value() + dialog.qSpinBoxXcm.value() / 100, 2)
         deltaY = round(dialog.qSpinBoxYmtr.value() + dialog.qSpinBoxYcm.value() / 100, 2)
         return (deltaX, deltaY, dialog.qSpinBoxRotate.value(), result == PQtW.QDialog.Accepted)
+    
+class PrintDialog(PQtW.QDialog):
+    def __init__(self, arrBouwlagen, parent=None):
+        super(PrintDialog, self).__init__(parent)
+        self.setWindowTitle("Bouwlagen printen")
+        self.chkBoxDict = {}
+        qlayout = PQtW.QVBoxLayout(self)
+        self.qlineA = PQtW.QLabel(self)
+        self.qRadioBtnCurrent = PQtW.QRadioButton(self)
+        self.qRadioBtnAll = PQtW.QRadioButton(self)
+        self.qRadioBtnSelection = PQtW.QRadioButton(self)
+        self.qlineA.setText("Selecteer welke bouwlagen u wilt printen")
+        self.qRadioBtnCurrent.setToolTip("Huidige bouwlaag")
+        self.qRadioBtnCurrent.setText("Huidige bouwlaag")
+        self.qRadioBtnAll.setToolTip("Alle bouwlagen")
+        self.qRadioBtnAll.setText("Alle bouwlagen")
+        self.qRadioBtnSelection.setToolTip("Bouwlagen selecteren")
+        self.qRadioBtnSelection.setText("Bouwlagen selecteren")
+        qlayout.addWidget(self.qlineA)
+        qlayout.addWidget(self.qRadioBtnCurrent)
+        qlayout.addWidget(self.qRadioBtnAll)
+        qlayout.addWidget(self.qRadioBtnSelection)
+        for bouwlaag in arrBouwlagen:
+            chkBox = PQtW.QCheckBox(self)
+            chkBox.setText(bouwlaag)
+            chkBox.setVisible(False)
+            qlayout.addWidget(chkBox)
+            self.chkBoxDict[bouwlaag] = chkBox
+            chkBox = None
+        self.qlineB = PQtW.QLabel(self)
+        self.qlineB.setText("Voeg een legenda toe:")
+        qlayout.addWidget(self.qlineB)
+        self.cmbBoxLegenda = PQtW.QComboBox(self)
+        self.cmbBoxLegenda.addItems([''] + PC.OBJECT["objecttypes"])
+        qlayout.addWidget(self.cmbBoxLegenda)
+        buttons = PQtW.QDialogButtonBox(
+            PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
+            PQtC.Qt.Horizontal, self)
+        buttons.accepted.connect(self.accept)
+        buttons.rejected.connect(self.reject)
+        qlayout.addWidget(buttons)
+        self.qRadioBtnSelection.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict))
+
+    def set_selection_visible(self, chkBoxDict):
+        for key, value in chkBoxDict.items():
+            value.setVisible(True)
+
+    def get_checked_radiobutton(self):
+        reply = None
+        if self.qRadioBtnCurrent.isChecked():
+            reply = ['current']
+        if self.qRadioBtnAll.isChecked():
+            reply = ['all']
+        if self.qRadioBtnSelection.isChecked():
+            bouwlagenArr = []
+            for key, value in self.chkBoxDict.items():
+                if value.isChecked():
+                    bouwlagenArr.append(key)
+            reply = ['selection', bouwlagenArr]
+        return reply
+
+    @staticmethod
+    def get_print_bouwlagen(arrBouwlagen, parent=None):
+        dialog = PrintDialog(arrBouwlagen, parent)
+        result = dialog.exec_()
+        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted, dialog.cmbBoxLegenda.currentText())

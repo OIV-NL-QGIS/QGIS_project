@@ -72,6 +72,7 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.helpBtn.clicked.disconnect()
         self.floatBtn.clicked.disconnect()
         self.terug.clicked.disconnect()
+        self.activatePan()
         try:
             self.selectTool.geomSelected.disconnect()
         except:
@@ -80,15 +81,29 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.show()
         del self
 
+    def activatePan(self):
+        """trigger pan function to loose other functions"""
+        self.iface.actionPan().trigger()
+        self.baseWidget.moveTool.possibleSnapFeatures = []
+        self.selectTool.possibleSnapFeatures = []
+
     def run_edit_tool(self):
         """activate the edit feature tool"""
         try:
             self.selectTool.geomSelected.disconnect()
         except:
             pass
+        self.selectTool.possibleSnapFeatures = self.get_snap_features()
+        self.selectTool.layer = UC.getlayer_byname(PC.PAND["bouwlaaglayername"])
         self.selectTool.whichConfig = PC.INFO_INTEREST["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
+
+    def get_snap_features(self):
+        layerNamesTup = CH.get_childlayers_info_point()
+        snapLayerNames = [i[0] for i in layerNamesTup]
+        possibleSnapFeatures = UC.get_possible_snapFeatures_ioi(snapLayerNames)
+        return possibleSnapFeatures
 
     def run_select_tool(self):
         """activate the select feature tool"""
@@ -115,6 +130,8 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except:
             pass
+        self.selectTool.possibleSnapFeatures = self.get_snap_features()
+        self.selectTool.layer = UC.getlayer_byname(PC.PAND["bouwlaaglayername"])
         self.selectTool.whichConfig = PC.INFO_INTEREST["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.delete)
@@ -144,6 +161,8 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         for lyrName in self.moveLayerNames:
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.startEditing()
+        self.baseWidget.moveTool.possibleSnapFeatures = self.get_snap_features()
+        self.baseWidget.moveTool.layer = UC.getlayer_byname(PC.PAND["bouwlaaglayername"])
         self.baseWidget.moveTool.onMoved = self.stop_moveTool
         self.canvas.setMapTool(self.baseWidget.moveTool)
 

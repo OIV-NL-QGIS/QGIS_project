@@ -6,6 +6,8 @@ import qgis.gui as QG
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.messages as MSG
+import oiv.helpers.drawing_helper as DH
+import oiv.helpers.rubberband_helper as RH
 
 
 class IdentifyGeometryTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
@@ -14,8 +16,11 @@ class IdentifyGeometryTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     def __init__(self, canvas):
         self.canvas = canvas
         QG.QgsMapToolIdentify.__init__(self, canvas)
+        self.vertexmarker = None
+        self.layer = None
 
     geomIdentified = PQtC.pyqtSignal(['QgsVectorLayer', 'QgsFeature'])
+    possibleSnapFeatures = []
 
     def canvasReleaseEvent(self, mouseEvent):
         """handle mouse release event and return indetified feature"""
@@ -28,12 +33,23 @@ class IdentifyGeometryTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
         else:
             self.geomIdentified.emit(None, tempfeature)
 
+    def canvasMoveEvent(self, event):
+        layerPt = self.toLayerCoordinates(self.layer, event.pos())
+        self.snapPt = DH.snap_to_point(self, event.pos(), layerPt)
+        if self.vertexmarker is not None:
+            self.vertexmarker.hide()
+        if self.snapPt is not None:
+            self.vertexmarker.setCenter(self.snapPt)
+            self.vertexmarker.show()
 
 class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
     """select geometry on the map"""
 
     whichConfig = ''
     expectedLayerName = None
+    possibleSnapFeatures = []
+    layer = None
+    vertexmarker = None
 
     def __init__(self, canvas):
         self.canvas = canvas
@@ -61,6 +77,15 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
                     self.geomSelected.emit(idlayer, tempfeature)
         else:
             MSG.showMsgBox('noidentifiedobject')
+
+    def canvasMoveEvent(self, event):
+        layerPt = self.toLayerCoordinates(self.layer, event.pos())
+        self.snapPt = DH.snap_to_point(self, event.pos(), layerPt)
+        if self.vertexmarker is not None:
+            self.vertexmarker.hide()
+        if self.snapPt is not None:
+            self.vertexmarker.setCenter(self.snapPt)
+            self.vertexmarker.show()
 
     def ask_user_for_feature(self, idLayer, allFeatures):
         """if more features are identified ask user which one to choose"""
@@ -98,6 +123,14 @@ class SelectTool(QG.QgsMapToolIdentify, QG.QgsMapTool):
                     targetFeature = feat
         return targetFeature
 
+    def canvasMoveEvent(self, event):
+        layerPt = self.toLayerCoordinates(self.layer, event.pos())
+        self.snapPt = DH.snap_to_point(self, event.pos(), layerPt)
+        if self.vertexmarker is not None:
+            self.vertexmarker.hide()
+        if self.snapPt is not None:
+            self.vertexmarker.setCenter(self.snapPt)
+            self.vertexmarker.show()
 
 class AskFeatureDialog(PQtW.QDialog):
     """if more features are identified ask user which one to choose"""

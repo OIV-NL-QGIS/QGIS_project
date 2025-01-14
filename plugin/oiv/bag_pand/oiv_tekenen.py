@@ -86,10 +86,19 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except:
             pass
+        self.selectTool.possibleSnapFeatures = self.get_snap_features()
+        self.selectTool.layer = UC.getlayer_byname(PC.PAND["bouwlaaglayername"])
         self.selectTool.whichConfig = PC.PAND["configtable"]
         self.selectTool.expectedLayerName = None
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.geomSelected.connect(self.edit_attribute)
+
+    def get_snap_features(self):
+        layerNamesTup = CH.get_childlayers_bl_point()
+        snapLayerNames = [i[0] for i in layerNamesTup]
+        objectId = self.pand_id.text()
+        possibleSnapFeatures = UC.get_possible_snapFeatures_bouwlaag(snapLayerNames, objectId)
+        return possibleSnapFeatures
 
     def run_select_tool(self):
         self.polygonSelectTool.canvas = self.canvas
@@ -135,6 +144,8 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except:
             pass
+        self.selectTool.possibleSnapFeatures = self.get_snap_features()
+        self.selectTool.layer = UC.getlayer_byname(PC.PAND["bouwlaaglayername"])
         self.selectTool.whichConfig = PC.PAND["configtable"]
         self.canvas.setMapTool(self.selectTool)
         self.selectTool.expectedLayerName = None
@@ -177,6 +188,8 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         for lyrName in self.moveLayerNames:
             moveLayer = UC.getlayer_byname(lyrName)
             moveLayer.startEditing()
+        self.parent.moveTool.possibleSnapFeatures = self.get_snap_features()
+        self.parent.moveTool.layer = UC.getlayer_byname(PC.PAND["bouwlaaglayername"])
         self.parent.moveTool.onMoved = self.stop_moveTool
         self.parent.moveTool.multi = multi
         self.canvas.setMapTool(self.parent.moveTool)
@@ -269,6 +282,8 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def activatePan(self):
         """trigger pan function to loose other functions"""
         self.iface.actionPan().trigger()
+        self.parent.moveTool.possibleSnapFeatures = []
+        self.selectTool.possibleSnapFeatures = []
 
     def close_bouwlaag_tekenen_show_base(self):
         """destroy and close self"""
@@ -276,6 +291,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.identify.clicked.disconnect()
         self.select.clicked.disconnect()
         self.delete_f.clicked.disconnect()
+        self.activatePan()
         try:
             self.selectTool.geomSelected.disconnect()
         except:
