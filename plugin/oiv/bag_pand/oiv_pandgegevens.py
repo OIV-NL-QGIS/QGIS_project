@@ -269,13 +269,15 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.draw_print_polygon()
    
     def resume_printing(self):
+        directory = ''
         arrBouwlagen = list(reversed([self.comboBox.itemText(i) for i in range(self.comboBox.count())]))
-        printWhat, reply = PrintDialog.get_print_bouwlagen(arrBouwlagen)
-        if printWhat[0] == 'current':
-            arrBouwlagen = [self.comboBox.currentText()]
-        elif printWhat[0] == 'selection':
-            arrBouwlagen = printWhat[1]
-        directory = PQtW.QFileDialog().getExistingDirectory()
+        printWhat, reply, legenda = PrintDialog.get_print_bouwlagen(arrBouwlagen)
+        if reply:
+            if printWhat[0] == 'current':
+                arrBouwlagen = [self.comboBox.currentText()]
+            elif printWhat[0] == 'selection':
+                arrBouwlagen = printWhat[1]
+            directory = PQtW.QFileDialog().getExistingDirectory()
         if directory != '' and reply:
             bouwlaagOrg = self.comboBox.currentText()
             columnId = self.printCoverageLayer.dataProvider().fieldNameIndex("pand_id")
@@ -288,7 +290,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
                 self.printCoverageLayer.commitChanges()
                 fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
                 rotation = self.canvas.rotation()
-                reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon', rotation)
+                reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon', rotation, legenda)
                 MSG.showMsgBox(reply, directory)
             subString = "bouwlaag = {}".format(bouwlaagOrg)
             UG.set_layer_substring(subString)
@@ -514,6 +516,12 @@ class PrintDialog(PQtW.QDialog):
             qlayout.addWidget(chkBox)
             self.chkBoxDict[bouwlaag] = chkBox
             chkBox = None
+        self.qlineB = PQtW.QLabel(self)
+        self.qlineB.setText("Voeg een legenda toe:")
+        qlayout.addWidget(self.qlineB)
+        self.cmbBoxLegenda = PQtW.QComboBox(self)
+        self.cmbBoxLegenda.addItems([''] + PC.OBJECT["objecttypes"])
+        qlayout.addWidget(self.cmbBoxLegenda)
         buttons = PQtW.QDialogButtonBox(
             PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
             PQtC.Qt.Horizontal, self)
@@ -544,4 +552,4 @@ class PrintDialog(PQtW.QDialog):
     def get_print_bouwlagen(arrBouwlagen, parent=None):
         dialog = PrintDialog(arrBouwlagen, parent)
         result = dialog.exec_()
-        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted)
+        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted, dialog.cmbBoxLegenda.currentText())

@@ -265,21 +265,21 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.show_subwidget(True, werkvoorraadWidget)
 
     def run_print(self):
-        printWhat, reply = PrintDialog.get_print_bouwlagen()
+        printWhat, reply, legenda = PrintDialog.get_print_bouwlagen()
         if printWhat == 'polygon':
             self.printCoverageLayer = PR.create_temp_print_layer('object_id')
             self.draw_print_polygon()
         elif reply:
-            self.resume_printing('terrein')
+            self.resume_printing('terrein', legenda)
 
-    def resume_printing(self, byWhichLayer):
+    def resume_printing(self, byWhichLayer, legenda):
         directory = PQtW.QFileDialog().getExistingDirectory()
         if directory != '':
             fileName = self.object_id.text() + '_' + self.formelenaam.text()
             filterString = '"object_id"='+"'{}'".format(self.object_id.text())
             UG.set_layer_substring(filterString, 'object')
             rotation = self.canvas.rotation()
-            reply, directory = PR.load_composer(directory, 'object', fileName, byWhichLayer, rotation)
+            reply, directory = PR.load_composer(directory, 'object', fileName, byWhichLayer, rotation, legenda)
             MSG.showMsgBox(reply, directory)
             UG.set_layer_substring('', 'object')
         if byWhichLayer == 'polygon':
@@ -332,6 +332,12 @@ class PrintDialog(PQtW.QDialog):
         qlayout.addWidget(self.qlineA)
         qlayout.addWidget(self.qRadioBtnPolygon)
         qlayout.addWidget(self.qRadioBtnTerrain)
+        self.qlineB = PQtW.QLabel(self)
+        self.qlineB.setText("Voeg een legenda toe:")
+        qlayout.addWidget(self.qlineB)
+        self.cmbBoxLegenda = PQtW.QComboBox(self)
+        self.cmbBoxLegenda.addItems([''] + PC.OBJECT["objecttypes"])
+        qlayout.addWidget(self.cmbBoxLegenda)
         buttons = PQtW.QDialogButtonBox(
             PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
             PQtC.Qt.Horizontal, self)
@@ -351,4 +357,4 @@ class PrintDialog(PQtW.QDialog):
     def get_print_bouwlagen(parent=None):
         dialog = PrintDialog(parent)
         result = dialog.exec_()
-        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted)
+        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted, dialog.cmbBoxLegenda.currentText())
