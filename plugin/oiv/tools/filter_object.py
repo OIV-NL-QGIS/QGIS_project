@@ -6,7 +6,7 @@ import oiv.helpers.drawing_helper as DH
 import oiv.helpers.configdb_helper as CH
 
 def init_filter_section(wdgt):
-    wdgt.filterframe.setVisible(True)
+    wdgt.filterframe.setVisible(not wdgt.filterframe.isVisible())
     wdgt.objecttype.clear()
     wdgt.objecttype.addItems(DH.OBJECTTYPES)
     set_current_date(wdgt)
