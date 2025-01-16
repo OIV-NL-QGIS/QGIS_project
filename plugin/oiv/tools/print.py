@@ -88,10 +88,7 @@ def load_layout(layoutName, project, byWhichLayer, rotation, legenda):
 
 def create_temp_print_layer(identifier):
     tempPrintLayer = QC.QgsVectorLayer("Polygon?crs=epsg:28992", "tempPrintCoverage", "memory")
-    if identifier == 'pand_id':
-        field = QC.QgsField(identifier, PQtC.QVariant.String)
-    else:
-        field = QC.QgsField(identifier, PQtC.QVariant.Int)
+    field = QC.QgsField(identifier, PQtC.QVariant.Int)
     tempPrintLayer.dataProvider().addAttributes([field])
     tempPrintLayer.updateFields()
     QC.QgsProject.instance().addMapLayer(tempPrintLayer, True)

@@ -267,6 +267,14 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_print(self):
         self.printCoverageLayer = PR.create_temp_print_layer("pand_id")
         self.draw_print_polygon()
+
+    def get_bouwlaag_id(self):
+        layerName = PC.PAND["bouwlaaglayername"]
+        layer = UC.getlayer_byname(layerName)
+        objectId = self.pand_id.text()
+        request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
+        ifeature = UC.featureRequest(layer, request)
+        return ifeature.id()
    
     def resume_printing(self):
         directory = ''
@@ -285,8 +293,9 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
                 subString = "bouwlaag = {}".format(bouwlaag)
                 UG.set_layer_substring(subString)
                 self.printCoverageLayer.startEditing()
+                bouwlaagId = self.get_bouwlaag_id()
                 for feature in self.printCoverageLayer.getFeatures():
-                    self.printCoverageLayer.changeAttributeValue(feature.id(), columnId, self.pand_id.text())
+                    self.printCoverageLayer.changeAttributeValue(feature.id(), columnId, bouwlaagId)
                 self.printCoverageLayer.commitChanges()
                 fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
                 rotation = self.canvas.rotation()
