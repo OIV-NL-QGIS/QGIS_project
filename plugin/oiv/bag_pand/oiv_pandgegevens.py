@@ -276,10 +276,20 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         ifeature = UC.featureRequest(layer, request)
         return ifeature.id()
    
-    def resume_printing(self):
+    def get_intersecting_objects(self, geom):
+        layerName = PC.OBJECT["terreinlayername"]
+        layer = UC.getlayer_byname(layerName)
+        intersectingObjects = []
+        for feat in layer.getFeatures():
+            if feat.geometry().intersection(geom):
+                intersectingObjects.append(feat["formelenaam"])
+        return intersectingObjects
+
+    def resume_printing(self, geom):
         directory = ''
         arrBouwlagen = list(reversed([self.comboBox.itemText(i) for i in range(self.comboBox.count())]))
-        printWhat, reply, legenda = PrintDialog.get_print_bouwlagen(arrBouwlagen)
+        arrObjects = self.get_intersecting_objects(geom)
+        printWhat, reply, legenda, objectnaam = PrintDialog.get_print_bouwlagen(arrBouwlagen, arrObjects)
         if reply:
             if printWhat[0] == 'current':
                 arrBouwlagen = [self.comboBox.currentText()]
@@ -288,16 +298,20 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             directory = PQtW.QFileDialog().getExistingDirectory()
         if directory != '' and reply:
             bouwlaagOrg = self.comboBox.currentText()
-            columnId = self.printCoverageLayer.dataProvider().fieldNameIndex("pand_id")
+            columnId1 = self.printCoverageLayer.dataProvider().fieldNameIndex("pand_id")
+            columnId2 = self.printCoverageLayer.dataProvider().fieldNameIndex("formelenaam")
+            columnId3 = self.printCoverageLayer.dataProvider().fieldNameIndex("bouwlaag")
             for bouwlaag in arrBouwlagen:
                 subString = "bouwlaag = {}".format(bouwlaag)
                 UG.set_layer_substring(subString)
                 self.printCoverageLayer.startEditing()
                 bouwlaagId = self.get_bouwlaag_id()
                 for feature in self.printCoverageLayer.getFeatures():
-                    self.printCoverageLayer.changeAttributeValue(feature.id(), columnId, bouwlaagId)
+                    self.printCoverageLayer.changeAttributeValue(feature.id(), columnId1, bouwlaagId)
+                    self.printCoverageLayer.changeAttributeValue(feature.id(), columnId2, objectnaam)
+                    self.printCoverageLayer.changeAttributeValue(feature.id(), columnId3, bouwlaag)
                 self.printCoverageLayer.commitChanges()
-                fileName = '{}_bouwlaag_{}'.format(self.pand_id.text(), bouwlaag)
+                fileName = '{}_bouwlaag_{}'.format(objectnaam, bouwlaag)
                 rotation = self.canvas.rotation()
                 reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon', rotation, legenda)
                 MSG.showMsgBox(reply, directory)
@@ -327,7 +341,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         tempFeature.setGeometry(geom)
         UC.write_layer(self.printCoverageLayer, tempFeature)
         RH.set_printcoverage_style(self.iface, self.printCoverageLayer)
-        self.resume_printing()
+        self.resume_printing(geom)
 
     def check_werkvoorraad(self):
         layerName = 'Werkvoorraad bouwlagen'
@@ -498,7 +512,7 @@ class MultiEditBouwlaagDialog(PQtW.QDialog):
         return (deltaX, deltaY, dialog.qSpinBoxRotate.value(), result == PQtW.QDialog.Accepted)
     
 class PrintDialog(PQtW.QDialog):
-    def __init__(self, arrBouwlagen, parent=None):
+    def __init__(self, arrBouwlagen, arrObjects, parent=None):
         super(PrintDialog, self).__init__(parent)
         self.setWindowTitle("Bouwlagen printen")
         self.chkBoxDict = {}
@@ -526,8 +540,14 @@ class PrintDialog(PQtW.QDialog):
             self.chkBoxDict[bouwlaag] = chkBox
             chkBox = None
         self.qlineB = PQtW.QLabel(self)
-        self.qlineB.setText("Voeg een legenda toe:")
+        self.qlineB.setText("Bij welk object hoort deze bouwlaag:")
         qlayout.addWidget(self.qlineB)
+        self.cmbBoxObject = PQtW.QComboBox(self)
+        self.cmbBoxObject.addItems(arrObjects)
+        qlayout.addWidget(self.cmbBoxObject)     
+        self.qlineC = PQtW.QLabel(self)
+        self.qlineC.setText("Voeg een legenda toe:")
+        qlayout.addWidget(self.qlineC)
         self.cmbBoxLegenda = PQtW.QComboBox(self)
         self.cmbBoxLegenda.addItems([''] + PC.OBJECT["objecttypes"])
         qlayout.addWidget(self.cmbBoxLegenda)
@@ -558,7 +578,8 @@ class PrintDialog(PQtW.QDialog):
         return reply
 
     @staticmethod
-    def get_print_bouwlagen(arrBouwlagen, parent=None):
-        dialog = PrintDialog(arrBouwlagen, parent)
+    def get_print_bouwlagen(arrBouwlagen, arrObjects, parent=None):
+        dialog = PrintDialog(arrBouwlagen, arrObjects, parent)
         result = dialog.exec_()
-        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted, dialog.cmbBoxLegenda.currentText())
+        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted
+                , dialog.cmbBoxLegenda.currentText(), dialog.cmbBoxObject.currentText())

@@ -18,11 +18,9 @@ def load_composer(output_folder, objectOfBouwlaag, fileName, byWhichLayer, rotat
         project = QC.QgsProject.instance()
         if objectOfBouwlaag == 'object':
             layoutName = 'print_object_pdf_A4' + suffix
-            layout, atlas = load_layout(layoutName, project, byWhichLayer, rotation, legenda)
         else:
             layoutName = 'print_bouwlagen_pdf_A4' + suffix
-            layout, atlas = load_layout(layoutName, project, byWhichLayer, rotation, legenda)
-            layout.itemById('title').setText("Bouwlaag: {}".format(fileName.split('_')[2]))
+        layout, atlas = load_layout(layoutName, project, byWhichLayer, rotation, legenda)
         rep = print_atlas(layout, atlas, output_folder, fileName)
         return rep, output_folder
     elif reply == 'stop':
@@ -88,8 +86,10 @@ def load_layout(layoutName, project, byWhichLayer, rotation, legenda):
 
 def create_temp_print_layer(identifier):
     tempPrintLayer = QC.QgsVectorLayer("Polygon?crs=epsg:28992", "tempPrintCoverage", "memory")
-    field = QC.QgsField(identifier, PQtC.QVariant.Int)
-    tempPrintLayer.dataProvider().addAttributes([field])
+    field1 = QC.QgsField(identifier, PQtC.QVariant.Int)
+    field2 = QC.QgsField('formelenaam', PQtC.QVariant.String)
+    field3 = QC.QgsField('bouwlaag', PQtC.QVariant.Int)
+    tempPrintLayer.dataProvider().addAttributes([field1, field2, field3])
     tempPrintLayer.updateFields()
     QC.QgsProject.instance().addMapLayer(tempPrintLayer, True)
     return tempPrintLayer

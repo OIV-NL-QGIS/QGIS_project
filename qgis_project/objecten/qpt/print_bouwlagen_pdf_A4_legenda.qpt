@@ -426,7 +426,7 @@
    </customproperties>
   </LayoutObject>
  </LayoutItem>
- <LayoutItem unitLabel="m" segmentMillimeters="16.7788" minBarWidth="50" style="Single Box" mapUuid="{5456ec59-68c4-49a6-a8bf-52ea271398ca}" numSegmentsLeft="0" maxBarWidth="150" referencePoint="0" labelVerticalPlacement="0" outlineWidthM="0.3,mm" excludeFromExports="0" segmentSizeMode="1" blendMode="0" size="96.5961,12.3,mm" frameJoinStyle="miter" frame="false" outlineWidth="0.3" position="7.2428,196.7,mm" lineJoinStyle="miter" numUnitsPerSegment="10" zValue="5" type="65646" subdivisionsHeight="1.5" templateUuid="{5c0f95bf-fd34-433c-a181-ed74b74dda0c}" visibility="1" numSubdivisions="1" uuid="{5c0f95bf-fd34-433c-a181-ed74b74dda0c}" numMapUnitsPerScaleBarUnit="1" numSegments="5" positionLock="false" labelHorizontalPlacement="0" background="false" positionOnPage="7.2428,196.7,mm" id="" boxContentSpace="1" height="2" labelBarSpace="3" unitType="meters" itemRotation="0" opacity="1" groupUuid="" lineCapStyle="square" alignment="0">
+ <LayoutItem unitLabel="m" segmentMillimeters="28.3659" minBarWidth="50" style="Single Box" mapUuid="{5456ec59-68c4-49a6-a8bf-52ea271398ca}" numSegmentsLeft="0" maxBarWidth="150" referencePoint="0" labelVerticalPlacement="0" outlineWidthM="0.3,mm" excludeFromExports="0" segmentSizeMode="1" blendMode="0" size="155.975,12.3,mm" frameJoinStyle="miter" frame="false" outlineWidth="0.3" position="7.2428,196.7,mm" lineJoinStyle="miter" numUnitsPerSegment="20" zValue="5" type="65646" subdivisionsHeight="1.5" templateUuid="{5c0f95bf-fd34-433c-a181-ed74b74dda0c}" visibility="1" numSubdivisions="1" uuid="{5c0f95bf-fd34-433c-a181-ed74b74dda0c}" numMapUnitsPerScaleBarUnit="1" numSegments="5" positionLock="false" labelHorizontalPlacement="0" background="false" positionOnPage="7.2428,196.7,mm" id="" boxContentSpace="1" height="2" labelBarSpace="3" unitType="meters" itemRotation="0" opacity="1" groupUuid="" lineCapStyle="square" alignment="0">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -715,7 +715,7 @@
    </symbol>
   </fillSymbol2>
  </LayoutItem>
- <LayoutItem excludeFromExports="0" visibility="1" zValue="4" type="65641" frame="false" marginX="0" templateUuid="{25601f3c-c4dd-43f6-9b59-4a5589ba6843}" id="title" marginY="0" labelText="Bouwlaag: 1" outlineWidthM="0.3,mm" size="290.31,11.4009,mm" valign="32" frameJoinStyle="miter" position="3.86898,2.84431,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="3.86898,2.84431,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{25601f3c-c4dd-43f6-9b59-4a5589ba6843}" blendMode="0" opacity="1">
+ <LayoutItem excludeFromExports="0" visibility="1" zValue="4" type="65641" frame="false" marginX="0" templateUuid="{25601f3c-c4dd-43f6-9b59-4a5589ba6843}" id="title" marginY="0" labelText="[%CONCAT(attribute( @atlas_feature, 'formelenaam' ), ' | Bouwlaag: ', attribute( @atlas_feature, 'bouwlaag' ))%]" outlineWidthM="0.3,mm" size="290.31,11.4009,mm" valign="32" frameJoinStyle="miter" position="3.86898,2.84431,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="3.86898,2.84431,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{25601f3c-c4dd-43f6-9b59-4a5589ba6843}" blendMode="0" opacity="1">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -814,7 +814,7 @@
     <Option/>
    </customproperties>
   </LayoutObject>
-  <Extent ymin="502779.70388047012966126" xmax="128485.40688523254357278" xmin="128308.39735441555967554" ymax="502904.86203620716696605"/>
+  <Extent ymin="502785.57677558483555913" xmax="128479.87582413548079785" xmin="128270.46962884612730704" ymax="502933.64164577209157869"/>
   <LayerSet/>
   <AtlasMap atlasDriven="1" margin="0" scalingMode="2"/>
   <labelBlockingItems/>
@@ -1305,5 +1305,5 @@
    <Option type="QString" value="false" name="singleFile"/>
   </Option>
  </customproperties>
- <Atlas filterFeatures="0" sortFeatures="0" filenamePattern=" &quot;pand_id&quot; || '_bouwlaag_' || &quot;bouwlaag&quot;" hideCoverage="1" coverageLayer="tempPrintCoverage_c48f6023_eb65_4580_b2a3_231b0b42123b" pageNameExpression="&quot;pand_id&quot;" coverageLayerProvider="memory" coverageLayerName="tempPrintCoverage" coverageLayerSource="Polygon?crs=epsg:28992&amp;uid={7daf340f-4e68-4130-8845-1156794a6775}" enabled="1"/>
+ <Atlas filterFeatures="0" sortFeatures="0" filenamePattern=" &quot;pand_id&quot; || '_bouwlaag_' || &quot;bouwlaag&quot;" hideCoverage="1" coverageLayer="tempPrintCoverage_8851a45d_3943_4cd3_8c33_bb6e8a272cd2" pageNameExpression="&quot;pand_id&quot;" coverageLayerProvider="memory" coverageLayerName="tempPrintCoverage" coverageLayerSource="Polygon?crs=epsg:28992&amp;uid={a36c7fbb-9549-4b74-beda-16f26f79582f}" enabled="1"/>
 </Layout>

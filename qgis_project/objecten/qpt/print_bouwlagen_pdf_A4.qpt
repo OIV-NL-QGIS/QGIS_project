@@ -33,7 +33,7 @@
     </data_defined_properties>
    </layer>
   </symbol>
-  <LayoutItem excludeFromExports="0" visibility="1" zValue="0" type="65638" frame="false" templateUuid="{815a8851-d011-4334-9f63-fd2c21601d28}" id="" outlineWidthM="0.3,mm" size="297,210,mm" frameJoinStyle="miter" position="0,0,mm" positionLock="false" positionOnPage="0,0,mm" background="true" itemRotation="0" groupUuid="" referencePoint="0" uuid="{815a8851-d011-4334-9f63-fd2c21601d28}" blendMode="0" opacity="1">
+  <LayoutItem excludeFromExports="0" visibility="1" zValue="0" type="65638" frame="false" templateUuid="{c6679c13-643f-44e8-b121-e7ab753cc288}" id="" outlineWidthM="0.3,mm" size="297,210,mm" frameJoinStyle="miter" position="0,0,mm" positionLock="false" positionOnPage="0,0,mm" background="true" itemRotation="0" groupUuid="" referencePoint="0" uuid="{c6679c13-643f-44e8-b121-e7ab753cc288}" blendMode="0" opacity="1">
    <FrameColor green="0" blue="0" alpha="255" red="0"/>
    <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
    <LayoutObject>
@@ -80,7 +80,7 @@
     </layer>
    </symbol>
   </LayoutItem>
-  <LayoutItem excludeFromExports="0" visibility="1" zValue="0" type="65638" frame="false" templateUuid="{7212302d-5a94-44ad-9fed-41109e75f5ef}" id="" outlineWidthM="0.3,mm" size="297,210,mm" frameJoinStyle="miter" position="0,220,mm" positionLock="false" positionOnPage="0,0,mm" background="true" itemRotation="0" groupUuid="" referencePoint="0" uuid="{7212302d-5a94-44ad-9fed-41109e75f5ef}" blendMode="0" opacity="1">
+  <LayoutItem excludeFromExports="0" visibility="1" zValue="0" type="65638" frame="false" templateUuid="{b7aeb060-8eb1-4f68-8a13-6885c4fbff56}" id="" outlineWidthM="0.3,mm" size="297,210,mm" frameJoinStyle="miter" position="0,220,mm" positionLock="false" positionOnPage="0,0,mm" background="true" itemRotation="0" groupUuid="" referencePoint="0" uuid="{b7aeb060-8eb1-4f68-8a13-6885c4fbff56}" blendMode="0" opacity="1">
    <FrameColor green="0" blue="0" alpha="255" red="0"/>
    <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
    <LayoutObject>
@@ -129,7 +129,7 @@
   </LayoutItem>
   <GuideCollection visible="1"/>
  </PageCollection>
- <LayoutItem excludeFromExports="0" visibility="1" zValue="71" type="65641" frame="false" marginX="0" templateUuid="{f83b23d3-1994-4ff3-8972-cd6649192879}" id="" marginY="0" labelText="Stoffen" outlineWidthM="0.3,mm" size="47.0507,6.05531,mm" valign="32" frameJoinStyle="miter" position="7.2428,340.761,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="7.2428,120.761,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{f83b23d3-1994-4ff3-8972-cd6649192879}" blendMode="0" opacity="1">
+ <LayoutItem excludeFromExports="0" visibility="1" zValue="71" type="65641" frame="false" marginX="0" templateUuid="{96106397-b1bc-470d-b188-653f84f4924a}" id="" marginY="0" labelText="Stoffen" outlineWidthM="0.3,mm" size="47.0507,6.05531,mm" valign="32" frameJoinStyle="miter" position="7.2428,340.761,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="7.2428,120.761,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{96106397-b1bc-470d-b188-653f84f4924a}" blendMode="0" opacity="1">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -191,7 +191,7 @@
    </dd_properties>
   </text-style>
  </LayoutItem>
- <LayoutItem hidePageIfEmpty="0" excludeFromExports="0" visibility="1" zValue="69" type="65647" frame="false" templateUuid="{62401206-09f9-4f36-ab48-1483bf3bef62}" id="" multiFrame="{47955bf7-a49d-48ba-8e4e-d2b45ccfad2a}" sectionWidth="145.762" outlineWidthM="0.3,mm" size="145.762,78.0631,mm" hideBackgroundIfEmpty="0" sectionY="0" frameJoinStyle="miter" position="7.2428,346.816,mm" positionLock="false" positionOnPage="7.2428,126.816,mm" background="false" itemRotation="0" groupUuid="" sectionHeight="78.0631" referencePoint="0" uuid="{62401206-09f9-4f36-ab48-1483bf3bef62}" blendMode="0" multiFrameTemplateUuid="{47955bf7-a49d-48ba-8e4e-d2b45ccfad2a}" opacity="1" sectionX="0">
+ <LayoutItem hidePageIfEmpty="0" excludeFromExports="0" visibility="1" zValue="69" type="65647" frame="false" templateUuid="{23946c46-cd20-4304-b989-58492a076cd9}" id="" multiFrame="{47955bf7-a49d-48ba-8e4e-d2b45ccfad2a}" sectionWidth="145.762" outlineWidthM="0.3,mm" size="145.762,78.0631,mm" hideBackgroundIfEmpty="0" sectionY="0" frameJoinStyle="miter" position="7.2428,346.816,mm" positionLock="false" positionOnPage="7.2428,126.816,mm" background="false" itemRotation="0" groupUuid="" sectionHeight="78.0631" referencePoint="0" uuid="{23946c46-cd20-4304-b989-58492a076cd9}" blendMode="0" multiFrameTemplateUuid="{47955bf7-a49d-48ba-8e4e-d2b45ccfad2a}" opacity="1" sectionX="0">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -207,85 +207,7 @@
    </customproperties>
   </LayoutObject>
  </LayoutItem>
- <LayoutItem excludeFromExports="0" visibility="1" zValue="48" type="65641" frame="false" marginX="0" templateUuid="{9c096ef4-8825-4018-8995-546f45d11dbe}" id="" marginY="0" labelText="Opslaglocaties" outlineWidthM="0.3,mm" size="47.0507,6.05531,mm" valign="32" frameJoinStyle="miter" position="7.2428,284.519,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="7.2428,64.519,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{9c096ef4-8825-4018-8995-546f45d11dbe}" blendMode="0" opacity="1">
-  <FrameColor green="0" blue="0" alpha="255" red="0"/>
-  <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
-  <LayoutObject>
-   <dataDefinedProperties>
-    <Option type="Map">
-     <Option type="QString" value="" name="name"/>
-     <Option name="properties"/>
-     <Option type="QString" value="collection" name="type"/>
-    </Option>
-   </dataDefinedProperties>
-   <customproperties>
-    <Option/>
-   </customproperties>
-  </LayoutObject>
-  <text-style fontSizeUnit="Point" forcedItalic="0" namedStyle="" capitalization="0" forcedBold="0" multilineHeight="1" allowHtml="0" fontWordSpacing="0" fontKerning="1" multilineHeightUnit="Percentage" previewBkgrdColor="255,255,255,255" fontStrikeout="0" fontItalic="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontUnderline="0" fontSize="12" fontWeight="75" textOrientation="horizontal" fontFamily="Verdana" fontLetterSpacing="0" textOpacity="1" textColor="0,0,0,255" blendMode="0">
-   <families/>
-   <text-buffer bufferSize="1" bufferColor="255,255,255,255" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferJoinStyle="128" bufferBlendMode="0" bufferDraw="0" bufferSizeUnits="MM" bufferNoFill="1" bufferOpacity="1"/>
-   <text-mask maskSize2="1.5" maskEnabled="0" maskSize="1.5" maskSizeUnits="MM" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskOpacity="1" maskedSymbolLayers="" maskJoinStyle="128" maskType="0"/>
-   <background shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeFillColor="255,255,255,255" shapeOffsetUnit="MM" shapeSVGFile="" shapeRotation="0" shapeRadiiUnit="MM" shapeSizeType="0" shapeSizeUnit="MM" shapeOffsetY="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeSizeY="0" shapeBorderColor="128,128,128,255" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOpacity="1" shapeRotationType="0" shapeJoinStyle="64" shapeSizeX="0" shapeDraw="0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeRadiiY="0" shapeType="0" shapeBorderWidthUnit="MM" shapeRadiiX="0" shapeOffsetX="0" shapeBorderWidth="0">
-    <symbol type="fill" clip_to_extent="1" force_rhr="0" name="fillSymbol" alpha="1" is_animated="0" frame_rate="10">
-     <data_defined_properties>
-      <Option type="Map">
-       <Option type="QString" value="" name="name"/>
-       <Option name="properties"/>
-       <Option type="QString" value="collection" name="type"/>
-      </Option>
-     </data_defined_properties>
-     <layer locked="0" class="SimpleFill" id="" enabled="1" pass="0">
-      <Option type="Map">
-       <Option type="QString" value="3x:0,0,0,0,0,0" name="border_width_map_unit_scale"/>
-       <Option type="QString" value="255,255,255,255" name="color"/>
-       <Option type="QString" value="bevel" name="joinstyle"/>
-       <Option type="QString" value="0,0" name="offset"/>
-       <Option type="QString" value="3x:0,0,0,0,0,0" name="offset_map_unit_scale"/>
-       <Option type="QString" value="MM" name="offset_unit"/>
-       <Option type="QString" value="128,128,128,255" name="outline_color"/>
-       <Option type="QString" value="no" name="outline_style"/>
-       <Option type="QString" value="0" name="outline_width"/>
-       <Option type="QString" value="MM" name="outline_width_unit"/>
-       <Option type="QString" value="solid" name="style"/>
-      </Option>
-      <data_defined_properties>
-       <Option type="Map">
-        <Option type="QString" value="" name="name"/>
-        <Option name="properties"/>
-        <Option type="QString" value="collection" name="type"/>
-       </Option>
-      </data_defined_properties>
-     </layer>
-    </symbol>
-   </background>
-   <shadow shadowUnder="0" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusUnit="MM" shadowScale="100" shadowBlendMode="6" shadowOffsetGlobal="1" shadowOffsetDist="1" shadowColor="0,0,0,255" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusAlphaOnly="0" shadowOffsetAngle="135" shadowOpacity="0.69999999999999996" shadowRadius="1.5" shadowDraw="0" shadowOffsetUnit="MM"/>
-   <dd_properties>
-    <Option type="Map">
-     <Option type="QString" value="" name="name"/>
-     <Option name="properties"/>
-     <Option type="QString" value="collection" name="type"/>
-    </Option>
-   </dd_properties>
-  </text-style>
- </LayoutItem>
- <LayoutItem hidePageIfEmpty="0" excludeFromExports="0" visibility="1" zValue="47" type="65647" frame="false" templateUuid="{c40b3356-0108-4fba-91bb-c220673b0edd}" id="" multiFrame="{47955bf7-a49d-48ba-8e4e-d2b45ccfad2a}" sectionWidth="65.162" outlineWidthM="0.3,mm" size="65.162,30.4874,mm" hideBackgroundIfEmpty="0" sectionY="0" frameJoinStyle="miter" position="7.2428,290.574,mm" positionLock="false" positionOnPage="7.2428,70.574,mm" background="false" itemRotation="0" groupUuid="" sectionHeight="30.4874" referencePoint="0" uuid="{c40b3356-0108-4fba-91bb-c220673b0edd}" blendMode="0" multiFrameTemplateUuid="{47955bf7-a49d-48ba-8e4e-d2b45ccfad2a}" opacity="1" sectionX="0">
-  <FrameColor green="0" blue="0" alpha="255" red="0"/>
-  <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
-  <LayoutObject>
-   <dataDefinedProperties>
-    <Option type="Map">
-     <Option type="QString" value="" name="name"/>
-     <Option name="properties"/>
-     <Option type="QString" value="collection" name="type"/>
-    </Option>
-   </dataDefinedProperties>
-   <customproperties>
-    <Option/>
-   </customproperties>
-  </LayoutObject>
- </LayoutItem>
- <LayoutItem excludeFromExports="0" visibility="1" zValue="7" type="65641" frame="false" marginX="0" templateUuid="{9fdd6e0a-9741-443d-bb88-e4cd54eeba03}" id="" marginY="0" labelText="Aanwezige personen" outlineWidthM="0.3,mm" size="74.1398,6.755,mm" valign="32" frameJoinStyle="miter" position="8.4721,229.695,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="8.4721,9.695,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{9fdd6e0a-9741-443d-bb88-e4cd54eeba03}" blendMode="0" opacity="1">
+ <LayoutItem excludeFromExports="0" visibility="1" zValue="48" type="65641" frame="false" marginX="0" templateUuid="{5500eb76-75a1-4d89-8a8b-3b2be0844d0d}" id="" marginY="0" labelText="Opslaglocaties" outlineWidthM="0.3,mm" size="47.0507,6.05531,mm" valign="32" frameJoinStyle="miter" position="7.2428,284.519,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="7.2428,64.519,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{5500eb76-75a1-4d89-8a8b-3b2be0844d0d}" blendMode="0" opacity="1">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -347,7 +269,7 @@
    </dd_properties>
   </text-style>
  </LayoutItem>
- <LayoutItem hidePageIfEmpty="0" excludeFromExports="0" visibility="1" zValue="6" type="65647" frame="false" templateUuid="{a9eba7e5-2bd3-4587-ae50-6457b2a9176e}" id="" multiFrame="{af7ba2f7-3859-4886-8393-f6c0e448cc37}" sectionWidth="283" outlineWidthM="0.3,mm" size="283,84.6113,mm" hideBackgroundIfEmpty="0" sectionY="0" frameJoinStyle="miter" position="7.59587,236.45,mm" positionLock="false" positionOnPage="7.59587,16.45,mm" background="false" itemRotation="0" groupUuid="" sectionHeight="84.6113" referencePoint="0" uuid="{a9eba7e5-2bd3-4587-ae50-6457b2a9176e}" blendMode="0" multiFrameTemplateUuid="{af7ba2f7-3859-4886-8393-f6c0e448cc37}" opacity="1" sectionX="0">
+ <LayoutItem hidePageIfEmpty="0" excludeFromExports="0" visibility="1" zValue="47" type="65647" frame="false" templateUuid="{555e46fb-6421-43b8-b10a-de59d62d5e5e}" id="" multiFrame="{47955bf7-a49d-48ba-8e4e-d2b45ccfad2a}" sectionWidth="65.162" outlineWidthM="0.3,mm" size="65.162,30.4874,mm" hideBackgroundIfEmpty="0" sectionY="0" frameJoinStyle="miter" position="7.2428,290.574,mm" positionLock="false" positionOnPage="7.2428,70.574,mm" background="false" itemRotation="0" groupUuid="" sectionHeight="30.4874" referencePoint="0" uuid="{555e46fb-6421-43b8-b10a-de59d62d5e5e}" blendMode="0" multiFrameTemplateUuid="{47955bf7-a49d-48ba-8e4e-d2b45ccfad2a}" opacity="1" sectionX="0">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -363,7 +285,85 @@
    </customproperties>
   </LayoutObject>
  </LayoutItem>
- <LayoutItem unitLabel="m" segmentMillimeters="16.7788" minBarWidth="50" style="Single Box" mapUuid="{e6fa610c-a06b-4e61-9e6e-af635ff2b789}" numSegmentsLeft="0" maxBarWidth="150" referencePoint="0" labelVerticalPlacement="0" outlineWidthM="0.3,mm" excludeFromExports="0" segmentSizeMode="1" blendMode="0" size="96.5961,12.3,mm" frameJoinStyle="miter" frame="false" outlineWidth="0.3" position="7.2428,196.7,mm" lineJoinStyle="miter" numUnitsPerSegment="10" zValue="5" type="65646" subdivisionsHeight="1.5" templateUuid="{a2f47506-07f8-4255-9149-89d21aeac866}" visibility="1" numSubdivisions="1" uuid="{a2f47506-07f8-4255-9149-89d21aeac866}" numMapUnitsPerScaleBarUnit="1" numSegments="5" positionLock="false" labelHorizontalPlacement="0" background="false" positionOnPage="7.2428,196.7,mm" id="" boxContentSpace="1" height="2" labelBarSpace="3" unitType="meters" itemRotation="0" opacity="1" groupUuid="" lineCapStyle="square" alignment="0">
+ <LayoutItem excludeFromExports="0" visibility="1" zValue="7" type="65641" frame="false" marginX="0" templateUuid="{aafdbe78-38b6-4620-a7b0-f45e46df0acd}" id="" marginY="0" labelText="Aanwezige personen" outlineWidthM="0.3,mm" size="74.1398,6.755,mm" valign="32" frameJoinStyle="miter" position="8.4721,229.695,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="8.4721,9.695,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{aafdbe78-38b6-4620-a7b0-f45e46df0acd}" blendMode="0" opacity="1">
+  <FrameColor green="0" blue="0" alpha="255" red="0"/>
+  <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
+  <LayoutObject>
+   <dataDefinedProperties>
+    <Option type="Map">
+     <Option type="QString" value="" name="name"/>
+     <Option name="properties"/>
+     <Option type="QString" value="collection" name="type"/>
+    </Option>
+   </dataDefinedProperties>
+   <customproperties>
+    <Option/>
+   </customproperties>
+  </LayoutObject>
+  <text-style fontSizeUnit="Point" forcedItalic="0" namedStyle="" capitalization="0" forcedBold="0" multilineHeight="1" allowHtml="0" fontWordSpacing="0" fontKerning="1" multilineHeightUnit="Percentage" previewBkgrdColor="255,255,255,255" fontStrikeout="0" fontItalic="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontUnderline="0" fontSize="12" fontWeight="75" textOrientation="horizontal" fontFamily="Verdana" fontLetterSpacing="0" textOpacity="1" textColor="0,0,0,255" blendMode="0">
+   <families/>
+   <text-buffer bufferSize="1" bufferColor="255,255,255,255" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferJoinStyle="128" bufferBlendMode="0" bufferDraw="0" bufferSizeUnits="MM" bufferNoFill="1" bufferOpacity="1"/>
+   <text-mask maskSize2="1.5" maskEnabled="0" maskSize="1.5" maskSizeUnits="MM" maskSizeMapUnitScale="3x:0,0,0,0,0,0" maskOpacity="1" maskedSymbolLayers="" maskJoinStyle="128" maskType="0"/>
+   <background shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeFillColor="255,255,255,255" shapeOffsetUnit="MM" shapeSVGFile="" shapeRotation="0" shapeRadiiUnit="MM" shapeSizeType="0" shapeSizeUnit="MM" shapeOffsetY="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeSizeY="0" shapeBorderColor="128,128,128,255" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOpacity="1" shapeRotationType="0" shapeJoinStyle="64" shapeSizeX="0" shapeDraw="0" shapeBlendMode="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeRadiiY="0" shapeType="0" shapeBorderWidthUnit="MM" shapeRadiiX="0" shapeOffsetX="0" shapeBorderWidth="0">
+    <symbol type="fill" clip_to_extent="1" force_rhr="0" name="fillSymbol" alpha="1" is_animated="0" frame_rate="10">
+     <data_defined_properties>
+      <Option type="Map">
+       <Option type="QString" value="" name="name"/>
+       <Option name="properties"/>
+       <Option type="QString" value="collection" name="type"/>
+      </Option>
+     </data_defined_properties>
+     <layer locked="0" class="SimpleFill" id="" enabled="1" pass="0">
+      <Option type="Map">
+       <Option type="QString" value="3x:0,0,0,0,0,0" name="border_width_map_unit_scale"/>
+       <Option type="QString" value="255,255,255,255" name="color"/>
+       <Option type="QString" value="bevel" name="joinstyle"/>
+       <Option type="QString" value="0,0" name="offset"/>
+       <Option type="QString" value="3x:0,0,0,0,0,0" name="offset_map_unit_scale"/>
+       <Option type="QString" value="MM" name="offset_unit"/>
+       <Option type="QString" value="128,128,128,255" name="outline_color"/>
+       <Option type="QString" value="no" name="outline_style"/>
+       <Option type="QString" value="0" name="outline_width"/>
+       <Option type="QString" value="MM" name="outline_width_unit"/>
+       <Option type="QString" value="solid" name="style"/>
+      </Option>
+      <data_defined_properties>
+       <Option type="Map">
+        <Option type="QString" value="" name="name"/>
+        <Option name="properties"/>
+        <Option type="QString" value="collection" name="type"/>
+       </Option>
+      </data_defined_properties>
+     </layer>
+    </symbol>
+   </background>
+   <shadow shadowUnder="0" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusUnit="MM" shadowScale="100" shadowBlendMode="6" shadowOffsetGlobal="1" shadowOffsetDist="1" shadowColor="0,0,0,255" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusAlphaOnly="0" shadowOffsetAngle="135" shadowOpacity="0.69999999999999996" shadowRadius="1.5" shadowDraw="0" shadowOffsetUnit="MM"/>
+   <dd_properties>
+    <Option type="Map">
+     <Option type="QString" value="" name="name"/>
+     <Option name="properties"/>
+     <Option type="QString" value="collection" name="type"/>
+    </Option>
+   </dd_properties>
+  </text-style>
+ </LayoutItem>
+ <LayoutItem hidePageIfEmpty="0" excludeFromExports="0" visibility="1" zValue="6" type="65647" frame="false" templateUuid="{e25c8b97-e5b0-47dd-a456-2e91077ab3d1}" id="" multiFrame="{af7ba2f7-3859-4886-8393-f6c0e448cc37}" sectionWidth="283" outlineWidthM="0.3,mm" size="283,84.6113,mm" hideBackgroundIfEmpty="0" sectionY="0" frameJoinStyle="miter" position="7.59587,236.45,mm" positionLock="false" positionOnPage="7.59587,16.45,mm" background="false" itemRotation="0" groupUuid="" sectionHeight="84.6113" referencePoint="0" uuid="{e25c8b97-e5b0-47dd-a456-2e91077ab3d1}" blendMode="0" multiFrameTemplateUuid="{af7ba2f7-3859-4886-8393-f6c0e448cc37}" opacity="1" sectionX="0">
+  <FrameColor green="0" blue="0" alpha="255" red="0"/>
+  <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
+  <LayoutObject>
+   <dataDefinedProperties>
+    <Option type="Map">
+     <Option type="QString" value="" name="name"/>
+     <Option name="properties"/>
+     <Option type="QString" value="collection" name="type"/>
+    </Option>
+   </dataDefinedProperties>
+   <customproperties>
+    <Option/>
+   </customproperties>
+  </LayoutObject>
+ </LayoutItem>
+ <LayoutItem unitLabel="m" segmentMillimeters="28.3659" minBarWidth="50" style="Single Box" mapUuid="{47bb8d43-539d-4350-9baf-cc04d3e39b68}" numSegmentsLeft="0" maxBarWidth="150" referencePoint="0" labelVerticalPlacement="0" outlineWidthM="0.3,mm" excludeFromExports="0" segmentSizeMode="1" blendMode="0" size="155.975,12.3,mm" frameJoinStyle="miter" frame="false" outlineWidth="0.3" position="7.2428,196.7,mm" lineJoinStyle="miter" numUnitsPerSegment="20" zValue="5" type="65646" subdivisionsHeight="1.5" templateUuid="{9ebd3027-8905-49f1-9e49-5ab86d579d70}" visibility="1" numSubdivisions="1" uuid="{9ebd3027-8905-49f1-9e49-5ab86d579d70}" numMapUnitsPerScaleBarUnit="1" numSegments="5" positionLock="false" labelHorizontalPlacement="0" background="false" positionOnPage="7.2428,196.7,mm" id="" boxContentSpace="1" height="2" labelBarSpace="3" unitType="meters" itemRotation="0" opacity="1" groupUuid="" lineCapStyle="square" alignment="0">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -652,7 +652,7 @@
    </symbol>
   </fillSymbol2>
  </LayoutItem>
- <LayoutItem excludeFromExports="0" visibility="1" zValue="4" type="65641" frame="false" marginX="0" templateUuid="{460365eb-0db1-4515-9e7c-f44e8fb9bdf7}" id="title" marginY="0" labelText="Bouwlaag: 1" outlineWidthM="0.3,mm" size="290.31,11.4009,mm" valign="32" frameJoinStyle="miter" position="3.86898,2.84431,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="3.86898,2.84431,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{460365eb-0db1-4515-9e7c-f44e8fb9bdf7}" blendMode="0" opacity="1">
+ <LayoutItem excludeFromExports="0" visibility="1" zValue="4" type="65641" frame="false" marginX="0" templateUuid="{5b808794-322f-40dd-85a8-7efbdc725970}" id="title" marginY="0" labelText="[%CONCAT(attribute( @atlas_feature, 'formelenaam' ), ' | Bouwlaag: ', attribute( @atlas_feature, 'bouwlaag' ))%]" outlineWidthM="0.3,mm" size="290.31,11.4009,mm" valign="32" frameJoinStyle="miter" position="3.86898,2.84431,mm" htmlState="0" halign="8" positionLock="false" positionOnPage="3.86898,2.84431,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{5b808794-322f-40dd-85a8-7efbdc725970}" blendMode="0" opacity="1">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -714,7 +714,7 @@
    </dd_properties>
   </text-style>
  </LayoutItem>
- <LayoutItem pictureRotation="0" mode="0" excludeFromExports="0" visibility="1" svgFillColor="125,139,143,255" zValue="3" type="65640" northOffset="0" frame="false" pictureWidth="14.9197" templateUuid="{ab139f01-ea5c-4928-a63c-0ee15e591fed}" id="Noordpijl" anchorPoint="0" svgBorderColor="0,0,0,255" svgBorderWidth="0.2" mapUuid="{e6fa610c-a06b-4e61-9e6e-af635ff2b789}" northMode="0" outlineWidthM="0.3,mm" pictureHeight="23.7248" size="19.7616,23.7248,mm" frameJoinStyle="miter" position="7.2428,172.975,mm" positionLock="false" positionOnPage="7.2428,172.975,mm" background="false" itemRotation="0" groupUuid="" file="arrows/NorthArrow_02.svg" referencePoint="0" uuid="{ab139f01-ea5c-4928-a63c-0ee15e591fed}" blendMode="0" resizeMode="0" opacity="1">
+ <LayoutItem pictureRotation="0" mode="0" excludeFromExports="0" visibility="1" svgFillColor="125,139,143,255" zValue="3" type="65640" northOffset="0" frame="false" pictureWidth="14.9197" templateUuid="{2d2d1784-7572-4c5a-ad05-6f6b9027291a}" id="Noordpijl" anchorPoint="0" svgBorderColor="0,0,0,255" svgBorderWidth="0.2" mapUuid="{47bb8d43-539d-4350-9baf-cc04d3e39b68}" northMode="0" outlineWidthM="0.3,mm" pictureHeight="23.7248" size="19.7616,23.7248,mm" frameJoinStyle="miter" position="7.2428,172.975,mm" positionLock="false" positionOnPage="7.2428,172.975,mm" background="false" itemRotation="0" groupUuid="" file="arrows/NorthArrow_02.svg" referencePoint="0" uuid="{2d2d1784-7572-4c5a-ad05-6f6b9027291a}" blendMode="0" resizeMode="0" opacity="1">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -730,7 +730,7 @@
    </customproperties>
   </LayoutObject>
  </LayoutItem>
- <LayoutItem excludeFromExports="0" visibility="1" labelMargin="0,mm" mapFlags="0" isTemporal="0" zValue="2" type="65639" frame="false" followPresetName="Bouwlagen" templateUuid="{e6fa610c-a06b-4e61-9e6e-af635ff2b789}" drawCanvasItems="true" id="" followPreset="false" outlineWidthM="0.3,mm" size="297,210,mm" keepLayerSet="false" frameJoinStyle="miter" position="0,0,mm" positionLock="false" positionOnPage="0,0,mm" mapRotation="0" background="true" itemRotation="0" groupUuid="" referencePoint="0" uuid="{e6fa610c-a06b-4e61-9e6e-af635ff2b789}" blendMode="0" opacity="1">
+ <LayoutItem excludeFromExports="0" visibility="1" labelMargin="0,mm" mapFlags="0" isTemporal="0" zValue="2" type="65639" frame="false" followPresetName="Bouwlagen" templateUuid="{47bb8d43-539d-4350-9baf-cc04d3e39b68}" drawCanvasItems="true" id="" followPreset="false" outlineWidthM="0.3,mm" size="297,210,mm" keepLayerSet="false" frameJoinStyle="miter" position="0,0,mm" positionLock="false" positionOnPage="0,0,mm" mapRotation="0" background="true" itemRotation="0" groupUuid="" referencePoint="0" uuid="{47bb8d43-539d-4350-9baf-cc04d3e39b68}" blendMode="0" opacity="1">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -751,7 +751,7 @@
     <Option/>
    </customproperties>
   </LayoutObject>
-  <Extent ymin="502779.70388047012966126" xmax="128485.40688523254357278" xmin="128308.39735441555967554" ymax="502904.86203620716696605"/>
+  <Extent ymin="502785.57677558483555913" xmax="128479.87582413548079785" xmin="128270.46962884612730704" ymax="502933.64164577209157869"/>
   <LayerSet/>
   <AtlasMap atlasDriven="1" margin="0" scalingMode="2"/>
   <labelBlockingItems/>
@@ -760,7 +760,7 @@
   </atlasClippingSettings>
   <itemClippingSettings forceLabelsInside="0" clipSource="" clippingType="0" enabled="0"/>
  </LayoutItem>
- <LayoutItem excludeFromExports="0" visibility="1" zValue="1" type="65643" cornerRadiusMeasure="5,mm" frame="false" templateUuid="{e83f328b-41f4-41b2-9f54-6f43906be3ee}" id="" outlineWidthM="0.3,mm" size="289.866,204.664,mm" frameJoinStyle="miter" position="4.16287,223.295,mm" positionLock="false" shapeType="1" positionOnPage="4.16287,3.295,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{e83f328b-41f4-41b2-9f54-6f43906be3ee}" blendMode="0" opacity="1">
+ <LayoutItem excludeFromExports="0" visibility="1" zValue="1" type="65643" cornerRadiusMeasure="5,mm" frame="false" templateUuid="{6a208134-c777-4934-bb5f-182ce7966d0e}" id="" outlineWidthM="0.3,mm" size="289.866,204.664,mm" frameJoinStyle="miter" position="4.16287,223.295,mm" positionLock="false" shapeType="1" positionOnPage="4.16287,3.295,mm" background="false" itemRotation="0" groupUuid="" referencePoint="0" uuid="{6a208134-c777-4934-bb5f-182ce7966d0e}" blendMode="0" opacity="1">
   <FrameColor green="0" blue="0" alpha="255" red="0"/>
   <BackgroundColor green="255" blue="255" alpha="255" red="255"/>
   <LayoutObject>
@@ -807,8 +807,8 @@
    </layer>
   </symbol>
  </LayoutItem>
- <LayoutMultiFrame source="0" showOnlyVisibleFeatures="0" verticalGrid="0" filterToAtlasIntersection="0" type="65649" featureFilter="&quot;bouwlaag_id&quot;  = attribute( @atlas_feature, 'pand_id' )" filterFeatures="true" wrapBehavior="0" templateUuid="{e260cc46-e5e2-459d-b90a-cffc34f882a9}" showGrid="1" vectorLayer="aanwezigepersonen20160318144720364" wrapString="" vectorLayerProvider="postgres" showUniqueRowsOnly="0" showEmptyRows="0" emptyTableMode="0" horizontalGrid="1" gridColor="0,0,0,255" vectorLayerSource="service='oiv' key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;aanwezig&quot; sql=&quot;self_deleted&quot; = 'infinity'" emptyTableMessage="" useConditionalStyling="0" gridStrokeWidth="0.1" maxFeatures="30" vectorLayerName="aanwezig" backgroundColor="255,255,255,255" headerHAlignment="0" cellMargin="1" headerMode="0" uuid="{e260cc46-e5e2-459d-b90a-cffc34f882a9}" resizeMode="0" relationId="">
-  <childFrame templateUuid="{a9eba7e5-2bd3-4587-ae50-6457b2a9176e}" uuid="{a9eba7e5-2bd3-4587-ae50-6457b2a9176e}"/>
+ <LayoutMultiFrame source="0" showOnlyVisibleFeatures="0" verticalGrid="0" filterToAtlasIntersection="0" type="65649" featureFilter="&quot;bouwlaag_id&quot;  = attribute( @atlas_feature, 'pand_id' )" filterFeatures="true" wrapBehavior="0" templateUuid="{a96d72e1-8a00-4f51-bf24-7377c88bf145}" showGrid="1" vectorLayer="aanwezigepersonen20160318144720364" wrapString="" vectorLayerProvider="postgres" showUniqueRowsOnly="0" showEmptyRows="0" emptyTableMode="0" horizontalGrid="1" gridColor="0,0,0,255" vectorLayerSource="service='oiv' key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;aanwezig&quot; sql=&quot;self_deleted&quot; = 'infinity'" emptyTableMessage="" useConditionalStyling="0" gridStrokeWidth="0.1" maxFeatures="30" vectorLayerName="aanwezig" backgroundColor="255,255,255,255" headerHAlignment="0" cellMargin="1" headerMode="0" uuid="{a96d72e1-8a00-4f51-bf24-7377c88bf145}" resizeMode="0" relationId="">
+  <childFrame templateUuid="{e25c8b97-e5b0-47dd-a456-2e91077ab3d1}" uuid="{e25c8b97-e5b0-47dd-a456-2e91077ab3d1}"/>
   <LayoutObject>
    <dataDefinedProperties>
     <Option type="Map">
@@ -959,8 +959,8 @@
    <lastRow cellBackgroundColor="255,255,255,255" enabled="0"/>
   </cellStyles>
  </LayoutMultiFrame>
- <LayoutMultiFrame source="0" showOnlyVisibleFeatures="0" verticalGrid="0" filterToAtlasIntersection="0" type="65649" featureFilter="&quot;bouwlaag_id&quot;  = attribute( @atlas_feature, 'pand_id' )" filterFeatures="true" wrapBehavior="0" templateUuid="{940b1f80-8259-4d8b-994c-06c1c8ce960b}" showGrid="1" vectorLayer="bouwlaag_opslag20171206142819813" wrapString="" vectorLayerProvider="postgres" showUniqueRowsOnly="0" showEmptyRows="0" emptyTableMode="0" horizontalGrid="1" gridColor="0,0,0,255" vectorLayerSource="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_opslag&quot; (geom) sql=bouwlaag = 1" emptyTableMessage="" useConditionalStyling="0" gridStrokeWidth="0.1" maxFeatures="30" vectorLayerName="Opslag stoffen bouwlaag" backgroundColor="255,255,255,255" headerHAlignment="0" cellMargin="1" headerMode="0" uuid="{940b1f80-8259-4d8b-994c-06c1c8ce960b}" resizeMode="0" relationId="">
-  <childFrame templateUuid="{c40b3356-0108-4fba-91bb-c220673b0edd}" uuid="{c40b3356-0108-4fba-91bb-c220673b0edd}"/>
+ <LayoutMultiFrame source="0" showOnlyVisibleFeatures="0" verticalGrid="0" filterToAtlasIntersection="0" type="65649" featureFilter="&quot;bouwlaag_id&quot;  = attribute( @atlas_feature, 'pand_id' )" filterFeatures="true" wrapBehavior="0" templateUuid="{c204e34c-affe-4f52-adb6-de0011b90df3}" showGrid="1" vectorLayer="bouwlaag_opslag20171206142819813" wrapString="" vectorLayerProvider="postgres" showUniqueRowsOnly="0" showEmptyRows="0" emptyTableMode="0" horizontalGrid="1" gridColor="0,0,0,255" vectorLayerSource="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;bouwlaag_opslag&quot; (geom) sql=bouwlaag = 3" emptyTableMessage="" useConditionalStyling="0" gridStrokeWidth="0.1" maxFeatures="30" vectorLayerName="Opslag stoffen bouwlaag" backgroundColor="255,255,255,255" headerHAlignment="0" cellMargin="1" headerMode="0" uuid="{c204e34c-affe-4f52-adb6-de0011b90df3}" resizeMode="0" relationId="">
+  <childFrame templateUuid="{555e46fb-6421-43b8-b10a-de59d62d5e5e}" uuid="{555e46fb-6421-43b8-b10a-de59d62d5e5e}"/>
   <LayoutObject>
    <dataDefinedProperties>
     <Option type="Map">
@@ -1090,8 +1090,8 @@
    <lastRow cellBackgroundColor="255,255,255,255" enabled="0"/>
   </cellStyles>
  </LayoutMultiFrame>
- <LayoutMultiFrame source="0" showOnlyVisibleFeatures="0" verticalGrid="0" filterToAtlasIntersection="0" type="65649" featureFilter="&quot;bouwlaag_id&quot;  = attribute( @atlas_feature, 'pand_id' )" filterFeatures="true" wrapBehavior="0" templateUuid="{07188a45-7b0c-46d5-88a9-c951291bf534}" showGrid="1" vectorLayer="gevaarlijkestof20161202091301168" wrapString="" vectorLayerProvider="postgres" showUniqueRowsOnly="0" showEmptyRows="0" emptyTableMode="0" horizontalGrid="1" gridColor="0,0,0,255" vectorLayerSource="service='oiv' key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;_gevaarlijkestof&quot;" emptyTableMessage="" useConditionalStyling="0" gridStrokeWidth="0.1" maxFeatures="30" vectorLayerName="gevaarlijkestof" backgroundColor="255,255,255,255" headerHAlignment="0" cellMargin="1" headerMode="0" uuid="{07188a45-7b0c-46d5-88a9-c951291bf534}" resizeMode="0" relationId="">
-  <childFrame templateUuid="{62401206-09f9-4f36-ab48-1483bf3bef62}" uuid="{62401206-09f9-4f36-ab48-1483bf3bef62}"/>
+ <LayoutMultiFrame source="0" showOnlyVisibleFeatures="0" verticalGrid="0" filterToAtlasIntersection="0" type="65649" featureFilter="&quot;bouwlaag_id&quot;  = attribute( @atlas_feature, 'pand_id' )" filterFeatures="true" wrapBehavior="0" templateUuid="{a17c4c29-9f73-462b-bc94-636c125838ee}" showGrid="1" vectorLayer="gevaarlijkestof20161202091301168" wrapString="" vectorLayerProvider="postgres" showUniqueRowsOnly="0" showEmptyRows="0" emptyTableMode="0" horizontalGrid="1" gridColor="0,0,0,255" vectorLayerSource="service='oiv' key='id' checkPrimaryKeyUnicity='1' table=&quot;objecten&quot;.&quot;_gevaarlijkestof&quot;" emptyTableMessage="" useConditionalStyling="0" gridStrokeWidth="0.1" maxFeatures="30" vectorLayerName="gevaarlijkestof" backgroundColor="255,255,255,255" headerHAlignment="0" cellMargin="1" headerMode="0" uuid="{a17c4c29-9f73-462b-bc94-636c125838ee}" resizeMode="0" relationId="">
+  <childFrame templateUuid="{23946c46-cd20-4304-b989-58492a076cd9}" uuid="{23946c46-cd20-4304-b989-58492a076cd9}"/>
   <LayoutObject>
    <dataDefinedProperties>
     <Option type="Map">
@@ -1242,5 +1242,5 @@
    <Option type="QString" value="false" name="singleFile"/>
   </Option>
  </customproperties>
- <Atlas filterFeatures="0" sortFeatures="0" filenamePattern=" &quot;pand_id&quot; || '_bouwlaag_' || &quot;bouwlaag&quot;" hideCoverage="1" coverageLayer="tempPrintCoverage_c48f6023_eb65_4580_b2a3_231b0b42123b" pageNameExpression="&quot;pand_id&quot;" coverageLayerProvider="memory" coverageLayerName="tempPrintCoverage" coverageLayerSource="Polygon?crs=epsg:28992&amp;uid={7daf340f-4e68-4130-8845-1156794a6775}" enabled="1"/>
+ <Atlas filterFeatures="0" sortFeatures="0" filenamePattern=" &quot;pand_id&quot; || '_bouwlaag_' || &quot;bouwlaag&quot;" hideCoverage="1" coverageLayer="" pageNameExpression="&quot;pand_id&quot;" enabled="0"/>
 </Layout>

@@ -118,16 +118,16 @@ def nearest_neighbor(layer, geom, geomType, objectId):
                 dist = distance
                 parentId = feat["id"]
     else:
-        parentId = nearest_neighbor_point(layer, geom)
+        parentId = nearest_neighbor_point(layer, geom, 1)
     return parentId
 
-def nearest_neighbor_point(layer, point):
+def nearest_neighbor_point(layer, point, k):
     index = None
     parentId = None
     extent = layer.extent()
     index = QC.QgsSpatialIndex(layer.getFeatures(QC.QgsFeatureRequest(extent)))
     try:
-        parentId = index.nearestNeighbor(point, 1)[0]
+        parentId = index.nearestNeighbor(point, k)[0]
     except: # pylint: disable=bare-except
         pass
     return parentId
