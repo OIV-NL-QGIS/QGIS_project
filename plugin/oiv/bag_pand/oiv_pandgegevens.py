@@ -266,6 +266,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             
     def run_print(self):
         self.printCoverageLayer = PR.create_temp_print_layer("pand_id")
+        self.bouwlaag_print.setEnabled(False)
         self.draw_print_polygon()
 
     def get_bouwlaag_id(self):
@@ -320,6 +321,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.iface.actionPan().trigger()
         qinst = QC.QgsProject.instance()
         qinst.removeMapLayer(qinst.mapLayersByName("tempPrintCoverage")[0].id())
+        self.bouwlaag_print.setEnabled(True)
+        self.iface.actionPan().trigger()
 
     def draw_print_polygon(self):
         drawTool = self.baseWidget.drawTool

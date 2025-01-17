@@ -38,6 +38,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     workLayout = None
     objectId = None
     printCoverageLayer = None
+    legenda = None
 
     def __init__(self, parent=None, objectId=None, formeleNaam=None):
         super(oivRepressiefObjectWidget, self).__init__(parent)
@@ -265,27 +266,31 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.show_subwidget(True, werkvoorraadWidget)
 
     def run_print(self):
-        printWhat, reply, legenda = PrintDialog.get_print_bouwlagen()
+        self.object_print.setEnabled(False)
+        printWhat, reply, self.legenda = PrintDialog.get_print_settings()
         if printWhat == 'polygon':
             self.printCoverageLayer = PR.create_temp_print_layer('object_id')
             self.draw_print_polygon()
         elif reply:
-            self.resume_printing('terrein', legenda)
+            self.resume_printing('terrein')
+        else:
+            self.object_print.setEnabled(True)
 
-    def resume_printing(self, byWhichLayer, legenda):
+    def resume_printing(self, byWhichLayer):
         directory = PQtW.QFileDialog().getExistingDirectory()
         if directory != '':
             fileName = self.object_id.text() + '_' + self.formelenaam.text()
             filterString = '"object_id"='+"'{}'".format(self.object_id.text())
             UG.set_layer_substring(filterString, 'object')
             rotation = self.canvas.rotation()
-            reply, directory = PR.load_composer(directory, 'object', fileName, byWhichLayer, rotation, legenda)
+            reply, directory = PR.load_composer(directory, 'object', fileName, byWhichLayer, rotation, self.legenda)
             MSG.showMsgBox(reply, directory)
             UG.set_layer_substring('', 'object')
         if byWhichLayer == 'polygon':
             qinst = QC.QgsProject.instance()
             qinst.removeMapLayer(qinst.mapLayersByName("tempPrintCoverage")[0].id())
         self.iface.actionPan().trigger()
+        self.object_print.setEnabled(True)
 
     def draw_print_polygon(self):
         drawTool = self.baseWidget.drawTool
@@ -354,7 +359,7 @@ class PrintDialog(PQtW.QDialog):
         return reply
 
     @staticmethod
-    def get_print_bouwlagen(parent=None):
+    def get_print_settings(parent=None):
         dialog = PrintDialog(parent)
         result = dialog.exec_()
         return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted, dialog.cmbBoxLegenda.currentText())
