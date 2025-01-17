@@ -42,8 +42,8 @@ PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
-        "min": 353,
-        "max": 362
+        "min": 362,
+        "max": 363
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
