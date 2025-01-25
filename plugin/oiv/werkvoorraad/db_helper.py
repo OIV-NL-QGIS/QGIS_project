@@ -7,12 +7,12 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.messages as MSG
 
 layerFields = {
-    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
-    "Werkvoorraad object - label": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"]],
+    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"], ["label", "string"]],
+    "Werkvoorraad object - label": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["omschrijving", "string"]],
     "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
-    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
-    "Werkvoorraad bouwlaag - label": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"]],
+    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"], ["label", "string"]],
+    "Werkvoorraad bouwlaag - label": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["omschrijving", "string"]],
     "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
     "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]]
 }
