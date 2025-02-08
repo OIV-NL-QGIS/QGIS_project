@@ -56,7 +56,7 @@ PRINTLAYERSTYLE = {
 
 VERTEXMARKERSTYLES = {
     "movepoint": {
-        'color': QColor('blue'),
+        'color': QColor('magenta'),
         'iconsize': 5,
         'icontype': QgsVertexMarker.ICON_X,
         'penwidth': 3,
@@ -74,7 +74,7 @@ VERTEXMARKERSTYLES = {
         'penwidth': 5,
     },
     "identify": {
-        'color': QColor('black'),
+        'color': QColor('magenta'),
         'iconsize': 6,
         'icontype': QgsVertexMarker.ICON_CIRCLE,
         'penwidth': 5,
