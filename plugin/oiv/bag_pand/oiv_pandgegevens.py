@@ -265,6 +265,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             layer.reload()
             
     def run_print(self):
+        self.iface.messageBar().pushMessage("Info", "Teken de polgoon voor het print extent", level=QC.Qgis.Info)
         self.printCoverageLayer = PR.create_temp_print_layer("pand_id")
         self.bouwlaag_print.setEnabled(False)
         self.draw_print_polygon()
@@ -315,7 +316,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
                 fileName = '{}_bouwlaag_{}'.format(objectnaam, bouwlaag)
                 rotation = self.canvas.rotation()
                 reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon', rotation, legenda)
-                MSG.showMsgBox(reply, directory)
+            MSG.showMsgBox(reply, directory)
             subString = "bouwlaag = {}".format(bouwlaagOrg)
             UG.set_layer_substring(subString)
         self.iface.actionPan().trigger()
@@ -559,12 +560,16 @@ class PrintDialog(PQtW.QDialog):
             PQtC.Qt.Horizontal, self)
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
+        spacerItem = PQtW.QSpacerItem(0, 0, PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Expanding)
+        qlayout.addItem(spacerItem)
         qlayout.addWidget(buttons)
-        self.qRadioBtnSelection.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict))
+        self.qRadioBtnSelection.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, True))
+        self.qRadioBtnAll.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, False))
+        self.qRadioBtnCurrent.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, False))
 
-    def set_selection_visible(self, chkBoxDict):
+    def set_selection_visible(self, chkBoxDict, visible):
         for key, value in chkBoxDict.items():
-            value.setVisible(True)
+            value.setVisible(visible)
 
     def get_checked_radiobutton(self):
         reply = None
