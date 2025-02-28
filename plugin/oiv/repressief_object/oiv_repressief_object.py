@@ -226,6 +226,10 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas.setMapTool(self.drawTool)
 
     def run_delete_terrein(self):
+        try:
+            self.selectTool.geomSelected.disconnect(self.delete)
+        except:
+            None
         self.control_buttons_addobjectframe(False, False, False, False, True)
         self.selectTool.whichConfig = PC.OBJECT["configtable"]
         self.canvas.setMapTool(self.selectTool)
@@ -268,7 +272,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_print(self):
         self.object_print.setEnabled(False)
         printWhat, reply, self.legenda = PrintDialog.get_print_settings()
-        if printWhat == 'polygon':
+        if reply and printWhat == 'polygon':
             self.printCoverageLayer = PR.create_temp_print_layer('object_id')
             self.draw_print_polygon()
         elif reply:
@@ -323,7 +327,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 class PrintDialog(PQtW.QDialog):
     def __init__(self, parent=None):
         super(PrintDialog, self).__init__(parent)
-        self.setWindowTitle("Bouwlagen printen")
+        self.setWindowTitle("Repressief object printen")
         self.chkBoxDict = {}
         qlayout = PQtW.QVBoxLayout(self)
         self.qlineA = PQtW.QLabel(self)
