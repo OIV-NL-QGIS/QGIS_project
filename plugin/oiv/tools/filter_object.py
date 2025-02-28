@@ -4,6 +4,7 @@ import qgis.PyQt.QtCore as PQtC
 import oiv.helpers.utils_core as UC
 import oiv.helpers.drawing_helper as DH
 import oiv.helpers.configdb_helper as CH
+import oiv.helpers.constants as PC
 
 def init_filter_section(wdgt):
     wdgt.filterframe.setVisible(not wdgt.filterframe.isVisible())
@@ -25,6 +26,7 @@ def set_object_filter(wdgt):
     if wdgt.checkSoort.isChecked():
         filters.append("typeobject = '{}'".format(wdgt.objecttype.currentText()))
     layerNames = CH.get_chidlayers_ob()
+    layerNames.insert(0, (PC.OBJECT["objectlayername"], ''))
     if filters:
         subString = ' AND '.join(filters)
     else:
