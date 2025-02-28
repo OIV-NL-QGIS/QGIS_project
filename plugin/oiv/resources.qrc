@@ -183,6 +183,8 @@
         <file>config_files/png/algemeen_gevaar.png</file>
         <file>config_files/png/stroming.png</file>
         <file>config_files/png/oever_kade.png</file>
+        <file>config_files/png/oever_kade_bereikbaar.png</file>
+        <file>config_files/png/oever_kade_niet_bereikbaar.png</file>
         <file>config_files/png/diepte_4m.png</file>
         <file>config_files/png/diepte_9m.png</file>
         <file>config_files/png/diepte_15m.png</file>
@@ -260,6 +262,7 @@
         <file>config_files/png/gasdetectiepaneel.png</file>
         <file>config_files/png/afsluiter_svm.png</file>
         <file>config_files/png/slagboom.png</file>
+        <file>config_files/png/poort.png</file>
         <file>config_files/png/brandweerinfokast.png</file>
         <file>config_files/png/doorrijhoogte.png</file>
         <file>config_files/png/scenario_locatie.png</file>

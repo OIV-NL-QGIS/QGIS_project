@@ -327,7 +327,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 class PrintDialog(PQtW.QDialog):
     def __init__(self, parent=None):
         super(PrintDialog, self).__init__(parent)
-        self.setWindowTitle("Bouwlagen printen")
+        self.setWindowTitle("Repressief object printen")
         self.chkBoxDict = {}
         qlayout = PQtW.QVBoxLayout(self)
         self.qlineA = PQtW.QLabel(self)
