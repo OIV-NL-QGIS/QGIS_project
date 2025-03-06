@@ -22,7 +22,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
     bouwlaagOfObject = None
     drawLayer = None
     tableData = None
-    tableColumns = ['id', 'operatie', 'symbol_name', 'brontabel']
+    tableColumns = ['id', 'datum_aangemaakt', 'operatie', 'symbol_name', 'brontabel']
 
     def __init__(self, parent=None, objectId=None, bron=None, bronTbl=None):
         """Constructor."""
@@ -70,7 +70,10 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
                 for feat in it:
                     data = []
                     for fieldName in self.tableColumns:
-                        data.append(feat[fieldName])
+                        if fieldName == 'datum_aangemaakt':
+                            data.append(feat[fieldName].toString('yyyy-MM-dd'))
+                        else:
+                            data.append(feat[fieldName])
                     data.append(layerName)
                     self.tableData.append(data)
         self.populate_table(self.tableData)
@@ -182,12 +185,12 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
                     item = PQtW.QTableWidgetItem(str(col))
                     self.tbl_werkvoorraad.setItem(i, j, item)
             if self.bouwlaagOfObject == 'Object':
-                self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Operatie', 'Type', 'Tabel', 'layerName'])
+                self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Datum', 'Operatie', 'Type', 'Tabel', 'layerName'])
             else:
-                self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Operatie', 'Type', 'Tabel', 'layerName', 'bouwlaag'])
+                self.tbl_werkvoorraad.setHorizontalHeaderLabels(['id', 'Datum', 'Operatie', 'Type', 'Tabel', 'layerName', 'bouwlaag'])
         self.tbl_werkvoorraad.setSelectionBehavior(PQtW.QAbstractItemView.SelectRows)
         self.tbl_werkvoorraad.setColumnHidden(0, True);
-        self.tbl_werkvoorraad.setColumnHidden(4, True);
+        self.tbl_werkvoorraad.setColumnHidden(5, True);
 
     def close_werkvoorraad(self):
         self.btn_opslaan.clicked.disconnect()
