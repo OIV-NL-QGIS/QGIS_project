@@ -26,7 +26,7 @@
 
 !define VERSION 3.6.4
 !define PLUGINVERSION 3.6.4
-!define QGISVERSION "QGIS334"
+!define QGISVERSION "QGIS340"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
 !define WEBSITE "https://www.safetyct.com"
@@ -401,7 +401,7 @@ Section "Objecten" SectionObjecten
   ${If} ${SectionIsSelected} ${SectionWFS}
     ;Convert standard PostGres project to geoserver WFS project
     SetRegView 64
-    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.34" "InstallPath"
+    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.40" "InstallPath"
     File /a ..\qgis_project\objecten\convert_objecten_to_wfs.py
     ExecWait "$R2\apps\Python39\python.exe $INSTDIR\convert_objecten_to_wfs.py"
     CreateShortCut "$desktop\${APPNAME} Objecten-WFS.lnk" "$INSTDIR\OIV_Objecten_WFS.qgs" "" "$INSTDIR\objecten.ico" 0
@@ -428,7 +428,7 @@ Section "Bluswater" SectionBluswater
 
   ${If} ${SectionIsSelected} ${SectionWFS}
     SetRegView 64
-    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.34" "InstallPath"
+    ReadRegStr $R2 HKLM "SOFTWARE\QGIS 3.40" "InstallPath"
     File /a ..\qgis_project\objecten\convert_bluswater_to_wfs.py
     ExecWait "$R2\apps\Python39\python.exe $INSTDIR\convert_bluswater_to_wfs.py"
     CreateShortCut "$desktop\${APPNAME} Bluswater-WFS.lnk" "$INSTDIR\Bluswater_Beheer_WFS.qgs" "" "$INSTDIR\bluswater.ico" 0
@@ -617,7 +617,7 @@ Function nsDialogPluginDir
     ${NSD_CreateLabel} 0 18u 100% 14u "$R1" 
     StrCpy $PluginDir "$R1"
     
-    ${NSD_CreateGroupBox} 0 86u 100% 34u "Plugin Install Path"
+    ${NSD_CreateGroupBox} 0 86u 100% 40u "Plugin Install Path"
     Pop $0
 
         ${NSD_CreateDirRequest} 5% 100u 80% 12u "$R1"
