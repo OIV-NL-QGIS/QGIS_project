@@ -93,6 +93,7 @@ OBJECT = {
     "objectlayername": "Objecten",
     "terreinlayername": "Object terrein",
     "objectbgtlayername": "Objecten BGT",
+    "objectwerkvoorraadlayername": "Werkvoorraad objecten",
     "gridlayername": "Grid",
     "configtable": "config_object",
     "gridwidgetui": "oiv_create_grid_widget.ui",
@@ -130,7 +131,7 @@ HELPURL = {
 STATUSRGL = {
     "start" : "Selecteer tab Terrein of Bouwlaag",
     "object": {
-        "toggletab": "Object: klik voor nieuw op bgt-terrein, voor bestaand op (blauwe) Object-stip.",
+        "toggletab": "Object: klik voor nieuw gebouw op BAG-pand, anders op bgt-terrein, voor bestaand op (blauwe) Object-stip of terrein.",
 
     },
     "bouwlaag": {
