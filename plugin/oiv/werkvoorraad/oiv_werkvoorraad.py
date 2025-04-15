@@ -71,7 +71,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
                     data = []
                     for fieldName in self.tableColumns:
                         if fieldName == 'datum_aangemaakt':
-                            data.append(feat[fieldName].toString('yyyy-MM-dd'))
+                            data.append(feat[fieldName].toString('yyyy-MM-dd HH:mm'))
                         else:
                             data.append(feat[fieldName])
                     data.append(layerName)
