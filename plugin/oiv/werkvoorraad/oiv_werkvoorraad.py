@@ -114,7 +114,10 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
     def get_index(self, feat, layerName):
         data = []
         for fieldName in self.tableColumns:
-            data.append(feat[fieldName])
+            if fieldName == 'datum_aangemaakt':
+                data.append(feat[fieldName].toString('yyyy-MM-dd HH:mm'))
+            else:
+                data.append(feat[fieldName])
         data.append(layerName)
         return self.tableData.index(data)
         
@@ -161,7 +164,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         indexes = self.tbl_werkvoorraad.selectionModel().selectedRows()
         for index in indexes:
             recordId = self.tbl_werkvoorraad.item(index.row(), 0).text()
-            layerName = self.tbl_werkvoorraad.item(index.row(), 4).text()
+            layerName = self.tbl_werkvoorraad.item(index.row(), 5).text()
             ilayer = UC.getlayer_byname(layerName)
             request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + recordId)
             ifeature = UC.featureRequest(ilayer, request)
