@@ -87,7 +87,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         
     def select_on_canvas(self, row, col):
         recordId = self.tbl_werkvoorraad.item(row, 0).text()
-        layerName = self.tbl_werkvoorraad.item(row, 4).text()
+        layerName = self.tbl_werkvoorraad.item(row, 5).text()
         layer = UC.getlayer_byname(layerName)
         layer.selectByExpression('"id" = {}'.format(recordId))
         
