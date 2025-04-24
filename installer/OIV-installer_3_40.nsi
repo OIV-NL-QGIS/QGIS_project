@@ -19,7 +19,7 @@
  
 ; Define your application name
 !define APPNAME "OIV"
-!define STAD "Hoorn"
+!define STAD "Roermond"
 !define BUILDTYPE ""
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
