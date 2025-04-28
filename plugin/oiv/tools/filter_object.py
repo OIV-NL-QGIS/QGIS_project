@@ -27,6 +27,7 @@ def set_object_filter(wdgt):
         filters.append("typeobject = '{}'".format(wdgt.objecttype.currentText()))
     layerNames = CH.get_chidlayers_ob()
     layerNames.insert(0, (PC.OBJECT["objectlayername"], ''))
+    layerNames.insert(0, (PC.OBJECT["objectwerkvoorraadlayername"], ''))
     if filters:
         subString = ' AND '.join(filters)
     else:
