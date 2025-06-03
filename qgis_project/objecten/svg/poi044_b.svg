@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   version="1.1"
+   viewBox="0 0 62 62"
+   sodipodi:docname="poi044_b.svg"
+   width="62"
+   height="62"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview13"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="29.33871"
+     inkscape:cx="30.982958"
+     inkscape:cy="31"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="2869"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <!-- Generator: Adobe Illustrator 29.3.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 151)  -->
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      .st0 {
+        fill: #e4151c;
+      }
+
+      .st1, .st2 {
+        fill: none;
+      }
+
+      .st2 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .st3 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath
+       id="clippath">
+      <rect
+         class="st1"
+         x="21.4"
+         y="19.5"
+         width="24"
+         height="12"
+         transform="rotate(-45,33.391021,25.568986)"
+         id="rect1" />
+    </clipPath>
+  </defs>
+  <path
+     d="M 13,3 H 49.1 L 58.6,37.4 31,58.3 3.4,37.3 13,3 M 10.7,0 0,38.5 31,62 62,38.5 51.3,0 Z"
+     id="path1" />
+  <g
+     id="g13">
+    <path
+       class="st2"
+       d="m 15,31.2 c -0.4,1.9 0.2,4 1.6,5.4 2.3,2.3 6.1,2.3 8.5,0 L 27,34.7"
+       id="path2" />
+    <g
+       id="g9">
+      <path
+         class="st0"
+         d="m 37.7,15.6 5.7,5.7 -14.1,14.1 -5.7,-5.7 14.1,-14.1 m 0,-2.8 -17,17 8.5,8.5 17,-17 z"
+         id="path3" />
+      <g
+         class="st3"
+         clip-path="url(#clippath)"
+         id="g8">
+        <g
+           id="g7">
+          <polygon
+             class="st0"
+             points="44.7,22.7 32.7,17.8 30.6,19.9 42.6,24.8 "
+             id="polygon3" />
+          <polygon
+             class="st0"
+             points="41.2,26.2 29.2,21.3 27.1,23.4 39.1,28.4 "
+             id="polygon4" />
+          <polygon
+             class="st0"
+             points="37.7,29.8 25.6,24.8 23.5,26.9 35.5,31.9 "
+             id="polygon5" />
+          <polygon
+             class="st0"
+             points="34.1,33.3 22.1,28.4 20,30.5 32,35.4 "
+             id="polygon6" />
+          <polygon
+             class="st0"
+             points="48.3,19.2 36.2,14.2 34.1,16.3 46.1,21.3 "
+             id="polygon7" />
+        </g>
+      </g>
+    </g>
+    <line
+       class="st2"
+       x1="28.5"
+       y1="37.599998"
+       x2="19.200001"
+       y2="46.799999"
+       id="line9" />
+    <g
+       id="g12">
+      <line
+         class="st2"
+         x1="19.9"
+         y1="31.9"
+         x2="17"
+         y2="31.5"
+         id="line10" />
+      <line
+         class="st2"
+         x1="10.1"
+         y1="30.4"
+         x2="13"
+         y2="30.9"
+         id="line11" />
+      <line
+         class="st2"
+         x1="15.8"
+         y1="26.200001"
+         x2="15.3"
+         y2="29.200001"
+         id="line12" />
+    </g>
+    <polygon
+       points="46.9,24.8 49.1,9.8 34.1,12.1 "
+       id="polygon12" />
+  </g>
+</svg>
