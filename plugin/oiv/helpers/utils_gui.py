@@ -1,8 +1,29 @@
 """utilities to adjust the UI of the widgets"""
+import qgis.core as QC
 import oiv.helpers.utils_core as UC
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 import oiv.helpers.messages as MSG
+
+layerCategorieDict = {
+    "alternatieve_type": "Waterwinning",
+    "afw_binnendekking_type": "Bereikbaarheid",
+    "bereikbaarheid_type": "Lijn",
+    "dreiging_type": "Dreiging",
+    "gebiedsgerichte_aanpak_type": "Lijn",
+    "gevaarlijkestof_opslag_type": "Dreiging",
+    "ingang_type": "Toegang",
+    "isolijnen_type": "Lijn",
+    "label_type": "Label",
+    "opstelplaats_type": "Opstelplaats",
+    "points_of_interest_type": "Point of interest",
+    "ruimten_type": "Vlak",
+    "scenario_locatie_type": "Scenario",
+    "sectoren_type": "Vlak",
+    "sleutelkluis_type": "Toegang",
+    "veiligh_bouwk_type": "Lijn",
+    "veiligh_install_type": "Veiligheidsvoorzieningen"
+}
 
 def set_layer_substring(subString, bouwlaagOfObject='bouwlaag'):
     """set layer subset according (you can check the subset under properties of the layer)"""
@@ -58,25 +79,47 @@ def set_lengte_oppervlakte_visibility(widget, lengteTF, straalTF, oppTF, offsetT
     widget.offset_button.setVisible(offsetTF)
     widget.offset_button.setCheckable(offsetTF)
 
-def get_actions(whichConfig):
+def get_actions(whichConfig, actionDict):
     """connect buttons and signals to the real action run"""
     #skip first line because of header
     editableLayerNames = []
     moveLayerNames = []
-    actionList = []
-    query = "SELECT child_layer, bestand, config_table FROM '{}'".format(whichConfig)
+    snapSymbols = []
+    query = "SELECT child_layer, layertype, type_layer_name, type_layer_name_identifier FROM '{}'".format(whichConfig)
     layers = UC.read_settings(query, True)
-    for layer in layers:
-        layerName = layer[0]
-        csvPath = layer[1]
-        configTable = layer[2]
-        if csvPath:
-            editableLayerNames.append(layerName)
-            layer = UC.getlayer_byname(layerName)
-            layerType = UC.check_layer_type(layer)
-            if layerType == "Point":
-                moveLayerNames.append(layerName)
-            if configTable:
-                query = "SELECT '{}', type_id, button_name FROM {}".format(layerName, configTable)
-                actionList.append(UC.read_settings(query, True))
-    return actionList, editableLayerNames, moveLayerNames
+    for lyr in layers:
+        layerName = lyr[0]
+        layerType = lyr[1]
+        typeLayerName = lyr[2]
+        idColumn = lyr[3]
+        editableLayerNames.append(layerName)
+        layer = UC.getlayer_byname(typeLayerName)
+        if layerType == "point":
+            moveLayerNames.append(layerName)
+        if layer:
+            categorie = layerCategorieDict[typeLayerName]
+            request = QC.QgsFeatureRequest()
+            clause = QC.QgsFeatureRequest.OrderByClause('volgnummer', ascending=True)
+            orderby = QC.QgsFeatureRequest.OrderBy([clause])
+            request.setOrderBy(orderby)
+            if whichConfig == PC.PAND["configtable"]:
+                request.setFilterExpression('"actief_bouwlaag" = true')
+            else:
+                request.setFilterExpression('"actief_ruimtelijk" = true')
+            featureIt = layer.getFeatures(request)
+            for feat in featureIt:
+                landOfReg = 'regionaal'
+                if layerType == "point":
+                    if feat["symbol_name"][:3] in ['poi', 'drg', 'bbh', 'wwn', 'tgn', 'vvz', 'osp', 'gev']:
+                        symbol = feat["symbol_name"] + '_' + feat["symbol_type"]
+                        landOfReg = 'landelijk'
+                    else:
+                        symbol = feat["symbol_name"]
+                    if feat["snap"]:
+                        snapSymbols.append(feat["naam"])
+                else:
+                    symbol = feat[idColumn].replace(' ', '_').lower()
+                for key,value in feat["tabbladen"].items():
+                    if value == 1:
+                        actionDict[key][categorie].append((layerName, feat[idColumn], feat[idColumn].replace(' ', '_'), symbol, landOfReg))
+    return actionDict, editableLayerNames, moveLayerNames, snapSymbols

@@ -35,6 +35,8 @@ class oiv(PQtW.QWidget):
     bagNode = None
     projComboAction = None
     checkVisibility = False
+    tekenWidget = None
+    tekenObjectWidget = None
 
     def __init__(self, iface):
         super(oiv, self).__init__()

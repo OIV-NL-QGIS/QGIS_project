@@ -186,10 +186,12 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_tekenen(self):
         """init teken widget"""
-        tekenWidget = oivTekenWidget(self)
+        if not self.baseWidget.parent.tekenWidget:
+            self.baseWidget.parent.tekenWidget = oivTekenWidget(self)
         subString = "bouwlaag = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)
-        self.show_subwidget(True, tekenWidget)
+        self.baseWidget.parent.tekenWidget.drawbuttonframe.setVisible(True)
+        self.show_subwidget(True, self.baseWidget.parent.tekenWidget)
 
     def openBagviewer(self):
         """open url based on BAG pand_id, i.v.m. terugmelden"""

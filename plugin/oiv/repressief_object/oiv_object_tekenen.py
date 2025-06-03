@@ -32,6 +32,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     drawLayerType = None
     editableLayerNames = []
     moveLayerNames = []
+    snapSymbols = []
 
     def __init__(self, parent=None):
         super(oivObjectTekenWidget, self).__init__(parent)
@@ -63,28 +64,63 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.info_of_interest.setVisible(False)
         self.baseWidget.label_info_of_interest.setVisible(False)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
-        actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.OBJECT["configtable"])
+        actionList = PC.ACTIONDICTOBJECT
+        actionList, self.editableLayerNames, self.moveLayerNames, self.snapSymbols = UG.get_actions(PC.OBJECT["configtable"], actionList)
         self.initActions(actionList)
 
     def initActions(self, actionList):
         """connect all the buttons to the action"""
-        for lyr in actionList:
-            for action in lyr:
-                runLayerName = action[0]
-                buttonNr = action[1]
-                buttonName = str(action[2].lower())
-                strButton = self.findChild(PQtW.QPushButton, buttonName)
-                if strButton:
-                    #set tooltip per buttonn
+        cnti = 0
+        cntj = 0
+        sizePolicy = PQtW.QSizePolicy(PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        tabWidget = self.findChild(PQtW.QTabWidget, 'tabWidgetObject')
+        for tabblad, categorieen in actionList.items():
+            widget = PQtW.QWidget()
+            tabWidget.addTab(widget, tabblad)
+            qlayout = PQtW.QGridLayout()
+            for categorie, actions in categorieen.items():
+                if actions:
+                    label = PQtW.QLabel()
+                    qlayout.addWidget(label, cnti, cntj, 1, 5)
+                    label.setText(categorie)
+                cnti += 1
+                cntj = 0
+                for action in actions:
+                    runLayerName = action[0]
+                    buttonNr = action[1]
+                    buttonName = str(action[2].lower())
+                    buttonIcon = action[3]
+                    landOfReg = action[4]
+                    strButton = PQtW.QPushButton()
+                    if landOfReg == 'landelijk':
+                        strButton.setIcon(QIcon(":/plugins/oiv/config_files/svg/" + buttonIcon + ".svg"))
+                    else:
+                        strButton.setIcon(QIcon(":/plugins/oiv/config_files/png/" + buttonIcon + ".png"))
                     strButton.setToolTip(buttonName)
-                    #geef met de signal ook mee welke knop er is geklikt -> nr
-                    strButton.clicked.connect(lambda dummy='dummyvar', rlayer=runLayerName, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
+                    sizePolicy.setHeightForWidth(strButton.sizePolicy().hasHeightForWidth())
+                    strButton.setSizePolicy(sizePolicy)
+                    strButton.setIconSize(PQtC.QSize(28, 28))
+                    qlayout.addWidget(strButton, cnti, cntj)
+                    if strButton:
+                        #set tooltip per buttonn
+                        strButton.setToolTip(buttonName)
+                        strButton.setStyleSheet("background-color: #e0e0e0")
+                        #geef met de signal ook mee welke knop er is geklikt -> nr
+                        strButton.clicked.connect(lambda dummy='dummyvar', rlayer=runLayerName, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
+                    if cntj == 4:
+                        cntj = 0
+                        cnti += 1
+                    else:
+                        cntj += 1
+                cnti += 1
+                cntj = 0
+            spacerItem = PQtW.QSpacerItem(0, 0, PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Expanding)
+            qlayout.addItem(spacerItem, cnti, cntj+1)
+            widget.setLayout(qlayout)
 
     def close_object_tekenen_show_base(self):
-        self.move.clicked.disconnect()
-        self.identify.clicked.disconnect()
-        self.select.clicked.disconnect()
-        self.delete_f.clicked.disconnect()
         self.activatePan()
         try:
             self.selectTool.geomSelected.disconnect()
@@ -100,20 +136,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.info_of_interest.setVisible(True)
         self.baseWidget.label_info_of_interest.setVisible(True)
         self.baseWidget.cadframe.setVisible(False)
-        self.terug.clicked.disconnect(self.close_object_tekenen_show_base)
+        #self.terug.clicked.disconnect(self.close_object_tekenen_show_base)
         del self
-
-    def ini_action(self, actionList, run_layer):
-        """connect all the buttons to the action"""
-        for action in actionList:
-            buttonNr = action[0]
-            buttonName = str(action[1].lower())
-            strButton = self.findChild(PQtW.QPushButton, buttonName)
-            if strButton:
-                #set tooltip per buttonn
-                strButton.setToolTip(buttonName)
-                #geef met de signal ook mee welke knop er is geklikt -> nr
-                strButton.clicked.connect(lambda dummy='dummyvar', rlayer=run_layer, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
 
     def run_edit_tool(self):
         """activate the edit feature tool"""
@@ -292,7 +316,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             pointTool.snapping = False
             pointTool.startRotate = False
             pointTool.possibleSnapFeatures = possibleSnapFeatures
-            if self.identifier in DW.ROSNAPSYMBOLS:
+            if self.identifier in self.snapSymbols:
                 pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)

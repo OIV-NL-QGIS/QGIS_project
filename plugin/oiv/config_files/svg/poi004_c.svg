@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 29.4.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 62 62"
+   xml:space="preserve"
+   sodipodi:docname="poi004_c.svg"
+   width="62"
+   height="62"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs9" /><sodipodi:namedview
+   id="namedview9"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="29.33871"
+   inkscape:cx="30.982958"
+   inkscape:cy="31"
+   inkscape:window-width="3840"
+   inkscape:window-height="2054"
+   inkscape:window-x="2869"
+   inkscape:window-y="-11"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<g
+   id="g2">
+	<defs
+   id="defs1">
+		<polygon
+   id="SVGID_1_"
+   points="10.7,0 51.3,0 62,38.5 31,62 0,38.5 " />
+	</defs>
+	<use
+   xlink:href="#SVGID_1_"
+   style="overflow:visible;fill:#ffffff"
+   id="use1" />
+	<clipPath
+   id="SVGID_00000024723774608212984180000008773327659357906304_">
+		<use
+   xlink:href="#SVGID_1_"
+   style="overflow:visible"
+   id="use2" />
+	</clipPath>
+</g>
+<g
+   id="g8">
+	<polygon
+   style="fill:none"
+   points="21.5,50.5 30.5,50.5 31.5,50.5 40.5,50.5 40.5,41.5 31.5,41.5 30.5,41.5 21.5,41.5 "
+   id="polygon2" />
+	<polygon
+   style="fill:none"
+   points="40.5,40.5 41.5,40.5 50.5,40.5 50.5,31.5 41.5,31.5 40.5,31.5 31.5,31.5 31.5,40.5 "
+   id="polygon3" />
+	<polygon
+   style="fill:none"
+   points="21.5,30.5 30.5,30.5 31.5,30.5 40.5,30.5 40.5,21.5 31.5,21.5 30.5,21.5 21.5,21.5 "
+   id="polygon4" />
+	<polygon
+   style="fill:none"
+   points="40.5,10.5 40.5,1.5 31.5,1.5 30.5,1.5 21.5,1.5 21.5,10.5 30.5,10.5 31.5,10.5 "
+   id="polygon5" />
+	<polygon
+   style="fill:none"
+   points="40.5,20.5 41.5,20.5 50.5,20.5 50.5,11.5 41.5,11.5 40.5,11.5 31.5,11.5 31.5,20.5 "
+   id="polygon6" />
+	<polygon
+   style="fill:none"
+   points="21.5,31.5 20.5,31.5 11.5,31.5 11.5,40.5 20.5,40.5 21.5,40.5 30.5,40.5 30.5,31.5 "
+   id="polygon7" />
+	<polygon
+   style="fill:none"
+   points="21.5,11.5 20.5,11.5 11.5,11.5 11.5,20.5 20.5,20.5 21.5,20.5 30.5,20.5 30.5,11.5 "
+   id="polygon8" />
+	<path
+   d="m 10.283,1.5 h 0.217 1 9 v 9 h -9 -1 -2.718 l -0.278,1 H 10.5 v 9 H 5.003 l -0.278,1 h 5.775 1 9 v 9 h -9 -1 -8.277 l -0.278,1 H 10.5 v 9 H 2.638 l 1.319,1 h 6.543 1 9 v 9 h -4.67 l 1.319,1 h 3.351 1 9 v 9 h -1.479 l 1.319,1 h 0.16 1 0.16 l 1.319,-1 H 31.5 v -9 h 9 1 3.351 l 1.319,-1 H 41.5 v -9 h 9 1 6.543 l 1.319,-1 H 51.5 v -9 h 8.555 l -0.278,-1 h -8.277 -1 -9 v -9 h 9 1 5.775 l -0.278,-1 H 51.5 v -9 h 2.996 l -0.278,-1 h -2.718 -1 -9 v -9 h 9 1 0.217 L 51.3,0 h -0.8 v 0.5 h -9 -1 -9 V 0 h -1 v 0.5 h -9 -1 -9 V 0 h -0.8 z m 1.217,19 v -9 h 9 1 9 v 9 h -9 -1 z m 0,20 v -9 h 9 1 9 v 9 h -9 -1 z m 29,10 h -9 -1 -9 v -9 h 9 1 9 z m 10,-19 v 9 h -9 -1 -9 v -9 h 9 1 z m -10,-1 h -9 -1 -9 v -9 h 9 1 9 z m 10,-19 v 9 h -9 -1 -9 v -9 h 9 1 z m -20,-10 h 1 9 v 9 h -9 -1 -9 v -9 z"
+   id="path8" />
+</g>
+<g
+   id="g9">
+	<polygon
+   style="fill:#ffffff"
+   points="25.3,42.4 22.2,34.8 30.6,23.4 34.6,24.3 38.9,30.4 41.8,36.1 37.8,42.5 34.4,43.4 31,43.4 "
+   id="polygon9" />
+	<path
+   style="fill:#ff0000"
+   d="m 31,7.4 c -2.5,4.8 0.4,7.4 -2.7,14.3 -1.8,-1.4 -0.8,-6.6 -4.1,-6.7 0.4,1.7 0.1,2.2 0,2.8 -0.4,2.4 -1.1,4.3 0.4,7.3 -2.3,-1.1 -2.5,-3.2 -4.4,-4.6 0.4,2.2 -0.5,6.9 2.1,11.3 -2.3,-0.3 -3.2,-1.1 -5.6,-3.6 2.6,14 4.7,14.4 14.4,15.3 -0.8,-0.1 -5.8,-1 -7.5,-6.7 0,-1.4 -0.1,1.3 4.7,1.4 -3,-4.9 -2.2,-3.9 -1.9,-6.7 1.4,1.8 0.3,2.1 3.7,3.5 -1.1,-3.6 1.8,-6 1.1,-10.2 0.8,1.8 3.6,1.5 3.4,10.2 2.3,-2.7 2.5,-0.8 3.6,-3.6 0.1,1.5 0.8,3.5 -2.3,6.9 0.8,0.3 2.2,0.4 4.3,-1.1 -2.1,2.5 -0.1,2.5 -5.5,6.4 6.7,0.1 11.1,-4.2 11,-13.6 -0.3,0.8 -0.4,2.5 -4,2.9 2.2,-2.2 3.4,-6.9 1.6,-10.5 -0.7,0.6 -1.6,3.4 -4,4.1 1.1,-2 0.8,-4.5 0.8,-4.5 0,0 0.4,-3.5 -1.6,-6.3 -0.5,4.2 -0.5,6.4 -3.2,7 0.4,-2.4 0.5,-3.6 -0.8,-6.4 -1.4,-2.9 -3,-5.9 -3.3,-8.7 z"
+   id="path9" />
+</g>
+</svg>
