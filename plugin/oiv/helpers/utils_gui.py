@@ -85,6 +85,10 @@ def get_actions(whichConfig, actionDict):
     editableLayerNames = []
     moveLayerNames = []
     snapSymbols = []
+    anchorpoints = {
+        "anchorpointtop": [],
+        "anchorpointbottom": []
+    }
     query = "SELECT child_layer, layertype, type_layer_name, type_layer_name_identifier FROM '{}'".format(whichConfig)
     layers = UC.read_settings(query, True)
     for lyr in layers:
@@ -117,9 +121,13 @@ def get_actions(whichConfig, actionDict):
                         symbol = feat["symbol_name"]
                     if feat["snap"]:
                         snapSymbols.append(feat["naam"])
+                    if feat["anchorpoint"] == 'top':
+                        anchorpoints["anchorpointtop"].append(feat[idColumn])
+                    elif feat["anchorpoint"] == 'bottom':
+                        anchorpoints["anchorpointbottom"].append(feat[idColumn])
                 else:
                     symbol = feat[idColumn].replace(' ', '_').lower()
                 for key,value in feat["tabbladen"].items():
                     if value == 1:
                         actionDict[key][categorie].append((layerName, feat[idColumn], feat[idColumn].replace(' ', '_'), symbol, landOfReg))
-    return actionDict, editableLayerNames, moveLayerNames, snapSymbols
+    return actionDict, editableLayerNames, moveLayerNames, snapSymbols, anchorpoints

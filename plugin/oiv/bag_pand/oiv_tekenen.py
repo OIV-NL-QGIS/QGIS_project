@@ -32,6 +32,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     moveLayerNames = []
     snapSymbols = []
     tabWidget = None
+    anchorPoints = None
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -66,7 +67,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.info_of_interest.setVisible(False)
         self.baseWidget.label_info_of_interest.setVisible(False)
         actionList = PC.ACTIONDICTBOUWLAAG
-        actionList, self.editableLayerNames, self.moveLayerNames, self.snapSymbols = UG.get_actions(PC.PAND["configtable"], actionList)
+        actionList, self.editableLayerNames, self.moveLayerNames, self.snapSymbols, self.anchorPoints = UG.get_actions(PC.PAND["configtable"], actionList)
         self.initActions(actionList)
 
     def initActions(self, actionList):
@@ -310,10 +311,27 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def place_feature(self, points, snapAngle):
         """Save and place feature on the canvas"""
         parentId = None
+        translateGeom = False
         self.iface.setActiveLayer(self.drawLayer)
         objectId = self.pand_id.text()
+        if self.drawLayerType == 'Point':
+            if self.identifier in self.anchorPoints["anchorpointtop"] or self.identifier in self.anchorPoints["anchorpointbottom"]:
+                result = CH.get_type_layer_bl(self.drawLayer.name())
+                typeLayerName = result[0]
+                typeName = result[1]
+                typeLayer = UC.getlayer_byname(typeLayerName)
+                request = QC.QgsFeatureRequest().setFilterExpression('"{}" = '.format(typeName) + "'{}'".format(self.identifier))
+                ifeature = UC.featureRequest(typeLayer, request)
+                size = ifeature["size_bouwlaag_middel"]
+                translateGeom = True
         if points:
             parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, objectId)
+            if translateGeom:
+                if self.identifier in self.anchorPoints["anchorpointtop"]:
+                    delta = 0.5
+                else:
+                    delta = -0.5
+                childFeature = UC.move_point(childFeature, delta * size, snapAngle)
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.PAND["configtable"])
             if buttonCheck != 'Cancel':

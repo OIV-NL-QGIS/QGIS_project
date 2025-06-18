@@ -33,6 +33,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     editableLayerNames = []
     moveLayerNames = []
     snapSymbols = []
+    tabWidget = None
+    anchorPoints = None
 
     def __init__(self, parent=None):
         super(oivObjectTekenWidget, self).__init__(parent)
@@ -65,7 +67,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.label_info_of_interest.setVisible(False)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
         actionList = PC.ACTIONDICTOBJECT
-        actionList, self.editableLayerNames, self.moveLayerNames, self.snapSymbols = UG.get_actions(PC.OBJECT["configtable"], actionList)
+        actionList, self.editableLayerNames, self.moveLayerNames, self.snapSymbols, self.anchorPoints = UG.get_actions(PC.OBJECT["configtable"], actionList)
         self.initActions(actionList)
 
     def initActions(self, actionList):
@@ -75,10 +77,10 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         sizePolicy = PQtW.QSizePolicy(PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        tabWidget = self.findChild(PQtW.QTabWidget, 'tabWidgetObject')
+        self.tabWidget = self.findChild(PQtW.QTabWidget, 'tabWidgetObject')
         for tabblad, categorieen in actionList.items():
             widget = PQtW.QWidget()
-            tabWidget.addTab(widget, tabblad)
+            self.tabWidget.addTab(widget, tabblad)
             qlayout = PQtW.QGridLayout()
             for categorie, actions in categorieen.items():
                 if actions:
@@ -339,9 +341,26 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def place_feature(self, points, snapAngle):
         parentId = None
+        translateGeom = False
         self.iface.setActiveLayer(self.drawLayer)
+        if self.drawLayerType == 'Point':
+            if self.identifier in self.anchorPoints["anchorpointtop"] or self.identifier in self.anchorPoints["anchorpointbottom"]:
+                result = CH.get_type_layer_ob(self.drawLayer.name())
+                typeLayerName = result[0]
+                typeName = result[1]
+                typeLayer = UC.getlayer_byname(typeLayerName)
+                request = QC.QgsFeatureRequest().setFilterExpression('"{}" = '.format(typeName) + "'{}'".format(self.identifier))
+                ifeature = UC.featureRequest(typeLayer, request)
+                size = ifeature["size_object_middel"]
+                translateGeom = True
         if points:
             parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, self.object_id.text())
+            if translateGeom:
+                if self.identifier in self.anchorPoints["anchorpointtop"]:
+                    delta = 0.5
+                else:
+                    delta = -0.5
+                childFeature = UC.move_point(childFeature, delta * size, snapAngle)
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.OBJECT["configtable"])
             if buttonCheck != 'Cancel':
