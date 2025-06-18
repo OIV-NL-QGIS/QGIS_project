@@ -21,6 +21,8 @@ import oiv.helpers.qt_helper as QT
 import oiv.tools.print as PR
 import oiv.helpers.rubberband_helper as RH
 
+from .oiv_object_tekenen import oivObjectTekenWidget
+
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PC.OBJECT["objectwidgetui"]))
 
@@ -259,9 +261,10 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.control_buttons_addobjectframe(True, True, True, True, True)
 
     def run_object_symbolen_tekenen(self):
-        tekenWidget = OTW.oivObjectTekenWidget(self)
-        tekenWidget.object_id.setText(self.object_id.text())
-        self.show_subwidget(True, tekenWidget)
+        if not self.baseWidget.parent.tekenObjectWidget:
+            self.baseWidget.parent.tekenObjectWidget = oivObjectTekenWidget(self)
+        self.baseWidget.parent.tekenObjectWidget.object_id.setText(self.object_id.text())
+        self.show_subwidget(True, self.baseWidget.parent.tekenObjectWidget)
 
     def run_werkvoorraad(self):
         werkvoorraadWidget = OWW.oivWerkvoorraadWidget(self)

@@ -30,6 +30,9 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     drawLayer = None
     editableLayerNames = []
     moveLayerNames = []
+    snapSymbols = []
+    tabWidget = None
+    anchorPoints = None
 
     def __init__(self, parent=None):
         """Constructor."""
@@ -63,22 +66,61 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.label_filter.setVisible(False)
         self.baseWidget.info_of_interest.setVisible(False)
         self.baseWidget.label_info_of_interest.setVisible(False)
-        actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.PAND["configtable"])
+        actionList = PC.ACTIONDICTBOUWLAAG
+        actionList, self.editableLayerNames, self.moveLayerNames, self.snapSymbols, self.anchorPoints = UG.get_actions(PC.PAND["configtable"], actionList)
         self.initActions(actionList)
 
     def initActions(self, actionList):
         """connect all the buttons to the action"""
-        for lyr in actionList:
-            for action in lyr:
-                runLayerName = action[0]
-                buttonNr = action[1]
-                buttonName = str(action[2].lower())
-                strButton = self.findChild(PQtW.QPushButton, buttonName)
-                if strButton:
-                    #set tooltip per buttonn
+        cnti = 0
+        cntj = 0
+        sizePolicy = PQtW.QSizePolicy(PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        self.tabWidget = self.findChild(PQtW.QTabWidget, 'tabWidgetBouwlaag')
+        for tabblad, categorieen in actionList.items():
+            widget = PQtW.QWidget()
+            self.tabWidget.addTab(widget, tabblad)
+            qlayout = PQtW.QGridLayout()
+            for categorie, actions in categorieen.items():
+                if actions:
+                    label = PQtW.QLabel()
+                    qlayout.addWidget(label, cnti, cntj, 1, 5)
+                    label.setText(categorie)
+                cnti += 1
+                cntj = 0
+                for action in actions:
+                    runLayerName = action[0]
+                    buttonNr = action[1]
+                    buttonName = str(action[2].lower())
+                    buttonIcon = action[3]
+                    landOfReg = action[4]
+                    strButton = PQtW.QPushButton()
+                    if landOfReg == 'landelijk':
+                        strButton.setIcon(QIcon(":/plugins/oiv/config_files/svg/" + buttonIcon + ".svg"))
+                    else:
+                        strButton.setIcon(QIcon(":/plugins/oiv/config_files/png/" + buttonIcon + ".png"))
                     strButton.setToolTip(buttonName)
-                    #geef met de signal ook mee welke knop er is geklikt -> nr
-                    strButton.clicked.connect(lambda dummy='dummyvar', rlayer=runLayerName, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
+                    sizePolicy.setHeightForWidth(strButton.sizePolicy().hasHeightForWidth())
+                    strButton.setSizePolicy(sizePolicy)
+                    strButton.setIconSize(PQtC.QSize(28, 28))
+                    qlayout.addWidget(strButton, cnti, cntj)
+                    if strButton:
+                        #set tooltip per buttonn
+                        strButton.setToolTip(buttonName)
+                        strButton.setStyleSheet("background-color: #e0e0e0")
+                        #geef met de signal ook mee welke knop er is geklikt -> nr
+                        strButton.clicked.connect(lambda dummy='dummyvar', rlayer=runLayerName, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
+                    if cntj == 4:
+                        cntj = 0
+                        cnti += 1
+                    else:
+                        cntj += 1
+                cnti += 1
+                cntj = 0
+            spacerItem = PQtW.QSpacerItem(0, 0, PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Expanding)
+            qlayout.addItem(spacerItem, cnti, cntj+1)
+            widget.setLayout(qlayout)
 
     def run_edit_tool(self):
         """activate the edit feature tool"""
@@ -245,7 +287,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             pointTool.snapping = False
             pointTool.startRotate = False
             pointTool.possibleSnapFeatures = possibleSnapFeatures
-            if self.identifier in DW.BLSNAPSYMBOLS:
+            if self.identifier in self.snapSymbols:
                 pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)
@@ -269,10 +311,27 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def place_feature(self, points, snapAngle):
         """Save and place feature on the canvas"""
         parentId = None
+        translateGeom = False
         self.iface.setActiveLayer(self.drawLayer)
         objectId = self.pand_id.text()
+        if self.drawLayerType == 'Point':
+            if self.identifier in self.anchorPoints["anchorpointtop"] or self.identifier in self.anchorPoints["anchorpointbottom"]:
+                result = CH.get_type_layer_bl(self.drawLayer.name())
+                typeLayerName = result[0]
+                typeName = result[1]
+                typeLayer = UC.getlayer_byname(typeLayerName)
+                request = QC.QgsFeatureRequest().setFilterExpression('"{}" = '.format(typeName) + "'{}'".format(self.identifier))
+                ifeature = UC.featureRequest(typeLayer, request)
+                size = ifeature["size_bouwlaag_middel"]
+                translateGeom = True
         if points:
             parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, objectId)
+            if translateGeom:
+                if self.identifier in self.anchorPoints["anchorpointtop"]:
+                    delta = 0.5
+                else:
+                    delta = -0.5
+                childFeature = UC.move_point(childFeature, delta * size, snapAngle)
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.PAND["configtable"])
             if buttonCheck != 'Cancel':
@@ -287,21 +346,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def close_bouwlaag_tekenen_show_base(self):
         """destroy and close self"""
-        self.move.clicked.disconnect()
-        self.identify.clicked.disconnect()
-        self.select.clicked.disconnect()
-        self.delete_f.clicked.disconnect()
         self.activatePan()
-        try:
-            self.selectTool.geomSelected.disconnect()
-        except:
-            pass
-        for widget in self.children():
-            if isinstance(widget, PQtW.QPushButton):
-                try:
-                    widget.clicked.disconnect()
-                except: # pylint: disable=bare-except
-                    pass
         self.close()
         self.parent.show_subwidget(False)
         self.drawbuttonframe.setVisible(False)
@@ -312,7 +357,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.info_of_interest.setVisible(True)
         self.baseWidget.label_info_of_interest.setVisible(True)
         self.baseWidget.cadframe.setVisible(False)
-        self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
+        #self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
         del self
 
 class MultiEditDialog(PQtW.QDialog):

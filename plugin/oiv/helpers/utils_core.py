@@ -2,6 +2,7 @@
 import os
 import sqlite3
 import webbrowser
+import math
 
 import qgis.PyQt.QtWidgets as PQtW
 import qgis.core as QC
@@ -286,3 +287,12 @@ def is_layer_visible(layer):
     layer_tree_root = QC.QgsProject.instance().layerTreeRoot()
     layer_tree_layer = layer_tree_root.findLayer(layer)
     return layer_tree_layer.isVisible()
+
+def move_point(feat, distance, angle_deg):
+    geom = feat.geometry()
+    angle_rad = math.radians(angle_deg)
+    dx = distance * math.cos(angle_rad)
+    dy = distance * math.sin(angle_rad)
+    geom.translate(dx, dy)
+    feat.setGeometry(geom)
+    return feat

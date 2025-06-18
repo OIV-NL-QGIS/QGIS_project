@@ -87,3 +87,11 @@ def get_childlayers_bl_point():
 def get_childlayers_info_point():
     query = "SELECT child_layer FROM config_info_of_interest WHERE layertype = 'point';"
     return read_settings(query, True)
+
+def get_type_layer_bl(layerName):
+    query = "SELECT type_layer_name, type_layer_name_identifier FROM config_bouwlaag WHERE child_layer = '{}';".format(layerName)
+    return read_settings(query, False)
+
+def get_type_layer_ob(layerName):
+    query = "SELECT type_layer_name, type_layer_name_identifier FROM config_object WHERE child_layer = '{}';".format(layerName)
+    return read_settings(query, False)

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   version="1.1"
+   viewBox="0 0 66.6 66.400002"
+   sodipodi:docname="poi044_a.svg"
+   width="66.599998"
+   height="66.400002"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="27.353383"
+     inkscape:cx="33.304838"
+     inkscape:cy="33.25"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="2869"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" />
+  <!-- Generator: Adobe Illustrator 29.3.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 151)  -->
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+      .st0 {
+        fill: #e4151c;
+      }
+
+      .st1 {
+        fill: #fff;
+      }
+
+      .st2, .st3 {
+        fill: none;
+      }
+
+      .st3 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .st4 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath
+       id="clippath">
+      <rect
+         class="st2"
+         x="23.700001"
+         y="21.5"
+         width="24"
+         height="12"
+         transform="rotate(-45,35.696656,27.513961)"
+         id="rect1" />
+    </clipPath>
+  </defs>
+  <g
+     id="g2">
+    <polygon
+       class="st1"
+       points="52.5,3.5 62.6,40 33.3,62.1 4,39.9 14.1,3.5 "
+       id="polygon1" />
+    <path
+       d="M 51.3,5 60.8,39.4 33.2,60.3 5.7,39.3 15.3,5 H 51.4 M 53.6,2 H 13 L 2.3,40.5 33.3,64 64.3,40.5 Z"
+       id="path1" />
+    <path
+       class="st1"
+       d="M 53.6,2 64.3,40.5 33.3,64 2.3,40.5 13,2 H 53.6 M 55.1,0 H 11.5 L 11.1,1.5 0.4,39.9 0,41.2 1.1,42 l 31,23.5 1.2,0.9 1.2,-0.9 L 65.5,42 66.6,41.2 66.2,39.9 55.5,1.5 Z"
+       id="path2" />
+  </g>
+  <g
+     id="g14">
+    <path
+       class="st3"
+       d="m 17.3,33.2 c -0.4,1.9 0.2,4 1.6,5.4 2.3,2.3 6.1,2.3 8.5,0 l 1.9,-1.9"
+       id="path3" />
+    <g
+       id="g10">
+      <path
+         class="st0"
+         d="M 40,17.6 45.7,23.3 31.6,37.4 25.9,31.7 40,17.6 m 0,-2.8 -17,17 8.5,8.5 17,-17 z"
+         id="path4" />
+      <g
+         class="st4"
+         clip-path="url(#clippath)"
+         id="g9">
+        <g
+           id="g8">
+          <polygon
+             class="st0"
+             points="47,24.7 35,19.8 32.9,21.9 44.9,26.8 "
+             id="polygon4" />
+          <polygon
+             class="st0"
+             points="43.5,28.2 31.5,23.3 29.3,25.4 41.4,30.4 "
+             id="polygon5" />
+          <polygon
+             class="st0"
+             points="40,31.8 27.9,26.8 25.8,28.9 37.8,33.9 "
+             id="polygon6" />
+          <polygon
+             class="st0"
+             points="36.4,35.3 24.4,30.4 22.3,32.5 34.3,37.4 "
+             id="polygon7" />
+          <polygon
+             class="st0"
+             points="50.6,21.2 38.5,16.2 36.4,18.3 48.4,23.3 "
+             id="polygon8" />
+        </g>
+      </g>
+    </g>
+    <line
+       class="st3"
+       x1="30.799999"
+       y1="39.599998"
+       x2="21.5"
+       y2="48.799999"
+       id="line10" />
+    <g
+       id="g13">
+      <line
+         class="st3"
+         x1="22.200001"
+         y1="33.900002"
+         x2="19.299999"
+         y2="33.5"
+         id="line11" />
+      <line
+         class="st3"
+         x1="12.3"
+         y1="32.400002"
+         x2="15.3"
+         y2="32.900002"
+         id="line12" />
+      <line
+         class="st3"
+         x1="18"
+         y1="28.200001"
+         x2="17.6"
+         y2="31.200001"
+         id="line13" />
+    </g>
+    <polygon
+       points="49.1,26.8 51.4,11.8 36.4,14.1 "
+       id="polygon13" />
+  </g>
+</svg>

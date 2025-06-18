@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 29.4.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 38 34"
+   xml:space="preserve"
+   sodipodi:docname="poi025_c.svg"
+   width="38"
+   height="34"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs3" /><sodipodi:namedview
+   id="namedview3"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="53.5"
+   inkscape:cx="18.990654"
+   inkscape:cy="17"
+   inkscape:window-width="3840"
+   inkscape:window-height="2054"
+   inkscape:window-x="2869"
+   inkscape:window-y="-11"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<path
+   style="fill:#ffffff"
+   d="m 35,13 c 1.7,0 3,-1.3 3,-3 C 38,8.3 36.7,7 35,7 H 34 V 5.4 C 34,2.4 31.6,0 28.6,0 H 9.4 C 6.4,0 4,2.4 4,5.4 V 7 H 3 c -1.7,0 -3,1.3 -3,3 0,1.7 1.3,3 3,3 h 1 v 8 H 3 c -1.7,0 -3,1.3 -3,3 0,1.7 1.3,3 3,3 h 1 v 1.6 c 0,3 2.4,5.4 5.4,5.4 h 19.2 c 3,0 5.4,-2.4 5.4,-5.4 V 27 h 1 c 1.7,0 3,-1.3 3,-3 0,-1.7 -1.3,-3 -3,-3 h -1 v -8 z"
+   id="path1" />
+<g
+   id="g3">
+	<path
+   style="fill:#ffff00"
+   d="M 28.6,30 C 29.4,30 30,29.4 30,28.6 V 5.4 C 30,4.6 29.4,4 28.6,4 H 9.4 C 8.6,4 8,4.6 8,5.4 V 28.6 C 8,29.4 8.6,30 9.4,30 Z"
+   id="path2" />
+	<path
+   d="M 35,23 H 32 V 11 h 3 c 0.6,0 1,-0.4 1,-1 C 36,9.4 35.6,9 35,9 H 32 V 5.4 C 32,3.5 30.5,2 28.6,2 H 9.4 C 7.5,2 6,3.5 6,5.4 V 9 H 3 c -0.6,0 -1,0.4 -1,1 0,0.6 0.4,1 1,1 H 6 V 23 H 3 c -0.6,0 -1,0.4 -1,1 0,0.6 0.4,1 1,1 h 3 v 3.6 C 6,30.5 7.5,32 9.4,32 H 28.6 C 30.5,32 32,30.5 32,28.6 V 25 h 3 c 0.6,0 1,-0.4 1,-1 0,-0.6 -0.4,-1 -1,-1 z M 8,28.6 V 5.4 C 8,4.6 8.6,4 9.4,4 H 28.6 C 29.4,4 30,4.6 30,5.4 V 28.6 C 30,29.4 29.4,30 28.6,30 H 9.4 C 8.6,30 8,29.4 8,28.6 Z"
+   id="path3" />
+</g>
+<polygon
+   points="19.5,8 23.7,8 20.1,14.1 22.9,14.1 14.3,26 18.5,16.3 16,16.3 "
+   id="polygon3" />
+</svg>

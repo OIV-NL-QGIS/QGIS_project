@@ -36,14 +36,14 @@ def bagpand_layername():
     return None
 
 
-OIV_VERSION = '3.6.5'
+OIV_VERSION = '3.6.6'
 
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
         "min": 362,
-        "max": 365
+        "max": 366
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
@@ -69,7 +69,6 @@ PAND = {
     "pandui": "oiv_pandgegevens_widget.ui",
     "bagviewerurl": "https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery=",
     "werkvoorraadlayers": [
-        "Hulplijnen bouwlaag",
         "Werkvoorraad bouwlaag - punt",
         "Werkvoorraad bouwlaag - label",
         "Werkvoorraad bouwlaag - lijn",
@@ -137,5 +136,167 @@ STATUSRGL = {
     "bouwlaag": {
         "toggletab": "Bouwlaag: klik voor nieuw op (roze) bag-pand, voor bestaand op (gele) Bouwlaag.",
   
+    }
+}
+
+ACTIONDICTOBJECT = {
+    "Algemeen": {    
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []
+    }, 
+    "Evenement": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    },
+    "Gebouw": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    }, 
+    "Infrastructuur": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    }, 
+    "Natuur": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    }, 
+    "Water": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    }
+}
+
+ACTIONDICTBOUWLAAG = {
+    "Algemeen": {    
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []
+    }, 
+    "Evenement": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    },
+    "Gebouw": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    }, 
+    "Infrastructuur": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    }, 
+    "Natuur": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
+    }, 
+    "Water": {
+        "Bereikbaarheid" : [],
+        "Dreiging": [],
+        "Opstelplaats": [],
+        "Point of interest": [],
+        "Scenario": [],
+        "Toegang": [],
+        "Veiligheidsvoorzieningen": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []        
     }
 }
