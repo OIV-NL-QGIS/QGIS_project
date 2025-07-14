@@ -77,11 +77,11 @@ def get_identifier_by_tablename_bl(tableName):
     return read_settings(query, False)[0]
 
 def get_childlayers_ob_point():
-    query = "SELECT child_layer FROM config_object WHERE layertype = 'point';"
+    query = "SELECT child_layer FROM config_object WHERE layertype = 'point' or layertype = 'label';"
     return read_settings(query, True)
 
 def get_childlayers_bl_point():
-    query = "SELECT child_layer FROM config_bouwlaag WHERE layertype = 'point';"
+    query = "SELECT child_layer FROM config_bouwlaag WHERE layertype = 'point' or layertype = 'label';"
     return read_settings(query, True)
 
 def get_childlayers_info_point():
