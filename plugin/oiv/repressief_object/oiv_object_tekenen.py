@@ -357,9 +357,9 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, self.object_id.text())
             if translateGeom:
                 if self.identifier in self.anchorPoints["anchorpointtop"]:
-                    delta = 0.5
-                else:
                     delta = -0.5
+                else:
+                    delta = 0.5
                 childFeature = UC.move_point(childFeature, delta * size, snapAngle)
         if parentId is not None:
             buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.OBJECT["configtable"])
