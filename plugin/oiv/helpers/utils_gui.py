@@ -98,7 +98,7 @@ def get_actions(whichConfig, actionDict):
         idColumn = lyr[3]
         editableLayerNames.append(layerName)
         layer = UC.getlayer_byname(typeLayerName)
-        if layerType == "point":
+        if layerType == "point" or layerType == "label":
             moveLayerNames.append(layerName)
         if layer:
             categorie = layerCategorieDict[typeLayerName]
