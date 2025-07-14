@@ -1,4 +1,4 @@
-from qgis.PyQt.QtWidgets import QDialogButtonBox, QComboBox
+from qgis.PyQt.QtWidgets import QDialogButtonBox, QComboBox, QDateTimeEdit
 from qgis.gui import QgsEditorWidgetWrapper, QgsFilterLineEdit
 
 buttonBoxName = "buttonBox"
@@ -11,6 +11,10 @@ def formOpen(dialog, layer, feature):
 
     comboBoxes = dialog.findChildren(QComboBox)
     for box in comboBoxes:
+        box.setStyleSheet("color: rgb(0, 0, 0); background-color: lightgray;")
+
+    dateTimeWidgets = dialog.findChildren(QDateTimeEdit)
+    for box in dateTimeWidgets:
         box.setStyleSheet("color: rgb(0, 0, 0); background-color: lightgray;")
         
     okButton = dialog.findChild(QDialogButtonBox, buttonBoxName)
