@@ -174,7 +174,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         filterRect = req.setFilterRect(bbox)
         layerNamesTup = CH.get_chidlayers_ob()
         layerNames = [i[0] for i in layerNamesTup]
-        layerNames.remove(PC.OBJECT["objectlayername"])
+        if PC.OBJECT["objectlayername"] in layerNames:
+            layerNames.remove(PC.OBJECT["objectlayername"])
         for layerName in layerNames:
             layer = UC.getlayer_byname(layerName)
             if UC.is_layer_visible(layer):
