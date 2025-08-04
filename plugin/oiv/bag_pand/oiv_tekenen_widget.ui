@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>909</height>
+    <width>610</width>
+    <height>1064</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -52,8 +52,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>648</width>
-         <height>887</height>
+         <width>610</width>
+         <height>1042</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_5">
@@ -73,21 +73,10 @@
          <layout class="QGridLayout" name="gridLayout">
           <item row="3" column="1">
            <layout class="QGridLayout" name="gridLayout_6">
-            <item row="3" column="0" colspan="2">
-             <widget class="QLineEdit" name="bouwlaag">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(208, 208, 208);
-border-color: rgba(255, 255, 255, 0);
-color: rgb(0, 0, 0);</string>
+            <item row="0" column="0" colspan="2">
+             <widget class="QPushButton" name="terug">
+              <property name="text">
+               <string>Terug</string>
               </property>
              </widget>
             </item>
@@ -129,28 +118,25 @@ border-color: rgba(255, 255, 255, 0);</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="0" colspan="2">
-             <widget class="QPushButton" name="terug">
-              <property name="text">
-               <string>Terug</string>
+            <item row="3" column="0" colspan="2">
+             <widget class="QLineEdit" name="bouwlaag">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(208, 208, 208);
+border-color: rgba(255, 255, 255, 0);
+color: rgb(0, 0, 0);</string>
               </property>
              </widget>
             </item>
            </layout>
-          </item>
-          <item row="7" column="1">
-           <widget class="QTabWidget" name="tabWidgetBouwlaag">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-            </property>
-            <property name="tabShape">
-             <enum>QTabWidget::Rounded</enum>
-            </property>
-            <property name="currentIndex">
-             <number>-1</number>
-            </property>
-           </widget>
           </item>
           <item row="4" column="1">
            <widget class="QFrame" name="drawbuttonframe">
@@ -331,6 +317,20 @@ border-color: rgba(255, 255, 255, 0);</string>
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QTabWidget" name="tabWidgetBouwlaag">
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);
+</string>
+            </property>
+            <property name="tabShape">
+             <enum>QTabWidget::Rounded</enum>
+            </property>
+            <property name="currentIndex">
+             <number>-1</number>
+            </property>
            </widget>
           </item>
          </layout>

@@ -136,6 +136,9 @@ STATUSRGL = {
     "bouwlaag": {
         "toggletab": "Bouwlaag: klik voor nieuw op (roze) bag-pand, voor bestaand op (gele) Bouwlaag.",
   
+    },
+    "info_of_interest": {
+        "toggletab": "Let op: U tekent nu buiten het IMROI model om."
     }
 }
 
@@ -298,5 +301,15 @@ ACTIONDICTBOUWLAAG = {
         "Label": [],
         "Lijn": [],
         "Vlak": []        
+    }
+}
+
+ACTIONDICTIOI = {
+    "Algemeen": {    
+        "Point of interest": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []
     }
 }
