@@ -130,12 +130,15 @@ HELPURL = {
 STATUSRGL = {
     "start" : "Selecteer tab Terrein of Bouwlaag",
     "object": {
-        "toggletab": "Object: klik voor nieuw gebouw op BAG-pand, anders op bgt-terrein, voor bestaand op (blauwe) Object-stip of terrein.",
+        "toggletab": "Object: klik voor nieuw gebouw op BAG-pand, anders op bgt-terrein, voor bestaand op repressief object symbool of terrein.",
 
     },
     "bouwlaag": {
         "toggletab": "Bouwlaag: klik voor nieuw op (roze) bag-pand, voor bestaand op (gele) Bouwlaag.",
   
+    },
+    "info_of_interest": {
+        "toggletab": "Let op: U tekent nu buiten het IMROI model om."
     }
 }
 
@@ -298,5 +301,15 @@ ACTIONDICTBOUWLAAG = {
         "Label": [],
         "Lijn": [],
         "Vlak": []        
+    }
+}
+
+ACTIONDICTIOI = {
+    "Algemeen": {    
+        "Point of interest": [],
+        "Waterwinning": [],
+        "Label": [],
+        "Lijn": [],
+        "Vlak": []
     }
 }

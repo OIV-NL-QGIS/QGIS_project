@@ -290,7 +290,10 @@ def is_layer_visible(layer):
 
 def move_point(feat, distance, angle_deg):
     geom = feat.geometry()
-    angle_rad = math.radians(angle_deg)
+    if angle_deg:
+        angle_rad = math.radians(angle_deg)
+    else:
+        angle_rad = 0
     dx = distance * math.sin(angle_rad)
     dy = distance * math.cos(angle_rad)
     geom.translate(dx, dy)
