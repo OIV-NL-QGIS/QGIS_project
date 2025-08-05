@@ -94,11 +94,11 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         if show:
             self.baseWidget.tabWidget.setTabVisible(1, False)
             self.baseWidget.tabWidget.addTab(widget, '')
-            self.baseWidget.tabWidget.setCurrentIndex(3)
+            self.baseWidget.tabWidget.setCurrentIndex(4)
         else:
             self.baseWidget.tabWidget.setTabVisible(1, True)
             self.baseWidget.tabWidget.setCurrentIndex(1)
-            self.baseWidget.tabWidget.removeTab(3)
+            self.baseWidget.tabWidget.removeTab(4)
 
     def run_edit_bouwlagen(self, ilayer, ifeature):
         """edit attribute form of floor feature"""
