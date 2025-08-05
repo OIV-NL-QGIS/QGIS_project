@@ -21,6 +21,8 @@ def write_plugin_settings(key1, newData):
         data[key1] = newData
         json.dump(data, f)
 
+def bagpand_layername():
+    return PAND["bagpandlayername"] + QC.QgsExpressionContextUtils.globalScope().variable('OIV_bag_connection')
 
 OIV_VERSION = '3.6.9'
 

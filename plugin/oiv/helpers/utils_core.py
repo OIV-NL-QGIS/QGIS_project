@@ -163,12 +163,13 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
     lyr = getlayer_byname(PC.PAND["bouwlaaglayername"])
     request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(objectId))
     featureIt = lyr.getFeatures(request)
+    baglayerName = PC.PAND["bagpandlayername"] + QC.QgsExpressionContextUtils.globalScope().variable('OIV_bag_connection')
     for feat in featureIt:
         bouwlaagIds.append(feat["id"])
     for name in layerNamesList:
         lyr = getlayer_byname(name)
         if lyr:
-            if name == PC.bagpand_layername():
+            if name == baglayerName:
                 request = QC.QgsFeatureRequest().setFilterExpression('"identificatie" = ' + "'{}'".format(objectId))
                 ifeature = featureRequest(lyr, request, False)
                 if ifeature:
