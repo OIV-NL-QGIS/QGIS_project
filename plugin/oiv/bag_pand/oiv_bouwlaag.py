@@ -54,8 +54,6 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.copy.setVisible(False)
         self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["bouwlaaghelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
         for var in vars(self):
             typeVar = type(vars(self)[var])
             if typeVar == PQtW.QCheckBox:

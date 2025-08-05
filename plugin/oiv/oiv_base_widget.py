@@ -93,6 +93,10 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             self.label_info_of_interest.setEnabled(True)
             self.label_filter.setEnabled(True)
             self.statusregel.setText(STATUSRGL["start"])
+            QC.QgsExpressionContextUtils.setProjectVariable(QC.QgsProject.instance(), 'selected_bagpand', '')
+            layerName = PC.PAND["bouwlaaglayername"]
+            layer = UC.getlayer_byname(layerName)
+            layer.reload()
         try:
             self.done.clicked.disconnect()
         except: # pylint: disable=bare-except
@@ -232,6 +236,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             self.pandwidget = OPG.oivPandWidget(self, objectId)
             vbox.addWidget(self.pandwidget)
             self.bouwlaagFrame.setLayout(vbox)
+        QC.QgsExpressionContextUtils.setProjectVariable(QC.QgsProject.instance(), 'selected_bagpand', str(objectId))
         self.pandwidget.pand_id.setText(str(objectId))
         self.pandwidget.initUI()
         self.bouwlaagFrame.setVisible(True)

@@ -7,7 +7,7 @@ from qgis.PyQt import uic
 import qgis.PyQt.QtWidgets as PQtW
 import qgis.core as QC
 
-from .helpers.constants import plugin_settings, write_plugin_settings, bagpand_layername
+from .helpers.constants import plugin_settings, write_plugin_settings, PAND
 from .helpers.utils_core import getlayer_byname
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -60,9 +60,9 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
         ltv = self.iface.layerTreeView()
         ltv.setLayerVisible(layer, visibility)
 
-    def set_bag_layer(self, visibility):
-        layerName = bagpand_layername()
-        layer = getlayer_byname(layerName)
+    def set_bag_layer(self, bagConSetting, visibility):
+        baglayerName = PAND["bagpandlayername"] + bagConSetting
+        layer = getlayer_byname(baglayerName)
         ltv = self.iface.layerTreeView()
         ltv.setLayerVisible(layer, visibility)
 
@@ -91,7 +91,6 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
     def close_config(self, _dummy, saveConfig):
         if saveConfig:
             self.set_db_connection()
-            self.set_bag_layer(False)
             self.set_background_layer(False)
             bagConSetting = self.check_bag_layer_setting()
             QC.QgsExpressionContextUtils.setGlobalVariable('OIV_bag_connection', bagConSetting)
@@ -103,7 +102,7 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
             self.get_checked_background_layer()
             QC.QgsExpressionContextUtils.setGlobalVariable('OIV_backgroundlayer', self.bkgrLayer)
             write_plugin_settings("BACKGROUNDLAYER", self.bkgrLayer) 
-            self.set_bag_layer(True)
+            self.set_bag_layer(bagConSetting, True)
             self.set_background_layer(True)
         else:
             print("changes canceled")
