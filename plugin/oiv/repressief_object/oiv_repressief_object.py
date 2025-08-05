@@ -207,11 +207,11 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         if show:
             self.baseWidget.tabWidget.setTabVisible(0, False)
             self.baseWidget.tabWidget.addTab(widget, '')
-            self.baseWidget.tabWidget.setCurrentIndex(3)
+            self.baseWidget.tabWidget.setCurrentIndex(4)
         else:
             self.baseWidget.tabWidget.setTabVisible(0, True)
             self.baseWidget.tabWidget.setCurrentIndex(0)
-            self.baseWidget.tabWidget.removeTab(3)
+            self.baseWidget.tabWidget.removeTab(4)
 
     def run_terrein_toevoegen(self):
         self.control_buttons_addobjectframe(True, False, False, False, False)

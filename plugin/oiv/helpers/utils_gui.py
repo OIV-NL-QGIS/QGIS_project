@@ -22,7 +22,10 @@ layerCategorieDict = {
     "sectoren_type": "Vlak",
     "sleutelkluis_type": "Toegang",
     "veiligh_bouwk_type": "Lijn",
-    "veiligh_install_type": "Veiligheidsvoorzieningen"
+    "veiligh_install_type": "Veiligheidsvoorzieningen",
+    "of_interest_points_type": "Point of interest",
+    "of_interest_labels_type": "Label",
+    "of_interest_lines_type": "Lijn",
 }
 
 def set_layer_substring(subString, bouwlaagOfObject='bouwlaag'):

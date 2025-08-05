@@ -3,6 +3,8 @@ import os
 
 from qgis.PyQt import uic
 import qgis.PyQt.QtWidgets as PQtW
+import qgis.PyQt.QtCore as PQtC
+from qgis.PyQt.QtGui import QIcon
 
 import oiv.helpers.utils_core as UC
 import oiv.helpers.utils_gui as UG
@@ -25,12 +27,17 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     drawLayerType = None
     editableLayerNames = []
     moveLayerNames = []
+    snapSymbols = []
+    tabWidget = None
+    anchorPoints = None
 
     def __init__(self, parent=None):
         super(oivInfoOfInterestTekenWidget, self).__init__(parent)
         self.setupUi(self)
+        self.parent = parent
         self.baseWidget = parent
         self.selectTool = parent.selectTool
+        self.polygonSelectTool = parent.polygonSelectTool
         self.iface = parent.iface
         self.canvas = parent.canvas
         self.initUI()
@@ -38,48 +45,89 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def initUI(self):
         """intitiate the UI elemets on the widget"""
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
+        self.baseWidget.setVisible(True)
         self.move.clicked.connect(self.run_move_point)
         self.identify.clicked.connect(self.run_edit_tool)
         self.select.clicked.connect(self.run_select_tool)
         self.delete_f.clicked.connect(self.run_delete_tool)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
-        actionList, self.editableLayerNames, self.moveLayerNames = UG.get_actions(PC.INFO_INTEREST["configtable"])
+        self.pan.clicked.connect(self.activatePan)
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
+        self.baseWidget.filter_objecten.setVisible(False)
+        self.baseWidget.label_filter.setVisible(False)
+        self.baseWidget.info_of_interest.setVisible(False)
+        self.baseWidget.label_info_of_interest.setVisible(False)
+        actionList = PC.ACTIONDICTIOI
+        actionList, self.editableLayerNames, self.moveLayerNames, self.snapSymbols, self.anchorPoints = UG.get_actions(PC.INFO_INTEREST["configtable"], actionList)
         self.initActions(actionList)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
-        self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["objecttekenenhelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
 
     def initActions(self, actionList):
-        """connect all the buttons to the action"""
-        for lyr in actionList:
-            for action in lyr:
-                runLayerName = action[0]
-                buttonNr = action[1]
-                buttonName = str(action[2].lower())
-                strButton = self.findChild(PQtW.QPushButton, buttonName)
-                if strButton:
-                    #set tooltip per buttonn
+        cnti = 0
+        cntj = 0
+        sizePolicy = PQtW.QSizePolicy(PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        self.tabWidget = self.findChild(PQtW.QTabWidget, 'tabWidgetInfoOfInterest')
+        for tabblad, categorieen in actionList.items():
+            widget = PQtW.QWidget()
+            self.tabWidget.addTab(widget, tabblad)
+            qlayout = PQtW.QGridLayout()
+            for categorie, actions in categorieen.items():
+                if actions:
+                    label = PQtW.QLabel()
+                    qlayout.addWidget(label, cnti, cntj, 1, 5)
+                    label.setText(categorie)
+                cnti += 1
+                cntj = 0
+                for action in actions:
+                    runLayerName = action[0]
+                    buttonNr = action[1]
+                    buttonName = str(action[2].lower())
+                    buttonIcon = action[3]
+                    landOfReg = action[4]
+                    strButton = PQtW.QPushButton()
+                    if landOfReg == 'landelijk':
+                        strButton.setIcon(QIcon(":/plugins/oiv/config_files/svg/" + buttonIcon + ".svg"))
+                    else:
+                        strButton.setIcon(QIcon(":/plugins/oiv/config_files/png/" + buttonIcon + ".png"))
                     strButton.setToolTip(buttonName)
-                    #geef met de signal ook mee welke knop er is geklikt -> nr
-                    strButton.clicked.connect(lambda dummy='dummyvar', rlayer=runLayerName, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
+                    sizePolicy.setHeightForWidth(strButton.sizePolicy().hasHeightForWidth())
+                    strButton.setSizePolicy(sizePolicy)
+                    strButton.setIconSize(PQtC.QSize(28, 28))
+                    qlayout.addWidget(strButton, cnti, cntj)
+                    if strButton:
+                        #set tooltip per buttonn
+                        strButton.setToolTip(buttonName)
+                        strButton.setStyleSheet("background-color: #e0e0e0")
+                        #geef met de signal ook mee welke knop er is geklikt -> nr
+                        strButton.clicked.connect(lambda dummy='dummyvar', rlayer=runLayerName, who=buttonNr: self.run_tekenen(dummy, rlayer, who))
+                    if cntj == 4:
+                        cntj = 0
+                        cnti += 1
+                    else:
+                        cntj += 1
+                cnti += 1
+                cntj = 0
+            spacerItem = PQtW.QSpacerItem(0, 0, PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Expanding)
+            qlayout.addItem(spacerItem, cnti, cntj+1)
+            widget.setLayout(qlayout)
 
     def close_object_tekenen_show_base(self):
-        self.move.clicked.disconnect()
-        self.identify.clicked.disconnect()
-        self.select.clicked.disconnect()
-        self.delete_f.clicked.disconnect()
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
-        self.terug.clicked.disconnect()
         self.activatePan()
         try:
             self.selectTool.geomSelected.disconnect()
         except:
             pass
-        self.close()
-        self.baseWidget.show()
-        del self
+        #self.close()
+        self.drawbuttonframe.setVisible(False)
+        self.baseWidget.filter_objecten.setVisible(True)
+        self.baseWidget.label_filter.setVisible(True)
+        self.baseWidget.info_of_interest.setVisible(True)
+        self.baseWidget.label_info_of_interest.setVisible(True)
+        self.baseWidget.cadframe.setVisible(False)
+        self.baseWidget.close_info_of_interest()
+        #del self
 
     def activatePan(self):
         """trigger pan function to loose other functions"""

@@ -138,6 +138,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.info_of_interest.setVisible(True)
         self.baseWidget.label_info_of_interest.setVisible(True)
         self.baseWidget.cadframe.setVisible(False)
+        self.baseWidget.tabWidget.setTabVisible(0, True)
         #self.terug.clicked.disconnect(self.close_object_tekenen_show_base)
         del self
 
