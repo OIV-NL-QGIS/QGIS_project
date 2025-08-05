@@ -276,7 +276,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parentLayerName = CH.get_parentlayer_bl(runLayer)
         objectId = self.pand_id.text()
         #aan welke lagen kan worden gesnapt?
-        baglayerName = PC.bagpand_layername()
+        baglayerName = PC.PAND["bagpandlayername"] + QC.QgsExpressionContextUtils.globalScope().variable('OIV_bag_connection')
         snapLayerNames = DW.BLSNAPLAYERS
         if baglayerName not in snapLayerNames:
             snapLayerNames.append(baglayerName)
