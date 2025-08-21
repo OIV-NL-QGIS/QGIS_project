@@ -94,7 +94,7 @@ OBJECT = {
             'Werkvoorraad object - lijn', 
             'Werkvoorraad object - vlak'],
     "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"],
-    "objecttypes": ["objecten", "waterongeval", "evenement", "natuur", "recreatiegebied"],
+    "objecttypes": ["Evenement A", "Evenement B", "Evenement C", "Natuur", "Objecten", "Waterongeval"],
 }
 
 INFO_INTEREST = {
