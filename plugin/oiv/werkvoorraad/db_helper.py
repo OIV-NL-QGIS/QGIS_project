@@ -24,7 +24,8 @@ def setup_postgisdb_connection():
     cursor = None
     try:
         config = ConfigParser()
-        filePath = QC.QgsProject.instance().readPath("./")
+        #filePath = QC.QgsProject.instance().readPath("./")
+        filePath = "C:/programdata/oiv"
         fileName = filePath + '/pg_service.conf'
         config.read_file(open(fileName))
         dbName = config.get('oiv', 'dbname')

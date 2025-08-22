@@ -82,7 +82,8 @@ class oivConfigWidget(PQtW.QDockWidget, FORM_CLASS):
             self.dataConn["active"] = 'test'
             self.dataConn["inactive"] = 'prod'
         write_plugin_settings("DBCONNECTION", self.dataConn)
-        path = QC.QgsProject.instance().readPath("./")
+        #path = QC.QgsProject.instance().readPath("./")
+        path = "C:/programdata/oiv"
         pgServiceFile = path + '/' + self.dataConn["filename"]
         os.remove(pgServiceFile)
         activeFileName = path + '/' + self.dataConn["filename"].split('.')[0] + '_' + self.dataConn["active"] + '.' + self.dataConn["filename"].split('.')[1]
