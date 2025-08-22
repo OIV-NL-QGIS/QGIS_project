@@ -119,8 +119,7 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except:
             pass
-        #self.close()
-        self.drawbuttonframe.setVisible(False)
+        self.parent.handleDoneBtn(False)
         self.baseWidget.filter_objecten.setVisible(True)
         self.baseWidget.label_filter.setVisible(True)
         self.baseWidget.info_of_interest.setVisible(True)
@@ -195,14 +194,22 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     #open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt
     def edit_attribute(self, ilayer, ifeature):
         stackWidget = SW.oivStackWidget(self)
-        self.iface.addDockWidget(QT.getWidgetType(), stackWidget)
+        self.activatePan()
+        self.show_subwidget(True, stackWidget)
         stackWidget.parentWidget = self
-        stackWidget.parentWidth = self.width()
+        stackWidget.baseWidget = self.baseWidget
         stackWidget.open_feature_form(ilayer, ifeature)
-        self.close()
         stackWidget.show()
-        self.selectTool.geomSelected.disconnect()
-        self.run_edit_tool()
+
+    def show_subwidget(self, show, widget=None):
+        if show:
+            self.baseWidget.tabWidget.setTabVisible(3, False)
+            self.baseWidget.tabWidget.addTab(widget, '')
+            self.baseWidget.tabWidget.setCurrentIndex(4)
+        else:
+            self.baseWidget.tabWidget.setTabVisible(3, True)
+            self.baseWidget.tabWidget.setCurrentIndex(3)
+            self.baseWidget.tabWidget.removeTab(4)
 
     #om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet
     def run_move_point(self):

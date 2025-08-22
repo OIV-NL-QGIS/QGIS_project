@@ -58,6 +58,8 @@ class oivStackWidget(PQtW.QDockWidget, FORM_CLASS):
         if not self.isTekenen:
             self.baseWidget.done.setVisible(True)
             self.baseWidget.done_png.setVisible(True)
+        else:
+            self.parent.run_edit_tool()
         self.terug.clicked.disconnect()
         self.close()
         self.parent.show_subwidget(False)

@@ -186,6 +186,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_tekenen(self):
         """init teken widget"""
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
         if not self.baseWidget.parent.tekenWidget:
             self.baseWidget.parent.tekenWidget = oivTekenWidget(self)
         subString = "bouwlaag = " + str(self.comboBox.currentText())

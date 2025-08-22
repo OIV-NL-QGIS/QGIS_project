@@ -261,6 +261,8 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.control_buttons_addobjectframe(True, True, True, True, True)
 
     def run_object_symbolen_tekenen(self):
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
         if not self.baseWidget.parent.tekenObjectWidget:
             self.baseWidget.parent.tekenObjectWidget = oivObjectTekenWidget(self)
         self.baseWidget.parent.tekenObjectWidget.object_id.setText(self.object_id.text())
