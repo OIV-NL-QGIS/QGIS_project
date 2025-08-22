@@ -208,7 +208,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         ifeature = UC.featureRequest(ilayer, request)
         if ifeature:
             ilayer.selectByIds([ifeature.id()])
-        reply = MSG.showMsgBox('deleteobject')
+        reply = MSG.showMsgBox('deleteobject_question')
         if not reply:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.deselect(ifeature.id())
