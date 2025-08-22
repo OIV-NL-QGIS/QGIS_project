@@ -2,14 +2,12 @@ from qgis.PyQt.QtCore import QPoint
 import qgis.core as QC
 
 import oiv.helpers.constants as PC
-import oiv.helpers.qt_helper as QH
 import oiv.helpers.rubberband_helper as RH
 
 #repressief object constants
 ROSNAPSYMBOLS = ['32', '47', '148', '150', '152', '301',
                  'Algemeen', 'Voorzichtig', 'Waarschuwing', 'Gevaar']
 ROSNAPLAYERS = ["Object terrein", "Isolijnen", "Bereikbaarheid", "Sectoren"]
-OBJECTTYPES = ['Evenement', 'Gebouw', 'Natuur', 'Waterongeval']
 
 #bouwlaag constants
 BLSNAPLAYERS = [PC.PAND["bouwlaaglayername"], "Bouwkundige veiligheidsvoorzieningen", "Ruimten"]

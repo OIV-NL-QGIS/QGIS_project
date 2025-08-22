@@ -186,6 +186,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_tekenen(self):
         """init teken widget"""
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
         if not self.baseWidget.parent.tekenWidget:
             self.baseWidget.parent.tekenWidget = oivTekenWidget(self)
         subString = "bouwlaag = " + str(self.comboBox.currentText())
@@ -206,7 +208,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         ifeature = UC.featureRequest(ilayer, request)
         if ifeature:
             ilayer.selectByIds([ifeature.id()])
-        reply = MSG.showMsgBox('deleteobject')
+        reply = MSG.showMsgBox('deleteobject_question')
         if not reply:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.deselect(ifeature.id())
@@ -560,7 +562,7 @@ class PrintDialog(PQtW.QDialog):
         buttons = PQtW.QDialogButtonBox(
             PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
             PQtC.Qt.Horizontal, self)
-        buttons.accepted.connect(self.accept)
+        buttons.accepted.connect(self.get_checked_radiobutton)
         buttons.rejected.connect(self.reject)
         spacerItem = PQtW.QSpacerItem(0, 0, PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Expanding)
         qlayout.addItem(spacerItem)
@@ -573,7 +575,7 @@ class PrintDialog(PQtW.QDialog):
         for key, value in chkBoxDict.items():
             value.setVisible(visible)
 
-    def get_checked_radiobutton(self):
+    def get_checked_radiobutton(self, accepted=False):
         reply = None
         if self.qRadioBtnCurrent.isChecked():
             reply = ['current']
@@ -585,11 +587,14 @@ class PrintDialog(PQtW.QDialog):
                 if value.isChecked():
                     bouwlagenArr.append(key)
             reply = ['selection', bouwlagenArr]
-        return reply
+        if reply and accepted:
+            return reply
+        else:
+            self.accept()
 
     @staticmethod
     def get_print_bouwlagen(arrBouwlagen, arrObjects, parent=None):
         dialog = PrintDialog(arrBouwlagen, arrObjects, parent)
         result = dialog.exec_()
-        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted
+        return (dialog.get_checked_radiobutton(True), result == PQtW.QDialog.Accepted
                 , dialog.cmbBoxLegenda.currentText(), dialog.cmbBoxObject.currentText())

@@ -270,7 +270,10 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.tabWidget.setTabVisible(0, False)
         self.tabWidget.setTabVisible(1, False)
         self.tabWidget.setTabVisible(3, True)
+        self.handleDoneBtn(True)
         self.tabWidget.setCurrentIndex(3)
+        self.done.setVisible(False)
+        self.done_png.setVisible(False)
         if not self.interestWidget:
             vbox = PQtW.QVBoxLayout()
             self.interestWidget = IOI.oivInfoOfInterestTekenWidget(self)

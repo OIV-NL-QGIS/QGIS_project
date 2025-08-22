@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="features">
-   <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+   <set>QDockWidget::NoDockWidgetFeatures</set>
   </property>
   <property name="windowTitle">
    <string/>
@@ -56,6 +56,12 @@
         <height>524287</height>
        </size>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
@@ -64,7 +70,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>632</width>
+         <width>634</width>
          <height>81</height>
         </rect>
        </property>

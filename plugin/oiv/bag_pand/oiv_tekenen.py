@@ -164,15 +164,20 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                     if feat.geometry().within(geom):
                         layer.select(feat.id())
         reply, ok = MultiEditDialog.get_multi_edit_action()
-        if reply == 'delete':
-            self.delete_multi(layerNames)
-        if reply == 'move':
-            self.run_move_point(True)
-        if reply == 'rotate':
-            self.run_move_point(True)
+        if ok:
+            if reply == 'delete':
+                self.delete_multi(layerNames)
+            if reply == 'move':
+                self.run_move_point(True)
+            if reply == 'rotate':
+                self.run_move_point(True)
+        else:
+            for layerName in layerNames:
+                layer = UC.getlayer_byname(layerName)
+                layer.selectByIds([])
 
     def delete_multi(self, layerNames):
-        reply = MSG.showMsgBox('deleteobject')
+        reply = MSG.showMsgBox('deleteobject_question')
         for layerName in layerNames:
             layer = UC.getlayer_byname(layerName)
             if reply:
@@ -206,24 +211,23 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
         if ilayer.name() != PC.OBJECT["objectlayername"]:
             stackWidget = SW.oivStackWidget(self)
+            self.activatePan()
             self.show_subwidget(True, stackWidget)
             stackWidget.parentWidget = self
             stackWidget.baseWidget = self.baseWidget
             stackWidget.isTekenen = True
             stackWidget.open_feature_form(ilayer, ifeature)
             stackWidget.show()
-            self.selectTool.geomSelected.disconnect()
-        self.run_edit_tool()
 
     def show_subwidget(self, show, widget=None):
         if show:
-            self.baseWidget.tabWidget.setTabVisible(3, False)
+            self.baseWidget.tabWidget.setTabVisible(4, False)
             self.baseWidget.tabWidget.addTab(widget, '')
-            self.baseWidget.tabWidget.setCurrentIndex(4)
+            self.baseWidget.tabWidget.setCurrentIndex(5)
         else:
-            self.baseWidget.tabWidget.setTabVisible(3, True)
-            self.baseWidget.tabWidget.setCurrentIndex(3)
-            self.baseWidget.tabWidget.removeTab(4)
+            self.baseWidget.tabWidget.setTabVisible(4, True)
+            self.baseWidget.tabWidget.setCurrentIndex(4)
+            self.baseWidget.tabWidget.removeTab(5)
 
     def run_move_point(self, multi=False):
         """om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet"""

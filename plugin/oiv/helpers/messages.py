@@ -28,6 +28,11 @@ MESSAGES = {
         "header":'Het grid is succesvol aangemaakt!',
         "body":'Het grid is succesvol aangemaakt!'
     },
+    'nochoice': {
+        "type": 'information',
+        "header":'Geen keuze gemaakt',
+        "body":'Selecteer eerst een actie die u wilt uitvoeren!'
+    },
     'deletegrid': {
         "type": 'question',
         "header": 'Continue?',
@@ -48,7 +53,7 @@ MESSAGES = {
         "header": 'Server antwoord te traag',
         "body": 'Geoserver antwoord te traag. Object is wel geplaatst.\n\nOpen het object door terug te gaan en hem te selecteren.'
     },
-    'deleteobject': {
+    'deleteobject_question': {
         "type": 'question',
         "header": 'Continue?',
         "body": 'Weet u zeker dat u de geselecteerde feature wilt weggooien?'
@@ -56,7 +61,7 @@ MESSAGES = {
     'deletedobject': {
         "type": 'information',
         "header": 'Succesvol!',
-        "body": 'Het object is succesvol verwijderd.'
+        "body": 'Het is succesvol verwijderd.'
     },
     'noselectedtodelete': {
         "type": 'information',

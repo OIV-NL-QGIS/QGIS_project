@@ -2,14 +2,13 @@
 import qgis.PyQt.QtCore as PQtC
 
 import oiv.helpers.utils_core as UC
-import oiv.helpers.drawing_helper as DH
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.constants as PC
 
 def init_filter_section(wdgt):
     wdgt.filterframe.setVisible(not wdgt.filterframe.isVisible())
     wdgt.objecttype.clear()
-    wdgt.objecttype.addItems(DH.OBJECTTYPES)
+    wdgt.objecttype.addItems(PC.OBJECT["objecttypes"])
     set_current_date(wdgt)
 
 def set_current_date(wdgt):
