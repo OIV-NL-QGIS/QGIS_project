@@ -356,20 +356,24 @@ class PrintDialog(PQtW.QDialog):
         buttons = PQtW.QDialogButtonBox(
             PQtW.QDialogButtonBox.Ok | PQtW.QDialogButtonBox.Cancel,
             PQtC.Qt.Horizontal, self)
-        buttons.accepted.connect(self.accept)
+        buttons.accepted.connect(self.get_checked_radiobutton)
         buttons.rejected.connect(self.reject)
         qlayout.addWidget(buttons)
 
-    def get_checked_radiobutton(self):
+    def get_checked_radiobutton(self, accepted=False):
         reply = None
         if self.qRadioBtnPolygon.isChecked():
             reply = 'polygon'
         if self.qRadioBtnTerrain.isChecked():
             reply = 'terrein'
-        return reply
+        if reply and accepted:
+            return reply
+        else:
+            self.accept()
 
     @staticmethod
     def get_print_settings(parent=None):
         dialog = PrintDialog(parent)
         result = dialog.exec_()
-        return (dialog.get_checked_radiobutton(), result == PQtW.QDialog.Accepted, dialog.cmbBoxLegenda.currentText())
+        return (dialog.get_checked_radiobutton(True), result == PQtW.QDialog.Accepted
+                , dialog.cmbBoxLegenda.currentText())
