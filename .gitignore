@@ -5,6 +5,7 @@ installer/nircmd.exe
 installer/dos2unix.exe
 qgis_project/objecten/pg_service.conf
 plugin/oiv/.vscode/
+plugin/oiv/*_ui.py
 *.pyc
 qgis_project/objecten/OIV_Objecten_test.qgs.qgz
 qgis_project/objecten/qpt/print_pdf_a4.qpt

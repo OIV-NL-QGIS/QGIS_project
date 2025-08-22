@@ -200,7 +200,7 @@ def temp_delete_feature(ilayer, ifeature, bouwlaagOfObject, rightLayerNames):
         ids.append(ifeature.id())
         ilayer.selectByIds(ids)
         ilayer.startEditing()
-        reply = MSG.showMsgBox('deleteobject')
+        reply = MSG.showMsgBox('deleteobject_question')
         if not reply:
             ilayer.selectByIds([])
         elif reply:

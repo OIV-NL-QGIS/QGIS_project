@@ -185,12 +185,17 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                     if feat.geometry().within(geom):
                         layer.select(feat.id())
         reply, ok = MultiEditDialog.get_multi_edit_action()
-        if reply == 'delete':
-            self.delete_multi(layerNames)
-        if reply == 'move':
-            self.run_move_point(True)
-        if reply == 'rotate':
-            self.run_move_point(True)
+        if ok:
+            if reply == 'delete':
+                self.delete_multi(layerNames)
+            if reply == 'move':
+                self.run_move_point(True)
+            if reply == 'rotate':
+                self.run_move_point(True)
+        else:
+            for layerName in layerNames:
+                layer = UC.getlayer_byname(layerName)
+                layer.selectByIds([])
 
     def delete_multi(self, layerNames):
         reply = MSG.showMsgBox('deleteobject')
