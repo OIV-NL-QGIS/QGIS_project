@@ -32,11 +32,9 @@ def getTitleBar():
     layout = PQtW.QHBoxLayout()
     font = QFont("Arial", 10, QFont.Bold)
     label = create_label(PLUGIN["name"], layout, font)
-    btnFloat = create_pushbutton("Icon", PLUGIN["floaticon"], layout, 20)
-    btnHelp = create_pushbutton("Icon", PLUGIN["helpicon"], layout, 20)
     titleBar.setLayout(layout)
     titleBar.setWindowFlag(Qt.WindowMaximizeButtonHint, True)
-    return btnHelp, btnFloat, titleBar
+    return titleBar
 
 def create_label(labelText, layout, font=None, row=None, column=None):
     """create QLabel and add it to layout"""

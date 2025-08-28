@@ -66,10 +66,8 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.done_png.setVisible(False)
         self.filterframe.setVisible(False)
         self.cadframe.setVisible(False)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(HELPURL["basewidgethelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
         self.statusregel.setText(STATUSRGL["start"])
 
     def handleDoneBtn(self, Status):

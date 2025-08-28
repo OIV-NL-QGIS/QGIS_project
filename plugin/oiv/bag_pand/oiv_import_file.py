@@ -49,10 +49,8 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         self.type.currentIndexChanged.connect(self.hide_import)
         self.validatie_import.clicked.connect(self.inlezen_validatie)
         self.import_file.clicked.connect(self.inlezen)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
-        self.helpBtn.clicked.connect(lambda: UC.open_url(PC.HELPURL["bouwlaagimporthelp"]))
-        self.floatBtn.clicked.connect(lambda: self.setFloating(True))
         for laag in self.importlagen:
             self.import_laag.addItem(laag)
         self.hide_all()
@@ -362,8 +360,6 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def close_import(self):
         """close feature form and save changes"""
-        self.helpBtn.clicked.disconnect()
-        self.floatBtn.clicked.disconnect()
         self.hide_all()
         self.close()
         self.parent.bouwlagen_to_combobox(str(self.object_id.text()), int(self.bouwlaag.text()))

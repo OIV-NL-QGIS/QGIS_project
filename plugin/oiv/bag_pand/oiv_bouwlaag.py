@@ -52,7 +52,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlaag_max.setVisible(False)
         self.bouwlaag.setVisible(False)
         self.copy.setVisible(False)
-        self.helpBtn, self.floatBtn, titleBar = QT.getTitleBar()
+        titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
         for var in vars(self):
             typeVar = type(vars(self)[var])
