@@ -45,8 +45,6 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.polygonSelectTool = parent.polygonSelectTool
         self.iface = parent.iface
         self.canvas = parent.canvas
-        self.object_id.setText(parent.object_id.text())
-        self.formelenaam.setText(parent.formelenaam.text())
         self.initUI()
 
     def initUI(self):

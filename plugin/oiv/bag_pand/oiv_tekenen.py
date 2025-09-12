@@ -44,8 +44,6 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas = parent.canvas
         self.selectTool = parent.selectTool 
         self.polygonSelectTool = parent.polygonSelectTool
-        self.bouwlaag.setText(str(parent.comboBox.currentText()))
-        self.pand_id.setText(parent.pand_id.text())
         self.initUI()
 
     def initUI(self):

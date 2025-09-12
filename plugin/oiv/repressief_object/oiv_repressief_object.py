@@ -266,6 +266,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         if not self.baseWidget.parent.tekenObjectWidget:
             self.baseWidget.parent.tekenObjectWidget = oivObjectTekenWidget(self)
         self.baseWidget.parent.tekenObjectWidget.object_id.setText(self.object_id.text())
+        self.baseWidget.parent.tekenObjectWidget.formelenaam.setText(parent.formelenaam.text())
         self.baseWidget.parent.tekenObjectWidget.drawbuttonframe.setVisible(True)
         self.show_subwidget(True, self.baseWidget.parent.tekenObjectWidget)
 

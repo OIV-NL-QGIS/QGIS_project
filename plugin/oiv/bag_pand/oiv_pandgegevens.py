@@ -193,6 +193,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         subString = "bouwlaag = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)
         self.baseWidget.parent.tekenWidget.drawbuttonframe.setVisible(True)
+        self.baseWidget.parent.tekenWidget.pand_id.setText(self.pand_id.text())
+        self.baseWidget.parent.tekenWidget.bouwlaag.setText(str(self.comboBox.currentText()))
         self.show_subwidget(True, self.baseWidget.parent.tekenWidget)
 
     def openBagviewer(self):
