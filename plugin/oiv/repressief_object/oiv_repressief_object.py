@@ -126,11 +126,11 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             #als "ja" -> verwijder de feature op basis van het unieke feature id
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
-            reply = MSG.showMsgBox('deletedobject')
             self.baseobjectFrame.setVisible(True)
             self.deleteobjectFrame.setVisible(False)
             self.baseWidget.handleDoneBtn(False)
             UC.refresh_layers(self.iface)
+            reply = MSG.showMsgBox('deletedobject')
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""

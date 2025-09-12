@@ -217,8 +217,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             ilayer.startEditing()
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
-            reply = MSG.showMsgBox('deletedobject')
             UC.refresh_layers(self.iface)
+            reply = MSG.showMsgBox('deletedobject')
             #set actieve bouwlaag to 1 and fill combobox
             self.bouwlagen_to_combobox(ifeature.id(), 1)
 
