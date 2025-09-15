@@ -2,6 +2,7 @@
 import os
 
 from qgis.PyQt import uic
+import qgis.core as QC
 import qgis.PyQt.QtWidgets as PQtW
 import qgis.PyQt.QtCore as PQtC
 from qgis.PyQt.QtGui import QIcon
@@ -52,6 +53,7 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.delete_f.clicked.connect(self.run_delete_tool)
         self.terug.clicked.connect(self.close_object_tekenen_show_base)
         self.pan.clicked.connect(self.activatePan)
+        self.drawbuttonframe.setVisible(True)
         self.baseWidget.done.setVisible(False)
         self.baseWidget.done_png.setVisible(False)
         self.baseWidget.filter_objecten.setVisible(False)
@@ -112,6 +114,16 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             spacerItem = PQtW.QSpacerItem(0, 0, PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Expanding)
             qlayout.addItem(spacerItem, cnti, cntj+1)
             widget.setLayout(qlayout)
+            self.set_layers_visible(True)
+
+    def set_layers_visible(self, visible):
+        for layerName in PC.INFO_INTEREST["layernames"]:
+            layer = UC.getlayer_byname(layerName)
+            layer_tree_root = QC.QgsProject.instance().layerTreeRoot()
+            layer_tree_layer = layer_tree_root.findLayer(layer)
+            layer_tree_layer.setItemVisibilityChecked(visible)
+        layergroup = PC.INFO_INTEREST["layergroup"]
+        QC.QgsProject.instance().layerTreeRoot().findGroup(layergroup).setItemVisibilityChecked(visible)
 
     def close_object_tekenen_show_base(self):
         self.activatePan()
@@ -119,14 +131,25 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             self.selectTool.geomSelected.disconnect()
         except:
             pass
-        self.parent.handleDoneBtn(False)
+        self.close()
+        #self.parent.show_subwidget(False)
+        self.baseWidget.tabWidget.setTabVisible(0, True)
+        self.baseWidget.tabWidget.setTabVisible(1, True)
+        self.baseWidget.tabWidget.setCurrentIndex(0)
+        self.baseWidget.tabWidget.removeTab(4)
+        self.set_layers_visible(False)
+        self.baseWidget.tabWidget.setTabVisible(3, False)
+        self.baseWidget.tabWidget.setTabVisible(2, False)
+        self.baseWidget.close_btn.setVisible(True)
+        self.baseWidget.close_png.setVisible(True)
+        self.drawbuttonframe.setVisible(False)
         self.baseWidget.filter_objecten.setVisible(True)
         self.baseWidget.label_filter.setVisible(True)
         self.baseWidget.info_of_interest.setVisible(True)
         self.baseWidget.label_info_of_interest.setVisible(True)
         self.baseWidget.cadframe.setVisible(False)
-        self.baseWidget.close_info_of_interest()
-        #del self
+        self.baseWidget.handleDoneBtn(False)
+        del self
 
     def activatePan(self):
         """trigger pan function to loose other functions"""

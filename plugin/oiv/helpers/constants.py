@@ -99,7 +99,9 @@ OBJECT = {
 
 INFO_INTEREST = {
     "configtable": "config_info_of_interest",
-    "tekenwidgetui": "oiv_info_of_interest_tekenen_widget.ui"
+    "tekenwidgetui": "oiv_info_of_interest_tekenen_widget.ui",
+    "layernames": ["Info of interest - Points", "Info of interest - Lines", "Info of interest - Labels"],
+    "layergroup": "Info of interest"
 }
 
 HELPURL = {
