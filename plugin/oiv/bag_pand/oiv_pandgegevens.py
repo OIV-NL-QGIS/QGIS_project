@@ -193,6 +193,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         subString = "bouwlaag = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)
         self.baseWidget.parent.tekenWidget.drawbuttonframe.setVisible(True)
+        self.baseWidget.parent.tekenWidget.pand_id.setText(self.pand_id.text())
+        self.baseWidget.parent.tekenWidget.bouwlaag.setText(str(self.comboBox.currentText()))
         self.show_subwidget(True, self.baseWidget.parent.tekenWidget)
 
     def openBagviewer(self):
@@ -217,8 +219,8 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             ilayer.startEditing()
             ilayer.deleteFeature(ifeature.id())
             ilayer.commitChanges()
-            reply = MSG.showMsgBox('deletedobject')
             UC.refresh_layers(self.iface)
+            reply = MSG.showMsgBox('deletedobject')
             #set actieve bouwlaag to 1 and fill combobox
             self.bouwlagen_to_combobox(ifeature.id(), 1)
 
@@ -567,6 +569,7 @@ class PrintDialog(PQtW.QDialog):
         spacerItem = PQtW.QSpacerItem(0, 0, PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Expanding)
         qlayout.addItem(spacerItem)
         qlayout.addWidget(buttons)
+        self.qRadioBtnCurrent.setChecked(True)
         self.qRadioBtnSelection.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, True))
         self.qRadioBtnAll.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, False))
         self.qRadioBtnCurrent.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, False))

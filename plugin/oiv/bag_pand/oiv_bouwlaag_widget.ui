@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>301</width>
-    <height>802</height>
+    <width>541</width>
+    <height>857</height>
    </rect>
   </property>
   <property name="features">
@@ -28,8 +28,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>281</width>
-         <height>760</height>
+         <width>521</width>
+         <height>815</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -177,25 +177,9 @@ color: rgb(0, 0, 0);</string>
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="label1">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Indien u wilt kopieren van een andere bouwlaag</string>
-            </property>
-            <property name="wordWrap">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QLabel" name="label2">
             <property name="text">
-             <string>selecteer hieronder dan die bouwlaag:</string>
+             <string>Selecteer de te kopiëren bouwlaag:</string>
             </property>
            </widget>
           </item>
@@ -254,7 +238,7 @@ color: rgb(0, 0, 0);</string>
           <item>
            <widget class="QPushButton" name="copy">
             <property name="text">
-             <string>Selecteer en Kopieer</string>
+             <string>Klik hier en daarna op de gewenste bouwlaag/bouwdeel</string>
             </property>
            </widget>
           </item>

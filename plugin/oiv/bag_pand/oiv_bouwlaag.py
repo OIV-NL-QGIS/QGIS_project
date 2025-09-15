@@ -45,7 +45,6 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.bouwlaag_overnemen.clicked.connect(self.run_bouwlaag_overnemen)
         self.terug.clicked.connect(self.close_bouwlaag)
         self.copy.clicked.connect(self.run_select_bouwlaag)
-        self.label1.setVisible(False)
         self.label2.setVisible(False)
         self.label3.setVisible(False)
         self.teken_bouwlaag.setEnabled(False)
@@ -70,7 +69,6 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_bouwlaag_overnemen(self):
         """copy floor from another floor"""
-        self.label1.setVisible(True)
         self.label2.setVisible(True)
         self.label3.setVisible(True)
         self.bouwlaag.setVisible(True)
@@ -254,7 +252,6 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def close_bouwlaag(self):
         """close floor widget and return to main menu"""
-        self.label1.setVisible(False)
         self.label2.setVisible(False)
         self.label3.setVisible(False)
         self.bouwlaag.setVisible(False)
