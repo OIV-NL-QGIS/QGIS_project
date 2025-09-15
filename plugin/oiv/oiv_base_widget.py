@@ -14,7 +14,7 @@ import oiv.helpers.utils_core as UC
 import oiv.bag_pand.oiv_pandgegevens as OPG
 import oiv.repressief_object.oiv_repressief_object as ORO
 import oiv.repressief_object.oiv_objectnieuw as OON
-import oiv.info_of_interest.oiv_info_of_interest as IOI
+from .info_of_interest.oiv_info_of_interest import oivInfoOfInterestTekenWidget
 import oiv.helpers.constants as PC
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -26,7 +26,6 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     repressiefObjectWidget = None
     pandwidget = None
-    interestWidget = None
     activeTab = None
     objectModified = False
     rotate_move_bouwlaag_values = {
@@ -265,26 +264,21 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         
     def run_info_of_interest(self):
         """start objectgegevens widget"""
-        self.tabWidget.setTabVisible(0, False)
-        self.tabWidget.setTabVisible(1, False)
-        self.tabWidget.setTabVisible(3, True)
         self.handleDoneBtn(True)
-        self.tabWidget.setCurrentIndex(3)
         self.done.setVisible(False)
         self.done_png.setVisible(False)
-        if not self.interestWidget:
-            vbox = PQtW.QVBoxLayout()
-            self.interestWidget = IOI.oivInfoOfInterestTekenWidget(self)
-            self.statusregelinfoOfInterest.setText(STATUSRGL["info_of_interest"]["toggletab"])
-            vbox.addWidget(self.interestWidget)
-            self.infoOfInterestFrame.setLayout(vbox)                                                             
-        self.infoOfInterestFrame.setVisible(True)
+        if not self.parent.interestWidget:
+            self.parent.interestWidget = oivInfoOfInterestTekenWidget(self)
+            self.statusregelinfoOfInterest.setText(STATUSRGL["info_of_interest"]["toggletab"])                                                     
+        self.show_subwidget(self.parent.interestWidget)
 
-    def close_info_of_interest(self):
-        self.tabWidget.setTabVisible(0, True)
-        self.tabWidget.setTabVisible(1, True)
-        self.tabWidget.setCurrentIndex(2)
-        self.tabWidget.setTabVisible(3, False)
+    def show_subwidget(self, widget=None):
+        self.tabWidget.setTabVisible(0, False)
+        self.tabWidget.setTabVisible(1, False)  
+        self.tabWidget.setTabVisible(4, True)
+        if widget:
+            self.tabWidget.addTab(widget, '')
+        self.tabWidget.setCurrentIndex(4)
 
     def close_basewidget(self):
         """close plugin and re-activate toolbar combobox"""
@@ -294,3 +288,4 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parent.toolbar.setEnabled(True)
         self.parent.projCombo.setEnabled(True)
         self.parent.checkVisibility = False
+        del self

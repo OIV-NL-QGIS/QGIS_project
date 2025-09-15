@@ -24,14 +24,14 @@ def write_plugin_settings(key1, newData):
 def bagpand_layername():
     return PAND["bagpandlayername"] + QC.QgsExpressionContextUtils.globalScope().variable('OIV_bag_connection')
 
-OIV_VERSION = '3.6.10'
+OIV_VERSION = '3.6.11'
 
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
-        "min": 3609,
-        "max": 3610
+        "min": 3610,
+        "max": 3611
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
@@ -99,7 +99,9 @@ OBJECT = {
 
 INFO_INTEREST = {
     "configtable": "config_info_of_interest",
-    "tekenwidgetui": "oiv_info_of_interest_tekenen_widget.ui"
+    "tekenwidgetui": "oiv_info_of_interest_tekenen_widget.ui",
+    "layernames": ["Info of interest - Points", "Info of interest - Lines", "Info of interest - Labels"],
+    "layergroup": "Info of interest"
 }
 
 HELPURL = {
@@ -212,7 +214,7 @@ ACTIONDICTOBJECT = {
 }
 
 ACTIONDICTBOUWLAAG = {
-    "Algemeen": {    
+    "Bouwlaag": {    
         "Bereikbaarheid" : [],
         "Dreiging": [],
         "Opstelplaats": [],
@@ -224,71 +226,6 @@ ACTIONDICTBOUWLAAG = {
         "Label": [],
         "Lijn": [],
         "Vlak": []
-    }, 
-    "Evenement": {
-        "Bereikbaarheid" : [],
-        "Dreiging": [],
-        "Opstelplaats": [],
-        "Point of interest": [],
-        "Scenario": [],
-        "Toegang": [],
-        "Veiligheidsvoorzieningen": [],
-        "Waterwinning": [],
-        "Label": [],
-        "Lijn": [],
-        "Vlak": []        
-    },
-    "Gebouw": {
-        "Bereikbaarheid" : [],
-        "Dreiging": [],
-        "Opstelplaats": [],
-        "Point of interest": [],
-        "Scenario": [],
-        "Toegang": [],
-        "Veiligheidsvoorzieningen": [],
-        "Waterwinning": [],
-        "Label": [],
-        "Lijn": [],
-        "Vlak": []        
-    }, 
-    "Infrastructuur": {
-        "Bereikbaarheid" : [],
-        "Dreiging": [],
-        "Opstelplaats": [],
-        "Point of interest": [],
-        "Scenario": [],
-        "Toegang": [],
-        "Veiligheidsvoorzieningen": [],
-        "Waterwinning": [],
-        "Label": [],
-        "Lijn": [],
-        "Vlak": []        
-    }, 
-    "Natuur": {
-        "Bereikbaarheid" : [],
-        "Dreiging": [],
-        "Opstelplaats": [],
-        "Point of interest": [],
-        "Scenario": [],
-        "Toegang": [],
-        "Veiligheidsvoorzieningen": [],
-        "Waterwinning": [],
-        "Label": [],
-        "Lijn": [],
-        "Vlak": []        
-    }, 
-    "Water": {
-        "Bereikbaarheid" : [],
-        "Dreiging": [],
-        "Opstelplaats": [],
-        "Point of interest": [],
-        "Scenario": [],
-        "Toegang": [],
-        "Veiligheidsvoorzieningen": [],
-        "Waterwinning": [],
-        "Label": [],
-        "Lijn": [],
-        "Vlak": []        
     }
 }
 

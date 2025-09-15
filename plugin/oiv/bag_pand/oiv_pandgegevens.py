@@ -298,6 +298,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         arrBouwlagen = list(reversed([self.comboBox.itemText(i) for i in range(self.comboBox.count())]))
         arrObjects = self.get_intersecting_objects(geom)
         printWhat, reply, legenda, objectnaam = PrintDialog.get_print_bouwlagen(arrBouwlagen, arrObjects)
+        QC.QgsExpressionContextUtils.setProjectVariable(QC.QgsProject.instance(), 'selected_bagpand', '')
         if reply:
             if printWhat[0] == 'current':
                 arrBouwlagen = [self.comboBox.currentText()]
@@ -329,6 +330,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         qinst = QC.QgsProject.instance()
         qinst.removeMapLayer(qinst.mapLayersByName("tempPrintCoverage")[0].id())
         self.bouwlaag_print.setEnabled(True)
+        QC.QgsExpressionContextUtils.setProjectVariable(QC.QgsProject.instance(), 'selected_bagpand', str(self.pand_id.text()))
         self.iface.actionPan().trigger()
 
     def draw_print_polygon(self):

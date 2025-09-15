@@ -132,5 +132,10 @@ def get_actions(whichConfig, actionDict):
                     symbol = feat[idColumn].replace(' ', '_').lower()
                 for key,value in feat["tabbladen"].items():
                     if value == 1:
-                        actionDict[key][categorie].append((layerName, feat[idColumn], feat[idColumn].replace(' ', '_'), symbol, landOfReg))
+                        if whichConfig == PC.PAND["configtable"]:
+                            if key == 'Bouwlaag':
+                                actionDict[key][categorie].append((layerName, feat[idColumn], feat[idColumn].replace(' ', '_'), symbol, landOfReg))
+                        else:
+                            if key != 'Bouwlaag':
+                                actionDict[key][categorie].append((layerName, feat[idColumn], feat[idColumn].replace(' ', '_'), symbol, landOfReg))
     return actionDict, editableLayerNames, moveLayerNames, snapSymbols, anchorpoints
