@@ -569,6 +569,7 @@ class PrintDialog(PQtW.QDialog):
         spacerItem = PQtW.QSpacerItem(0, 0, PQtW.QSizePolicy.Policy.Minimum, PQtW.QSizePolicy.Policy.Expanding)
         qlayout.addItem(spacerItem)
         qlayout.addWidget(buttons)
+        self.qRadioBtnCurrent.setChecked(True)
         self.qRadioBtnSelection.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, True))
         self.qRadioBtnAll.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, False))
         self.qRadioBtnCurrent.clicked.connect(lambda: self.set_selection_visible(self.chkBoxDict, False))
