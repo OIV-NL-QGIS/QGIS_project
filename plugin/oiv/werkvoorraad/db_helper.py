@@ -7,16 +7,19 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.messages as MSG
 
 layerFields = {
-    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"], ["label", "string"]],
-    "Werkvoorraad object - label": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["omschrijving", "string"]],
-    "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
-    "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
-    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["fotografie_id", "int"], ["label", "string"]],
-    "Werkvoorraad bouwlaag - label": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["omschrijving", "string"]],
-    "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]],
-    "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["fotografie_id", "int"]]
+    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["label", "string"], 
+                                   ["opmerking", "string"], ["formaat_object", "string"], ["label_positie", "string"]],
+    "Werkvoorraad object - label": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["omschrijving", "string"],
+                                    ["opmerking", "string"], ["formaat_object", "string"]],
+    "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["opmerking", "string"]],
+    "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["opmerking", "string"]],
+    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["label", "string"], 
+                                     ["opmerking", "string"], ["formaat_bouwlaag", "string"], ["label_positie", "string"]],
+    "Werkvoorraad bouwlaag - label": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["omschrijving", "string"], 
+                                      ["opmerking", "string"], ["formaat_bouwlaag", "string"]],
+    "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["opmerking", "string"]],
+    "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["opmerking", "string"]]
 }
-typeIdTable = ["dreiging", "ingang", "points_of_interest", "sleutelkluis", "veiligh_install", "veiligh_ruimtelijk"]
 
 def setup_postgisdb_connection():
     """setup the postgis database connection"""
@@ -133,17 +136,11 @@ def update_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
             else:
                 identifier = CH.get_identifier_by_tablename_bl(tableName)
             if identifier == 'soort':
-                query += " {}=(SELECT naam FROM objecten.{}_type t WHERE naam = '{}'),".format(identifier, tableName, feat[attr])
-            else:
-                query += " {}=(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}'),".format(identifier, tableName, feat[attr])
+                query += " {}=(SELECT naam FROM objecten.{}_type t WHERE symbol_name = '{}'),".format(identifier, tableName, feat[attr])
         elif attrType == "string":
             query += " {}='{}',".format(attr, feat[attr])
         elif attrType == "int":
             query += ' {}={},'.format(attr, feat[attr])
-    if feat["waarden_new"] != None:
-        for key, value in feat["waarden_new"].items():
-            if value:
-                query += " {}='{}',".format(key, value)
     query = query[:-1] + ' WHERE id = {};'.format(feat["bron_id"])
     cursor.execute(query)
     conn.commit()
@@ -164,23 +161,15 @@ def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
             else:
                 identifier = CH.get_identifier_by_tablename_bl(tableName)
             attrQuery.append('{}'.format(identifier))
-            if identifier == 'soort' or identifier == 'ruimten_type_id':
-                valueQuery.append("(SELECT naam FROM objecten.{}_type t WHERE t.naam = '{}')".format(tableName, feat[attr]))
-            else:
-                valueQuery.append("(SELECT t.id FROM objecten.{}_type t WHERE t.symbol_name = '{}')".format(tableName, feat[attr]))
+            if identifier == 'soort':
+                valueQuery.append("(SELECT naam FROM objecten.{}_type t WHERE t.symbol_name = '{}')".format(tableName, feat[attr]))
         else:
-            attrQuery.append('{}'.format(attr))
-            if attrType == "string":
-                valueQuery.append("'{}'".format(feat[attr]))
-            elif attrType == "int":
-                valueQuery.append('{}'.format(feat[attr]))
-    if feat["waarden_new"] != None:
-        for key, value in feat["waarden_new"].items():
-            attrQuery.append('{}'.format(key))
-            if value:
-                valueQuery.append("'{}'".format(value))
-            else:
-                valueQuery.append("''")
+            if feat[attr]:
+                attrQuery.append('{}'.format(attr))
+                if attrType == "string":
+                    valueQuery.append("'{}'".format(feat[attr]))
+                elif attrType == "int":
+                    valueQuery.append('{}'.format(feat[attr]))
     query = 'INSERT INTO objecten.{} ('.format(tableName) + ', '.join(attrQuery) + ') VALUES (' + ', '.join(valueQuery) + ');'
     cursor.execute(query)
     conn.commit()
