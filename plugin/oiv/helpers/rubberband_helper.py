@@ -74,7 +74,7 @@ VERTEXMARKERSTYLES = {
         'penwidth': 5,
     },
     "identify": {
-        'color': QColor('magenta'),
+        'color': QColor('black'),
         'iconsize': 6,
         'icontype': QgsVertexMarker.ICON_CIRCLE,
         'penwidth': 5,

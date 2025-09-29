@@ -24,7 +24,6 @@ class MovePointTool(QG.QgsMapToolIdentify):
         self.idlayer = None
         self.startRotate = False
         self.tempRubberBand = None
-        self.vertexMarker = None
         self.vertexmarker = None
         self.multi = False
         self.possibleSnapFeatures = []
@@ -42,8 +41,8 @@ class MovePointTool(QG.QgsMapToolIdentify):
             if found_features is not None and type_check == "Point":
                 self.dragging = True
                 #init drag point
-                self.vertexMarker = RH.init_vertexmarker("movepoint", self.canvas)
-                self.vertexMarker.show()
+                self.vertexmarker = RH.init_vertexmarker("movepoint", self.canvas)
+                self.vertexmarker.show()
             #anders doe niets
             else:
                 self.dragging = False
@@ -73,7 +72,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
             self.tempRubberBand = RH.init_rubberband("moveandrotatepoint", self.canvas, 'line')
         if self.dragging:
             self.point = layerPt
-            self.vertexMarker.setCenter(layerPt)
+            self.vertexmarker.setCenter(layerPt)
         #als roteren -> teken de tempRubberband als lijn
         elif self.startRotate:
             self.tempRubberBand.movePoint(layerPt)
@@ -89,7 +88,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
     def canvasReleaseEvent(self, event):
         """als verslepen -> pas de geometry van de betreffende feature aan"""
         if self.dragging and self.point:
-            self.vertexMarker.hide()
+            self.vertexmarker.hide()
             geom_new = QC.QgsGeometry.fromPointXY(self.point)
             geom_old = self.idlayer.getFeature(self.fid).geometry()
             if not self.multi:
@@ -122,9 +121,9 @@ class MovePointTool(QG.QgsMapToolIdentify):
         if self.tempRubberBand is not None:
             self.canvas.scene().removeItem(self.tempRubberBand)
             self.tempRubberBand = None
-        if self.vertexMarker is not None:
-            self.canvas.scene().removeItem(self.vertexMarker)
-            self.vertexMarker = None
+        if self.vertexmarker is not None:
+            self.canvas.scene().removeItem(self.vertexmarker)
+            self.vertexmarker = None
         self.fid = None
         self.point = None
         self.startRotate = False
