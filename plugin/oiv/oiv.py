@@ -37,6 +37,7 @@ class oiv(PQtW.QWidget):
     checkVisibility = False
     tekenWidget = None
     tekenObjectWidget = None
+    interestWidget = None
 
     def __init__(self, iface):
         super(oiv, self).__init__()
@@ -131,7 +132,8 @@ class oiv(PQtW.QWidget):
             self.action.setEnabled(False)
         else:
             # always start from floor 1
-            self.basewidget = OB.oivBaseWidget(self)
+            if not self.basewidget:
+                self.basewidget = OB.oivBaseWidget(self)
             subString = "bouwlaag = 1"
             UG.set_layer_substring(subString)
             index = self.projCombo.findText('1', PQtC.Qt.MatchFixedString)

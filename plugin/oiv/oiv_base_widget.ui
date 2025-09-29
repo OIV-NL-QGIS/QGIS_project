@@ -18,7 +18,7 @@
    </font>
   </property>
   <property name="features">
-   <set>QDockWidget::NoDockWidgetFeatures</set>
+   <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
   </property>
   <property name="windowTitle">
    <string>OIV</string>
@@ -124,7 +124,7 @@
              <enum>QTabWidget::North</enum>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <property name="iconSize">
              <size>

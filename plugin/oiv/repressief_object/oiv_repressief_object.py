@@ -33,7 +33,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
     attributeform = None
     identifier = None
     snapLayerNames = DH.ROSNAPLAYERS
-    tekensymbolenwidget = None
     importwidget = None
     gridWidget = None
     workWidget = None
@@ -266,7 +265,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         if not self.baseWidget.parent.tekenObjectWidget:
             self.baseWidget.parent.tekenObjectWidget = oivObjectTekenWidget(self)
         self.baseWidget.parent.tekenObjectWidget.object_id.setText(self.object_id.text())
-        self.baseWidget.parent.tekenObjectWidget.formelenaam.setText(parent.formelenaam.text())
+        self.baseWidget.parent.tekenObjectWidget.formelenaam.setText(self.formelenaam.text())
         self.baseWidget.parent.tekenObjectWidget.drawbuttonframe.setVisible(True)
         self.show_subwidget(True, self.baseWidget.parent.tekenObjectWidget)
 
