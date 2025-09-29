@@ -5,6 +5,7 @@ import qgis.core as QC
 import oiv.helpers.constants as PC
 import oiv.helpers.configdb_helper as CH
 import oiv.helpers.messages as MSG
+import oiv.helpers.utils_core as UC
 
 layerFields = {
     "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["label", "string"], 
@@ -78,12 +79,13 @@ def execute_queries(executableFeatures, bouwlaagOfObject, accept):
         feat = arr[0]
         ilayer = arr[1]
         layerName = ilayer.name()
+        layerType = UC.check_layer_type(ilayer)
         operatie = feat['operatie']
         update_accepted(layerName, accept, cursor, conn)
         if accept and operatie == 'INSERT':
-            result = insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject)
+            result = insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject, layerType)
         if accept and operatie == 'UPDATE':
-            result = update_feature(feat, cursor, conn, layerName, bouwlaagOfObject)
+            result = update_feature(feat, cursor, conn, layerName, bouwlaagOfObject, layerType)
         if accept and operatie == 'DELETE':
             result = delete_feature(feat, cursor, conn)
         if operatie == 'UPDATE':
@@ -122,7 +124,7 @@ def clean_werkvoorraad(feat, cursor, conn, layerName):
     conn.commit()
     return 'succes'
 
-def update_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
+def update_feature(feat, cursor, conn, layerName, bouwlaagOfObject, layerType):
     tableName = feat["brontabel"]
     query = 'UPDATE objecten.{} SET '.format(tableName)
     query += "geom = ST_GeomFromText('{}', 28992),".format(feat.geometry().asWkt())
@@ -136,17 +138,22 @@ def update_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
             else:
                 identifier = CH.get_identifier_by_tablename_bl(tableName)
             if identifier == 'soort':
-                query += " {}=(SELECT naam FROM objecten.{}_type t WHERE symbol_name = '{}'),".format(identifier, tableName, feat[attr])
-        elif attrType == "string":
-            query += " {}='{}',".format(attr, feat[attr])
-        elif attrType == "int":
-            query += ' {}={},'.format(attr, feat[attr])
+                if layerType == 'Point':
+                    query += " {}=(SELECT naam FROM objecten.{}_type t WHERE symbol_name = '{}'),".format(identifier, tableName, feat[attr])
+                else:
+                    query += " {}=(SELECT naam FROM objecten.{}_type t WHERE naam = '{}'),".format(identifier, tableName, feat[attr])
+        else:
+            if feat[attr]:
+                if attrType == "string":
+                    query += " {}='{}',".format(attr, feat[attr])
+                elif attrType == "int":
+                    query += ' {}={},'.format(attr, feat[attr])
     query = query[:-1] + ' WHERE id = {};'.format(feat["bron_id"])
     cursor.execute(query)
     conn.commit()
     return 'succes'
 
-def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
+def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject, layerType):
     tableName = feat["brontabel"]
     attrQuery = []
     valueQuery = []
@@ -162,7 +169,10 @@ def insert_feature(feat, cursor, conn, layerName, bouwlaagOfObject):
                 identifier = CH.get_identifier_by_tablename_bl(tableName)
             attrQuery.append('{}'.format(identifier))
             if identifier == 'soort':
-                valueQuery.append("(SELECT naam FROM objecten.{}_type t WHERE t.symbol_name = '{}')".format(tableName, feat[attr]))
+                if layerType == 'Point':
+                    valueQuery.append("(SELECT naam FROM objecten.{}_type t WHERE t.symbol_name = '{}')".format(tableName, feat[attr]))
+                else:
+                    valueQuery.append("(SELECT naam FROM objecten.{}_type t WHERE t.naam = '{}')".format(tableName, feat[attr]))
         else:
             if feat[attr]:
                 attrQuery.append('{}'.format(attr))
