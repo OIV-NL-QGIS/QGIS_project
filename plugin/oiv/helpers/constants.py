@@ -24,14 +24,14 @@ def write_plugin_settings(key1, newData):
 def bagpand_layername():
     return PAND["bagpandlayername"] + QC.QgsExpressionContextUtils.globalScope().variable('OIV_bag_connection')
 
-OIV_VERSION = '3.6.11'
+OIV_VERSION = '3.6.12'
 
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
-        "min": 3610,
-        "max": 3611
+        "min": 3611,
+        "max": 3612
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
