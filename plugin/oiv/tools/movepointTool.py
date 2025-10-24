@@ -6,6 +6,7 @@ import qgis.gui as QG
 import oiv.helpers.rubberband_helper as RH
 import oiv.helpers.utils_core as UC
 import oiv.helpers.drawing_helper as DH
+import oiv.helpers.messages as MSG
 
 
 class MovePointTool(QG.QgsMapToolIdentify):
@@ -32,14 +33,16 @@ class MovePointTool(QG.QgsMapToolIdentify):
     def canvasPressEvent(self, event):
         """op welke feature wordt er geklikt"""
         found_features = self.identify(event.x(), event.y(), self.TopDownStopAtFirst, self.VectorLayer)
-        #check type van de laag, het werkt alleen voor point layers
-        type_check = UC.check_layer_type(found_features[0].mLayer)
-        self.idlayer = found_features[0].mLayer
-        feature = found_features[0].mFeature
-        self.fid = feature.id()
+        type_check = None
         #indien de linkesmuisnop wordt geklikt, het betreft een point layer en er is een feature gevonden -> verslepen
+        if found_features:
+            #check type van de laag, het werkt alleen voor point layers
+            type_check = UC.check_layer_type(found_features[0].mLayer)
+            self.idlayer = found_features[0].mLayer
+            feature = found_features[0].mFeature
+            self.fid = feature.id()
         if event.button() == PQtC.Qt.LeftButton:
-            if found_features is not None and type_check == "Point":
+            if type_check == "Point":
                 self.dragging = True
                 #init drag point
                 self.vertexMovemarker = RH.init_vertexmarker("movepoint", self.canvas)
@@ -48,14 +51,16 @@ class MovePointTool(QG.QgsMapToolIdentify):
             else:
                 self.dragging = False
                 self.fid = None
+                MSG.showMsgBox('noidentifiedobject')
         #indien de rechtermuisknop wordt geklikt -> roteren
         if event.button() == PQtC.Qt.RightButton:
-            if found_features is not None and type_check == "Point":
+            if type_check == "Point":
                 if not self.startRotate:
                     self.start_to_rotate(event)
             else:
                 self.startRotate = False
                 self.fid = None
+                MSG.showMsgBox('noidentifiedobject')
 
     def start_to_rotate(self, event):
         """init tempRubberband indicating rotation"""
@@ -101,7 +106,8 @@ class MovePointTool(QG.QgsMapToolIdentify):
             self.idlayer.triggerRepaint()
             self.stop_moveTool(None, geom_old, geom_new)
         else:
-            self.vertexMovemarker.hide()
+            if self.vertexMovemarker is not None:
+                self.vertexMovemarker.hide()
         #als roteren -> pas de rotatie van de betreffende feature aan op basis van de loodrechte lijn tussen muisklik en bestaand punt
         if self.startRotate:
             self.tempRubberBand.hide()
@@ -118,6 +124,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
             self.idlayer.commitChanges()
             self.idlayer.triggerRepaint()
             self.stop_moveTool(rotation, None, None)
+          
 
     def stop_moveTool(self, rotation, geom_old, geom_new):
         """reset rubberbands"""
