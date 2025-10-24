@@ -56,28 +56,31 @@ PRINTLAYERSTYLE = {
 
 VERTEXMARKERSTYLES = {
     "movepoint": {
-        'color': QColor('magenta'),
-        'iconsize': 5,
-        'icontype': QgsVertexMarker.ICON_X,
-        'penwidth': 3,
+        'color': QColor('black'),
+        'fillcolor': QColor('magenta'),
+        'iconsize': 10,
+        'icontype': QgsVertexMarker.ICON_CIRCLE,
+        'penwidth': 2,
     },
     "snappoint": {
-        'color': QColor('magenta'),
-        'iconsize': 8,
-        'icontype': QgsVertexMarker.ICON_X,
-        'penwidth': 5,
+        'color': QColor('black'),
+        'fillcolor': QColor('magenta'),
+        'iconsize': 10,
+        'icontype': QgsVertexMarker.ICON_CIRCLE,
+        'penwidth': 2,
     },
     "centroid": {
         'color': QColor('magenta'),
-        'iconsize': 12,
-        'icontype': QgsVertexMarker.ICON_X,
-        'penwidth': 5,
+        'iconsize': 10,
+        'icontype': QgsVertexMarker.ICON_CIRCLE,
+        'penwidth': 2,
     },
     "identify": {
         'color': QColor('black'),
-        'iconsize': 6,
+        'fillcolor': QColor('magenta'),
+        'iconsize': 10,
         'icontype': QgsVertexMarker.ICON_CIRCLE,
-        'penwidth': 5,
+        'penwidth': 2,
     },
 }
 
@@ -110,6 +113,7 @@ def init_vertexmarker(styleName, canvas):
     vmStyle = VERTEXMARKERSTYLES[styleName]
     vertexmarker = QgsVertexMarker(canvas)
     vertexmarker.setColor(vmStyle["color"])
+    vertexmarker.setFillColor(vmStyle["fillcolor"])
     vertexmarker.setIconSize(vmStyle["iconsize"])
     vertexmarker.setIconType(vmStyle["icontype"])
     vertexmarker.setPenWidth(vmStyle["penwidth"])

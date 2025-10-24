@@ -33,7 +33,7 @@ def get_parentlayer_bl(layerName):
     return read_settings(query, False)[0]
 
 def get_allkeys_bl(layerName):
-    query = "SELECT foreign_key, identifier, input_label, rotatie FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
+    query = "SELECT foreign_key, identifier, input_label, rotatie, size_field FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
     return read_settings(query, False)
 
 def get_chidlayers_bl():

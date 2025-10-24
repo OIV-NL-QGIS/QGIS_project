@@ -24,14 +24,14 @@ def write_plugin_settings(key1, newData):
 def bagpand_layername():
     return PAND["bagpandlayername"] + QC.QgsExpressionContextUtils.globalScope().variable('OIV_bag_connection')
 
-OIV_VERSION = '3.6.12'
+OIV_VERSION = '3.6.13'
 
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
-        "min": 3611,
-        "max": 3612
+        "min": 3612,
+        "max": 3613
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
@@ -94,7 +94,7 @@ OBJECT = {
             'Werkvoorraad object - lijn', 
             'Werkvoorraad object - vlak'],
     "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"],
-    "objecttypes": ["Evenement A", "Evenement B", "Evenement C", "Natuur", "Objecten", "Waterongeval"],
+    "objecttypes": ["Evenement A", "Evenement B", "Evenement C", "Natuur", "Objecten", "Water"],
 }
 
 INFO_INTEREST = {

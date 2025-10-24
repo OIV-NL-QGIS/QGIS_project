@@ -123,13 +123,15 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             newFeature.setGeometry(feat.geometry())
             if attrs[1]:
                 if str(feat[attrs[1]]).isdigit():
-                    newFeature[attrs[1]] = int(feat[attrs[1]])
+                    newFeature[attrs[1]] = int(feat[attrs[1]]) 
                 else:
                     newFeature[attrs[1]] = feat[attrs[1]]
             if attrs[2]:
                 newFeature[attrs[2]] = feat[attrs[2]]
             if attrs[3]:
                 newFeature[attrs[3]] = feat[attrs[3]]
+            if attrs[4]:
+                newFeature[attrs[4]] = feat[attrs[4]]
             newFeature[attrs[0]] = int(newID)
             newFeature["bouwlaag"] = bouwlaag
             field_index = fields.indexFromName('applicatie')
