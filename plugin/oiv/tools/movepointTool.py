@@ -25,6 +25,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
         self.startRotate = False
         self.tempRubberBand = None
         self.vertexmarker = None
+        self.vertexMovemarker = None
         self.multi = False
         self.possibleSnapFeatures = []
 
@@ -41,8 +42,8 @@ class MovePointTool(QG.QgsMapToolIdentify):
             if found_features is not None and type_check == "Point":
                 self.dragging = True
                 #init drag point
-                self.vertexmarker = RH.init_vertexmarker("movepoint", self.canvas)
-                self.vertexmarker.show()
+                self.vertexMovemarker = RH.init_vertexmarker("movepoint", self.canvas)
+                self.vertexMovemarker.show()
             #anders doe niets
             else:
                 self.dragging = False
@@ -72,7 +73,7 @@ class MovePointTool(QG.QgsMapToolIdentify):
             self.tempRubberBand = RH.init_rubberband("moveandrotatepoint", self.canvas, 'line')
         if self.dragging:
             self.point = layerPt
-            self.vertexmarker.setCenter(layerPt)
+            self.vertexMovemarker.setCenter(layerPt)
         #als roteren -> teken de tempRubberband als lijn
         elif self.startRotate:
             self.tempRubberBand.movePoint(layerPt)
@@ -124,6 +125,9 @@ class MovePointTool(QG.QgsMapToolIdentify):
         if self.vertexmarker is not None:
             self.canvas.scene().removeItem(self.vertexmarker)
             self.vertexmarker = None
+        if self.vertexMovemarker is not None:
+            self.canvas.scene().removeItem(self.vertexMovemarker)
+            self.vertexMovemarker = None
         self.fid = None
         self.point = None
         self.startRotate = False
