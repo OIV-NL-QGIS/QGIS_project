@@ -100,6 +100,8 @@ class MovePointTool(QG.QgsMapToolIdentify):
             self.idlayer.commitChanges()
             self.idlayer.triggerRepaint()
             self.stop_moveTool(None, geom_old, geom_new)
+        else:
+            self.vertexMovemarker.hide()
         #als roteren -> pas de rotatie van de betreffende feature aan op basis van de loodrechte lijn tussen muisklik en bestaand punt
         if self.startRotate:
             self.tempRubberBand.hide()

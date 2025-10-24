@@ -196,7 +196,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 layer.selectByIds([])
 
     def delete_multi(self, layerNames):
-        reply = MSG.showMsgBox('deleteobject')
+        reply = MSG.showMsgBox('deleteobject_question')
         for layerName in layerNames:
             layer = UC.getlayer_byname(layerName)
             if reply:
@@ -284,7 +284,6 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         if multi:
             layerNamesTup = CH.get_chidlayers_ob()
             layerNames = [i[0] for i in layerNamesTup]
-            layerNames.remove(PC.OBJECT["objectlayername"])
             for layerName in layerNames:
                 layer = UC.getlayer_byname(layerName)
                 layer.startEditing()
