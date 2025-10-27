@@ -53,7 +53,6 @@
     <file>config_files/png/krve.png</file>
     <file>config_files/png/ugv.png</file>
     <file>config_files/png/schermenponton.png</file>
-    <file>config_files/png/waterkanon_schuim.png</file>
     <file>config_files/png/voedingspunt_schuim.png</file>
     <file>config_files/png/calamiteiten_coördinatiecentrum.png</file>
     <file>config_files/png/wegen_eigen_terrein.png</file>
@@ -88,7 +87,6 @@
     <file>config_files/png/hulplijn.png</file>
     <file>config_files/png/zwembad.png</file>
     <file>config_files/png/afbrand_scenario.png</file>
-    <file>config_files/png/openwater.png</file>
     <file>config_files/png/slagboom.png</file>
     <file>config_files/png/poort.png</file>
     <file>config_files/png/scenario_locatie.png</file>
