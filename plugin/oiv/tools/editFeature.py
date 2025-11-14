@@ -8,8 +8,8 @@ def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
         ids = []
         ids.append(ifeature.id())
         ilayer.selectByIds(ids)
+        reply = MSG.showMsgBox('deleteobject_question')
         ilayer.startEditing()
-        reply = MSG.showMsgBox('deleteobject')
         if not reply:
             ilayer.selectByIds([])
         elif reply:
