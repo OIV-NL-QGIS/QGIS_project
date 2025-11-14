@@ -66,7 +66,7 @@ MESSAGES = {
     'noselectedtodelete': {
         "type": 'information',
         "header": 'Geen tekenlaag!',
-        "body": 'U heeft geen feature op een tekenlaag aangeklikt!\nKlik a.u.b. op de juiste locatie.\n\nWeet u zeker dat u iets wilt weggooien?'
+        "body": 'U heeft geen feature op een tekenlaag aangeklikt!\n\nKlik a.u.b. op de juiste locatie.'
     },
     'bouwlaagcreated': {
         "type": 'information',
