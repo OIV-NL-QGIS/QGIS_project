@@ -17,8 +17,8 @@
              DYNAMISCHE SYMBOLIZER
              =============================== -->
         <Rule>
-          <Name>Gevaarlijkestof</Name>
-          <Title>Afwijkende binnendekking</Title>
+          <Name>Gevaarlijkestof opslag</Name>
+          <Title>Gevaarlijkestof opslag</Title>
           <PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Graphic>
               <ExternalGraphic>
@@ -101,42 +101,23 @@
       <!-- ===============================
            LEGENDA ONLY RULES (alle 43 POI)
            =============================== -->
-        <!-- DMO -->
+        <!-- ADR Kemler -bord -->
         <Rule>
-          <Name>DMO</Name>
-          <Title>DMO</Title>
+          <Name>ADR Kemler -bord</Name>
+          <Title>ADR Kemler -bord</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/bbh001_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/gev001_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
             </Graphic>
           </PointSymbolizer>
         </Rule>
-
-        <!-- TMO -->
-        <Rule>
-          <Name>TMO</Name>
-          <Title>TMO</Title>
-          <ogc:Filter>
-            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <PointSymbolizer>
-            <Graphic>
-              <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/bbh003_a.svg"/>
-                <Format>image/svg+xml</Format>
-              </ExternalGraphic>
-              <Size>32</Size>
-            </Graphic>
-          </PointSymbolizer>
-        </Rule>
-
 
       </FeatureTypeStyle>
     </UserStyle>
