@@ -40,7 +40,7 @@
         <!-- ===============================
              CENTRALE TEXT SYMBOLIZER
              =============================== -->
-          <TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+          <TextSymbolizer>
             <Label>
               <ogc:PropertyName>formelenaam</ogc:PropertyName>
             </Label>
