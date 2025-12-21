@@ -17,9 +17,9 @@
              DYNAMISCHE SYMBOLIZER
              =============================== -->
         <Rule>
-          <Name>Afwijkende binnendekking</Name>
-          <Title>Afwijkende binnendekking</Title>
-          <PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+          <Name>Repressief object</Name>
+          <Title>Repressief object</Title>
+          <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
                 <OnlineResource xlink:href="./symbols/svg/${symbol_name}.svg"/>
@@ -35,9 +35,6 @@
                   <ogc:Literal>1</ogc:Literal>
                 </ogc:Mul>
               </Size>
-              <Rotation>
-                <ogc:PropertyName>rotatie</ogc:PropertyName>
-              </Rotation>
             </Graphic>
           </PointSymbolizer>
         <!-- ===============================
@@ -45,7 +42,7 @@
              =============================== -->
           <TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Label>
-              <ogc:PropertyName>label</ogc:PropertyName>
+              <ogc:PropertyName>formelenaam</ogc:PropertyName>
             </Label>
             <Font>
               <CssParameter name="font-size">
@@ -101,17 +98,17 @@
       <!-- ===============================
            LEGENDA ONLY RULES (alle 43 POI)
            =============================== -->
-        <!-- DMO -->
+        <!-- Evenement A -->
         <Rule>
-          <Name>DMO</Name>
-          <Title>DMO</Title>
+          <Name>Evenement A</Name>
+          <Title>Evenement A</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/bbh001_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/ter001_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -119,17 +116,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- TMO -->
+        <!-- Evenement B -->
         <Rule>
-          <Name>TMO</Name>
-          <Title>TMO</Title>
+          <Name>Evenement B</Name>
+          <Title>Evenement B</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/bbh003_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/ter002_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -137,6 +134,95 @@
           </PointSymbolizer>
         </Rule>
 
+        <!-- Evenement C -->
+        <Rule>
+          <Name>Evenement C</Name>
+          <Title>Evenement C</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/ter003_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Gebouw -->
+        <Rule>
+          <Name>Gebouw</Name>
+          <Title>Gebouw</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/ter004_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Infrastructuur -->
+        <Rule>
+          <Name>Infrastructuur</Name>
+          <Title>Infrastructuur</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/ter005_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Natuur -->
+        <Rule>
+          <Name>Natuur</Name>
+          <Title>Natuur</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/ter006_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Water -->
+        <Rule>
+          <Name>Water</Name>
+          <Title>Water</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/ter007_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
 
       </FeatureTypeStyle>
     </UserStyle>
