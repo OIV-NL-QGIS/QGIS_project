@@ -17,8 +17,8 @@
              DYNAMISCHE SYMBOLIZER
              =============================== -->
         <Rule>
-          <Name>Sleutelkluis</Name>
-          <Title>Sleutelkluis</Title>
+          <Name>Veiligheidsvoorzieningen</Name>
+          <Title>Veiligheidsvoorzieningen</Title>
           <PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Graphic>
               <ExternalGraphic>
