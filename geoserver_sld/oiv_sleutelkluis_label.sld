@@ -17,8 +17,8 @@
              DYNAMISCHE SYMBOLIZER
              =============================== -->
         <Rule>
-          <Name>Scenario locatie</Name>
-          <Title>Scenario locatie</Title>
+          <Name>Sleutelkluis</Name>
+          <Title>Sleutelkluis</Title>
           <PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Graphic>
               <ExternalGraphic>
