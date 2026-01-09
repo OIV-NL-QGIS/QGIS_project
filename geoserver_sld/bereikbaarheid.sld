@@ -5,6 +5,8 @@
     <UserStyle>
       <se:Name>Bereikbaarheid</se:Name>
       <se:FeatureTypeStyle>
+        
+        <!-- Aanrijdroute -->
         <se:Rule>
           <se:Name>aanrijdroute</se:Name>
           <se:Description>
