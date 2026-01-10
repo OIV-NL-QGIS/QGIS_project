@@ -307,6 +307,34 @@
           </se:LineSymbolizer>
         </se:Rule>
 
+        <se:Rule>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Label>
+              <ogc:PropertyName>label</ogc:PropertyName>
+            </se:Label>
+            <se:Font>
+              <se:SvgParameter name="font-family">Arial</se:SvgParameter>
+              <se:SvgParameter name="font-size">4</se:SvgParameter>
+              <se:SvgParameter name="font-weight">bold</se:SvgParameter>
+            </se:Font>
+            <se:Halo>
+              <se:Radius>0.4</se:Radius>
+              <se:Fill>
+                <se:SvgParameter name="fill">#ffffff</se:SvgParameter>
+              </se:Fill>
+            </se:Halo>
+            <se:Fill>
+              <se:SvgParameter name="fill">#000000</se:SvgParameter>
+            </se:Fill>
+            <se:VendorOption name="repeat">75</se:VendorOption>
+            <se:VendorOption name="followLine">true</se:VendorOption>
+            <se:VendorOption name="conflictResolution">false</se:VendorOption>
+            <se:VendorOption name="partials">true</se:VendorOption>
+            <se:VendorOption name="maxAngleDelta">45</se:VendorOption>
+          </se:TextSymbolizer>
+        </se:Rule>
+
       </se:FeatureTypeStyle>
     </UserStyle>
   </NamedLayer>
