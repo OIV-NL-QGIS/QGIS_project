@@ -4,15 +4,14 @@
     <se:Name>Bouwlagen</se:Name>
     <UserStyle>
       <se:Name>Bouwlagen</se:Name>
-
       <se:FeatureTypeStyle>
-        
         <!-- Bouwlaag -->
         <se:Rule>
           <se:Name>Bouwlaag</se:Name>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#f7f6d7</se:SvgParameter>
+              <se:SvgParameter name="fill-opacity">1</se:SvgParameter>
             </se:Fill>
             <se:Stroke>
               <se:SvgParameter name="stroke">#a2a2a2</se:SvgParameter>
@@ -23,7 +22,6 @@
             </se:Stroke>
           </se:PolygonSymbolizer>
         </se:Rule>
-        
       </se:FeatureTypeStyle>
     </UserStyle>
   </NamedLayer>
