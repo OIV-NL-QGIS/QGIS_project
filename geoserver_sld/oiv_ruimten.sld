@@ -178,6 +178,30 @@
           </se:PolygonSymbolizer>
         </se:Rule>
 
+        <!-- Zwembad binnen -->
+        <se:Rule>
+          <se:Name>Zwembad binnen</se:Name>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:Literal>zwembad binnen</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+            <se:Fill>
+              <se:SvgParameter name="fill">#0072e0</se:SvgParameter>
+              <se:SvgParameter name="fill-opacity">1</se:SvgParameter>
+            </se:Fill>
+            <se:Stroke>
+              <se:SvgParameter name="stroke">#0033e6</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">0.1</se:SvgParameter>
+              <se:SvgParameter name="stroke-linejoin">mitre</se:SvgParameter>
+              <se:SvgParameter name="stroke-linecap">butt</se:SvgParameter>
+              <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+            </se:Stroke>
+          </se:PolygonSymbolizer>
+        </se:Rule>
+
       </se:FeatureTypeStyle>
     </UserStyle>
   </NamedLayer>
