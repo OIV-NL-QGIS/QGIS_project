@@ -12,7 +12,7 @@
           <se:Name>Diepte -4m</se:Name>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:PropertyName>hoogte</ogc:PropertyName>
               <ogc:Literal>-4</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -32,7 +32,7 @@
           <se:Name>Diepte -9m</se:Name>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:PropertyName>hoogte</ogc:PropertyName>
               <ogc:Literal>-9</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -52,7 +52,7 @@
           <se:Name>Diepte -15m</se:Name>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
-              <ogc:PropertyName>soort</ogc:PropertyName>
+              <ogc:PropertyName>hoogte</ogc:PropertyName>
               <ogc:Literal>-15</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
@@ -80,7 +80,8 @@
             </se:Stroke>
           </se:LineSymbolizer>
         </se:Rule>
-
+      </se:FeatureTypeStyle>
+      <se:FeatureTypeStyle>
         <se:Rule>
           <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
