@@ -8,6 +8,7 @@
         <!-- Bouwlaag -->
         <se:Rule>
           <se:Name>Bouwlaag</se:Name>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#f7f6d7</se:SvgParameter>

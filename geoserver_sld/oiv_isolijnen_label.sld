@@ -16,6 +16,7 @@
               <ogc:Literal>-4</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#58b65c</se:SvgParameter>
@@ -36,6 +37,7 @@
               <ogc:Literal>-9</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#ff7f00</se:SvgParameter>
@@ -56,6 +58,7 @@
               <ogc:Literal>-15</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#e31a1c</se:SvgParameter>
@@ -70,6 +73,7 @@
         <se:Rule>
           <se:Name></se:Name>
           <se:ElseFilter/>
+          <se:MaxScaleDenominator>50000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#000000</se:SvgParameter>
@@ -81,9 +85,10 @@
           </se:LineSymbolizer>
         </se:Rule>
       </se:FeatureTypeStyle>
+      
       <se:FeatureTypeStyle>
         <se:Rule>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:MaxScaleDenominator>25000</se:MaxScaleDenominator>
           <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Label>
               <ogc:PropertyName>hoogte</ogc:PropertyName>

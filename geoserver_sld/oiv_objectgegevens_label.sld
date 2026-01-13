@@ -32,7 +32,7 @@
               <Size>
                 <ogc:Mul>
                   <ogc:PropertyName>size</ogc:PropertyName>
-                  <ogc:Literal>1</ogc:Literal>
+                  <ogc:Literal>3</ogc:Literal>
                 </ogc:Mul>
               </Size>
             </Graphic>

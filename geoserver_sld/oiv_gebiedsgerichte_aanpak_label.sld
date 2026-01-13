@@ -16,6 +16,7 @@
               <ogc:Literal>Beheer bos 0%</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#c00300</se:SvgParameter>
@@ -36,6 +37,7 @@
               <ogc:Literal>Beheer bos 30%</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#ffff00</se:SvgParameter>
@@ -56,6 +58,7 @@
               <ogc:Literal>Beheer bos 60%</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#e9760d</se:SvgParameter>
@@ -76,6 +79,7 @@
               <ogc:Literal>Beheer bos 100%</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#4d7731</se:SvgParameter>
@@ -96,6 +100,7 @@
               <ogc:Literal>Beheer heide 100%</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#4d7731</se:SvgParameter>
@@ -116,6 +121,7 @@
               <ogc:Literal>Beheer heide niet gereed</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#c00300</se:SvgParameter>
@@ -136,6 +142,7 @@
               <ogc:Literal>Beheer heide subcompartiment</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#ffff00</se:SvgParameter>
@@ -156,6 +163,7 @@
               <ogc:Literal>Bos compartiment gereed</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#548235</se:SvgParameter>
@@ -176,6 +184,7 @@
               <ogc:Literal>Bos compartimentsgrens in aanleg</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#548235</se:SvgParameter>
@@ -206,6 +215,7 @@
               <ogc:Literal>Bos subcompartiment of 60% gereed</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#548235</se:SvgParameter>
@@ -226,6 +236,7 @@
               <ogc:Literal>Heide gereed</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#548235</se:SvgParameter>
@@ -256,6 +267,7 @@
               <ogc:Literal>Stoplijn door voorbranden</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#262626</se:SvgParameter>
@@ -286,6 +298,7 @@
               <ogc:Literal>Stoplijn in heide of gras</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#b37dc5</se:SvgParameter>

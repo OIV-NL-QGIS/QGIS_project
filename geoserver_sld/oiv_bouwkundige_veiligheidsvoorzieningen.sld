@@ -16,6 +16,7 @@
               <ogc:Literal>30 min brandwerende scheiding</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#e31a1c</se:SvgParameter>
@@ -37,6 +38,7 @@
               <ogc:Literal>60 min brandwerende scheiding</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#33a02c</se:SvgParameter>
@@ -58,6 +60,7 @@
               <ogc:Literal>120 min brandwerende scheiding</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#e31a1c</se:SvgParameter>
@@ -78,6 +81,7 @@
               <ogc:Literal>blusleiding</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#964B00</se:SvgParameter>
@@ -99,6 +103,7 @@
               <ogc:Literal>bouwdeelscheiding</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#e31a1c</se:SvgParameter>
@@ -119,6 +124,7 @@
               <ogc:Literal>Contouren</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#555555</se:SvgParameter>
@@ -139,6 +145,7 @@
               <ogc:Literal>hulplijn</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#000000</se:SvgParameter>
@@ -160,6 +167,7 @@
               <ogc:Literal>rookwerendescheiding</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#3288bd</se:SvgParameter>
@@ -180,6 +188,7 @@
               <ogc:Literal>slagboom</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
               <se:SvgParameter name="stroke">#000000</se:SvgParameter>

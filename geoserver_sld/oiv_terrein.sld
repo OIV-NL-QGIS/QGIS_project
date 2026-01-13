@@ -8,6 +8,7 @@
         <!-- Terrein -->
         <se:Rule>
           <se:Name>Terrein</se:Name>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#75649d</se:SvgParameter>

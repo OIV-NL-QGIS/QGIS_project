@@ -14,6 +14,7 @@
               <ogc:Literal>Grid</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>100000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer>
             <se:Fill>
               <se:SvgParameter name="fill">#000000</se:SvgParameter>
@@ -37,8 +38,7 @@
               <ogc:Literal></ogc:Literal>
             </ogc:PropertyIsNotEqualTo>
           </ogc:Filter>
-          <se:MinScaleDenominator>0</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>150000</se:MaxScaleDenominator>
+          <se:MaxScaleDenominator>100000</se:MaxScaleDenominator>
           <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Label>
               <ogc:PropertyName>y_as_label</ogc:PropertyName>
@@ -75,8 +75,7 @@
               <ogc:Literal></ogc:Literal>
             </ogc:PropertyIsNotEqualTo>
           </ogc:Filter>
-          <se:MinScaleDenominator>0</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>150000</se:MaxScaleDenominator>
+          <se:MaxScaleDenominator>100000</se:MaxScaleDenominator>
           <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Label>
               <ogc:PropertyName>x_as_label</ogc:PropertyName>
@@ -108,8 +107,7 @@
 
         <!-- Labels vaknummers -->
         <se:Rule>
-          <se:MinScaleDenominator>1</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>150000</se:MaxScaleDenominator>
+          <se:MaxScaleDenominator>100000</se:MaxScaleDenominator>
           <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Geometry>
               <ogc:Function name="centroid">

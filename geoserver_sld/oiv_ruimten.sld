@@ -15,6 +15,7 @@
               <ogc:Literal>afbrand scenario</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:GraphicFill>
@@ -49,6 +50,7 @@
               <ogc:Literal>bijzondere ruimte</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#fff97a</se:SvgParameter>
@@ -96,6 +98,7 @@
               <ogc:Literal>overige ruimte</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#fff97a</se:SvgParameter>
@@ -120,6 +123,7 @@
               <ogc:Literal>tijdelijke BAG</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#fb9a99</se:SvgParameter>
@@ -163,6 +167,7 @@
               <ogc:Literal>verkeersruimte</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#b2df8a</se:SvgParameter>
@@ -187,6 +192,7 @@
               <ogc:Literal>zwembad binnen</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#0072e0</se:SvgParameter>

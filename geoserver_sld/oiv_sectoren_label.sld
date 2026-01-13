@@ -15,6 +15,7 @@
               <ogc:Literal>Drassig terrein niet berijdbaar</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:GraphicFill>
@@ -49,6 +50,7 @@
               <ogc:Literal>Ecologisch kwetsbaar terrein</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:GraphicFill>
@@ -83,6 +85,7 @@
               <ogc:Literal>Gevaarlijk terrein nooit te betreden</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:GraphicFill>
@@ -117,6 +120,7 @@
               <ogc:Literal>openwater</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#80bde3</se:SvgParameter>
@@ -141,6 +145,7 @@
               <ogc:Literal>parkeerzone</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#027dc0</se:SvgParameter>
@@ -165,6 +170,7 @@
               <ogc:Literal>persvak</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#c5bbe4</se:SvgParameter>
@@ -189,6 +195,7 @@
               <ogc:Literal>podium</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#4c4c4c</se:SvgParameter>
@@ -213,6 +220,7 @@
               <ogc:Literal>publieke sector</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#fbc2d1</se:SvgParameter>
@@ -237,6 +245,7 @@
               <ogc:Literal>tent</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#8490ca</se:SvgParameter>
@@ -261,6 +270,7 @@
               <ogc:Literal>zwembad</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:SvgParameter name="fill">#0072e0</se:SvgParameter>
@@ -285,6 +295,7 @@
               <ogc:Literal>terrein niet-begaanbaar</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Fill>
               <se:GraphicFill>
@@ -311,7 +322,7 @@
         </se:Rule>
 
         <se:Rule>
-          <se:MaxScaleDenominator>10000</se:MaxScaleDenominator>
+          <se:MaxScaleDenominator>5000</se:MaxScaleDenominator>
           <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Label>
               <ogc:PropertyName>label</ogc:PropertyName>
