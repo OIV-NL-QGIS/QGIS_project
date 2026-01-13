@@ -19,6 +19,7 @@
         <Rule>
           <Name>Afwijkende binnendekking</Name>
           <Title>Afwijkende binnendekking</Title>
+          <MaxScaleDenominator>2500</MaxScaleDenominator>
           <PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Graphic>
               <ExternalGraphic>

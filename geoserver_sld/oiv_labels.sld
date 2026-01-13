@@ -14,6 +14,7 @@
               <ogc:Literal>calamiteitendoorgang</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Geometry>
               <ogc:PropertyName>label_box</ogc:PropertyName>
@@ -34,6 +35,7 @@
               <ogc:Literal>Gevaar</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Geometry>
               <ogc:PropertyName>label_box</ogc:PropertyName>
@@ -59,6 +61,7 @@
               <ogc:Literal>publieke ingang</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Geometry>
               <ogc:PropertyName>label_box</ogc:PropertyName>
@@ -79,6 +82,7 @@
               <ogc:Literal>Voorzichtig</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Geometry>
               <ogc:PropertyName>label_box</ogc:PropertyName>
@@ -104,6 +108,7 @@
               <ogc:Literal>Waarschuwing</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:PolygonSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Geometry>
               <ogc:PropertyName>label_box</ogc:PropertyName>
@@ -121,6 +126,7 @@
         </se:Rule>
           
         <se:Rule>
+          <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Label>
               <ogc:PropertyName>omschrijving</ogc:PropertyName>

@@ -19,6 +19,7 @@
         <Rule>
           <Name>Points of interest</Name>
           <Title>Points of interest</Title>
+          <MaxScaleDenominator>5000</MaxScaleDenominator>
           <PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Graphic>
               <ExternalGraphic>
