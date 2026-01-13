@@ -19,6 +19,7 @@
         <Rule>
           <Name>Repressief object</Name>
           <Title>Repressief object</Title>
+          <MaxScaleDenominator>2500</MaxScaleDenominator>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
