@@ -129,7 +129,7 @@
           <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Label>
-              <ogc:PropertyName>omschrijving</ogc:PropertyName>
+              <ogc:PropertyName>omschrijving_gs</ogc:PropertyName>
             </se:Label>
             <se:Font>
               <se:SvgParameter name="font-family">Arial</se:SvgParameter>
