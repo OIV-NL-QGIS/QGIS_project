@@ -17,9 +17,9 @@
              DYNAMISCHE SYMBOLIZER
              =============================== -->
         <Rule>
-          <Name>Points of interest</Name>
-          <Title>Points of interest</Title>
-          <MaxScaleDenominator>5000</MaxScaleDenominator>
+          <Name>Veiligheidsvoorzieningen</Name>
+          <Title>Veiligheidsvoorzieningen</Title>
+          <MaxScaleDenominator>2500</MaxScaleDenominator>
           <PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Graphic>
               <ExternalGraphic>
@@ -102,34 +102,17 @@
       <!-- ===============================
            LEGENDA ONLY RULES (alle 43 POI)
            =============================== -->
-        <!-- Afsluitpaal of poller -->
+        <!-- Activering blussysteem -->
         <Rule>
-          <Name>Afsluitpaal of poller</Name>
-          <Title>Afsluitpaal of poller</Title>
+          <Name>Activering blussysteem</Name>
+          <Title>Activering blussysteem</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi001_a.svg"/>
-                <Format>image/svg+xml</Format>
-              </ExternalGraphic>
-              <Size>32</Size>
-            </Graphic>
-          </PointSymbolizer>
-        </Rule>
-        <!-- ANWB Paddenstoel -->
-        <Rule>
-          <Name>ANWB Paddenstoel</Name>
-          <Title>ANWB Paddenstoel</Title>
-          <ogc:Filter>
-            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
-          </ogc:Filter>
-          <PointSymbolizer>
-            <Graphic>
-              <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi002_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz001_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -137,17 +120,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Attractie -->
+        <!-- AED -->
         <Rule>
-          <Name>Attractie</Name>
-          <Title>Attractie</Title>
+          <Name>AED</Name>
+          <Title>AED</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi003_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz002_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -155,17 +138,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Berijdbaar voor brandweer -->
+        <!-- Afsluiter CV -->
         <Rule>
-          <Name>Berijdbaar voor brandweer</Name>
-          <Title>Berijdbaar voor brandweer</Title>
+          <Name>Afsluiter CV</Name>
+          <Title>Afsluiter CV</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi004_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz003_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -173,17 +156,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Bivakplaats Defensie -->
+        <!-- Afsluiter diversen -->
         <Rule>
-          <Name>Bivakplaats Defensie</Name>
-          <Title>Bivakplaats Defensie</Title>
+          <Name>Afsluiter diversen</Name>
+          <Title>Afsluiter diversen</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi005_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz004_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -191,17 +174,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Bungalowpark -->
+        <!-- Afsluiter elektra -->
         <Rule>
-          <Name>Bungalowpark</Name>
-          <Title>Bungalowpark</Title>
+          <Name>Afsluiter elektra</Name>
+          <Title>Afsluiter elektra</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi010_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz005_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -209,17 +192,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Calamiteiten coördinatiecentrum -->
+        <!-- Afsluiter gas -->
         <Rule>
-          <Name>Calamiteiten coördinatiecentrum</Name>
-          <Title>Calamiteiten coördinatiecentrum</Title>
+          <Name>Afsluiter gas</Name>
+          <Title>Afsluiter gas</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi011_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz006_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -227,17 +210,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Camping -->
+        <!-- Afsluiter luchtbehandeling -->
         <Rule>
-          <Name>Camping</Name>
-          <Title>Camping</Title>
+          <Name>Afsluiter luchtbehandeling</Name>
+          <Title>Afsluiter luchtbehandeling</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi012_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz007_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -245,17 +228,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Doorrijhoogte -->
+        <!-- Afsluiter neon -->
         <Rule>
-          <Name>Doorrijhoogte</Name>
-          <Title>Doorrijhoogte</Title>
+          <Name>Afsluiter neon</Name>
+          <Title>Afsluiter neon</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi014_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz008_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -263,17 +246,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Ecoduct -->
+        <!-- Afsluiter omloop -->
         <Rule>
-          <Name>Ecoduct</Name>
-          <Title>Ecoduct</Title>
+          <Name>Afsluiter omloop</Name>
+          <Title>Afsluiter omloop</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi015_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz009_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -281,17 +264,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Feesttent -->
+        <!-- Afsluiter rwa -->
         <Rule>
-          <Name>Feesttent</Name>
-          <Title>Feesttent</Title>
+          <Name>Afsluiter rwa</Name>
+          <Title>Afsluiter rwa</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi016_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz010_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -299,17 +282,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Heli landingsplaats -->
+        <!-- Afsluiter sprinkler -->
         <Rule>
-          <Name>Heli landingsplaats</Name>
-          <Title>Heli landingsplaats</Title>
+          <Name>Afsluiter sprinkler</Name>
+          <Title>Afsluiter sprinkler</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi018_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz011_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -317,17 +300,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Hotel -->
+        <!-- Afsluiter SVM -->
         <Rule>
-          <Name>Hotel</Name>
-          <Title>Hotel</Title>
+          <Name>Afsluiter SVM</Name>
+          <Title>Afsluiter SVM</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi019_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz012_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -335,17 +318,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Kleedkamer -->
+        <!-- Afsluiter water -->
         <Rule>
-          <Name>Kleedkamer</Name>
-          <Title>Kleedkamer</Title>
+          <Name>Afsluiter water</Name>
+          <Title>Afsluiter water</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi020_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz013_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -353,17 +336,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Kraam elektra -->
+        <!-- Antidote tegengif -->
         <Rule>
-          <Name>Kraam elektra</Name>
-          <Title>Kraam elektra</Title>
+          <Name>Antidote tegengif</Name>
+          <Title>Antidote tegengif</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi021_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz014_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -371,17 +354,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Kraam gas -->
+        <!-- Blusmonitor S (schuim) -->
         <Rule>
-          <Name>Kraam gas</Name>
-          <Title>Kraam gas</Title>
+          <Name>Blusmonitor S (schuim)</Name>
+          <Title>Blusmonitor S (schuim)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi022_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz015_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -389,17 +372,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Mountainbike route -->
+        <!-- Blusmonitor W water (waterkanon) -->
         <Rule>
-          <Name>Mountainbike route</Name>
-          <Title>Mountainbike route</Title>
+          <Name>Blusmonitor W water (waterkanon)</Name>
+          <Title>Blusmonitor W water (waterkanon)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi023_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz016_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -407,17 +390,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Object vitale infrastructuur -->
+        <!-- Blussysteem AFFF -->
         <Rule>
-          <Name>Object vitale infrastructuur</Name>
-          <Title>Object vitale infrastructuur</Title>
+          <Name>Blussysteem AFFF</Name>
+          <Title>Blussysteem AFFF</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi024_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz017_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -425,17 +408,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Omvormer -->
+        <!-- Blussysteem CO2 (koolstofdioxide) -->
         <Rule>
-          <Name>Omvormer</Name>
-          <Title>Omvormer</Title>
+          <Name>Blussysteem CO2 (koolstofdioxide)</Name>
+          <Title>Blussysteem CO2 (koolstofdioxide)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi025_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz018_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -443,17 +426,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Opstapplaats RPA -->
+        <!-- Blussysteem Hi-Fog (watermist) -->
         <Rule>
-          <Name>Opstapplaats RPA</Name>
-          <Title>Opstapplaats RPA</Title>
+          <Name>Blussysteem Hi-Fog (watermist)</Name>
+          <Title>Blussysteem Hi-Fog (watermist)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi027_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz019_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -461,17 +444,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Overdrachtsplaats ambulance-vervoer -->
+        <!-- Blussysteem N2 (stikstof) -->
         <Rule>
-          <Name>Overdrachtsplaats ambulance-vervoer</Name>
-          <Title>Overdrachtsplaats ambulance-vervoer</Title>
+          <Name>Blussysteem N2 (stikstof)</Name>
+          <Title>Blussysteem N2 (stikstof)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi028_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz020_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -479,17 +462,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Parkeerplaats -->
+        <!-- Blussysteem S (schuim) -->
         <Rule>
-          <Name>Parkeerplaats</Name>
-          <Title>Parkeerplaats</Title>
+          <Name>Blussysteem S (schuim)</Name>
+          <Title>Blussysteem S (schuim)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi029_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz021_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -497,17 +480,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Passeerplaats -->
+        <!-- Blussysteem W (water) -->
         <Rule>
-          <Name>Passeerplaats</Name>
-          <Title>Passeerplaats</Title>
+          <Name>Blussysteem W (water)</Name>
+          <Title>Blussysteem W (water)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi030_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz022_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -515,17 +498,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Restaurant -->
+        <!-- Brandbestrijdingsmateriaal -->
         <Rule>
-          <Name>Restaurant</Name>
-          <Title>Restaurant</Title>
+          <Name>Brandbestrijdingsmateriaal</Name>
+          <Title>Brandbestrijdingsmateriaal</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi032_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz023_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -533,17 +516,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Rustplaats -->
+        <!-- Brandbluspomp -->
         <Rule>
-          <Name>Rustplaats</Name>
-          <Title>Rustplaats</Title>
+          <Name>Brandbluspomp</Name>
+          <Title>Brandbluspomp</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi033_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz024_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -551,17 +534,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Sleutelpaal of ringpaal -->
+        <!-- Brandblusser -->
         <Rule>
-          <Name>Sleutelpaal of ringpaal</Name>
-          <Title>Sleutelpaal of ringpaal</Title>
+          <Name>Brandblusser</Name>
+          <Title>Brandblusser</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi034_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz025_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -569,17 +552,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Solitair bouwwerk -->
+        <!-- Brandmeldinstallatie (BMC) -->
         <Rule>
-          <Name>Solitair bouwwerk</Name>
-          <Title>Solitair bouwwerk</Title>
+          <Name>Brandmeldinstallatie (BMC)</Name>
+          <Title>Brandmeldinstallatie (BMC)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi037_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz026_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -587,17 +570,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Solitair bouwwerk risicogevend -->
+        <!-- Brandmeldpaneel (BMP) -->
         <Rule>
-          <Name>Solitair bouwwerk risicogevend</Name>
-          <Title>Solitair bouwwerk risicogevend</Title>
+          <Name>Brandmeldpaneel (BMP)</Name>
+          <Title>Brandmeldpaneel (BMP)</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi035_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz027_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -605,17 +588,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Solitair bouwwerk, risico-ontvangend -->
+        <!-- Brandslanghaspel -->
         <Rule>
-          <Name>Solitair bouwwerk, risico-ontvangend</Name>
-          <Title>Solitair bouwwerk, risico-ontvangend</Title>
+          <Name>Brandslanghaspel</Name>
+          <Title>Brandslanghaspel</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi036_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz028_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -623,17 +606,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Straattheater -->
+        <!-- Brandweer info-kast -->
         <Rule>
-          <Name>Straattheater</Name>
-          <Title>Straattheater</Title>
+          <Name>Brandweer info-kast</Name>
+          <Title>Brandweer info-kast</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi038_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz029_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -641,17 +624,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Strandpaal, paal -->
+        <!-- Buisleiding afnamepunt -->
         <Rule>
-          <Name>Strandpaal, paal</Name>
-          <Title>Strandpaal, paal</Title>
+          <Name>Buisleiding afnamepunt</Name>
+          <Title>Buisleiding afnamepunt</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi039_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz030_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -659,17 +642,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Stuwrichting ventilaties -->
+        <!-- Buisleiding HD afnamepunt -->
         <Rule>
-          <Name>Stuwrichting ventilaties</Name>
-          <Title>Stuwrichting ventilaties</Title>
+          <Name>Buisleiding HD afnamepunt</Name>
+          <Title>Buisleiding HD afnamepunt</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi040_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz031_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -677,17 +660,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Uitzichtpunt -->
+        <!-- Buisleiding HD vulpunt -->
         <Rule>
-          <Name>Uitzichtpunt</Name>
-          <Title>Uitzichtpunt</Title>
+          <Name>Buisleiding HD vulpunt</Name>
+          <Title>Buisleiding HD vulpunt</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi041_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz032_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -695,17 +678,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Verboden voor heli’s om te landen -->
+        <!-- Buisleiding LD afnamepunt -->
         <Rule>
-          <Name>Verboden voor heli’s om te landen</Name>
-          <Title>Verboden voor heli’s om te landen</Title>
+          <Name>Buisleiding LD afnamepunt</Name>
+          <Title>Buisleiding LD afnamepunt</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi042_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz033_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -713,17 +696,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Vuurhaard -->
+        <!-- Buisleiding LD vulpunt -->
         <Rule>
-          <Name>Vuurhaard</Name>
-          <Title>Vuurhaard</Title>
+          <Name>Buisleiding LD vulpunt</Name>
+          <Title>Buisleiding LD vulpunt</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi043_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz034_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -731,17 +714,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Vuurwerkafsteekplaats -->
+        <!-- Buisleiding vulpunt -->
         <Rule>
-          <Name>Vuurwerkafsteekplaats</Name>
-          <Title>Vuurwerkafsteekplaats</Title>
+          <Name>Buisleiding vulpunt</Name>
+          <Title>Buisleiding vulpunt</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi044_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz035_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -749,17 +732,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Wegafsluiting -->
+        <!-- Eerste hulp -->
         <Rule>
-          <Name>Wegafsluiting</Name>
-          <Title>Wegafsluiting</Title>
+          <Name>Eerste hulp</Name>
+          <Title>Eerste hulp</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi046_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz036_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -767,17 +750,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Wegafsluiting passeerbaar -->
+        <!-- Flitslicht -->
         <Rule>
-          <Name>Wegafsluiting passeerbaar</Name>
-          <Title>Wegafsluiting passeerbaar</Title>
+          <Name>Flitslicht</Name>
+          <Title>Flitslicht</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi045_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz037_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -785,17 +768,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Wildrooster -->
+        <!-- Gas detectiepaneel -->
         <Rule>
-          <Name>Wildrooster</Name>
-          <Title>Wildrooster</Title>
+          <Name>Gas detectiepaneel</Name>
+          <Title>Gas detectiepaneel</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi047_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz038_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -803,17 +786,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Windvaan -->
+        <!-- Generator -->
         <Rule>
-          <Name>Windvaan</Name>
-          <Title>Windvaan</Title>
+          <Name>Generator</Name>
+          <Title>Generator</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi048_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz039_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -821,17 +804,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Zendmast -->
+        <!-- Kadeaansluiting blusboot -->
         <Rule>
-          <Name>Zendmast</Name>
-          <Title>Zendmast</Title>
+          <Name>Kadeaansluiting blusboot</Name>
+          <Title>Kadeaansluiting blusboot</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi049_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz040_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -839,17 +822,17 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Zittafel -->
+        <!-- Meterkast elektra en gas -->
         <Rule>
-          <Name>Zittafel</Name>
-          <Title>Zittafel</Title>
+          <Name>Meterkast elektra en gas</Name>
+          <Title>Meterkast elektra en gas</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi050_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz041_a.svg"/>
                 <Format>image/svg+xml</Format>
               </ExternalGraphic>
               <Size>32</Size>
@@ -857,18 +840,360 @@
           </PointSymbolizer>
         </Rule>
 
-        <!-- Zwaartepunt -->
+        <!-- Meterkast elektra en water -->
         <Rule>
-          <Name>Zwaartepunt</Name>
-          <Title>Zwaartepunt</Title>
+          <Name>Meterkast elektra en water</Name>
+          <Title>Meterkast elektra en water</Title>
           <ogc:Filter>
             <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <PointSymbolizer>
             <Graphic>
               <ExternalGraphic>
-                <OnlineResource xlink:href="./symbols/svg/poi051_a.svg"/>
+                <OnlineResource xlink:href="./symbols/svg/vvz042_a.svg"/>
                 <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Meterkast elektra, gas en water -->
+        <Rule>
+          <Name>Meterkast elektra, gas en water</Name>
+          <Title>Meterkast elektra, gas en water</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz043_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Meterkast gas en water -->
+        <Rule>
+          <Name>Meterkast gas en water</Name>
+          <Title>Meterkast gas en water</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz044_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Nevenpaneel (NP) -->
+        <Rule>
+          <Name>Nevenpaneel (NP)</Name>
+          <Title>Nevenpaneel (NP)</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz045_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Niet bruikbaar -->
+        <Rule>
+          <Name>Niet bruikbaar</Name>
+          <Title>Niet bruikbaar</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz046_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Nooddouche -->
+        <Rule>
+          <Name>Nooddouche</Name>
+          <Title>Nooddouche</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz047_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Noodstop -->
+        <Rule>
+          <Name>Noodstop</Name>
+          <Title>Noodstop</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz048_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Oilboom_afzet -->
+        <Rule>
+          <Name>Oilboom_afzet</Name>
+          <Title>Oilboom_afzet</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/png/oilboom_afzet.png"/>
+                <Format>image/png</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Oilboom_opstel -->
+        <Rule>
+          <Name>Oilboom_opstel</Name>
+          <Title>Oilboom_opstel</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/png/oilboom_opstel.png"/>
+                <Format>image/png</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Ontruimingspaneel -->
+        <Rule>
+          <Name>Ontruimingspaneel</Name>
+          <Title>Ontruimingspaneel</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz050_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Oogdouche -->
+        <Rule>
+          <Name>Oogdouche</Name>
+          <Title>Oogdouche</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz051_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Overdruk ventilatie -->
+        <Rule>
+          <Name>Overdruk ventilatie</Name>
+          <Title>Overdruk ventilatie</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz052_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Rookwarmteafvoer RWA -->
+        <Rule>
+          <Name>Rookwarmteafvoer RWA</Name>
+          <Title>Rookwarmteafvoer RWA</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz053_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Schacht of kanaal -->
+        <Rule>
+          <Name>Schacht of kanaal</Name>
+          <Title>Schacht of kanaal</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz054_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Schermenponton -->
+        <Rule>
+          <Name>Schermenponton</Name>
+          <Title>Schermenponton</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/png/schermenponton.png"/>
+                <Format>image/png</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Sprinklermeldinstallatie (SMC) -->
+        <Rule>
+          <Name>Sprinklermeldinstallatie (SMC)</Name>
+          <Title>Sprinklermeldinstallatie (SMC)</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz055_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Verzamelplaats -->
+        <Rule>
+          <Name>Verzamelplaats</Name>
+          <Title>Verzamelplaats</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz056_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Voedingspunt SVM -->
+        <Rule>
+          <Name>Voedingspunt SVM</Name>
+          <Title>Voedingspunt SVM</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/png/voedingspunt_schuim.png"/>
+                <Format>image/png</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- Water-reduceer (drukbegrenzer) -->
+        <Rule>
+          <Name>Water-reduceer (drukbegrenzer)</Name>
+          <Title>Water-reduceer (drukbegrenzer)</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/svg/vvz057_a.svg"/>
+                <Format>image/svg+xml</Format>
+              </ExternalGraphic>
+              <Size>32</Size>
+            </Graphic>
+          </PointSymbolizer>
+        </Rule>
+
+        <!-- tijdelijke wegafsluiting -->
+        <Rule>
+          <Name>tijdelijke wegafsluiting</Name>
+          <Title>tijdelijke wegafsluiting</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo><ogc:Literal>0</ogc:Literal><ogc:Literal>1</ogc:Literal></ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <PointSymbolizer>
+            <Graphic>
+              <ExternalGraphic>
+                <OnlineResource xlink:href="./symbols/png/tijdelijke_wegafsluiting.png"/>
+                <Format>image/png</Format>
               </ExternalGraphic>
               <Size>32</Size>
             </Graphic>
