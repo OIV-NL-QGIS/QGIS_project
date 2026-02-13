@@ -349,6 +349,10 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
     def close_bouwlaag_tekenen_show_base(self):
         """destroy and close self"""
         self.activatePan()
+        try:
+            self.selectTool.geomSelected.disconnect()
+        except:
+            None
         self.close()
         self.parent.show_subwidget(False)
         self.drawbuttonframe.setVisible(False)
