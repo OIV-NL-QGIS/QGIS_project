@@ -106,8 +106,8 @@
           <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
           <se:LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Stroke>
-              <se:SvgParameter name="stroke">#e31a1c</se:SvgParameter>
-              <se:SvgParameter name="stroke-width">0.2</se:SvgParameter>
+              <se:SvgParameter name="stroke">#000000</se:SvgParameter>
+              <se:SvgParameter name="stroke-width">0.1</se:SvgParameter>
               <se:SvgParameter name="stroke-linejoin">mitre</se:SvgParameter>
               <se:SvgParameter name="stroke-linecap">round</se:SvgParameter>
               <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
