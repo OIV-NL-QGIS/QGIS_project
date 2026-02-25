@@ -22,7 +22,15 @@ def write_plugin_settings(key1, newData):
         json.dump(data, f)
 
 def bagpand_layername():
-    return PAND["bagpandlayername"] + QC.QgsExpressionContextUtils.globalScope().variable('OIV_bag_connection')
+    project = QC.QgsProject.instance()
+    root = project.layerTreeRoot()
+    group = root.findGroup("BAG")
+    active_layer = None
+    if group:
+        for child in group.children():
+            if child.isVisible():
+                active_layer = child.layer()
+    return active_layer.name()
 
 OIV_VERSION = '3.7.0'
 
