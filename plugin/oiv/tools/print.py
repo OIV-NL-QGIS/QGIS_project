@@ -1,7 +1,7 @@
 import os
 import qgis.core as QC
 import qgis.PyQt.QtCore as PQtC
-from PyQt5.QtXml import QDomDocument
+from qgis.PyQt.QtXml import QDomDocument
 
 
 import oiv.helpers.utils_core as UC
