@@ -23,7 +23,7 @@
 !define BUILDTYPE ""
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
-
+ 
 !define VERSION 3.7.2
 !define PLUGINVERSION 3.7.2
 !define QGISVERSION "QGIS340"
