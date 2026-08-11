@@ -176,12 +176,11 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def delete_multi(self, layerNames):
         reply = MSG.showMsgBox('deleteobject_question')
+        if not reply:
+            return
         for layerName in layerNames:
             layer = UC.getlayer_byname(layerName)
-            if reply:
-                DH.temp_delete_feature_multi(layer, 'Bouwlaag')
-            else:
-                layer.selectByIds([])
+            EF.delete_features(layer, self.editableLayerNames, confirm=False)
 
     def run_delete_tool(self):
         """activate delete feature tool"""
@@ -197,9 +196,9 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.connect(self.delete)
 
     def delete(self, ilayer, ifeature):
-        """delete a feature"""
-        reply = DH.temp_delete_feature(ilayer, ifeature, 'Bouwlaag', self.editableLayerNames)
-        #reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
+        """Delete a feature"""
+        ilayer.selectByIds([ifeature.id()])
+        reply = EF.delete_features(ilayer, self.editableLayerNames, confirm=True)
         if reply == 'Retry':
             self.run_delete_tool()
         self.selectTool.geomSelected.disconnect()

@@ -32,14 +32,14 @@ def bagpand_layername():
                 active_layer = child.layer()
     return active_layer.name()
 
-OIV_VERSION = '3.7.2'
+OIV_VERSION = '3.7.6'
 
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
     "compatibleDbVersion": {
-        "min": 3700,
-        "max": 3702
+        "min": 3705,
+        "max": 3706
     },
     "menulocation": "&OIV Objecten",
     "settingsname": "Configure",
@@ -73,14 +73,14 @@ PAND = {
 
 WERKVOORRAAD = {
     "tablelayertranslate": {
-        "Werkvoorraad bouwlaag - punt": "werkvoorraad_punt",
-        "Werkvoorraad bouwlaag - label": "werkvoorraad_label",
-        "Werkvoorraad bouwlaag - lijn": "werkvoorraad_lijn",
-        "Werkvoorraad bouwlaag - vlak": "werkvoorraad_vlak",
-        "Werkvoorraad object - punt": "werkvoorraad_punt",
-        "Werkvoorraad object - label": "werkvoorraad_label",
-        "Werkvoorraad object - lijn": "werkvoorraad_lijn",
-        "Werkvoorraad object - vlak": "werkvoorraad_vlak"
+        "Werkvoorraad bouwlaag - punt": "mobiel_sync.werkvoorraad_symbool",
+        "Werkvoorraad bouwlaag - label": "mobiel_sync.werkvoorraad_label",
+        "Werkvoorraad bouwlaag - lijn": "mobiel_sync.werkvoorraad_lijn",
+        "Werkvoorraad bouwlaag - vlak": "mobiel_sync.werkvoorraad_vlak",
+        "Werkvoorraad object - punt": "mobiel_sync.werkvoorraad_symbool",
+        "Werkvoorraad object - label": "mobiel_sync.werkvoorraad_label",
+        "Werkvoorraad object - lijn": "mobiel_sync.werkvoorraad_lijn",
+        "Werkvoorraad object - vlak": "mobiel_sync.werkvoorraad_vlak"
     }    
 }
 

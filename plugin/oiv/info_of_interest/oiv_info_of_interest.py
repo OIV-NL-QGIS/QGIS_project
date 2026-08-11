@@ -207,8 +207,9 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.connect(self.delete)
 
     def delete(self, ilayer, ifeature):
-        """delete a feature"""
-        reply = EF.delete_feature(ilayer, ifeature, self.editableLayerNames, self.iface)
+        """Delete a feature"""
+        ilayer.selectByIds([ifeature.id()])
+        reply = EF.delete_features(ilayer, self.editableLayerNames, confirm=True)
         if reply == 'Retry':
             self.run_delete_tool()
         self.selectTool.geomSelected.disconnect()

@@ -181,4 +181,14 @@ MESSAGES = {
         "header": 'Let op!',
         "body": 'Bestand bestaat al, wilt u het bestand overschrijven?'
     },
+    'werkvoorraad_conflict_overgeslagen': {
+        "type": 'warning',
+        "header": 'Conflict niet afgehandeld',
+        "body": 'Er staan 1 of meerdere conflicten in de werkvoorraad.\nDeze moeten handmatig afgehandeld worden.'
+    },
+    'werkvoorraad_meerdere_conflicten': {
+        "type": 'warning',
+        "header": 'Conflict één tegelijk',
+        "body": 'Conflicten kunnen alleen één voor één afgehandeld worden.\nSelecteer één conflict en ga verder.'
+    },
 }

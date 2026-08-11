@@ -2,26 +2,31 @@
 import qgis.core as QC
 import oiv.helpers.messages as MSG
 
-def delete_feature(ilayer, ifeature, rightLayerNames, _iface):
-    """delete a feature"""
-    if ilayer.name() in rightLayerNames:
-        ids = []
-        ids.append(ifeature.id())
-        ilayer.selectByIds(ids)
-        ilayer.startEditing()
-        reply = MSG.showMsgBox('deleteobject')
+
+def delete_features(ilayer, editableLayerNames, confirm):
+    """Delete selected features from a QGIS layer"""
+    if ilayer.name() not in editableLayerNames:
+        MSG.showMsgBox('layernoteditable')
+        ilayer.selectByIds([])
+        return "Done"
+    features = ilayer.selectedFeatures()
+    if not features:
+        return "Done"
+    # Alleen bevestigen als dit gevraagd wordt
+    if confirm:
+        reply = MSG.showMsgBox('deleteobject_question')
         if not reply:
             ilayer.selectByIds([])
-        elif reply:
-            ilayer.deleteFeature(ifeature.id())
-            ilayer.commitChanges()
-        return "Done"
-    else:
-        reply = MSG.showMsgBox('noselectedtodelete')
-        if reply:
-            ilayer.selectByIds([])
             return "Done"
-        return "Retry"
+    ilayer.startEditing()
+    for feature in features:
+        ilayer.deleteFeature(feature.id())
+    if ilayer.commitChanges():
+        ilayer.selectByIds([])
+        ilayer.triggerRepaint()
+        return "Done"
+    ilayer.rollBack()
+    return "Retry"
 
 def getfeature_geometry(featGeom, layerType):
     """get geometry type of a feature"""

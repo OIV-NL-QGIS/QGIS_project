@@ -174,7 +174,7 @@
               <se:SvgParameter name="fill-opacity">1</se:SvgParameter>
             </se:Fill>
             <se:Stroke>
-              <se:SvgParameter name="stroke">#33a02c</se:SvgParameter>
+              <se:SvgParameter name="stroke">#b2df8a</se:SvgParameter>
               <se:SvgParameter name="stroke-width">0.26</se:SvgParameter>
               <se:SvgParameter name="stroke-linejoin">mitre</se:SvgParameter>
               <se:SvgParameter name="stroke-linecap">butt</se:SvgParameter>
@@ -189,7 +189,7 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:PropertyIsEqualTo>
               <ogc:PropertyName>soort</ogc:PropertyName>
-              <ogc:Literal>zwembad binnen</ogc:Literal>
+              <ogc:Literal>zwembad</ogc:Literal>
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <se:MaxScaleDenominator>2500</se:MaxScaleDenominator>
