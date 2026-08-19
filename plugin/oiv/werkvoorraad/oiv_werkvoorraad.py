@@ -84,7 +84,11 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
                     data = []
                     for fieldName in self.tableColumns:
                         if fieldName == 'modified_at':
-                            data.append(feat[fieldName].toString('yyyy-MM-dd HH:mm'))
+                            value = feat[fieldName]
+                            if value is None or value.isNull():
+                                data.append(None)
+                            else:
+                                data.append(value.toString('yyyy-MM-dd HH:mm'))
                         else:
                             data.append(feat[fieldName])
                     data.append(layerName)
