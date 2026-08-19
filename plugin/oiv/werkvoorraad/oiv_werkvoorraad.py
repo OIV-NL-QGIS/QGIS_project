@@ -37,6 +37,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.parent = parent
         self.iface = parent.iface
         self.canvas = parent.canvas
+        self.baseWidget = parent.baseWidget
         self.polygonSelectTool = parent.polygonSelectTool
 
     def initUI(self):
@@ -49,6 +50,12 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.btn_opslaan.clicked.connect(self.execute_selected_rows)
         self.btn_terug.clicked.connect(self.close_werkvoorraad)
         titleBar = QT.getTitleBar()
+        self.baseWidget.done.setVisible(False)
+        self.baseWidget.done_png.setVisible(False)
+        self.baseWidget.filter_objecten.setVisible(False)
+        self.baseWidget.label_filter.setVisible(False)
+        self.baseWidget.info_of_interest.setVisible(False)
+        self.baseWidget.label_info_of_interest.setVisible(False)
         self.setTitleBarWidget(titleBar)
         self.select_by_polygon.clicked.connect(self.run_select)
         self.tbl_werkvoorraad.cellClicked.connect(self.select_on_canvas)
@@ -352,6 +359,14 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.fr_conflict.setVisible(False)
         self.btn_opslaan.clicked.disconnect()
         self.btn_terug.clicked.disconnect()
+        self.baseWidget.done.setVisible(True)
+        self.baseWidget.done_png.setVisible(True)
+        self.baseWidget.filter_objecten.setVisible(True)
+        self.baseWidget.label_filter.setVisible(True)
+        self.baseWidget.info_of_interest.setVisible(True)
+        self.baseWidget.label_info_of_interest.setVisible(True)
+        self.baseWidget.cadframe.setVisible(False)
+        self.baseWidget.tabWidget.setTabVisible(1, True)
         self.close()
         self.parent.show_subwidget(False)
         del self
