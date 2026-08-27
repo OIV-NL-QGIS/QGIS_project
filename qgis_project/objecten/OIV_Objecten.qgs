@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUser="JoostDeen" version="3.44.11-Solothurn" saveDateTime="2026-08-19T18:46:25" projectname="OIV - Objecten v3.7.6 - Leeuwarden" saveUserFull="Joost Deen">
+<qgis saveUser="JoostDeen" version="3.44.11-Solothurn" saveDateTime="2026-08-19T21:19:03" projectname="OIV - Objecten v3.7.6 - Leeuwarden" saveUserFull="Joost Deen">
   <homePath path=""/>
   <title>OIV - Objecten v3.7.6 - Leeuwarden</title>
   <transaction mode="Disabled"/>
@@ -12201,6 +12201,12 @@ def my_form_open(dialog, layer, feature):
           <column width="-1" name="modified_by" type="field" hidden="0"/>
           <column width="-1" name="bouwlaag" type="field" hidden="0"/>
           <column width="-1" name="bouwlaag_object" type="field" hidden="0"/>
+          <column width="-1" name="bouwlaag_id" type="field" hidden="0"/>
+          <column width="-1" name="object_id" type="field" hidden="0"/>
+          <column width="-1" name="operatie" type="field" hidden="0"/>
+          <column width="-1" name="soort" type="field" hidden="0"/>
+          <column width="-1" name="brontabel" type="field" hidden="0"/>
+          <column width="-1" name="status" type="field" hidden="0"/>
           <column width="-1" type="actions" hidden="1"/>
         </columns>
       </attributetableconfig>
@@ -100125,7 +100131,7 @@ def my_form_open(dialog, layer, feature):
   <Sensors/>
   <ProjectViewSettings rotation="0" UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent xmin="173695.56203305182862096" ymin="529431.30101385735906661" xmax="174362.4919558045512531" ymax="529535.79694645456038415">
+    <DefaultViewExtent xmin="173915.97192205273313448" ymin="529431.30101385735906661" xmax="174142.08206680364673957" ymax="529535.79694645456038415">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["Amersfoort / RD New",BASEGEOGCRS["Amersfoort",DATUM["Amersfoort",ELLIPSOID["Bessel 1841",6377397.155,299.1528128,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4289]],CONVERSION["RD New",METHOD["Oblique Stereographic",ID["EPSG",9809]],PARAMETER["Latitude of natural origin",52.1561605555556,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8801]],PARAMETER["Longitude of natural origin",5.38763888888889,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8802]],PARAMETER["Scale factor at natural origin",0.9999079,SCALEUNIT["unity",1],ID["EPSG",8805]],PARAMETER["False easting",155000,LENGTHUNIT["metre",1],ID["EPSG",8806]],PARAMETER["False northing",463000,LENGTHUNIT["metre",1],ID["EPSG",8807]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Engineering survey, topographic mapping."],AREA["Netherlands - onshore, including Waddenzee, Dutch Wadden Islands and 12-mile offshore coastal zone."],BBOX[50.75,3.2,53.7,7.22]],ID["EPSG",28992]]</wkt>
         <proj4>+proj=sterea +lat_0=52.1561605555556 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +units=m +no_defs</proj4>
@@ -100190,7 +100196,7 @@ def my_form_open(dialog, layer, feature):
       </spatialrefsys>
     </CoordinateCustomCrs>
   </ProjectDisplaySettings>
-  <ProjectGpsSettings destinationLayer="Annotaties_a1f7520e_81ee_40a7_b92f_9944aa0263da" destinationLayerName="Annotaties object" autoAddTrackVertices="0" destinationLayerProvider="postgres" autoCommitFeatures="0" destinationFollowsActiveLayer="1" destinationLayerSource="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;mobiel&quot;.&quot;annotaties&quot; (geom) sql=&quot;bouwlaag_object&quot; = 'object'">
+  <ProjectGpsSettings destinationLayer="annotaties_f32ab182_1196_4be6_a4e3_4e7757221303" destinationLayerName="Annotaties bouwlaag" autoAddTrackVertices="0" destinationLayerProvider="postgres" autoCommitFeatures="0" destinationFollowsActiveLayer="1" destinationLayerSource="service='oiv' sslmode=allow key='id' srid=28992 type=Point checkPrimaryKeyUnicity='1' table=&quot;mobiel_sync&quot;.&quot;annotaties&quot; (geom) sql=bouwlaag = 1">
     <timeStampFields/>
   </ProjectGpsSettings>
 </qgis>

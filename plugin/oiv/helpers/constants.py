@@ -68,7 +68,8 @@ PAND = {
         "Werkvoorraad bouwlaag - punt",
         "Werkvoorraad bouwlaag - label",
         "Werkvoorraad bouwlaag - lijn",
-        "Werkvoorraad bouwlaag - vlak"],
+        "Werkvoorraad bouwlaag - vlak",
+        "Annotaties bouwlaag"],
 }
 
 WERKVOORRAAD = {
@@ -80,7 +81,9 @@ WERKVOORRAAD = {
         "Werkvoorraad object - punt": "mobiel_sync.werkvoorraad_symbool",
         "Werkvoorraad object - label": "mobiel_sync.werkvoorraad_label",
         "Werkvoorraad object - lijn": "mobiel_sync.werkvoorraad_lijn",
-        "Werkvoorraad object - vlak": "mobiel_sync.werkvoorraad_vlak"
+        "Werkvoorraad object - vlak": "mobiel_sync.werkvoorraad_vlak",
+        "Annotaties bouwlaag" : "mobiel.annotaties",
+        "Annotaties object" : "mobiel.annotaties",
     }    
 }
 
@@ -100,7 +103,8 @@ OBJECT = {
             'Werkvoorraad object - punt', 
             'Werkvoorraad object - label', 
             'Werkvoorraad object - lijn', 
-            'Werkvoorraad object - vlak'],
+            'Werkvoorraad object - vlak',
+            'Annotaties object'],
     "nogeotables": ["aanwezig", "historie", "gebruiksfunctie", "bedrijfshulpverlening", "contactpersoon", "scenario", "veilighv_org"],
     "objecttypes": ["Evenement A", "Evenement B", "Evenement C", "Natuur", "Objecten", "Water", "Infrastructuur"],
 }
