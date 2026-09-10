@@ -238,7 +238,8 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def delete(self, ilayer, ifeature):
         deleteLayerNames = [PC.OBJECT["objectlayername"], PC.OBJECT["terreinlayername"]]
-        reply = EF.delete_feature(ilayer, ifeature, deleteLayerNames, self.iface)
+        ilayer.selectByIds([ifeature.id()])
+        reply = EF.delete_features(ilayer, deleteLayerNames, True )
         if reply == 'Retry':
             self.run_delete_terrein()
         self.selectTool.geomSelected.disconnect(self.delete)

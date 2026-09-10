@@ -1,1 +1,1 @@
-{"BAGCONNECTION": {"active": "Database", "inactive": "PDOK"}, "DBCONNECTION": {"active": "test", "inactive": "prod", "filename": "pg_service.conf"}, "BACKGROUNDLAYER": "BRT"}
+{"BAGCONNECTION": {"active": "PDOK", "inactive": "Database"}, "DBCONNECTION": {"active": "test", "inactive": "prod", "filename": "pg_service.conf"}, "BACKGROUNDLAYER": "BRT"}
