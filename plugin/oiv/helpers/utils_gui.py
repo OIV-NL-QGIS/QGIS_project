@@ -99,7 +99,8 @@ def get_actions(whichConfig, actionDict):
         layerType = lyr[1]
         typeLayerName = lyr[2]
         idColumn = lyr[3]
-        editableLayerNames.append(layerName)
+        if layerName != PC.PAND["bouwlaaglayername"] and layerName != PC.OBJECT["objectlayername"]:
+            editableLayerNames.append(layerName)
         layer = UC.getlayer_byname(typeLayerName)
         if layerType == "point" or layerType == "label":
             moveLayerNames.append(layerName)
