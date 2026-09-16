@@ -369,7 +369,6 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 UC.write_layer(self.drawLayer, childFeature)
                 self.baseWidget.objectModified = True
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
-        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
 
 class MultiEditDialog(PQtW.QDialog):
     def __init__(self, parent=None):

@@ -6,7 +6,7 @@ import oiv.helpers.messages as MSG
 def delete_features(ilayer, editableLayerNames, confirm):
     """Delete selected features from a QGIS layer"""
     if ilayer.name() not in editableLayerNames:
-        MSG.showMsgBox('layernoteditable')
+        MSG.showMsgBox('noselectedtodelete')
         ilayer.selectByIds([])
         return "Done"
     features = ilayer.selectedFeatures()

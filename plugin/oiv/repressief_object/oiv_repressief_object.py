@@ -129,7 +129,6 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             self.deleteobjectFrame.setVisible(False)
             self.baseWidget.handleDoneBtn(False)
             UC.refresh_layers(self.iface)
-            reply = MSG.showMsgBox('deletedobject')
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""
