@@ -48,20 +48,10 @@ MESSAGES = {
         "header": 'Geen tekenlaag!',
         "body": 'U heeft geen grid of kaartblad aangeklikt!\n\nKlik a.u.b. op de juiste locatie.'
     },
-    'newobjectslowanswer': {
-        "type": 'warning',
-        "header": 'Server antwoord te traag',
-        "body": 'Geoserver antwoord te traag. Object is wel geplaatst.\n\nOpen het object door terug te gaan en hem te selecteren.'
-    },
     'deleteobject_question': {
         "type": 'question',
         "header": 'Continue?',
         "body": 'Weet u zeker dat u de geselecteerde feature wilt weggooien?'
-    },
-    'deletedobject': {
-        "type": 'information',
-        "header": 'Succesvol!',
-        "body": 'Het is succesvol verwijderd.'
     },
     'noselectedtodelete': {
         "type": 'information',
