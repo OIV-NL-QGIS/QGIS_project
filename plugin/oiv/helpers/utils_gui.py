@@ -63,6 +63,15 @@ def set_layer_substring(subString, bouwlaagOfObject='bouwlaag'):
                 lyr.startEditing()
     return "succes"
 
+def set_symbol_size_visible(widget, visible):
+    """change UI based on drawing points"""
+    if visible:
+        widget.defaultframe.setVisible(True)
+    else:
+        widget.defaultframe.setVisible(False)
+    widget.symbol_size.setVisible(visible)
+    widget.symbol_size_label.setVisible(visible)
+
 def set_lengte_oppervlakte_visibility(widget, lengteTF, straalTF, oppTF, offsetTF):
     """change UI based on drawing lines/polygons"""
     if True in (lengteTF, straalTF, oppTF, offsetTF):

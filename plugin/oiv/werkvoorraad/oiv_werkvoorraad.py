@@ -370,6 +370,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.info_of_interest.setVisible(True)
         self.baseWidget.label_info_of_interest.setVisible(True)
         self.baseWidget.cadframe.setVisible(False)
+        self.baseWidget.defaultframe.setVisible(False)
         self.baseWidget.tabWidget.setTabVisible(1, True)
         self.close()
         self.parent.show_subwidget(False)

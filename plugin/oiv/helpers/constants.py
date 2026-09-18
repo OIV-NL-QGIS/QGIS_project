@@ -34,6 +34,8 @@ def bagpand_layername():
 
 OIV_VERSION = '3.7.7'
 
+SYMBOLSIZE = ['klein', 'middel', 'groot']
+
 PLUGIN = {
     "name": "OIV Objecten",
     "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",

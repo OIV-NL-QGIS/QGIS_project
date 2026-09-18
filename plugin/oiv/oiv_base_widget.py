@@ -16,6 +16,7 @@ import oiv.repressief_object.oiv_repressief_object as ORO
 import oiv.repressief_object.oiv_objectnieuw as OON
 from .info_of_interest.oiv_info_of_interest import oivInfoOfInterestTekenWidget
 import oiv.helpers.constants as PC
+import oiv.helpers.utils_gui as UG
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), PLUGIN["basewidget"]))
@@ -64,6 +65,9 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         self.done.setVisible(False)
         self.done_png.setVisible(False)
         self.filterframe.setVisible(False)
+        self.defaultframe.setVisible(False)
+        self.symbol_size.addItems(PC.SYMBOLSIZE)
+        self.symbol_size.setCurrentIndex(1)
         self.cadframe.setVisible(False)
         titleBar = QT.getTitleBar()
         self.setTitleBarWidget(titleBar)
