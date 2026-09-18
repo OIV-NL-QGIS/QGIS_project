@@ -98,6 +98,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def open_georeferencer(self):
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
+        UG.set_symbol_size_visible(self.baseWidget, False)
         self.iface.mainWindow().findChildren(PQtW.QAction, 'mActionShowGeoreferencer')[0].trigger()
 
     def open_bgt_viewer(self):
@@ -177,6 +178,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseobjectFrame.setVisible(True)
         self.addobjectFrame.setVisible(False)
         self.georeferencer.clicked.disconnect(self.open_georeferencer)
+        UG.set_symbol_size_visible(self.baseWidget, False)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.control_buttons_addobjectframe(True, True, True, True, True)
         self.terug_add.clicked.disconnect(self.object_toevoegen_sluiten)
@@ -196,6 +198,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.selectTool.geomSelected.connect(self.edit_attribute)
 
     def run_create_grid(self):
+        UG.set_symbol_size_visible(self.baseWidget, False)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         gridWidget = GW.oivGridWidget(self)
         gridWidget.object_id.setText(self.object_id.text())
@@ -218,6 +221,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         self.drawTool.parent = self
         self.drawTool.baseWidget = self.baseWidget
         self.drawTool.layer = UC.getlayer_byname(PC.OBJECT["terreinlayername"])
+        UG.set_symbol_size_visible(self.baseWidget, False)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, True, True, True, True)
         self.drawTool.possibleSnapFeatures = possibleSnapFeatures
         self.drawTool.canvas = self.canvas
@@ -326,6 +330,7 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def run_import(self):
         """initiate import widget"""
+        UG.set_symbol_size_visible(self.baseWidget, False)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         importwidget = IFW.oivImportFileWidget(self)
         self.show_subwidget(True, importwidget)

@@ -239,10 +239,10 @@ def construct_feature(layerType, parentLayerName, points, objectId):
     else:
         return parentId, tempFeature
 
-def get_attributes(foreignKey, childFeature, snapAngle, input_id, drawLayer, whichConfig):
+def get_attributes(foreignKey, childFeature, snapAngle, input_id, drawLayer, whichConfig, defaultSize):
     drawLayerName = drawLayer.name()
     #haal de vraag voor de inputdialog vanuit de config file
-    query = "SELECT foreign_key, identifier, input_label, question, label_required, rotatie\
+    query = "SELECT foreign_key, identifier, input_label, question, label_required, rotatie, size_field\
              FROM {} WHERE child_layer = '{}'".format(whichConfig, drawLayerName)
     attrs = read_settings(query, False)
     labelTekst = user_input_label(attrs[4], attrs[3])
@@ -267,6 +267,8 @@ def get_attributes(foreignKey, childFeature, snapAngle, input_id, drawLayer, whi
             childFeature[attrs[0]] = foreignKey
         if snapAngle is not None:
             childFeature[attrs[5]] = int(snapAngle)
+        if defaultSize is not None:
+            childFeature[attrs[6]] = defaultSize
         return childFeature
     else:
         return 'Cancel'

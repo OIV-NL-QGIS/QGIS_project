@@ -49,6 +49,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
+        UG.set_symbol_size_visible(self.baseWidget, True)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.object_id.setVisible(False)
         self.drawbuttonframe.setVisible(True)
@@ -136,6 +137,8 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.info_of_interest.setVisible(True)
         self.baseWidget.label_info_of_interest.setVisible(True)
         self.baseWidget.cadframe.setVisible(False)
+        self.baseWidget.defaultframe.setVisible(False)
+        self.baseWidget.symbol_size.setCurrentIndex(1)
         self.baseWidget.tabWidget.setTabVisible(0, True)
         #self.terug.clicked.disconnect(self.close_object_tekenen_show_base)
         del self
@@ -324,9 +327,11 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 pointTool.snapping = True
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)
+            UG.set_symbol_size_visible(self.baseWidget, True)
             UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
             pointTool.onGeometryAdded = self.place_feature
         else:
+            UG.set_symbol_size_visible(self.baseWidget, False)
             drawTool = self.parent.drawTool
             if self.drawLayerType == "LineString":
                 drawTool.captureMode = 1
@@ -342,10 +347,12 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             drawTool.baseWidget = self.baseWidget
 
     def place_feature(self, points, snapAngle):
+        defaultSize = None
         parentId = None
         translateGeom = False
         self.iface.setActiveLayer(self.drawLayer)
         if self.drawLayerType == 'Point':
+            defaultSize = self.baseWidget.symbol_size.currentText()
             if self.identifier in self.anchorPoints["anchorpointtop"] or self.identifier in self.anchorPoints["anchorpointbottom"]:
                 result = CH.get_type_layer_ob(self.drawLayer.name())
                 typeLayerName = result[0]
@@ -364,7 +371,7 @@ class oivObjectTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                     delta = 0.5
                 childFeature = UC.move_point(childFeature, delta * size, snapAngle)
         if parentId is not None:
-            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.OBJECT["configtable"])
+            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.OBJECT["configtable"], defaultSize)
             if buttonCheck != 'Cancel':
                 UC.write_layer(self.drawLayer, childFeature)
                 self.baseWidget.objectModified = True

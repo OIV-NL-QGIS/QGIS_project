@@ -48,6 +48,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def initUI(self):
         """intitiate the UI elemets on the widget"""
+        UG.set_symbol_size_visible(self.baseWidget, True)
         UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
         self.pand_id.setVisible(False)
         self.drawbuttonframe.setVisible(True)
@@ -293,8 +294,10 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             pointTool.layer = self.drawLayer
             self.canvas.setMapTool(pointTool)
             UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
+            UG.set_symbol_size_visible(self.baseWidget, True)
             pointTool.onGeometryAdded = self.place_feature
         else:
+            UG.set_symbol_size_visible(self.baseWidget, False)
             drawTool = self.parent.drawTool
             if self.drawLayerType == "LineString":
                 drawTool.captureMode = 1
@@ -311,11 +314,13 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def place_feature(self, points, snapAngle):
         """Save and place feature on the canvas"""
+        defaultSize = None
         parentId = None
         translateGeom = False
         self.iface.setActiveLayer(self.drawLayer)
         objectId = self.pand_id.text()
         if self.drawLayerType == 'Point':
+            defaultSize = self.baseWidget.symbol_size.currentText()
             if self.identifier in self.anchorPoints["anchorpointtop"] or self.identifier in self.anchorPoints["anchorpointbottom"]:
                 result = CH.get_type_layer_bl(self.drawLayer.name())
                 typeLayerName = result[0]
@@ -334,11 +339,10 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                     delta = 0.5
                 childFeature = UC.move_point(childFeature, delta * size, snapAngle)
         if parentId is not None:
-            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.PAND["configtable"])
+            buttonCheck = UC.get_attributes(parentId, childFeature, snapAngle, self.identifier, self.drawLayer, PC.PAND["configtable"], defaultSize)
             if buttonCheck != 'Cancel':
                 UC.write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
-        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
 
     def activatePan(self):
         """trigger pan function to loose other functions"""
@@ -363,6 +367,8 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.info_of_interest.setVisible(True)
         self.baseWidget.label_info_of_interest.setVisible(True)
         self.baseWidget.cadframe.setVisible(False)
+        self.baseWidget.defaultframe.setVisible(False)
+        self.baseWidget.symbol_size.setCurrentIndex(1)
         self.baseWidget.tabWidget.setTabVisible(1, True)
         #self.terug.clicked.connect(self.close_bouwlaag_tekenen_show_base)
         del self
