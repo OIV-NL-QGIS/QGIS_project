@@ -343,6 +343,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
             if buttonCheck != 'Cancel':
                 UC.write_layer(self.drawLayer, childFeature)
         self.run_tekenen('dummy', self.drawLayer.name(), self.identifier)
+        UG.set_lengte_oppervlakte_visibility(self.baseWidget, False, False, False, False)
 
     def activatePan(self):
         """trigger pan function to loose other functions"""
