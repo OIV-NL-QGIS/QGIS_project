@@ -38,7 +38,7 @@ SYMBOLSIZE = ['klein', 'middel', 'groot']
 
 PLUGIN = {
     "name": "OIV Objecten",
-    "toolbartext": "OIV " + OIV_VERSION + " | Actieve bouwlaag: ",
+    "toolbartext": "OIV " + OIV_VERSION + " | Actieve verdieping: ",
     "compatibleDbVersion": {
         "min": 3706,
         "max": 3707
@@ -57,7 +57,7 @@ PLUGIN = {
 PAND = {
     "bagpandlayername": "BAG panden - ",
     "bouwlaaglayername": "Bouwlagen",
-    "bouwlagen": {
+    "verdiepingen": {
         "min": -10,
         "max": 30
     },
@@ -132,13 +132,13 @@ HELPURL = {
 }
 
 STATUSRGL = {
-    "start" : "Selecteer tab Terrein of Bouwlaag",
+    "start" : "Selecteer tab Terrein of Verdieping",
     "object": {
         "toggletab": "Object: klik voor nieuw gebouw op BAG-pand, anders op bgt-terrein, voor bestaand op repressief object symbool of terrein.",
 
     },
-    "bouwlaag": {
-        "toggletab": "Bouwlaag: klik voor nieuw op (roze) bag-pand, voor bestaand op (gele) Bouwlaag.",
+    "verdieping": {
+        "toggletab": "Verdieping: klik voor nieuw op (roze) bag-pand, voor bestaand op (gele) Verdieping.",
   
     },
     "info_of_interest": {

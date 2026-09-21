@@ -67,23 +67,19 @@ class oiv(PQtW.QWidget):
         label.setText(PLUGIN["toolbartext"])
         # init dropdown to switch floors
         self.projCombo = PQtW.QComboBox(self.iface.mainWindow())
-        bouwlagen = PAND["bouwlagen"]
+        bouwlagen = PAND["verdiepingen"]
         minBouwlaag = bouwlagen["min"]
         maxBouwlaag = bouwlagen["max"]
         for i in range(maxBouwlaag - minBouwlaag + 1):
-            if maxBouwlaag - i != 0:
-                if maxBouwlaag - i == 1:
-                    init_index = i
-                self.projCombo.addItem(str(maxBouwlaag - i))
+            if maxBouwlaag - i == 0:
+                init_index = i
+            self.projCombo.addItem(str(maxBouwlaag - i))
         self.projComboAction = self.toolbar.addWidget(self.projCombo)
         self.projCombo.setFixedWidth(100)
         self.projCombo.setMaxVisibleItems(30)
-        # set intial index to floor 1
         self.projCombo.setCurrentIndex(init_index)
         # connect to set layer subset if the index is changed
         self.projCombo.currentIndexChanged.connect(self.set_layer_subset_toolbar)
-        # init projectVariable to communicate from plugin to qgis
-        QC.QgsExpressionContextUtils.setProjectVariable(QC.QgsProject.instance(), 'actieve_bouwlaag', 1)
 
     def unload(self):
         """remove the plugin menu item and remove the widgets"""
@@ -104,8 +100,6 @@ class oiv(PQtW.QWidget):
         """laag filter aanpassen naar de geselecteerd bouwlaag"""
         subString = "bouwlaag = " + str(self.projCombo.currentText())
         UG.set_layer_substring(subString)
-        project = QC.QgsProject.instance()
-        QC.QgsExpressionContextUtils.setProjectVariable(project, 'actieve_bouwlaag', int(self.projCombo.currentText()))
 
     def run_config(self):
         configWidget = OC.oivConfigWidget(self)
@@ -131,12 +125,11 @@ class oiv(PQtW.QWidget):
             self.toolbar.setEnabled(False)
             self.action.setEnabled(False)
         else:
-            # always start from floor 1
             if not self.basewidget:
                 self.basewidget = OB.oivBaseWidget(self)
-            subString = "bouwlaag = 1"
+            subString = "bouwlaag = 0"
             UG.set_layer_substring(subString)
-            index = self.projCombo.findText('1', PQtC.Qt.MatchFixedString)
+            index = self.projCombo.findText('0', PQtC.Qt.MatchFixedString)
             if index >= 0:
                 self.projCombo.setCurrentIndex(index)
             self.iface.addDockWidget(QT.getWidgetType(), self.basewidget)

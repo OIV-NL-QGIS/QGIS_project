@@ -27,7 +27,6 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     repressiefObjectWidget = None
     pandwidget = None
-    activeTab = None
     objectModified = False
     rotate_move_bouwlaag_values = {
         "deltaXmtr" : 0,
@@ -129,7 +128,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             pass
 
     def ask_history(self):
-        if self.activeTab == 'Object' and self.objectModified == True:
+        if self.objectModified == True:
             reply = MSG.showMsgBox('modifyHistory')
             if not reply:
                 self.repressiefObjectWidget.run_objectgegevens_bewerken()
@@ -150,7 +149,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
         elif index == 1:
             self.tabWidget.setCurrentIndex(1)
             self.run_identify_pand()
-            self.statusregelBouwlaag.setText(STATUSRGL["bouwlaag"]["toggletab"])
+            self.statusregelBouwlaag.setText(STATUSRGL["verdieping"]["toggletab"])
             self.handleDoneBtn(True)
             self.done.clicked.connect(self.ask_history)
             self.tabWidget.setTabVisible(0, False)
@@ -187,11 +186,9 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             if ilayer.name() == PAND["bouwlaaglayername"]:
                 objectId = str(ifeature["pand_id"])
                 self.run_bouwlagen(objectId, False)
-                self.activeTab = 'Bouwlaag'
             elif ilayer.name() == bagpand_layername():
                 objectId = str(ifeature["identificatie"])
                 self.run_bouwlagen(objectId, True)
-                self.activeTab = 'Bouwlaag'
         #if another layer is identified there is no object that can be determined, so a message is send to the user
         else:
             MSG.showMsgBox('noidentifiedobject')
@@ -207,24 +204,20 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
             objectId = str(ifeature["identificatie"])
             bron = "BAG"
             bron_tabel = "Pand"
-            self.activeTab = 'Object'
             self.run_new_object(objectId, bron, bron_tabel)
         elif ilayer.name() == bagpand_layername():
             objectId = str(ifeature["identificatie"])
             bron = ifeature["bron"]
             bron_tabel = ifeature["bron_tbl"]
-            self.activeTab = 'Object'
             self.run_new_object(objectId, bron, bron_tabel)
         elif ilayer.name() == OBJECT["objectlayername"]:
             objectId = ifeature["id"]
             formeleNaam = ifeature["formelenaam"]
-            self.activeTab = 'Object'
             self.run_object(formeleNaam, objectId)
         elif ilayer.name() == OBJECT["terreinlayername"]:
             objectId = ifeature["object_id"]
             request = QC.QgsFeatureRequest().setFilterExpression('"id" = ' + str(objectId))
             ifeature = UC.featureRequest(drawLayer, request)
-            self.activeTab = 'Object'
             if ifeature:
                 formeleNaam = ifeature["formelenaam"]
                 self.run_object(formeleNaam, objectId)

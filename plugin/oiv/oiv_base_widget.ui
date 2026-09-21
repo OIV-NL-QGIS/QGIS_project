@@ -446,7 +446,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                <normaloff>:/plugins/oiv/config_files/png/bouwlagen.png</normaloff>:/plugins/oiv/config_files/png/bouwlagen.png</iconset>
              </attribute>
              <attribute name="title">
-              <string>Bouwlaag</string>
+              <string>Verdieping</string>
              </attribute>
              <attribute name="toolTip">
               <string>Klik voor planvorming Bouwlaag / pand</string>
