@@ -67,13 +67,13 @@ class oiv(PQtW.QWidget):
         label.setText(PLUGIN["toolbartext"])
         # init dropdown to switch floors
         self.projCombo = PQtW.QComboBox(self.iface.mainWindow())
-        bouwlagen = PAND["verdiepingen"]
-        minBouwlaag = bouwlagen["min"]
-        maxBouwlaag = bouwlagen["max"]
-        for i in range(maxBouwlaag - minBouwlaag + 1):
-            if maxBouwlaag - i == 0:
+        verdiepingen = PAND["verdiepingen"]
+        minVerdieping = verdiepingen["min"]
+        maxVerdieping = verdiepingen["max"]
+        for i in range(maxVerdieping - minVerdieping + 1):
+            if maxVerdieping - i == 0:
                 init_index = i
-            self.projCombo.addItem(str(maxBouwlaag - i))
+            self.projCombo.addItem(str(maxVerdieping - i))
         self.projComboAction = self.toolbar.addWidget(self.projCombo)
         self.projCombo.setFixedWidth(100)
         self.projCombo.setMaxVisibleItems(30)
@@ -97,7 +97,7 @@ class oiv(PQtW.QWidget):
         self.iface.removeToolBarIcon(self.action)
 
     def set_layer_subset_toolbar(self):
-        """laag filter aanpassen naar de geselecteerd bouwlaag"""
+        """laag filter aanpassen naar de geselecteerd verdieping"""
         subString = "bouwlaag = " + str(self.projCombo.currentText())
         UG.set_layer_substring(subString)
 

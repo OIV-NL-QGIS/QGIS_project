@@ -104,7 +104,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         self.canvas.setMapTool(self.parent.selectTool)
 
     def set_layer_subset_bouwlaag(self):
-        """set layers substring which are a childlayer of "bouwlagen"""
+        """set layers substring which are a childlayer of "verdiepingen"""
         comboboxText = str(self.bouwlaag.currentText())
         if comboboxText != "":
             sub_string = "bouwlaag = " + str(self.bouwlaag.currentText())

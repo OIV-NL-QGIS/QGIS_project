@@ -134,7 +134,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         return layer
 
     def get_centroid(self):
-        tempLayer = UC.getlayer_byname('Bouwlagen')
+        tempLayer = UC.getlayer_byname('Verdiepingen')
         req = '"id" = ' + self.bouwlaag_id.text()
         request = QC.QgsFeatureRequest().setFilterExpression(req)
         ifeature = UC.featureRequest(tempLayer, request)
@@ -323,7 +323,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def set_parent_id(self, ilayer, ifeature):
         """let user select the floor which to link to"""
-        if ilayer.name() == 'Bouwlagen' and ifeature:
+        if ilayer.name() == 'Verdiepingen' and ifeature:
             self.bouwlaag_id.setText(str(ifeature["id"]))
             self.selectTool.geomSelected.disconnect(self.set_parent_id)
             self.label3.setVisible(True)

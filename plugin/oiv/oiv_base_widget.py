@@ -181,7 +181,7 @@ class oivBaseWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def get_identified_pand(self, ilayer, ifeature):
         """Return of identified layer and feature and get related object"""
-        #the identified layer must be "Bouwlagen" or "BAG panden"
+        #the identified layer must be "Verdiepingen" or "BAG panden"
         if isinstance(ilayer, QC.QgsVectorLayer):
             if ilayer.name() == PAND["bouwlaaglayername"]:
                 objectId = str(ifeature["pand_id"])

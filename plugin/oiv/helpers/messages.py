@@ -61,12 +61,12 @@ MESSAGES = {
     'bouwlaagcreated': {
         "type": 'information',
         "header": 'Gereed!',
-        "body": 'Alle bouwlagen zijn succesvol aangemaakt!'
+        "body": 'Alle verdiepingen zijn succesvol aangemaakt!'
     },
     'nobouwlaagselected': {
         "type": 'information',
-        "header": 'Geen bouwlaag!',
-        "body": 'U heeft geen bouwlaag aangeklikt!\n\nKlik a.u.b. op de juiste locatie.'
+        "header": 'Geen verdieping!',
+        "body": 'U heeft geen verdieping aangeklikt!\n\nKlik a.u.b. op de juiste locatie.'
     },
     'importchecksok': {
         "type": 'information',
@@ -99,7 +99,7 @@ MESSAGES = {
     'bouwlaagvolgorde': {
         "type": 'warning',
         "header": 'Let op!',
-        "body": 'De hoogste bouwlaag kan niet lager zijn als de laagste, vul opnieuw in!.'
+        "body": 'De hoogste verdieping kan niet lager zijn als de laagste, vul opnieuw in!.'
     },
     'noidentifiedobject': {
         "type": 'information',
@@ -134,7 +134,7 @@ MESSAGES = {
     'unsavedchanges': {
         "type": 'question_save',
         "header": 'Niet opgeslagen wijzigingen!',
-        "body": 'Om van bouwlaag te veranderen moet u eerst de bewerkingen opslaan!\n\nIn de volgende laag zijn nog niet opgeslagen wijzigingen: '
+        "body": 'Om van verdieping te veranderen moet u eerst de bewerkingen opslaan!\n\nIn de volgende laag zijn nog niet opgeslagen wijzigingen: '
     },
     'no_objectid': {
         "type": 'critical',
@@ -158,8 +158,8 @@ MESSAGES = {
     },
     'multipleBouwlagenidentified': {
         "type": 'warning',
-        "header": 'Meerdere bouwlagen',
-        "body": 'Er zijn meerdere bouwlagen die elkaar overlapppen.\nDus het is onduidelijk waaraan u wilt koppelen.\nHerstel dit eerst.'
+        "header": 'Meerdere verdiepingen',
+        "body": 'Er zijn meerdere verdiepingen die elkaar overlapppen.\nDus het is onduidelijk waaraan u wilt koppelen.\nHerstel dit eerst.'
     },
     'modifyHistory': {
         "type": 'question',

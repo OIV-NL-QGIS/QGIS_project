@@ -56,35 +56,35 @@ PLUGIN = {
 
 PAND = {
     "bagpandlayername": "BAG panden - ",
-    "bouwlaaglayername": "Bouwlagen",
+    "bouwlaaglayername": "Verdiepingen",
     "verdiepingen": {
         "min": -10,
         "max": 30
     },
-    "configtable": "config_bouwlaag",
+    "configtable": "config_verdieping",
     "tekenwidgetui": "oiv_tekenen_widget.ui",
     "bouwlaagui": "oiv_bouwlaag_widget.ui",
     "pandui": "oiv_pandgegevens_widget.ui",
     "bagviewerurl": "https://bagviewer.kadaster.nl/lvbag/bag-viewer/#?searchQuery=",
     "werkvoorraadlayers": [
-        "Werkvoorraad bouwlaag - punt",
-        "Werkvoorraad bouwlaag - label",
-        "Werkvoorraad bouwlaag - lijn",
-        "Werkvoorraad bouwlaag - vlak",
-        "Annotaties bouwlaag"],
+        "Werkvoorraad verdieping - punt",
+        "Werkvoorraad verdieping - label",
+        "Werkvoorraad verdieping - lijn",
+        "Werkvoorraad verdieping - vlak",
+        "Annotaties verdieping"],
 }
 
 WERKVOORRAAD = {
     "tablelayertranslate": {
-        "Werkvoorraad bouwlaag - punt": "mobiel_sync.werkvoorraad_symbool",
-        "Werkvoorraad bouwlaag - label": "mobiel_sync.werkvoorraad_label",
-        "Werkvoorraad bouwlaag - lijn": "mobiel_sync.werkvoorraad_lijn",
-        "Werkvoorraad bouwlaag - vlak": "mobiel_sync.werkvoorraad_vlak",
+        "Werkvoorraad verdieping - punt": "mobiel_sync.werkvoorraad_symbool",
+        "Werkvoorraad verdieping - label": "mobiel_sync.werkvoorraad_label",
+        "Werkvoorraad verdieping - lijn": "mobiel_sync.werkvoorraad_lijn",
+        "Werkvoorraad verdieping - vlak": "mobiel_sync.werkvoorraad_vlak",
         "Werkvoorraad object - punt": "mobiel_sync.werkvoorraad_symbool",
         "Werkvoorraad object - label": "mobiel_sync.werkvoorraad_label",
         "Werkvoorraad object - lijn": "mobiel_sync.werkvoorraad_lijn",
         "Werkvoorraad object - vlak": "mobiel_sync.werkvoorraad_vlak",
-        "Annotaties bouwlaag" : "mobiel.annotaties",
+        "Annotaties verdieping" : "mobiel.annotaties",
         "Annotaties object" : "mobiel.annotaties",
     }    
 }

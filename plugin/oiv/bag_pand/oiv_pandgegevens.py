@@ -355,7 +355,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.resume_printing(geom)
 
     def check_werkvoorraad(self):
-        layerName = 'Werkvoorraad bouwlagen'
+        layerName = 'Werkvoorraad verdiepingen'
         ilayer = UC.getlayer_byname(layerName)
         request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(self.pandId))
         it = ilayer.getFeatures(request)
@@ -378,25 +378,24 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 class BouwlaagDialog(PQtW.QDialog):
     def __init__(self, parent=None):
         super(BouwlaagDialog, self).__init__(parent)
-        bouwlagen = PC.PAND["verdiepingen"]
-        minBouwlaag = bouwlagen["min"]
-        maxBouwlaag = bouwlagen["max"]
-        self.setWindowTitle("Bouwlagen toevoegen")
+        verdiepingen = PC.PAND["verdiepingen"]
+        minVerdieping = verdiepingen["min"]
+        maxVerdieping = verdiepingen["max"]
+        self.setWindowTitle("Verdieping toevoegen")
         qlayout = PQtW.QVBoxLayout(self)
         self.qlineA = PQtW.QLabel(self)
         self.qlineB = PQtW.QLabel(self)
         self.qlineC = PQtW.QLabel(self)
         self.qComboA = PQtW.QComboBox(self)
         self.qComboB = PQtW.QComboBox(self)
-        self.qlineA.setText("U kunt meerdere bouwlagenlagen in 1x creeren, door van en t/m in te vullen!")
+        self.qlineA.setText("U kunt meerdere verdiepingen in 1x creeren, door van en t/m in te vullen!")
         self.qlineB.setText("Van:")
         self.qlineC.setText("Tot en met:")
-        for i in range(maxBouwlaag - minBouwlaag + 1):
-            if maxBouwlaag - i != 0:
-                self.qComboA.addItem(str(maxBouwlaag - i))
-                self.qComboB.addItem(str(maxBouwlaag - i))
-                if maxBouwlaag - i == 1:
-                    init_index = i
+        for i in range(maxVerdieping - minVerdieping + 1):
+            self.qComboA.addItem(str(maxVerdieping - i))
+            self.qComboB.addItem(str(maxVerdieping - i))
+            if maxVerdieping - i == 0:
+                init_index = i
         self.qComboA.setCurrentIndex(init_index)
         self.qComboB.setCurrentIndex(init_index)
         self.qComboA.setFixedWidth(100)
@@ -429,7 +428,7 @@ class BouwlaagDialog(PQtW.QDialog):
 class MultiEditBouwlaagDialog(PQtW.QDialog):
     def __init__(self, parent=None, ifeature=None, ilayer=None, savedDelta=None):
         super(MultiEditBouwlaagDialog, self).__init__(parent)
-        self.setWindowTitle("Bouwlaag roteren en verplaatsen")
+        self.setWindowTitle("Verdieping roteren en verplaatsen")
         self.savedDelta = savedDelta
         qlayout = PQtW.QGridLayout(self)
         self.ilayer = ilayer
@@ -525,20 +524,20 @@ class MultiEditBouwlaagDialog(PQtW.QDialog):
 class PrintDialog(PQtW.QDialog):
     def __init__(self, arrBouwlagen, arrObjects, parent=None):
         super(PrintDialog, self).__init__(parent)
-        self.setWindowTitle("Bouwlagen printen")
+        self.setWindowTitle("Verdiepingen printen")
         self.chkBoxDict = {}
         qlayout = PQtW.QVBoxLayout(self)
         self.qlineA = PQtW.QLabel(self)
         self.qRadioBtnCurrent = PQtW.QRadioButton(self)
         self.qRadioBtnAll = PQtW.QRadioButton(self)
         self.qRadioBtnSelection = PQtW.QRadioButton(self)
-        self.qlineA.setText("Selecteer welke bouwlagen u wilt printen")
-        self.qRadioBtnCurrent.setToolTip("Huidige bouwlaag")
-        self.qRadioBtnCurrent.setText("Huidige bouwlaag")
-        self.qRadioBtnAll.setToolTip("Alle bouwlagen")
-        self.qRadioBtnAll.setText("Alle bouwlagen")
-        self.qRadioBtnSelection.setToolTip("Bouwlagen selecteren")
-        self.qRadioBtnSelection.setText("Bouwlagen selecteren")
+        self.qlineA.setText("Selecteer welke verdiepingen u wilt printen")
+        self.qRadioBtnCurrent.setToolTip("Huidige verdieping")
+        self.qRadioBtnCurrent.setText("Huidige verdieping")
+        self.qRadioBtnAll.setToolTip("Alle verdiepingen")
+        self.qRadioBtnAll.setText("Alle verdiepingen")
+        self.qRadioBtnSelection.setToolTip("Verdiepingen selecteren")
+        self.qRadioBtnSelection.setText("Verdiepingen selecteren")
         qlayout.addWidget(self.qlineA)
         qlayout.addWidget(self.qRadioBtnCurrent)
         qlayout.addWidget(self.qRadioBtnAll)
@@ -551,7 +550,7 @@ class PrintDialog(PQtW.QDialog):
             self.chkBoxDict[bouwlaag] = chkBox
             chkBox = None
         self.qlineB = PQtW.QLabel(self)
-        self.qlineB.setText("Bij welk object hoort deze bouwlaag:")
+        self.qlineB.setText("Bij welk object hoort deze verdieping:")
         qlayout.addWidget(self.qlineB)
         self.cmbBoxObject = PQtW.QComboBox(self)
         self.cmbBoxObject.addItems(arrObjects)
