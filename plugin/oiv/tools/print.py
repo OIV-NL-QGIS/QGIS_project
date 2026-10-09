@@ -31,9 +31,18 @@ def print_atlas(layout, atlas, output_folder, fileName):
         while atlas.next():
             exporter = QC.QgsLayoutExporter(layout)
             settings = QC.QgsLayoutExporter.PdfExportSettings()
-            settings.flags = QC.QgsLayoutRenderContext.Flag(QC.QgsLayoutRenderContext.FlagHideCoverageLayer |                              
-                        QC.QgsLayoutRenderContext.FlagAntialiasing |
-                        QC.QgsLayoutRenderContext.FlagUseAdvancedEffects)
+            if hasattr(QC.Qgis, "LayoutRenderFlag"):
+                settings.flags = (
+                    QC.Qgis.LayoutRenderFlag.HideCoverageLayer |
+                    QC.Qgis.LayoutRenderFlag.Antialiasing |
+                    QC.Qgis.LayoutRenderFlag.UseAdvancedEffects
+                )
+            else:
+                settings.flags = (
+                    QC.QgsLayoutRenderContext.FlagHideCoverageLayer |
+                    QC.QgsLayoutRenderContext.FlagAntialiasing |
+                    QC.QgsLayoutRenderContext.FlagUseAdvancedEffects
+                )
             fileName = fileName + '.pdf'
             filePath = output_folder + '/' + fileName
             exporter.exportToPdf(filePath, settings)
