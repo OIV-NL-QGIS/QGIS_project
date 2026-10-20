@@ -228,7 +228,7 @@ ACTIONDICTOBJECT = {
 }
 
 ACTIONDICTBOUWLAAG = {
-    "Bouwlaag": {    
+    "Verdieping": {    
         "Bereikbaarheid" : [],
         "Dreiging": [],
         "Opstelplaats": [],
