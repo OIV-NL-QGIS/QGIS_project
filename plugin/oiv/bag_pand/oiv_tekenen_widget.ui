@@ -114,7 +114,7 @@ border-color: rgba(255, 255, 255, 0);</string>
                </font>
               </property>
               <property name="text">
-               <string>U tekent op bouwlaag:</string>
+               <string>U tekent op verdieping:</string>
               </property>
              </widget>
             </item>

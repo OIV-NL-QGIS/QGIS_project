@@ -7,21 +7,6 @@ import oiv.helpers.configdb_helper as CH
 import oiv.helpers.messages as MSG
 import oiv.helpers.utils_core as UC
 
-layerFields = {
-    "Werkvoorraad object - punt": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["label", "string"], 
-                                   ["opmerking", "string"], ["formaat_object", "string"], ["label_positie", "string"]],
-    "Werkvoorraad object - label": [["object_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["omschrijving", "string"],
-                                    ["opmerking", "string"], ["formaat_object", "string"]],
-    "Werkvoorraad object - lijn": [["object_id", "int"], ["symbol_name", "type"], ["opmerking", "string"]],
-    "Werkvoorraad object - vlak": [["object_id", "int"], ["symbol_name", "type"], ["opmerking", "string"]],
-    "Werkvoorraad bouwlaag - punt": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["label", "string"], 
-                                     ["opmerking", "string"], ["formaat_bouwlaag", "string"], ["label_positie", "string"]],
-    "Werkvoorraad bouwlaag - label": [["bouwlaag_id", "int"], ["rotatie", "int"], ["symbol_name", "type"], ["omschrijving", "string"], 
-                                      ["opmerking", "string"], ["formaat_bouwlaag", "string"]],
-    "Werkvoorraad bouwlaag - lijn": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["opmerking", "string"]],
-    "Werkvoorraad bouwlaag - vlak": [["bouwlaag_id", "int"], ["symbol_name", "type"], ["opmerking", "string"]]
-}
-
 def setup_postgisdb_connection():
     """setup the postgis database connection"""
     conn = None

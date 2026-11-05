@@ -61,7 +61,7 @@
              </font>
             </property>
             <property name="text">
-             <string>U voegt bouwlagen toe aan de bouwlagen:</string>
+             <string>U voegt verdiepingen toe aan de verdiepingen:</string>
             </property>
            </widget>
           </item>
@@ -80,7 +80,7 @@ color: rgb(0, 0, 0);</string>
           <item>
            <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>De nu weergegeven bouwlaag is:</string>
+             <string>De nu weergegeven verdieping is:</string>
             </property>
            </widget>
           </item>
@@ -138,28 +138,28 @@ color: rgb(0, 0, 0);</string>
              </font>
             </property>
             <property name="text">
-             <string>Bouwlaag toevoegen</string>
+             <string>Verdieping toevoegen</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="bouwlaag_bag">
             <property name="text">
-             <string>Bouwlaag overnemen van BAG</string>
+             <string>Verdieping overnemen van BAG</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="bouwlaag_tekenen">
             <property name="text">
-             <string>Bouwlaag zelf tekenen</string>
+             <string>Verdieping zelf tekenen</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="bouwlaag_overnemen">
             <property name="text">
-             <string>Bouwlaag overnemen van andere bouwlaag</string>
+             <string>Verdieping overnemen van andere verdieping</string>
             </property>
            </widget>
           </item>
@@ -179,7 +179,7 @@ color: rgb(0, 0, 0);</string>
           <item>
            <widget class="QLabel" name="label2">
             <property name="text">
-             <string>Selecteer de te kopiëren bouwlaag:</string>
+             <string>Selecteer de te kopiëren verdieping:</string>
             </property>
            </widget>
           </item>
@@ -210,14 +210,14 @@ color: rgb(0, 0, 0);</string>
           <item>
            <widget class="QCheckBox" name="copy_ingang_bouwl">
             <property name="text">
-             <string>Ingang bouwlaag</string>
+             <string>Ingang verdieping</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="copy_label">
             <property name="text">
-             <string>Labels bouwlaag</string>
+             <string>Labels verdieping</string>
             </property>
            </widget>
           </item>
@@ -238,7 +238,7 @@ color: rgb(0, 0, 0);</string>
           <item>
            <widget class="QPushButton" name="copy">
             <property name="text">
-             <string>Klik hier en daarna op de gewenste bouwlaag/bouwdeel</string>
+             <string>Klik hier en daarna op de gewenste verdieping/bouwdeel</string>
             </property>
            </widget>
           </item>

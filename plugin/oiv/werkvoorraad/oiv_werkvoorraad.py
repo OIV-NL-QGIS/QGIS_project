@@ -176,7 +176,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         
     def getbouwlaag_ids(self, bagId):
         ids = []
-        layerName = 'Bouwlagen'
+        layerName = 'Verdiepingen'
         ilayer = UC.getlayer_byname(layerName)
         request = QC.QgsFeatureRequest().setFilterExpression('"pand_id" = ' + "'{}'".format(bagId))
         it = ilayer.getFeatures(request)
@@ -190,7 +190,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
             bouwlagen = WDH.get_bouwlagen(objectId)
             if bouwlagen:
                 for bouwlaag in bouwlagen:
-                    labelText = 'Bouwlaag: {}'.format(str(bouwlaag))
+                    labelText = 'Verdieping: {}'.format(str(bouwlaag))
                     label = PQtW.QLabel()
                     label.setText(labelText)
                     layout.addWidget(label)

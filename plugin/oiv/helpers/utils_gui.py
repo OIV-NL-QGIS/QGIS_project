@@ -105,7 +105,7 @@ def get_actions(whichConfig, actionDict):
     layers = UC.read_settings(query, True)
     for lyr in layers:
         layerName = lyr[0]
-        layerType = lyr[1]
+        layerType = lyr[1] 
         typeLayerName = lyr[2]
         idColumn = lyr[3]
         if layerName != PC.PAND["bouwlaaglayername"] and layerName != PC.OBJECT["objectlayername"]:
@@ -143,9 +143,9 @@ def get_actions(whichConfig, actionDict):
                 for key,value in feat["tabbladen"].items():
                     if value == 1:
                         if whichConfig == PC.PAND["configtable"]:
-                            if key == 'Bouwlaag':
+                            if key == 'Verdieping':
                                 actionDict[key][categorie].append((layerName, feat[idColumn], feat[idColumn].replace(' ', '_'), symbol, landOfReg))
                         else:
-                            if key != 'Bouwlaag':
+                            if key != 'Verdieping':
                                 actionDict[key][categorie].append((layerName, feat[idColumn], feat[idColumn].replace(' ', '_'), symbol, landOfReg))
     return actionDict, editableLayerNames, moveLayerNames, snapSymbols, anchorpoints

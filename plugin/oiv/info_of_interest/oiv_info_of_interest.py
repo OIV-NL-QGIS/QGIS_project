@@ -225,18 +225,19 @@ class oivInfoOfInterestTekenWidget(PQtW.QDockWidget, FORM_CLASS):
         self.show_subwidget(True, stackWidget)
         stackWidget.parentWidget = self
         stackWidget.baseWidget = self.baseWidget
+        stackWidget.isTekenen = True
         stackWidget.open_feature_form(ilayer, ifeature)
         stackWidget.show()
 
     def show_subwidget(self, show, widget=None):
         if show:
-            self.baseWidget.tabWidget.setTabVisible(3, False)
+            self.baseWidget.tabWidget.setTabVisible(4, False)
             self.baseWidget.tabWidget.addTab(widget, '')
-            self.baseWidget.tabWidget.setCurrentIndex(4)
+            self.baseWidget.tabWidget.setCurrentIndex(5)
         else:
-            self.baseWidget.tabWidget.setTabVisible(3, True)
-            self.baseWidget.tabWidget.setCurrentIndex(3)
-            self.baseWidget.tabWidget.removeTab(4)
+            self.baseWidget.tabWidget.setTabVisible(4, True)
+            self.baseWidget.tabWidget.setCurrentIndex(4)
+            self.baseWidget.tabWidget.removeTab(5)
 
     #om te verschuiven/roteren moeten de betreffende lagen op bewerken worden gezet
     def run_move_point(self):

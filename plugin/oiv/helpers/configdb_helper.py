@@ -21,23 +21,23 @@ def read_settings(query, allResult):
             conn.close()
 
 def get_foreign_key_bl(layerName):
-    query = "SELECT foreign_key FROM 'config_bouwlaag' WHERE child_layer = '{}'".format(layerName)
+    query = "SELECT foreign_key FROM 'config_verdieping' WHERE child_layer = '{}'".format(layerName)
     return read_settings(query, False)[0]
 
 def get_identifier_bl(layerName):
-    query = "SELECT identifier FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
+    query = "SELECT identifier FROM config_verdieping WHERE child_layer = '{}'".format(layerName)
     return read_settings(query, False)[0]
 
 def get_parentlayer_bl(layerName):
-    query = "SELECT parent_layer FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
+    query = "SELECT parent_layer FROM config_verdieping WHERE child_layer = '{}'".format(layerName)
     return read_settings(query, False)[0]
 
 def get_allkeys_bl(layerName):
-    query = "SELECT foreign_key, identifier, input_label, rotatie, size_field FROM config_bouwlaag WHERE child_layer = '{}'".format(layerName)
+    query = "SELECT foreign_key, identifier, input_label, rotatie, size_field FROM config_verdieping WHERE child_layer = '{}'".format(layerName)
     return read_settings(query, False)
 
 def get_chidlayers_bl():
-    query = "SELECT child_layer FROM config_bouwlaag;"
+    query = "SELECT child_layer FROM config_verdieping;"
     return read_settings(query, True)
 
 def get_foreign_key_ob(layerName):
@@ -65,7 +65,7 @@ def get_tablename_ob(layerName):
     return read_settings(query, False)[0]
 
 def get_tablename_bl(layerName):
-    query = "SELECT tablename FROM config_bouwlaag WHERE child_layer = '{}';".format(layerName)
+    query = "SELECT tablename FROM config_verdieping WHERE child_layer = '{}';".format(layerName)
     return read_settings(query, False)[0]
 
 def get_identifier_by_tablename_ob(tableName):
@@ -73,7 +73,7 @@ def get_identifier_by_tablename_ob(tableName):
     return read_settings(query, False)[0]
 
 def get_identifier_by_tablename_bl(tableName):
-    query = "SELECT identifier FROM config_bouwlaag WHERE tablename = '{}';".format(tableName)
+    query = "SELECT identifier FROM config_verdieping WHERE tablename = '{}';".format(tableName)
     return read_settings(query, False)[0]
 
 def get_childlayers_ob_point():
@@ -81,7 +81,7 @@ def get_childlayers_ob_point():
     return read_settings(query, True)
 
 def get_childlayers_bl_point():
-    query = "SELECT child_layer FROM config_bouwlaag WHERE layertype = 'point' or layertype = 'label';"
+    query = "SELECT child_layer FROM config_verdieping WHERE layertype = 'point' or layertype = 'label';"
     return read_settings(query, True)
 
 def get_childlayers_info_point():
@@ -89,7 +89,7 @@ def get_childlayers_info_point():
     return read_settings(query, True)
 
 def get_type_layer_bl(layerName):
-    query = "SELECT type_layer_name, type_layer_name_identifier FROM config_bouwlaag WHERE child_layer = '{}';".format(layerName)
+    query = "SELECT type_layer_name, type_layer_name_identifier FROM config_verdieping WHERE child_layer = '{}';".format(layerName)
     return read_settings(query, False)
 
 def get_type_layer_ob(layerName):
