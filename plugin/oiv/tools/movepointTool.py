@@ -85,16 +85,19 @@ class MovePointTool(QG.QgsMapToolIdentify):
         else:
             layerPt = self.toLayerCoordinates(self.layer, event.pos())
             self.snapPt = DH.snap_to_point(self, event.pos(), layerPt)
-            if self.vertexmarker is not None:
-                self.vertexmarker.hide()
             if self.snapPt is not None:
+                if self.vertexmarker is None:
+                    self.vertexmarker = RH.init_vertexmarker("movepoint", self.canvas)
                 self.vertexmarker.setCenter(self.snapPt)
                 self.vertexmarker.show()
+            elif self.vertexmarker is not None:
+                self.vertexmarker.hide()
 
     def canvasReleaseEvent(self, event):
         """als verslepen -> pas de geometry van de betreffende feature aan"""
         if self.dragging and self.point:
-            self.vertexmarker.hide()
+            if self.vertexMovemarker is not None:
+                self.vertexMovemarker.hide()
             geom_new = QC.QgsGeometry.fromPointXY(self.point)
             geom_old = self.idlayer.getFeature(self.fid).geometry()
             if not self.multi:
