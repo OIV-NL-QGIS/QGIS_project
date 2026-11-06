@@ -80,13 +80,6 @@ Dit bestand moet daarnaast online beschikbaar zijn op de onderstaande URL:</stri
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="file_url">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="pushButton">
          <property name="text">
           <string>Open bestand in browser</string>
