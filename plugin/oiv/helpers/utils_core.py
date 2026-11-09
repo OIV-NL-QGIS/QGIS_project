@@ -182,7 +182,7 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
                     possibleSnapFeatures.append(feat.geometry())
             elif bouwlaagIds:
                 for bid in bouwlaagIds:
-                    request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + str(bid))
+                    request = QC.QgsFeatureRequest().setFilterExpression('"verdieping_id" = ' + str(bid))
                     featureIt = lyr.getFeatures(request)
                     for feat in featureIt:
                         possibleSnapFeatures.append(feat.geometry())
@@ -239,7 +239,7 @@ def construct_feature(layerType, parentLayerName, points, objectId):
     else:
         return parentId, tempFeature
 
-def get_attributes(foreignKey, childFeature, snapAngle, input_id, drawLayer, whichConfig, defaultSize):
+def get_attributes(foreignKey, childFeature, snapAngle, input_id, drawLayer, whichConfig, defaultSize=None):
     drawLayerName = drawLayer.name()
     #haal de vraag voor de inputdialog vanuit de config file
     query = "SELECT foreign_key, identifier, input_label, question, label_required, rotatie, size_field\

@@ -328,7 +328,7 @@ class oivTekenWidget(PQtW.QDockWidget, FORM_CLASS):
                 typeLayer = UC.getlayer_byname(typeLayerName)
                 request = QC.QgsFeatureRequest().setFilterExpression('"{}" = '.format(typeName) + "'{}'".format(self.identifier))
                 ifeature = UC.featureRequest(typeLayer, request)
-                size = ifeature["size_bouwlaag_middel"]
+                size = ifeature["size_verdieping_middel"]
                 translateGeom = True
         if points:
             parentId, childFeature = UC.construct_feature(self.drawLayerType, self.parentLayerName, points, objectId)

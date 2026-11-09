@@ -107,7 +107,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         """set layers substring which are a childlayer of "verdiepingen"""
         comboboxText = str(self.bouwlaag.currentText())
         if comboboxText != "":
-            sub_string = "bouwlaag = " + str(self.bouwlaag.currentText())
+            sub_string = "verdieping = " + str(self.bouwlaag.currentText())
             UG.set_layer_substring(sub_string)
 
     def copy_layers(self, parentID, newID, layer, bouwlaag):
@@ -133,7 +133,7 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             if attrs[4]:
                 newFeature[attrs[4]] = feat[attrs[4]]
             newFeature[attrs[0]] = int(newID)
-            newFeature["bouwlaag"] = bouwlaag
+            newFeature["verdieping"] = bouwlaag
             field_index = fields.indexFromName('applicatie')
             if field_index != -1:
                 newFeature['applicatie'] = 'OIV'
@@ -151,35 +151,34 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def draw_feature(self, points, _dummy):
         """create the floor feature and save to the floors layer"""
-        minBouwlaag = int(self.bouwlaag_min.text())
-        maxBouwlaag = int(self.bouwlaag_max.text())
+        minVerdieping = int(self.bouwlaag_min.text())
+        maxVerdieping = int(self.bouwlaag_max.text())
         childFeature = QC.QgsFeature()
         layerName = PC.PAND["bouwlaaglayername"]
         layer = UC.getlayer_byname(layerName)
         foreignKey = CH.get_foreign_key_bl(layerName)
         # construct QgsFeature to save
-        for i in range(minBouwlaag, maxBouwlaag + 1):
-            if i != 0:
-                childFeature.setGeometry(QC.QgsGeometry.fromPolygonXY([points]))
-                fields = layer.fields()
-                childFeature.initAttributes(fields.count())
-                childFeature.setFields(fields)
-                childFeature[foreignKey] = self.objectId
-                childFeature["bouwlaag"] = i
-                UC.write_layer(layer, childFeature)
-                # block the signals of changing the comboBox to add the new floor
-                self.bouwlaag.blockSignals(True)
-                self.bouwlaag.clear()
-                if i not in self.bouwlaagList:
-                    self.bouwlaagList.append(i)
+        for i in range(minVerdieping, maxVerdieping + 1):
+            childFeature.setGeometry(QC.QgsGeometry.fromPolygonXY([points]))
+            fields = layer.fields()
+            childFeature.initAttributes(fields.count())
+            childFeature.setFields(fields)
+            childFeature[foreignKey] = self.objectId
+            childFeature["verdieping"] = i
+            UC.write_layer(layer, childFeature)
+            # block the signals of changing the comboBox to add the new floor
+            self.bouwlaag.blockSignals(True)
+            self.bouwlaag.clear()
+            if i not in self.bouwlaagList:
+                self.bouwlaagList.append(i)
         self.bouwlaagList.sort()
         self.bouwlagen_to_combobox()
         self.bouwlaag.blockSignals(False)
         self.iface.actionPan().trigger()
         # set all layers substring to the right floor
-        sub_string = "bouwlaag = " + str(minBouwlaag)
+        sub_string = "verdieping = " + str(minVerdieping)
         UG.set_layer_substring(sub_string)
-        if maxBouwlaag != minBouwlaag:
+        if maxVerdieping != minVerdieping:
             MSG.showMsgBox('bouwlaagcreated')
 
     def copy_bag_bouwlaag(self, ilayer, ifeature):
@@ -188,8 +187,8 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             childFeature = QC.QgsFeature()
             layerName = PC.PAND["bouwlaaglayername"]
             # get active floor from dockwidget
-            minBouwlaag = int(self.bouwlaag_min.text())
-            maxBouwlaag = int(self.bouwlaag_max.text())
+            minVerdieping = int(self.bouwlaag_min.text())
+            maxVerdieping = int(self.bouwlaag_max.text())
             try:
                 selectedLaag = int(self.bouwlaag.currentText())
             except:
@@ -198,14 +197,14 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             # get necessary attributes from config file
             foreignKey = CH.get_foreign_key_bl(layerName)
             # construct QgsFeature to save
-            for i in range(minBouwlaag, maxBouwlaag + 1):
-                if i != 0 and i != selectedLaag:
+            for i in range(minVerdieping, maxVerdieping + 1):
+                if i != selectedLaag:
                     childFeature.setGeometry(ifeature.geometry())
                     fields = layer.fields()
                     childFeature.initAttributes(fields.count())
                     childFeature.setFields(fields)
                     childFeature[foreignKey] = self.objectId
-                    childFeature["bouwlaag"] = i
+                    childFeature["verdieping"] = i
                     newFeatureId = UC.write_layer(layer, childFeature)
                     # copy also the selected layers
                     if ilayer.name() == PC.PAND["bouwlaaglayername"]:
@@ -220,13 +219,13 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
             self.bouwlaag.blockSignals(False)
             self.iface.actionPan().trigger()
             # set all layers substring to the right floor
-            sub_string = "bouwlaag = " + str(minBouwlaag)
+            sub_string = "verdieping = " + str(minVerdieping)
             UG.set_layer_substring(sub_string)
             try:
                 self.parent.selectTool.geomSelected.disconnect()
             except:  # pylint: disable=bare-except
                 pass
-            if maxBouwlaag >= minBouwlaag:
+            if maxVerdieping >= minVerdieping:
                 MSG.showMsgBox('bouwlaagcreated')
         else:
             MSG.showMsgBox('nobouwlaagselected')
@@ -240,11 +239,8 @@ class oivBouwlaagWidget(PQtW.QDockWidget, FORM_CLASS):
         """add existing floors to the comboBox of the "bouwlaagdockwidget"""
         self.bouwlaag.blockSignals(True)
         self.bouwlaag.clear()
-        for i in range(len(self.bouwlaagList) + 1):
-            if i == 0:
-                self.bouwlaag.addItem("")
-            else:
-                self.bouwlaag.addItem(str(self.bouwlaagList[i - 1]))
+        for i in range(len(self.bouwlaagList)):
+            self.bouwlaag.addItem(str(self.bouwlaagList[i]))
         self.bouwlaag.blockSignals(False)
         index = self.bouwlaag.findText(str(self.bouwlaag_min.text()), PQtC.Qt.MatchFixedString)
         if index >= 0:

@@ -140,7 +140,7 @@ def get_actions(whichConfig, actionDict):
                         anchorpoints["anchorpointbottom"].append(feat[idColumn])
                 else:
                     symbol = feat[idColumn].replace(' ', '_').lower()
-                for key,value in feat["tabbladen"].items():
+                for key, value in feat["tabbladen"].items():
                     if value == 1:
                         if whichConfig == PC.PAND["configtable"]:
                             if key == 'Verdieping':

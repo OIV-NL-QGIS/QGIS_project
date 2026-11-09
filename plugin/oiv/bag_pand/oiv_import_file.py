@@ -183,7 +183,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         typeLayer = UC.getlayer_byname('ingang_type')
         request = QC.QgsFeatureRequest().setFilterExpression('"naam" = ' + "'Deur'")
         ifeature = UC.featureRequest(typeLayer, request)
-        return ifeature["id"]
+        return ifeature["naam"]
 
     def construct_features(self, targetFields, targetLayerName, identifier, typeLayer, ingangFields):
         bouwlaagGeomCentroid = self.get_centroid()
@@ -209,7 +209,7 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
                 elif self.importTypeFile in ('GPKG', 'SHP'):
                     geom = feature.geometry()
                 targetFeature.setGeometry(geom)
-                targetFeature["bouwlaag_id"] = bouwlaagId
+                targetFeature["verdieping_id"] = bouwlaagId
                 targetFeature["applicatie"] = 'OIV'
                 if targetLayerName == "Ruimten":
                     req = '"naam" = ' + "'" + self.mappingDict[feature[attributeField]]["soort"] + "'"
@@ -238,8 +238,8 @@ class oivImportFileWidget(PQtW.QDockWidget, FORM_CLASS):
         length = geom.length()
         featureGeom = geom.interpolate(length / 2.0).asPoint()
         ingangFeature.setGeometry(QC.QgsGeometry().fromPointXY(featureGeom))
-        ingangFeature["ingang_type_id"] = typeId
-        ingangFeature["bouwlaag_id"] = bouwlaagId
+        ingangFeature["soort"] = typeId
+        ingangFeature["verdieping_id"] = bouwlaagId
         ingangFeature["applicatie"] = 'OIV'
         ingangFeature["rotatie"] = angle
         return ingangFeature

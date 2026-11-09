@@ -37,15 +37,15 @@ def close_db_connection(cursor, conn):
         conn.close()
 
 def get_bouwlagen(objectId):
-    bouwlagen = []
+    verdiepingen = []
     conn, cursor = setup_postgisdb_connection()
-    query = 'SELECT bouwlaag FROM mobiel_sync.bouwlagen_binnen_object WHERE object_id = {};'.format(int(objectId))
+    query = 'SELECT verdieping FROM mobiel_sync.bouwlagen_binnen_object WHERE object_id = {};'.format(int(objectId))
     cursor.execute(query)
-    bouwlaagTuple = cursor.fetchall()
-    if bouwlaagTuple:
-        bouwlagen = [tup["bouwlaag"] for tup in bouwlaagTuple]
+    verdiepingTuple = cursor.fetchall()
+    if verdiepingTuple:
+        verdiepingen = [tup["verdieping"] for tup in verdiepingTuple]
     close_db_connection(cursor, conn)
-    return bouwlagen
+    return verdiepingen
 
 def check_object_mods(objectId):
     answer = False
