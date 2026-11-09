@@ -75,7 +75,7 @@ class oivWerkvoorraadWidget(PQtW.QDockWidget, FORM_CLASS):
         else:
             layerNames = PC.PAND["werkvoorraadlayers"]
             objectIds = self.getbouwlaag_ids(objectId)
-            request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" in ({})'.format(objectIds))
+            request = QC.QgsFeatureRequest().setFilterExpression('"verdieping_id" in ({})'.format(objectIds))
         for layerName in layerNames:
             ilayer = UC.getlayer_byname(layerName)
             if ilayer:

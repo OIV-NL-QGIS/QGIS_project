@@ -182,7 +182,7 @@ def get_possible_snapFeatures_bouwlaag(layerNamesList, objectId):
                     possibleSnapFeatures.append(feat.geometry())
             elif bouwlaagIds:
                 for bid in bouwlaagIds:
-                    request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + str(bid))
+                    request = QC.QgsFeatureRequest().setFilterExpression('"verdieping_id" = ' + str(bid))
                     featureIt = lyr.getFeatures(request)
                     for feat in featureIt:
                         possibleSnapFeatures.append(feat.geometry())

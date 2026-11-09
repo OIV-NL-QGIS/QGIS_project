@@ -120,7 +120,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         request = QC.QgsFeatureRequest().setFilterExpression(foreignKey + " = '" + str(objectId) + "'")
         tempFeatureIt = tempLayer.getFeatures(request)
         #create unique list of existing floors and sort it from small to big
-        bouwlaagList = [it["bouwlaag"] for it in tempFeatureIt]
+        bouwlaagList = [it["verdieping"] for it in tempFeatureIt]
         self.sortedList = UC.create_unique_sorted_list(bouwlaagList)
         #block signal of combobox to add existing floors
         self.comboBox.blockSignals(True)
@@ -137,7 +137,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             actieveBouwlaag = 1
         self.comboBox.blockSignals(False)
         #set substring of childlayers
-        subString = "bouwlaag = " + str(actieveBouwlaag)
+        subString = "verdieping = " + str(actieveBouwlaag)
         UG.set_layer_substring(subString)
         index = self.comboBox.findText(str(actieveBouwlaag), PQtC.Qt.MatchFixedString)
         if index >= 0:
@@ -154,7 +154,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
 
     def set_layer_subset_bouwlaag(self):
         """if index of combobox has changed set cql filter of childlayers"""
-        subString = "bouwlaag = " + str(self.comboBox.currentText())
+        subString = "verdieping = " + str(self.comboBox.currentText())
         self.baseWidget.statusregelBouwlaag.setText('U tekent op Verdieping: ' + str(self.comboBox.currentText()))
         UG.set_layer_substring(subString)
 
@@ -173,9 +173,9 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     def run_bouwlaag(self):
         while True:
             bouwlaag, bouwlaagMax, ok = BouwlaagDialog.getBouwlagen()
-            if (bouwlaag != 0 and bouwlaagMax >= bouwlaag and ok is True):
+            if (bouwlaagMax >= bouwlaag and ok is True):
                 bouwlaagwidget = oivBouwlaagWidget(self, bouwlaag, bouwlaagMax)
-                subString = "bouwlaag = " + str(bouwlaag)
+                subString = "verdieping = " + str(bouwlaag)
                 UG.set_layer_substring(subString)
                 self.show_subwidget(True, bouwlaagwidget)
                 break
@@ -190,7 +190,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         self.baseWidget.done_png.setVisible(False)
         if not self.baseWidget.parent.tekenWidget:
             self.baseWidget.parent.tekenWidget = oivTekenWidget(self)
-        subString = "bouwlaag = " + str(self.comboBox.currentText())
+        subString = "verdieping = " + str(self.comboBox.currentText())
         UG.set_layer_substring(subString)
         self.baseWidget.parent.tekenWidget.drawbuttonframe.setVisible(True)
         self.baseWidget.parent.tekenWidget.pand_id.setText(self.pand_id.text())
@@ -253,7 +253,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             layer = UC.getlayer_byname(layerName)
             field_idx = layer.fields().indexOf("rotatie")
             layer.startEditing()
-            request = QC.QgsFeatureRequest().setFilterExpression('"bouwlaag_id" = ' + "'{}'".format(bouwlaagId))
+            request = QC.QgsFeatureRequest().setFilterExpression('"verdieping_id" = ' + "'{}'".format(bouwlaagId))
             it = layer.getFeatures(request)
             for feat in it:
                 geom = feat.geometry()
@@ -308,9 +308,9 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             bouwlaagOrg = self.comboBox.currentText()
             columnId1 = self.printCoverageLayer.dataProvider().fieldNameIndex("pand_id")
             columnId2 = self.printCoverageLayer.dataProvider().fieldNameIndex("formelenaam")
-            columnId3 = self.printCoverageLayer.dataProvider().fieldNameIndex("bouwlaag")
+            columnId3 = self.printCoverageLayer.dataProvider().fieldNameIndex("verdieping")
             for bouwlaag in arrBouwlagen:
-                subString = "bouwlaag = {}".format(bouwlaag)
+                subString = "verdieping = {}".format(bouwlaag)
                 UG.set_layer_substring(subString)
                 self.printCoverageLayer.startEditing()
                 bouwlaagId = self.get_bouwlaag_id()
@@ -323,7 +323,7 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
                 rotation = self.canvas.rotation()
                 reply, directory = PR.load_composer(directory, 'bouwlaag', fileName, 'polygon', rotation, legenda)
             MSG.showMsgBox(reply, directory)
-            subString = "bouwlaag = {}".format(bouwlaagOrg)
+            subString = "verdieping = {}".format(bouwlaagOrg)
             UG.set_layer_substring(subString)
         self.iface.actionPan().trigger()
         qinst = QC.QgsProject.instance()

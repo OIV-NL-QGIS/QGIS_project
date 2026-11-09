@@ -98,7 +98,7 @@ class oiv(PQtW.QWidget):
 
     def set_layer_subset_toolbar(self):
         """laag filter aanpassen naar de geselecteerd verdieping"""
-        subString = "bouwlaag = " + str(self.projCombo.currentText())
+        subString = "verdieping = " + str(self.projCombo.currentText())
         UG.set_layer_substring(subString)
 
     def run_config(self):
@@ -127,7 +127,7 @@ class oiv(PQtW.QWidget):
         else:
             if not self.basewidget:
                 self.basewidget = OB.oivBaseWidget(self)
-            subString = "bouwlaag = 0"
+            subString = "verdieping = 0"
             UG.set_layer_substring(subString)
             index = self.projCombo.findText('0', PQtC.Qt.MatchFixedString)
             if index >= 0:
