@@ -23,6 +23,11 @@ def showMsgBox(msgName, extraBody=''):
 
 #All messages
 MESSAGES = {
+    'verdieping_bestaat_al': {
+        "type": 'question',
+        "header":'Er bestaan al verdiepingen!',
+        "body":'Op minimaal één van de verdiepingen bestaat al een verdieping.\nHet gaat om de volgende verdieping(en):\n'
+    },
     'gridcreated': {
         "type": 'information',
         "header":'Het grid is succesvol aangemaakt!',

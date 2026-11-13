@@ -172,17 +172,45 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     #add new floor
     def run_bouwlaag(self):
         while True:
-            bouwlaag, bouwlaagMax, ok = BouwlaagDialog.getBouwlagen()
-            if (bouwlaagMax >= bouwlaag and ok is True):
-                bouwlaagwidget = oivBouwlaagWidget(self, bouwlaag, bouwlaagMax)
-                subString = "verdieping = " + str(bouwlaag)
+            verdieping, verdiepingMax, ok = BouwlaagDialog.getBouwlagen()
+            if (verdiepingMax >= verdieping and ok is True):
+                # Controleer of verdieping al bestaat
+                verdiepingen = self.check_verdieping_exists(verdieping, verdiepingMax)
+                if verdiepingen:
+                    verdiepingenStr = ', '.join(map(str, verdiepingen)) + '\n\nWilt u evengoed doorgaan?'
+                    reply = MSG.showMsgBox('verdieping_bestaat_al', verdiepingenStr)
+                    if not reply:
+                        continue
+                bouwlaagwidget = oivBouwlaagWidget(self, verdieping, verdiepingMax)
+                subString = "verdieping = " + str(verdieping)
                 UG.set_layer_substring(subString)
                 self.show_subwidget(True, bouwlaagwidget)
                 break
-            elif bouwlaagMax < bouwlaag:
+            elif verdiepingMax < verdieping:
                 MSG.showMsgBox('bouwlaagvolgorde')
             elif ok is False:
                 break
+
+    def check_verdieping_exists(self, verdieping, verdiepingMax):
+        """controleer welke verdiepingen al bestaan binnen opgegeven bereik"""
+        runLayer = PC.PAND["bouwlaaglayername"]
+        layer = UC.getlayer_byname(runLayer)
+        objectId = self.pand_id.text()
+        foreignKey = CH.get_foreign_key_bl(runLayer)
+        # Bewaar huidige filter
+        currentFilter = layer.subsetString()
+        try:
+            # Verwijder tijdelijk de filter
+            layer.setSubsetString("")
+            # Controleer welke verdiepingen al bestaan voor dit object
+            request = QC.QgsFeatureRequest().setFilterExpression(
+                '"{}" = {} AND "verdieping" >= {} AND "verdieping" <= {}'.format(
+                    foreignKey, objectId, verdieping, verdiepingMax))
+            verdiepingen = sorted(set(feature['verdieping'] for feature in layer.getFeatures(request)))
+            return verdiepingen
+        finally:
+            # Herstel oorspronkelijke filter
+            layer.setSubsetString(currentFilter)
 
     def run_tekenen(self):
         """init teken widget"""
