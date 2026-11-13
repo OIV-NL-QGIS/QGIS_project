@@ -210,10 +210,13 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         ifeature = UC.featureRequest(ilayer, request)
         if ifeature:
             ilayer.selectByIds([ifeature.id()])
+            child_layers = self.select_child_objects(ifeature.id())
         reply = MSG.showMsgBox('deleteobject_question')
         if not reply:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.deselect(ifeature.id())
+            for layer in child_layers:
+                layer.selectByIds([])            
         elif reply:
             #als "ja" -> verwijder de feature op basis van het unieke feature id
             ilayer.startEditing()
@@ -221,7 +224,23 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             ilayer.commitChanges()
             UC.refresh_layers(self.iface)
             #set actieve bouwlaag to 1 and fill combobox
-            self.bouwlagen_to_combobox(ifeature.id(), 1)
+            self.bouwlagen_to_combobox(ifeature.id(), 0)
+
+    def select_child_objects(self, objectId):
+        """selecteer gerelateerde child-objecten"""
+        layerNamesTup = CH.get_chidlayers_bl()
+        layerNames = [i[0] for i in layerNamesTup]
+        layers = []
+        if PC.PAND["bouwlaaglayername"] in layerNames:
+            layerNames.remove(PC.PAND["bouwlaaglayername"])
+        for layerName in layerNames:
+            layer = UC.getlayer_byname(layerName)
+            if layer:
+                request = QC.QgsFeatureRequest().setFilterExpression(f'"verdieping_id" = {objectId}')
+                features = list(layer.getFeatures(request))
+                layer.selectByIds([feature.id() for feature in features])
+                layers.append(layer)
+        return layers
 
     def run_move_rotate_tool(self):
         """activate the selecttool"""
