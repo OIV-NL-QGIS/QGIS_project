@@ -19,14 +19,14 @@
  
 ; Define your application name
 !define APPNAME "OIV"
-!define STAD "Roermond"
+!define STAD "Leeuwarden"
 !define BUILDTYPE ""
 !define APPTITLE "Operationele Informatie Voorziening"
 !define COMPANY "Safety Consulting and Technology"
 
-!define VERSION 3.7.2
-!define PLUGINVERSION 3.7.2
-!define QGISVERSION "QGIS334"
+!define VERSION 3.7.7
+!define PLUGINVERSION 3.7.7
+!define QGISVERSION "QGIS344"
 
 !define APPNAMEANDVERSION "${APPNAME} ${VERSION} ${BUILDTYPE}"
 !define WEBSITE "https://www.safetyct.com"
