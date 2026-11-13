@@ -11,6 +11,7 @@ import oiv.helpers.utils_gui as UG
 import oiv.tools.editFeature as EF
 import oiv.tools.stackwidget as SW
 import oiv.tools.import_file as IFW
+import oiv.helpers.configdb_helper as CH
 import oiv.repressief_object.oiv_object_tekenen as OTW
 import oiv.repressief_object.oiv_create_grid as GW
 import oiv.werkvoorraad.oiv_werkvoorraad as OWW
@@ -118,10 +119,13 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
         ifeature = UC.featureRequest(ilayer, request)
         ilayer.startEditing()
         ilayer.selectByIds([ifeature.id()])
+        child_layers = self.select_child_objects(objectId)
         reply = MSG.showMsgBox('deleteobject_question')
         if not reply:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.selectByIds([])
+            for layer in child_layers:
+                layer.selectByIds([])
         elif reply:
             #als "ja" -> verwijder de feature op basis van het unieke feature id
             ilayer.deleteFeature(ifeature.id())
@@ -130,6 +134,24 @@ class oivRepressiefObjectWidget(PQtW.QDockWidget, FORM_CLASS):
             self.deleteobjectFrame.setVisible(False)
             self.baseWidget.handleDoneBtn(False)
             UC.refresh_layers(self.iface)
+
+
+    def select_child_objects(self, objectId):
+        """selecteer gerelateerde child-objecten"""
+        layerNamesTup = CH.get_chidlayers_ob()
+        layerNames = [i[0] for i in layerNamesTup]
+        layers = []
+        if PC.OBJECT["objectlayername"] in layerNames:
+            layerNames.remove(PC.OBJECT["objectlayername"])
+        for layerName in layerNames:
+            layer = UC.getlayer_byname(layerName)
+            if layer:
+                request = QC.QgsFeatureRequest().setFilterExpression(f'"object_id" = {objectId}')
+                features = list(layer.getFeatures(request))
+                layer.selectByIds([feature.id() for feature in features])
+                layers.append(layer)
+        return layers
+
 
     def edit_attribute(self, ilayer, ifeature):
         """open het formulier van een feature in een dockwidget, zodat de attributen kunnen worden bewerkt"""

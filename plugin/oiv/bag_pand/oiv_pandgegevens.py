@@ -172,17 +172,45 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
     #add new floor
     def run_bouwlaag(self):
         while True:
-            bouwlaag, bouwlaagMax, ok = BouwlaagDialog.getBouwlagen()
-            if (bouwlaagMax >= bouwlaag and ok is True):
-                bouwlaagwidget = oivBouwlaagWidget(self, bouwlaag, bouwlaagMax)
-                subString = "verdieping = " + str(bouwlaag)
+            verdieping, verdiepingMax, ok = BouwlaagDialog.getBouwlagen()
+            if (verdiepingMax >= verdieping and ok is True):
+                # Controleer of verdieping al bestaat
+                verdiepingen = self.check_verdieping_exists(verdieping, verdiepingMax)
+                if verdiepingen:
+                    verdiepingenStr = ', '.join(map(str, verdiepingen)) + '\n\nWilt u evengoed doorgaan?'
+                    reply = MSG.showMsgBox('verdieping_bestaat_al', verdiepingenStr)
+                    if not reply:
+                        continue
+                bouwlaagwidget = oivBouwlaagWidget(self, verdieping, verdiepingMax)
+                subString = "verdieping = " + str(verdieping)
                 UG.set_layer_substring(subString)
                 self.show_subwidget(True, bouwlaagwidget)
                 break
-            elif bouwlaagMax < bouwlaag:
+            elif verdiepingMax < verdieping:
                 MSG.showMsgBox('bouwlaagvolgorde')
             elif ok is False:
                 break
+
+    def check_verdieping_exists(self, verdieping, verdiepingMax):
+        """controleer welke verdiepingen al bestaan binnen opgegeven bereik"""
+        runLayer = PC.PAND["bouwlaaglayername"]
+        layer = UC.getlayer_byname(runLayer)
+        objectId = self.pand_id.text()
+        foreignKey = CH.get_foreign_key_bl(runLayer)
+        # Bewaar huidige filter
+        currentFilter = layer.subsetString()
+        try:
+            # Verwijder tijdelijk de filter
+            layer.setSubsetString("")
+            # Controleer welke verdiepingen al bestaan voor dit object
+            request = QC.QgsFeatureRequest().setFilterExpression(
+                '"{}" = {} AND "verdieping" >= {} AND "verdieping" <= {}'.format(
+                    foreignKey, objectId, verdieping, verdiepingMax))
+            verdiepingen = sorted(set(feature['verdieping'] for feature in layer.getFeatures(request)))
+            return verdiepingen
+        finally:
+            # Herstel oorspronkelijke filter
+            layer.setSubsetString(currentFilter)
 
     def run_tekenen(self):
         """init teken widget"""
@@ -210,10 +238,13 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
         ifeature = UC.featureRequest(ilayer, request)
         if ifeature:
             ilayer.selectByIds([ifeature.id()])
+            child_layers = self.select_child_objects(ifeature.id())
         reply = MSG.showMsgBox('deleteobject_question')
         if not reply:
             #als "nee" deselecteer alle geselecteerde features
             ilayer.deselect(ifeature.id())
+            for layer in child_layers:
+                layer.selectByIds([])            
         elif reply:
             #als "ja" -> verwijder de feature op basis van het unieke feature id
             ilayer.startEditing()
@@ -221,7 +252,23 @@ class oivPandWidget(PQtW.QDockWidget, FORM_CLASS):
             ilayer.commitChanges()
             UC.refresh_layers(self.iface)
             #set actieve bouwlaag to 1 and fill combobox
-            self.bouwlagen_to_combobox(ifeature.id(), 1)
+            self.bouwlagen_to_combobox(ifeature.id(), 0)
+
+    def select_child_objects(self, objectId):
+        """selecteer gerelateerde child-objecten"""
+        layerNamesTup = CH.get_chidlayers_bl()
+        layerNames = [i[0] for i in layerNamesTup]
+        layers = []
+        if PC.PAND["bouwlaaglayername"] in layerNames:
+            layerNames.remove(PC.PAND["bouwlaaglayername"])
+        for layerName in layerNames:
+            layer = UC.getlayer_byname(layerName)
+            if layer:
+                request = QC.QgsFeatureRequest().setFilterExpression(f'"verdieping_id" = {objectId}')
+                features = list(layer.getFeatures(request))
+                layer.selectByIds([feature.id() for feature in features])
+                layers.append(layer)
+        return layers
 
     def run_move_rotate_tool(self):
         """activate the selecttool"""
